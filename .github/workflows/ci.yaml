@@ -29,6 +29,8 @@ jobs:
             os: macos-13
           - build: macos-arm64
             os: macos-14
+          - build: windows-amd64
+            os: windows-latest
     env:
       TARGET: ${{ matrix.target }}
     steps:

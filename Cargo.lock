@@ -3,5 +3,12 @@
 version = 4
 
 [[package]]
+name = "alith"
+version = "0.2.0"
+dependencies = [
+ "alith-core",
+]
+
+[[package]]
 name = "alith-core"
 version = "0.2.0"

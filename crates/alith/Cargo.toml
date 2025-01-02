@@ -1,0 +1,7 @@
+[package]
+name = "alith"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+alith-core.workspace = true
