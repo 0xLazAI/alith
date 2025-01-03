@@ -2,3 +2,9 @@
 name = "alith-core"
 version = { workspace = true }
 edition = { workspace = true }
+
+[dependencies]
+anyhow = "1.0.95"
+serde = { version = "1.0.217", features = ["derive"] }
+thiserror = "2.0.9"
+uuid = { version = "1.11.0", features = ["serde"] }
