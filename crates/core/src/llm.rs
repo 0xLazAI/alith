@@ -1,7 +1,8 @@
+use serde::{Deserialize, Serialize};
 use std::time::Duration;
 
 /// A struct representing a Large Language Model (LLM)
-#[derive(Debug, Default, Clone)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct LLM {
     /// The name or identifier of the model to use
     /// Examples: "gpt-4", "gpt-3.5-turbo", etc.
