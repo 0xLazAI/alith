@@ -2,7 +2,7 @@ use uuid::Uuid;
 
 use crate::chat::Completion;
 use crate::knowledge::Knowledge;
-use crate::task::{Task, TaskError};
+use crate::task::TaskError;
 use crate::tool::Tool;
 
 pub struct Agent<M: Completion> {
@@ -42,7 +42,7 @@ pub struct Agent<M: Completion> {
 
 impl<M: Completion> Agent<M>
 where
-    M: Completion<Request = String, Response = String>,
+    M: Completion,
 {
     pub fn new(model: M, tools: Vec<Box<dyn Tool>>, id: Uuid, name: String) -> Agent<M> {
         Agent {
@@ -65,13 +65,13 @@ where
         }
     }
 
-    pub async fn execute_task(
+    pub async fn completion(
         &mut self,
-        mut task: Task<M>,
+        request: M::Request,
         context: Option<&str>,
         tools: Option<Vec<Box<dyn Tool>>>,
-    ) -> Result<String, TaskError> {
-        let mut task_prompt = task.description.clone();
+    ) -> Result<M::Response, TaskError> {
+        let mut task_prompt = String::new();
 
         // Add context if provided.
         if let Some(context) = context {
@@ -107,12 +107,10 @@ where
         // Generate a response using the model.
         let response = self
             .model
-            .completion(task_prompt)
+            .completion(request)
             .await
             .map_err(|_| TaskError::ExecutionError)?;
 
-        // Update the task's output and return the result.
-        task.output = Some(response.clone());
         Ok(response)
     }
 
