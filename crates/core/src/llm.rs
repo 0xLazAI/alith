@@ -36,3 +36,39 @@ pub struct LLM {
     /// Used to limit the total length of input and output
     pub context_window_size: usize,
 }
+
+impl LLM {
+    pub fn new(model: &str) -> Self {
+        Self {
+            model: model.to_string(),
+            timeout: Some(Duration::from_secs(60)),
+            temperature: Some(0.7),
+            preamble: None,
+            max_completion_tokens: Some(512),
+            max_tokens: Some(2048),
+            base_url: None,
+            api_version: None,
+            api_key: None,
+            context_window_size: 4096,
+        }
+    }
+
+    pub fn with_temperature(mut self, temperature: f64) -> Self {
+        if (0.0..=1.0).contains(&temperature) {
+            self.temperature = Some(temperature);
+        } else {
+            panic!("Temperature must be in the range 0.0 to 1.0.");
+        }
+        self
+    }
+
+    pub fn with_api_key(mut self, api_key: &str) -> Self {
+        self.api_key = Some(api_key.to_string());
+        self
+    }
+
+    pub fn with_context_window_size(mut self, size: usize) -> Self {
+        self.context_window_size = size;
+        self
+    }
+}
