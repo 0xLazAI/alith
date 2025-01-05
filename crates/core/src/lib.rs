@@ -1,7 +1,10 @@
 pub mod agent;
 pub mod chat;
+pub mod embedding;
 pub mod flow;
 pub mod knowledge;
 pub mod llm;
+pub mod memory;
+pub mod store;
 pub mod task;
 pub mod tool;
