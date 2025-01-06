@@ -99,6 +99,7 @@ where
                 task_prompt.push_str(
                     &tool
                         .run(&task_prompt)
+                        .await
                         .unwrap_or_else(|_| format!("\nTool `{}` execution failed.", tool.name())),
                 );
             }
