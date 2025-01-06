@@ -56,12 +56,12 @@ pub trait StructureTool: Send + Sync {
         schema_for!(Self::Input)
     }
 
-    async fn call(&self, input: Self::Input) -> Result<Self::Output, ToolError>;
+    async fn run_with_args(&self, input: Self::Input) -> Result<Self::Output, ToolError>;
 
     async fn run(&self, input: &str) -> Result<String, ToolError> {
         match serde_json::from_str(input) {
             Ok(input) => {
-                let output = self.call(input).await?;
+                let output = self.run_with_args(input).await?;
                 serde_json::to_string(&output).map_err(ToolError::JsonError)
             }
             Err(e) => Err(ToolError::JsonError(e)),
@@ -90,7 +90,7 @@ impl<T: StructureTool> Tool for T {
     async fn run(&self, input: &str) -> Result<String, ToolError> {
         match serde_json::from_str(input) {
             Ok(input) => {
-                let output = self.call(input).await?;
+                let output = self.run_with_args(input).await?;
                 serde_json::to_string(&output).map_err(ToolError::JsonError)
             }
             Err(e) => Err(ToolError::JsonError(e)),
@@ -138,7 +138,7 @@ mod tests {
             "dummy"
         }
 
-        async fn call(&self, input: Self::Input) -> Result<Self::Output, ToolError> {
+        async fn run_with_args(&self, input: Self::Input) -> Result<Self::Output, ToolError> {
             Ok(format!("x: {}, y: {}", input.x, input.y))
         }
     }
