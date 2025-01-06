@@ -1,14 +1,14 @@
 use std::error::Error;
 
-pub trait Completion: Clone + Send + Sync {
+pub trait Completion {
     type Request: From<String>;
     type Response: Send + Sync + ToString;
 
     /// Generates a completion response for the given completion request.
     fn completion(
-        &self,
+        &mut self,
         request: Self::Request,
-    ) -> impl std::future::Future<Output = Result<Self::Response, CompletionError>> + Send;
+    ) -> impl std::future::Future<Output = Result<Self::Response, CompletionError>>;
 }
 
 #[derive(Clone)]
@@ -18,7 +18,10 @@ impl Completion for StringCompletion {
     type Request = String;
     type Response = String;
 
-    async fn completion(&self, request: Self::Request) -> Result<Self::Response, CompletionError> {
+    async fn completion(
+        &mut self,
+        request: Self::Request,
+    ) -> Result<Self::Response, CompletionError> {
         Ok(format!("Processed: {}", request))
     }
 }
