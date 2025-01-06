@@ -5,7 +5,10 @@ edition = { workspace = true }
 
 [dependencies]
 anyhow = "1.0.95"
+async-trait = "0.1.84"
+schemars = "0.8.21"
 serde = { version = "1.0.217", features = ["derive"] }
+serde_json = "1.0.134"
 thiserror = "2.0.9"
-tokio = { version = "1.42.0", features = ["sync"] }
+tokio = { version = "1.42.0", features = ["sync", "rt", "macros"] }
 uuid = { version = "1.11.0", features = ["serde"] }
