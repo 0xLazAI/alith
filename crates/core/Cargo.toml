@@ -4,6 +4,9 @@ version = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
+llm_client.workspace = true
+llm_models.workspace = true
+
 anyhow = "1.0.95"
 async-trait = "0.1.84"
 schemars = "0.8.21"
