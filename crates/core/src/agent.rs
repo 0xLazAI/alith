@@ -1,4 +1,4 @@
-use crate::chat::Completion;
+use crate::chat::{Completion, Request};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
 use crate::task::TaskError;
@@ -16,8 +16,6 @@ pub struct Agent<M: Completion> {
     pub id: Uuid,
     /// The name of the agent.
     pub name: String,
-    /// Role of the agent.
-    pub role: String,
     /// System prompt
     pub preamble: String,
     /// System format for the agent.
@@ -30,6 +28,8 @@ pub struct Agent<M: Completion> {
     pub verbose: bool,
     /// The maximum requests per minute for the completion text.
     pub max_rpm: Option<usize>,
+    /// Temperature of the model
+    pub temperature: Option<f32>,
     /// Maximum number of tokens for the completion.
     pub max_tokens: Option<usize>,
     /// Maximum execution time for an agent to execute a task.
@@ -57,13 +57,13 @@ where
             tools,
             id,
             name,
-            role: "default".to_string(),
             preamble: String::new(),
             system_template: String::new(),
             prompt_template: String::new(),
             response_template: String::new(),
             verbose: false,
             max_rpm: None,
+            temperature: None,
             max_tokens: None,
             max_execution_time: None,
             knowledges: Vec::new(),
@@ -72,46 +72,16 @@ where
         }
     }
 
-    pub async fn completion(
-        &mut self,
-        request: M::Request,
-        context: Option<&str>,
-    ) -> Result<M::Response, TaskError> {
-        let mut task_prompt = request.to_string();
-
-        // Add context if provided.
-        if let Some(context) = context {
-            task_prompt = format!("{}\nContext: {}", task_prompt, context);
-        }
-
-        // Apply context window constraints if enabled.
-        if self.respect_context_window {
-            // Placeholder for context window logic (e.g., truncation or summarization).
-        }
-
-        // Enrich the task prompt using knowledge sources.
-        for knowledge in &self.knowledges {
-            task_prompt = knowledge.enrich(&task_prompt);
-        }
-
-        // Validate Docker installation for code execution (if allowed).
-        if self.allow_code_execution {
-            self.validate_docker_installation();
-        }
-
+    pub async fn prompt(&mut self, prompt: &str) -> Result<M::Response, TaskError> {
         let mut executor = Executor::new(self.model.clone(), self.tools.clone(), 10);
+        let mut req = Request::new(prompt.to_string(), self.preamble.clone());
+        req.max_tokens = self.max_tokens;
+        req.temperature = self.temperature;
         let response = executor
-            .invoke(task_prompt)
+            .invoke(req)
             .await
             .map_err(|_| TaskError::ExecutionError)?;
 
         Ok(response)
-    }
-
-    fn validate_docker_installation(&self) {
-        if self.verbose {
-            println!("Validating Docker installation...");
-        }
-        // Placeholder: Add actual logic for Docker validation.
     }
 }

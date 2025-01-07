@@ -1,12 +1,11 @@
+use crate::chat::Completion;
+use crate::chat::CompletionError;
+use crate::chat::Request;
 use anyhow::Result;
-
 pub use llm_client::basic_completion::BasicCompletion;
 pub use llm_client::prelude::*;
 pub use llm_client::LlmClient;
 pub use llm_models::api_model::ApiLlmModel;
-
-use crate::chat::Completion;
-use crate::chat::CompletionError;
 
 pub struct Client {
     pub(crate) client: LlmClient,
@@ -40,18 +39,14 @@ impl Drop for Client {
 }
 
 impl Completion for Client {
-    type Request = String;
     type Response = String;
 
-    async fn completion(
-        &mut self,
-        request: Self::Request,
-    ) -> Result<Self::Response, CompletionError> {
+    async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
         self.completion
             .prompt()
             .add_user_message()
             .map_err(|err| CompletionError::Normal(err.to_string()))?
-            .set_content(&request);
+            .set_content(&request.prompt);
         self.completion
             .run()
             .await
