@@ -41,6 +41,7 @@ dependencies = [
  "async-trait",
  "llm_client",
  "llm_models",
+ "regex",
  "schemars",
  "serde",
  "serde_json",

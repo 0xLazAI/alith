@@ -1,15 +1,17 @@
-use uuid::Uuid;
-
 use crate::chat::Completion;
+use crate::executor::Executor;
 use crate::knowledge::Knowledge;
 use crate::task::TaskError;
 use crate::tool::Tool;
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use uuid::Uuid;
 
 pub struct Agent<M: Completion> {
     /// The model to use.
-    pub model: M,
+    pub model: Arc<RwLock<M>>,
     /// The tools to use.
-    pub tools: Vec<Box<dyn Tool>>,
+    pub tools: Arc<Vec<Box<dyn Tool>>>,
     /// The id of the agent.
     pub id: Uuid,
     /// The name of the agent.
@@ -44,7 +46,12 @@ impl<M: Completion> Agent<M>
 where
     M: Completion,
 {
-    pub fn new(model: M, tools: Vec<Box<dyn Tool>>, id: Uuid, name: String) -> Agent<M> {
+    pub fn new(
+        model: Arc<RwLock<M>>,
+        tools: Arc<Vec<Box<dyn Tool>>>,
+        id: Uuid,
+        name: String,
+    ) -> Agent<M> {
         Agent {
             model,
             tools,
@@ -69,9 +76,8 @@ where
         &mut self,
         request: M::Request,
         context: Option<&str>,
-        tools: Option<Vec<Box<dyn Tool>>>,
     ) -> Result<M::Response, TaskError> {
-        let mut task_prompt = String::new();
+        let mut task_prompt = request.to_string();
 
         // Add context if provided.
         if let Some(context) = context {
@@ -93,22 +99,9 @@ where
             self.validate_docker_installation();
         }
 
-        // Apply additional tools if provided.
-        if let Some(execution_tools) = tools {
-            for tool in execution_tools {
-                task_prompt.push_str(
-                    &tool
-                        .run(&task_prompt)
-                        .await
-                        .unwrap_or_else(|_| format!("\nTool `{}` execution failed.", tool.name())),
-                );
-            }
-        }
-
-        // Generate a response using the model.
-        let response = self
-            .model
-            .completion(request)
+        let mut executor = Executor::new(self.model.clone(), self.tools.clone(), 10);
+        let response = executor
+            .invoke(task_prompt)
             .await
             .map_err(|_| TaskError::ExecutionError)?;
 

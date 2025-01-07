@@ -1,7 +1,7 @@
-use std::error::Error;
+use std::{error::Error, fmt::Display};
 
 pub trait Completion {
-    type Request: From<String>;
+    type Request: From<String> + Display;
     type Response: Send + Sync + ToString;
 
     /// Generates a completion response for the given completion request.

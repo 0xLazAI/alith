@@ -45,7 +45,7 @@ impl<M: Completion> Task<M> {
 
         // Call `execute_task` on the Agent
         let result = agent
-            .completion(self.description.clone().into(), None, None)
+            .completion(self.description.clone().into(), None)
             .await
             .map_err(|_| TaskError::ExecutionError)?;
 
