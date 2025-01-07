@@ -1,6 +1,9 @@
 use async_trait::async_trait;
 use schemars::{schema::RootSchema, schema_for, JsonSchema};
 use serde::{Deserialize, Serialize};
+use serde_json::json;
+
+pub use llm_client::interface::requests::completion::{ToolChoice, ToolDefinition};
 
 #[async_trait]
 pub trait Tool: Send + Sync {
@@ -19,6 +22,8 @@ pub trait Tool: Send + Sync {
     fn author(&self) -> &str {
         "Anonymous"
     }
+
+    fn definition(&self) -> ToolDefinition;
 
     fn validate_input(&self, input: &str) -> Result<(), ToolError> {
         if input.trim().is_empty() {
@@ -56,6 +61,14 @@ pub trait StructureTool: Send + Sync {
         schema_for!(Self::Input)
     }
 
+    fn definition(&self) -> ToolDefinition {
+        ToolDefinition {
+            name: self.name().to_owned(),
+            description: self.description().to_owned(),
+            parameters: json!(self.schema()),
+        }
+    }
+
     async fn run_with_args(&self, input: Self::Input) -> Result<Self::Output, ToolError>;
 
     async fn run(&self, input: &str) -> Result<String, ToolError> {
@@ -85,6 +98,10 @@ impl<T: StructureTool> Tool for T {
 
     fn author(&self) -> &str {
         self.author()
+    }
+
+    fn definition(&self) -> ToolDefinition {
+        self.definition()
     }
 
     async fn run(&self, input: &str) -> Result<String, ToolError> {
@@ -159,5 +176,9 @@ mod tests {
             .unwrap();
         assert_eq!(tool.name(), "dummy");
         assert_eq!(output, "\"x: 1, y: 2\"");
+        assert_eq!(
+            tool.definition().parameters.to_string(),
+            "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"properties\":{\"x\":{\"format\":\"uint\",\"minimum\":0.0,\"type\":\"integer\"},\"y\":{\"format\":\"uint\",\"minimum\":0.0,\"type\":\"integer\"}},\"required\":[\"x\",\"y\"],\"title\":\"DummpyInput\",\"type\":\"object\"}"
+        );
     }
 }

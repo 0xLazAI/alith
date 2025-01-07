@@ -1,4 +1,4 @@
-use crate::chat::{Completion, Request};
+use crate::chat::{Completion, Request, ResponseContent};
 use crate::tool::Tool;
 use regex::Regex;
 use std::sync::Arc;
@@ -31,7 +31,7 @@ impl<M: Completion> Executor<M> {
             .await
             .map_err(|e| format!("Model error: {}", e))?;
 
-        let response_str = response.to_string();
+        let response_str = response.content();
         if response_str.trim().is_empty() {
             return Err("Received an empty response from the LLM.".to_string());
         }

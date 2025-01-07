@@ -12,6 +12,8 @@ pub struct Agent<M: Completion> {
     pub model: Arc<RwLock<M>>,
     /// The tools to use.
     pub tools: Arc<Vec<Box<dyn Tool>>>,
+    /// Knowledge sources for the agent.
+    pub knowledges: Vec<Box<dyn Knowledge>>,
     /// The id of the agent.
     pub id: Uuid,
     /// The name of the agent.
@@ -34,8 +36,6 @@ pub struct Agent<M: Completion> {
     pub max_tokens: Option<usize>,
     /// Maximum execution time for an agent to execute a task.
     pub max_execution_time: Option<usize>,
-    /// Knowledge sources for the agent.
-    pub knowledges: Vec<Box<dyn Knowledge>>,
     /// Whether to respect the context window.
     pub respect_context_window: bool,
     /// Whether code execution is allowed.
@@ -77,6 +77,11 @@ where
         let mut req = Request::new(prompt.to_string(), self.preamble.clone());
         req.max_tokens = self.max_tokens;
         req.temperature = self.temperature;
+        req.tools = self
+            .tools
+            .iter()
+            .map(|tool| tool.definition())
+            .collect::<Vec<_>>();
         let response = executor
             .invoke(req)
             .await

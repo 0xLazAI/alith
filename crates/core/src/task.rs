@@ -1,3 +1,4 @@
+use crate::chat::ResponseContent;
 use crate::{agent::Agent, chat::Completion};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -50,7 +51,7 @@ impl<M: Completion> Task<M> {
             .map_err(|_| TaskError::ExecutionError)?;
 
         // Set the output of the task
-        self.output = Some(result.to_string());
+        self.output = Some(result.content());
         Ok(self.output.clone().unwrap())
     }
 }

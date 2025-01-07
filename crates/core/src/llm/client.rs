@@ -1,11 +1,20 @@
 use crate::chat::Completion;
 use crate::chat::CompletionError;
 use crate::chat::Request;
+use crate::chat::ResponseContent;
 use anyhow::Result;
+
 pub use llm_client::basic_completion::BasicCompletion;
+pub use llm_client::interface::requests::completion::{CompletionRequest, CompletionResponse};
+pub use llm_client::models::api_model::ApiLlmModel;
 pub use llm_client::prelude::*;
 pub use llm_client::LlmClient;
-pub use llm_models::api_model::ApiLlmModel;
+
+impl ResponseContent for CompletionResponse {
+    fn content(&self) -> String {
+        self.content.to_string()
+    }
+}
 
 pub struct Client {
     pub(crate) client: LlmClient,
@@ -13,7 +22,7 @@ pub struct Client {
 }
 
 impl Client {
-    pub fn from(name: &str) -> Result<Client> {
+    pub fn from_model_name(name: &str) -> Result<Client> {
         if name.starts_with("gpt") {
             let mut builder = LlmClient::openai();
             builder.model = ApiLlmModel::openai_model_from_model_id(name);
@@ -39,7 +48,7 @@ impl Drop for Client {
 }
 
 impl Completion for Client {
-    type Response = String;
+    type Response = CompletionResponse;
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
         self.completion
@@ -50,7 +59,6 @@ impl Completion for Client {
         self.completion
             .run()
             .await
-            .map(|resp| resp.content)
             .map_err(|err| CompletionError::Normal(err.to_string()))
     }
 }
