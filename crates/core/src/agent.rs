@@ -1,4 +1,4 @@
-use crate::chat::{Completion, Request};
+use crate::chat::{Completion, Request, ResponseContent};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
 use crate::task::TaskError;
@@ -72,9 +72,9 @@ where
         }
     }
 
-    pub async fn prompt(&mut self, prompt: &str) -> Result<M::Response, TaskError> {
+    pub async fn prompt(&mut self, prompt: &str) -> Result<String, TaskError> {
         let mut executor = Executor::new(self.model.clone(), self.tools.clone());
-        let mut req = Request::new(prompt.to_string(), self.preamble.clone());
+        let mut req: Request = Request::new(prompt.to_string(), self.preamble.clone());
         req.max_tokens = self.max_tokens;
         req.temperature = self.temperature;
         req.tools = self
@@ -87,6 +87,6 @@ where
             .await
             .map_err(|_| TaskError::ExecutionError)?;
 
-        Ok(response)
+        Ok(response.content())
     }
 }

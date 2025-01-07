@@ -31,36 +31,37 @@ pub trait Prompt: Send + Sync {
     ) -> impl std::future::Future<Output = Result<String, Self::PromptError>> + Send;
 }
 
-/// Represents a request sent to a language model for completion.
+/// Represents a request sent to a language model for generating a completion response.
 ///
-/// A `Request` includes both the user-provided prompt and a system preamble.
-/// Additionally, it allows customization of parameters such as the maximum token
-/// limit and temperature for text generation.
+/// A `Request` encapsulates the user prompt and additional configuration options,
+/// such as a system-defined preamble, token limit, and randomness control. It
+/// can also include a list of tools available to the model for enhanced functionality.
 #[derive(Debug, Clone)]
 pub struct Request {
-    /// The user-provided prompt to be completed by the language model.
+    /// The user-provided prompt that the language model must complete.
     pub prompt: String,
-    /// The system-defined preamble, which can be used to guide the model's behavior.
+    /// A system-defined preamble, used to guide the behavior and tone of the model.
     pub preamble: String,
-    /// Optional: The maximum number of tokens to use for the response.
+    /// Optional: The maximum number of tokens allowed for the generated response.
     pub max_tokens: Option<usize>,
-    /// Optional: The temperature value for text generation, controlling randomness.
+    /// Optional: The temperature for text generation, controlling the randomness of the output.
     pub temperature: Option<f32>,
-    /// The tools to be sent to the model
+    /// A collection of tools provided to the model for tool-based interactions.
     pub tools: Vec<ToolDefinition>,
 }
 
 impl Request {
-    /// Creates a new `Request` with the specified prompt and preamble.
+    /// Constructs a new `Request` with the given prompt and preamble.
     ///
-    /// By default, the `max_tokens` and `temperature` fields are unset.
+    /// By default, `max_tokens` and `temperature` are left unset. The tools list
+    /// is initialized as an empty vector.
     ///
     /// # Arguments
-    /// - `prompt`: The user-provided prompt.
-    /// - `preamble`: The system-defined preamble to guide the model's behavior.
+    /// - `prompt`: A string representing the user's input prompt.
+    /// - `preamble`: A string that defines the system preamble to guide the model.
     ///
     /// # Returns
-    /// A new instance of `Request`.
+    /// A new instance of the `Request` struct.
     pub fn new(prompt: String, preamble: String) -> Self {
         Self {
             prompt,
@@ -72,31 +73,73 @@ impl Request {
     }
 }
 
+/// A trait for extracting the content from a language model's response.
+///
+/// Implementing this trait allows access to the main text content of a response.
 pub trait ResponseContent {
+    /// Retrieves the main content from the response.
+    ///
+    /// # Returns
+    /// A string containing the text content of the response.
     fn content(&self) -> String;
 }
 
-/// A trait representing a completion engine for processing requests.
+/// A trait for extracting tool-based calls from a language model's response.
 ///
-/// This trait defines the behavior of components that handle `Request` objects
-/// and generate a response asynchronously. The response type is customizable
-/// and must implement `Send`, `Sync`, and `ToString`.
+/// Implementing this trait allows access to tool-related interactions defined
+/// in the response.
+pub trait ResponseToolCalls {
+    /// Extracts tool calls from the response.
+    ///
+    /// # Returns
+    /// A vector of `ToolCall` objects representing tool-related interactions.
+    fn toolcalls(&self) -> Vec<ToolCall>;
+}
+
+/// Represents a call to a specific tool in a response.
+///
+/// A `ToolCall` includes the tool's ID, type, and the associated function with its arguments.
+pub struct ToolCall {
+    /// The unique identifier for the tool call.
+    pub id: String,
+    /// The type of the tool call.
+    pub r#type: String,
+    /// The function being called, along with its name and arguments.
+    pub function: CallFunction,
+}
+
+/// Represents a callable function within a tool interaction.
+///
+/// This includes the function's name and its arguments as a string.
+pub struct CallFunction {
+    /// The name of the function being invoked.
+    pub name: String,
+    /// The arguments provided to the function as a string.
+    pub arguments: String,
+}
+
+/// A trait defining the behavior of a completion engine.
+///
+/// This trait is used by components that handle requests for text generation
+/// (or similar completions) and generate responses asynchronously. The response
+/// type must support text content extraction (`ResponseContent`) and tool call
+/// extraction (`ResponseToolCalls`).
 ///
 /// # Associated Types
-/// - `Response`: The type of the generated response.
+/// - `Response`: The specific type of the response generated by the completion engine.
 pub trait Completion {
     /// The type of response returned by the `completion` method.
-    type Response: Send + Sync + ResponseContent;
+    type Response: Send + Sync + ResponseContent + ResponseToolCalls;
 
-    /// Processes a completion request and returns the result asynchronously.
+    /// Processes a `Request` and returns the generated response asynchronously.
     ///
     /// # Arguments
-    /// - `request`: The request object containing prompt and configuration details.
+    /// - `request`: The request object containing the prompt and additional configuration.
     ///
     /// # Returns
     /// A future that resolves to either:
     /// - `Ok(Self::Response)`: The generated response.
-    /// - `Err(CompletionError)`: An error that occurred during completion.
+    /// - `Err(CompletionError)`: An error encountered during the request processing.
     fn completion(
         &mut self,
         request: Request,
