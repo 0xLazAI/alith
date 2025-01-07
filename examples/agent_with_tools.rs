@@ -1,7 +1,7 @@
-use alith_core::{
+use alith::{
     agent::Agent,
     llm::LLM,
-    tool::{StructureTool, ToolError},
+    tool::{StructureTool, Tool, ToolError},
 };
 use async_trait::async_trait;
 use schemars::JsonSchema;
@@ -58,14 +58,8 @@ impl StructureTool for Subtract {
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let model = LLM::from_model_name("openai")?
-        .with_api_key(&env::var("OPENAI_API_KEY").expect("OPENAI_API_KEY not set"));
-    let mut agent = Agent::new(
-        Arc::new(RwLock::new(model)),
-        Arc::new(vec![Box::new(Adder), Box::new(Subtract)]),
-        Uuid::from_u128(123),
-        "simple agent".to_string(),
-    );
+    let tools: [Box<dyn Tool>; 2] = [Box::new(Adder), Box::new(Subtract)];
+    let mut agent = Agent::new("simple agent", LLM::from_model_name("gpt4o")?, tools);
     agent.preamble =
         "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.".to_string();
     let response = agent.prompt("Calculate 10 - 3").await?;

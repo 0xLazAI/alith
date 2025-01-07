@@ -46,17 +46,15 @@ impl<M: Completion> Agent<M>
 where
     M: Completion,
 {
-    pub fn new(
-        model: Arc<RwLock<M>>,
-        tools: Arc<Vec<Box<dyn Tool>>>,
-        id: Uuid,
-        name: String,
-    ) -> Agent<M> {
+    pub fn new<I>(name: impl ToString, model: M, tools: I) -> Agent<M>
+    where
+        I: IntoIterator<Item = Box<dyn Tool>>,
+    {
         Agent {
-            model,
-            tools,
-            id,
-            name,
+            model: Arc::new(RwLock::new(model)),
+            tools: Arc::new(tools.into_iter().collect()),
+            id: Uuid::new_v4(),
+            name: name.to_string(),
             preamble: String::new(),
             system_template: String::new(),
             prompt_template: String::new(),

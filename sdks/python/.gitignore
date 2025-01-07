@@ -1,0 +1,16 @@
+/build/
+.vs/
+.vscode/
+.idea/
+venv
+
+# kcl files
+.pytest_cache
+__pycache__
+*.pyc
+build-result/
+dist/
+alith/bin
+alith.egg-info/
+.eggs/
+alith/_alith*
