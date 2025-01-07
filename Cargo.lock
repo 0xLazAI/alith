@@ -58,6 +58,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "alith-tools"
+version = "0.2.0"
+dependencies = [
+ "alith-core",
+]
+
+[[package]]
 name = "anyhow"
 version = "1.0.95"
 source = "registry+https://github.com/rust-lang/crates.io-index"
