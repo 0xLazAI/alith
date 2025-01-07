@@ -1,14 +1,7 @@
-use crate::chat::{Completion, Request, ResponseContent};
+use crate::chat::{Completion, Request, ResponseContent, ResponseToolCalls, ToolCall};
 use crate::tool::Tool;
-use regex::Regex;
 use std::sync::Arc;
 use tokio::sync::RwLock;
-
-/// Represents an action to be performed by a tool.
-pub struct ToolAction {
-    pub tool_name: String,
-    pub input: String,
-}
 
 /// Manages the execution of tasks using an LLM, tools, and (optionally) memory components.
 pub struct Executor<M: Completion> {
@@ -37,34 +30,25 @@ impl<M: Completion> Executor<M> {
         }
 
         // Attempt to parse and execute a tool action.
-        if let Some(action) = self.parse_action(&response_str) {
-            self.execute_tool(&action).await?;
+        for call in response.toolcalls() {
+            self.execute_tool(call).await?;
         }
 
         Ok(response)
     }
 
-    /// Parses a tool action from the LLM's response.
-    fn parse_action(&self, response: &str) -> Option<ToolAction> {
-        let re = Regex::new(r"Using tool: (\w+)\nInput: (.+)").ok()?;
-        let captures = re.captures(response)?;
-
-        Some(ToolAction {
-            tool_name: captures.get(1)?.as_str().to_string(),
-            input: captures.get(2)?.as_str().to_string(),
-        })
-    }
-
     /// Executes a tool action and returns the result.
-    async fn execute_tool(&self, action: &ToolAction) -> Result<String, String> {
+    async fn execute_tool(&self, call: ToolCall) -> Result<String, String> {
         if let Some(tool) = self
             .tools
             .iter()
-            .find(|t| t.name().eq_ignore_ascii_case(&action.tool_name))
+            .find(|t| t.name().eq_ignore_ascii_case(&call.function.name))
         {
-            tool.run(&action.input).await.map_err(|e| e.to_string())
+            tool.run(&call.function.arguments)
+                .await
+                .map_err(|e| e.to_string())
         } else {
-            Err(format!("Tool not found: {}", action.tool_name))
+            Err(format!("Tool not found: {}", call.function.name))
         }
     }
 }

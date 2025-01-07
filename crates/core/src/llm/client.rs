@@ -1,9 +1,11 @@
+use crate::chat::CallFunction;
 use crate::chat::Completion;
 use crate::chat::CompletionError;
 use crate::chat::Request;
 use crate::chat::ResponseContent;
+use crate::chat::ResponseToolCalls;
+use crate::chat::ToolCall;
 use anyhow::Result;
-
 pub use llm_client::basic_completion::BasicCompletion;
 pub use llm_client::interface::requests::completion::{CompletionRequest, CompletionResponse};
 pub use llm_client::models::api_model::ApiLlmModel;
@@ -41,6 +43,25 @@ impl Client {
     }
 }
 
+type ClientResponse = CompletionResponse;
+impl ResponseToolCalls for ClientResponse {
+    fn toolcalls(&self) -> Vec<ToolCall> {
+        self.tool_calls
+            .as_ref()
+            .unwrap_or(&Vec::new())
+            .iter()
+            .map(|call| ToolCall {
+                id: call.id.clone(),
+                r#type: call.r#type.clone(),
+                function: CallFunction {
+                    name: call.function.name.clone(),
+                    arguments: call.function.arguments.clone(),
+                },
+            })
+            .collect()
+    }
+}
+
 impl Drop for Client {
     fn drop(&mut self) {
         self.client.shutdown();
@@ -48,7 +69,7 @@ impl Drop for Client {
 }
 
 impl Completion for Client {
-    type Response = CompletionResponse;
+    type Response = ClientResponse;
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
         self.completion
