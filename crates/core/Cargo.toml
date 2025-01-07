@@ -15,3 +15,4 @@ serde_json = "1.0.134"
 thiserror = "2.0.9"
 tokio = { version = "1.42.0", features = ["sync", "rt", "macros"] }
 uuid = { version = "1.11.0", features = ["serde"] }
+regex = "1.10"
