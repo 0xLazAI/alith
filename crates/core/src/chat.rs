@@ -1,5 +1,7 @@
 use std::error::Error;
 
+use llm_client::interface::requests::completion::ToolDefinition;
+
 /// A trait representing a prompt-based interaction mechanism.
 /// This trait defines the behavior of components that process user prompts
 /// and return responses asynchronously.
@@ -44,6 +46,8 @@ pub struct Request {
     pub max_tokens: Option<usize>,
     /// Optional: The temperature value for text generation, controlling randomness.
     pub temperature: Option<f32>,
+    /// The tools to be sent to the model
+    pub tools: Vec<ToolDefinition>,
 }
 
 impl Request {
@@ -63,8 +67,13 @@ impl Request {
             preamble,
             max_tokens: None,
             temperature: None,
+            tools: Vec::new(),
         }
     }
+}
+
+pub trait ResponseContent {
+    fn content(&self) -> String;
 }
 
 /// A trait representing a completion engine for processing requests.
@@ -77,7 +86,7 @@ impl Request {
 /// - `Response`: The type of the generated response.
 pub trait Completion {
     /// The type of response returned by the `completion` method.
-    type Response: Send + Sync + ToString;
+    type Response: Send + Sync + ResponseContent;
 
     /// Processes a completion request and returns the result asynchronously.
     ///

@@ -1,7 +1,10 @@
 pub mod client;
 
-use serde::{Deserialize, Serialize};
+use anyhow::Result;
+use client::{Client, CompletionResponse};
 use std::time::Duration;
+
+use crate::chat::{Completion, CompletionError};
 
 // OpenAI models
 
@@ -29,7 +32,6 @@ pub const LLAMA_3_1_8B_INSTRUCT: &str = "llama-3.1-8b-instruct";
 pub const LLAMA_3_1_70B_INSTRUCT: &str = "llama-3.1-70b-instruct";
 
 /// A struct representing a Large Language Model (LLM)
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct LLM {
     /// The name or identifier of the model to use
     /// Examples: "gpt-4", "gpt-3.5-turbo", etc.
@@ -62,12 +64,14 @@ pub struct LLM {
     /// The context window size, representing the maximum number of tokens the model can handle
     /// Used to limit the total length of input and output
     pub context_window_size: usize,
+    /// The LLM client used to communicate with model backends
+    pub client: Client,
 }
 
 impl LLM {
-    pub fn new(model: &str) -> Self {
-        Self {
-            model: model.to_string(),
+    pub fn from_model_name(name: &str) -> Result<Self> {
+        Ok(Self {
+            model: name.to_string(),
             timeout: Some(Duration::from_secs(60)),
             temperature: Some(0.7),
             preamble: None,
@@ -77,7 +81,8 @@ impl LLM {
             api_version: None,
             api_key: None,
             context_window_size: 4096,
-        }
+            client: Client::from_model_name(name)?,
+        })
     }
 
     pub fn with_temperature(mut self, temperature: f64) -> Self {
@@ -97,5 +102,16 @@ impl LLM {
     pub fn with_context_window_size(mut self, size: usize) -> Self {
         self.context_window_size = size;
         self
+    }
+}
+
+impl Completion for LLM {
+    type Response = CompletionResponse;
+
+    async fn completion(
+        &mut self,
+        request: crate::chat::Request,
+    ) -> Result<Self::Response, CompletionError> {
+        self.client.completion(request).await
     }
 }
