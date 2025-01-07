@@ -1,4 +1,4 @@
-pub trait Knowledge {
+pub trait Knowledge: Send + Sync {
     fn load(&self) -> Result<String, KnowledgeError>;
 
     fn name(&self) -> &str {
