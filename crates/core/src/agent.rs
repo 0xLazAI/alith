@@ -73,7 +73,7 @@ where
     }
 
     pub async fn prompt(&mut self, prompt: &str) -> Result<M::Response, TaskError> {
-        let mut executor = Executor::new(self.model.clone(), self.tools.clone(), 10);
+        let mut executor = Executor::new(self.model.clone(), self.tools.clone());
         let mut req = Request::new(prompt.to_string(), self.preamble.clone());
         req.max_tokens = self.max_tokens;
         req.temperature = self.temperature;
