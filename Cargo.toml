@@ -7,6 +7,7 @@ resolver = "2"
 alith-core = { path = "crates/core" }
 llm_client = { git = "https://github.com/lazai-labs/llm_client", version = "0.1.0" }
 llm_models = { git = "https://github.com/lazai-labs/llm_client", version = "0.1.0" }
+llm_interface = { git = "https://github.com/lazai-labs/llm_client", version = "0.1.0" }
 
 [workspace.package]
 version = "0.2.0"

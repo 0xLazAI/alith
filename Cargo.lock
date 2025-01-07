@@ -40,6 +40,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "llm_client",
+ "llm_interface",
  "llm_models",
  "regex",
  "schemars",

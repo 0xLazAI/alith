@@ -6,6 +6,7 @@ edition = { workspace = true }
 [dependencies]
 llm_client.workspace = true
 llm_models.workspace = true
+llm_interface.workspace = true
 
 anyhow = "1.0.95"
 async-trait = "0.1.84"
@@ -16,3 +17,4 @@ thiserror = "2.0.9"
 tokio = { version = "1.42.0", features = ["sync", "rt", "macros"] }
 uuid = { version = "1.11.0", features = ["serde"] }
 regex = "1.10"
+

@@ -7,7 +7,7 @@ use uuid::Uuid;
 #[derive(Clone)]
 pub struct Task<M: Completion> {
     pub id: Uuid,
-    pub description: String,
+    pub prompt: String,
     pub output: Option<String>,
     pub agent: Arc<RwLock<Agent<M>>>, // Use RwLock for thread-safe mutable access
     pub metadata: Option<TaskMetadata>,
@@ -17,15 +17,15 @@ pub struct Task<M: Completion> {
 pub struct TaskMetadata {
     pub priority: usize,
     pub tags: Vec<String>,
-    pub created_at: u64, // Timestamp in seconds since the UNIX epoch
+    pub created_at: u64,
 }
 
 impl<M: Completion> Task<M> {
     /// Creates a new task.
-    pub fn new(agent: Arc<RwLock<Agent<M>>>, description: String) -> Self {
+    pub fn new(agent: Arc<RwLock<Agent<M>>>, prompt: String) -> Self {
         Self {
             id: Uuid::default(),
-            description,
+            prompt,
             output: None,
             agent,
             metadata: None,
@@ -45,7 +45,7 @@ impl<M: Completion> Task<M> {
 
         // Call `execute_task` on the Agent
         let result = agent
-            .completion(self.description.clone().into(), None)
+            .prompt(&self.prompt.clone())
             .await
             .map_err(|_| TaskError::ExecutionError)?;
 

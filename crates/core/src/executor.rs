@@ -1,4 +1,4 @@
-use crate::chat::Completion;
+use crate::chat::{Completion, Request};
 use crate::tool::Tool;
 use regex::Regex;
 use std::sync::Arc;
@@ -32,14 +32,14 @@ impl<M: Completion> Executor<M> {
     }
 
     /// Executes the task by managing interactions between the LLM and tools.
-    pub async fn invoke(&mut self, request: String) -> Result<M::Response, String> {
+    pub async fn invoke(&mut self, request: Request) -> Result<M::Response, String> {
         let mut iterations = 0;
 
         while iterations < self.max_iterations {
             // Interact with the LLM to get a response.
             let mut model = self.model.write().await;
             let response = model
-                .completion(request.clone().into())
+                .completion(request.clone())
                 .await
                 .map_err(|e| format!("Model error: {}", e))?;
 
