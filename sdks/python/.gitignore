@@ -4,7 +4,6 @@
 .idea/
 venv
 
-# kcl files
 .pytest_cache
 __pycache__
 *.pyc

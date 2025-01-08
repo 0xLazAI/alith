@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/*", "sdks/python"]
+members = ["crates/*", "sdks/*"]
 default-members = ["crates/alith"]
 resolver = "2"
 

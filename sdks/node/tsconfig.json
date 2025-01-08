@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "strict": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "./alith",
+    "outDir": "./dist"
+  },
+  "include": [".", "alith/**/*"],
+  "exclude": ["node_modules", "benchmark", "theme"]
+}

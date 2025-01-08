@@ -1,0 +1,19 @@
+{
+  "name": "@lazai-labs/alith-win32-arm64-msvc",
+  "repository": "https://github.com/lazai-labs/alith",
+  "version": "0.1.0",
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "alith.win32-arm64-msvc.node",
+  "files": [
+    "alith.win32-arm64-msvc.node"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 10"
+  }
+}

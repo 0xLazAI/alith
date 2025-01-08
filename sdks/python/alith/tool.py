@@ -1,8 +1,12 @@
 from dataclasses import dataclass
 from typing import Callable
 from ._alith import DelegateTool as _DelegateTool
+from inspect import Parameter
+from pydantic import create_model
 import json
 import ctypes
+import inspect
+
 
 CFUNC_TYPE = ctypes.CFUNCTYPE(ctypes.c_char_p, ctypes.c_char_p)
 
@@ -15,22 +19,19 @@ class Tool:
     author: str
 
 
-def get_function_schema(func: Callable) -> str:
+def get_function_schema(f: Callable) -> str:
     """Generate a JSON schema for the function's parameters."""
-    import inspect
-
-    sig = inspect.signature(func)
-    schema = {"type": "object", "properties": {}, "required": []}
-    for name, param in sig.parameters.items():
-        param_type = (
-            str(param.annotation)
-            if param.annotation != inspect.Parameter.empty
-            else "any"
-        )
-        schema["properties"][name] = {"type": param_type}
-        if param.default == inspect.Parameter.empty:
-            schema["required"].append(name)
-    return json.dumps(schema)
+    kw = {
+        n: (o.annotation, ... if o.default == Parameter.empty else o.default)
+        for n, o in inspect.signature(f).parameters.items()
+    }
+    f_model = create_model(f"input for `{f.__name__}`", **kw)
+    f_json = {
+        "name": f.__name__,
+        "description": f.__doc__,
+        "parameters": f_model.model_json_schema(),
+    }
+    return json.dumps(f_json)
 
 
 def create_delegate_tool(func: Callable) -> _DelegateTool:
