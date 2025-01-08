@@ -1,0 +1,11 @@
+{
+  "entryPoints": ["index.d.ts"],
+  "out": "docs",
+  "name": "Alith Node SDK",
+  "tsconfig": "tsconfig.json",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "includeVersion": true,
+  "githubPages": false
+}
