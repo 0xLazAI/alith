@@ -15,4 +15,4 @@ thiserror = "2.0.9"
 tokio = { version = "1.42.0", features = ["sync", "rt", "macros", "rt-multi-thread"] }
 uuid = { version = "1.11.0", features = ["serde", "v4"] }
 regex = "1.10"
-
+futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
