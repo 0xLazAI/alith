@@ -1,8 +1,10 @@
+use llm_client::interface::requests::completion::ToolDefinition;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use std::error::Error;
 
-use llm_client::interface::requests::completion::ToolDefinition;
-
 /// A trait representing a prompt-based interaction mechanism.
+///
 /// This trait defines the behavior of components that process user prompts
 /// and return responses asynchronously.
 ///
@@ -31,30 +33,59 @@ pub trait Prompt: Send + Sync {
     ) -> impl std::future::Future<Output = Result<String, Self::PromptError>> + Send;
 }
 
+/// Represents a document with an ID, text, and additional properties.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Document {
+    /// The unique identifier of the document.
+    pub id: String,
+    /// The text content of the document.
+    pub text: String,
+    /// Additional properties associated with the document, represented as key-value pairs.
+    #[serde(flatten)]
+    pub additional_props: HashMap<String, String>,
+}
+
+impl std::fmt::Display for Document {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            concat!("<file id: {}>\n", "{}\n", "</file>\n"),
+            self.id,
+            if self.additional_props.is_empty() {
+                self.text.clone()
+            } else {
+                let mut sorted_props = self.additional_props.iter().collect::<Vec<_>>();
+                sorted_props.sort_by(|a, b| a.0.cmp(b.0));
+                let metadata = sorted_props
+                    .iter()
+                    .map(|(k, v)| format!("{}: {:?}", k, v))
+                    .collect::<Vec<_>>()
+                    .join(" ");
+                format!("<metadata {} />\n{}", metadata, self.text)
+            }
+        )
+    }
+}
+
 /// Represents a request sent to a language model for generating a completion response.
-///
-/// A `Request` encapsulates the user prompt and additional configuration options,
-/// such as a system-defined preamble, token limit, and randomness control. It
-/// can also include a list of tools available to the model for enhanced functionality.
 #[derive(Debug, Clone)]
 pub struct Request {
     /// The user-provided prompt that the language model must complete.
     pub prompt: String,
-    /// A system-defined preamble, used to guide the behavior and tone of the model.
+    /// A system-defined preamble to guide the behavior and tone of the model.
     pub preamble: String,
     /// Optional: The maximum number of tokens allowed for the generated response.
     pub max_tokens: Option<usize>,
-    /// Optional: The temperature for text generation, controlling the randomness of the output.
+    /// Optional: The temperature for text generation, controlling randomness of the output.
     pub temperature: Option<f32>,
     /// A collection of tools provided to the model for tool-based interactions.
     pub tools: Vec<ToolDefinition>,
+    /// A collection of documents attached to the request as context.
+    pub documents: Vec<Document>,
 }
 
 impl Request {
     /// Constructs a new `Request` with the given prompt and preamble.
-    ///
-    /// By default, `max_tokens` and `temperature` are left unset. The tools list
-    /// is initialized as an empty vector.
     ///
     /// # Arguments
     /// - `prompt`: A string representing the user's input prompt.
@@ -69,13 +100,32 @@ impl Request {
             max_tokens: None,
             temperature: None,
             tools: Vec::new(),
+            documents: Vec::new(),
+        }
+    }
+
+    /// Constructs a prompt string that includes the context from the attached documents.
+    ///
+    /// # Returns
+    /// A string containing the formatted prompt with document attachments, if any.
+    pub(crate) fn prompt_with_context(&self) -> String {
+        if !self.documents.is_empty() {
+            format!(
+                "<attachments>\n{}</attachments>\n\n{}",
+                self.documents
+                    .iter()
+                    .map(|doc| doc.to_string())
+                    .collect::<Vec<_>>()
+                    .join(""),
+                self.prompt
+            )
+        } else {
+            self.prompt.clone()
         }
     }
 }
 
 /// A trait for extracting the content from a language model's response.
-///
-/// Implementing this trait allows access to the main text content of a response.
 pub trait ResponseContent {
     /// Retrieves the main content from the response.
     ///
@@ -85,9 +135,6 @@ pub trait ResponseContent {
 }
 
 /// A trait for extracting tool-based calls from a language model's response.
-///
-/// Implementing this trait allows access to tool-related interactions defined
-/// in the response.
 pub trait ResponseToolCalls {
     /// Extracts tool calls from the response.
     ///
@@ -97,8 +144,6 @@ pub trait ResponseToolCalls {
 }
 
 /// Represents a call to a specific tool in a response.
-///
-/// A `ToolCall` includes the tool's ID, type, and the associated function with its arguments.
 pub struct ToolCall {
     /// The unique identifier for the tool call.
     pub id: String,
@@ -109,8 +154,6 @@ pub struct ToolCall {
 }
 
 /// Represents a callable function within a tool interaction.
-///
-/// This includes the function's name and its arguments as a string.
 pub struct CallFunction {
     /// The name of the function being invoked.
     pub name: String,
@@ -121,9 +164,7 @@ pub struct CallFunction {
 /// A trait defining the behavior of a completion engine.
 ///
 /// This trait is used by components that handle requests for text generation
-/// (or similar completions) and generate responses asynchronously. The response
-/// type must support text content extraction (`ResponseContent`) and tool call
-/// extraction (`ResponseToolCalls`).
+/// (or similar completions) and generate responses asynchronously.
 ///
 /// # Associated Types
 /// - `Response`: The specific type of the response generated by the completion engine.
