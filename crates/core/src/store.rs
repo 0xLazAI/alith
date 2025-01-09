@@ -1,4 +1,25 @@
+use crate::embedding::EmbeddingError;
+use futures::future::BoxFuture;
+use serde_json::Value;
 use std::sync::{Arc, Mutex};
+
+#[derive(Debug, thiserror::Error)]
+pub enum VectorStoreError {
+    #[error("Embedding error: {0}")]
+    EmbeddingError(#[from] EmbeddingError),
+
+    /// JSON error (e.g.: serialization, deserialization, etc.)
+    #[error("JSON error: {0}")]
+    JsonError(#[from] serde_json::Error),
+
+    #[error("Datastore error: {0}")]
+    DatastoreError(#[from] Box<dyn std::error::Error + Send + Sync + 'static>),
+
+    #[error("Missing Id: {0}")]
+    MissingIdError(String),
+}
+
+pub type TopNResults = Result<Vec<(f64, String, Value)>, VectorStoreError>;
 
 /// Trait representing a storage backend.
 pub trait Storage: Send + Sync {
@@ -6,7 +27,7 @@ pub trait Storage: Send + Sync {
     fn save(&self, value: String);
 
     /// Searches the storage with a query, limiting the results and applying a threshold.
-    fn search(&self, query: &str, limit: usize, threshold: f32) -> Vec<String>;
+    fn search(&self, query: &str, limit: usize, threshold: f32) -> BoxFuture<'static, TopNResults>;
 
     /// Resets the storage by clearing all stored data.
     fn reset(&self);
@@ -26,20 +47,32 @@ impl InMemoryStorage {
     }
 }
 
+impl Default for InMemoryStorage {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Storage for InMemoryStorage {
     fn save(&self, value: String) {
         let mut data = self.data.lock().unwrap();
         data.push(value);
     }
 
-    fn search(&self, query: &str, limit: usize, _threshold: f32) -> Vec<String> {
-        let data = self.data.lock().unwrap();
-        // Perform a simple substring search.
-        data.iter()
-            .filter(|item| item.contains(query))
-            .take(limit)
-            .cloned()
-            .collect()
+    fn search(
+        &self,
+        query: &str,
+        _limit: usize,
+        _threshold: f32,
+    ) -> BoxFuture<'static, TopNResults> {
+        let _data = self.data.lock().unwrap().clone(); // Clone data for safe async use.
+        let _query = query.to_string(); // Clone the query string for async move.
+
+        Box::pin(async move {
+            //  TODO
+            let results = vec![];
+            Ok(results)
+        })
     }
 
     fn reset(&self) {
@@ -69,16 +102,11 @@ impl<S: Storage> Store<S> {
     }
 
     /// Indexes the embeddings using a provided embedding model.
-    pub fn index<M>(&self, embedding_model: M)
+    pub fn index<M>(&self, _embedding_model: M)
     where
         M: Fn(&str) -> Vec<f32> + Send + Sync,
     {
-        // Retrieve all stored embeddings.
-        let data = self.storage.search("", usize::MAX, 0.0);
-        for item in data {
-            let embedding = embedding_model(&item);
-            println!("Indexing: {:?} -> {:?}", item, embedding);
-        }
+        // todo
     }
 }
 

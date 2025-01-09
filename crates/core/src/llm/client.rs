@@ -72,11 +72,25 @@ impl Completion for Client {
     type Response = ClientResponse;
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
-        self.completion
-            .prompt()
-            .add_user_message()
-            .map_err(|err| CompletionError::Normal(err.to_string()))?
-            .set_content(&request.prompt);
+        let prompt = self.completion.prompt();
+        if !request.preamble.trim().is_empty() {
+            prompt
+                .add_system_message()
+                .map_err(|err| CompletionError::Normal(err.to_string()))?
+                .set_content(&request.preamble);
+        }
+        if request.documents.is_empty() {
+            prompt
+                .add_user_message()
+                .map_err(|err| CompletionError::Normal(err.to_string()))?
+                .set_content(&request.prompt);
+        } else {
+            prompt
+                .add_user_message()
+                .map_err(|err| CompletionError::Normal(err.to_string()))?
+                .set_content(request.prompt_with_context());
+        }
+
         self.completion
             .run()
             .await

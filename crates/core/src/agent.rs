@@ -1,9 +1,11 @@
-use crate::chat::{Completion, Request, ResponseContent};
+use crate::chat::{Completion, Document, Request, ResponseContent};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
-use crate::store::Storage;
+use crate::store::{Storage, VectorStoreError};
 use crate::task::TaskError;
 use crate::tool::Tool;
+use futures::{stream, StreamExt, TryStreamExt};
+use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use uuid::Uuid;
@@ -76,11 +78,7 @@ where
     }
 
     /// Adds a storage index to the agent.
-    pub fn add_store_index(
-        mut self,
-        sample: usize,
-        store: impl Storage + 'static,
-    ) -> Self {
+    pub fn store_index(mut self, sample: usize, store: impl Storage + 'static) -> Self {
         self.store_indices.push((sample, Box::new(store)));
         self
     }
@@ -96,6 +94,32 @@ where
             .iter()
             .map(|tool| tool.definition())
             .collect::<Vec<_>>();
+        req.documents = stream::iter(self.store_indices.iter())
+            .then(|(num_sample, index)| async {
+                Ok::<_, VectorStoreError>(
+                    index
+                        .search(prompt, *num_sample, 1000.0)
+                        .await?
+                        .into_iter()
+                        .map(|(_, id, doc)| {
+                            let text = serde_json::to_string_pretty(&doc)
+                                .unwrap_or_else(|_| doc.to_string());
+
+                            Document {
+                                id,
+                                text,
+                                additional_props: HashMap::new(),
+                            }
+                        })
+                        .collect::<Vec<_>>(),
+                )
+            })
+            .try_fold(vec![], |mut acc, docs| async {
+                acc.extend(docs);
+                Ok(acc)
+            })
+            .await
+            .map_err(|_| TaskError::ExecutionError)?;
 
         let response = executor
             .invoke(req)

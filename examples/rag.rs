@@ -35,7 +35,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .build()
         .await?;
 
-    let vector_store = StoreFactory::getStore("in_mem").from_documents(embeddings);
+    let vector_store = StoreFactory::get_store("in_mem").from_documents(embeddings);
     let index = vector_store.index(embedding_model);
 
     let mut agent = Agent::new(

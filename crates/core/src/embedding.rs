@@ -1,9 +1,9 @@
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::cmp::max;
 use futures::stream;
 use futures::stream::StreamExt;
 use futures::stream::TryStreamExt;
+use serde::{Deserialize, Serialize};
+use std::cmp::max;
+use std::collections::HashMap;
 
 // Struct representing an embedding
 #[derive(Clone, Default, Deserialize, Serialize, Debug)]
@@ -40,10 +40,27 @@ pub enum EmbedError {
     Custom(String),
 }
 
-// Errors related to the embedding model
-#[derive(Debug)]
+#[derive(Debug, thiserror::Error)]
 pub enum EmbeddingError {
-    Custom(String),
+    /// Http error (e.g.: connection error, timeout, etc.)
+    #[error("HttpError: {0}")]
+    HttpError(#[from] reqwest::Error),
+
+    /// Json error (e.g.: serialization, deserialization)
+    #[error("JsonError: {0}")]
+    JsonError(#[from] serde_json::Error),
+
+    /// Error processing the document for embedding
+    #[error("DocumentError: {0}")]
+    DocumentError(Box<dyn std::error::Error + Send + Sync + 'static>),
+
+    /// Error parsing the completion response
+    #[error("ResponseError: {0}")]
+    ResponseError(String),
+
+    /// Error returned by the embedding model provider
+    #[error("ProviderError: {0}")]
+    ProviderError(String),
 }
 
 // Enum to handle one or multiple embeddings
@@ -116,17 +133,13 @@ impl<M: EmbeddingModel, T: Embed + Send> EmbeddingsBuilder<M, T> {
 
         // Compute embeddings for the texts
         let mut embeddings = stream::iter(texts.into_iter())
-            .flat_map(|(i, texts)| {
-                stream::iter(texts.into_iter().map(move |text| (i, text)))
-            })
+            .flat_map(|(i, texts)| stream::iter(texts.into_iter().map(move |text| (i, text))))
             .chunks(M::MAX_DOCUMENTS)
             .map(|chunk| async {
                 let (ids, docs): (Vec<_>, Vec<_>) = chunk.into_iter().unzip();
 
                 let embeddings = self.model.embed_texts(docs).await?;
-                Ok::<_, EmbeddingError>(
-                    ids.into_iter().zip(embeddings).collect::<Vec<_>>(),
-                )
+                Ok::<_, EmbeddingError>(ids.into_iter().zip(embeddings).collect::<Vec<_>>())
             })
             .buffer_unordered(max(1, 1024 / M::MAX_DOCUMENTS))
             .try_fold(

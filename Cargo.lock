@@ -42,6 +42,7 @@ dependencies = [
  "futures",
  "llm_client",
  "regex",
+ "reqwest 0.11.27",
  "schemars",
  "serde",
  "serde_json",
