@@ -3,9 +3,9 @@ use alith::{Agent, LLM, EmbeddingsBuilder, StoreFactory, };
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt4o")?;
-    let embedding_model = model.embedding_model("text-embedding-ada-002");
+    let embeddings_model = model.embeddings_model("text-embedding-ada-002");
 
-    let embeddings = EmbeddingsBuilder::new(embedding_model.clone())
+    let embeddings = EmbeddingsBuilder::new(embeddings_model.clone())
         .documents(vec![
             WordDefinition {
                 id: "doc0".to_string(),
@@ -36,7 +36,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .await?;
 
     let vector_store = StoreFactory::get_store("in_mem").from_documents(embeddings);
-    let index = vector_store.index(embedding_model);
+    let index = vector_store.index(embeddings_model);
 
     let mut agent = Agent::new(
         "simple agent",

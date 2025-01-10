@@ -5,22 +5,22 @@ use serde::{Deserialize, Serialize};
 use std::cmp::max;
 use std::collections::HashMap;
 
-// Struct representing an embedding
+/// Struct representing an embedding
 #[derive(Clone, Default, Deserialize, Serialize, Debug)]
-pub struct Embedding {
+pub struct EmbeddingsData {
     pub document: String,
     pub vec: Vec<f64>,
 }
 
-// Trait for an embedding model
-pub trait EmbeddingModel: Clone + Send + Sync {
+/// Trait for embeddings
+pub trait Embeddings: Clone + Send + Sync {
     const MAX_DOCUMENTS: usize;
 
     /// Generate embeddings for a list of texts
     fn embed_texts(
         &self,
-        texts: Vec<String>,
-    ) -> futures::future::BoxFuture<'static, Result<Vec<Embedding>, EmbeddingError>>;
+        input: Vec<String>,
+    ) -> futures::future::BoxFuture<'static, Result<Vec<EmbeddingsData>, EmbeddingsError>>;
 }
 
 // Trait that defines the embedding process for a document
@@ -41,7 +41,7 @@ pub enum EmbedError {
 }
 
 #[derive(Debug, thiserror::Error)]
-pub enum EmbeddingError {
+pub enum EmbeddingsError {
     /// Http error (e.g.: connection error, timeout, etc.)
     #[error("HttpError: {0}")]
     HttpError(#[from] reqwest::Error),
@@ -63,7 +63,7 @@ pub enum EmbeddingError {
     ProviderError(String),
 }
 
-// Enum to handle one or multiple embeddings
+/// Enum to handle one or multiple embeddings
 #[derive(Clone)]
 pub enum OneOrMany<T> {
     One(T),
@@ -87,13 +87,13 @@ impl<T: Clone> OneOrMany<T> {
     }
 }
 
-// The main builder struct for generating embeddings
-pub struct EmbeddingsBuilder<M: EmbeddingModel, T: Embed> {
+/// The main builder struct for generating embeddings
+pub struct EmbeddingsBuilder<M: Embeddings, T: Embed> {
     model: M,
     documents: Vec<(T, Vec<String>)>,
 }
 
-impl<M: EmbeddingModel, T: Embed> EmbeddingsBuilder<M, T> {
+impl<M: Embeddings, T: Embed> EmbeddingsBuilder<M, T> {
     /// Create a new embedding builder with the given model
     pub fn new(model: M) -> Self {
         Self {
@@ -119,9 +119,9 @@ impl<M: EmbeddingModel, T: Embed> EmbeddingsBuilder<M, T> {
     }
 }
 
-impl<M: EmbeddingModel, T: Embed + Send> EmbeddingsBuilder<M, T> {
+impl<M: Embeddings, T: Embed + Send> EmbeddingsBuilder<M, T> {
     /// Generate embeddings for all documents
-    pub async fn build(self) -> Result<Vec<(T, OneOrMany<Embedding>)>, EmbeddingError> {
+    pub async fn build(self) -> Result<Vec<(T, OneOrMany<EmbeddingsData>)>, EmbeddingsError> {
         // Create lookup stores for documents and their corresponding texts
         let mut docs = HashMap::new();
         let mut texts = HashMap::new();
@@ -139,12 +139,12 @@ impl<M: EmbeddingModel, T: Embed + Send> EmbeddingsBuilder<M, T> {
                 let (ids, docs): (Vec<_>, Vec<_>) = chunk.into_iter().unzip();
 
                 let embeddings = self.model.embed_texts(docs).await?;
-                Ok::<_, EmbeddingError>(ids.into_iter().zip(embeddings).collect::<Vec<_>>())
+                Ok::<_, EmbeddingsError>(ids.into_iter().zip(embeddings).collect::<Vec<_>>())
             })
             .buffer_unordered(max(1, 1024 / M::MAX_DOCUMENTS))
             .try_fold(
                 HashMap::new(),
-                |mut acc: HashMap<_, OneOrMany<Embedding>>, embeddings| async move {
+                |mut acc: HashMap<_, OneOrMany<EmbeddingsData>>, embeddings| async move {
                     embeddings.into_iter().for_each(|(i, embedding)| {
                         acc.entry(i)
                             .and_modify(|embeds| embeds.push(embedding.clone()))

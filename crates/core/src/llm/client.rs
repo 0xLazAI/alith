@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use crate::chat::CallFunction;
 use crate::chat::Completion;
 use crate::chat::CompletionError;
@@ -6,7 +8,9 @@ use crate::chat::ResponseContent;
 use crate::chat::ResponseToolCalls;
 use crate::chat::ToolCall;
 use anyhow::Result;
+
 pub use llm_client::basic_completion::BasicCompletion;
+pub use llm_client::embeddings::Embeddings;
 pub use llm_client::interface::requests::completion::{CompletionRequest, CompletionResponse};
 pub use llm_client::models::api_model::ApiLlmModel;
 pub use llm_client::prelude::*;
@@ -20,7 +24,14 @@ impl ResponseContent for CompletionResponse {
 
 pub struct Client {
     pub(crate) client: LlmClient,
-    pub(crate) completion: BasicCompletion,
+}
+
+impl Clone for Client {
+    fn clone(&self) -> Self {
+        Self {
+            client: LlmClient::new(Arc::clone(&self.client.backend)),
+        }
+    }
 }
 
 impl Client {
@@ -29,14 +40,12 @@ impl Client {
             let mut builder = LlmClient::openai();
             builder.model = ApiLlmModel::openai_model_from_model_id(name);
             let client = builder.init()?;
-            let completion = client.basic_completion();
-            Ok(Client { client, completion })
+            Ok(Client { client })
         } else if name.starts_with("claude") {
             let mut builder = LlmClient::anthropic();
             builder.model = ApiLlmModel::anthropic_model_from_model_id(name);
             let client = builder.init()?;
-            let completion = client.basic_completion();
-            Ok(Client { client, completion })
+            Ok(Client { client })
         } else {
             Err(anyhow::anyhow!("unknown model {name}"))
         }
@@ -72,7 +81,8 @@ impl Completion for Client {
     type Response = ClientResponse;
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
-        let prompt = self.completion.prompt();
+        let mut completion = self.client.basic_completion();
+        let prompt = completion.prompt();
         if !request.preamble.trim().is_empty() {
             prompt
                 .add_system_message()
@@ -91,7 +101,7 @@ impl Completion for Client {
                 .set_content(request.prompt_with_context());
         }
 
-        self.completion
+        completion
             .run()
             .await
             .map_err(|err| CompletionError::Normal(err.to_string()))
