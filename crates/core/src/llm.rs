@@ -34,29 +34,28 @@ pub struct LLM {
     /// The name or identifier of the model to use
     /// Examples: "gpt-4", "gpt-3.5-turbo", etc.
     pub model: String,
-    /// The version of the API
-    /// Some APIs may require a version number to ensure compatibility
-    pub api_version: Option<String>,
-    /// The API key used for authentication
-    /// Typically required to access protected API services
-    pub api_key: Option<String>,
     /// The LLM client used to communicate with model backends
+    client: Client,
+}
+
+pub struct EmbeddingsModel {
     pub client: Client,
+    pub model: String,
 }
 
 impl LLM {
     pub fn from_model_name(name: &str) -> Result<Self> {
         Ok(Self {
             model: name.to_string(),
-            api_version: None,
-            api_key: None,
             client: Client::from_model_name(name)?,
         })
     }
 
-    pub fn with_api_key(mut self, api_key: &str) -> Self {
-        self.api_key = Some(api_key.to_string());
-        self
+    pub fn embeddings_model(&self, model: &str) -> EmbeddingsModel {
+        EmbeddingsModel {
+            model: model.to_string(),
+            client: self.client.clone(),
+        }
     }
 }
 

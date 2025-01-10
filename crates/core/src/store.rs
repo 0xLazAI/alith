@@ -1,4 +1,4 @@
-use crate::embedding::EmbeddingError;
+use crate::embeddings::EmbeddingsError;
 use futures::future::BoxFuture;
 use serde_json::Value;
 use std::sync::{Arc, Mutex};
@@ -6,7 +6,7 @@ use std::sync::{Arc, Mutex};
 #[derive(Debug, thiserror::Error)]
 pub enum VectorStoreError {
     #[error("Embedding error: {0}")]
-    EmbeddingError(#[from] EmbeddingError),
+    EmbeddingError(#[from] EmbeddingsError),
 
     /// JSON error (e.g.: serialization, deserialization, etc.)
     #[error("JSON error: {0}")]
@@ -102,7 +102,7 @@ impl<S: Storage> Store<S> {
     }
 
     /// Indexes the embeddings using a provided embedding model.
-    pub fn index<M>(&self, _embedding_model: M)
+    pub fn index<M>(&self, _embeddings_model: M)
     where
         M: Fn(&str) -> Vec<f32> + Send + Sync,
     {
