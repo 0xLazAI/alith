@@ -1,4 +1,4 @@
-use crate::chat::{Completion, Document, Request, ResponseContent};
+use crate::chat::{Completion, Document, Message, Request, ResponseContent};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
 use crate::store::{Storage, VectorStoreError};
@@ -18,7 +18,7 @@ pub struct Agent<M: Completion> {
     /// The tools to use.
     pub tools: Arc<Vec<Box<dyn Tool>>>,
     /// Knowledge sources for the agent.
-    pub knowledges: Vec<Box<dyn Knowledge>>,
+    pub knowledges: Arc<Vec<Box<dyn Knowledge>>>,
     /// The unique ID of the agent.
     pub id: Uuid,
     /// The name of the agent.
@@ -71,7 +71,7 @@ where
             temperature: None,
             max_tokens: None,
             max_execution_time: None,
-            knowledges: Vec::new(),
+            knowledges: Arc::new(Vec::new()),
             respect_context_window: false,
             allow_code_execution: false,
         }
@@ -84,11 +84,21 @@ where
     }
 
     /// Processes a prompt using the agent.
-    pub async fn prompt(&mut self, prompt: &str) -> Result<String, TaskError> {
-        let mut executor = Executor::new(self.model.clone(), self.tools.clone());
+    pub async fn prompt(
+        &mut self,
+        prompt: &str,
+        history: Vec<Message>,
+    ) -> Result<String, TaskError> {
+        let mut executor = Executor::new(
+            self.model.clone(),
+            self.knowledges.clone(),
+            self.tools.clone(),
+        );
         let mut req: Request = Request::new(prompt.to_string(), self.preamble.clone());
+        req.history = history;
         req.max_tokens = self.max_tokens;
         req.temperature = self.temperature;
+        // todo: move tools and docs gen code to executor?
         req.tools = self
             .tools
             .iter()

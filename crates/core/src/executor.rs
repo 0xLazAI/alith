@@ -1,4 +1,5 @@
 use crate::chat::{Completion, Request, ResponseContent, ResponseToolCalls, ToolCall};
+use crate::knowledge::Knowledge;
 use crate::tool::Tool;
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -6,17 +7,35 @@ use tokio::sync::RwLock;
 /// Manages the execution of tasks using an LLM, tools, and (optionally) memory components.
 pub struct Executor<M: Completion> {
     model: Arc<RwLock<M>>,
+    knowledges: Arc<Vec<Box<dyn Knowledge>>>,
     tools: Arc<Vec<Box<dyn Tool>>>,
 }
 
 impl<M: Completion> Executor<M> {
     /// Creates a new `Executor` instance.
-    pub fn new(model: Arc<RwLock<M>>, tools: Arc<Vec<Box<dyn Tool>>>) -> Self {
-        Self { model, tools }
+    pub fn new(
+        model: Arc<RwLock<M>>,
+        knowledges: Arc<Vec<Box<dyn Knowledge>>>,
+        tools: Arc<Vec<Box<dyn Tool>>>,
+    ) -> Self {
+        Self {
+            model,
+            knowledges,
+            tools,
+        }
     }
 
     /// Executes the task by managing interactions between the LLM and tools.
-    pub async fn invoke(&mut self, request: Request) -> Result<M::Response, String> {
+    pub async fn invoke(&mut self, mut request: Request) -> Result<M::Response, String> {
+        request.knowledges = {
+            let mut enriched_knowledges = Vec::new();
+            for knowledge in self.knowledges.iter() {
+                let enriched = knowledge.enrich(&request.prompt);
+                enriched_knowledges.push(enriched);
+            }
+            enriched_knowledges
+        };
+
         // Interact with the LLM to get a response.
         let mut model = self.model.write().await;
         let response = model

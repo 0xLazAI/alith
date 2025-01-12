@@ -33,6 +33,13 @@ pub trait Prompt: Send + Sync {
     ) -> impl std::future::Future<Output = Result<String, Self::PromptError>> + Send;
 }
 
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Message {
+    /// "system", "user", or "assistant"
+    pub role: String,
+    pub content: String,
+}
+
 /// Represents a document with an ID, text, and additional properties.
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Document {
@@ -68,19 +75,60 @@ impl std::fmt::Display for Document {
 }
 
 /// Represents a request sent to a language model for generating a completion response.
+///
+/// This struct provides a flexible interface to configure the language model's behavior
+/// and enhance its outputs with additional tools, documents, and contextual information.
+/// It is suited for a wide range of use cases, from simple prompt completions to
+/// advanced multi-turn interactions or tool-augmented tasks.
 #[derive(Debug, Clone)]
 pub struct Request {
-    /// The user-provided prompt that the language model must complete.
+    /// The user-provided input text that the language model must complete or respond to.
+    ///
+    /// This is the primary query or message that serves as the basis for the model's response.
     pub prompt: String,
+
     /// A system-defined preamble to guide the behavior and tone of the model.
+    ///
+    /// Use this field to provide specific instructions to the model, such as role-playing as
+    /// an expert, adhering to a formal tone, or aligning responses with certain principles.
     pub preamble: String,
-    /// Optional: The maximum number of tokens allowed for the generated response.
+
+    /// A collection of knowledge sources available for enriching the request prompt.
+    ///
+    /// These knowledge sources are represented as `Box<dyn Knowledge>` objects,
+    /// which implement the `Knowledge` trait. Each knowledge source can process
+    /// the input prompt and return additional contextual or enriched information.
+    pub knowledges: Vec<String>,
+
+    /// A sequence of previous messages exchanged in the conversation.
+    ///
+    /// This provides context for multi-turn interactions, enabling the model to maintain
+    /// coherence and relevance across turns.
+    pub history: Vec<Message>,
+
+    /// Optional: Defines the maximum number of tokens allowed for the generated response.
+    ///
+    /// When set, this value restricts the length of the model's output. If not provided,
+    /// the system may use a default or determine the length dynamically.
     pub max_tokens: Option<usize>,
-    /// Optional: The temperature for text generation, controlling randomness of the output.
+
+    /// Optional: Controls the randomness of the text generation process.
+    ///
+    /// Higher values (e.g., 1.0) result in more creative and diverse responses, while lower
+    /// values (e.g., 0.2) make the output more focused and deterministic. If `None`, the system
+    /// uses a default temperature.
     pub temperature: Option<f32>,
-    /// A collection of tools provided to the model for tool-based interactions.
+
+    /// A collection of tools available for tool-based interactions with the model.
+    ///
+    /// Tools are external systems, APIs, or utilities that the model can invoke to perform
+    /// specific tasks or enhance its responses.
     pub tools: Vec<ToolDefinition>,
-    /// A collection of documents attached to the request as context.
+
+    /// A collection of documents that provide context or background information for the model.
+    ///
+    /// These documents can be used by the model to generate more accurate and informed responses.
+    /// Examples include research papers, policy documents, or reference materials.
     pub documents: Vec<Document>,
 }
 
@@ -97,6 +145,8 @@ impl Request {
         Self {
             prompt,
             preamble,
+            knowledges: Vec::new(),
+            history: Vec::new(),
             max_tokens: None,
             temperature: None,
             tools: Vec::new(),
