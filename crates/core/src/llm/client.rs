@@ -82,13 +82,31 @@ impl Completion for Client {
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
         let mut completion = self.client.basic_completion();
+        if let Some(temperature) = request.temperature {
+            completion.temperature(temperature);
+        }
+        if let Some(max_tokens) = request.max_tokens {
+            completion.max_tokens(max_tokens.try_into().unwrap());
+        }
+
         let prompt = completion.prompt();
+        // Add preamble if provided
         if !request.preamble.trim().is_empty() {
             prompt
                 .add_system_message()
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
                 .set_content(&request.preamble);
         }
+
+        // Add knowledge sources if provided
+        for knowledge in &request.knowledges {
+            prompt
+                .add_system_message()
+                .map_err(|err| CompletionError::Normal(err.to_string()))?
+                .set_content(knowledge);
+        }
+
+        // Add user prompt with or without context
         if request.documents.is_empty() {
             prompt
                 .add_user_message()
@@ -101,6 +119,20 @@ impl Completion for Client {
                 .set_content(request.prompt_with_context());
         }
 
+        // Add conversation history
+        for msg in &request.history {
+            let result = match msg.role.as_str() {
+                "system" => prompt.add_system_message(),
+                "user" => prompt.add_user_message(),
+                "assistant" => prompt.add_assistant_message(),
+                _ => continue, // Just skip unknown roles
+            };
+            result
+                .map_err(|err| CompletionError::Normal(err.to_string()))?
+                .set_content(&msg.content);
+        }
+
+        // Execute the completion request
         completion
             .run()
             .await
