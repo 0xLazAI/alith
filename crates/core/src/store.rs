@@ -7,14 +7,11 @@ use std::sync::{Arc, Mutex};
 pub enum VectorStoreError {
     #[error("Embedding error: {0}")]
     EmbeddingError(#[from] EmbeddingsError),
-
     /// JSON error (e.g.: serialization, deserialization, etc.)
     #[error("JSON error: {0}")]
     JsonError(#[from] serde_json::Error),
-
     #[error("Datastore error: {0}")]
     DatastoreError(#[from] Box<dyn std::error::Error + Send + Sync + 'static>),
-
     #[error("Missing Id: {0}")]
     MissingIdError(String),
 }
@@ -25,15 +22,14 @@ pub type TopNResults = Result<Vec<(f64, String, Value)>, VectorStoreError>;
 pub trait Storage: Send + Sync {
     /// Saves a value into the storage.
     fn save(&self, value: String);
-
     /// Searches the storage with a query, limiting the results and applying a threshold.
     fn search(&self, query: &str, limit: usize, threshold: f32) -> BoxFuture<'static, TopNResults>;
-
     /// Resets the storage by clearing all stored data.
     fn reset(&self);
 }
 
 /// In-memory storage implementation.
+#[derive(Debug, Clone)]
 pub struct InMemoryStorage {
     data: Arc<Mutex<Vec<String>>>, // Simple in-memory vector to store data.
 }
@@ -69,7 +65,7 @@ impl Storage for InMemoryStorage {
         let _query = query.to_string(); // Clone the query string for async move.
 
         Box::pin(async move {
-            //  TODO
+            // TODO: use hnsw and bm25 to search
             let results = vec![];
             Ok(results)
         })
@@ -81,43 +77,14 @@ impl Storage for InMemoryStorage {
     }
 }
 
-/// A generic vector store that wraps a storage backend.
-pub struct Store<S: Storage> {
-    storage: Arc<S>,
-}
-
-impl<S: Storage> Store<S> {
-    /// Creates a new `Store` with the given storage backend.
-    pub fn new(storage: S) -> Self {
-        Self {
-            storage: Arc::new(storage),
-        }
-    }
-
-    /// Populates the store with embeddings.
-    pub fn from_documents(&self, embeddings: Vec<String>) {
-        for embedding in embeddings {
-            self.storage.save(embedding);
-        }
-    }
-
-    /// Indexes the embeddings using a provided embedding model.
-    pub fn index<M>(&self, _embeddings_model: M)
-    where
-        M: Fn(&str) -> Vec<f32> + Send + Sync,
-    {
-        // todo
-    }
-}
-
 /// Factory to create different types of vector stores.
 pub struct StoreFactory;
 
 impl StoreFactory {
     /// Returns a store instance based on the specified type.
-    pub fn get_store(store_type: &str) -> Store<impl Storage> {
+    pub fn get_store(store_type: &str) -> impl Storage {
         match store_type {
-            "in_mem" => Store::new(InMemoryStorage::new()),
+            "memory" => InMemoryStorage::new(),
             _ => panic!("Unknown store type: {}", store_type),
         }
     }

@@ -5,13 +5,13 @@ edition = { workspace = true }
 
 [dependencies]
 llm_client.workspace = true
-anyhow = "1.0.95"
-async-trait = "0.1.84"
-schemars = "0.8.21"
-serde = { version = "1.0.217", features = ["derive"] }
-serde_json = "1.0.134"
-thiserror = "2.0.9"
-tokio = { version = "1.42.0", features = ["sync", "rt", "macros", "rt-multi-thread"] }
+anyhow.workspace = true
+async-trait.workspace = true
+schemars.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
 uuid = { version = "1.11.0", features = ["serde", "v4"] }
 regex = "1.10"
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }

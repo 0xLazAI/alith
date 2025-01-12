@@ -5,3 +5,17 @@ edition = { workspace = true }
 
 [dependencies]
 alith-core.workspace = true
+async-trait.workspace = true
+tokio.workspace = true
+serde.workspace = true
+anyhow.workspace = true
+schemars.workspace = true
+
+[[example]]
+name = "agent"
+
+[[example]]
+name = "agent_with_tools"
+
+[[example]]
+name = "rag"
