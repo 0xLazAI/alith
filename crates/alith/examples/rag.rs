@@ -1,19 +1,15 @@
-use alith::{Agent, EmbeddingsBuilder, Storage, StoreFactory, LLM};
+use alith::{Agent, EmbeddingsBuilder, InMemoryStorage, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt4o")?;
-    let embeddings = EmbeddingsBuilder::new(model.embeddings_model("text-embedding-ada-002"))
+    let embeddingds_model = model.embeddings_model("text-embedding-ada-002");
+    let data = EmbeddingsBuilder::new(embeddingds_model.clone())
         .documents(vec!["doc0", "doc1", "doc2"])
         .unwrap()
         .build()
         .await?;
-    let storage = StoreFactory::get_store("memory");
-    for (_, embedding) in embeddings {
-        for data in embedding {
-            storage.save(data.document);
-        }
-    }
+    let storage = InMemoryStorage::from_multiple_documents(embeddingds_model, data);
 
     let mut agent = Agent::new("simple agent", model, vec![]);
     agent.preamble =
