@@ -1,6 +1,7 @@
 pub mod client;
 
 use crate::chat::{Completion, CompletionError};
+use crate::embeddings::{Embeddings, EmbeddingsData, EmbeddingsError};
 use anyhow::Result;
 use client::{Client, CompletionResponse};
 
@@ -38,6 +39,7 @@ pub struct LLM {
     client: Client,
 }
 
+#[derive(Clone)]
 pub struct EmbeddingsModel {
     pub client: Client,
     pub model: String,
@@ -67,5 +69,16 @@ impl Completion for LLM {
         request: crate::chat::Request,
     ) -> Result<Self::Response, CompletionError> {
         self.client.completion(request).await
+    }
+}
+
+impl Embeddings for EmbeddingsModel {
+    const MAX_DOCUMENTS: usize = 1024;
+
+    async fn embed_texts(
+        &self,
+        input: Vec<String>,
+    ) -> Result<Vec<EmbeddingsData>, EmbeddingsError> {
+        self.client.embed_texts(input).await
     }
 }

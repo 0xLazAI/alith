@@ -1,14 +1,7 @@
-use alith::{
-    agent::Agent,
-    llm::LLM,
-    tool::{StructureTool, Tool, ToolError},
-};
+use alith::{Agent, StructureTool, Tool, ToolError, LLM};
 use async_trait::async_trait;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use std::{env, sync::Arc};
-use tokio::sync::RwLock;
-use uuid::Uuid;
 
 #[derive(JsonSchema, Serialize, Deserialize)]
 pub struct Input {

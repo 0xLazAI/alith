@@ -7,6 +7,9 @@ use crate::chat::Request;
 use crate::chat::ResponseContent;
 use crate::chat::ResponseToolCalls;
 use crate::chat::ToolCall;
+use crate::embeddings::Embeddings as EmbeddingsTrait;
+use crate::embeddings::EmbeddingsData;
+use crate::embeddings::EmbeddingsError;
 use anyhow::Result;
 
 pub use llm_client::basic_completion::BasicCompletion;
@@ -52,8 +55,7 @@ impl Client {
     }
 }
 
-type ClientResponse = CompletionResponse;
-impl ResponseToolCalls for ClientResponse {
+impl ResponseToolCalls for CompletionResponse {
     fn toolcalls(&self) -> Vec<ToolCall> {
         self.tool_calls
             .as_ref()
@@ -78,7 +80,7 @@ impl Drop for Client {
 }
 
 impl Completion for Client {
-    type Response = ClientResponse;
+    type Response = CompletionResponse;
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
         let mut completion = self.client.basic_completion();
@@ -137,5 +139,30 @@ impl Completion for Client {
             .run()
             .await
             .map_err(|err| CompletionError::Normal(err.to_string()))
+    }
+}
+
+impl EmbeddingsTrait for Client {
+    const MAX_DOCUMENTS: usize = 1024;
+
+    async fn embed_texts(
+        &self,
+        input: Vec<String>,
+    ) -> Result<Vec<EmbeddingsData>, EmbeddingsError> {
+        let mut embeddings = self.client.embeddings();
+        embeddings.set_input(input);
+        embeddings
+            .run()
+            .await
+            .map(|resp| {
+                resp.data
+                    .iter()
+                    .map(|data| EmbeddingsData {
+                        document: data.object.clone(),
+                        vec: data.embedding.clone(),
+                    })
+                    .collect()
+            })
+            .map_err(|err| EmbeddingsError::ResponseError(err.to_string()))
     }
 }

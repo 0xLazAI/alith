@@ -78,36 +78,36 @@ where
     }
 
     /// Adds a storage index to the agent.
-    pub fn store_index(mut self, sample: usize, store: impl Storage + 'static) -> Self {
+    pub fn store_index(&mut self, sample: usize, store: impl Storage + 'static) -> &mut Self {
         self.store_indices.push((sample, Box::new(store)));
         self
     }
 
     /// Processes a prompt using the agent.
-    pub async fn prompt(
-        &mut self,
-        prompt: &str,
-        history: Vec<Message>,
-    ) -> Result<String, TaskError> {
+    pub async fn prompt(&mut self, prompt: &str) -> Result<String, TaskError> {
+        self.chat(prompt, vec![]).await
+    }
+
+    /// Processes a prompt using the agent.
+    pub async fn chat(&mut self, prompt: &str, history: Vec<Message>) -> Result<String, TaskError> {
         let mut executor = Executor::new(
             self.model.clone(),
             self.knowledges.clone(),
             self.tools.clone(),
         );
-        let mut req: Request = Request::new(prompt.to_string(), self.preamble.clone());
+        let mut req = Request::new(prompt.to_string(), self.preamble.clone());
         req.history = history;
         req.max_tokens = self.max_tokens;
         req.temperature = self.temperature;
-        // todo: move tools and docs gen code to executor?
         req.tools = self
             .tools
             .iter()
             .map(|tool| tool.definition())
             .collect::<Vec<_>>();
         req.documents = stream::iter(self.store_indices.iter())
-            .then(|(num_sample, index)| async {
+            .then(|(num_sample, storage)| async {
                 Ok::<_, VectorStoreError>(
-                    index
+                    storage
                         .search(prompt, *num_sample, 1000.0)
                         .await?
                         .into_iter()

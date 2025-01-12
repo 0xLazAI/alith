@@ -45,7 +45,7 @@ impl<M: Completion> Task<M> {
 
         // Call `execute_task` on the Agent
         let result = agent
-            .prompt(&self.prompt.clone(), vec![])
+            .prompt(&self.prompt.clone())
             .await
             .map_err(|_| TaskError::ExecutionError)?;
 
