@@ -37,7 +37,7 @@ impl DelegateAgent {
             tools,
         );
         let rt = Runtime::new().unwrap();
-        let result = rt.block_on(async { agent.prompt(prompt).await });
+        let result = rt.block_on(async { agent.prompt(prompt, vec![]).await });
         result.map_err(|e| PyErr::new::<PyException, _>(e.to_string()))
     }
 }
