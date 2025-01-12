@@ -111,15 +111,10 @@ where
                         .search(prompt, *num_sample, 1000.0)
                         .await?
                         .into_iter()
-                        .map(|(_, id, doc)| {
-                            let text = serde_json::to_string_pretty(&doc)
-                                .unwrap_or_else(|_| doc.to_string());
-
-                            Document {
-                                id,
-                                text,
-                                additional_props: HashMap::new(),
-                            }
+                        .map(|(id, text, _)| Document {
+                            id,
+                            text,
+                            additional_props: HashMap::new(),
                         })
                         .collect::<Vec<_>>(),
                 )

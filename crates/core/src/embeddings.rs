@@ -1,3 +1,4 @@
+use async_trait::async_trait;
 use futures::stream;
 use futures::stream::StreamExt;
 use futures::stream::TryStreamExt;
@@ -13,14 +14,13 @@ pub struct EmbeddingsData {
 }
 
 /// Trait for embeddings
+#[async_trait]
 pub trait Embeddings: Clone + Send + Sync {
     const MAX_DOCUMENTS: usize = 1024;
 
     /// Generate embeddings for a list of texts
-    fn embed_texts(
-        &self,
-        input: Vec<String>,
-    ) -> impl std::future::Future<Output = Result<Vec<EmbeddingsData>, EmbeddingsError>>;
+    async fn embed_texts(&self, input: Vec<String>)
+        -> Result<Vec<EmbeddingsData>, EmbeddingsError>;
 }
 
 // Trait that defines the embedding process for a document

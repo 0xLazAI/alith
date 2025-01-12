@@ -3,6 +3,7 @@ pub mod client;
 use crate::chat::{Completion, CompletionError};
 use crate::embeddings::{Embeddings, EmbeddingsData, EmbeddingsError};
 use anyhow::Result;
+use async_trait::async_trait;
 use client::{Client, CompletionResponse};
 
 // OpenAI models
@@ -72,6 +73,7 @@ impl Completion for LLM {
     }
 }
 
+#[async_trait]
 impl Embeddings for EmbeddingsModel {
     const MAX_DOCUMENTS: usize = 1024;
 

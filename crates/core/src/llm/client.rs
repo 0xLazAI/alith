@@ -12,6 +12,7 @@ use crate::embeddings::EmbeddingsData;
 use crate::embeddings::EmbeddingsError;
 use anyhow::Result;
 
+use async_trait::async_trait;
 pub use llm_client::basic_completion::BasicCompletion;
 pub use llm_client::embeddings::Embeddings;
 pub use llm_client::interface::requests::completion::{CompletionRequest, CompletionResponse};
@@ -142,6 +143,7 @@ impl Completion for Client {
     }
 }
 
+#[async_trait]
 impl EmbeddingsTrait for Client {
     const MAX_DOCUMENTS: usize = 1024;
 

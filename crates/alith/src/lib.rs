@@ -5,7 +5,7 @@ pub use core::{
     chat::{Completion, CompletionError, Prompt, Request, ResponseContent},
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
     llm::LLM,
-    store::{InMemoryStorage, Storage, StoreFactory, VectorStoreError},
+    store::{InMemoryStorage, Storage, VectorStoreError},
     tool::{StructureTool, Tool, ToolChoice, ToolDefinition, ToolError},
 };
 

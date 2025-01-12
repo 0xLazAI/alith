@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::error::Error;
 
+use crate::store::DocumentId;
+
 /// A trait representing a prompt-based interaction mechanism.
 ///
 /// This trait defines the behavior of components that process user prompts
@@ -44,7 +46,7 @@ pub struct Message {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Document {
     /// The unique identifier of the document.
-    pub id: String,
+    pub id: DocumentId,
     /// The text content of the document.
     pub text: String,
     /// Additional properties associated with the document, represented as key-value pairs.
@@ -57,7 +59,7 @@ impl std::fmt::Display for Document {
         write!(
             f,
             concat!("<file id: {}>\n", "{}\n", "</file>\n"),
-            self.id,
+            self.id.0,
             if self.additional_props.is_empty() {
                 self.text.clone()
             } else {
