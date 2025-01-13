@@ -3,7 +3,7 @@
   "repository": "https://github.com/lazai-labs/alith",
   "version": "0.1.0",
   "os": [
-    "darwin"
+    "win32"
   ],
   "cpu": [
     "arm64"

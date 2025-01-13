@@ -3,10 +3,10 @@
   "repository": "https://github.com/lazai-labs/alith",
   "version": "0.1.0",
   "os": [
-    "darwin"
+    "win32"
   ],
   "cpu": [
-    "arm64"
+    "x64"
   ],
   "main": "alith.win32-x64-msvc.node",
   "files": [
