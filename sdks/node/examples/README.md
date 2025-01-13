@@ -1,4 +1,4 @@
-# Alith Python Examples
+# Alith Node Examples
 
 - [Simple Agent](./agent.ts)
 - [Agent with Tools](./agent_with_tools.ts)

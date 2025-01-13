@@ -1,4 +1,4 @@
-# Alith Python Examples
+# Alith Rust Examples
 
 - [Simple Agent](./agent.rs)
 - [Agent with Tools](./agent_with_tools.rs)
