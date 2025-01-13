@@ -47,7 +47,7 @@ impl<M: Completion> Task<M> {
         let result = agent
             .prompt(&self.prompt.clone())
             .await
-            .map_err(|_| TaskError::ExecutionError)?;
+            .map_err(|err| TaskError::ExecutionError(err.to_string()))?;
 
         // Set the output of the task
         self.output = Some(result);
@@ -73,12 +73,10 @@ impl TaskMetadata {
 
 #[derive(Debug, thiserror::Error)]
 pub enum TaskError {
-    #[error("Failed to execute the task")]
-    ExecutionError,
-
+    #[error("Failed to execute the task: {0}")]
+    ExecutionError(String),
     #[error("Failed to acquire lock on the agent")]
     LockError,
-
     #[error("An unknown error occurred: {0}")]
     Unknown(String),
 }

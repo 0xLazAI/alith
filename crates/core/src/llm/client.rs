@@ -144,6 +144,7 @@ impl Completion for Client {
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
                 .set_content(&msg.content);
         }
+        completion.base_req.tools.append(&mut request.tools.clone());
 
         // Execute the completion request
         completion

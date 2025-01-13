@@ -26,7 +26,7 @@ impl<M: Completion> Executor<M> {
     }
 
     /// Executes the task by managing interactions between the LLM and tools.
-    pub async fn invoke(&mut self, mut request: Request) -> Result<M::Response, String> {
+    pub async fn invoke(&mut self, mut request: Request) -> Result<String, String> {
         request.knowledges = {
             let mut enriched_knowledges = Vec::new();
             for knowledge in self.knowledges.iter() {
@@ -43,17 +43,14 @@ impl<M: Completion> Executor<M> {
             .await
             .map_err(|e| format!("Model error: {}", e))?;
 
-        let response_str = response.content();
-        if response_str.trim().is_empty() {
-            return Err("Received an empty response from the LLM.".to_string());
-        }
+        let mut response_str = response.content();
 
         // Attempt to parse and execute a tool action.
         for call in response.toolcalls() {
-            self.execute_tool(call).await?;
+            response_str = self.execute_tool(call).await?;
         }
 
-        Ok(response)
+        Ok(response_str)
     }
 
     /// Executes a tool action and returns the result.

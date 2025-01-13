@@ -1,4 +1,4 @@
-use crate::chat::{Completion, Document, Message, Request, ResponseContent};
+use crate::chat::{Completion, Document, Message, Request};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
 use crate::store::{Storage, VectorStoreError};
@@ -124,13 +124,13 @@ where
                 Ok(acc)
             })
             .await
-            .map_err(|_| TaskError::ExecutionError)?;
+            .map_err(|err| TaskError::ExecutionError(err.to_string()))?;
 
         let response = executor
             .invoke(req)
             .await
-            .map_err(|_| TaskError::ExecutionError)?;
+            .map_err(|err| TaskError::ExecutionError(err.to_string()))?;
 
-        Ok(response.content())
+        Ok(response)
     }
 }
