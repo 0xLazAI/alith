@@ -9,8 +9,8 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "rootDir": "./alith",
-    "outDir": "./dist"
+    "rootDir": ".",
+    "outDir": "."
   },
   "include": [".", "alith/**/*"],
   "exclude": ["node_modules", "benchmark", "theme"]

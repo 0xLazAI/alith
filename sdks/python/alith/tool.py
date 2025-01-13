@@ -26,30 +26,29 @@ def get_function_schema(f: Callable) -> str:
         for n, o in inspect.signature(f).parameters.items()
     }
     f_model = create_model(f"input for `{f.__name__}`", **kw)
-    f_json = {
+    schema = {
         "name": f.__name__,
         "description": f.__doc__,
         "parameters": f_model.model_json_schema(),
     }
-    return json.dumps(f_json)
+    return schema
 
 
 def create_delegate_tool(func: Callable) -> _DelegateTool:
     """Create a DelegateTool instance from a Python function."""
     # Get function name and description
-    name = func.__name__
-    description = func.__doc__.strip() if func.__doc__ else ""
 
     # Get function parameters as JSON schema
-    parameters = get_function_schema(func)
+    schema = get_function_schema(func)
 
-    def wrapper(args: ctypes.c_char_p) -> ctypes.c_char_p:
+    def wrapper(args: ctypes.c_char_p) -> bytes:
         """Wrapper function to match the extern "C" signature."""
         args_str = ctypes.cast(args, ctypes.c_char_p).value.decode("utf-8")
+        print(args_str)
         args_json = json.loads(args_str)
         result = func(**args_json)
         result_json = json.dumps(result)
-        return ctypes.c_char_p(result_json.encode("utf-8"))
+        return result_json.encode("utf-8")
 
     cfunc_wrapper = CFUNC_TYPE(wrapper)
     # Get function address (C pointer)
@@ -57,10 +56,10 @@ def create_delegate_tool(func: Callable) -> _DelegateTool:
 
     # Create and return DelegateTool instance
     return _DelegateTool(
-        name=name,
+        name=schema["name"],
         version="1.0.0",  # Default version
-        description=description,
-        parameters=parameters,
+        description=schema["description"],
+        parameters=json.dumps(schema["parameters"]),
         author="Unknown",  # Default author
         func_agent=func_agent,
     )

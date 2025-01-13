@@ -62,8 +62,6 @@ impl DelegateAgent {
             },
             tools,
         );
-        // The LLM log locations
-        std::env::set_var("CARGO_TARGET_DIR", ".");
         agent.preamble = self.preamble.clone();
         let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
         let result = rt.block_on(async { agent.prompt(prompt).await });

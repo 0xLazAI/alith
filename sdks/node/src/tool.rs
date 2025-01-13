@@ -1,20 +1,28 @@
-use std::ffi::{c_char, CString};
-
 use alith::{Tool, ToolDefinition, ToolError};
 use async_trait::async_trait;
 
-use napi::JsNumber;
+use napi::{Env, JsFunction, JsString};
 use napi_derive::napi;
 
+use crate::sys;
+
+use super::ValueType;
+
+#[derive(Clone, Copy)]
+pub struct Value {
+    pub env: sys::napi_env,
+    _value: sys::napi_value,
+    _value_type: ValueType,
+}
+
 #[napi(object)]
-#[derive(Clone)]
 pub struct DelegateTool {
     pub name: String,
     pub version: String,
     pub description: String,
     pub parameters: String,
     pub author: String,
-    pub func_agent: JsNumber,
+    pub handler: JsFunction,
 }
 
 unsafe impl Send for DelegateTool {}
@@ -24,22 +32,26 @@ impl DelegateTool {
     fn run_with_func_agent(
         &self,
         input: &str,
-        func_agent: i64,
+        func_agent: &JsFunction,
     ) -> std::result::Result<String, ToolError> {
-        unsafe {
-            let func_method: extern "C" fn(args: *const c_char) -> *const c_char =
-                std::mem::transmute(func_agent);
-            let c_input = CString::new(input).map_err(|_| ToolError::InvalidInput)?;
-            let c_result = func_method(c_input.as_ptr());
-            if c_result.is_null() {
-                return Err(ToolError::InvalidOutput);
-            }
-            let result = {
-                let c_str = std::ffi::CStr::from_ptr(c_result);
-                c_str.to_string_lossy().into_owned()
-            };
-            Ok(result)
-        }
+        let func_value: &Value = unsafe { std::mem::transmute(func_agent) };
+        let env = unsafe { Env::from_raw(func_value.env) };
+        let js_input = env
+            .create_string(input)
+            .map_err(|_| ToolError::InvalidInput)?;
+        let result = self
+            .handler
+            .call(None, &[js_input])
+            .map_err(|_| ToolError::InvalidOutput)?;
+        let result_str: JsString = result
+            .coerce_to_string()
+            .map_err(|_| ToolError::InvalidOutput)?;
+        Ok(result_str
+            .into_utf8()
+            .map_err(|_| ToolError::InvalidOutput)?
+            .as_str()
+            .map_err(|_| ToolError::InvalidOutput)?
+            .to_string())
     }
 }
 
@@ -70,10 +82,6 @@ impl Tool for DelegateTool {
     }
 
     async fn run(&self, input: &str) -> std::result::Result<String, ToolError> {
-        let func_agent = self
-            .func_agent
-            .get_int64()
-            .map_err(|_| ToolError::InvalidInput)?;
-        self.run_with_func_agent(input, func_agent)
+        self.run_with_func_agent(input, &self.handler)
     }
 }

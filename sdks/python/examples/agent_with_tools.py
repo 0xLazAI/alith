@@ -3,12 +3,12 @@ from alith import Agent
 
 def sum(x: int, y: int) -> int:
     """Add x and y together"""
-    x + y
+    return x + y
 
 
 def sub(x: int, y: int) -> int:
     """Subtract y from x (i.e.: x - y)"""
-    x + y
+    return x - y
 
 
 agent = Agent(
