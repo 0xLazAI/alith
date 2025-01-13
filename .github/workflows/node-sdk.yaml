@@ -1,0 +1,228 @@
+name: node-sdk
+
+env:
+  DEBUG: napi:*
+  MACOSX_DEPLOYMENT_TARGET: '10.13'
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # Notes: this defaults only apply on run tasks.
+    defaults:
+      run:
+        working-directory: "sdks/node"
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: 1.83
+          override: true
+          components: clippy, rustfmt
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: cargo test --no-fail-fast
+
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        settings:
+          - target: x86_64-unknown-linux-gnu
+            build: |
+              docker run \
+              -v .:/build \
+              -e NAPI_TARGET=x86_64-unknown-linux-gnu \
+              -w /build/sdks/node \
+              ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian \
+              bash -c "npm run build"
+              cd sdks/node
+              # change owner to current user
+              sudo chown -R 1001:121 *.node
+          # TODO: fix aws-lc-rs build errors
+          # - target: aarch64-unknown-linux-gnu
+          #   build: |
+          #     docker run \
+          #     -v .:/build \
+          #     -e NAPI_TARGET=aarch64-unknown-linux-gnu \
+          #     -w /build/sdks/node \
+          #     ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64 \
+          #     bash -c "set -e &&
+          #     apt-get install -y gcc-aarch64-linux-gnu libc6-dev-arm64-cross &&
+          #     rustup target add aarch64-unknown-linux-gnu &&
+          #     npm run build --target aarch64-unknown-linux-gnu &&
+          #     aarch64-unknown-linux-gnu-strip *.node"
+          #     cd sdks/node
+          #     # change owner to current user
+          #     sudo chown -R 1001:121 *.node
+
+    # Notes: this defaults only apply on run tasks.
+    defaults:
+      run:
+        working-directory: "sdks/node"
+
+    name: linux - ${{ matrix.settings.target }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        shell: bash
+        working-directory: .
+        run: ${{ matrix.settings.build }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: bindings-linux-${{ matrix.settings.target }}
+          path: sdks/node/*.node
+
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        settings:
+          - target: x86_64-pc-windows-msvc
+            build: npm run build:windows
+
+    # Notes: this defaults only apply on run tasks.
+    defaults:
+      run:
+        working-directory: "sdks/node"
+
+    name: windows - ${{ matrix.settings.target }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        shell: bash
+        run: ${{ matrix.settings.build }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: bindings-windows-${{ matrix.settings.target }}
+          path: sdks/node/*.node
+
+  macos:
+    runs-on: macos-13
+    strategy:
+      matrix:
+        settings:
+          - target: x86_64-apple-darwin
+            build: |
+              npm run build
+              strip -x *.node
+          - target: aarch64-apple-darwin
+            build: |
+              sudo rm -Rf /Library/Developer/CommandLineTools/SDKs/*;
+              export CC=$(xcrun -f clang);
+              export CXX=$(xcrun -f clang++);
+              SYSROOT=$(xcrun --sdk macosx --show-sdk-path);
+              export CFLAGS="-isysroot $SYSROOT -isystem $SYSROOT";
+              rustup target add aarch64-apple-darwin;
+
+              export NAPI_TARGET=aarch64-apple-darwin;
+              npm run build
+              strip -x *.node
+
+    # Notes: this defaults only apply on run tasks.
+    defaults:
+      run:
+        working-directory: "sdks/node"
+
+    name: macos - ${{ matrix.settings.target }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: ${{ matrix.settings.build }}
+        shell: bash
+      - uses: actions/upload-artifact@v3
+        with:
+          name: bindings-macos-${{ matrix.settings.target }}
+          path: sdks/node/*.node
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [macos, linux, windows]
+    permissions:
+      id-token: write
+
+    # Notes: this defaults only apply on run tasks.
+    defaults:
+      run:
+        working-directory: "sdks/node"
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: sdks/node/artifacts
+      - name: Move artifacts
+        run: npx napi artifacts
+
+      - name: List packages
+        run: ls -R ./npm
+        shell: bash
+
+      - name: Publish Dry Run
+        if: "startsWith(github.ref, 'refs/tags/') && contains(github.ref, '-')"
+        # Since this command will not exit with non-zero code when file missing,
+        # we need to check the output manually.
+        run: |
+          npm publish --access public --provenance --dry-run
+
+      - name: Publish
+        if: "startsWith(github.ref, 'refs/tags/')"
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          npm publish --access public --provenance
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
