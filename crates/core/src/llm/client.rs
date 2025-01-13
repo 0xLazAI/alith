@@ -39,20 +39,30 @@ impl Clone for Client {
 }
 
 impl Client {
-    pub fn from_model_name(name: &str) -> Result<Client> {
-        if name.starts_with("gpt") {
+    pub fn from_model_name(model: &str) -> Result<Client> {
+        if model.starts_with("gpt") {
             let mut builder = LlmClient::openai();
-            builder.model = ApiLlmModel::openai_model_from_model_id(name);
+            builder.model = ApiLlmModel::openai_model_from_model_id(model);
             let client = builder.init()?;
             Ok(Client { client })
-        } else if name.starts_with("claude") {
+        } else if model.starts_with("claude") {
             let mut builder = LlmClient::anthropic();
-            builder.model = ApiLlmModel::anthropic_model_from_model_id(name);
+            builder.model = ApiLlmModel::anthropic_model_from_model_id(model);
             let client = builder.init()?;
             Ok(Client { client })
         } else {
-            Err(anyhow::anyhow!("unknown model {name}"))
+            Err(anyhow::anyhow!("unknown model {model}"))
         }
+    }
+
+    pub fn openai_compatible_client(api_key: &str, base_url: &str, model: &str) -> Result<Client> {
+        let mut builder = LlmClient::openai();
+        builder.model = ApiLlmModel::gpt_4();
+        builder.model.model_base.model_id = model.to_string();
+        builder.config.api_config.api_key = Some(api_key.to_string().into());
+        builder.config.api_config.host = base_url.to_string();
+        let client = builder.init()?;
+        Ok(Client { client })
     }
 }
 

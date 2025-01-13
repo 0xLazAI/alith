@@ -15,14 +15,34 @@ pub struct DelegateAgent {
     #[pyo3(get, set)]
     pub name: String,
     #[pyo3(get, set)]
+    pub api_key: String,
+    #[pyo3(get, set)]
+    pub base_url: String,
+    #[pyo3(get, set)]
+    pub preamble: String,
+    #[pyo3(get, set)]
     pub tools: Vec<DelegateTool>,
 }
 
 #[pymethods]
 impl DelegateAgent {
     #[new]
-    pub fn new(name: String, model: String, tools: Vec<DelegateTool>) -> Self {
-        DelegateAgent { model, name, tools }
+    pub fn new(
+        name: String,
+        model: String,
+        api_key: String,
+        base_url: String,
+        preamble: String,
+        tools: Vec<DelegateTool>,
+    ) -> Self {
+        DelegateAgent {
+            model,
+            name,
+            api_key,
+            base_url,
+            preamble,
+            tools,
+        }
     }
 
     pub fn prompt(&self, prompt: &str) -> PyResult<String> {
@@ -33,10 +53,19 @@ impl DelegateAgent {
             .collect::<Vec<_>>();
         let mut agent = Agent::new(
             self.name.to_string(),
-            LLM::from_model_name(&self.model).unwrap(),
+            if self.base_url.is_empty() {
+                LLM::from_model_name(&self.model)
+                    .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
+            } else {
+                LLM::openai_compatible_model(&self.api_key, &self.base_url, &self.model)
+                    .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
+            },
             tools,
         );
-        let rt = Runtime::new().unwrap();
+        // The LLM log locations
+        std::env::set_var("CARGO_TARGET_DIR", ".");
+        agent.preamble = self.preamble.clone();
+        let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
         let result = rt.block_on(async { agent.prompt(prompt).await });
         result.map_err(|e| PyErr::new::<PyException, _>(e.to_string()))
     }
