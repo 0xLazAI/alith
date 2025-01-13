@@ -47,10 +47,17 @@ pub struct EmbeddingsModel {
 }
 
 impl LLM {
-    pub fn from_model_name(name: &str) -> Result<Self> {
+    pub fn from_model_name(model: &str) -> Result<Self> {
         Ok(Self {
-            model: name.to_string(),
-            client: Client::from_model_name(name)?,
+            model: model.to_string(),
+            client: Client::from_model_name(model)?,
+        })
+    }
+
+    pub fn openai_compatible_model(api_key: &str, base_url: &str, model: &str) -> Result<Self> {
+        Ok(Self {
+            model: model.to_string(),
+            client: Client::openai_compatible_client(api_key, base_url, model)?,
         })
     }
 

@@ -15,6 +15,9 @@ schemars.workspace = true
 name = "agent"
 
 [[example]]
+name = "agent_deepseek"
+
+[[example]]
 name = "agent_with_tools"
 
 [[example]]

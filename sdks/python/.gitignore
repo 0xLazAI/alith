@@ -13,3 +13,4 @@ alith/bin
 alith.egg-info/
 .eggs/
 alith/_alith*
+llm_logs
