@@ -40,6 +40,7 @@
   },
   "scripts": {
     "build": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --release && npx tsc --build",
+    "build:windows": "napi build --platform --release && npx tsc --build",
     "build:debug": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\"",
     "prepublishOnly": "napi prepublish -t npm",
     "docs": "typedoc",

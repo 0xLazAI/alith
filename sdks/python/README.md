@@ -46,6 +46,10 @@ agent = Agent(
 print(agent.prompt("Calculate 10 - 3"))
 ```
 
+## Examples
+
+See [here](./examples/README.md) for more examples.
+
 ## Developing
 
 Setup virtualenv:

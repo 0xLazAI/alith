@@ -15,5 +15,4 @@ tokio.workspace = true
 uuid = { version = "1.11.1", features = ["serde", "v4"] }
 regex = "1.10"
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
-reqwest = { version = "0.12.12", features = ["json"] }
 hnsw_rs = "0.3.1"

@@ -63,9 +63,6 @@ pub enum EmbedError {
 
 #[derive(Debug, thiserror::Error)]
 pub enum EmbeddingsError {
-    /// Http error (e.g.: connection error, timeout, etc.)
-    #[error("HttpError: {0}")]
-    HttpError(#[from] reqwest::Error),
     /// Json error (e.g.: serialization, deserialization)
     #[error("JsonError: {0}")]
     JsonError(#[from] serde_json::Error),

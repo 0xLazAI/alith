@@ -10,7 +10,7 @@ llm_client = { git = "https://github.com/0xLazAI/llm_client", version = "0.2.0" 
 async-trait = "0.1.84"
 serde = { version = "1.0.217", features = ["derive"] }
 serde_json = "1.0.134"
-tokio = { version = "1.43.0", features = ["sync", "rt", "macros", "rt-multi-thread"] }
+tokio = { version = "1.43.0", features = ["full"] }
 anyhow = "1.0.95"
 thiserror = "2.0.11"
 schemars = "0.8.21"
