@@ -9,12 +9,15 @@ export interface DelegateTool {
   description: string
   parameters: string
   author: string
-  funcAgent: number
+  handler: (...args: any[]) => any
 }
 export declare class DelegateAgent {
   model: string
   name: string
-  tools: Array<DelegateTool>
-  constructor(name: string, model: string, tools: Array<DelegateTool>)
+  apiKey: string
+  baseUrl: string
+  preamble: string
+  constructor(name: string, model: string, apiKey: string, baseUrl: string, preamble: string)
+  promptWithTools(prompt: string, delegateTools: Array<DelegateTool>): string
   prompt(prompt: string): string
 }

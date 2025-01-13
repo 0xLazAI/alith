@@ -12,11 +12,11 @@ async fn main() -> Result<(), anyhow::Error> {
     let storage = InMemoryStorage::from_multiple_documents(embeddingds_model, data);
 
     let mut agent = Agent::new("simple agent", model, vec![]);
-    agent.preamble =
-        "
-            You are a dictionary assistant here to assist the user in understanding the meaning of words.
-            You will find additional non-standard word definitions that could be useful below.
-        ".to_string();
+    agent.preamble = r#"
+You are a dictionary assistant here to assist the user in understanding the meaning of words.
+You will find additional non-standard word definitions that could be useful below.
+"#
+    .to_string();
     agent.store_index(1, storage);
     let response = agent.prompt("What does \"glarb-glarb\" mean?").await?;
 

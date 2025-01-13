@@ -11,8 +11,13 @@ npm install alith
 ```typescript
 import { Agent } from "alith";
 
-const agent = new Agent("A dummy Agent", "gpt-4o-mini");
-console.log(agent.promt("What is the problem?"));
+const agent = new Agent({
+  name: "A dummy Agent",
+  model: "gpt-4o-mini",
+  preamble:
+    "You are a comedian here to entertain the user using humour and jokes.",
+});
+console.log(agent.prompt("Entertain me!"));
 ```
 
 ## Developing
