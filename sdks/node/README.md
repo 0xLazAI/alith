@@ -11,7 +11,7 @@ npm install alith
 - Simple Agent
 
 ```typescript
-import { Agent } from "alith";
+import { Agent } from "alith/agent";
 
 const agent = new Agent({
   name: "A dummy Agent",
@@ -25,7 +25,7 @@ console.log(agent.prompt("Calculate 10 - 3"));
 - Agent with Tools
 
 ```typescript
-import { Agent } from "alith";
+import { Agent } from "alith/agent";
 
 const agent = new Agent({
   name: "A dummy Agent",
