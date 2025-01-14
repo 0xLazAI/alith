@@ -1,5 +1,5 @@
-import { DelegateAgent, DelegateTool } from './index.js'
-import { Tool } from './tool.js'
+import { DelegateAgent, DelegateTool } from './internal'
+import { Tool } from './tool'
 
 // Define the configuration structure for an Agent
 type AgentOptions = {
@@ -73,4 +73,4 @@ class Agent {
   }
 }
 
-export { Agent }
+export { Agent, AgentOptions }

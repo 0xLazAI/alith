@@ -200,4 +200,5 @@ package-lock.json
 
 *.js
 *.d.ts
-!index.js
+!internal.d.ts
+!internal.js
