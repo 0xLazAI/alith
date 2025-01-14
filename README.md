@@ -3,7 +3,7 @@
 </p>
 
 <h2 align="center">
-Simple, Composable and High-Performance On-Chain AI Agents for Everyone
+Simple, Composable, High-Performance and Web3 Friendly AI Agents for Everyone
 </h2>
 
 ## Introdution
@@ -17,7 +17,7 @@ Alith is an AI agent framework designed for the Web3 and Crypto, empowering deve
 + **Workflow Support**: Implementing any workflow pattern through processes - from simple sequential and hierarchical processes to complex custom orchestration patterns with conditional branching and parallel execution.
 + **Cross-Language Support**: Provides SDKs for Rust, Python and Node.js, making it easily accessible to different developers.
 + **High-Performance Inference**: Leverage the performance advantages of Rust and quick model inference technologies including graph optimization, model compression, JIT/AOT compilation with GPU coprocessors, etc.
-+ **Fully On-Chain**: Verifiable and confidential AI agent based on EVM & WASM & Trusted Execution Environment (TEE) & Data Aggregation (DA).
++ **Web3 Friendly and Secure**: Out-of-the-box Web3 plugin allows developers to easily and securely integrate blockchain capabilities into TEE-based AI agent frameworks and their applications.
 
 ## Architecture
 
@@ -34,3 +34,7 @@ Alith is an AI agent framework designed for the Web3 and Crypto, empowering deve
 ## Contributing
 
 We warmly welcome contributions to Alith! Whether you're a developer, a user reporting a bug, or someone eager to enhance our documentation, your participation is highly valued!
+
+## License
+
+Apache 2.0

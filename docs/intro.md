@@ -12,8 +12,24 @@ In LazAI, we believe that AI Agent is not a solution, but a goal we want to achi
 - **High-Performance Inference** - Leveraging the performance advantages of Rust and fast model inference technologies, including graph optimization, model quantization compression, JIT/AOT compilation using co-processors such as CPUs, GPUs, and TPUs, to maintain excellent performance in constantly changing scenarios.
 - **Developer-Friendly** - Provides SDKs for Rust, Python, and Node.js, making it easy for different developers to access, while also providing low-code orchestration and one-click deployment and operation and maintenance functions to reduce the threshold of use.
 - **Highly Scalable** - From covering internal prompts to accessing low-level APIs. Customize roles, goals, tools, operations, and behaviors while maintaining clear abstractions.
-- **Ecosystem Affinity** - Integrated into the existing AI and Web3 ecosystems, enabling access to any model and any chain.
+- **AI and Web3 Ecosystem Affinity** - Integrated into the existing AI and Web3 ecosystems, enabling access to any model and any chain.
 
 ## How to Choose?
 
 In short, if you need collaboration among different development teams and multiple Agents, and your scenario has special requirements for data acquisition, model fine-tuning, and high-performance inference, Alith will be your top choice. At the same time, Alith also provides the capability support offered by most AI Agent frameworks.
+
+### v.s. Langchain
+
+Langchain is a popular framework for building applications powered by Large Language Models (LLMs). It provides a wide range of tools and integrations for linking together different components of AI applications. However, Langchain focuses primarily on the orchestration of LLMs and lacks native support for Web3 and blockchain integration. Alith is designed specifically for Web3, providing seamless integration with blockchain technology, decentralized data governance, and high-performance inference capabilities. If your project requires Web3 integration or decentralized AI workflows, Alith is a better choice. In addition, based on the Alith Python SDK and Node SDK, we can easily integrate Alith with Langchain and Langchainjs.
+
+### v.s. Eliza
+
+Eliza is a lightweight AI framework designed to be simple and easy to use for Web3. It is ideal for developers who need to quickly prototype AI applications without dealing with complex configurations and workflows. Compared to Eliza, Alith has a cross-language SDK, high-performance inference, and support for complex workflows, providing a more powerful solution for developers who need to build scalable, high-performance AI agents with Web3 capabilities. In addition, based on the Alith Node SDK, we can easily combine Alith and Eliza to benefit from the Eliza Web3 ecosystem while making up for the disadvantages of the Eliza framework.
+
+### v.s. Swarms
+
+Swarms is another AI framework that emphasizes collaborative multi-agent systems. It allows multiple AI agents to work together to solve complex tasks. While Swarms excels in multi-agent collaboration, it does not provide the same level of Web3 integration or high-performance inference optimization as Alith, nor does it provide multi-language SDK support. Alith's focus on Web3-friendly features, combined with its Rust-based performance optimizations, makes it a more suitable choice for developers looking to build decentralized, high-performance AI agents.
+
+### v.s. Rig
+
+Rig is also an AI Agent framework written in Rust. Compared to Rig, Alith provides developers with easier-to-use Python and Node SDKs, and has made more inference optimizations for diffrent devices such as CPU, GPU, etc., which is more suitable for developers who need to combine real-time data processing with AI and blockchain technologies.
