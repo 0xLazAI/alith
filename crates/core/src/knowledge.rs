@@ -1,4 +1,20 @@
 pub trait Knowledge: Send + Sync {
+    fn chunk_size(&self) -> usize {
+        4000
+    }
+
+    fn chunk_overlap(&self) -> usize {
+        200
+    }
+
+    fn chunks(&self) -> Vec<String> {
+        Vec::new()
+    }
+
+    fn chunk_embeddings(&self) -> Vec<Vec<f64>> {
+        Vec::new()
+    }
+
     fn load(&self) -> Result<String, KnowledgeError>;
 
     fn name(&self) -> &str {

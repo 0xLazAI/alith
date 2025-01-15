@@ -76,6 +76,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "alith-knowledge"
+version = "0.1.0"
+dependencies = [
+ "alith-core",
+]
+
+[[package]]
 name = "alith-node-sdk"
 version = "0.1.0"
 dependencies = [
