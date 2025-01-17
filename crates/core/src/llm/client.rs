@@ -13,6 +13,7 @@ use crate::embeddings::EmbeddingsError;
 use anyhow::Result;
 
 use async_trait::async_trait;
+pub use llm_client as client;
 pub use llm_client::basic_completion::BasicCompletion;
 pub use llm_client::embeddings::Embeddings;
 pub use llm_client::interface::requests::completion::{CompletionRequest, CompletionResponse};

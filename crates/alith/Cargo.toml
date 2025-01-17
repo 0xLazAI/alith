@@ -5,6 +5,7 @@ edition = { workspace = true }
 
 [dependencies]
 alith-core.workspace = true
+alith-knowledge.workspace = true
 async-trait.workspace = true
 tokio.workspace = true
 serde.workspace = true
@@ -21,4 +22,7 @@ name = "agent_deepseek"
 name = "agent_with_tools"
 
 [[example]]
-name = "rag"
+name = "agent_with_knowledge"
+
+[[example]]
+name = "agent_with_rag"

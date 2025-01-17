@@ -30,7 +30,9 @@ impl<M: Completion> Executor<M> {
         request.knowledges = {
             let mut enriched_knowledges = Vec::new();
             for knowledge in self.knowledges.iter() {
-                let enriched = knowledge.enrich(&request.prompt);
+                let enriched = knowledge
+                    .enrich(&request.prompt)
+                    .map_err(|err| err.to_string())?;
                 enriched_knowledges.push(enriched);
             }
             enriched_knowledges
@@ -47,7 +49,7 @@ impl<M: Completion> Executor<M> {
 
         // Attempt to parse and execute a tool action.
         for call in response.toolcalls() {
-            response_str = self.execute_tool(call).await?;
+            response_str.push_str(&self.execute_tool(call).await?);
         }
 
         Ok(response_str)

@@ -6,6 +6,7 @@ resolver = "2"
 [workspace.dependencies]
 alith = { path = "crates/alith" }
 alith-core = { path = "crates/core" }
+alith-knowledge = { path = "crates/knowledge" }
 llm_client = { git = "https://github.com/0xLazAI/llm_client", version = "0.2.0" }
 async-trait = "0.1.84"
 serde = { version = "1.0.217", features = ["derive"] }
