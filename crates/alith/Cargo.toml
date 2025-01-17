@@ -6,6 +6,8 @@ edition = { workspace = true }
 [dependencies]
 alith-core.workspace = true
 alith-knowledge.workspace = true
+alith-store.workspace = true
+
 async-trait.workspace = true
 tokio.workspace = true
 serde.workspace = true
@@ -26,3 +28,6 @@ name = "agent_with_knowledge"
 
 [[example]]
 name = "agent_with_rag"
+
+[[example]]
+name = "agent_with_qdrant"
