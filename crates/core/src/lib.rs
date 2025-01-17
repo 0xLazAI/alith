@@ -6,6 +6,7 @@ pub mod executor;
 pub mod flow;
 pub mod knowledge;
 pub mod llm;
+pub mod splitting;
 pub use llm_client;
 pub mod memory;
 pub mod store;

@@ -1,7 +1,9 @@
-use crate::embeddings::{Embeddings, EmbeddingsData, EmbeddingsError};
+use crate::{
+    embeddings::{Embeddings, EmbeddingsData, EmbeddingsError},
+    splitting::split_text,
+};
 use async_trait::async_trait;
 use hnsw_rs::prelude::*;
-use llm_client::utils::TextSplitter;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -22,7 +24,6 @@ pub enum VectorStoreError {
 }
 
 pub type TopNResults = Result<Vec<(DocumentId, String, f32)>, VectorStoreError>;
-pub type FileId = usize;
 
 #[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd, Deserialize)]
 pub struct DocumentId(pub usize);
@@ -40,11 +41,11 @@ impl Serialize for DocumentId {
 #[async_trait]
 pub trait Storage: Send + Sync {
     /// Saves a value into the storage.
-    async fn save(&self, value: String);
+    async fn save(&self, value: String) -> Result<(), VectorStoreError>;
     /// Searches the storage with a query, limiting the results and applying a threshold.
     async fn search(&self, query: &str, limit: usize, threshold: f32) -> TopNResults;
     /// Resets the storage by clearing all stored data.
-    async fn reset(&self);
+    async fn reset(&self) -> Result<(), VectorStoreError>;
 }
 
 /// In-memory storage implementation.
@@ -76,9 +77,13 @@ impl<E: Embeddings> InMemoryStorage<E> {
 
 #[async_trait]
 impl<E: Embeddings> Storage for InMemoryStorage<E> {
-    async fn save(&self, value: String) {
+    async fn save(&self, value: String) -> Result<(), VectorStoreError> {
         let mut data = self.data.write().await;
-        let embeddings = self.embeddings.embed_texts(vec![value]).await.unwrap();
+        let embeddings = self
+            .embeddings
+            .embed_texts(vec![value])
+            .await
+            .map_err(VectorStoreError::EmbeddingError)?;
         data.append(&mut embeddings.clone());
         let list: Vec<_> = embeddings
             .iter()
@@ -86,6 +91,7 @@ impl<E: Embeddings> Storage for InMemoryStorage<E> {
             .map(|(k, data)| (&data.vec, k))
             .collect();
         self.hnsw.write().await.parallel_insert(&list);
+        Ok(())
     }
 
     async fn search(&self, query: &str, limit: usize, threshold: f32) -> TopNResults {
@@ -104,9 +110,10 @@ impl<E: Embeddings> Storage for InMemoryStorage<E> {
             })
     }
 
-    async fn reset(&self) {
+    async fn reset(&self) -> Result<(), VectorStoreError> {
         let mut data = self.data.write().await;
         data.clear();
+        Ok(())
     }
 }
 
@@ -149,15 +156,5 @@ impl<E: Embeddings> InMemoryStorage<E> {
             .collect();
         hnsw.parallel_insert(&list);
         hnsw
-    }
-}
-
-fn split_text(text: &str) -> Vec<String> {
-    match TextSplitter::new().split_text(text) {
-        Some(splits) => splits
-            .iter()
-            .map(|split| split.text().to_string())
-            .collect(),
-        None => vec![],
     }
 }
