@@ -1,0 +1,9 @@
+[package]
+name = "alith-knowledge"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+alith-core.workspace = true
+anyhow.workspace = true
+lopdf = "0.34.0"
