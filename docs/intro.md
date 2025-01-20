@@ -32,4 +32,4 @@ Swarms is another AI framework that emphasizes collaborative multi-agent systems
 
 ### v.s. Rig
 
-Rig is also an AI Agent framework written in Rust. Compared to Rig, Alith provides developers with easier-to-use Python and Node SDKs, and has made more inference optimizations for diffrent devices such as CPU, GPU, etc., which is more suitable for developers who need to combine real-time data processing with AI and blockchain technologies.
+Rig is also an AI Agent framework written in Rust. Compared to Rig, Alith provides developers with easier-to-use Python and Node SDKs, and has made more inference optimizations for different devices such as CPU, GPU, etc., which is more suitable for developers who need to combine real-time data processing with AI and blockchain technologies.
