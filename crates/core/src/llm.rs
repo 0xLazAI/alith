@@ -1,17 +1,20 @@
 pub mod client;
 
-use std::sync::Arc;
-
 use crate::chat::{Completion, CompletionError};
 use crate::embeddings::{Embeddings, EmbeddingsData, EmbeddingsError};
 use anyhow::Result;
 use async_trait::async_trait;
 use client::{Client, CompletionResponse};
+
+#[cfg(feature = "inference")]
 use fastembed::TextEmbedding;
+#[cfg(feature = "inference")]
 pub use fastembed::{
     EmbeddingModel as FastEmbeddingsModelName, ExecutionProviderDispatch,
     InitOptions as FastEmbeddingsModelOptions,
 };
+#[cfg(feature = "inference")]
+use std::sync::Arc;
 
 // OpenAI models
 
@@ -99,11 +102,13 @@ impl Embeddings for EmbeddingsModel {
     }
 }
 
+#[cfg(feature = "inference")]
 #[derive(Clone)]
 pub struct FastEmbeddingsModel {
     model: Arc<TextEmbedding>,
 }
 
+#[cfg(feature = "inference")]
 impl FastEmbeddingsModel {
     /// Try to generate a new TextEmbedding Instance.
     ///
@@ -128,6 +133,7 @@ impl FastEmbeddingsModel {
     }
 }
 
+#[cfg(feature = "inference")]
 #[async_trait]
 impl Embeddings for FastEmbeddingsModel {
     const MAX_DOCUMENTS: usize = 1024;

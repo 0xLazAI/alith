@@ -7,6 +7,7 @@ edition = { workspace = true }
 alith-core.workspace = true
 alith-knowledge.workspace = true
 alith-store.workspace = true
+alith-inference.workspace = true
 
 async-trait.workspace = true
 tokio.workspace = true
@@ -31,3 +32,6 @@ name = "agent_with_rag"
 
 [[example]]
 name = "agent_with_qdrant"
+
+[features]
+inference = ["alith-core/inference", "alith-inference/inference"]

@@ -1,7 +1,14 @@
 pub use alith_core as core;
+#[cfg(feature = "inference")]
+pub use alith_inference as inference;
 pub use alith_knowledge as knowledge;
 pub use alith_store as store;
 
+#[cfg(feature = "inference")]
+pub use core::llm::{
+    ExecutionProviderDispatch, FastEmbeddingsModel, FastEmbeddingsModelName,
+    FastEmbeddingsModelOptions,
+};
 pub use core::{
     agent::Agent,
     chat::{Completion, CompletionError, Prompt, Request, ResponseContent},
@@ -11,10 +18,7 @@ pub use core::{
     },
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
-    llm::{
-        EmbeddingsModel, ExecutionProviderDispatch, FastEmbeddingsModel, FastEmbeddingsModelName,
-        FastEmbeddingsModelOptions, LLM,
-    },
+    llm::{EmbeddingsModel, LLM},
     splitting::{
         split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,
     },
@@ -22,6 +26,7 @@ pub use core::{
     task::{Task, TaskError, TaskMetadata},
     tool::{StructureTool, Tool, ToolChoice, ToolDefinition, ToolError},
 };
+
 pub use knowledge::{pdf::PdfFileKnowledge, string::StringKnowledge, text::TextFileKnowledge};
 pub use store::qdrant::*;
 

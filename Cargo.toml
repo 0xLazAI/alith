@@ -8,6 +8,7 @@ alith = { path = "crates/alith" }
 alith-core = { path = "crates/core" }
 alith-knowledge = { path = "crates/knowledge" }
 alith-store = { path = "crates/store" }
+alith-inference = { path = "crates/inference" }
 
 llm_client = { git = "https://github.com/0xLazAI/llm_client", version = "0.2.0" }
 fastembed = { git = "https://github.com/Anush008/fastembed-rs", version = "4.4.0", default_features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
@@ -31,3 +32,5 @@ opt-level = 3
 lto = true
 strip = true
 codegen-units = 1
+rpath = true
+panic = "unwind"

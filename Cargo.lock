@@ -60,6 +60,7 @@ name = "alith"
 version = "0.2.0"
 dependencies = [
  "alith-core",
+ "alith-inference",
  "alith-knowledge",
  "alith-store",
  "anyhow",
