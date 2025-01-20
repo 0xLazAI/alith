@@ -5,3 +5,8 @@ edition = { workspace = true }
 
 [dependencies]
 alith-core.workspace = true
+
+ort = { version = "=2.0.0-rc.9", default-features = false, features = [
+  "ndarray",
+] }
+tokenizers = "0.21.0"

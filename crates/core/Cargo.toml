@@ -13,6 +13,7 @@ serde_json.workspace = true
 thiserror.workspace = true
 tokio.workspace = true
 uuid.workspace = true
+fastembed.workspace = true
 regex = "1.10"
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
 hnsw_rs = "0.3.1"
