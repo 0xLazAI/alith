@@ -1,13 +1,14 @@
 use crate::chat::{Completion, Document, Message, Request};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
+use crate::memory::Memory;
 use crate::store::{Storage, VectorStoreError};
 use crate::task::TaskError;
 use crate::tool::Tool;
 use futures::{stream, StreamExt, TryStreamExt};
 use std::collections::HashMap;
 use std::sync::Arc;
-use tokio::sync::RwLock;
+use tokio::sync::{Mutex, RwLock};
 use uuid::Uuid;
 
 pub struct Agent<M: Completion> {
@@ -19,6 +20,8 @@ pub struct Agent<M: Completion> {
     pub tools: Arc<Vec<Box<dyn Tool>>>,
     /// Knowledge sources for the agent.
     pub knowledges: Arc<Vec<Box<dyn Knowledge>>>,
+    /// Agent memory.
+    pub memory: Option<Arc<Mutex<dyn Memory>>>,
     /// The unique ID of the agent.
     pub id: Uuid,
     /// The name of the agent.
@@ -72,9 +75,16 @@ where
             max_tokens: None,
             max_execution_time: None,
             knowledges: Arc::new(Vec::new()),
+            memory: None,
             respect_context_window: false,
             allow_code_execution: false,
         }
+    }
+
+    /// Adds a memory to the agent.
+    pub fn memory(&mut self, memory: impl Memory + 'static) -> &mut Self {
+        self.memory = Some(Arc::new(Mutex::new(memory)));
+        self
     }
 
     /// Adds a storage index to the agent.

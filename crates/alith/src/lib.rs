@@ -19,6 +19,7 @@ pub use core::{
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
     llm::{EmbeddingsModel, LLM},
+    memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
     splitting::{
         split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,
     },

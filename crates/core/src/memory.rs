@@ -1,4 +1,250 @@
-pub trait Memory {
-    fn save<T>(&self, value: T);
-    fn search(&self, query: &str, limit: usize, threshold: f32);
+use serde::{Deserialize, Serialize};
+use serde_json::Value;
+use std::{num::NonZeroUsize, sync::Arc};
+use tokio::sync::Mutex;
+
+/// Represents the type of a message.
+#[derive(PartialEq, Eq, Serialize, Deserialize, Debug, Clone)]
+pub enum MessageType {
+    #[serde(rename = "system")]
+    SystemMessage,
+    #[serde(rename = "human")]
+    HumanMessage,
+    #[serde(rename = "tool")]
+    ToolMessage,
+}
+
+impl Default for MessageType {
+    /// Default message type is `SystemMessage`.
+    fn default() -> Self {
+        Self::SystemMessage
+    }
+}
+
+impl MessageType {
+    /// Converts the `MessageType` to a string representation.
+    pub fn type_string(&self) -> String {
+        match self {
+            MessageType::SystemMessage => "system".to_owned(),
+            MessageType::HumanMessage => "human".to_owned(),
+            MessageType::ToolMessage => "tool".to_owned(),
+        }
+    }
+}
+
+/// Represents a message with content, type, optional ID, and optional tool calls.
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct Message {
+    pub content: String,
+    pub message_type: MessageType,
+    pub id: Option<String>,
+    pub tool_calls: Option<Value>,
+}
+
+impl Message {
+    /// Creates a new human message with the given content.
+    pub fn new_human_message<T: std::fmt::Display>(content: T) -> Self {
+        Message {
+            content: content.to_string(),
+            message_type: MessageType::HumanMessage,
+            id: None,
+            tool_calls: None,
+        }
+    }
+
+    /// Creates a new system message with the given content.
+    pub fn new_system_message<T: std::fmt::Display>(content: T) -> Self {
+        Message {
+            content: content.to_string(),
+            message_type: MessageType::SystemMessage,
+            id: None,
+            tool_calls: None,
+        }
+    }
+
+    /// Creates a new tool message with the given content and ID.
+    pub fn new_tool_message<T: std::fmt::Display, S: Into<String>>(content: T, id: S) -> Self {
+        Message {
+            content: content.to_string(),
+            message_type: MessageType::ToolMessage,
+            id: Some(id.into()),
+            tool_calls: None,
+        }
+    }
+
+    /// Adds tool calls to the message.
+    pub fn with_tool_calls(mut self, tool_calls: Value) -> Self {
+        self.tool_calls = Some(tool_calls);
+        self
+    }
+
+    /// Deserializes a `Value` into a vector of `Message` objects.
+    pub fn messages_from_value(value: &Value) -> Result<Vec<Message>, serde_json::error::Error> {
+        serde_json::from_value(value.clone())
+    }
+
+    /// Converts a slice of `Message` objects into a single string representation.
+    pub fn messages_to_string(messages: &[Message]) -> String {
+        messages
+            .iter()
+            .map(|m| format!("{:?}: {}", m.message_type, m.content))
+            .collect::<Vec<String>>()
+            .join("\n")
+    }
+}
+
+/// A trait representing a memory storage for messages.
+pub trait Memory: Send + Sync {
+    /// Returns all messages stored in memory.
+    fn messages(&self) -> Vec<Message>;
+
+    /// Adds a user (human) message to the memory.
+    fn add_user_message(&mut self, message: &dyn std::fmt::Display) {
+        self.add_message(Message::new_human_message(message.to_string()));
+    }
+
+    /// Adds a message to the memory.
+    fn add_message(&mut self, message: Message);
+
+    /// Clears all messages from memory.
+    fn clear(&mut self);
+
+    /// Converts the memory's messages to a string representation.
+    fn to_string(&self) -> String {
+        self.messages()
+            .iter()
+            .map(|msg| format!("{}: {}", msg.message_type.type_string(), msg.content))
+            .collect::<Vec<String>>()
+            .join("\n")
+    }
+}
+
+/// Converts a type implementing `Memory` into a boxed trait object.
+impl<M> From<M> for Box<dyn Memory>
+where
+    M: Memory + 'static,
+{
+    fn from(memory: M) -> Self {
+        Box::new(memory)
+    }
+}
+
+/// A memory structure that stores messages in a sliding window buffer.
+pub struct WindowBufferMemory {
+    window_size: usize,
+    messages: Vec<Message>,
+}
+
+impl Default for WindowBufferMemory {
+    /// Creates a default `WindowBufferMemory` with a window size of 10.
+    fn default() -> Self {
+        Self::new(10)
+    }
+}
+
+impl WindowBufferMemory {
+    /// Creates a new `WindowBufferMemory` with the specified window size.
+    pub fn new(window_size: usize) -> Self {
+        Self {
+            messages: Vec::new(),
+            window_size,
+        }
+    }
+
+    /// Get the window size.
+    #[inline]
+    pub fn window_size(&self) -> usize {
+        self.window_size
+    }
+}
+
+/// Converts `WindowBufferMemory` into an `Arc<dyn Memory>`.
+impl From<WindowBufferMemory> for Arc<dyn Memory> {
+    fn from(val: WindowBufferMemory) -> Self {
+        Arc::new(val)
+    }
+}
+
+/// Converts `WindowBufferMemory` into an `Arc<Mutex<dyn Memory>>`.
+impl From<WindowBufferMemory> for Arc<Mutex<dyn Memory>> {
+    fn from(val: WindowBufferMemory) -> Self {
+        Arc::new(Mutex::new(val))
+    }
+}
+
+impl Memory for WindowBufferMemory {
+    /// Returns all messages in the buffer.
+    fn messages(&self) -> Vec<Message> {
+        self.messages.clone()
+    }
+
+    /// Adds a message to the buffer, removing the oldest message if the buffer is full.
+    fn add_message(&mut self, message: Message) {
+        if self.messages.len() >= self.window_size {
+            self.messages.remove(0);
+        }
+        self.messages.push(message);
+    }
+
+    /// Clears all messages from the buffer.
+    fn clear(&mut self) {
+        self.messages.clear();
+    }
+}
+
+/// A memory structure that stores messages in an LRU (Least Recently Used) cache.
+pub struct RLUCacheMemory {
+    cache: lru::LruCache<String, Message>,
+    capacity: usize,
+}
+
+impl RLUCacheMemory {
+    /// Creates a new `RLUCacheMemory` with the specified capacity.
+    pub fn new(capacity: usize) -> Self {
+        Self {
+            cache: lru::LruCache::new(NonZeroUsize::new(capacity).unwrap()),
+            capacity,
+        }
+    }
+
+    /// Get the capacity.
+    #[inline]
+    pub fn capacity(&self) -> usize {
+        self.capacity
+    }
+}
+
+impl Memory for RLUCacheMemory {
+    /// Returns all messages in the cache.
+    fn messages(&self) -> Vec<Message> {
+        self.cache.iter().map(|(_, msg)| msg.clone()).collect()
+    }
+
+    /// Adds a message to the cache, evicting the least recently used message if the cache is full.
+    fn add_message(&mut self, message: Message) {
+        let id = message
+            .id
+            .clone()
+            .unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
+        self.cache.put(id, message);
+    }
+
+    /// Clears all messages from the cache.
+    fn clear(&mut self) {
+        self.cache.clear();
+    }
+}
+
+/// Converts `RLUCacheMemory` into an `Arc<dyn Memory>`.
+impl From<RLUCacheMemory> for Arc<dyn Memory> {
+    fn from(val: RLUCacheMemory) -> Self {
+        Arc::new(val)
+    }
+}
+
+/// Converts `RLUCacheMemory` into an `Arc<Mutex<dyn Memory>>`.
+impl From<RLUCacheMemory> for Arc<Mutex<dyn Memory>> {
+    fn from(val: RLUCacheMemory) -> Self {
+        Arc::new(Mutex::new(val))
+    }
 }
