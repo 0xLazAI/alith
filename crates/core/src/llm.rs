@@ -1,10 +1,17 @@
 pub mod client;
 
+use std::sync::Arc;
+
 use crate::chat::{Completion, CompletionError};
 use crate::embeddings::{Embeddings, EmbeddingsData, EmbeddingsError};
 use anyhow::Result;
 use async_trait::async_trait;
 use client::{Client, CompletionResponse};
+use fastembed::TextEmbedding;
+pub use fastembed::{
+    EmbeddingModel as FastEmbeddingsModelName, ExecutionProviderDispatch,
+    InitOptions as FastEmbeddingsModelOptions,
+};
 
 // OpenAI models
 
@@ -38,12 +45,6 @@ pub struct LLM {
     pub model: String,
     /// The LLM client used to communicate with model backends
     client: Client,
-}
-
-#[derive(Clone)]
-pub struct EmbeddingsModel {
-    pub client: Client,
-    pub model: String,
 }
 
 impl LLM {
@@ -80,6 +81,12 @@ impl Completion for LLM {
     }
 }
 
+#[derive(Clone)]
+pub struct EmbeddingsModel {
+    pub client: Client,
+    pub model: String,
+}
+
 #[async_trait]
 impl Embeddings for EmbeddingsModel {
     const MAX_DOCUMENTS: usize = 1024;
@@ -89,5 +96,58 @@ impl Embeddings for EmbeddingsModel {
         input: Vec<String>,
     ) -> Result<Vec<EmbeddingsData>, EmbeddingsError> {
         self.client.embed_texts(input).await
+    }
+}
+
+#[derive(Clone)]
+pub struct FastEmbeddingsModel {
+    model: Arc<TextEmbedding>,
+}
+
+impl FastEmbeddingsModel {
+    /// Try to generate a new TextEmbedding Instance.
+    ///
+    /// Uses the highest level of Graph optimization.
+    ///
+    /// Uses the total number of CPUs available as the number of intra-threads.
+    pub fn try_new(opts: FastEmbeddingsModelOptions) -> anyhow::Result<Self> {
+        let model = TextEmbedding::try_new(opts)?;
+        Ok(Self {
+            model: Arc::new(model),
+        })
+    }
+
+    /// Try to generate a new TextEmbedding Instance.
+    ///
+    /// Uses the highest level of Graph optimization.
+    ///
+    /// Uses the total number of CPUs available as the number of intra-threads.
+    #[inline]
+    pub fn try_default() -> anyhow::Result<Self> {
+        Self::try_new(Default::default())
+    }
+}
+
+#[async_trait]
+impl Embeddings for FastEmbeddingsModel {
+    const MAX_DOCUMENTS: usize = 1024;
+
+    async fn embed_texts(
+        &self,
+        input: Vec<String>,
+    ) -> Result<Vec<EmbeddingsData>, EmbeddingsError> {
+        // Generate embeddings with the default batch size, 256
+        let embeddings = self
+            .model
+            .embed(input.clone(), None)
+            .map_err(|err| EmbeddingsError::ProviderError(err.to_string()))?;
+        Ok(input
+            .iter()
+            .zip(embeddings)
+            .map(|(doc, embeddings)| EmbeddingsData {
+                document: doc.to_string(),
+                vec: embeddings.iter().map(|e| *e as f64).collect(),
+            })
+            .collect())
     }
 }

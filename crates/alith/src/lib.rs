@@ -11,7 +11,10 @@ pub use core::{
     },
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
-    llm::LLM,
+    llm::{
+        EmbeddingsModel, ExecutionProviderDispatch, FastEmbeddingsModel, FastEmbeddingsModelName,
+        FastEmbeddingsModelOptions, LLM,
+    },
     splitting::{
         split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,
     },
