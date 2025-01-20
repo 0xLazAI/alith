@@ -40,7 +40,7 @@ dependencies = [
 
 [[package]]
 name = "alith"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith-core",
  "alith-knowledge",
@@ -54,7 +54,7 @@ dependencies = [
 
 [[package]]
 name = "alith-core"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -72,14 +72,14 @@ dependencies = [
 
 [[package]]
 name = "alith-inference"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith-core",
 ]
 
 [[package]]
 name = "alith-knowledge"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith-core",
  "anyhow",
@@ -88,7 +88,7 @@ dependencies = [
 
 [[package]]
 name = "alith-node-sdk"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith",
  "async-trait",
@@ -103,7 +103,7 @@ dependencies = [
 
 [[package]]
 name = "alith-python-sdk"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith",
  "async-trait",
@@ -115,7 +115,7 @@ dependencies = [
 
 [[package]]
 name = "alith-rust-sdk"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith",
  "async-trait",
@@ -126,7 +126,7 @@ dependencies = [
 
 [[package]]
 name = "alith-store"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith-core",
  "anyhow",
@@ -139,7 +139,7 @@ dependencies = [
 
 [[package]]
 name = "alith-tools"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "alith-core",
 ]
