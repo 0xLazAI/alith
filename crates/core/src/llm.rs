@@ -71,6 +71,11 @@ impl LLM {
             client: self.client.clone(),
         }
     }
+
+    #[inline]
+    pub fn client(&self) -> &Client {
+        &self.client
+    }
 }
 
 impl Completion for LLM {

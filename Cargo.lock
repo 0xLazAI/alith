@@ -67,9 +67,11 @@ dependencies = [
  "anyhow",
  "async-trait",
  "llm_client",
+ "reqwest",
  "schemars",
  "serde",
  "tokio",
+ "url",
 ]
 
 [[package]]

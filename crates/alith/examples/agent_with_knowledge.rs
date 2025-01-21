@@ -1,14 +1,26 @@
-use alith::{Agent, Knowledge, PdfFileKnowledge, StringKnowledge, TextFileKnowledge, LLM};
+use alith::{
+    Agent, HtmlKnowledge, Knowledge, PdfFileKnowledge, StringKnowledge, TextFileKnowledge, LLM,
+};
+use std::io::Cursor;
 use std::sync::Arc;
+use url::Url;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
+    let url = "https://en.m.wikivoyage.org/wiki/Seoul";
+    let html = reqwest::get(url).await.unwrap().text().await.unwrap();
+
     let knowledges: Vec<Box<dyn Knowledge>> = vec![
         Box::new(StringKnowledge::new("Reference Joke 1")),
         Box::new(TextFileKnowledge::new("path/to/text.txt")),
         Box::new(PdfFileKnowledge::new("path/to/pdf.pdf")),
+        Box::new(HtmlKnowledge::new(
+            Cursor::new(html),
+            Url::parse(url).unwrap(),
+            false,
+        )),
     ];
-    let model = LLM::from_model_name("gpt-4o")?;
+    let model = LLM::from_model_name("gpt-4")?;
     let mut agent = Agent::new("simple agent", model, vec![]);
     agent.preamble =
         "You are a comedian here to entertain the user using humour and jokes.".to_string();

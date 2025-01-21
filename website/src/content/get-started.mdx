@@ -1,0 +1,180 @@
+import { Steps, Tabs } from 'nextra/components'
+
+# Get Started
+
+This guide will walk you through everything you need to get started with the
+**Alith**. Whether you're building intelligent agents, integrating tools,
+or experimenting with language models, Alith provides a seamless experience
+across multiple programming languages. Below, you'll find installation 
+instructions, quick start guides, and examples for **Rust**, **Python**,
+and **Node.js**.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+  <Steps>
+
+## Install Dependency
+
+- Install Alith Dependency
+
+```shell
+cargo add alith --git https://github.com/0xLazAI/alith
+```
+
+- Install Other Dependencies like `tokio`, `async_trait`, `schemars`, `serde` and `anyhow`.
+
+```shell
+cargo add tokio async_trait schemars serde anyhow
+```
+
+## Write the Code
+
+```rust
+use alith::{Agent, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::from_model_name("gpt-4")?;
+    let mut agent = Agent::new("simple agent", model, vec![]);
+    agent.preamble =
+        "You are a comedian here to entertain the user using humour and jokes.".to_string();
+    let response = agent.prompt("Entertain me!").await?;
+
+    println!("{}", response);
+
+    Ok(())
+}
+```
+
+## Model Provider Settings
+
+We can configure different AI model providers, here we take the OpenAI model as th example.
+
+- Unix
+
+```shell
+export OPENAI_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:OPENAI_API_KEY = "<your API key>"
+```
+
+## Run the Code
+
+```shell
+cargo run --release
+```
+
+</Steps>
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+  <Steps>
+
+## Install Dependency
+
+- Install Alith Dependency
+
+```shell
+python3 -m pip install alith
+# Or use `pip install alith` direclty.
+```
+
+## Write the Code
+
+```python
+from alith import Agent
+
+agent = Agent(
+    name="A dummy Agent",
+    model="gpt-4",
+    preamble="You are a comedian here to entertain the user using humour and jokes.",
+)
+print(agent.prompt("Entertain me!"))
+```
+
+## Model Provider Settings
+
+We can configure different AI model providers, here we take the OpenAI model as th example.
+
+- Unix
+
+```shell
+export OPENAI_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:OPENAI_API_KEY = "<your API key>"
+```
+
+## Run the Code
+
+```shell
+python3 main.py
+```
+
+</Steps>
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+  <Steps>
+
+## Install Dependency
+
+- Install Alith Dependency
+
+```shell
+npm install alith
+# Or use pnpm `pnpm install alith`
+# Or use yarn `yarn install alith`
+```
+
+## Write the Code
+
+```typescript
+import { Agent } from 'alith'
+
+const agent = new Agent({
+  name: 'A dummy Agent',
+  model: 'gpt-4',
+  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
+})
+console.log(agent.prompt('Entertain me!'))
+```
+
+## Model Provider Settings
+
+We can configure different AI model providers, here we take the OpenAI model as th example.
+
+- Unix
+
+```shell
+export OPENAI_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:OPENAI_API_KEY = "<your API key>"
+```
+
+## Run the Code
+
+```shell
+tsc index.ts && node index.js
+```
+
+</Steps>
+
+</Tabs.Tab>
+</Tabs>

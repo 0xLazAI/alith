@@ -1,0 +1,264 @@
+import { Steps, Tabs } from 'nextra/components'
+
+# Large Language Models (LLMs)
+
+Alith provides seamless integration with various **Large Language Models (LLMs)**, allowing you to easily switch between models like GPT-4, GPT-3.5, Claude, Deepseek and others. Below, you'll find examples of how to initialize and use LLMs in Rust, Python, and Node.js.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+## OpenAI Models
+
+Set the API key.
+
+- Unix
+
+```shell
+export OPENAI_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:OPENAI_API_KEY = "<your API key>"
+```
+
+Write the code.
+
+```rust
+use alith::{Agent, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::from_model_name("gpt-4")?;
+    let mut agent = Agent::new("simple agent", model, vec![]);
+    agent.preamble =
+        "You are a comedian here to entertain the user using humour and jokes.".to_string();
+    let response = agent.prompt("Entertain me!").await?;
+
+    println!("{}", response);
+
+    Ok(())
+}
+```
+
+## OpenAI API Compatible Models
+
+Here, we take the Deepseek model as the example.
+
+```rust
+use alith::{Agent, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::openai_compatible_model(
+        "<Your API Key>", // Replace with your api key or read it from env.
+        "api.deepseek.com",
+        "deepseek-chat",
+    )?;
+    let mut agent = Agent::new("simple agent", model, vec![]);
+    agent.preamble =
+        "You are a comedian here to entertain the user using humour and jokes.".to_string();
+    let response = agent.prompt("Entertain me!").await?;
+
+    println!("{}", response);
+
+    Ok(())
+}
+```
+
+## Anthropic Models
+
+Set the API key.
+
+- Unix
+
+```shell
+export ANTHROPIC_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:ANTHROPIC_API_KEY = "<your API key>"
+```
+
+Write the code.
+
+```rust
+use alith::{Agent, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::from_model_name("claude-3-5-sonnet")?;
+    let mut agent = Agent::new("simple agent", model, vec![]);
+    agent.preamble =
+        "You are a comedian here to entertain the user using humour and jokes.".to_string();
+    let response = agent.prompt("Entertain me!").await?;
+
+    println!("{}", response);
+
+    Ok(())
+}
+```
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+## OpenAI Models
+
+Set the API key.
+
+- Unix
+
+```shell
+export OPENAI_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:OPENAI_API_KEY = "<your API key>"
+```
+
+Write the code.
+
+```python
+from alith import Agent
+
+agent = Agent(
+    name="A dummy Agent",
+    model="gpt-4o-mini",
+    preamble="You are a comedian here to entertain the user using humour and jokes.",
+)
+print(agent.prompt("Entertain me!"))
+```
+
+## OpenAI API Compatible Models
+
+Here, we take the Deepseek model as the example.
+
+```python
+from alith import Agent
+
+agent = Agent(
+    name="A dummy Agent",
+    model="deepseek-chat",
+    api_key="<Your API Key>", # Replace with your api key or read it from env.
+    base_url="api.deepseek.com",
+    preamble="You are a comedian here to entertain the user using humour and jokes.",
+)
+print(agent.prompt("Entertain me!"))
+```
+
+## Anthropic Models
+
+Set the API key.
+
+- Unix
+
+```shell
+export ANTHROPIC_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:ANTHROPIC_API_KEY = "<your API key>"
+```
+
+Write the code.
+
+```python
+from alith import Agent
+
+agent = Agent(
+    name="A dummy Agent",
+    model="claude-3-5-sonnet",
+    preamble="You are a comedian here to entertain the user using humour and jokes.",
+)
+print(agent.prompt("Entertain me!"))
+```
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+## OpenAI Models
+
+Set the API key.
+
+- Unix
+
+```shell
+export OPENAI_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:OPENAI_API_KEY = "<your API key>"
+```
+
+Write the code.
+
+```typescript
+import { Agent } from 'alith'
+
+const agent = new Agent({
+  name: 'A dummy Agent',
+  model: 'gpt-4',
+  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
+})
+console.log(agent.prompt('Entertain me!'))
+```
+
+## OpenAI API Compatible Models
+
+Here, we take the Deepseek model as the example.
+
+```typescript
+import { Agent } from 'alith'
+
+const agent = new Agent({
+  name: 'A dummy Agent',
+  model: 'deepseek-chat',
+  api_key: '<Your API Key>',
+  base_url: 'api.deepseek.com',
+  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
+})
+console.log(agent.prompt('Entertain me!'))
+```
+
+## Anthropic Models
+
+Set the API key.
+
+- Unix
+
+```shell
+export ANTHROPIC_API_KEY=<your API key>
+```
+
+- Windows
+
+```shell
+$env:ANTHROPIC_API_KEY = "<your API key>"
+```
+
+Write the code.
+
+```typescript
+import { Agent } from 'alith'
+
+const agent = new Agent({
+  name: 'A dummy Agent',
+  model: 'claude-3-5-sonnet',
+  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
+})
+console.log(agent.prompt('Entertain me!'))
+```
+
+</Tabs.Tab>
+</Tabs>

@@ -82,7 +82,7 @@ where
     }
 
     /// Adds a memory to the agent.
-    pub fn memory(&mut self, memory: impl Memory + 'static) -> &mut Self {
+    pub fn memory(mut self, memory: impl Memory + 'static) -> Self {
         self.memory = Some(Arc::new(RwLock::new(memory)));
         self
     }
@@ -90,6 +90,12 @@ where
     /// Adds a storage index to the agent.
     pub fn store_index(&mut self, sample: usize, store: impl Storage + 'static) -> &mut Self {
         self.store_indices.push((sample, Box::new(store)));
+        self
+    }
+
+    /// System prompt for the agent.
+    pub fn preamble(mut self, preamble: impl ToString) -> Self {
+        self.preamble = preamble.to_string();
         self
     }
 
