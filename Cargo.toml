@@ -11,7 +11,7 @@ alith-store = { path = "crates/store" }
 alith-inference = { path = "crates/inference" }
 
 llm_client = { git = "https://github.com/0xLazAI/llm_client", version = "0.2.0" }
-fastembed = { git = "https://github.com/Anush008/fastembed-rs", version = "4.4.0", default_features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
+fastembed = { git = "https://github.com/Anush008/fastembed-rs", version = "4.4.0", default-features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
 uuid = { version = "1.12.0", features = ["serde", "v4"] }
 async-trait = "0.1.84"
 serde = { version = "1.0.217", features = ["derive"] }

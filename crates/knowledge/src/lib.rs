@@ -1,3 +1,4 @@
+pub mod html;
 pub mod pdf;
 pub mod string;
 pub mod text;

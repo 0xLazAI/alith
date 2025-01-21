@@ -28,7 +28,12 @@ pub use core::{
     tool::{StructureTool, Tool, ToolChoice, ToolDefinition, ToolError},
 };
 
-pub use knowledge::{pdf::PdfFileKnowledge, string::StringKnowledge, text::TextFileKnowledge};
+pub use knowledge::{
+    html::{html_to_md, HtmlKnowledge},
+    pdf::PdfFileKnowledge,
+    string::StringKnowledge,
+    text::TextFileKnowledge,
+};
 pub use store::qdrant::*;
 
 pub use async_trait::async_trait;
