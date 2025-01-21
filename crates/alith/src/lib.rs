@@ -36,4 +36,6 @@ pub use knowledge::{
 };
 pub use store::qdrant::*;
 
+pub use llm_client;
+
 pub use async_trait::async_trait;

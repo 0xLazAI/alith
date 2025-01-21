@@ -8,7 +8,7 @@ use crate::tool::Tool;
 use futures::{stream, StreamExt, TryStreamExt};
 use std::collections::HashMap;
 use std::sync::Arc;
-use tokio::sync::{Mutex, RwLock};
+use tokio::sync::RwLock;
 use uuid::Uuid;
 
 pub struct Agent<M: Completion> {
@@ -21,7 +21,7 @@ pub struct Agent<M: Completion> {
     /// Knowledge sources for the agent.
     pub knowledges: Arc<Vec<Box<dyn Knowledge>>>,
     /// Agent memory.
-    pub memory: Option<Arc<Mutex<dyn Memory>>>,
+    pub memory: Option<Arc<RwLock<dyn Memory>>>,
     /// The unique ID of the agent.
     pub id: Uuid,
     /// The name of the agent.
@@ -83,7 +83,7 @@ where
 
     /// Adds a memory to the agent.
     pub fn memory(&mut self, memory: impl Memory + 'static) -> &mut Self {
-        self.memory = Some(Arc::new(Mutex::new(memory)));
+        self.memory = Some(Arc::new(RwLock::new(memory)));
         self
     }
 
@@ -104,6 +104,7 @@ where
             self.model.clone(),
             self.knowledges.clone(),
             self.tools.clone(),
+            self.memory.clone(),
         );
         let mut req = Request::new(prompt.to_string(), self.preamble.clone());
         req.history = history;

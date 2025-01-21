@@ -65,6 +65,7 @@ dependencies = [
  "alith-store",
  "anyhow",
  "async-trait",
+ "llm_client",
  "schemars",
  "serde",
  "tokio",
