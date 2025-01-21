@@ -31,13 +31,13 @@ To address these issues, we have launched LazAI — a decentralized AI platfor
 Alith is a decentralized AI agent framework tailored to harness the capabilities of the LazAI -a decentralized AI platform dedicated to building an open, transparent, high-performance, secure, and inclusive AI ecosystem. LazAI is an innovative framework centered around the concept of "AI assets," which is used to define the ownership and management protocols of private AI resources (such as personal data and proprietary models). On the LazAI platform, AI developers, data providers, and other stakeholders can collaborate through integrated development tools to jointly create high-quality AI assets. These assets can be used for further development or traded and shared within the platform. LazAI uses blockchain technology to ensure that all interactions are transparent and tamper-proof, with clear ownership and fair profit distribution for contributors.
 
 <p align="center">
-    <img src="../imgs/lazai.png" alt="LazAI Arch" />
+    <img src="../imgs/lazai.png" alt="LazAI Arch" style="width: 95%;"/>
 </p>
 
 Alith combines cutting-edge performance optimization with robust Web3 integration, addressing critical issues such as data sovereignty, efficient inference, and decentralized collaboration. By leveraging blockchain technology, Alith ensures transparent data governance and fair resource allocation, empowering developers and contributors within a decentralized AI ecosystem. Its cross-language SDKs for Python, Rust, and Node.js, alongside features like low-code orchestration and seamless deployment, make it both developer-friendly and highly scalable.
 
 <p align="center">
-    <img src="../imgs/alith.png" alt="Alith Arch" />
+    <img src="../imgs/alith.png" alt="Alith Arch" style="width: 95%;" />
 </p>
 
 ## Why Alith
