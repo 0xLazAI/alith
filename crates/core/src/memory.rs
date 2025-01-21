@@ -7,17 +7,19 @@ use tokio::sync::Mutex;
 #[derive(PartialEq, Eq, Serialize, Deserialize, Debug, Clone)]
 pub enum MessageType {
     #[serde(rename = "system")]
-    SystemMessage,
+    System,
     #[serde(rename = "human")]
-    HumanMessage,
+    Human,
+    #[serde(rename = "ai")]
+    AI,
     #[serde(rename = "tool")]
-    ToolMessage,
+    Tool,
 }
 
 impl Default for MessageType {
     /// Default message type is `SystemMessage`.
     fn default() -> Self {
-        Self::SystemMessage
+        Self::System
     }
 }
 
@@ -25,9 +27,10 @@ impl MessageType {
     /// Converts the `MessageType` to a string representation.
     pub fn type_string(&self) -> String {
         match self {
-            MessageType::SystemMessage => "system".to_owned(),
-            MessageType::HumanMessage => "human".to_owned(),
-            MessageType::ToolMessage => "tool".to_owned(),
+            MessageType::System => "system".to_owned(),
+            MessageType::Human => "human".to_owned(),
+            MessageType::AI => "ai".to_owned(),
+            MessageType::Tool => "tool".to_owned(),
         }
     }
 }
@@ -46,7 +49,7 @@ impl Message {
     pub fn new_human_message<T: std::fmt::Display>(content: T) -> Self {
         Message {
             content: content.to_string(),
-            message_type: MessageType::HumanMessage,
+            message_type: MessageType::Human,
             id: None,
             tool_calls: None,
         }
@@ -56,7 +59,7 @@ impl Message {
     pub fn new_system_message<T: std::fmt::Display>(content: T) -> Self {
         Message {
             content: content.to_string(),
-            message_type: MessageType::SystemMessage,
+            message_type: MessageType::System,
             id: None,
             tool_calls: None,
         }
@@ -66,8 +69,18 @@ impl Message {
     pub fn new_tool_message<T: std::fmt::Display, S: Into<String>>(content: T, id: S) -> Self {
         Message {
             content: content.to_string(),
-            message_type: MessageType::ToolMessage,
+            message_type: MessageType::Tool,
             id: Some(id.into()),
+            tool_calls: None,
+        }
+    }
+
+    /// Creates a new =AI message with the given content.
+    pub fn new_ai_message<T: std::fmt::Display>(content: T) -> Self {
+        Message {
+            content: content.to_string(),
+            message_type: MessageType::AI,
+            id: None,
             tool_calls: None,
         }
     }
@@ -101,6 +114,11 @@ pub trait Memory: Send + Sync {
     /// Adds a user (human) message to the memory.
     fn add_user_message(&mut self, message: &dyn std::fmt::Display) {
         self.add_message(Message::new_human_message(message.to_string()));
+    }
+
+    /// Adds an AI (LLM) message to the memory.
+    fn add_ai_message(&mut self, message: &dyn std::fmt::Display) {
+        self.add_message(Message::new_ai_message(message.to_string()));
     }
 
     /// Adds a message to the memory.
