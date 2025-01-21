@@ -1,11 +1,11 @@
-import { Steps, Tabs } from 'nextra/components'
+import { Steps, Tabs } from "nextra/components";
 
 # Get Started
 
 This guide will walk you through everything you need to get started with the
 **Alith**. Whether you're building intelligent agents, integrating tools,
 or experimenting with language models, Alith provides a seamless experience
-across multiple programming languages. Below, you'll find installation 
+across multiple programming languages. Below, you'll find installation
 instructions, quick start guides, and examples for **Rust**, **Python**,
 and **Node.js**.
 
@@ -142,14 +142,15 @@ npm install alith
 ## Write the Code
 
 ```typescript
-import { Agent } from 'alith'
+import { Agent } from "alith";
 
 const agent = new Agent({
-  name: 'A dummy Agent',
-  model: 'gpt-4',
-  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
-})
-console.log(agent.prompt('Entertain me!'))
+  name: "A dummy Agent",
+  model: "gpt-4",
+  preamble:
+    "You are a comedian here to entertain the user using humour and jokes.",
+});
+console.log(agent.prompt("Entertain me!"));
 ```
 
 ## Model Provider Settings

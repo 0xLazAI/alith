@@ -1,4 +1,4 @@
-import { Steps, Tabs } from 'nextra/components'
+import { Steps, Tabs } from "nextra/components";
 
 # Large Language Models (LLMs)
 
@@ -204,14 +204,15 @@ $env:OPENAI_API_KEY = "<your API key>"
 Write the code.
 
 ```typescript
-import { Agent } from 'alith'
+import { Agent } from "alith";
 
 const agent = new Agent({
-  name: 'A dummy Agent',
-  model: 'gpt-4',
-  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
-})
-console.log(agent.prompt('Entertain me!'))
+  name: "A dummy Agent",
+  model: "gpt-4",
+  preamble:
+    "You are a comedian here to entertain the user using humour and jokes.",
+});
+console.log(agent.prompt("Entertain me!"));
 ```
 
 ## OpenAI API Compatible Models
@@ -219,16 +220,17 @@ console.log(agent.prompt('Entertain me!'))
 Here, we take the Deepseek model as the example.
 
 ```typescript
-import { Agent } from 'alith'
+import { Agent } from "alith";
 
 const agent = new Agent({
-  name: 'A dummy Agent',
-  model: 'deepseek-chat',
-  api_key: '<Your API Key>',
-  base_url: 'api.deepseek.com',
-  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
-})
-console.log(agent.prompt('Entertain me!'))
+  name: "A dummy Agent",
+  model: "deepseek-chat",
+  api_key: "<Your API Key>",
+  base_url: "api.deepseek.com",
+  preamble:
+    "You are a comedian here to entertain the user using humour and jokes.",
+});
+console.log(agent.prompt("Entertain me!"));
 ```
 
 ## Anthropic Models
@@ -250,14 +252,15 @@ $env:ANTHROPIC_API_KEY = "<your API key>"
 Write the code.
 
 ```typescript
-import { Agent } from 'alith'
+import { Agent } from "alith";
 
 const agent = new Agent({
-  name: 'A dummy Agent',
-  model: 'claude-3-5-sonnet',
-  preamble: 'You are a comedian here to entertain the user using humour and jokes.',
-})
-console.log(agent.prompt('Entertain me!'))
+  name: "A dummy Agent",
+  model: "claude-3-5-sonnet",
+  preamble:
+    "You are a comedian here to entertain the user using humour and jokes.",
+});
+console.log(agent.prompt("Entertain me!"));
 ```
 
 </Tabs.Tab>

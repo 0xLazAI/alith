@@ -1,5 +1,5 @@
-export const metadata = {}
+export const metadata = {};
 
 export default function IndexPage() {
-  return null
+  return null;
 }

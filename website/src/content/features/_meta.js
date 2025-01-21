@@ -1,8 +1,8 @@
 export default {
-  llm: '',
-  tool: '',
-  knowledge: '',
-  memory: '',
-  embeddings: '',
-  store: '',
-}
+  llm: "",
+  tool: "",
+  knowledge: "",
+  memory: "",
+  embeddings: "",
+  store: "",
+};

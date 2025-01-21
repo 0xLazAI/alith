@@ -1,4 +1,4 @@
 export default {
-  langchain: '',
-  eliza: '',
-}
+  langchain: "",
+  eliza: "",
+};

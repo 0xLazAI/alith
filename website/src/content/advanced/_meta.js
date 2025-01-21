@@ -1,5 +1,5 @@
 export default {
-  rag: '',
-  cot: '',
-  decision: '',
-}
+  rag: "",
+  cot: "",
+  decision: "",
+};
