@@ -20,7 +20,7 @@ async fn main() -> Result<(), anyhow::Error> {
         client
             .create_collection(
                 CreateCollectionBuilder::new(DEFAULT_COLLECTION_NAME)
-                    .vectors_config(VectorParamsBuilder::new(1664, Distance::Cosine)),
+                    .vectors_config(VectorParamsBuilder::new(1536, Distance::Cosine)),
             )
             .await?;
     }
