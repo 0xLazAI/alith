@@ -50,7 +50,7 @@ pub trait StructureTool: Send + Sync {
     }
 
     fn description(&self) -> &str {
-        "A default tool"
+        "A default tool description"
     }
 
     fn author(&self) -> &str {
@@ -118,6 +118,8 @@ impl<T: StructureTool> Tool for T {
 #[derive(Debug, thiserror::Error)]
 #[error("Tool error")]
 pub enum ToolError {
+    #[error("NormalError: {0}")]
+    NormalError(Box<dyn std::error::Error + Send + Sync + 'static>),
     #[error("Invalid input provided to the tool")]
     InvalidInput,
     #[error("The tool produced invalid output")]
