@@ -27,9 +27,7 @@ Alith is an AI agent framework designed for the Web3 and Crypto, empowering deve
 
 ## Quick Start
 
-- [Node](./sdks/node/README.md)
-- [Python](./sdks/python/README.md)
-- [Rust](./sdks/rust/README.md)
+See documents [here](https://alith.vercel.app/).
 
 ## Contributing
 
