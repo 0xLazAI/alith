@@ -25,6 +25,9 @@ name = "agent"
 name = "agent_deepseek"
 
 [[example]]
+name = "agent_claude"
+
+[[example]]
 name = "agent_with_tools"
 
 [[example]]

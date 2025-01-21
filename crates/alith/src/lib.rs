@@ -3,6 +3,7 @@ pub use alith_core as core;
 pub use alith_inference as inference;
 pub use alith_knowledge as knowledge;
 pub use alith_store as store;
+pub use alith_tools as tools;
 
 #[cfg(feature = "inference")]
 pub use core::llm::{
@@ -28,14 +29,13 @@ pub use core::{
     tool::{StructureTool, Tool, ToolChoice, ToolDefinition, ToolError},
 };
 
+pub use alith_tools::search::{Search, SearchProvider, SearchResult, SearchResults, SearchTool};
+pub use async_trait::async_trait;
 pub use knowledge::{
     html::{html_to_md, HtmlKnowledge},
     pdf::PdfFileKnowledge,
     string::StringKnowledge,
     text::TextFileKnowledge,
 };
-pub use store::qdrant::*;
-
 pub use llm_client;
-
-pub use async_trait::async_trait;
+pub use store::qdrant::*;
