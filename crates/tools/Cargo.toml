@@ -5,3 +5,11 @@ edition = { workspace = true }
 
 [dependencies]
 alith-core.workspace = true
+reqwest.workspace = true
+url.workspace = true
+async-trait.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+scraper = "0.22.0"
