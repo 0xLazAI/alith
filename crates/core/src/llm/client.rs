@@ -1,3 +1,5 @@
+use std::ops::Deref;
+use std::ops::DerefMut;
 use std::sync::Arc;
 
 use crate::chat::CallFunction;
@@ -29,6 +31,20 @@ impl ResponseContent for CompletionResponse {
 
 pub struct Client {
     pub(crate) client: LlmClient,
+}
+
+impl Deref for Client {
+    type Target = LlmClient;
+
+    fn deref(&self) -> &Self::Target {
+        &self.client
+    }
+}
+
+impl DerefMut for Client {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.client
+    }
 }
 
 impl Clone for Client {

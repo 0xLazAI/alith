@@ -1,0 +1,63 @@
+import { Tabs } from 'nextra/components'
+
+# Embeddings
+
+The Alith SDK supports embeddings, which are numerical representations of text that capture semantic meaning. Embeddings are useful for tasks like semantic search, clustering, and similarity comparisons. Below, you'll find examples of how to generate and use embeddings in Rust, Python, and Node.js.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+## Large Language Embeddings Model
+
+Here we take the OpenAI embeddings model as the example.
+
+```rust
+use alith::{Agent, EmbeddingsBuilder, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::from_model_name("gpt-4")?;
+    let embeddingds_model = model.embeddings_model("text-embedding-ada-002");
+    let data = EmbeddingsBuilder::new(embeddingds_model.clone())
+        .documents(vec!["doc0", "doc1", "doc2"])
+        .unwrap()
+        .build()
+        .await?;
+}
+```
+
+## Local Fast Embedding Model
+
+```rust
+use alith::{Agent, RLUCacheMemory, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::from_model_name("gpt-4")?;
+    let mut agent = Agent::new("simple agent", model, vec![])
+        .preamble("You are a searcher. When I ask questions about Web3, you can search from the Internet and answer them. When you encounter other questions, you can directly answer them.")
+        .memory(RLUCacheMemory::new(10));
+    let response = agent.prompt("What's BitCoin?").await?;
+
+    println!("{}", response);
+
+    Ok(())
+}
+```
+
+> Note that running this program will pull the embeddings model from Hugging Face and start the inference engine locally for inference, so we need to turn on the inference feature.
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+Comming Soon
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+Comming Soon
+
+</Tabs.Tab>
+</Tabs>

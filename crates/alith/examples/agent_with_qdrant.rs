@@ -6,7 +6,7 @@ use alith::{Agent, EmbeddingsBuilder, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let model = LLM::from_model_name("gpt-4o")?;
+    let model = LLM::from_model_name("gpt-4")?;
     let embeddingds_model = model.embeddings_model("text-embedding-ada-002");
     let data = EmbeddingsBuilder::new(embeddingds_model.clone())
         .documents(vec!["doc0", "doc1", "doc2"])

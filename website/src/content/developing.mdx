@@ -1,0 +1,221 @@
+import { Tabs } from 'nextra/components'
+
+# Developing
+
+This section provides instructions for setting up the development environment for the Alith SDK and contributing to the project.
+
+<Tabs items={['Rust', 'Python', 'Node.js', 'Website']}>
+
+<Tabs.Tab>
+
+### Prerequisites
+
+- Install Rust using [rustup](https://rustup.rs/):
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+### Clone the Repository
+
+```shell
+git clone https://github.com/0xLazAI/alith.git
+cd alith
+```
+
+### Build the SDK
+
+To build the Rust SDK, run:
+
+```shell
+make check
+```
+
+### Run Tests
+
+To run the test suite:
+
+```shell
+make test
+```
+
+### Format Code
+
+Ensure your code follows Rust's formatting standards:
+
+```shell
+make fmt
+```
+
+### Linting
+
+Use Clippy to catch common mistakes and improve code quality:
+
+```shell
+make clippy
+```
+
+### Contributing
+
+- Fork the repository and create a new branch for your changes.
+- Submit a pull request with a detailed description of your changes.
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Prerequisites
+- Install [Python](https://www.python.org/downloads/) (v3.8 or higher).
+- Install [Cargo](https://www.rust-lang.org/tools/install) (for Rust code).
+
+### Clone the Repository
+
+```shell
+git clone https://github.com/0xLazAI/alith.git
+cd alith
+```
+
+### Set Up a Virtual Environment
+
+Create and activate a virtual environment:
+
+```shell
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### Install Maturin
+
+Install `maturin` to build the Python bindings:
+
+```shell
+cargo install maturin
+```
+
+### Build the SDK
+
+Build the Python SDK:
+
+```shell
+maturin develop
+```
+
+### Run Tests
+
+Run the test suite:
+```shell
+python3 -m pytest
+```
+
+### Contributing
+
+- Fork the repository and create a new branch for your changes.
+- Submit a pull request with a detailed description of your changes.
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Prerequisites
+
+- Install [Node.js](https://nodejs.org/) (v18 or higher).
+- Install [Cargo](https://www.rust-lang.org/tools/install) (for Rust code).
+
+### Clone the Repository
+
+```shell
+git clone https://github.com/0xLazAI/alith.git
+cd alith
+```
+
+### Install Dependencies
+
+Install the required dependencies:
+
+```shell
+npm install
+```
+
+### Build the SDK
+
+To build the Node.js SDK, run:
+
+```shell
+npm run build
+```
+
+### Run Tests
+
+To run the test suite:
+
+```shell
+npm test
+```
+
+### Format Code
+
+Use Prettier to format your code:
+
+```shell
+npm run format
+```
+
+### Contributing
+
+- Fork the repository and create a new branch for your changes.
+- Submit a pull request with a detailed description of your changes.
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Prerequisites
+
+- Install [Node.js](https://nodejs.org/) (v18 or higher).
+- Install [pnpm](https://pnpm.io/installation) (recommended).
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/0xLazAI/alith.git
+cd alith/website
+```
+
+### Install Dependencies
+
+Install the required dependencies:
+
+```bash
+pnpm install
+```
+
+### Run the Development Server
+
+Start the development server:
+
+```bash
+pnpm dev
+```
+
+The website will be available at `http://localhost:3000`.
+
+### Build the Website
+
+To build the website for production:
+
+```bash
+pnpm build
+```
+
+### Deploy the Website
+
+Deploy the website to your preferred platform (e.g., GitHub Page, Vercel, Netlify).
+
+### Contributing
+
+- Fork the repository and create a new branch for your changes.
+- Submit a pull request with a detailed description of your changes.
+
+</Tabs.Tab>
+
+</Tabs>

@@ -52,7 +52,7 @@ impl StructureTool for Subtract {
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let tools: [Box<dyn Tool>; 2] = [Box::new(Adder), Box::new(Subtract)];
-    let model = LLM::from_model_name("gpt-4o")?;
+    let model = LLM::from_model_name("gpt-4")?;
     let mut agent = Agent::new("simple agent", model, tools);
     agent.preamble =
         "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.".to_string();

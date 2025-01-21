@@ -2,7 +2,7 @@ import { Agent } from '../agent'
 
 const agent = new Agent({
   name: 'A dummy Agent',
-  model: 'gpt-4o-mini',
+  model: 'gpt-4',
   preamble:
     'You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.',
   tools: [
