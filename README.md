@@ -22,7 +22,7 @@ Alith is an AI agent framework designed for the Web3 and Crypto, empowering deve
 ## Architecture
 
 <p align="center">
-    <img src="imgs/arch.png" alt="Alith Arch" />
+    <img src="imgs/alith.png" alt="Alith Arch" />
 </p>
 
 ## Quick Start
