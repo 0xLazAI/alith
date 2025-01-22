@@ -29,18 +29,17 @@ async fn main() -> Result<(), anyhow::Error> {
 ## Local Fast Embedding Model
 
 ```rust
-use alith::{Agent, RLUCacheMemory, LLM};
+use alith::{EmbeddingsBuilder, FastEmbeddingsModel};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let model = LLM::from_model_name("gpt-4")?;
-    let mut agent = Agent::new("simple agent", model, vec![])
-        .preamble("You are a searcher. When I ask questions about Web3, you can search from the Internet and answer them. When you encounter other questions, you can directly answer them.")
-        .memory(RLUCacheMemory::new(10));
-    let response = agent.prompt("What's BitCoin?").await?;
-
-    println!("{}", response);
-
+    let embeddingds_model = FastEmbeddingsModel::try_default().unwrap();
+    let data = EmbeddingsBuilder::new(embeddingds_model.clone())
+        .documents(vec!["doc0", "doc1", "doc2"])
+        .unwrap()
+        .build()
+        .await?;
+    println!("{:?}", data);
     Ok(())
 }
 ```
