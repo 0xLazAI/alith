@@ -17,8 +17,8 @@ use alith::{Agent, EmbeddingsBuilder, LLM};
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
-    let embeddingds_model = model.embeddings_model("text-embedding-ada-002");
-    let data = EmbeddingsBuilder::new(embeddingds_model.clone())
+    let embeddings_model = model.embeddings_model("text-embedding-ada-002");
+    let data = EmbeddingsBuilder::new(embeddings_model.clone())
         .documents(vec!["doc0", "doc1", "doc2"])
         .unwrap()
         .build()
@@ -33,8 +33,8 @@ use alith::{EmbeddingsBuilder, FastEmbeddingsModel};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let embeddingds_model = FastEmbeddingsModel::try_default().unwrap();
-    let data = EmbeddingsBuilder::new(embeddingds_model.clone())
+    let embeddings_model = FastEmbeddingsModel::try_default().unwrap();
+    let data = EmbeddingsBuilder::new(embeddings_model.clone())
         .documents(vec!["doc0", "doc1", "doc2"])
         .unwrap()
         .build()

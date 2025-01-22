@@ -7,8 +7,8 @@ use alith::{Agent, EmbeddingsBuilder, LLM};
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
-    let embeddingds_model = model.embeddings_model("text-embedding-ada-002");
-    let data = EmbeddingsBuilder::new(embeddingds_model.clone())
+    let embeddings_model = model.embeddings_model("text-embedding-ada-002");
+    let data = EmbeddingsBuilder::new(embeddings_model.clone())
         .documents(vec!["doc0", "doc1", "doc2"])
         .unwrap()
         .build()
@@ -25,7 +25,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .await?;
     }
 
-    let storage = QdrantStorage::from_multiple_documents(client, embeddingds_model, data).await?;
+    let storage = QdrantStorage::from_multiple_documents(client, embeddings_model, data).await?;
 
     let mut agent = Agent::new("simple agent", model, vec![]);
     agent.preamble = r#"
