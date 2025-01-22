@@ -16,9 +16,9 @@ use alith::{Agent, LLM};
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
-    let mut agent = Agent::new("simple agent", model, vec![]);
-    agent.preamble =
-        "You are a comedian here to entertain the user using humour and jokes.".to_string();
+    let agent = Agent::new("simple agent", model, vec![])
+        .preamble("You are a comedian here to entertain the user using humour and jokes.");
+
     let response = agent.prompt("Entertain me!").await?;
 
     println!("{}", response);
@@ -85,9 +85,8 @@ impl StructureTool for Subtract {
 async fn main() -> Result<(), anyhow::Error> {
     let tools: [Box<dyn Tool>; 2] = [Box::new(Adder), Box::new(Subtract)];
     let model = LLM::from_model_name("gpt-4")?;
-    let mut agent = Agent::new("simple agent", model, tools);
-    agent.preamble =
-        "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.".to_string();
+    let agent = Agent::new("simple agent", model, tools)
+        .preamble("You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.");
     let response = agent.prompt("Calculate 10 - 3").await?;
 
     println!("{}", response);

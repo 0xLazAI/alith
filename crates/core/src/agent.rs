@@ -88,7 +88,7 @@ where
     }
 
     /// Adds a storage index to the agent.
-    pub fn store_index(&mut self, sample: usize, store: impl Storage + 'static) -> &mut Self {
+    pub fn store_index(mut self, sample: usize, store: impl Storage + 'static) -> Self {
         self.store_indices.push((sample, Box::new(store)));
         self
     }
@@ -100,12 +100,12 @@ where
     }
 
     /// Processes a prompt using the agent.
-    pub async fn prompt(&mut self, prompt: &str) -> Result<String, TaskError> {
+    pub async fn prompt(&self, prompt: &str) -> Result<String, TaskError> {
         self.chat(prompt, vec![]).await
     }
 
     /// Processes a prompt using the agent.
-    pub async fn chat(&mut self, prompt: &str, history: Vec<Message>) -> Result<String, TaskError> {
+    pub async fn chat(&self, prompt: &str, history: Vec<Message>) -> Result<String, TaskError> {
         let mut executor = Executor::new(
             self.model.clone(),
             self.knowledges.clone(),

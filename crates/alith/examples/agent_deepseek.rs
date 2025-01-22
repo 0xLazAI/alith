@@ -7,9 +7,8 @@ async fn main() -> Result<(), anyhow::Error> {
         "api.deepseek.com",
         "deepseek-chat",
     )?;
-    let mut agent = Agent::new("simple agent", model, vec![]);
-    agent.preamble =
-        "You are a comedian here to entertain the user using humour and jokes.".to_string();
+    let agent = Agent::new("simple agent", model, vec![])
+        .preamble("You are a comedian here to entertain the user using humour and jokes.");
     let response = agent.prompt("Entertain me!").await?;
 
     println!("{}", response);

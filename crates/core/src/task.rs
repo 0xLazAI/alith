@@ -41,8 +41,7 @@ impl<M: Completion> Task<M> {
     /// Executes the task using the agent.
     pub async fn execute(&mut self) -> Result<String, TaskError> {
         // Get a write lock for mutable access to the Agent
-        let mut agent = self.agent.write().await;
-
+        let agent = self.agent.read().await;
         // Call `execute_task` on the Agent
         let result = agent
             .prompt(&self.prompt.clone())

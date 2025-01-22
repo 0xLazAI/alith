@@ -11,13 +11,14 @@ async fn main() -> Result<(), anyhow::Error> {
         .await?;
     let storage = InMemoryStorage::from_multiple_documents(embeddings_model, data);
 
-    let mut agent = Agent::new("simple agent", model, vec![]);
-    agent.preamble = r#"
+    let agent = Agent::new("simple agent", model, vec![])
+        .preamble(
+            r#"
 You are a dictionary assistant here to assist the user in understanding the meaning of words.
 You will find additional non-standard word definitions that could be useful below.
-"#
-    .to_string();
-    agent.store_index(1, storage);
+"#,
+        )
+        .store_index(1, storage);
     let response = agent.prompt("What does \"glarb-glarb\" mean?").await?;
 
     println!("{}", response);
