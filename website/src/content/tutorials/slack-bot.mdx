@@ -2,15 +2,15 @@ import { Steps } from "nextra/components";
 
 # Slack Bot
 
-In this tutorial, you will learn how to create a Slack bot that uses 
+In this tutorial, you will learn how to create a Slack bot that uses
 the Alith Python SDK to generate responses to messages. This bot will
 listen to messages in a slack channel and reply.
 
 > Note: Although we used Python in this tutorial, you can still use
 > Alith Rust SDK and Node.js SDK to complete this robot. The benefit
-> of using Alith Python SDK is that you can improve development 
-> efficiency while still getting a production-level AI Bot. 
-> For example, you can deploy the Bot on AWS Lambda, benefiting 
+> of using Alith Python SDK is that you can improve development
+> efficiency while still getting a production-level AI Bot.
+> For example, you can deploy the Bot on AWS Lambda, benefiting
 > from the core Rust implementation and few Python dependencies,
 > it will get a much smaller cold start than frameworks written by
 > Python such as Langchain.
@@ -42,10 +42,12 @@ python3 -m pip install alith slack_sdk slack_bolt
 1. Go to the [Slack API](https://api.slack.com/apps) and click Create New App.
 2. Choose **From scratch**, give your app a name, and select your workspace.
 3. Under OAuth & Permissions, add the following bot token scopes:
-  - **app_mentions:read**
-  - **chat:write**
-  - **im:history**
-  - **im:write**
+
+- **app_mentions:read**
+- **chat:write**
+- **im:history**
+- **im:write**
+
 4. Install the app to your workspace and copy the Bot Token (starts with xoxb-).
 5. Under Socket Mode, enable it and generate an App Token (starts with xapp-).
 
@@ -63,7 +65,7 @@ export SLACK_APP_TOKEN="xapp-your-slack-app-token"
 
 Create a Python script (e.g., `slack-bot.py`) and add the following code:
 
-```shell
+```python
 import os
 from alith import Agent
 from slack_bolt import App
@@ -96,7 +98,7 @@ if __name__ == "__main__":
 Run your Python script to start the bot:
 
 ```shell
-python3 slack_bot.py
+python3 slack-bot.py
 ```
 
 ## Test the Bot
