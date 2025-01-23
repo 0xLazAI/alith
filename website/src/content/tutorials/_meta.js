@@ -1,3 +1,4 @@
 export default {
-  'slack-bot': "",
+  "slack-bot": "",
+  "search-bot": "",
 };
