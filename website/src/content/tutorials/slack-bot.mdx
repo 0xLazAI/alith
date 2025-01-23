@@ -1,0 +1,130 @@
+import { Steps } from "nextra/components";
+
+# Slack Bot
+
+In this tutorial, you will learn how to create a Slack bot that uses 
+the Alith Python SDK to generate responses to messages. This bot will
+listen to messages in a slack channel and reply.
+
+> Note: Although we used Python in this tutorial, you can still use
+> Alith Rust SDK and Node.js SDK to complete this robot. The benefit
+> of using Alith Python SDK is that you can improve development 
+> efficiency while still getting a production-level AI Bot. 
+> For example, you can deploy the Bot on AWS Lambda, benefiting 
+> from the core Rust implementation and few Python dependencies,
+> it will get a much smaller cold start than frameworks written by
+> Python such as Langchain.
+
+## Prerequisites
+
+Before starting, ensure you have the following:
+
+- OpenAI API Key: Sign up at OpenAI and get your API key.
+- Slack App and Bot Token: Create a Slack App and generate a Bot Token.
+- Python Environment: Install Python (3.8 or higher) and set up a virtual environment.
+
+<Steps>
+
+## Install Required Libraries
+
+Install the necessary Python libraries using `pip`:
+
+```shell
+python3 -m pip install alith slack_sdk slack_bolt
+```
+
+- **alith**: Alith Agent SDK for Python
+- **slack_sdk**: Official Slack SDK for Python.
+- **slack_bolt**: A framework for building Slack apps.
+
+## Create a Slack App
+
+1. Go to the [Slack API](https://api.slack.com/apps) and click Create New App.
+2. Choose **From scratch**, give your app a name, and select your workspace.
+3. Under OAuth & Permissions, add the following bot token scopes:
+  - **app_mentions:read**
+  - **chat:write**
+  - **im:history**
+  - **im:write**
+4. Install the app to your workspace and copy the Bot Token (starts with xoxb-).
+5. Under Socket Mode, enable it and generate an App Token (starts with xapp-).
+
+## Set Up Environment Variables
+
+Store your API keys and tokens as environment variables for security:
+
+```shell
+export OPENAI_API_KEY="your-openai-api-key"
+export SLACK_BOT_TOKEN="xoxb-your-slack-bot-token"
+export SLACK_APP_TOKEN="xapp-your-slack-app-token"
+```
+
+## Write the Slack Bot Code
+
+Create a Python script (e.g., `slack-bot.py`) and add the following code:
+
+```shell
+import os
+from alith import Agent
+from slack_bolt import App
+from slack_bolt.adapter.socket_mode import SocketModeHandler
+
+# Initialize Slack Bolt app with the bot token
+slack_app = App(token=os.getenv("SLACK_BOT_TOKEN"))
+agent = Agent(
+    name="Slack Bot Agent",
+    model="gpt-4",
+    preamble="""You are an advanced AI assistant built by [Alith](https://github.com/0xLazAI/alith).""",
+)
+
+# Define a message handler
+@slack_app.message("")
+def handle_message(message, say):
+    # Use the agent to generate a response
+    response = agent.prompt(message["text"])
+    # Send the reply back to the Slack channel
+    say(response)
+
+# Start the bot using Socket Mode
+if __name__ == "__main__":
+    handler = SocketModeHandler(slack_app, os.getenv("SLACK_APP_TOKEN"))
+    handler.start()
+```
+
+## Run the Slack Bot
+
+Run your Python script to start the bot:
+
+```shell
+python3 slack_bot.py
+```
+
+## Test the Bot
+
+1. Go to your Slack workspace.
+2. Mention the bot in a channel or send it a direct message.
+
+## Deploy the Bot
+
+To keep the bot running 24/7, deploy it to a cloud platform like:
+
+- Heroku: Follow the [Heroku Python deployment guide](https://devcenter.heroku.com/articles/getting-started-with-python).
+- AWS Lambda: Use the [Serverless Framework](https://www.serverless.com/) to deploy the bot.
+- Google Cloud Run: Follow the [Google Cloud Run documentation](https://cloud.google.com/run/docs/quickstarts/build-and-deploy).
+
+## Enhance the Bot
+
+Here are some ideas to improve your bot:
+
+1. Contextual Conversations: Store conversation history to enable multi-turn dialogues.
+2. Error Handling: Add error handling for API failures or invalid inputs.
+3. Custom Commands: Allow users to trigger specific actions (e.g., /ask for questions).
+4. Rate Limiting: Prevent abuse by limiting the number of requests per user.
+
+</Steps>
+
+## References
+
+- [Alith Documentation](https://alith.vercel.app/docs)
+- [Slack API Documentation](https://api.slack.com/)
+- [Slack Bolt Documentation](https://slack.dev/bolt-python/tutorial/getting-started)

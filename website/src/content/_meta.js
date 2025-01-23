@@ -4,5 +4,6 @@ export default {
   features: "",
   advanced: "",
   integrations: "",
+  tutorials: "",
   developing: "",
 };
