@@ -2,7 +2,7 @@ import { Agent } from '../agent'
 
 const agent = new Agent({
   name: 'A dummy Agent',
-  model: 'deepseek-chat',
+  model: 'deepseek-chat',  // or `deepseek-reasoner` for DeepSeek R1
   api_key: '<Your API Key>',
   base_url: 'api.deepseek.com',
   preamble:

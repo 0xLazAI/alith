@@ -54,7 +54,7 @@ async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::openai_compatible_model(
         "<Your API Key>", // Replace with your api key or read it from env.
         "api.deepseek.com",
-        "deepseek-chat",
+        "deepseek-chat", // or `deepseek-reasoner` for DeepSeek R1 Model
     )?;
     let agent = Agent::new("simple agent", model, vec![])
         .preamble("You are a comedian here to entertain the user using humour and jokes.");
@@ -144,7 +144,7 @@ from alith import Agent
 
 agent = Agent(
     name="A dummy Agent",
-    model="deepseek-chat",
+    model="deepseek-chat", # or `deepseek-reasoner` for DeepSeek R1
     api_key="<Your API Key>", # Replace with your api key or read it from env.
     base_url="api.deepseek.com",
     preamble="You are a comedian here to entertain the user using humour and jokes.",
@@ -224,7 +224,7 @@ import { Agent } from "alith";
 
 const agent = new Agent({
   name: "A dummy Agent",
-  model: "deepseek-chat",
+  model: "deepseek-chat", // or `deepseek-reasoner` for DeepSeek R1
   api_key: "<Your API Key>",
   base_url: "api.deepseek.com",
   preamble:
