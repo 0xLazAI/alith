@@ -8,6 +8,6 @@
 - [Agent with CoT](./agent_with_cot.rs)
 - [Agent with Decision](./agent_with_decision.rs)
 - [Agent with Memory](./agent_with_memory.rs)
-- [Agent Based on Deepseek Chat Models](./agent_deepseek.rs)
+- [Agent Based on DeepSeek Chat Models](./agent_deepseek.rs)
 - [Agent Based on Cluade Chat Models](./agent_claude.rs)
 - [Agent Based on Claude Models](./agent_claude.rs)

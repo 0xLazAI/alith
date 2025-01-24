@@ -6,4 +6,5 @@ export default {
   integrations: "",
   tutorials: "",
   developing: "",
+  roadmap: "",
 };
