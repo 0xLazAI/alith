@@ -31,6 +31,7 @@ We are committed to continuous innovation, with key milestones including:
   - **Web3**
     - **Ethereum**: Enable integration with Ethereum for smart contract interactions, wallet management, and decentralized application (dApp) support.
     - **Solana**: Add support for Solana to provide fast and cost-effective blockchain interactions.
+    - **Metis**: Add support for Metis to provide an efficient Layer 2 scaling solution, enabling rapid deployment and low-cost interactions for decentralized applications (dApps) and decentralized autonomous organizations (DAOs).
   - **Other Community Tools**
 - **Operations**
   - **Monitoring and Logging**: Enhance monitoring and logging capabilities for better operational insights and troubleshooting.
@@ -50,6 +51,8 @@ We are committed to continuous innovation, with key milestones including:
 - **Features**
   - **Real-Time Data Processing**: Integrate real-time data processing capabilities for time-sensitive applications.
   - **Explainability and Transparency**: Develop features to provide insights into model decision-making processes, enhancing trust and usability.
+  - **Distributed Inference**: Enhance the inference engine to support distributed computing, enabling scalable and efficient model serving across multiple nodes.
+  - **Adaptive Batching**: Introduce adaptive batching techniques to optimize throughput and latency based on incoming request patterns.
 - **Integrations**
   - **LazAI**: Integrate LazAI Blockchain for decentralized, secure, and scalable AI model deployment. Enable on-chain inference using WebAssembly (WASM) for efficient and trustless execution of AI models.
   - **IoT Devices**: Enable integration with IoT devices for real-time data collection, processing, and decision-making in edge computing scenarios.
