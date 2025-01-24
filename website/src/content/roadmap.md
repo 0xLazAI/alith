@@ -7,7 +7,10 @@ We are committed to continuous innovation, with key milestones including:
 - **Models**
   - **Llama**
   - **Perplexity**
+  - **Grok**
   - **Qwen**
+  - **DeepSeek**
+  - **Other Community Models**
 - **Features**
   - **Prompt Management System**: Introduce a system for managing, versioning, and optimizing prompts to improve model performance and usability.
   - **Multi-Agent Workflow/Chain**: Enable complex workflows where multiple agents can collaborate, pass tasks, and share context seamlessly.
