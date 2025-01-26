@@ -33,6 +33,10 @@ See documents [here](https://alith.vercel.app/docs/get-started).
 
 We warmly welcome contributions to Alith! Whether you're a developer, a user reporting a bug, or someone eager to enhance our documentation, your participation is highly valued!
 
+## Contact
+
+Join our [Telegram group](https://t.me/+7jcLG0Qwhsk0N2Y1)
+
 ## License
 
 Apache 2.0
