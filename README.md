@@ -35,7 +35,7 @@ We warmly welcome contributions to Alith! Whether you're a developer, a user rep
 
 ## Contact
 
-Join our [Telegram group](https://t.me/+7jcLG0Qwhsk0N2Y1)
+Join our [Telegram group](https://t.me/+7jcLG0Qwhsk0N2Y1) and follow our [X/Twitter](https://x.com/0xalith).
 
 ## License
 
