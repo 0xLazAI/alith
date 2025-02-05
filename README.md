@@ -8,7 +8,7 @@ Simple, Composable, High-Performance and Web3 Friendly AI Agents for Everyone
 
 ## Introdution
 
-Alith is an AI agent framework designed for the Web3 and Crypto, empowering developers to quickly build, deploy, and manage on-chain AI agents. By integrating blockchain technology, AI/ML models, and developer-friendly tools, Alith provides a modular and extensible platform that supports AI bots, multi-chain interactions, smart contract operations, real-time data processing, and high-performance inference. Whether you're building DeFi trading bots, NFT analyzers, or DAO governance tools, Alith offers robust support for your projects. For more indroduction and comparision, see documents [here](https://alith.vercel.app/docs).
+Alith is an AI agent framework designed for the Web3 and Crypto, empowering developers to quickly build, deploy, and manage on-chain AI agents. By integrating blockchain technology, AI/ML models, and developer-friendly tools, Alith provides a modular and extensible platform that supports AI bots, multi-chain interactions, smart contract operations, real-time data processing, and high-performance inference. Whether you're building DeFi trading bots, NFT analyzers, or DAO governance tools, Alith offers robust support for your projects. For more indroduction and comparision, see documents [here](https://alith.lazai.network/docs).
 
 ## Features
 
@@ -27,7 +27,7 @@ Alith is an AI agent framework designed for the Web3 and Crypto, empowering deve
 
 ## Quick Start
 
-See documents [here](https://alith.vercel.app/docs/get-started).
+See documents [here](https://alith.lazai.network/docs/get-started).
 
 ## Contributing
 
