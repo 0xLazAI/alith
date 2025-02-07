@@ -36,7 +36,7 @@ jobs:
       - name: Upload sdist
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: sdist-${{ github.run_id }}
           path: sdks/python/dist
 
   linux:
@@ -59,7 +59,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: wheels-linux-${{ matrix.target }}-${{ github.run_id }}
           path: sdks/python/dist
 
   windows:
@@ -74,7 +74,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: wheels-windows-${{ github.run_id }}
           path: sdks/python/dist
 
   macos:
@@ -90,7 +90,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: wheels-macos-${{ github.run_id }}
           path: sdks/python/dist
 
   release:
@@ -104,7 +104,19 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: wheels
+          name: wheels-linux-x86_64-${{ github.run_id }}
+          path: sdks/python/dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: wheels-linux-aarch64-${{ github.run_id }}
+          path: sdks/python/dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: wheels-windows-${{ github.run_id }}
+          path: sdks/python/dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: wheels-macos-${{ github.run_id }}
           path: sdks/python/dist
       - name: Publish to PyPI
         # The issue https://github.com/pypa/gh-action-pypi-publish/issues/310 has not tagged a release yet
