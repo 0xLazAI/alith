@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="imgs/logo.png" alt="Alith Logo" style="width: 70px;" />
+    <img src="imgs/logo.png" alt="Alith Logo" style="width: 80px;" />
 </p>
 
 <h2 align="center">
