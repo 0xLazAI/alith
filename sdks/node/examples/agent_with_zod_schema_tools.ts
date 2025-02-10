@@ -1,4 +1,12 @@
 import { Agent } from '../agent'
+import { z } from 'zod'
+
+export const InputSchema = z
+  .object({
+    x: z.number().describe('The number to substract from'),
+    y: z.number().describe('The number to substract'),
+  })
+  .strip()
 
 const agent = new Agent({
   name: 'A dummy Agent',
@@ -9,19 +17,7 @@ const agent = new Agent({
     {
       name: 'subtract',
       description: 'Subtract y from x (i.e.: x - y)',
-      parameters: {
-        type: 'object',
-        properties: {
-          x: {
-            type: 'number',
-            description: 'The number to substract from',
-          },
-          y: {
-            type: 'number',
-            description: 'The number to substract',
-          },
-        },
-      },
+      parameters: InputSchema,
       handler: (x, y) => {
         return x - y
       },
