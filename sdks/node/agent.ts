@@ -1,5 +1,5 @@
 import { DelegateAgent, DelegateTool } from './internal'
-import { Tool } from './tool'
+import { convertParametersToJson, Tool } from './tool'
 
 // Define the configuration structure for an Agent
 type AgentOptions = {
@@ -44,7 +44,7 @@ class Agent {
         name: tool.name,
         version: tool.version ?? '',
         description: tool.description,
-        parameters: tool.parameters,
+        parameters: convertParametersToJson(tool.parameters),
         author: tool.author ?? '',
         handler: (args: string) => {
           let tool_args = JSON.parse(args)
