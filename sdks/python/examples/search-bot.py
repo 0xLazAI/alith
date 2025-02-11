@@ -1,6 +1,7 @@
 from alith import Agent
 from duckduckgo_search import DDGS
 
+
 def search(query: str) -> str:
     """
     DuckDuckGoSearch is a tool designed to perform search queries on the DuckDuckGo search engine.
@@ -17,11 +18,12 @@ def search(query: str) -> str:
     else:
         return f"No results found for '{query}'."
 
+
 agent = Agent(
     name="Search Bot Agent",
     model="gpt-4",
     preamble="""You are a searcher. When I ask questions about Web3, you can search from the Internet and answer them. When you encounter other questions, you can directly answer them.""",
-    tools=[search]
+    tools=[search],
 )
 
 # Main loop to interact with the user
