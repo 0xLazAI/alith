@@ -1,7 +1,10 @@
 {
   "name": "alith",
-  "version": "0.2.2",
-  "repository": "https://github.com/0xLazAI/alith",
+  "version": "0.2.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xLazAI/alith.git"
+  },
   "license": "Apache-2.0",
   "main": "index.js",
   "types": "index.d.ts",
@@ -75,13 +78,5 @@
     "json-schema": "^0.4.0",
     "zod": "^3.24.1",
     "zod-to-json-schema": "^3.24.1"
-  },
-  "optionalDependencies": {
-    "@lazai-labs/alith-win32-x64-msvc": "0.2.2",
-    "@lazai-labs/alith-darwin-x64": "0.2.2",
-    "@lazai-labs/alith-linux-x64-gnu": "0.2.2",
-    "@lazai-labs/alith-darwin-arm64": "0.2.2",
-    "@lazai-labs/alith-linux-arm64-gnu": "0.2.2",
-    "@lazai-labs/alith-win32-arm64-msvc": "0.2.2"
   }
 }
