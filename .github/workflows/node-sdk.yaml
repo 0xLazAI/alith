@@ -208,6 +208,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: sdks/node/artifacts
+
       - name: Move artifacts
         run: npx napi artifacts
 
