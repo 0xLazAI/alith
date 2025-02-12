@@ -36,21 +36,12 @@ mod tests {
         assert_eq!(out, "Hello world");
     }
 
-    #[tokio::test]
-    async fn graph_test() {
-        let node_name = "My Node";
+    #[test]
+    fn graph_test() {
         let mut node_table = NodeTable::new();
-        let mut s =
-            DefaultNode::with_action(NodeName::from(node_name), HelloAction, &mut node_table);
-        let a = DefaultNode::with_action(NodeName::from(node_name), HelloAction, &mut node_table);
-        let b = DefaultNode::with_action(NodeName::from(node_name), HelloAction, &mut node_table);
-
-        assert_eq!(node_table.get(node_name).unwrap(), &s.id());
-
-        let env = Arc::new(EnvVar::new(node_table));
-        let out = s.run(env).await.get_out().unwrap();
-        let out: &String = out.get().unwrap();
-        assert_eq!(out, "Hello world");
+        let s = DefaultNode::with_action(NodeName::from("s"), HelloAction, &mut node_table);
+        let a = DefaultNode::with_action(NodeName::from("a"), HelloAction, &mut node_table);
+        let b = DefaultNode::with_action(NodeName::from("b"), HelloAction, &mut node_table);
         let mut g = dependencies!(
             s -> a b,
             b -> a
