@@ -67,6 +67,11 @@ impl Client {
             builder.model = ApiLlmModel::anthropic_model_from_model_id(model);
             let client = builder.init()?;
             Ok(Client { client })
+        } else if model.starts_with("llama") || model.starts_with("sonar") {
+            let mut builder = LlmClient::perplexity();
+            builder.model = ApiLlmModel::perplexity_model_from_model_id(model);
+            let client = builder.init()?;
+            Ok(Client { client })
         } else {
             Err(anyhow::anyhow!("unknown model {model}"))
         }

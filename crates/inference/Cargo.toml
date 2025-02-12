@@ -6,6 +6,7 @@ edition = { workspace = true }
 [dependencies]
 alith-core.workspace = true
 
+thiserror.workspace = true
 ort = { version = "=2.0.0-rc.9", default-features = false, features = [
   "ndarray",
 ] }
