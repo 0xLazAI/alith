@@ -1,6 +1,6 @@
 {
   "name": "alith",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0xLazAI/alith.git"
@@ -13,16 +13,14 @@
     "package": {
       "name": "@lazai-labs/alith"
     },
-    "triples": {
-      "additional": [
-        "x86_64-apple-darwin",
-        "aarch64-apple-darwin",
-        "x86_64-unknown-linux-gnu",
-        "aarch64-unknown-linux-gnu",
-        "x86_64-windows-msvc",
-        "aarch64-windows-msvc"
-      ]
-    }
+    "targets": [
+      "x86_64-apple-darwin",
+      "aarch64-apple-darwin",
+      "x86_64-unknown-linux-gnu",
+      "aarch64-unknown-linux-gnu",
+      "x86_64-pc-windows-msvc",
+      "aarch64-pc-windows-msvc"
+    ]
   },
   "files": [
     "*.d.ts",
