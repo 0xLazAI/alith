@@ -80,6 +80,7 @@ version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-trait",
+ "dagrs",
  "fastembed",
  "futures",
  "hnsw_rs",
@@ -890,6 +891,32 @@ version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32a2785755761f3ddc1492979ce1e48d2c00d09311c39e4466429188f3dd6501"
 dependencies = [
+ "quote",
+ "syn 2.0.96",
+]
+
+[[package]]
+name = "dagrs"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cd84a736ffb5752612e39db805a3073a001011bda13dd7914f606f32b1fbb669"
+dependencies = [
+ "async-trait",
+ "dagrs-derive",
+ "env_logger",
+ "futures",
+ "log",
+ "proc-macro2",
+ "tokio",
+]
+
+[[package]]
+name = "dagrs-derive"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9055323982dc983da2b7da8a7ce421eae21d914ad6072a8a60d30836c97ebb55"
+dependencies = [
+ "proc-macro2",
  "quote",
  "syn 2.0.96",
 ]

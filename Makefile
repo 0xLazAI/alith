@@ -5,7 +5,7 @@ check:
 	cargo check -r --all
 
 test:
-	cargo test -r --all
+	cargo test -r --workspace --all-features
 
 accept:
 	cargo insta accept --all

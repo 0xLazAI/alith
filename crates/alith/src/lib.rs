@@ -18,6 +18,10 @@ pub use core::{
         DEFAULT_CHUNK_SIZE,
     },
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
+    flow::{
+        auto_node, dependencies, Action, Content, DefaultNode, EmptyAction, EnvVar, Graph,
+        InChannels, Node, NodeId, NodeName, NodeTable, OutChannels, Output, RecvErr, SendErr,
+    },
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
     llm::{EmbeddingsModel, LLM},
     memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
