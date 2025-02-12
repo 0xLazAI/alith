@@ -17,9 +17,10 @@
       "additional": [
         "x86_64-apple-darwin",
         "aarch64-apple-darwin",
-        "aarch64-unknown-linux-gnu",
         "x86_64-unknown-linux-gnu",
-        "aarch64-pc-windows-msvc"
+        "aarch64-unknown-linux-gnu",
+        "x86_64-windows-msvc",
+        "aarch64-windows-msvc"
       ]
     }
   },
