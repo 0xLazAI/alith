@@ -100,6 +100,7 @@ version = "0.2.0"
 dependencies = [
  "alith-core",
  "ort",
+ "thiserror 2.0.11",
  "tokenizers 0.21.0",
 ]
 

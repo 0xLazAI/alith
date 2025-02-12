@@ -41,6 +41,12 @@ pub const LLAMA_3_1_SONAR_LARGE_CHAT: &str = "llama-3.1-sonar-large-128k-chat";
 pub const LLAMA_3_1_8B_INSTRUCT: &str = "llama-3.1-8b-instruct";
 pub const LLAMA_3_1_70B_INSTRUCT: &str = "llama-3.1-70b-instruct";
 
+// Remote Sonar models
+
+pub const SONAR_SMALL: &str = "sonar_small";
+pub const SONAR_LARGE: &str = "sonar_large";
+pub const SONAR_HUGE: &str = "sonar_huge";
+
 /// A struct representing a Large Language Model (LLM)
 pub struct LLM {
     /// The name or identifier of the model to use
