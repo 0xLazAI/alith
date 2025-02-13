@@ -3,6 +3,7 @@ pub mod chat;
 pub mod chunking;
 pub mod embeddings;
 pub mod executor;
+pub mod extractor;
 pub mod flow;
 pub mod knowledge;
 pub mod llm;
