@@ -18,6 +18,7 @@ pub use core::{
         DEFAULT_CHUNK_SIZE,
     },
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
+    extractor::{ExtractionError, Extractor},
     flow::{
         auto_node, dependencies, Action, Content, DefaultNode, EmptyAction, EnvVar, Graph,
         InChannels, Node, NodeId, NodeName, NodeTable, OutChannels, Output, RecvErr, SendErr,
