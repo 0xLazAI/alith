@@ -28,16 +28,10 @@ pub trait Embed {
     fn embed(&self, embedder: &mut TextEmbedder) -> Result<(), EmbedError>;
 }
 
-impl Embed for String {
+impl<T: AsRef<str>> Embed for T {
     fn embed(&self, embedder: &mut TextEmbedder) -> Result<(), EmbedError> {
-        embedder.embed(self.clone());
-        Ok(())
-    }
-}
-
-impl Embed for &str {
-    fn embed(&self, embedder: &mut TextEmbedder) -> Result<(), EmbedError> {
-        embedder.embed(self.to_string());
+        let text = self.as_ref().to_string();
+        embedder.embed(text);
         Ok(())
     }
 }
@@ -50,8 +44,11 @@ pub struct TextEmbedder {
 
 impl TextEmbedder {
     /// Adds input `text` string to the list of texts in the [TextEmbedder] that need to be embedded.
-    pub fn embed(&mut self, text: String) {
-        self.texts.push(text);
+    pub fn embed<S>(&mut self, text: S)
+    where
+        S: AsRef<str> + Sync + Send,
+    {
+        self.texts.push(text.as_ref().to_string());
     }
 }
 
