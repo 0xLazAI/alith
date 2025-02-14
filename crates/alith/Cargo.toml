@@ -44,6 +44,9 @@ name = "agent_with_knowledge"
 name = "agent_with_memory"
 
 [[example]]
+name = "agent_with_embeddings"
+
+[[example]]
 name = "agent_with_rag"
 
 [[example]]
