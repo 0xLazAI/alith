@@ -34,12 +34,16 @@ def get_function_schema(f: Callable) -> str:
     return schema
 
 
-def create_delegate_tool(func: Callable) -> _DelegateTool:
+def create_delegate_tool(
+    func: Callable, version: str = "1.0.0", author: str = "Unknown"
+) -> _DelegateTool:
     """Create a DelegateTool instance from a Python function."""
-    # Get function name and description
-
-    # Get function parameters as JSON schema
+    # Get the function JSON schema
     schema = get_function_schema(func)
+    # Get function name and description
+    name, description = schema["name"], schema["description"]
+    # Get function parameters as JSON schema
+    parameters = schema["parameters"]
 
     def wrapper(args: ctypes.c_char_p) -> bytes:
         """Wrapper function to match the extern "C" signature."""
@@ -56,10 +60,10 @@ def create_delegate_tool(func: Callable) -> _DelegateTool:
 
     # Create and return DelegateTool instance
     return _DelegateTool(
-        name=schema["name"],
-        version="1.0.0",  # Default version
-        description=schema["description"],
-        parameters=json.dumps(schema["parameters"]),
-        author="Unknown",  # Default author
+        name=name,
+        version=version,
+        description=description,
+        parameters=parameters,
+        author=author,
         func_agent=func_agent,
     )
