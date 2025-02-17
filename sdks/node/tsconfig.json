@@ -9,9 +9,9 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "rootDir": ".",
-    "outDir": "."
+    "rootDir": "src",
+    "outDir": "dist"
   },
-  "include": [".", "alith/**/*"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "benchmark", "theme"]
 }

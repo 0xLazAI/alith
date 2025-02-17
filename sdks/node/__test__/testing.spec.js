@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import { Agent } from '../agent.js'
+import { Agent } from '../dist/index.js'
 
 test('test', (t) => {
   const agent = new Agent({
