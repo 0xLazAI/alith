@@ -43,7 +43,7 @@
   },
   "scripts": {
     "build": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && cp ./src/internal* dist",
-    "build:windows": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && cp .\\src/internal* dist",
+    "build:windows": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && copy src\\internal* dist",
     "build:debug": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && cp ./src/internal* dist",
     "prepublishOnly": "napi prepublish -t npm",
     "docs": "typedoc",
