@@ -3,7 +3,7 @@
 </p>
 
 <h2 align="center">
-Simple, Composable, High-Performance and Web3 Friendly AI Agents for Everyone
+Simple, Composable, High-Performance, Safe and Web3 Friendly AI Agents for Everyone
 </h2>
 
 ## Introduction
