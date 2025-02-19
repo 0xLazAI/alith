@@ -1,6 +1,6 @@
-import { JSONSchema7 } from 'json-schema'
-import { zodToJsonSchema } from 'zod-to-json-schema'
+import type { JSONSchema7 } from 'json-schema'
 import { z } from 'zod'
+import { zodToJsonSchema } from 'zod-to-json-schema'
 
 /**
  * The Parameters type, which can be one of the following three types:
@@ -65,7 +65,7 @@ function convertParametersToJson(parameters: Parameters): string {
     return parameters
   }
   // If parameters is a Zod schema
-  else if (parameters instanceof z.ZodSchema) {
+  if (parameters instanceof z.ZodSchema) {
     // Use zodToJsonSchema to convert the Zod schema to JSON Schema
     // target: 'jsonSchema7' specifies the target format as JSON Schema 7
     const jsonSchema = zodToJsonSchema(parameters, {
@@ -75,14 +75,13 @@ function convertParametersToJson(parameters: Parameters): string {
     return JSON.stringify(jsonSchema)
   }
   // If parameters is an object (assumed to be a JSON Schema object)
-  else if (typeof parameters === 'object') {
+  if (typeof parameters === 'object') {
     // Directly convert the object to a JSON string
     return JSON.stringify(parameters)
-  } else {
-    // If the type of parameters does not match any of the above, throw an error
-    throw new Error('Invalid parameters type')
   }
+  // If the type of parameters does not match any of the above, throw an error
+  throw new Error('Invalid parameters type')
 }
 
 // Export the function and types for use in other modules
-export { convertParametersToJson, Parameters, Tool }
+export { convertParametersToJson, type Parameters, type Tool }

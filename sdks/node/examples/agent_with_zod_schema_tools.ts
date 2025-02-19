@@ -1,5 +1,5 @@
-import { Agent } from '../agent'
 import { z } from 'zod'
+import { Agent } from '../agent'
 
 export const InputSchema = z
   .object({

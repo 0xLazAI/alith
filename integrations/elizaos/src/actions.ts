@@ -1,4 +1,4 @@
-import {
+import type {
 	Action,
 	ActionExample,
 	Handler,
@@ -8,7 +8,7 @@ import {
 	State,
 	Validator,
 } from "@elizaos/core";
-import { Agent } from "alith";
+import type { Agent } from "alith";
 
 const promptActionExamples = [
 	[
