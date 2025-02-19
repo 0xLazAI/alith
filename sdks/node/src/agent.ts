@@ -1,13 +1,13 @@
-import { DelegateAgent, DelegateTool } from './internal'
-import { convertParametersToJson, Tool } from './tool'
+import { DelegateAgent, type DelegateTool } from './internal'
+import { type Tool, convertParametersToJson } from './tool'
 
 // Define the configuration structure for an Agent
 type AgentOptions = {
   name: string // The name of the agent
   model: string // The model used by the agent
   preamble: string // Introductory text or context for the agent
-  base_url?: string // Optional base URL for API requests
-  api_key?: string // Optional API key for authentication
+  baseUrl?: string // Optional base URL for API requests
+  apiKey?: string // Optional API key for authentication
   tools?: Array<Tool> // Optional list of tools available to the agent
 }
 
@@ -21,13 +21,13 @@ class Agent {
    * @param {string} opts.name - The name of the agent.
    * @param {string} opts.model - The model used by the agent.
    * @param {string} opts.preamble - Introductory text or context for the agent.
-   * @param {string} [opts.base_url] - Optional base URL for API requests.
-   * @param {string} [opts.api_key] - Optional API key for authentication.
+   * @param {string} [opts.baseUrl] - Optional base URL for API requests.
+   * @param {string} [opts.apiKey] - Optional API key for authentication.
    * @param {Array<Tool>} [opts.tools] - Optional list of tools available to the agent.
    */
   constructor(opts: AgentOptions) {
     this._opts = opts
-    this._agent = new DelegateAgent(opts.name, opts.model, opts.api_key ?? '', opts.base_url ?? '', opts.preamble ?? '')
+    this._agent = new DelegateAgent(opts.name, opts.model, opts.apiKey ?? '', opts.baseUrl ?? '', opts.preamble ?? '')
   }
 
   /**
@@ -37,23 +37,23 @@ class Agent {
    */
   prompt(prompt: string): string {
     // Delegate the prompt processing to the underlying agent and return the result
-    let tools = this._opts.tools ?? []
-    let delegate_tools: Array<DelegateTool> = []
-    for (let tool of tools) {
-      delegate_tools.push({
+    const tools = this._opts.tools ?? []
+    const delegateTools: Array<DelegateTool> = []
+    for (const tool of tools) {
+      delegateTools.push({
         name: tool.name,
         version: tool.version ?? '',
         description: tool.description,
         parameters: convertParametersToJson(tool.parameters),
         author: tool.author ?? '',
         handler: (args: string) => {
-          let tool_args = JSON.parse(args)
+          const tool_args = JSON.parse(args)
           const args_array = Object.values(tool_args)
           return tool.handler(...args_array)
         },
       })
     }
-    return this._agent.promptWithTools(prompt, delegate_tools)
+    return this._agent.promptWithTools(prompt, delegateTools)
   }
 
   /**
@@ -73,4 +73,4 @@ class Agent {
   }
 }
 
-export { Agent, AgentOptions }
+export { Agent, type AgentOptions }

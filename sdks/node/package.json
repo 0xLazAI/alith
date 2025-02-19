@@ -30,6 +30,7 @@
   "devDependencies": {
     "@napi-rs/cli": "^2.18.1",
     "@types/json-schema": "^7.0.15",
+    "@biomejs/biome": "1.9.4",
     "ava": "^6.0.1",
     "prettier": "^2.8.4",
     "typedoc": "^0.25",
@@ -49,6 +50,8 @@
     "docs": "typedoc",
     "test": "cp *.node dist && ava",
     "format": "prettier --write .",
+    "lint": "biome lint .",
+    "lint:fix": "biome check --apply . --unsafe",
     "universal": "napi universal",
     "version": "napi version",
     "tsc": "npx tsc --build"

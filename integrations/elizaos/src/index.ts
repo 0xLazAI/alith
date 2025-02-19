@@ -1,6 +1,6 @@
 import type { Plugin } from "@elizaos/core";
 import { AlithAction } from "./actions";
-import { Agent } from "alith";
+import { Agent, AgentOptions } from "./agent";
 
 function createAlithPlugin(agent: Agent): Plugin {
 	return {
@@ -10,4 +10,4 @@ function createAlithPlugin(agent: Agent): Plugin {
 	};
 }
 
-export { createAlithPlugin };
+export { createAlithPlugin, Agent, AgentOptions };
