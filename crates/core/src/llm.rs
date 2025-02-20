@@ -47,6 +47,17 @@ pub const SONAR_SMALL: &str = "sonar_small";
 pub const SONAR_LARGE: &str = "sonar_large";
 pub const SONAR_HUGE: &str = "sonar_huge";
 
+pub mod openai_compatible {
+    pub const DEEPSEEK_BASE_URL: &str = "https://api.deepseek.com";
+    pub const GROQ_BASE_URL: &str = "https://api.groq.com/openai/v1";
+    pub const HUNYUAN_BASE_URL: &str = "https://api.hunyuan.cloud.tencent.com/v1";
+    pub const MINIMAX_BASE_URL: &str = "https://api.minimax.chat/v1";
+    pub const MISTRAL_BASE_URL: &str = "https://api.mistral.ai/v1";
+    pub const MOONSHOT_BASE_URL: &str = "https://api.moonshot.cn/v1";
+    pub const PERPLEXITY_BASE_URL: &str = "https://api.perplexity.ai";
+    pub const QIANWEN_BASE_URL: &str = "https://dashscope.aliyuncs.com/compatible-mode/v1";
+}
+
 /// A struct representing a Large Language Model (LLM)
 pub struct LLM {
     /// The name or identifier of the model to use
