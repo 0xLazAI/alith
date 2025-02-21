@@ -1,9 +1,7 @@
 import {
-	Action,
 	AgentRuntime,
 	CacheManager,
 	type Content,
-	IAgentRuntime,
 	type Memory,
 	MemoryCacheAdapter,
 	ModelProviderName,

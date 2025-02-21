@@ -1,5 +1,5 @@
 {
-	"name": "elizaos-plugin-alith",
+	"name": "elizaos-alith",
 	"version": "0.1.0",
 	"type": "module",
 	"main": "dist/index.js",
