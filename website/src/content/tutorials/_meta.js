@@ -1,5 +1,6 @@
 export default {
   "slack-bot": "",
-  "tg-bot": "",
   "search-bot": "",
+  "tg-bot": "",
+  "tg-bot-with-rag": "",
 };
