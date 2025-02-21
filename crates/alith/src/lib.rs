@@ -1,5 +1,5 @@
 pub use alith_core as core;
-#[cfg(feature = "inference")]
+
 pub use alith_inference as inference;
 pub use alith_knowledge as knowledge;
 pub use alith_store as store;
@@ -12,7 +12,9 @@ pub use core::llm::{
 };
 pub use core::{
     agent::Agent,
-    chat::{Completion, CompletionError, Prompt, Request, ResponseContent},
+    chat::{
+        Completion, CompletionError, Prompt, Request, ResponseContent, ResponseToolCalls, ToolCall,
+    },
     chunking::{
         chunk_text, Chunk, ChunkError, ChunkerConfig, ChunkerResult, TextChunker,
         DEFAULT_CHUNK_SIZE,
@@ -25,6 +27,10 @@ pub use core::{
     },
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
     llm::{EmbeddingsModel, LLM},
+    llm_client::{
+        interface::requests::completion::{CompletionFinishReason, GenerationSettings},
+        CompletionRequest, CompletionResponse,
+    },
     memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
     splitting::{
         split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,

@@ -28,6 +28,8 @@ async fn main() -> Result<(), anyhow::Error> {
 
 ## Local Fast Embedding Model
 
+> Note that running this program will pull the embeddings model from Hugging Face and start the inference engine locally for inference, so we need to turn on the inference feature.
+
 ```rust
 use alith::{EmbeddingsBuilder, FastEmbeddingsModel};
 
@@ -43,8 +45,6 @@ async fn main() -> Result<(), anyhow::Error> {
     Ok(())
 }
 ```
-
-> Note that running this program will pull the embeddings model from Hugging Face and start the inference engine locally for inference, so we need to turn on the inference feature.
 
   </Tabs.Tab>
 

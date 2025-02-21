@@ -248,4 +248,6 @@ pub enum CompletionError {
     /// - The error includes a message describing the cause of the failure.
     #[error("A normal completion error occurred: {0}")]
     Normal(String),
+    #[error("An inference error occurred: {0}")]
+    Inference(String),
 }
