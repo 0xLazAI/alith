@@ -14,8 +14,6 @@ from langchain_text_splitters import MarkdownTextSplitter
 from pymilvus import MilvusClient, model
 from alith import Agent
 
-from pymilvus import MilvusClient
-
 # --------------------------------------------
 # Constants
 # --------------------------------------------
