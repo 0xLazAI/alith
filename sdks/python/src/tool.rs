@@ -74,6 +74,7 @@ impl Tool for DelegateTool {
             let func_method: extern "C" fn(args: *const c_char) -> *const c_char =
                 std::mem::transmute(self.func_agent);
             let c_input = CString::new(input).map_err(|_| ToolError::InvalidInput)?;
+            // The c_result is malloc from python, thus do not free it.
             let c_result = func_method(c_input.as_ptr());
             if c_result.is_null() {
                 return Err(ToolError::InvalidOutput);

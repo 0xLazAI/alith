@@ -6,6 +6,9 @@ from pydantic import create_model
 import json
 import ctypes
 import inspect
+import warnings
+
+warnings.filterwarnings(action="ignore", category=RuntimeWarning)
 
 
 CFUNC_TYPE = ctypes.CFUNCTYPE(ctypes.c_char_p, ctypes.c_char_p)
@@ -47,6 +50,7 @@ def create_delegate_tool(
 
     def wrapper(args: ctypes.c_char_p) -> bytes:
         """Wrapper function to match the extern "C" signature."""
+
         args_str = ctypes.cast(args, ctypes.c_char_p).value.decode("utf-8")
         args_json = json.loads(args_str)
         result = func(**args_json)
