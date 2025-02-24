@@ -23,7 +23,7 @@ impl Foo {
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
-    let embeddings_model = model.embeddings_model("text-embedding-ada-002");
+    let embeddings_model = model.embeddings_model("text-embedding-3-small");
     let data = EmbeddingsBuilder::new(embeddings_model.clone())
         .documents(vec![Foo::new("doc0"), Foo::new("doc1"), Foo::new("doc2")])
         .unwrap()
