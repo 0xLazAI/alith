@@ -19,7 +19,7 @@ schemars.workspace = true
 reqwest.workspace = true
 url.workspace = true
 
-rand = "0.8"
+rand = "0.9"
 
 [[example]]
 name = "agent"
