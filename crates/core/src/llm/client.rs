@@ -9,12 +9,10 @@ use crate::chat::Request;
 use crate::chat::ResponseContent;
 use crate::chat::ResponseToolCalls;
 use crate::chat::ToolCall;
-use crate::embeddings::Embeddings as EmbeddingsTrait;
 use crate::embeddings::EmbeddingsData;
 use crate::embeddings::EmbeddingsError;
 use anyhow::Result;
 
-use async_trait::async_trait;
 pub use llm_client as client;
 pub use llm_client::basic_completion::BasicCompletion;
 pub use llm_client::embeddings::Embeddings;
@@ -136,7 +134,7 @@ impl Completion for Client {
         // Add knowledge sources if provided
         for knowledge in &request.knowledges {
             prompt
-                .add_system_message()
+                .add_user_message()
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
                 .set_content(knowledge);
         }
@@ -176,16 +174,15 @@ impl Completion for Client {
     }
 }
 
-#[async_trait]
-impl EmbeddingsTrait for Client {
-    const MAX_DOCUMENTS: usize = 1024;
-
-    async fn embed_texts(
+impl Client {
+    pub async fn embed_texts(
         &self,
+        model: &str,
         input: Vec<String>,
     ) -> Result<Vec<EmbeddingsData>, EmbeddingsError> {
         let mut embeddings = self.client.embeddings();
         embeddings.set_input(input);
+        embeddings.set_model(model.to_string());
         embeddings
             .run()
             .await

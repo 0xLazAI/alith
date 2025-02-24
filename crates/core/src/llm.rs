@@ -120,7 +120,7 @@ impl Embeddings for EmbeddingsModel {
         &self,
         input: Vec<String>,
     ) -> Result<Vec<EmbeddingsData>, EmbeddingsError> {
-        self.client.embed_texts(input).await
+        self.client.embed_texts(&self.model, input).await
     }
 }
 
