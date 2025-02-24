@@ -160,7 +160,7 @@ impl Request {
     ///
     /// # Returns
     /// A string containing the formatted prompt with document attachments, if any.
-    pub(crate) fn prompt_with_context(&self) -> String {
+    pub(crate) fn prompt_with_context(&self, prompt: String) -> String {
         if !self.documents.is_empty() {
             format!(
                 "<attachments>\n{}</attachments>\n\n{}",
@@ -169,10 +169,10 @@ impl Request {
                     .map(|doc| doc.to_string())
                     .collect::<Vec<_>>()
                     .join(""),
-                self.prompt
+                prompt
             )
         } else {
-            self.prompt.clone()
+            prompt.clone()
         }
     }
 }

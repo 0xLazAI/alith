@@ -131,12 +131,12 @@ impl Completion for Client {
                 .set_content(&request.preamble);
         }
 
+        let mut input = request.prompt.clone();
+
         // Add knowledge sources if provided
         for knowledge in &request.knowledges {
-            prompt
-                .add_user_message()
-                .map_err(|err| CompletionError::Normal(err.to_string()))?
-                .set_content(knowledge);
+            input.push('\n');
+            input.push_str(&knowledge);
         }
 
         // Add user prompt with or without context
@@ -144,12 +144,12 @@ impl Completion for Client {
             prompt
                 .add_user_message()
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
-                .set_content(&request.prompt);
+                .set_content(&input);
         } else {
             prompt
                 .add_user_message()
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
-                .set_content(request.prompt_with_context());
+                .set_content(request.prompt_with_context(input));
         }
 
         // Add conversation history
