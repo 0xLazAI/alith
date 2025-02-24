@@ -2186,7 +2186,7 @@ checksum = "4ee93343901ab17bd981295f2cf0026d4ad018c7c31ba84549a4ddbb47a45104"
 [[package]]
 name = "llm_client"
 version = "0.2.0"
-source = "git+https://github.com/0xLazAI/llm_client#f33038758afc92220e2afa915c11ca76ae38ee21"
+source = "git+https://github.com/0xLazAI/llm_client#a63db88413ce4da4a8845266f5e4b178e22e9d52"
 dependencies = [
  "anyhow",
  "colorful",
@@ -2208,7 +2208,7 @@ dependencies = [
 [[package]]
 name = "llm_devices"
 version = "0.2.0"
-source = "git+https://github.com/0xLazAI/llm_client#f33038758afc92220e2afa915c11ca76ae38ee21"
+source = "git+https://github.com/0xLazAI/llm_client#a63db88413ce4da4a8845266f5e4b178e22e9d52"
 dependencies = [
  "anyhow",
  "colorful",
@@ -2226,7 +2226,7 @@ dependencies = [
 [[package]]
 name = "llm_interface"
 version = "0.2.0"
-source = "git+https://github.com/0xLazAI/llm_client#f33038758afc92220e2afa915c11ca76ae38ee21"
+source = "git+https://github.com/0xLazAI/llm_client#a63db88413ce4da4a8845266f5e4b178e22e9d52"
 dependencies = [
  "anyhow",
  "backoff",
@@ -2251,7 +2251,7 @@ dependencies = [
 [[package]]
 name = "llm_models"
 version = "0.2.0"
-source = "git+https://github.com/0xLazAI/llm_client#f33038758afc92220e2afa915c11ca76ae38ee21"
+source = "git+https://github.com/0xLazAI/llm_client#a63db88413ce4da4a8845266f5e4b178e22e9d52"
 dependencies = [
  "anyhow",
  "byteorder",
@@ -2274,7 +2274,7 @@ dependencies = [
 [[package]]
 name = "llm_prompt"
 version = "0.2.0"
-source = "git+https://github.com/0xLazAI/llm_client#f33038758afc92220e2afa915c11ca76ae38ee21"
+source = "git+https://github.com/0xLazAI/llm_client#a63db88413ce4da4a8845266f5e4b178e22e9d52"
 dependencies = [
  "anyhow",
  "colorful",
@@ -2286,7 +2286,7 @@ dependencies = [
 [[package]]
 name = "llm_utils"
 version = "0.2.0"
-source = "git+https://github.com/0xLazAI/llm_client#f33038758afc92220e2afa915c11ca76ae38ee21"
+source = "git+https://github.com/0xLazAI/llm_client#a63db88413ce4da4a8845266f5e4b178e22e9d52"
 dependencies = [
  "anyhow",
  "html2text",
