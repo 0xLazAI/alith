@@ -136,7 +136,7 @@ impl Completion for Client {
         // Add knowledge sources if provided
         for knowledge in &request.knowledges {
             input.push('\n');
-            input.push_str(&knowledge);
+            input.push_str(knowledge);
         }
 
         // Add user prompt with or without context
