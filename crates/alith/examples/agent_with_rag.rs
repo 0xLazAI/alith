@@ -9,6 +9,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .unwrap()
         .build()
         .await?;
+    // Or you can use other vertor storage, e.g., milvus, qdrant, etc.
     let storage = InMemoryStorage::from_multiple_documents(embeddings_model, data);
 
     let agent = Agent::new("simple agent", model, vec![])
