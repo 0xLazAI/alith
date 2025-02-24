@@ -28,6 +28,9 @@ name = "agent"
 name = "agent_deepseek"
 
 [[example]]
+name = "agent_grok"
+
+[[example]]
 name = "agent_claude"
 
 [[example]]
