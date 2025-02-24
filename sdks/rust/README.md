@@ -45,7 +45,7 @@ pub struct Adder;
 #[async_trait]
 impl StructureTool for Adder {
     type Input = Input;
-    type Output = String;
+    type Output = usize;
 
     fn name(&self) -> &str {
         "adder"
@@ -57,7 +57,7 @@ impl StructureTool for Adder {
 
     async fn run_with_args(&self, input: Self::Input) -> Result<Self::Output, ToolError> {
         let result = input.x + input.y;
-        Ok(result.to_string())
+        Ok(result)
     }
 }
 
@@ -65,7 +65,7 @@ pub struct Subtract;
 #[async_trait]
 impl StructureTool for Subtract {
     type Input = Input;
-    type Output = String;
+    type Output = usize;
 
     fn name(&self) -> &str {
         "subtract"
@@ -77,7 +77,7 @@ impl StructureTool for Subtract {
 
     async fn run_with_args(&self, input: Self::Input) -> Result<Self::Output, ToolError> {
         let result = input.x - input.y;
-        Ok(result.to_string())
+        Ok(result)
     }
 }
 
