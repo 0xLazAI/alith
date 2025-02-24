@@ -48,7 +48,6 @@ def create_delegate_tool(
     def wrapper(args: ctypes.c_char_p) -> bytes:
         """Wrapper function to match the extern "C" signature."""
         args_str = ctypes.cast(args, ctypes.c_char_p).value.decode("utf-8")
-        print(args_str)
         args_json = json.loads(args_str)
         result = func(**args_json)
         result_json = json.dumps(result)
@@ -63,7 +62,7 @@ def create_delegate_tool(
         name=name,
         version=version,
         description=description,
-        parameters=parameters,
+        parameters=json.dumps(parameters),
         author=author,
         func_agent=func_agent,
     )
