@@ -28,8 +28,8 @@ impl MessageType {
     pub fn type_string(&self) -> String {
         match self {
             MessageType::System => "system".to_owned(),
-            MessageType::Human => "human".to_owned(),
-            MessageType::AI => "ai".to_owned(),
+            MessageType::Human => "user".to_owned(),
+            MessageType::AI => "assistant".to_owned(),
             MessageType::Tool => "tool".to_owned(),
         }
     }

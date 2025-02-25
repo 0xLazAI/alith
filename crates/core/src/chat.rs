@@ -58,7 +58,7 @@ impl std::fmt::Display for Document {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            concat!("<file id: {}>\n", "{}\n", "</file>\n"),
+            concat!("<document id: {}>\n", "{}\n", "</document>\n"),
             self.id.0,
             if self.additional_props.is_empty() {
                 self.text.clone()

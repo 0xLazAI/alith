@@ -1,7 +1,4 @@
-use crate::{
-    embeddings::{Embeddings, EmbeddingsData, EmbeddingsError},
-    splitting::split_text,
-};
+use crate::embeddings::{Embeddings, EmbeddingsData, EmbeddingsError};
 use async_trait::async_trait;
 use hnsw_rs::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -97,9 +94,11 @@ impl<E: Embeddings> Storage for InMemoryStorage<E> {
     async fn search(&self, query: &str, limit: usize, threshold: f32) -> TopNResults {
         // Collect the necessary data from the MutexGuard before entering the async block
         let data = self.data.read().await;
-        let splits = split_text(query);
-
-        let embeddings = self.embeddings.clone().embed_texts(splits).await?;
+        let embeddings = self
+            .embeddings
+            .clone()
+            .embed_texts(vec![query.to_string()])
+            .await?;
         self.vector_search(embeddings, limit, threshold)
             .await
             .map(|result| {
