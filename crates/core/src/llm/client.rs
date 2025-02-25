@@ -114,6 +114,7 @@ impl Completion for Client {
     type Response = CompletionResponse;
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
+        // New the complation request
         let mut completion = self.client.basic_completion();
         if let Some(temperature) = request.temperature {
             completion.temperature(temperature);
@@ -121,7 +122,7 @@ impl Completion for Client {
         if let Some(max_tokens) = request.max_tokens {
             completion.max_tokens(max_tokens.try_into().unwrap());
         }
-
+        // Construct the prompt
         let prompt = completion.prompt();
         // Add preamble if provided
         if !request.preamble.trim().is_empty() {
@@ -130,28 +131,6 @@ impl Completion for Client {
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
                 .set_content(&request.preamble);
         }
-
-        let mut input = request.prompt.clone();
-
-        // Add knowledge sources if provided
-        for knowledge in &request.knowledges {
-            input.push('\n');
-            input.push_str(knowledge);
-        }
-
-        // Add user prompt with or without context
-        if request.documents.is_empty() {
-            prompt
-                .add_user_message()
-                .map_err(|err| CompletionError::Normal(err.to_string()))?
-                .set_content(&input);
-        } else {
-            prompt
-                .add_user_message()
-                .map_err(|err| CompletionError::Normal(err.to_string()))?
-                .set_content(request.prompt_with_context(input));
-        }
-
         // Add conversation history
         for msg in &request.history {
             let result = match msg.role.as_str() {
@@ -164,8 +143,26 @@ impl Completion for Client {
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
                 .set_content(&msg.content);
         }
+        let mut input = request.prompt.clone();
+        // Add knowledge sources if provided
+        for knowledge in &request.knowledges {
+            input.push('\n');
+            input.push_str(knowledge);
+        }
+        // Add user prompt with or without the document context
+        if request.documents.is_empty() {
+            prompt
+                .add_user_message()
+                .map_err(|err| CompletionError::Normal(err.to_string()))?
+                .set_content(&input);
+        } else {
+            prompt
+                .add_user_message()
+                .map_err(|err| CompletionError::Normal(err.to_string()))?
+                .set_content(request.prompt_with_context(input));
+        }
+        // Add custom tools
         completion.base_req.tools.append(&mut request.tools.clone());
-
         // Execute the completion request
         completion
             .run()
