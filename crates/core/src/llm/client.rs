@@ -181,7 +181,7 @@ impl Client {
         input: Vec<String>,
     ) -> Result<Vec<EmbeddingsData>, EmbeddingsError> {
         let mut embeddings = self.client.embeddings();
-        embeddings.set_input(input);
+        embeddings.set_input(input.clone());
         embeddings.set_model(model.to_string());
         embeddings
             .run()
@@ -189,8 +189,9 @@ impl Client {
             .map(|resp| {
                 resp.data
                     .iter()
-                    .map(|data| EmbeddingsData {
-                        document: data.object.clone(),
+                    .zip(input)
+                    .map(|(data, document)| EmbeddingsData {
+                        document,
                         vec: data.embedding.clone(),
                     })
                     .collect()

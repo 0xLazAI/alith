@@ -125,7 +125,7 @@ where
             .then(|(num_sample, storage)| async {
                 Ok::<_, VectorStoreError>(
                     storage
-                        .search(prompt, *num_sample, 1000.0)
+                        .search(prompt, *num_sample, 0.5)
                         .await?
                         .into_iter()
                         .map(|(id, text, _)| Document {
