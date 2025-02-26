@@ -69,10 +69,29 @@ impl DelegateAgent {
     }
 }
 
+/// An easy alternative to the [`TextChunker`] struct.  
+///
+/// * `text` - The natural language text to chunk.
+/// * `max_chunk_token_size` - The maxium token sized to be chunked to. Inclusive.
+/// * `overlap_percent` - The percentage of overlap between chunks. Default is None.
+#[pyfunction]
+fn chunk_text(
+    text: &str,
+    max_chunk_token_size: u32,
+    overlap_percent: f32,
+) -> PyResult<Vec<String>> {
+    Ok(
+        alith::chunk_text(text, max_chunk_token_size, Some(overlap_percent))
+            .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
+            .unwrap_or_default(),
+    )
+}
+
 /// A Python module implemented in Rust.
 #[pymodule]
 fn _alith(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<DelegateAgent>()?;
     m.add_class::<DelegateTool>()?;
+    m.add_function(wrap_pyfunction!(chunk_text, m)?)?;
     Ok(())
 }
