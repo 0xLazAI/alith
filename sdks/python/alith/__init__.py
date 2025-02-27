@@ -4,6 +4,7 @@ from .embeddings import (
     Embeddings,
     MilvusEmbeddings,
     FastEmbeddings,
+    RemoteModelEmbeddings,
     FASTEMBED_AVAILABLE,
 )
 from .store import (
@@ -21,6 +22,7 @@ __all__ = [
     "Embeddings",
     "MilvusEmbeddings",
     "FastEmbeddings",
+    "RemoteModelEmbeddings",
     "FASTEMBED_AVAILABLE",
     "Store",
     "ChromaDBStore",

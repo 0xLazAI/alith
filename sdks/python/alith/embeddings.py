@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional, Union
 from pathlib import Path
+import requests
+import json
 
 
 class Embeddings(ABC):
@@ -90,3 +92,34 @@ class MilvusEmbeddings(Embeddings):
 
     def embed_texts(self, texts: List[str]) -> List[List[float]]:
         return self.embedding_fn.encode_documents(texts)
+
+
+class RemoteModelEmbeddings(Embeddings):
+    def __init__(
+        self, model: str, api_key: str, base_url: str, port: Optional[int | str] = None
+    ):
+        self.model = model
+        self.api_key = api_key
+        self.base_url = base_url
+        self.port = port
+
+    def embed_texts(self, texts: List[str]) -> List[List[float]]:
+        if self.base_url.startswith("http"):
+            if self.port:
+                url = f"{self.base_url}:{self.port}/embeddings"
+            else:
+                url = f"{self.base_url}/embeddings"
+        else:
+            url = f"https://{self.base_url}/embeddings"
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
+        payload = {"input": texts, "model": self.model}
+        response = requests.post(url, headers=headers, data=json.dumps(payload))
+        if response.status_code == 200:
+            response_datas = response.json().get("data", [])
+            embeddings = [data.get("embedding", []) for data in response_datas]
+            return embeddings
+        else:
+            response.raise_for_status()
