@@ -13,6 +13,10 @@ classifiers = [
 dynamic = ["version"]
 description = "Alith Python SDK"
 license = { text = "Apache-2.0" }
+dependencies = [
+    "pydantic",
+    "requests",
+]
 
 [tool.maturin]
 features = ["pyo3/extension-module"]

@@ -91,7 +91,21 @@ You will find additional non-standard word definitions that could be useful belo
 
   <Tabs.Tab>
 
-Comming Soon
+## RAG with Vector Database
+
+```python
+from pathlib import Path
+from alith import Agent, MilvusStore, chunk_text
+
+print(
+    Agent(
+        name="RAG Bot",
+        model="gpt-4",
+        preamble="I'm a RAG bot. Ask me anything!",
+        store=MilvusStore().save_docs(chunk_text(Path("README.md").read_text())),
+    ).prompt("What is Alith?")
+)
+```
 
   </Tabs.Tab>
 
