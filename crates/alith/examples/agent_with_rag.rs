@@ -12,7 +12,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .await?;
     // Or you can use other vertor storage, e.g., milvus, qdrant, etc. Here we use a memory store for example.
     let storage = InMemoryStorage::from_multiple_documents(embeddings_model, data);
-    let agent = Agent::new("simple agent", model, vec![])
+    let agent = Agent::new("simple agent", model)
         .preamble(
             r#"
 You are a dictionary assistant here to assist the user in understanding the meaning of words.

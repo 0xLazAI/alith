@@ -6,7 +6,7 @@ use std::collections::HashMap;
 use std::time::Duration;
 use tracing_subscriber::EnvFilter;
 
-pub async fn sse_client<S: Into<String>>(
+pub async fn sse_client<S: AsRef<str>>(
     sse_url: S,
     env: HashMap<String, String>,
 ) -> Result<impl McpClientTrait> {
@@ -19,7 +19,7 @@ pub async fn sse_client<S: Into<String>>(
         )
         .init();
     // Create the base transport
-    let transport = SseTransport::new(sse_url, env);
+    let transport = SseTransport::new(sse_url.as_ref(), env);
     // Start transport
     let handle = transport.start().await?;
     // Create the service with timeout middleware
@@ -41,9 +41,9 @@ pub async fn sse_client<S: Into<String>>(
     Ok(client)
 }
 
-pub async fn stdio_client<S: Into<String>>(
+pub async fn stdio_client<S: AsRef<str>>(
     command: S,
-    args: Vec<String>,
+    args: Vec<S>,
     env: HashMap<String, String>,
 ) -> Result<impl McpClientTrait> {
     // Initialize logging
@@ -55,7 +55,11 @@ pub async fn stdio_client<S: Into<String>>(
         )
         .init();
     // Create the base transport
-    let transport = StdioTransport::new(command, args, env);
+    let transport = StdioTransport::new(
+        command.as_ref().to_string(),
+        args.iter().map(|s| s.as_ref().to_string()).collect(),
+        env,
+    );
     // Start transport
     let handle = transport.start().await?;
     // Create the service with timeout middleware

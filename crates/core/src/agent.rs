@@ -1,10 +1,12 @@
 use crate::chat::{Completion, Document, Message, Request};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
+use crate::mcp::{sse_client, stdio_client};
 use crate::memory::Memory;
 use crate::store::{Storage, VectorStoreError};
 use crate::task::TaskError;
 use crate::tool::Tool;
+use crate::{make_ref, Ref};
 use futures::{stream, StreamExt, TryStreamExt};
 use mcp_client::McpClientTrait;
 use std::collections::HashMap;
@@ -14,15 +16,15 @@ use uuid::Uuid;
 
 pub struct Agent<M: Completion> {
     /// The model to use.
-    pub model: Arc<RwLock<M>>,
+    pub model: Ref<M>,
     /// Indexed storage for the agent.
     pub store_indices: Vec<(usize, Box<dyn Storage>)>,
     /// The tools to use.
-    pub tools: Arc<Vec<Box<dyn Tool>>>,
+    pub tools: Ref<Vec<Box<dyn Tool>>>,
     /// Knowledge sources for the agent.
     pub knowledges: Arc<Vec<Box<dyn Knowledge>>>,
     /// Agent memory.
-    pub memory: Option<Arc<RwLock<dyn Memory>>>,
+    pub memory: Option<Ref<dyn Memory>>,
     /// The unique ID of the agent.
     pub id: Uuid,
     /// The name of the agent.
@@ -58,13 +60,10 @@ where
     M: Completion,
 {
     /// Creates a new agent.
-    pub fn new<I>(name: impl ToString, model: M, tools: I) -> Agent<M>
-    where
-        I: IntoIterator<Item = Box<dyn Tool>>,
-    {
+    pub fn new(name: impl ToString, model: M) -> Agent<M> {
         Agent {
             model: Arc::new(RwLock::new(model)),
-            tools: Arc::new(tools.into_iter().collect()),
+            tools: make_ref(vec![]),
             store_indices: vec![],
             id: Uuid::new_v4(),
             name: name.to_string(),
@@ -85,6 +84,55 @@ where
         }
     }
 
+    /// Creates a new agent with some tools
+    pub fn new_with_tools<I>(name: impl ToString, model: M, tools: I) -> Agent<M>
+    where
+        I: IntoIterator<Item = Box<dyn Tool>>,
+    {
+        Agent {
+            model: Arc::new(RwLock::new(model)),
+            tools: make_ref(tools.into_iter().collect()),
+            store_indices: vec![],
+            id: Uuid::new_v4(),
+            name: name.to_string(),
+            preamble: String::new(),
+            system_template: String::new(),
+            prompt_template: String::new(),
+            response_template: String::new(),
+            verbose: false,
+            max_rpm: None,
+            temperature: None,
+            max_tokens: None,
+            max_execution_time: None,
+            knowledges: Arc::new(Vec::new()),
+            memory: None,
+            mcp_client: None,
+            respect_context_window: false,
+            allow_code_execution: false,
+        }
+    }
+
+    /// Add a tool into the agent
+    pub async fn tool(self, tool: impl Tool + 'static) -> Self {
+        let mut self_tools = self.tools.write().await;
+        self_tools.push(Box::new(tool));
+        drop(self_tools);
+        self
+    }
+
+    /// Add some tools into the agent
+    pub async fn tools<I>(self, tools: I) -> Self
+    where
+        I: IntoIterator<Item = Box<dyn Tool>>,
+    {
+        let mut self_tools = self.tools.write().await;
+        for tool in tools.into_iter() {
+            self_tools.push(tool);
+        }
+        drop(self_tools);
+        self
+    }
+
     /// Adds a memory to the agent.
     pub fn memory(mut self, memory: impl Memory + 'static) -> Self {
         self.memory = Some(Arc::new(RwLock::new(memory)));
@@ -103,10 +151,31 @@ where
         self
     }
 
-    #[inline]
-    pub fn with_mcp_client(mut self, mcp_client: impl McpClientTrait + 'static) -> Self {
+    /// Set the MCP client.
+    pub fn mcp_client(mut self, mcp_client: impl McpClientTrait + 'static) -> Self {
         self.mcp_client = Some(Arc::new(mcp_client));
         self
+    }
+
+    /// Set the MCP sse client.
+    pub async fn mcp_sse_client<S: AsRef<str> + 'static>(
+        mut self,
+        sse_url: S,
+        env: HashMap<String, String>,
+    ) -> anyhow::Result<Self> {
+        self.mcp_client = Some(Arc::new(sse_client(sse_url, env).await?));
+        Ok(self)
+    }
+
+    /// Set the MCP sse client.
+    pub async fn mcp_stdio_client<S: AsRef<str> + 'static>(
+        mut self,
+        command: S,
+        args: Vec<S>,
+        env: HashMap<String, String>,
+    ) -> anyhow::Result<Self> {
+        self.mcp_client = Some(Arc::new(stdio_client(command, args, env).await?));
+        Ok(self)
     }
 
     /// Processes a prompt using the agent.
@@ -141,8 +210,8 @@ where
         req.history = history;
         req.max_tokens = self.max_tokens;
         req.temperature = self.temperature;
-        req.tools = self
-            .tools
+        let tools = self.tools.read().await;
+        req.tools = tools
             .iter()
             .map(|tool| tool.definition())
             .collect::<Vec<_>>();

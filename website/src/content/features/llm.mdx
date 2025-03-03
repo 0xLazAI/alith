@@ -31,7 +31,7 @@ use alith::{Agent, LLM};
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
-    let agent = Agent::new("simple agent", model, vec![])
+    let agent = Agent::new("simple agent", model)
         .preamble("You are a comedian here to entertain the user using humour and jokes.");
 
     let response = agent.prompt("Entertain me!").await?;
@@ -56,7 +56,7 @@ async fn main() -> Result<(), anyhow::Error> {
         "api.deepseek.com",
         "deepseek-chat", // or `deepseek-reasoner` for DeepSeek R1 Model
     )?;
-    let agent = Agent::new("simple agent", model, vec![])
+    let agent = Agent::new("simple agent", model)
         .preamble("You are a comedian here to entertain the user using humour and jokes.");
 
     let response = agent.prompt("Entertain me!").await?;
@@ -91,7 +91,7 @@ use alith::{Agent, LLM};
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("claude-3-5-sonnet")?;
-    let agent = Agent::new("simple agent", model, vec![])
+    let agent = Agent::new("simple agent", model)
         .preamble("You are a comedian here to entertain the user using humour and jokes.");
 
     let response = agent.prompt("Entertain me!").await?;

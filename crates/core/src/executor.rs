@@ -2,17 +2,17 @@ use crate::chat::{Completion, Request, ResponseContent, ResponseToolCalls, ToolC
 use crate::knowledge::Knowledge;
 use crate::memory::{Memory, Message};
 use crate::tool::Tool;
+use crate::Ref;
 use anyhow::Result;
 use mcp_client::McpClientTrait;
 use std::sync::Arc;
-use tokio::sync::RwLock;
 
 /// Manages the execution of tasks using an LLM, tools, and (optionally) memory components.
 pub struct Executor<M: Completion> {
-    model: Arc<RwLock<M>>,
+    model: Ref<M>,
     knowledges: Arc<Vec<Box<dyn Knowledge>>>,
-    tools: Arc<Vec<Box<dyn Tool>>>,
-    memory: Option<Arc<RwLock<dyn Memory>>>,
+    tools: Ref<Vec<Box<dyn Tool>>>,
+    memory: Option<Ref<dyn Memory>>,
     /// The MCP client used to communicate with the MCP server
     mcp_client: Option<Arc<dyn McpClientTrait>>,
 }
@@ -20,10 +20,10 @@ pub struct Executor<M: Completion> {
 impl<M: Completion> Executor<M> {
     /// Creates a new `Executor` instance.
     pub fn new(
-        model: Arc<RwLock<M>>,
+        model: Ref<M>,
         knowledges: Arc<Vec<Box<dyn Knowledge>>>,
-        tools: Arc<Vec<Box<dyn Tool>>>,
-        memory: Option<Arc<RwLock<dyn Memory>>>,
+        tools: Ref<Vec<Box<dyn Tool>>>,
+        memory: Option<Ref<dyn Memory>>,
         mcp_client: Option<Arc<dyn McpClientTrait>>,
     ) -> Self {
         Self {
@@ -101,8 +101,8 @@ impl<M: Completion> Executor<M> {
 
     /// Executes a tool action and returns the result.
     async fn execute_tool(&self, call: ToolCall) -> Result<String, String> {
-        if let Some(tool) = self
-            .tools
+        let tools = self.tools.read().await;
+        if let Some(tool) = tools
             .iter()
             .find(|t| t.name().eq_ignore_ascii_case(&call.function.name))
         {
