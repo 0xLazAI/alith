@@ -7,7 +7,7 @@ async fn main() -> Result<(), anyhow::Error> {
         "api.grok.ai/v1",
         "grok-3",
     )?;
-    let agent = Agent::new("simple agent", model, vec![])
+    let agent = Agent::new("simple agent", model)
         .preamble("You are a comedian here to entertain the user using humour and jokes.");
     let response = agent.prompt("Entertain me!").await?;
 

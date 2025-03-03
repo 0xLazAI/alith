@@ -14,3 +14,13 @@ pub mod memory;
 pub mod store;
 pub mod task;
 pub mod tool;
+
+use std::sync::Arc;
+use tokio::sync::RwLock;
+
+pub type Ref<T> = Arc<RwLock<T>>;
+
+#[inline]
+pub fn make_ref<T>(t: T) -> Ref<T> {
+    Arc::new(RwLock::new(t))
+}

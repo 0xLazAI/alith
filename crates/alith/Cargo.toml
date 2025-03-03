@@ -37,6 +37,9 @@ name = "agent_claude"
 name = "agent_with_tools"
 
 [[example]]
+name = "agent_with_mcp"
+
+[[example]]
 name = "agent_with_extractor"
 
 [[example]]

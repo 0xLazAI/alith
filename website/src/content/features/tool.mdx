@@ -10,7 +10,7 @@ Alith allows you to **define tools that agents can use to perform specific tasks
 ## Custom Calculation Tool
 
 ```rust
-use alith::{Agent, StructureTool, Tool, ToolError, LLM};
+use alith::{Agent, StructureTool, ToolError, LLM};
 use async_trait::async_trait;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -63,10 +63,11 @@ impl StructureTool for Subtract {
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let tools: [Box<dyn Tool>; 2] = [Box::new(Adder), Box::new(Subtract)];
     let model = LLM::from_model_name("gpt-4")?;
-    let agent = Agent::new("simple agent", model, tools)
-        .preamble("You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.");
+    let agent = Agent::new("simple agent", model)
+        .preamble("You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.")
+        .tool(Adder).await
+        .tool(Subtract).await;
     let response = agent.prompt("Calculate 10 - 3").await?;
 
     println!("{}", response);
@@ -78,14 +79,14 @@ async fn main() -> Result<(), anyhow::Error> {
 ## Builtin Search Tool
 
 ```rust
-use alith::{Agent, SearchTool, Tool, LLM};
+use alith::{Agent, SearchTool, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let tools: [Box<dyn Tool>; 1] = [Box::new(SearchTool::default())];
     let model = LLM::from_model_name("gpt-4")?;
-    let agent = Agent::new("simple agent", model, tools)
-        .preamble("You are a searcher. When I ask questions about Web3, you can search from the Internet and answer them. When you encounter other questions, you can directly answer them.");
+    let agent = Agent::new("simple agent", model)
+        .preamble("You are a searcher. When I ask questions about Web3, you can search from the Internet and answer them. When you encounter other questions, you can directly answer them.")
+        .tool(SearchTool::default()).await;
     let response = agent.prompt("What's BitCoin?").await?;
 
     println!("{}", response);

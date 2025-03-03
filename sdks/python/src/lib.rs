@@ -51,7 +51,7 @@ impl DelegateAgent {
             .iter()
             .map(|t| Box::new(t.clone()) as Box<dyn Tool>)
             .collect::<Vec<_>>();
-        let mut agent = Agent::new(
+        let mut agent = Agent::new_with_tools(
             self.name.to_string(),
             if self.base_url.is_empty() {
                 LLM::from_model_name(&self.model)

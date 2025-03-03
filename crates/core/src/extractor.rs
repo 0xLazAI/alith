@@ -4,7 +4,7 @@ use crate::{
     agent::Agent,
     chat::Completion,
     task::TaskError,
-    tool::{StructureTool, Tool, ToolError},
+    tool::{StructureTool, ToolError},
 };
 use async_trait::async_trait;
 use schemars::JsonSchema;
@@ -23,18 +23,20 @@ where
 {
     /// Constructor for Extractor that initializes the agent with the given model.
     #[inline]
-    pub fn new<T>(model: M) -> Self
+    pub async fn new<T>(model: M) -> Self
     where
         T: Serialize + for<'a> Deserialize<'a> + JsonSchema + Send + Sync + 'static,
     {
-        let tools: [Box<dyn Tool>; 1] = [Box::new(ExtractTool::<T> { _data: PhantomData })];
         Self {
-            agent: Agent::new("extract-agent", model, tools).preamble(
-                r#"Extract the data structure from the input string.
+            agent: Agent::new("extract-agent", model)
+                .preamble(
+                    r#"Extract the data structure from the input string.
 Note you MUST use the tool named `extractor` to extract the input string to the
 data structure.
 "#,
-            ),
+                )
+                .tool(ExtractTool::<T> { _data: PhantomData })
+                .await,
         }
     }
 

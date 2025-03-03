@@ -16,7 +16,7 @@ use alith::{Agent, LLM};
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
-    let agent = Agent::new("simple agent", model, vec![])
+    let agent = Agent::new("simple agent", model)
         .preamble("You are a comedian here to entertain the user using humour and jokes.");
 
     let response = agent.prompt("Entertain me!").await?;
@@ -30,7 +30,7 @@ async fn main() -> Result<(), anyhow::Error> {
 - Agent with Tools
 
 ```rust
-use alith::{Agent, StructureTool, Tool, ToolError, LLM};
+use alith::{Agent, StructureTool, ToolError, LLM};
 use async_trait::async_trait;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -83,10 +83,11 @@ impl StructureTool for Subtract {
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    let tools: [Box<dyn Tool>; 2] = [Box::new(Adder), Box::new(Subtract)];
     let model = LLM::from_model_name("gpt-4")?;
-    let agent = Agent::new("simple agent", model, tools)
-        .preamble("You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.");
+    let agent = Agent::new("simple agent", model)
+        .preamble("You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.")
+        .tool(Adder).await
+        .tool(Subtract).await;
     let response = agent.prompt("Calculate 10 - 3").await?;
 
     println!("{}", response);

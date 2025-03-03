@@ -45,7 +45,7 @@ impl DelegateAgent {
         for tool in delegate_tools {
             tools.push(Box::new(tool) as Box<dyn Tool>);
         }
-        let mut agent = Agent::new(
+        let mut agent = Agent::new_with_tools(
             self.name.to_string(),
             if self.base_url.is_empty() {
                 LLM::from_model_name(&self.model)

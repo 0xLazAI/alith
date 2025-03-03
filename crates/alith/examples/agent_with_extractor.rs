@@ -11,7 +11,7 @@ struct Person {
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
-    let extractor = Extractor::new::<Person>(model);
+    let extractor = Extractor::new::<Person>(model).await;
     let response: Person = extractor.extract("Alice is 18 years old").await?;
     println!("{:?}", response);
     Ok(())

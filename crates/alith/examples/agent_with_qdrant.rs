@@ -27,7 +27,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let storage = QdrantStorage::from_multiple_documents(client, embeddings_model, data).await?;
 
-    let agent = Agent::new("simple agent", model, vec![])
+    let agent = Agent::new("simple agent", model)
         .preamble(
             r#"
 You are a dictionary assistant here to assist the user in understanding the meaning of words.
