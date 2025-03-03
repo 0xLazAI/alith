@@ -3,6 +3,7 @@ use crate::knowledge::Knowledge;
 use crate::memory::{Memory, Message};
 use crate::tool::Tool;
 use anyhow::Result;
+use mcp_client::McpClientTrait;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -12,6 +13,8 @@ pub struct Executor<M: Completion> {
     knowledges: Arc<Vec<Box<dyn Knowledge>>>,
     tools: Arc<Vec<Box<dyn Tool>>>,
     memory: Option<Arc<RwLock<dyn Memory>>>,
+    /// The MCP client used to communicate with the MCP server
+    mcp_client: Option<Arc<dyn McpClientTrait>>,
 }
 
 impl<M: Completion> Executor<M> {
@@ -21,12 +24,14 @@ impl<M: Completion> Executor<M> {
         knowledges: Arc<Vec<Box<dyn Knowledge>>>,
         tools: Arc<Vec<Box<dyn Tool>>>,
         memory: Option<Arc<RwLock<dyn Memory>>>,
+        mcp_client: Option<Arc<dyn McpClientTrait>>,
     ) -> Self {
         Self {
             model,
             knowledges,
             tools,
             memory,
+            mcp_client,
         }
     }
 
@@ -51,17 +56,17 @@ impl<M: Completion> Executor<M> {
             .await
             .map_err(|e| format!("Model error: {}", e))?;
 
-        let mut response_str = response.content();
-        self.add_ai_message(&response_str).await;
+        let mut responses = vec![response.content()];
+        self.add_ai_message(&responses[0]).await;
 
         // Attempt to parse and execute a tool action.
         for call in response.toolcalls() {
             let tool_call = self.execute_tool(call).await?;
             self.add_ai_message_with_tool_call(&tool_call).await?;
-            response_str.push_str(&tool_call);
+            responses.push(tool_call);
         }
 
-        Ok(response_str)
+        Ok(responses.join("\n"))
     }
 
     /// Add a user message into the memory if the memory has been set.
@@ -104,6 +109,18 @@ impl<M: Completion> Executor<M> {
             tool.run(&call.function.arguments)
                 .await
                 .map_err(|e| e.to_string())
+        } else if let Some(mcp_client) = &self.mcp_client {
+            let arguments =
+                serde_json::from_str(&call.function.arguments).map_err(|e| e.to_string())?;
+            let response = mcp_client
+                .call_tool(&call.function.name, arguments)
+                .await
+                .map_err(|e| format!("MCP error: {}", e))?;
+            if let Some(text) = response.content[0].as_text() {
+                Ok(text.to_string())
+            } else {
+                Ok("".to_string())
+            }
         } else {
             Err(format!("Tool not found: {}", call.function.name))
         }

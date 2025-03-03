@@ -6,6 +6,7 @@ use crate::store::{Storage, VectorStoreError};
 use crate::task::TaskError;
 use crate::tool::Tool;
 use futures::{stream, StreamExt, TryStreamExt};
+use mcp_client::McpClientTrait;
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -48,6 +49,8 @@ pub struct Agent<M: Completion> {
     pub respect_context_window: bool,
     /// Whether code execution is allowed.
     pub allow_code_execution: bool,
+    /// The MCP client used to communicate with the MCP server
+    mcp_client: Option<Arc<dyn McpClientTrait>>,
 }
 
 impl<M: Completion> Agent<M>
@@ -76,6 +79,7 @@ where
             max_execution_time: None,
             knowledges: Arc::new(Vec::new()),
             memory: None,
+            mcp_client: None,
             respect_context_window: false,
             allow_code_execution: false,
         }
@@ -96,6 +100,12 @@ where
     /// System prompt for the agent.
     pub fn preamble(mut self, preamble: impl ToString) -> Self {
         self.preamble = preamble.to_string();
+        self
+    }
+
+    #[inline]
+    pub fn with_mcp_client(mut self, mcp_client: impl McpClientTrait + 'static) -> Self {
+        self.mcp_client = Some(Arc::new(mcp_client));
         self
     }
 
@@ -125,6 +135,7 @@ where
             self.knowledges.clone(),
             self.tools.clone(),
             self.memory.clone(),
+            self.mcp_client.clone(),
         );
         let mut req = Request::new(prompt.to_string(), self.preamble.clone());
         req.history = history;
