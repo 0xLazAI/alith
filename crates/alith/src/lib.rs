@@ -31,6 +31,10 @@ pub use core::{
         interface::requests::completion::{CompletionFinishReason, GenerationSettings},
         CompletionRequest, CompletionResponse,
     },
+    mcp::{
+        sse_client, stdio_client, ClientCapabilities, ClientInfo, McpClient, McpClientTrait,
+        McpService, SseTransport, StdioTransport, Transport,
+    },
     memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
     splitting::{
         split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,

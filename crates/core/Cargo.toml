@@ -19,6 +19,8 @@ regex = "1.10"
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
 hnsw_rs = "0.3.1"
 lru = "0.13.0"
+mcp-client = "0.1.0"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 [features]
 inference = []

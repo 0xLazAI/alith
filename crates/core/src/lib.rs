@@ -7,6 +7,7 @@ pub mod extractor;
 pub mod flow;
 pub mod knowledge;
 pub mod llm;
+pub mod mcp;
 pub mod splitting;
 pub use llm_client;
 pub mod memory;
