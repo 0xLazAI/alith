@@ -25,6 +25,9 @@ pub use core::{
         auto_node, dependencies, Action, Content, DefaultNode, EmptyAction, EnvVar, Graph,
         InChannels, Node, NodeId, NodeName, NodeTable, OutChannels, Output, RecvErr, SendErr,
     },
+    json::{
+        parse_and_check_json_markdown, parse_json_markdown, parse_partial_json, JsonParseError,
+    },
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
     llm::{EmbeddingsModel, LLM},
     llm_client::{
@@ -36,6 +39,7 @@ pub use core::{
         McpService, SseTransport, StdioTransport, Transport,
     },
     memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
+    parser::{JsonParser, MarkdownParser, Parser, ParserError, StringParser, TrimParser},
     splitting::{
         split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,
     },
