@@ -19,10 +19,12 @@ We are committed to continuous innovation, with key milestones including:
   - **Inference Engine**: Release the first version of the inference engine, optimized for low-latency, high-throughput model serving.
   - **More Storage Support**: Mivus, Postgres, Sqlite, etc.
   - **More Knowlege Support**: Docx, Excel, CSV, GitCommit, etc.
+  - **Output Parsrs**: JSON, XML, Markdown, etc.
 - **Integrations**
-  - **Eliza for Alith Node SDK**: Integrate Eliza into the Alith Node SDK for foundational NLP capabilities.
+  - **Eliza for Alith Node SDK**: Integrate Eliza into the Alith Node SDK.
   - **Langchain for Alith Python SDK**: Fully integrate Langchain into the Alith Python SDK to enable advanced chaining, memory, and tooling for LLM applications.
   - **Langchain.js for Alith Node SDK**: Bring Langchain capabilities to the Node.js ecosystem with Langchain.js integration.
+  - **Model Context Protocol (MCP) Integration**: Bring MCP client capabilities to the Alith SDK and integrate with more MCP servers.
 - **Tools**
   - **Clients**
     - **Twitter**: Develop a Twitter client for real-time social media monitoring, sentiment analysis, and engagement.
