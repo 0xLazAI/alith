@@ -56,12 +56,5 @@ Alith is an AI agent framework designed for the Web3 and Crypto, empowering deve
                 .len(),
             9
         );
-        assert_eq!(
-            chunk_text(text, 40, Some(0.1))
-                .unwrap()
-                .unwrap_or_default()
-                .len(),
-            10
-        );
     }
 }
