@@ -41,7 +41,8 @@ pub use core::{
     memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
     parser::{JsonParser, MarkdownParser, Parser, ParserError, StringParser, TrimParser},
     splitting::{
-        split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,
+        split_text, split_text_into_indices, Separator, SeparatorGroup, TextCleaner,
+        TextConcatenator, TextSplit, TextSplitter,
     },
     store::{DocumentId, InMemoryStorage, Storage, TopNResults, VectorStoreError},
     task::{Task, TaskError, TaskMetadata},

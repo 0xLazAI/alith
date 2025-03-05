@@ -31,6 +31,7 @@ pub const CLAUDE_3_OPUS: &str = "claude-3-opus";
 pub const CLAUDE_3_SONNET: &str = "claude-3-sonnet";
 pub const CLAUDE_3_HAIKU: &str = "claude-3-haiku";
 pub const CLAUDE_3_5_SONNET: &str = "claude-3-5-sonnet";
+pub const CLAUDE_3_7_SONNET: &str = "claude-3-7-sonnet";
 
 // Remote Llama models
 
