@@ -23,7 +23,13 @@ class Agent:
             for tool in self.tools or []
         ]
         agent = _DelegateAgent(
-            self.name, self.model, self.api_key, self.base_url, self.preamble, tools, self.mcp_config_path
+            self.name,
+            self.model,
+            self.api_key,
+            self.base_url,
+            self.preamble,
+            tools,
+            self.mcp_config_path,
         )
         if self.store:
             docs = self.store.search(prompt)

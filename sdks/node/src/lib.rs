@@ -17,6 +17,26 @@ pub struct DelegateAgent {
     pub mcp_config_path: String,
 }
 
+/// Runs the text chunker on the incoming text and returns the chunks as a vector of strings.
+///
+/// * `text` - The natural language text to chunk.
+/// * `max_chunk_token_size` - The maxium token sized to be chunked to. Inclusive.
+/// * `overlap_percent` - The percentage of overlap between chunks. Default is None.
+#[napi]
+pub fn chunk_text(
+    text: String,
+    max_chunk_token_size: Option<u32>,
+    overlap_percent: Option<f64>,
+) -> Result<Vec<String>> {
+    Ok(alith::chunk_text(
+        &text,
+        max_chunk_token_size.unwrap_or(200),
+        overlap_percent.map(|p| p as f32),
+    )
+    .map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))?
+    .unwrap_or_default())
+}
+
 #[napi]
 impl DelegateAgent {
     #[napi(constructor)]

@@ -284,6 +284,7 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { DelegateAgent } = nativeBinding
+const { DelegateAgent, chunkText } = nativeBinding
 
 module.exports.DelegateAgent = DelegateAgent
+module.exports.chunkText = chunkText
