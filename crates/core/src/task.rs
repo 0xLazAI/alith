@@ -1,3 +1,4 @@
+use crate::mcp::MCPError;
 use crate::{agent::Agent, chat::Completion};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -78,4 +79,6 @@ pub enum TaskError {
     LockError,
     #[error("An unknown error occurred: {0}")]
     Unknown(String),
+    #[error("MCP error: {0}")]
+    MCPError(#[from] MCPError),
 }

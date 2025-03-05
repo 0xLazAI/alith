@@ -35,8 +35,8 @@ pub use core::{
         CompletionRequest, CompletionResponse,
     },
     mcp::{
-        sse_client, stdio_client, ClientCapabilities, ClientInfo, McpClient, McpClientTrait,
-        McpService, SseTransport, StdioTransport, Transport,
+        setup_mcp_clients, sse_client, stdio_client, ClientCapabilities, ClientInfo, MCPClient,
+        MCPConfig, MCPError, MCPServerConfig, SseTransport, StdioTransport, Transport,
     },
     memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
     parser::{JsonParser, MarkdownParser, Parser, ParserError, StringParser, TrimParser},

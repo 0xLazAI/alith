@@ -17,7 +17,8 @@ export declare class DelegateAgent {
   apiKey: string
   baseUrl: string
   preamble: string
-  constructor(name: string, model: string, apiKey: string, baseUrl: string, preamble: string)
+  mcpConfigPath: string
+  constructor(name: string, model: string, apiKey: string, baseUrl: string, preamble: string, mcpConfigPath: string)
   promptWithTools(prompt: string, delegateTools: Array<DelegateTool>): string
   prompt(prompt: string): string
 }

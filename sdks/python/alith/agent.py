@@ -14,6 +14,7 @@ class Agent:
     api_key: Optional[str] = field(default_factory=str)
     base_url: Optional[str] = field(default_factory=str)
     tools: List[Union[Tool, Callable, _DelegateTool]] = field(default_factory=list)
+    mcp_config_path: Optional[str] = field(default_factory=str)
     store: Optional[Store] = None
 
     def prompt(self, prompt: str) -> str:
@@ -22,7 +23,7 @@ class Agent:
             for tool in self.tools or []
         ]
         agent = _DelegateAgent(
-            self.name, self.model, self.api_key, self.base_url, self.preamble, tools
+            self.name, self.model, self.api_key, self.base_url, self.preamble, tools, self.mcp_config_path
         )
         if self.store:
             docs = self.store.search(prompt)
