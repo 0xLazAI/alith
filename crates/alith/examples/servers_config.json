@@ -1,18 +1,10 @@
 {
     "mcpServers": {
-        "sqlite": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-sqlite",
-                "--db-path",
-                "./test.db"
-            ]
-        },
-        "puppeteer": {
+        "github": {
             "command": "npx",
             "args": [
                 "-y",
-                "@modelcontextprotocol/server-puppeteer"
+                "@modelcontextprotocol/server-github"
             ]
         }
     }
