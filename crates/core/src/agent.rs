@@ -1,15 +1,15 @@
 use crate::chat::{Completion, Document, Message, Request};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
-use crate::mcp::{sse_client, stdio_client};
+use crate::mcp::{setup_mcp_clients, sse_client, stdio_client, MCPClient, MCPError};
 use crate::memory::Memory;
 use crate::store::{Storage, VectorStoreError};
 use crate::task::TaskError;
 use crate::tool::Tool;
 use crate::{make_ref, Ref};
 use futures::{stream, StreamExt, TryStreamExt};
-use mcp_client::McpClientTrait;
 use std::collections::HashMap;
+use std::path::Path;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use uuid::Uuid;
@@ -31,16 +31,6 @@ pub struct Agent<M: Completion> {
     pub name: String,
     /// System prompt for the agent.
     pub preamble: String,
-    /// System format for the agent.
-    pub system_template: String,
-    /// Prompt format for the agent.
-    pub prompt_template: String,
-    /// Response format for the agent.
-    pub response_template: String,
-    /// Enable or disable verbose mode.
-    pub verbose: bool,
-    /// The maximum requests per minute for completions.
-    pub max_rpm: Option<usize>,
     /// Temperature of the model.
     pub temperature: Option<f32>,
     /// Maximum number of tokens for the completion.
@@ -52,7 +42,7 @@ pub struct Agent<M: Completion> {
     /// Whether code execution is allowed.
     pub allow_code_execution: bool,
     /// The MCP client used to communicate with the MCP server
-    mcp_client: Option<Arc<dyn McpClientTrait>>,
+    mcp_clients: Ref<Vec<MCPClient>>,
 }
 
 impl<M: Completion> Agent<M>
@@ -68,17 +58,12 @@ where
             id: Uuid::new_v4(),
             name: name.to_string(),
             preamble: String::new(),
-            system_template: String::new(),
-            prompt_template: String::new(),
-            response_template: String::new(),
-            verbose: false,
-            max_rpm: None,
             temperature: None,
             max_tokens: None,
             max_execution_time: None,
             knowledges: Arc::new(Vec::new()),
             memory: None,
-            mcp_client: None,
+            mcp_clients: make_ref(vec![]),
             respect_context_window: false,
             allow_code_execution: false,
         }
@@ -96,17 +81,12 @@ where
             id: Uuid::new_v4(),
             name: name.to_string(),
             preamble: String::new(),
-            system_template: String::new(),
-            prompt_template: String::new(),
-            response_template: String::new(),
-            verbose: false,
-            max_rpm: None,
             temperature: None,
             max_tokens: None,
             max_execution_time: None,
             knowledges: Arc::new(Vec::new()),
             memory: None,
-            mcp_client: None,
+            mcp_clients: make_ref(vec![]),
             respect_context_window: false,
             allow_code_execution: false,
         }
@@ -152,30 +132,45 @@ where
     }
 
     /// Set the MCP client.
-    pub fn mcp_client(mut self, mcp_client: impl McpClientTrait + 'static) -> Self {
-        self.mcp_client = Some(Arc::new(mcp_client));
+    pub async fn mcp_client(self, mcp_client: MCPClient) -> Self {
+        let mut mcp_clients = self.mcp_clients.write().await;
+        mcp_clients.push(mcp_client);
+        drop(mcp_clients);
         self
     }
 
-    /// Set the MCP sse client.
-    pub async fn mcp_sse_client<S: AsRef<str> + 'static>(
-        mut self,
-        sse_url: S,
-        env: HashMap<String, String>,
-    ) -> anyhow::Result<Self> {
-        self.mcp_client = Some(Arc::new(sse_client(sse_url, env).await?));
+    /// Set the MCP server config path.
+    pub async fn mcp_config_path<P: AsRef<Path>>(self, path: P) -> anyhow::Result<Self, MCPError> {
+        let clients = setup_mcp_clients(path).await?;
+        let mut mcp_clients = self.mcp_clients.write().await;
+        for (_, client) in clients {
+            mcp_clients.push(client);
+        }
+        drop(mcp_clients);
         Ok(self)
     }
 
     /// Set the MCP sse client.
+    #[inline]
+    pub async fn mcp_sse_client<S: AsRef<str> + 'static>(
+        self,
+        sse_url: S,
+        env: HashMap<String, String>,
+    ) -> anyhow::Result<Self> {
+        Ok(self.mcp_client(sse_client(sse_url, env).await?).await)
+    }
+
+    /// Set the MCP sse client.
+    #[inline]
     pub async fn mcp_stdio_client<S: AsRef<str> + 'static>(
-        mut self,
+        self,
         command: S,
         args: Vec<S>,
         env: HashMap<String, String>,
     ) -> anyhow::Result<Self> {
-        self.mcp_client = Some(Arc::new(stdio_client(command, args, env).await?));
-        Ok(self)
+        Ok(self
+            .mcp_client(stdio_client(command, args, env).await?)
+            .await)
     }
 
     /// Processes a prompt using the agent.
@@ -204,7 +199,7 @@ where
             self.knowledges.clone(),
             self.tools.clone(),
             self.memory.clone(),
-            self.mcp_client.clone(),
+            self.mcp_clients.clone(),
         );
         let mut req = Request::new(prompt.to_string(), self.preamble.clone());
         req.history = history;
@@ -215,6 +210,12 @@ where
             .iter()
             .map(|tool| tool.definition())
             .collect::<Vec<_>>();
+        let mcp_clients = self.mcp_clients.read().await;
+        for client in mcp_clients.iter() {
+            for tool in client.tools.values() {
+                req.tools.push(tool.clone());
+            }
+        }
         req.documents = stream::iter(self.store_indices.iter())
             .then(|(num_sample, storage)| async {
                 Ok::<_, VectorStoreError>(

@@ -9,6 +9,7 @@ type AgentOptions = {
   baseUrl?: string // Optional base URL for API requests
   apiKey?: string // Optional API key for authentication
   tools?: Array<Tool> // Optional list of tools available to the agent
+  mcpConfigPath?: string // Optional mcp config path
 }
 
 // Represents an agent that can process prompts using tools
@@ -24,10 +25,18 @@ class Agent {
    * @param {string} [opts.baseUrl] - Optional base URL for API requests.
    * @param {string} [opts.apiKey] - Optional API key for authentication.
    * @param {Array<Tool>} [opts.tools] - Optional list of tools available to the agent.
+   * @param {string} [opts.mcpConfigPath] - Optional mcp config path.
    */
   constructor(opts: AgentOptions) {
     this._opts = opts
-    this._agent = new DelegateAgent(opts.name, opts.model, opts.apiKey ?? '', opts.baseUrl ?? '', opts.preamble ?? '')
+    this._agent = new DelegateAgent(
+      opts.name,
+      opts.model,
+      opts.apiKey ?? '',
+      opts.baseUrl ?? '',
+      opts.preamble ?? '',
+      opts.mcpConfigPath ?? '',
+    )
   }
 
   /**

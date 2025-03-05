@@ -1,10 +1,9 @@
 use crate::chat::{Completion, Request, ResponseContent, ResponseToolCalls, ToolCall};
 use crate::knowledge::Knowledge;
+use crate::mcp::MCPClient;
 use crate::memory::{Memory, Message};
 use crate::tool::Tool;
 use crate::Ref;
-use anyhow::Result;
-use mcp_client::McpClientTrait;
 use std::sync::Arc;
 
 /// Manages the execution of tasks using an LLM, tools, and (optionally) memory components.
@@ -14,7 +13,7 @@ pub struct Executor<M: Completion> {
     tools: Ref<Vec<Box<dyn Tool>>>,
     memory: Option<Ref<dyn Memory>>,
     /// The MCP client used to communicate with the MCP server
-    mcp_client: Option<Arc<dyn McpClientTrait>>,
+    mcp_clients: Ref<Vec<MCPClient>>,
 }
 
 impl<M: Completion> Executor<M> {
@@ -24,25 +23,23 @@ impl<M: Completion> Executor<M> {
         knowledges: Arc<Vec<Box<dyn Knowledge>>>,
         tools: Ref<Vec<Box<dyn Tool>>>,
         memory: Option<Ref<dyn Memory>>,
-        mcp_client: Option<Arc<dyn McpClientTrait>>,
+        mcp_clients: Ref<Vec<MCPClient>>,
     ) -> Self {
         Self {
             model,
             knowledges,
             tools,
             memory,
-            mcp_client,
+            mcp_clients,
         }
     }
 
     /// Executes the task by managing interactions between the LLM and tools.
-    pub async fn invoke(&mut self, mut request: Request) -> Result<String, String> {
+    pub async fn invoke(&mut self, mut request: Request) -> anyhow::Result<String> {
         request.knowledges = {
             let mut enriched_knowledges = Vec::new();
             for knowledge in self.knowledges.iter() {
-                let enriched = knowledge
-                    .enrich(&request.prompt)
-                    .map_err(|err| err.to_string())?;
+                let enriched = knowledge.enrich(&request.prompt)?;
                 enriched_knowledges.push(enriched);
             }
             enriched_knowledges
@@ -51,10 +48,7 @@ impl<M: Completion> Executor<M> {
         self.add_user_message(&request.prompt).await;
         // Interact with the LLM to get a response.
         let mut model = self.model.write().await;
-        let response = model
-            .completion(request.clone())
-            .await
-            .map_err(|e| format!("Model error: {}", e))?;
+        let response = model.completion(request.clone()).await?;
 
         let mut responses = vec![response.content()];
         self.add_ai_message(&responses[0]).await;
@@ -89,40 +83,39 @@ impl<M: Completion> Executor<M> {
     async fn add_ai_message_with_tool_call(
         &self,
         tool_call: &dyn std::fmt::Display,
-    ) -> Result<(), String> {
+    ) -> anyhow::Result<()> {
         if let Some(memory) = &self.memory {
             let mut memory = memory.write().await;
-            let tool_call: serde_json::Value =
-                serde_json::from_str(&format!("{tool_call}")).map_err(|err| err.to_string())?;
+            let tool_call: serde_json::Value = serde_json::from_str(&format!("{tool_call}"))?;
             memory.add_message(Message::new_ai_message("").with_tool_calls(tool_call));
         }
         Ok(())
     }
 
     /// Executes a tool action and returns the result.
-    async fn execute_tool(&self, call: ToolCall) -> Result<String, String> {
+    async fn execute_tool(&self, call: ToolCall) -> anyhow::Result<String> {
         let tools = self.tools.read().await;
         if let Some(tool) = tools
             .iter()
             .find(|t| t.name().eq_ignore_ascii_case(&call.function.name))
         {
-            tool.run(&call.function.arguments)
-                .await
-                .map_err(|e| e.to_string())
-        } else if let Some(mcp_client) = &self.mcp_client {
-            let arguments =
-                serde_json::from_str(&call.function.arguments).map_err(|e| e.to_string())?;
-            let response = mcp_client
-                .call_tool(&call.function.name, arguments)
-                .await
-                .map_err(|e| format!("MCP error: {}", e))?;
-            if let Some(text) = response.content[0].as_text() {
-                Ok(text.to_string())
-            } else {
-                Ok("".to_string())
-            }
+            Ok(tool.run(&call.function.arguments).await?)
         } else {
-            Err(format!("Tool not found: {}", call.function.name))
+            let mcp_clients = self.mcp_clients.read().await;
+            if !mcp_clients.is_empty() {
+                for mcp_client in mcp_clients.iter() {
+                    if mcp_client.tools.contains_key(&call.function.name) {
+                        let arguments = serde_json::from_str(&call.function.arguments)?;
+                        let response = mcp_client.call_tool(&call.function.name, arguments).await?;
+                        if let Some(text) = response.content[0].as_text() {
+                            return Ok(text.to_string());
+                        } else {
+                            return Ok("".to_string());
+                        }
+                    }
+                }
+            }
+            Err(anyhow::anyhow!("Tool not found: {}", call.function.name))
         }
     }
 }

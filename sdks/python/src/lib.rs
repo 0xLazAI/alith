@@ -22,6 +22,8 @@ pub struct DelegateAgent {
     pub preamble: String,
     #[pyo3(get, set)]
     pub tools: Vec<DelegateTool>,
+    #[pyo3(get, set)]
+    pub mcp_config_path: String,
 }
 
 #[pymethods]
@@ -34,6 +36,7 @@ impl DelegateAgent {
         base_url: String,
         preamble: String,
         tools: Vec<DelegateTool>,
+        mcp_config_path: String,
     ) -> Self {
         DelegateAgent {
             model,
@@ -42,6 +45,7 @@ impl DelegateAgent {
             base_url,
             preamble,
             tools,
+            mcp_config_path,
         }
     }
 
@@ -64,7 +68,12 @@ impl DelegateAgent {
         );
         agent.preamble = self.preamble.clone();
         let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
-        let result = rt.block_on(async { agent.prompt(prompt).await });
+        let result = rt.block_on(async {
+            if !self.mcp_config_path.is_empty() {
+                agent = agent.mcp_config_path(&self.mcp_config_path).await?;
+            }
+            agent.prompt(prompt).await
+        });
         result.map_err(|e| PyErr::new::<PyException, _>(e.to_string()))
     }
 }

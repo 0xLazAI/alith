@@ -14,6 +14,7 @@ pub struct DelegateAgent {
     pub api_key: String,
     pub base_url: String,
     pub preamble: String,
+    pub mcp_config_path: String,
 }
 
 #[napi]
@@ -25,6 +26,7 @@ impl DelegateAgent {
         api_key: String,
         base_url: String,
         preamble: String,
+        mcp_config_path: String,
     ) -> Self {
         DelegateAgent {
             model,
@@ -32,6 +34,7 @@ impl DelegateAgent {
             api_key,
             base_url,
             preamble,
+            mcp_config_path,
         }
     }
 
@@ -59,7 +62,12 @@ impl DelegateAgent {
         agent.preamble = self.preamble.clone();
         let rt =
             Runtime::new().map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))?;
-        let result = rt.block_on(async { agent.prompt(&prompt).await });
+        let result = rt.block_on(async {
+            if !self.mcp_config_path.is_empty() {
+                agent = agent.mcp_config_path(&self.mcp_config_path).await?;
+            }
+            agent.prompt(&prompt).await
+        });
         result.map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))
     }
 
