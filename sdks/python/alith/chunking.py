@@ -3,7 +3,7 @@ from typing import List
 
 
 def chunk_text(
-    text: str, max_chunk_token_size: int = 200, overlap_percent=0.01
+    text: str, max_chunk_token_size: int = 200, overlap_percent: float = 0.0
 ) -> List[str]:
     """Chunks a natural language text into smaller pieces.
 

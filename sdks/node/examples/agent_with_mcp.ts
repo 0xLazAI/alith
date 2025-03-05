@@ -1,4 +1,4 @@
-import { Agent } from '../src/'
+import { Agent } from 'alith'
 
 const agent = new Agent({
   name: 'A dummy Agent',

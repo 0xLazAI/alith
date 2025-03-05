@@ -11,6 +11,18 @@ export interface DelegateTool {
   author: string
   handler: (...args: any[]) => any
 }
+/**
+ * Runs the text chunker on the incoming text and returns the chunks as a vector of strings.
+ *
+ * * `text` - The natural language text to chunk.
+ * * `max_chunk_token_size` - The maxium token sized to be chunked to. Inclusive.
+ * * `overlap_percent` - The percentage of overlap between chunks. Default is None.
+ */
+export declare function chunkText(
+  text: string,
+  maxChunkTokenSize?: number | undefined | null,
+  overlapPercent?: number | undefined | null,
+): Array<string>
 export declare class DelegateAgent {
   model: string
   name: string

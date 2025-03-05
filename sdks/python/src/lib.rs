@@ -78,7 +78,7 @@ impl DelegateAgent {
     }
 }
 
-/// An easy alternative to the [`TextChunker`] struct.  
+/// Runs the text chunker on the incoming text and returns the chunks as a vector of strings.
 ///
 /// * `text` - The natural language text to chunk.
 /// * `max_chunk_token_size` - The maxium token sized to be chunked to. Inclusive.
@@ -89,11 +89,17 @@ fn chunk_text(
     max_chunk_token_size: u32,
     overlap_percent: f32,
 ) -> PyResult<Vec<String>> {
-    Ok(
-        alith::chunk_text(text, max_chunk_token_size, Some(overlap_percent))
-            .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
-            .unwrap_or_default(),
+    Ok(alith::chunk_text(
+        text,
+        max_chunk_token_size,
+        if overlap_percent == 0.0 {
+            Some(overlap_percent)
+        } else {
+            None
+        },
     )
+    .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
+    .unwrap_or_default())
 }
 
 /// A Python module implemented in Rust.
