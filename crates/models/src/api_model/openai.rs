@@ -1,9 +1,9 @@
-use super::ApiLlmModel;
-use crate::{tokenizer::LlmTokenizer, LlmModelBase};
+use super::ApiLLMModel;
+use crate::{tokenizer::LLMTokenizer, LLMModelBase};
 use std::sync::Arc;
 
-impl ApiLlmModel {
-    pub fn openai_model_from_model_id(model_id: &str) -> ApiLlmModel {
+impl ApiLLMModel {
+    pub fn openai_model_from_model_id(model_id: &str) -> ApiLLMModel {
         match model_id {
             "gpt-4" => Self::gpt_4(),
             "gpt-4-32k" => Self::gpt_4_32k(),
@@ -11,15 +11,15 @@ impl ApiLlmModel {
             "gpt-4o" => Self::gpt_4_o(),
             "gpt-3.5-turbo" => Self::gpt_3_5_turbo(),
             "gpt-4o-mini" => Self::gpt_3_5_turbo(),
-            _ => panic!("Model ID ({model_id}) not found for ApiLlmModel"),
+            _ => panic!("Model ID ({model_id}) not found for ApiLLMModel"),
         }
     }
 
-    pub fn gpt_4() -> ApiLlmModel {
+    pub fn gpt_4() -> ApiLLMModel {
         let model_id = "gpt-4".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 8192,
                 inference_ctx_size: 4096,
@@ -32,11 +32,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn gpt_4_32k() -> ApiLlmModel {
+    pub fn gpt_4_32k() -> ApiLLMModel {
         let model_id = "gpt-4-32k".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 32768,
                 inference_ctx_size: 4096,
@@ -49,11 +49,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn gpt_4_turbo() -> ApiLlmModel {
+    pub fn gpt_4_turbo() -> ApiLLMModel {
         let model_id = "gpt-4-turbo".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 128000,
                 inference_ctx_size: 4096,
@@ -66,11 +66,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn gpt_3_5_turbo() -> ApiLlmModel {
+    pub fn gpt_3_5_turbo() -> ApiLLMModel {
         let model_id = "gpt-3.5-turbo".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 16385,
                 inference_ctx_size: 4096,
@@ -83,11 +83,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn gpt_4_o_mini() -> ApiLlmModel {
+    pub fn gpt_4_o_mini() -> ApiLLMModel {
         let model_id = "gpt-4o-mini".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 128000,
                 inference_ctx_size: 16384,
@@ -100,11 +100,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn gpt_4_o() -> ApiLlmModel {
+    pub fn gpt_4_o() -> ApiLLMModel {
         let model_id = "gpt-4o".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 128000,
                 inference_ctx_size: 4096,
@@ -117,11 +117,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn o1_mini() -> ApiLlmModel {
+    pub fn o1_mini() -> ApiLLMModel {
         let model_id = "o1-mini".to_string();
         let tokenizer = model_tokenizer("gpt-4o-mini");
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 128000,
                 inference_ctx_size: 65536,
@@ -134,11 +134,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn o1_preview() -> ApiLlmModel {
+    pub fn o1_preview() -> ApiLLMModel {
         let model_id = "o1-preview".to_string();
         let tokenizer = model_tokenizer("gpt-4o-mini");
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 128000,
                 inference_ctx_size: 32768,
@@ -152,22 +152,22 @@ impl ApiLlmModel {
     }
 }
 
-fn model_tokenizer(model_id: &str) -> Arc<LlmTokenizer> {
+fn model_tokenizer(model_id: &str) -> Arc<LLMTokenizer> {
     Arc::new(
-        LlmTokenizer::new_tiktoken(model_id)
+        LLMTokenizer::new_tiktoken(model_id)
             .unwrap_or_else(|_| panic!("Failed to load tokenizer for {model_id}")),
     )
 }
 
-pub trait OpenAiModelTrait {
-    fn model(&mut self) -> &mut ApiLlmModel;
+pub trait OpenAIModelTrait {
+    fn model(&mut self) -> &mut ApiLLMModel;
 
     /// Set the model using the model_id string.
     fn model_id_str(mut self, model_id: &str) -> Self
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::openai_model_from_model_id(model_id);
+        *self.model() = ApiLLMModel::openai_model_from_model_id(model_id);
         self
     }
 
@@ -176,7 +176,7 @@ pub trait OpenAiModelTrait {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::gpt_4();
+        *self.model() = ApiLLMModel::gpt_4();
         self
     }
 
@@ -185,7 +185,7 @@ pub trait OpenAiModelTrait {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::gpt_4_32k();
+        *self.model() = ApiLLMModel::gpt_4_32k();
         self
     }
 
@@ -194,7 +194,7 @@ pub trait OpenAiModelTrait {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::gpt_4_turbo();
+        *self.model() = ApiLLMModel::gpt_4_turbo();
         self
     }
 
@@ -203,7 +203,7 @@ pub trait OpenAiModelTrait {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::gpt_4_o();
+        *self.model() = ApiLLMModel::gpt_4_o();
         self
     }
 
@@ -212,7 +212,7 @@ pub trait OpenAiModelTrait {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::gpt_3_5_turbo();
+        *self.model() = ApiLLMModel::gpt_3_5_turbo();
         self
     }
 
@@ -220,7 +220,7 @@ pub trait OpenAiModelTrait {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::gpt_3_5_turbo();
+        *self.model() = ApiLLMModel::gpt_3_5_turbo();
         self
     }
 }

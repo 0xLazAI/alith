@@ -1,16 +1,17 @@
 use crate::llms::{
     api::{
-        config::{ApiConfig, LlmApiConfigTrait},
+        config::{ApiConfig, LLMApiConfigTrait},
         generic_openai::{GenericApiBackend, GenericApiConfig},
     },
-    LlmBackend,
+    LLMBackend,
 };
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
-use alith_models::api_model::{perplexity::PerplexityModelTrait, ApiLlmModel};
-// Everything here can be implemented for any struct.
+use alith_models::api_model::{perplexity::PerplexityModelTrait, ApiLLMModel};
+use std::sync::Arc;
+
 pub struct PerplexityBackendBuilder {
     pub config: GenericApiConfig,
-    pub model: ApiLlmModel,
+    pub model: ApiLLMModel,
 }
 
 impl Default for PerplexityBackendBuilder {
@@ -21,26 +22,27 @@ impl Default for PerplexityBackendBuilder {
         config.logging_config.logger_name = "perplexity".to_string();
         Self {
             config,
-            model: ApiLlmModel::sonar_large(),
+            model: ApiLLMModel::sonar_large(),
         }
     }
 }
 
 impl PerplexityBackendBuilder {
-    pub fn init(self) -> crate::Result<std::sync::Arc<LlmBackend>> {
-        Ok(std::sync::Arc::new(LlmBackend::GenericApi(
-            GenericApiBackend::new(self.config, self.model)?,
-        )))
+    pub fn init(self) -> crate::Result<Arc<LLMBackend>> {
+        Ok(Arc::new(LLMBackend::GenericApi(GenericApiBackend::new(
+            self.config,
+            self.model,
+        )?)))
     }
 }
 
 impl PerplexityModelTrait for PerplexityBackendBuilder {
-    fn model(&mut self) -> &mut ApiLlmModel {
+    fn model(&mut self) -> &mut ApiLLMModel {
         &mut self.model
     }
 }
 
-impl LlmApiConfigTrait for PerplexityBackendBuilder {
+impl LLMApiConfigTrait for PerplexityBackendBuilder {
     fn api_base_config_mut(&mut self) -> &mut ApiConfig {
         &mut self.config.api_config
     }

@@ -1,12 +1,13 @@
 use alith_interface::{
-    llms::LlmBackend,
+    llms::LLMBackend,
     requests::{
         completion::{CompletionRequest, CompletionResponse},
         logit_bias::{LogitBias, LogitBiasTrait},
         req_components::{RequestConfig, RequestConfigTrait},
     },
 };
-use alith_prompt::LlmPrompt;
+use alith_prompt::LLMPrompt;
+use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct BasicCompletion {
@@ -15,14 +16,14 @@ pub struct BasicCompletion {
 
 impl BasicCompletion {
     #[inline]
-    pub fn new(backend: std::sync::Arc<LlmBackend>) -> Self {
+    pub fn new(backend: Arc<LLMBackend>) -> Self {
         Self {
             base_req: CompletionRequest::new(backend),
         }
     }
 
     #[inline]
-    pub fn prompt(&mut self) -> &mut LlmPrompt {
+    pub fn prompt(&mut self) -> &mut LLMPrompt {
         &mut self.base_req.prompt
     }
 

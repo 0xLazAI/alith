@@ -17,9 +17,9 @@ pub use alith_client as client;
 pub use alith_client::basic_completion::BasicCompletion;
 pub use alith_client::embeddings::Embeddings;
 pub use alith_client::prelude::*;
-pub use alith_client::LlmClient;
+pub use alith_client::LLMClient;
 pub use alith_interface::requests::completion::{CompletionRequest, CompletionResponse};
-pub use alith_models::api_model::ApiLlmModel;
+pub use alith_models::api_model::ApiLLMModel;
 
 impl ResponseContent for CompletionResponse {
     fn content(&self) -> String {
@@ -28,11 +28,11 @@ impl ResponseContent for CompletionResponse {
 }
 
 pub struct Client {
-    pub(crate) client: LlmClient,
+    pub(crate) client: LLMClient,
 }
 
 impl Deref for Client {
-    type Target = LlmClient;
+    type Target = LLMClient;
 
     fn deref(&self) -> &Self::Target {
         &self.client
@@ -48,7 +48,7 @@ impl DerefMut for Client {
 impl Clone for Client {
     fn clone(&self) -> Self {
         Self {
-            client: LlmClient::new(Arc::clone(&self.client.backend)),
+            client: LLMClient::new(Arc::clone(&self.client.backend)),
         }
     }
 }
@@ -56,18 +56,18 @@ impl Clone for Client {
 impl Client {
     pub fn from_model_name(model: &str) -> Result<Client> {
         if model.starts_with("gpt") {
-            let mut builder = LlmClient::openai();
-            builder.model = ApiLlmModel::openai_model_from_model_id(model);
+            let mut builder = LLMClient::openai();
+            builder.model = ApiLLMModel::openai_model_from_model_id(model);
             let client = builder.init()?;
             Ok(Client { client })
         } else if model.starts_with("claude") {
-            let mut builder = LlmClient::anthropic();
-            builder.model = ApiLlmModel::anthropic_model_from_model_id(model);
+            let mut builder = LLMClient::anthropic();
+            builder.model = ApiLLMModel::anthropic_model_from_model_id(model);
             let client = builder.init()?;
             Ok(Client { client })
         } else if model.starts_with("llama") || model.starts_with("sonar") {
-            let mut builder = LlmClient::perplexity();
-            builder.model = ApiLlmModel::perplexity_model_from_model_id(model);
+            let mut builder = LLMClient::perplexity();
+            builder.model = ApiLLMModel::perplexity_model_from_model_id(model);
             let client = builder.init()?;
             Ok(Client { client })
         } else {
@@ -76,8 +76,8 @@ impl Client {
     }
 
     pub fn openai_compatible_client(api_key: &str, base_url: &str, model: &str) -> Result<Client> {
-        let mut builder = LlmClient::openai();
-        builder.model = ApiLlmModel::gpt_4();
+        let mut builder = LLMClient::openai();
+        builder.model = ApiLLMModel::gpt_4();
         builder.model.model_base.model_id = model.to_string();
         builder.config.api_config.api_key = Some(api_key.to_string().into());
         builder.config.api_config.host = base_url.to_string();

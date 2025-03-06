@@ -1,4 +1,6 @@
 use crate::PromptTokenizer;
+use std::collections::HashMap;
+use std::sync::Arc;
 use thiserror::Error;
 
 pub const DEFAULT_SAFETY_TOKENS: u64 = 10;
@@ -87,10 +89,10 @@ fn available_tokens(
 }
 
 pub(crate) fn total_prompt_tokens_openai_format(
-    prompt: &Vec<std::collections::HashMap<String, String>>,
+    prompt: &[HashMap<String, String>],
     tokens_per_message: Option<u32>,
     tokens_per_name: Option<i32>,
-    tokenizer: &std::sync::Arc<dyn PromptTokenizer>,
+    tokenizer: &Arc<dyn PromptTokenizer>,
 ) -> u64 {
     let tokens_per_message = tokens_per_message.unwrap_or(0);
     let mut num_tokens: u64 = 0;

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 impl CompletionResponse {
     pub fn new_from_openai(
         req: &CompletionRequest,
-        res: OpenAiCompletionResponse,
+        res: OpenAICompletionResponse,
     ) -> Result<Self, CompletionError> {
         let choice = if res.choices.is_empty() {
             return Err(CompletionError::ResponseContentEmpty);
@@ -45,7 +45,7 @@ impl CompletionResponse {
 
 /// Represents a chat completion response returned by model, based on the provided input.
 #[derive(Debug, Deserialize, Clone, PartialEq, Serialize)]
-pub struct OpenAiCompletionResponse {
+pub struct OpenAICompletionResponse {
     /// A unique identifier for the chat completion.
     pub id: String,
     /// A list of chat completion choices. Can be more than one if `n` is greater than 1.

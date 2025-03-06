@@ -3,6 +3,7 @@ use crate::PromptTokenizer;
 use minijinja::value::{from_args, Value, ValueKind};
 use minijinja::{context, Environment, Error, ErrorKind};
 use std::collections::HashMap;
+use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct ChatTemplatePrompt {
@@ -12,7 +13,7 @@ pub struct ChatTemplatePrompt {
     pub concatenator: TextConcatenator,
     pub messages: std::cell::RefCell<Vec<PromptMessage>>,
     pub generation_prefix: std::cell::RefCell<Option<String>>,
-    pub tokenizer: std::sync::Arc<dyn PromptTokenizer>,
+    pub tokenizer: Arc<dyn PromptTokenizer>,
     chat_template: String,
     bos_token: Option<String>,
     eos_token: String,
@@ -27,7 +28,7 @@ impl ChatTemplatePrompt {
         eos_token: &str,
         unk_token: Option<&str>,
         base_generation_prefix: Option<&str>,
-        tokenizer: std::sync::Arc<dyn PromptTokenizer>,
+        tokenizer: Arc<dyn PromptTokenizer>,
     ) -> Self {
         Self {
             built_prompt_string: std::cell::RefCell::new(None),
@@ -133,7 +134,7 @@ impl std::fmt::Display for ChatTemplatePrompt {
 ///
 /// The formatted message as a String.
 pub fn apply_chat_template(
-    messages: &Vec<HashMap<String, String>>,
+    messages: &[HashMap<String, String>],
     chat_template: &str,
     bos_token: Option<&str>,
     eos_token: &str,

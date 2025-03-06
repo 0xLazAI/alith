@@ -30,7 +30,7 @@ impl HuggingFaceLoader {
 
     pub fn hf_api(&self) -> &Api {
         self.hf_api.get_or_init(|| {
-            ApiBuilder::new()
+            ApiBuilder::from_env()
                 .with_progress(true)
                 .with_token(self.load_hf_token())
                 .build()

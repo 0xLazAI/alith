@@ -15,31 +15,31 @@ pub use prelude::*;
 pub(crate) use tracing::{debug, error, info, span, trace, warn, Level};
 
 pub use alith_interface as interface;
-pub use alith_interface::llms::LlmBackend;
+pub use alith_interface::llms::LLMBackend;
 
 use std::sync::Arc;
 
 #[derive(Clone)]
-pub struct LlmClient {
-    pub backend: Arc<LlmBackend>,
+pub struct LLMClient {
+    pub backend: Arc<LLMBackend>,
 }
 
-impl LlmClient {
-    pub fn new(backend: Arc<LlmBackend>) -> Self {
+impl LLMClient {
+    pub fn new(backend: Arc<LLMBackend>) -> Self {
         Self { backend }
     }
 
-    /// Creates a new instance of the [`OpenAiBackendBuilder`]. This builder that allows you to specify the model and other parameters. It is converted to an `LlmClient` instance using the `init` method.
-    pub fn openai() -> backend_builders::openai::OpenAiBackendBuilder {
-        backend_builders::openai::OpenAiBackendBuilder::default()
+    /// Creates a new instance of the [`OpenAIBackendBuilder`]. This builder that allows you to specify the model and other parameters. It is converted to an `LLMClient` instance using the `init` method.
+    pub fn openai() -> backend_builders::openai::OpenAIBackendBuilder {
+        backend_builders::openai::OpenAIBackendBuilder::default()
     }
 
-    /// Creates a new instance of the [`AnthropicBackendBuilder`]. This builder that allows you to specify the model and other parameters. It is converted to an `LlmClient` instance using the `init` method.
+    /// Creates a new instance of the [`AnthropicBackendBuilder`]. This builder that allows you to specify the model and other parameters. It is converted to an `LLMClient` instance using the `init` method.
     pub fn anthropic() -> backend_builders::anthropic::AnthropicBackendBuilder {
         backend_builders::anthropic::AnthropicBackendBuilder::default()
     }
 
-    /// Creates a new instance of the [`PerplexityBackendBuilder`]. This builder that allows you to specify the model and other parameters. It is converted to an `LlmClient` instance using the `init` method.
+    /// Creates a new instance of the [`PerplexityBackendBuilder`]. This builder that allows you to specify the model and other parameters. It is converted to an `LLMClient` instance using the `init` method.
     pub fn perplexity() -> backend_builders::perplexity::PerplexityBackendBuilder {
         backend_builders::perplexity::PerplexityBackendBuilder::default()
     }

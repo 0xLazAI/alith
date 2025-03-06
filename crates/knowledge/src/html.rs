@@ -5,7 +5,7 @@ use std::{cell::RefCell, rc::Rc};
 use url::Url;
 
 use alith_core::{
-    chunking::{chunk_text, Chunk, ChunkError},
+    chunking::{chunk_text, ChunkError, Chunker},
     knowledge::{Knowledge, KnowledgeError},
 };
 
@@ -25,7 +25,7 @@ impl<R: Read> HtmlKnowledge<R> {
     }
 }
 
-impl<R: Read + Send + Sync> Chunk for HtmlKnowledge<R> {
+impl<R: Read + Send + Sync> Chunker for HtmlKnowledge<R> {
     fn chunk(&self) -> std::result::Result<Vec<String>, ChunkError> {
         Ok(chunk_text(
             &self

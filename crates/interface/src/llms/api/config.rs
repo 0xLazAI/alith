@@ -34,7 +34,7 @@ impl ApiConfig {
     }
 }
 
-pub trait LlmApiConfigTrait {
+pub trait LLMApiConfigTrait {
     fn api_base_config_mut(&mut self) -> &mut ApiConfig;
 
     fn api_config(&self) -> &ApiConfig;

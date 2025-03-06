@@ -4,17 +4,17 @@ use alith_devices::devices::DeviceConfig;
 #[cfg(target_os = "macos")]
 use alith_devices::devices::MetalConfig;
 use alith_models::local_model::{
-    gguf::GgufLoader, metadata::llm::DEFAULT_CONTEXT_LENGTH, LocalLlmModel,
+    gguf::GgufLoader, metadata::llm::DEFAULT_CONTEXT_LENGTH, LocalLLMModel,
 };
 
 #[derive(Clone, Debug)]
-pub struct LocalLlmConfig {
+pub struct LocalLLMConfig {
     pub batch_size: u64,
     pub inference_ctx_size: u64,
     pub device_config: DeviceConfig,
 }
 
-impl Default for LocalLlmConfig {
+impl Default for LocalLLMConfig {
     fn default() -> Self {
         Self {
             batch_size: 512,
@@ -24,8 +24,8 @@ impl Default for LocalLlmConfig {
     }
 }
 
-impl LocalLlmConfig {
-    pub fn load_model(&mut self, mut llm_loader: GgufLoader) -> crate::Result<LocalLlmModel> {
+impl LocalLLMConfig {
+    pub fn load_model(&mut self, mut llm_loader: GgufLoader) -> crate::Result<LocalLLMModel> {
         let model = if llm_loader.gguf_local_loader.local_quant_file_path.is_none()
             || llm_loader.gguf_hf_loader.hf_quant_file_url.is_none()
         {
@@ -50,7 +50,7 @@ impl LocalLlmConfig {
         Ok(model)
     }
 
-    fn load_preset_model(&mut self, mut llm_loader: GgufLoader) -> crate::Result<LocalLlmModel> {
+    fn load_preset_model(&mut self, mut llm_loader: GgufLoader) -> crate::Result<LocalLLMModel> {
         if llm_loader
             .gguf_preset_loader
             .preset_with_quantization_level
@@ -79,8 +79,8 @@ impl LocalLlmConfig {
     }
 }
 
-pub trait LlmLocalTrait {
-    fn config(&mut self) -> &mut LocalLlmConfig;
+pub trait LLMLocalTrait {
+    fn config(&mut self) -> &mut LocalLLMConfig;
 
     /// If enabled, any issues with the configuration will result in an error.
     /// Otherwise, fallbacks will be used.

@@ -1,9 +1,9 @@
-use super::ApiLlmModel;
-use crate::{tokenizer::LlmTokenizer, LlmModelBase};
+use super::ApiLLMModel;
+use crate::{tokenizer::LLMTokenizer, LLMModelBase};
 use std::sync::Arc;
 
-impl ApiLlmModel {
-    pub fn perplexity_model_from_model_id(model_id: &str) -> ApiLlmModel {
+impl ApiLLMModel {
+    pub fn perplexity_model_from_model_id(model_id: &str) -> ApiLLMModel {
         if model_id.starts_with("llama-3.1-sonar-small") {
             Self::sonar_small()
         } else if model_id.starts_with("llama-3.1-sonar-large") {
@@ -17,15 +17,15 @@ impl ApiLlmModel {
         } else if model_id.contains("sonar-huge") {
             Self::sonar_huge()
         } else {
-            panic!("Model ID ({model_id}) not found for ApiLlmModel")
+            panic!("Model ID ({model_id}) not found for ApiLLMModel")
         }
     }
 
-    pub fn sonar_small() -> ApiLlmModel {
+    pub fn sonar_small() -> ApiLLMModel {
         let model_id = "llama-3.1-sonar-small-128k-online".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 127072,
                 inference_ctx_size: 8192,
@@ -38,11 +38,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn sonar_large() -> ApiLlmModel {
+    pub fn sonar_large() -> ApiLLMModel {
         let model_id = "llama-3.1-sonar-large-128k-online".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 127072,
                 inference_ctx_size: 8192,
@@ -55,11 +55,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn sonar_huge() -> ApiLlmModel {
+    pub fn sonar_huge() -> ApiLLMModel {
         let model_id = "llama-3.1-sonar-huge-128k-online".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 127072,
                 inference_ctx_size: 8192,
@@ -73,22 +73,22 @@ impl ApiLlmModel {
     }
 }
 
-pub fn model_tokenizer(_model_id: &str) -> Arc<LlmTokenizer> {
+pub fn model_tokenizer(_model_id: &str) -> Arc<LLMTokenizer> {
     Arc::new(
-        LlmTokenizer::new_tiktoken("gpt-4")
+        LLMTokenizer::new_tiktoken("gpt-4")
             .unwrap_or_else(|_| panic!("Failed to load tokenizer for gpt-4")),
     )
 }
 
 pub trait PerplexityModelTrait: Sized {
-    fn model(&mut self) -> &mut ApiLlmModel;
+    fn model(&mut self) -> &mut ApiLLMModel;
 
     /// Set the model using the model_id string.
     fn model_id_str(mut self, model_id: &str) -> Self
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::perplexity_model_from_model_id(model_id);
+        *self.model() = ApiLLMModel::perplexity_model_from_model_id(model_id);
         self
     }
 
@@ -96,7 +96,7 @@ pub trait PerplexityModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::sonar_small();
+        *self.model() = ApiLLMModel::sonar_small();
         self
     }
 
@@ -104,7 +104,7 @@ pub trait PerplexityModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::sonar_large();
+        *self.model() = ApiLLMModel::sonar_large();
         self
     }
 
@@ -112,7 +112,7 @@ pub trait PerplexityModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::sonar_huge();
+        *self.model() = ApiLLMModel::sonar_huge();
         self
     }
 }

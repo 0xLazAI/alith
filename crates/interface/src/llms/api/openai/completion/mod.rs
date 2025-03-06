@@ -1,4 +1,4 @@
 mod req;
 mod res;
-pub use req::OpenAiCompletionRequest;
-pub use res::OpenAiCompletionResponse;
+pub use req::OpenAICompletionRequest;
+pub use res::OpenAICompletionResponse;

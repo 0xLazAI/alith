@@ -6,12 +6,12 @@ pub(crate) use tracing::{debug, error, info, span, trace, warn, Level};
 pub mod llms;
 pub mod requests;
 
-pub struct LlmInterface {}
+pub struct LLMInterface {}
 
 // These are examples and bare minimum implementations. For full featured implementation see the alith-client crate.
-impl LlmInterface {
-    pub fn openai() -> llms::api::openai::builder::OpenAiBackendBuilder {
-        llms::api::openai::builder::OpenAiBackendBuilder::default()
+impl LLMInterface {
+    pub fn openai() -> llms::api::openai::builder::OpenAIBackendBuilder {
+        llms::api::openai::builder::OpenAIBackendBuilder::default()
     }
 
     pub fn anthropic() -> llms::api::anthropic::builder::AnthropicBackendBuilder {

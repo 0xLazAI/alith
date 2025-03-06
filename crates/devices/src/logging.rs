@@ -5,6 +5,7 @@ use indenter::indented;
 
 use std::fmt::Write;
 use std::path::PathBuf;
+use std::sync::Arc;
 use std::{fs::create_dir_all, path::Path};
 use tracing_subscriber::layer::SubscriberExt;
 
@@ -14,7 +15,7 @@ pub struct LoggingConfig {
     pub logging_enabled: bool,
     pub logger_name: String,
     pub log_path: Option<PathBuf>,
-    pub _tracing_guard: Option<std::sync::Arc<tracing::subscriber::DefaultGuard>>,
+    pub _tracing_guard: Option<Arc<tracing::subscriber::DefaultGuard>>,
     pub build_log: bool,
 }
 
@@ -38,7 +39,7 @@ impl LoggingConfig {
 
     pub fn load_logger(&mut self) -> crate::Result<()> {
         self._tracing_guard = if self.logging_enabled {
-            Some(std::sync::Arc::new(self.create_logger()?))
+            Some(Arc::new(self.create_logger()?))
         } else {
             None
         };

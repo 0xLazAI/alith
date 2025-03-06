@@ -1,4 +1,4 @@
-use alith_models::tokenizer::LlmTokenizer;
+use alith_models::tokenizer::LLMTokenizer;
 
 use crate::requests::req_components::RequestConfigTrait;
 
@@ -7,7 +7,7 @@ use std::{collections::HashMap, sync::Arc};
 #[derive(Clone, Default)]
 pub struct LogitBias {
     pub base_logit_bias: Option<HashMap<u32, f32>>,
-    pub built_openai_bias: OpenAiLogitBias,
+    pub built_openai_bias: OpenAILogitBias,
     from_token_ids: FromTokenIds,
     from_chars: FromChars,
     from_words: FromWords,
@@ -58,7 +58,7 @@ impl LogitBias {
         self
     }
 
-    pub(crate) fn build_openai(&mut self, tokenizer: &Arc<LlmTokenizer>) -> crate::Result<()> {
+    pub(crate) fn build_openai(&mut self, tokenizer: &Arc<LLMTokenizer>) -> crate::Result<()> {
         if !self.built_openai_bias.is_none() {
             return Ok(());
         }
@@ -75,7 +75,7 @@ impl LogitBias {
         self.built_openai_bias.get()
     }
 
-    fn build_base(&mut self, tokenizer: &Arc<LlmTokenizer>) -> crate::Result<()> {
+    fn build_base(&mut self, tokenizer: &Arc<LLMTokenizer>) -> crate::Result<()> {
         if self.from_token_ids.is_none()
             && self.from_chars.is_none()
             && self.from_words.is_none()
@@ -172,7 +172,7 @@ impl FromTokenIds {
         self.token_ids = None;
     }
 
-    fn get(&self, tokenizer: &Arc<LlmTokenizer>) -> crate::Result<HashMap<u32, f32>> {
+    fn get(&self, tokenizer: &Arc<LLMTokenizer>) -> crate::Result<HashMap<u32, f32>> {
         if let Some(token_ids) = &self.token_ids {
             for token_id in token_ids.keys() {
                 tokenizer.try_from_single_token_id(*token_id)?;
@@ -211,7 +211,7 @@ impl FromChars {
         self.chars = None;
     }
 
-    fn get(&self, tokenizer: &Arc<LlmTokenizer>) -> crate::Result<HashMap<u32, f32>> {
+    fn get(&self, tokenizer: &Arc<LLMTokenizer>) -> crate::Result<HashMap<u32, f32>> {
         if let Some(chars) = &self.chars {
             let mut token_logit_bias: HashMap<u32, f32> = HashMap::new();
             for (char, bias) in chars {
@@ -246,7 +246,7 @@ impl FromWords {
         self.words = None;
     }
 
-    fn get(&self, tokenizer: &Arc<LlmTokenizer>) -> crate::Result<HashMap<u32, f32>> {
+    fn get(&self, tokenizer: &Arc<LLMTokenizer>) -> crate::Result<HashMap<u32, f32>> {
         if let Some(words) = &self.words {
             let mut token_logit_bias: HashMap<u32, f32> = HashMap::new();
             for (word_maybe, bias) in words {
@@ -307,7 +307,7 @@ impl FromTexts {
         self.texts = None;
     }
 
-    fn get(&self, tokenizer: &Arc<LlmTokenizer>) -> crate::Result<HashMap<u32, f32>> {
+    fn get(&self, tokenizer: &Arc<LLMTokenizer>) -> crate::Result<HashMap<u32, f32>> {
         if let Some(texts) = &self.texts {
             let mut token_logit_bias: HashMap<u32, f32> = HashMap::new();
             for (text, bias) in texts {
@@ -334,11 +334,11 @@ impl FromTexts {
 }
 
 #[derive(Clone, Default)]
-pub struct OpenAiLogitBias {
+pub struct OpenAILogitBias {
     pub built_logit_bias: Option<HashMap<String, serde_json::Value>>,
 }
 
-impl OpenAiLogitBias {
+impl OpenAILogitBias {
     fn is_none(&self) -> bool {
         self.built_logit_bias.is_none()
     }

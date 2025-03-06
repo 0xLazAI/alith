@@ -1,9 +1,9 @@
-use super::ApiLlmModel;
-use crate::{tokenizer::LlmTokenizer, LlmModelBase};
+use super::ApiLLMModel;
+use crate::{tokenizer::LLMTokenizer, LLMModelBase};
 use std::sync::Arc;
 
-impl ApiLlmModel {
-    pub fn anthropic_model_from_model_id(model_id: &str) -> ApiLlmModel {
+impl ApiLLMModel {
+    pub fn anthropic_model_from_model_id(model_id: &str) -> ApiLLMModel {
         if model_id.starts_with("claude-3-opus") {
             Self::claude_3_opus()
         } else if model_id.starts_with("claude-3-sonnet") {
@@ -19,11 +19,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn claude_3_opus() -> ApiLlmModel {
+    pub fn claude_3_opus() -> ApiLLMModel {
         let model_id = "claude-3-opus-20240229".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 200000,
                 inference_ctx_size: 4096,
@@ -36,11 +36,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn claude_3_sonnet() -> ApiLlmModel {
+    pub fn claude_3_sonnet() -> ApiLLMModel {
         let model_id = "claude-3-sonnet-20240229".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 200000,
                 inference_ctx_size: 4096,
@@ -53,11 +53,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn claude_3_haiku() -> ApiLlmModel {
+    pub fn claude_3_haiku() -> ApiLLMModel {
         let model_id = "claude-3-haiku-20240307".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 200000,
                 inference_ctx_size: 4096,
@@ -70,11 +70,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn claude_3_5_sonnet() -> ApiLlmModel {
+    pub fn claude_3_5_sonnet() -> ApiLLMModel {
         let model_id = "claude-3-5-sonnet-20240620".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 200000,
                 inference_ctx_size: 8192,
@@ -87,11 +87,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn claude_3_7_sonnet() -> ApiLlmModel {
+    pub fn claude_3_7_sonnet() -> ApiLLMModel {
         let model_id = "claude-3-7-sonnet-20250219".to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 200000,
                 inference_ctx_size: 8192,
@@ -104,11 +104,11 @@ impl ApiLlmModel {
         }
     }
 
-    pub fn claude<S: ToString>(model_id: S) -> ApiLlmModel {
+    pub fn claude<S: ToString>(model_id: S) -> ApiLLMModel {
         let model_id = model_id.to_string();
         let tokenizer = model_tokenizer(&model_id);
-        ApiLlmModel {
-            model_base: LlmModelBase {
+        ApiLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: 200000,
                 inference_ctx_size: 8192,
@@ -122,24 +122,24 @@ impl ApiLlmModel {
     }
 }
 
-pub fn model_tokenizer(_model_id: &str) -> Arc<LlmTokenizer> {
+pub fn model_tokenizer(_model_id: &str) -> Arc<LLMTokenizer> {
     println!("Anthropic does not have a publically available tokenizer. See this for more information: https://github.com/javirandor/anthropic-tokenizer");
     println!("However, since Anthropic does not support logit bias, we don't have a use for an actual tokenizer. So we can use TikToken to count tokens.");
     Arc::new(
-        LlmTokenizer::new_tiktoken("gpt-4")
+        LLMTokenizer::new_tiktoken("gpt-4")
             .unwrap_or_else(|_| panic!("Failed to load tokenizer for gpt-4")),
     )
 }
 
 pub trait AnthropicModelTrait: Sized {
-    fn model(&mut self) -> &mut ApiLlmModel;
+    fn model(&mut self) -> &mut ApiLLMModel;
 
     /// Set the model using the model_id string.
     fn model_id_str(mut self, model_id: &str) -> Self
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::anthropic_model_from_model_id(model_id);
+        *self.model() = ApiLLMModel::anthropic_model_from_model_id(model_id);
         self
     }
 
@@ -148,7 +148,7 @@ pub trait AnthropicModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::claude_3_opus();
+        *self.model() = ApiLLMModel::claude_3_opus();
         self
     }
 
@@ -157,7 +157,7 @@ pub trait AnthropicModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::claude_3_sonnet();
+        *self.model() = ApiLLMModel::claude_3_sonnet();
         self
     }
 
@@ -166,7 +166,7 @@ pub trait AnthropicModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::claude_3_haiku();
+        *self.model() = ApiLLMModel::claude_3_haiku();
         self
     }
 
@@ -175,7 +175,7 @@ pub trait AnthropicModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::claude_3_5_sonnet();
+        *self.model() = ApiLLMModel::claude_3_5_sonnet();
         self
     }
 
@@ -184,7 +184,7 @@ pub trait AnthropicModelTrait: Sized {
     where
         Self: Sized,
     {
-        *self.model() = ApiLlmModel::claude_3_7_sonnet();
+        *self.model() = ApiLLMModel::claude_3_7_sonnet();
         self
     }
 }

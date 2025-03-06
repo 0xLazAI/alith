@@ -1,23 +1,24 @@
 use super::{PromptMessage, TextConcatenator};
 use crate::PromptTokenizer;
 use std::collections::HashMap;
+use std::sync::Arc;
 
 #[derive(Clone)]
-pub struct OpenAiPrompt {
+pub struct OpenAIPrompt {
     pub built_prompt_hashmap: std::cell::RefCell<Option<Vec<HashMap<String, String>>>>,
     pub total_prompt_tokens: std::cell::RefCell<Option<u64>>,
     pub concatenator: TextConcatenator,
     pub messages: std::cell::RefCell<Vec<PromptMessage>>,
-    tokenizer: std::sync::Arc<dyn PromptTokenizer>,
+    tokenizer: Arc<dyn PromptTokenizer>,
     tokens_per_message: Option<u32>,
     tokens_per_name: Option<i32>,
 }
 
-impl OpenAiPrompt {
+impl OpenAIPrompt {
     pub fn new(
         tokens_per_message: Option<u32>,
         tokens_per_name: Option<i32>,
-        tokenizer: std::sync::Arc<dyn PromptTokenizer>,
+        tokenizer: Arc<dyn PromptTokenizer>,
     ) -> Self {
         Self {
             built_prompt_hashmap: std::cell::RefCell::new(None),
@@ -51,10 +52,10 @@ impl OpenAiPrompt {
     }
 }
 
-impl std::fmt::Display for OpenAiPrompt {
+impl std::fmt::Display for OpenAIPrompt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f)?;
-        writeln!(f, "OpenAiPrompt")?;
+        writeln!(f, "OpenAIPrompt")?;
         for message in self.messages.borrow().iter() {
             writeln!(f, "{}", message)?;
         }

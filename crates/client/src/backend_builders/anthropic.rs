@@ -1,38 +1,39 @@
-use crate::LlmClient;
+use crate::LLMClient;
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
 use alith_interface::llms::{
     api::{
         anthropic::{AnthropicBackend, AnthropicConfig},
-        config::{ApiConfig, LlmApiConfigTrait},
+        config::{ApiConfig, LLMApiConfigTrait},
     },
-    LlmBackend,
+    LLMBackend,
 };
-use alith_models::api_model::{anthropic::AnthropicModelTrait, ApiLlmModel};
+use alith_models::api_model::{anthropic::AnthropicModelTrait, ApiLLMModel};
+use std::sync::Arc;
 
 // Everything here can be implemented for any struct.
 pub struct AnthropicBackendBuilder {
     pub config: AnthropicConfig,
-    pub model: ApiLlmModel,
+    pub model: ApiLLMModel,
 }
 
 impl Default for AnthropicBackendBuilder {
     fn default() -> Self {
         Self {
             config: Default::default(),
-            model: ApiLlmModel::claude_3_7_sonnet(),
+            model: ApiLLMModel::claude_3_7_sonnet(),
         }
     }
 }
 
 impl AnthropicBackendBuilder {
-    pub fn init(self) -> crate::Result<LlmClient> {
-        Ok(LlmClient::new(std::sync::Arc::new(LlmBackend::Anthropic(
+    pub fn init(self) -> crate::Result<LLMClient> {
+        Ok(LLMClient::new(Arc::new(LLMBackend::Anthropic(
             AnthropicBackend::new(self.config, self.model)?,
         ))))
     }
 }
 
-impl LlmApiConfigTrait for AnthropicBackendBuilder {
+impl LLMApiConfigTrait for AnthropicBackendBuilder {
     fn api_base_config_mut(&mut self) -> &mut ApiConfig {
         &mut self.config.api_config
     }
@@ -43,7 +44,7 @@ impl LlmApiConfigTrait for AnthropicBackendBuilder {
 }
 
 impl AnthropicModelTrait for AnthropicBackendBuilder {
-    fn model(&mut self) -> &mut ApiLlmModel {
+    fn model(&mut self) -> &mut ApiLLMModel {
         &mut self.model
     }
 }

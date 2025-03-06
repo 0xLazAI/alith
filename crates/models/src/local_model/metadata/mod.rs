@@ -7,7 +7,7 @@ use general::GeneralMetadata;
 use llm::Architecture;
 use tokenizer::TokenizerMetadata;
 
-pub struct LocalLlmMetadata {
+pub struct LocalLLMMetadata {
     pub general: GeneralMetadata,
     pub llm: Architecture,
     pub tokenizer: TokenizerMetadata,
@@ -15,7 +15,7 @@ pub struct LocalLlmMetadata {
     pub layers: GgufLayers,
 }
 
-impl LocalLlmMetadata {
+impl LocalLLMMetadata {
     pub fn from_gguf_path(path: &std::path::Path) -> crate::Result<Self> {
         let mut reader = std::fs::File::open(path)?;
         let gguf: GgufFile = GgufFile::read(&mut reader)?;
@@ -54,9 +54,9 @@ impl LocalLlmMetadata {
     }
 }
 
-impl std::fmt::Debug for LocalLlmMetadata {
+impl std::fmt::Debug for LocalLLMMetadata {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let mut debug_struct = f.debug_struct("LocalLlmMetadata");
+        let mut debug_struct = f.debug_struct("LocalLLMMetadata");
         debug_struct.field("GeneralMetadata", &self.general);
         debug_struct.field("Architecture", &self.llm);
         debug_struct.field("TokenizerMetadata", &self.tokenizer);

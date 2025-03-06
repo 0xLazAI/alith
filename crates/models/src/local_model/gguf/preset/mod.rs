@@ -1,5 +1,5 @@
 //! Adding a preset model checklist:
-//! 1. Add a new variant to the `LlmPreset` enum via generate_models! macro
+//! 1. Add a new variant to the `LLMPreset` enum via generate_models! macro
 //! 2. Create directory for the new model in `llm_client/llm_models/src/local_model/gguf/preset`
 //! 3. Add model_macro_data.json to the new model's directory
 //! 4. Add the model's config.json to the new model's directory
@@ -9,7 +9,7 @@
 //! 8. Add a test_base_generation_prefix test case to llm_client/llm_models/tests/it/metadata.rs for the new model
 use crate::local_model::{
     gguf::loaders::preset::GgufPresetLoader, hf_loader::HuggingFaceLoader,
-    metadata::config_json::ConfigJson, GgufLoader, LocalLlmModel,
+    metadata::config_json::ConfigJson, GgufLoader, LocalLLMModel,
 };
 
 fn presets_path() -> std::path::PathBuf {
@@ -22,7 +22,7 @@ fn presets_path() -> std::path::PathBuf {
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
-pub struct LlmPresetData {
+pub struct LLMPresetData {
     pub model_id: String,
     pub gguf_repo_id: String,
     pub number_of_parameters: u64,
@@ -80,8 +80,8 @@ impl TokenizerConfigPresetData {
     }
 }
 
-impl LlmPresetData {
-    pub fn new<P: AsRef<std::path::Path>>(path: P) -> LlmPresetData {
+impl LLMPresetData {
+    pub fn new<P: AsRef<std::path::Path>>(path: P) -> LLMPresetData {
         let cargo_manifest_dir = env!("CARGO_MANIFEST_DIR");
         let path = std::path::PathBuf::from(cargo_manifest_dir)
             .join("src")
@@ -120,12 +120,12 @@ macro_rules! generate_models {
         }
 
         impl $enum_name {
-            pub fn get_data(&self) -> &'static LlmPresetData {
+            pub fn get_data(&self) -> &'static LLMPresetData {
                 match self {
                     $(
                         Self::$variant => {
-                            static DATA: std::sync::LazyLock<LlmPresetData> = std::sync::LazyLock::new(|| {
-                                LlmPresetData::new($path)
+                            static DATA: std::sync::LazyLock<LLMPresetData> = std::sync::LazyLock::new(|| {
+                                LLMPresetData::new($path)
                             });
                             &DATA
                         }
@@ -192,7 +192,7 @@ macro_rules! generate_models {
 
 
 
-            pub fn load(&self) -> crate::Result<LocalLlmModel> {
+            pub fn load(&self) -> crate::Result<LocalLLMModel> {
                 let mut loader = GgufLoader::default();
                 loader.gguf_preset_loader.llm_preset = self.clone();
                 loader.load()
@@ -238,7 +238,7 @@ macro_rules! generate_models {
 }
 
 generate_models!(
-    LlmPreset {
+    LLMPreset {
         SuperNovaMedius13b => "arcee/supernova_medius",
         Llama3_1_8bInstruct => "llama/llama3_1_8b_instruct",
         Llama3_2_3bInstruct => "llama/llama3_2_3b_instruct",

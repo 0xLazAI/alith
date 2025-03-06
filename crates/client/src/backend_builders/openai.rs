@@ -1,38 +1,39 @@
-use crate::LlmClient;
+use crate::LLMClient;
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
 use alith_interface::llms::{
     api::{
-        config::{ApiConfig, LlmApiConfigTrait},
-        openai::{OpenAiBackend, OpenAiConfig},
+        config::{ApiConfig, LLMApiConfigTrait},
+        openai::{OpenAIBackend, OpenAIConfig},
     },
-    LlmBackend,
+    LLMBackend,
 };
-use alith_models::api_model::{openai::OpenAiModelTrait, ApiLlmModel};
+use alith_models::api_model::{openai::OpenAIModelTrait, ApiLLMModel};
+use std::sync::Arc;
 
 // Everything here can be implemented for any struct.
-pub struct OpenAiBackendBuilder {
-    pub config: OpenAiConfig,
-    pub model: ApiLlmModel,
+pub struct OpenAIBackendBuilder {
+    pub config: OpenAIConfig,
+    pub model: ApiLLMModel,
 }
 
-impl Default for OpenAiBackendBuilder {
+impl Default for OpenAIBackendBuilder {
     fn default() -> Self {
         Self {
             config: Default::default(),
-            model: ApiLlmModel::gpt_4_o_mini(),
+            model: ApiLLMModel::gpt_4_o_mini(),
         }
     }
 }
 
-impl OpenAiBackendBuilder {
-    pub fn init(self) -> crate::Result<LlmClient> {
-        Ok(LlmClient::new(std::sync::Arc::new(LlmBackend::OpenAi(
-            OpenAiBackend::new(self.config, self.model)?,
+impl OpenAIBackendBuilder {
+    pub fn init(self) -> crate::Result<LLMClient> {
+        Ok(LLMClient::new(Arc::new(LLMBackend::OpenAI(
+            OpenAIBackend::new(self.config, self.model)?,
         ))))
     }
 }
 
-impl LlmApiConfigTrait for OpenAiBackendBuilder {
+impl LLMApiConfigTrait for OpenAIBackendBuilder {
     fn api_base_config_mut(&mut self) -> &mut ApiConfig {
         &mut self.config.api_config
     }
@@ -42,13 +43,13 @@ impl LlmApiConfigTrait for OpenAiBackendBuilder {
     }
 }
 
-impl OpenAiModelTrait for OpenAiBackendBuilder {
-    fn model(&mut self) -> &mut ApiLlmModel {
+impl OpenAIModelTrait for OpenAIBackendBuilder {
+    fn model(&mut self) -> &mut ApiLLMModel {
         &mut self.model
     }
 }
 
-impl LoggingConfigTrait for OpenAiBackendBuilder {
+impl LoggingConfigTrait for OpenAIBackendBuilder {
     fn logging_config_mut(&mut self) -> &mut LoggingConfig {
         &mut self.config.logging_config
     }

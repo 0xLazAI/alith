@@ -5,7 +5,7 @@ use anyhow::Context;
 use serde::Deserialize;
 
 #[derive(Deserialize, Clone, PartialEq)]
-pub struct LlmChatTemplate {
+pub struct LLMChatTemplate {
     pub chat_template: String,
     pub bos_token: Option<String>,
     pub eos_token: String,
@@ -13,13 +13,13 @@ pub struct LlmChatTemplate {
     pub base_generation_prefix: Option<String>,
 }
 
-impl LlmChatTemplate {
+impl LLMChatTemplate {
     pub fn from_local_path(
         tokenizer_config_local_path: &std::path::PathBuf,
     ) -> crate::Result<Self> {
         let file = std::fs::File::open(tokenizer_config_local_path)?;
         let reader = std::io::BufReader::new(file);
-        let mut chat_template: LlmChatTemplate = serde_json::from_reader(reader)?;
+        let mut chat_template: LLMChatTemplate = serde_json::from_reader(reader)?;
         chat_template.set_generation_prefix()?;
         Ok(chat_template)
     }
@@ -59,7 +59,7 @@ impl LlmChatTemplate {
             None
         };
 
-        let mut chat_template = LlmChatTemplate {
+        let mut chat_template = LLMChatTemplate {
             chat_template: chat_template.to_owned(),
             bos_token: Some(bos_token),
             eos_token,
@@ -84,7 +84,7 @@ impl LlmChatTemplate {
         ]);
 
         let message_1 = alith_prompt::apply_chat_template(
-            &vec![user_message_1.clone()],
+            &[user_message_1.clone()],
             &self.chat_template,
             self.bos_token.as_deref(),
             &self.eos_token,
@@ -94,7 +94,7 @@ impl LlmChatTemplate {
             .trim_end_matches(self.eos_token.as_str())
             .to_owned();
         let message_2 = alith_prompt::apply_chat_template(
-            &vec![user_message_1, assistant_message_1],
+            &[user_message_1, assistant_message_1],
             &self.chat_template,
             self.bos_token.as_deref(),
             &self.eos_token,
@@ -126,9 +126,9 @@ impl LlmChatTemplate {
     }
 }
 
-impl std::fmt::Debug for LlmChatTemplate {
+impl std::fmt::Debug for LLMChatTemplate {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let mut debug_struct = f.debug_struct("LlmChatTemplate");
+        let mut debug_struct = f.debug_struct("LLMChatTemplate");
         debug_struct.field("chat_template", &"string too long to print nicely");
         debug_struct.field("bos_token", &self.bos_token);
         debug_struct.field("eos_token", &self.eos_token);

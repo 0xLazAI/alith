@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 #[derive(Clone, Serialize, Default, Debug, Deserialize)]
-pub struct OpenAiCompletionRequest {
+pub struct OpenAICompletionRequest {
     /// ID of the model to use.
     /// See the [model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
     pub model: String,
@@ -60,7 +60,7 @@ pub struct OpenAiCompletionRequest {
 
     /// The tools for the request, default: None
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tools: Option<Vec<OpenAiToolDefinition>>,
+    pub tools: Option<Vec<OpenAIToolDefinition>>,
 
     /// The tool choice for the request, default: None
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -68,12 +68,12 @@ pub struct OpenAiCompletionRequest {
 }
 
 #[derive(Clone, Serialize, Debug, Deserialize)]
-pub struct OpenAiToolDefinition {
+pub struct OpenAIToolDefinition {
     pub r#type: String,
     pub function: ToolDefinition,
 }
 
-impl OpenAiCompletionRequest {
+impl OpenAICompletionRequest {
     pub fn new(req: &CompletionRequest) -> crate::Result<Self, CompletionError> {
         let mut messages = Vec::new();
         match &req.prompt.get_built_prompt_hashmap() {
@@ -85,7 +85,7 @@ impl OpenAiCompletionRequest {
             Err(e) => return Err(CompletionError::RequestBuilderError(e.to_string())),
         }
 
-        Ok(OpenAiCompletionRequest {
+        Ok(OpenAICompletionRequest {
             messages,
             model: req.backend.model_id().to_owned(),
             logit_bias: req.logit_bias.as_ref().and_then(|lb| lb.get_openai()),
@@ -101,7 +101,7 @@ impl OpenAiCompletionRequest {
                 Some(
                     req.tools
                         .iter()
-                        .map(|tool| OpenAiToolDefinition {
+                        .map(|tool| OpenAIToolDefinition {
                             r#type: "function".to_string(),
                             function: tool.clone(),
                         })

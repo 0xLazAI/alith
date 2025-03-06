@@ -1,9 +1,10 @@
 use super::{
-    hf_loader::HuggingFaceLoader, metadata::LocalLlmMetadata, GgufPresetTrait, HfTokenTrait,
-    LlmChatTemplate, LocalLlmModel,
+    hf_loader::HuggingFaceLoader, metadata::LocalLLMMetadata, GgufPresetTrait, HfTokenTrait,
+    LLMChatTemplate, LocalLLMModel,
 };
-use crate::tokenizer::LlmTokenizer;
+use crate::tokenizer::LLMTokenizer;
 use loaders::{hf::GgufHfLoader, local::GgufLocalLoader, preset::GgufPresetLoader};
+use std::sync::Arc;
 use tools::gguf_tokenizer::convert_gguf_to_hf_tokenizer;
 
 pub mod loaders;
@@ -24,7 +25,7 @@ impl GgufLoader {
         Self::default()
     }
 
-    pub fn load(&mut self) -> crate::Result<LocalLlmModel> {
+    pub fn load(&mut self) -> crate::Result<LocalLLMModel> {
         if self.gguf_local_loader.local_quant_file_path.is_some() {
             self.gguf_local_loader.load()
         } else if self.gguf_hf_loader.hf_quant_file_url.is_some() {
@@ -59,11 +60,11 @@ impl GgufPresetTrait for GgufLoader {
 
 pub(crate) fn load_tokenizer(
     local_tokenizer_path: &Option<std::path::PathBuf>,
-    model_metadata: &LocalLlmMetadata,
-) -> crate::Result<std::sync::Arc<LlmTokenizer>> {
+    model_metadata: &LocalLLMMetadata,
+) -> crate::Result<Arc<LLMTokenizer>> {
     if let Some(local_tokenizer_path) = &local_tokenizer_path {
-        match LlmTokenizer::new_from_tokenizer_json(local_tokenizer_path) {
-            Ok(tokenizer) => Ok(std::sync::Arc::new(tokenizer)),
+        match LLMTokenizer::new_from_tokenizer_json(local_tokenizer_path) {
+            Ok(tokenizer) => Ok(Arc::new(tokenizer)),
             Err(e) => {
                 crate::warn!("Failed to load tokenizer from local path: {}", e);
                 let ggml = if let Some(ggml) = &model_metadata.tokenizer.ggml {
@@ -72,16 +73,12 @@ pub(crate) fn load_tokenizer(
                     crate::bail!("GGML tokenizer model not found.");
                 };
                 let tokenizer = convert_gguf_to_hf_tokenizer(ggml)?;
-                Ok(std::sync::Arc::new(LlmTokenizer::new_from_tokenizer(
-                    tokenizer,
-                )?))
+                Ok(Arc::new(LLMTokenizer::new_from_tokenizer(tokenizer)?))
             }
         }
     } else if let Some(ggml) = &model_metadata.tokenizer.ggml {
         let tokenizer = convert_gguf_to_hf_tokenizer(ggml)?;
-        Ok(std::sync::Arc::new(LlmTokenizer::new_from_tokenizer(
-            tokenizer,
-        )?))
+        Ok(Arc::new(LLMTokenizer::new_from_tokenizer(tokenizer)?))
     } else {
         crate::bail!("No tokenizer found in model metadata")
     }
@@ -89,18 +86,18 @@ pub(crate) fn load_tokenizer(
 
 pub(crate) fn load_chat_template(
     local_tokenizer_config_path: &Option<std::path::PathBuf>,
-    model_metadata: &LocalLlmMetadata,
-) -> crate::Result<LlmChatTemplate> {
+    model_metadata: &LocalLLMMetadata,
+) -> crate::Result<LLMChatTemplate> {
     if let Some(local_tokenizer_config_path) = local_tokenizer_config_path {
-        match LlmChatTemplate::from_local_path(local_tokenizer_config_path) {
+        match LLMChatTemplate::from_local_path(local_tokenizer_config_path) {
             Ok(chat_template) => Ok(chat_template),
             Err(e) => {
                 crate::warn!("Failed to load chat template from local path: {}", e);
-                LlmChatTemplate::from_gguf_tokenizer(&model_metadata.tokenizer)
+                LLMChatTemplate::from_gguf_tokenizer(&model_metadata.tokenizer)
             }
         }
     } else {
-        LlmChatTemplate::from_gguf_tokenizer(&model_metadata.tokenizer)
+        LLMChatTemplate::from_gguf_tokenizer(&model_metadata.tokenizer)
     }
 }
 

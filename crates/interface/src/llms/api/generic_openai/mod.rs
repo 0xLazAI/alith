@@ -1,7 +1,7 @@
 use super::{
     client::ApiClient,
     config::{ApiConfig, ApiConfigTrait},
-    openai::completion::OpenAiCompletionRequest,
+    openai::completion::OpenAICompletionRequest,
 };
 use crate::requests::{
     completion::{
@@ -10,18 +10,18 @@ use crate::requests::{
     embeddings::{EmbeddingsError, EmbeddingsRequest, EmbeddingsResponse},
 };
 use alith_devices::logging::LoggingConfig;
-use alith_models::api_model::ApiLlmModel;
+use alith_models::api_model::ApiLLMModel;
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
 use secrecy::{ExposeSecret, Secret};
 use serde_json::json;
 
 pub struct GenericApiBackend {
     pub(crate) client: ApiClient<GenericApiConfig>,
-    pub model: ApiLlmModel,
+    pub model: ApiLLMModel,
 }
 
 impl GenericApiBackend {
-    pub fn new(mut config: GenericApiConfig, model: ApiLlmModel) -> crate::Result<Self> {
+    pub fn new(mut config: GenericApiConfig, model: ApiLLMModel) -> crate::Result<Self> {
         config.logging_config.load_logger()?;
         if let Ok(api_key) = config.api_config.load_api_key() {
             config.api_config.api_key = Some(api_key);
@@ -40,7 +40,7 @@ impl GenericApiBackend {
             .client
             .post(
                 &self.client.config.completion_path,
-                OpenAiCompletionRequest::new(request)?,
+                OpenAICompletionRequest::new(request)?,
             )
             .await
         {

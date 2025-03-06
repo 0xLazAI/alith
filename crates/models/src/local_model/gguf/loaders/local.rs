@@ -1,10 +1,10 @@
 use crate::{
     local_model::{
         gguf::{load_chat_template, load_tokenizer},
-        metadata::LocalLlmMetadata,
-        LocalLlmModel,
+        metadata::LocalLLMMetadata,
+        LocalLLMModel,
     },
-    LlmModelBase,
+    LLMModelBase,
 };
 
 #[derive(Default, Clone)]
@@ -17,7 +17,7 @@ pub struct GgufLocalLoader {
 }
 
 impl GgufLocalLoader {
-    pub fn load(&mut self) -> crate::Result<LocalLlmModel> {
+    pub fn load(&mut self) -> crate::Result<LocalLLMModel> {
         let local_model_path =
             if let Some(local_quant_file_path) = self.local_quant_file_path.as_ref() {
                 local_quant_file_path.to_owned()
@@ -31,10 +31,10 @@ impl GgufLocalLoader {
             local_model_path.to_string_lossy().to_string()
         };
 
-        let model_metadata = LocalLlmMetadata::from_gguf_path(&local_model_path)?;
+        let model_metadata = LocalLLMMetadata::from_gguf_path(&local_model_path)?;
 
-        Ok(LocalLlmModel {
-            model_base: LlmModelBase {
+        Ok(LocalLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: model_metadata.context_length(),
                 inference_ctx_size: model_metadata.context_length(),

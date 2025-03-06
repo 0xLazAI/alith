@@ -7,12 +7,13 @@ use crate::{
     primitives::*,
 };
 use alith_interface::{
-    llms::LlmBackend,
+    llms::LLMBackend,
     requests::{
         completion::CompletionRequest,
         req_components::{RequestConfig, RequestConfigTrait},
     },
 };
+use std::sync::Arc;
 
 pub struct BasicPrimitiveWorkflow<P> {
     pub primitive: P,
@@ -22,7 +23,7 @@ pub struct BasicPrimitiveWorkflow<P> {
 }
 
 impl<P: PrimitiveTrait> BasicPrimitiveWorkflow<P> {
-    pub fn new(backend: std::sync::Arc<LlmBackend>) -> Self {
+    pub fn new(backend: Arc<LLMBackend>) -> Self {
         Self {
             primitive: P::default(),
             base_req: CompletionRequest::new(backend),
@@ -109,7 +110,7 @@ pub struct BasicPrimitiveWorkflowBuilder {
 }
 
 impl BasicPrimitiveWorkflowBuilder {
-    pub fn new(backend: std::sync::Arc<LlmBackend>) -> Self {
+    pub fn new(backend: Arc<LLMBackend>) -> Self {
         Self {
             base_req: CompletionRequest::new(backend),
         }

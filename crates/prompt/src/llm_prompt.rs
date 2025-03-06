@@ -4,26 +4,27 @@ use std::{
 };
 
 use crate::{
-    chat_template_prompt::ChatTemplatePrompt, openai_prompt::OpenAiPrompt, PromptMessage,
+    chat_template_prompt::ChatTemplatePrompt, openai_prompt::OpenAIPrompt, PromptMessage,
     PromptMessageType, PromptTokenizer, TextConcatenator, TextConcatenatorTrait,
 };
+use std::sync::Arc;
 
 #[derive(Clone)]
-pub enum LlmPrompt {
+pub enum LLMPrompt {
     ChatTemplatePrompt(ChatTemplatePrompt),
-    OpenAiPrompt(OpenAiPrompt),
+    OpenAIPrompt(OpenAIPrompt),
 }
 
-impl LlmPrompt {
+impl LLMPrompt {
     pub fn new_chat_template_prompt(
         chat_template: &str,
         bos_token: Option<&str>,
         eos_token: &str,
         unk_token: Option<&str>,
         base_generation_prefix: Option<&str>,
-        tokenizer: std::sync::Arc<dyn PromptTokenizer>,
+        tokenizer: Arc<dyn PromptTokenizer>,
     ) -> Self {
-        LlmPrompt::ChatTemplatePrompt(ChatTemplatePrompt::new(
+        LLMPrompt::ChatTemplatePrompt(ChatTemplatePrompt::new(
             chat_template,
             bos_token,
             eos_token,
@@ -36,9 +37,9 @@ impl LlmPrompt {
     pub fn new_openai_prompt(
         tokens_per_message: Option<u32>,
         tokens_per_name: Option<i32>,
-        tokenizer: std::sync::Arc<dyn PromptTokenizer>,
+        tokenizer: Arc<dyn PromptTokenizer>,
     ) -> Self {
-        LlmPrompt::OpenAiPrompt(OpenAiPrompt::new(
+        LLMPrompt::OpenAIPrompt(OpenAIPrompt::new(
             tokens_per_message,
             tokens_per_name,
             tokenizer,
@@ -85,15 +86,15 @@ impl LlmPrompt {
     pub fn set_generation_prefix<T: AsRef<str>>(&self, generation_prefix: T) {
         self.clear_built_prompt();
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.set_generation_prefix(generation_prefix),
-            LlmPrompt::OpenAiPrompt(_) => {}
+            LLMPrompt::ChatTemplatePrompt(p) => p.set_generation_prefix(generation_prefix),
+            LLMPrompt::OpenAIPrompt(_) => {}
         }
     }
 
     pub fn clear_generation_prefix(&self) {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.clear_generation_prefix(),
-            LlmPrompt::OpenAiPrompt(_) => {}
+            LLMPrompt::ChatTemplatePrompt(p) => p.clear_generation_prefix(),
+            LLMPrompt::OpenAIPrompt(_) => {}
         }
     }
 
@@ -104,8 +105,8 @@ impl LlmPrompt {
 
     pub fn clear_built_prompt(&self) {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.clear_built_prompt(),
-            LlmPrompt::OpenAiPrompt(p) => p.clear_built_prompt(),
+            LLMPrompt::ChatTemplatePrompt(p) => p.clear_built_prompt(),
+            LLMPrompt::OpenAIPrompt(p) => p.clear_built_prompt(),
         }
     }
 
@@ -158,10 +159,10 @@ impl LlmPrompt {
     fn build_prompt(&self) -> crate::Result<()> {
         self.precheck_build()?;
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => {
+            LLMPrompt::ChatTemplatePrompt(p) => {
                 p.build_prompt();
             }
-            LlmPrompt::OpenAiPrompt(p) => {
+            LLMPrompt::OpenAIPrompt(p) => {
                 p.build_prompt();
             }
         }
@@ -187,62 +188,62 @@ impl LlmPrompt {
     // Helper functions
     fn messages_ref(&self) -> Ref<Vec<PromptMessage>> {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.messages.borrow(),
-            LlmPrompt::OpenAiPrompt(p) => p.messages.borrow(),
+            LLMPrompt::ChatTemplatePrompt(p) => p.messages.borrow(),
+            LLMPrompt::OpenAIPrompt(p) => p.messages.borrow(),
         }
     }
 
     fn messages_mut(&self) -> RefMut<Vec<PromptMessage>> {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.messages.borrow_mut(),
-            LlmPrompt::OpenAiPrompt(p) => p.messages.borrow_mut(),
+            LLMPrompt::ChatTemplatePrompt(p) => p.messages.borrow_mut(),
+            LLMPrompt::OpenAIPrompt(p) => p.messages.borrow_mut(),
         }
     }
 
     fn concatenator_ref(&self) -> &TextConcatenator {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => &p.concatenator,
-            LlmPrompt::OpenAiPrompt(p) => &p.concatenator,
+            LLMPrompt::ChatTemplatePrompt(p) => &p.concatenator,
+            LLMPrompt::OpenAIPrompt(p) => &p.concatenator,
         }
     }
 
     fn concatenator_mut(&mut self) -> &mut TextConcatenator {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => &mut p.concatenator,
-            LlmPrompt::OpenAiPrompt(p) => &mut p.concatenator,
+            LLMPrompt::ChatTemplatePrompt(p) => &mut p.concatenator,
+            LLMPrompt::OpenAIPrompt(p) => &mut p.concatenator,
         }
     }
 
     fn built_prompt_string(&self) -> Ref<Option<String>> {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.built_prompt_string.borrow(),
-            LlmPrompt::OpenAiPrompt(_) => unimplemented!(),
+            LLMPrompt::ChatTemplatePrompt(p) => p.built_prompt_string.borrow(),
+            LLMPrompt::OpenAIPrompt(_) => unimplemented!(),
         }
     }
 
     fn built_prompt_hashmap(&self) -> Ref<Option<Vec<HashMap<String, String>>>> {
         match self {
-            LlmPrompt::ChatTemplatePrompt(_) => unimplemented!(),
-            LlmPrompt::OpenAiPrompt(p) => p.built_prompt_hashmap.borrow(),
+            LLMPrompt::ChatTemplatePrompt(_) => unimplemented!(),
+            LLMPrompt::OpenAIPrompt(p) => p.built_prompt_hashmap.borrow(),
         }
     }
 
     fn total_prompt_tokens(&self) -> Ref<Option<u64>> {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.total_prompt_tokens.borrow(),
-            LlmPrompt::OpenAiPrompt(p) => p.total_prompt_tokens.borrow(),
+            LLMPrompt::ChatTemplatePrompt(p) => p.total_prompt_tokens.borrow(),
+            LLMPrompt::OpenAIPrompt(p) => p.total_prompt_tokens.borrow(),
         }
     }
 
     fn built_prompt_as_tokens(&self) -> Ref<Option<Vec<u32>>> {
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => p.built_prompt_as_tokens.borrow(),
-            LlmPrompt::OpenAiPrompt(_) => unimplemented!(),
+            LLMPrompt::ChatTemplatePrompt(p) => p.built_prompt_as_tokens.borrow(),
+            LLMPrompt::OpenAIPrompt(_) => unimplemented!(),
         }
     }
 }
 
-impl TextConcatenatorTrait for LlmPrompt {
+impl TextConcatenatorTrait for LLMPrompt {
     fn concatenator_mut(&mut self) -> &mut TextConcatenator {
         self.concatenator_mut()
     }
@@ -252,22 +253,22 @@ impl TextConcatenatorTrait for LlmPrompt {
     }
 }
 
-impl std::fmt::Display for LlmPrompt {
+impl std::fmt::Display for LLMPrompt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f)?;
 
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => {
+            LLMPrompt::ChatTemplatePrompt(p) => {
                 p.build_prompt();
             }
-            LlmPrompt::OpenAiPrompt(p) => {
+            LLMPrompt::OpenAIPrompt(p) => {
                 p.build_prompt();
             }
         }
 
         match self {
-            LlmPrompt::ChatTemplatePrompt(p) => write!(f, "{}", p),
-            LlmPrompt::OpenAiPrompt(p) => write!(f, "{}", p),
+            LLMPrompt::ChatTemplatePrompt(p) => write!(f, "{}", p),
+            LLMPrompt::OpenAIPrompt(p) => write!(f, "{}", p),
         }
     }
 }

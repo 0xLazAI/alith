@@ -24,14 +24,14 @@ impl fmt::Debug for TokenizerBackend {
 }
 
 #[derive(Debug)]
-pub struct LlmTokenizer {
+pub struct LLMTokenizer {
     pub tokenizer: TokenizerBackend,
     pub tokenizer_path: Option<PathBuf>,
     pub with_special_tokens: bool,
     pub white_space_token_id: u32,
 }
 
-impl LlmTokenizer {
+impl LLMTokenizer {
     pub fn new_tiktoken<T: AsRef<str>>(model_id: T) -> Result<Self> {
         let tokenizer = get_bpe_from_model(model_id.as_ref())?;
         let white_space_token_id = u32::try_from(tokenizer.encode_ordinary(" ").remove(0))?;
@@ -71,7 +71,7 @@ impl LlmTokenizer {
         }
 
         let local_path = api.load_file("tokenizer.json", repo_id)?;
-        LlmTokenizer::new_from_tokenizer_json(&local_path)
+        LLMTokenizer::new_from_tokenizer_json(&local_path)
     }
 
     pub fn tokenize<T: AsRef<str>>(&self, str: T) -> Vec<u32> {
@@ -226,7 +226,7 @@ impl LlmTokenizer {
     }
 }
 
-impl PromptTokenizer for LlmTokenizer {
+impl PromptTokenizer for LLMTokenizer {
     fn tokenize(&self, input: &str) -> Vec<u32> {
         self.tokenize(input)
     }

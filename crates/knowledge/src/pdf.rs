@@ -2,7 +2,7 @@ use lopdf::Document;
 use std::path::{Path, PathBuf};
 
 use alith_core::{
-    chunking::{chunk_text, Chunk, ChunkError},
+    chunking::{chunk_text, ChunkError, Chunker},
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
 };
 
@@ -18,7 +18,7 @@ impl PdfFileKnowledge {
     }
 }
 
-impl Chunk for PdfFileKnowledge {
+impl Chunker for PdfFileKnowledge {
     fn chunk(&self) -> std::result::Result<Vec<String>, ChunkError> {
         Ok(chunk_text(
             &self

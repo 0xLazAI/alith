@@ -1,7 +1,7 @@
 use crate::components::cascade::step::StepConfig;
 use crate::components::cascade::CascadeFlow;
 use crate::components::grammar::NoneGrammar;
-use crate::LlmClient;
+use crate::LLMClient;
 
 use alith_interface::requests::completion::CompletionRequest;
 use serde::{Deserialize, Serialize};
@@ -16,7 +16,7 @@ pub struct TagCollectionDescriber {
 
 impl TagCollectionDescriber {
     pub async fn run(
-        llm_client: &LlmClient,
+        llm_client: &LLMClient,
         criteria: &str,
         tag_collection: &mut TagCollection,
     ) -> crate::Result<()> {

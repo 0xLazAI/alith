@@ -15,7 +15,7 @@ pub struct LlamaMetadata {
     pub expert_count: Option<u32>,
     pub expert_used_count: Option<u32>,
 
-    // Other potentially useful fields from the previous LlmMetadata
+    // Other potentially useful fields from the previous LLMMetadata
     pub use_parallel_residual: Option<bool>,
     pub attention: AttentionMetadata,
     pub rope: RopeMetadata,

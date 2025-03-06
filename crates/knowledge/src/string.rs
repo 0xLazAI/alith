@@ -1,5 +1,5 @@
 use alith_core::{
-    chunking::{chunk_text, Chunk, ChunkError},
+    chunking::{chunk_text, ChunkError, Chunker},
     knowledge::{Knowledge, KnowledgeError},
 };
 use anyhow::Result;
@@ -17,7 +17,7 @@ impl StringKnowledge {
     }
 }
 
-impl Chunk for StringKnowledge {
+impl Chunker for StringKnowledge {
     fn chunk(&self) -> std::result::Result<Vec<String>, ChunkError> {
         Ok(chunk_text(
             &self.content,

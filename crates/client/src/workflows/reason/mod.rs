@@ -5,8 +5,9 @@ use crate::{
     components::{cascade::CascadeFlow, instruct_prompt::InstructPrompt},
     primitives::*,
 };
-use alith_interface::{llms::LlmBackend, requests::completion::CompletionRequest};
+use alith_interface::{llms::LLMBackend, requests::completion::CompletionRequest};
 use one_round::ReasonOneRound;
+use std::sync::Arc;
 
 pub trait ReasonTrait: PrimitiveTrait {
     fn primitive_to_result_index(&self, content: &str) -> u32;
@@ -33,7 +34,7 @@ pub struct ReasonWorkflowBuilder {
 }
 
 impl ReasonWorkflowBuilder {
-    pub fn new(backend: std::sync::Arc<LlmBackend>) -> Self {
+    pub fn new(backend: Arc<LLMBackend>) -> Self {
         Self {
             base_req: CompletionRequest::new(backend),
         }

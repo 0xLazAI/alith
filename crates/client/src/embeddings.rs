@@ -1,7 +1,8 @@
 use alith_interface::{
-    llms::LlmBackend,
+    llms::LLMBackend,
     requests::embeddings::{EmbeddingsRequest, EmbeddingsResponse},
 };
+use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct Embeddings {
@@ -9,7 +10,7 @@ pub struct Embeddings {
 }
 
 impl Embeddings {
-    pub fn new(backend: std::sync::Arc<LlmBackend>) -> Self {
+    pub fn new(backend: Arc<LLMBackend>) -> Self {
         Self {
             req: EmbeddingsRequest::new(backend),
         }

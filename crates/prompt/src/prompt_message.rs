@@ -7,6 +7,7 @@ pub enum PromptMessageType {
     System,
     User,
     Assistant,
+    Function,
 }
 
 impl PromptMessageType {
@@ -15,6 +16,7 @@ impl PromptMessageType {
             PromptMessageType::System => "system",
             PromptMessageType::User => "user",
             PromptMessageType::Assistant => "assistant",
+            PromptMessageType::Function => "function",
         }
     }
 }
@@ -219,6 +221,7 @@ impl std::fmt::Display for PromptMessage {
             PromptMessageType::System => "System",
             PromptMessageType::User => "User",
             PromptMessageType::Assistant => "Assistant",
+            PromptMessageType::Function => "Function",
         };
         let message = match self.build_prompt_string() {
             Some(built_message_string) => {

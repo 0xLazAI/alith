@@ -1,6 +1,5 @@
-pub use alith_core as core;
-
 pub use alith_client as client;
+pub use alith_core as core;
 pub use alith_devices as devices;
 pub use alith_inference as inference;
 pub use alith_interface as interface;
@@ -21,13 +20,13 @@ pub use core::{
         Completion, CompletionError, Prompt, Request, ResponseContent, ResponseToolCalls, ToolCall,
     },
     chunking::{
-        chunk_text, Chunk, ChunkError, ChunkerConfig, ChunkerResult, TextChunker,
+        chunk_text, ChunkError, Chunker, ChunkerConfig, ChunkerResult, TextChunker,
         DEFAULT_CHUNK_SIZE,
     },
-    client::{
-        interface::requests::completion::{CompletionFinishReason, GenerationSettings},
-        CompletionRequest, CompletionResponse,
+    cleaner::{
+        normalize_whitespace, reduce_to_single_whitespace, strip_unwanted_chars, TextCleaner,
     },
+    concatenator::{TextConcatenator, TextConcatenatorTrait},
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
     extractor::{ExtractionError, Extractor},
     flow::{
@@ -46,16 +45,13 @@ pub use core::{
     memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
     parser::{JsonParser, MarkdownParser, Parser, ParserError, StringParser, TrimParser},
     splitting::{
-        split_text, split_text_into_indices, Separator, SeparatorGroup, TextCleaner,
-        TextConcatenator, TextSplit, TextSplitter,
+        split_text, split_text_into_indices, Separator, SeparatorGroup, TextSplit, TextSplitter,
     },
     store::{DocumentId, InMemoryStorage, Storage, TopNResults, VectorStoreError},
     task::{Task, TaskError, TaskMetadata},
     tool::{StructureTool, Tool, ToolChoice, ToolDefinition, ToolError},
 };
 
-pub use alith_tools::search::{Search, SearchProvider, SearchResult, SearchResults, SearchTool};
-pub use async_trait::async_trait;
 pub use knowledge::{
     html::{html_to_md, HtmlKnowledge},
     pdf::PdfFileKnowledge,
@@ -63,3 +59,18 @@ pub use knowledge::{
     text::TextFileKnowledge,
 };
 pub use store::qdrant::*;
+pub use tools::search::{Search, SearchProvider, SearchResult, SearchResults, SearchTool};
+
+pub use client::{
+    interface::llms::LLMBackend,
+    interface::requests::completion::{CompletionFinishReason, GenerationSettings},
+    interface::LLMInterface,
+    CompletionRequest, CompletionResponse, EmbeddingsRequest, EmbeddingsResponse,
+};
+pub use models::{api_model::ApiLLMModel, local_model::LocalLLMModel, LLMModelBase};
+pub use prompt::{
+    apply_chat_template, check_and_get_max_tokens, ChatTemplatePrompt, LLMPrompt, MaxTokenState,
+    OpenAIPrompt, PromptMessage, PromptMessageType, PromptTokenizer, RequestTokenLimitError,
+};
+
+pub use async_trait::async_trait;

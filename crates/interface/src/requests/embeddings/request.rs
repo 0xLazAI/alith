@@ -1,4 +1,4 @@
-use crate::{llms::LlmBackend, requests::req_components::RequestConfig};
+use crate::{llms::LLMBackend, requests::req_components::RequestConfig};
 use std::sync::Arc;
 
 use super::{response::EmbeddingsResponse, EmbeddingsError};
@@ -6,7 +6,7 @@ use super::{response::EmbeddingsResponse, EmbeddingsError};
 pub struct EmbeddingsRequest {
     pub model: String,
     pub input: Vec<String>,
-    backend: Arc<LlmBackend>,
+    backend: Arc<LLMBackend>,
     config: RequestConfig,
     llm_interface_errors: Vec<EmbeddingsError>,
 }
@@ -24,7 +24,7 @@ impl Clone for EmbeddingsRequest {
 }
 
 impl EmbeddingsRequest {
-    pub fn new(backend: Arc<LlmBackend>) -> EmbeddingsRequest {
+    pub fn new(backend: Arc<LLMBackend>) -> EmbeddingsRequest {
         EmbeddingsRequest {
             model: String::new(),
             input: Vec::new(),

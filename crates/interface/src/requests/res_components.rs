@@ -1,7 +1,7 @@
 use super::completion::request::CompletionRequest;
 use crate::llms::api::{
     anthropic::completion::AnthropicCompletionResponse,
-    openai::completion::OpenAiCompletionResponse,
+    openai::completion::OpenAICompletionResponse,
 };
 
 /// The log probability of the completion.
@@ -42,7 +42,7 @@ pub struct GenerationSettings {
 }
 
 impl GenerationSettings {
-    pub fn new_from_openai(req: &CompletionRequest, res: &OpenAiCompletionResponse) -> Self {
+    pub fn new_from_openai(req: &CompletionRequest, res: &OpenAICompletionResponse) -> Self {
         Self {
             model: res.model.to_owned(),
             frequency_penalty: req.config.frequency_penalty,
@@ -178,7 +178,7 @@ pub struct TokenUsage {
 }
 
 impl TokenUsage {
-    pub fn new_from_generic(res: &OpenAiCompletionResponse) -> Self {
+    pub fn new_from_generic(res: &OpenAICompletionResponse) -> Self {
         if let Some(usage) = &res.usage {
             Self {
                 tokens_cached: None,

@@ -2,7 +2,7 @@ use std::fs::read_to_string;
 use std::path::{Path, PathBuf};
 
 use alith_core::{
-    chunking::{chunk_text, Chunk, ChunkError},
+    chunking::{chunk_text, ChunkError, Chunker},
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
 };
 
@@ -18,7 +18,7 @@ impl TextFileKnowledge {
     }
 }
 
-impl Chunk for TextFileKnowledge {
+impl Chunker for TextFileKnowledge {
     fn chunk(&self) -> std::result::Result<Vec<String>, ChunkError> {
         Ok(chunk_text(
             &self

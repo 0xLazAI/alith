@@ -15,7 +15,6 @@ alith-devices = { path = "crates/devices" }
 alith-models = { path = "crates/models" }
 alith-prompt = { path = "crates/prompt" }
 alith-interface = { path = "crates/interface" }
-alith-utils = { path = "crates/utils" }
 
 fastembed = { git = "https://github.com/Anush008/fastembed-rs", version = "4.4.0", default-features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
 uuid = { version = "1.15.1", features = ["serde", "v4"] }

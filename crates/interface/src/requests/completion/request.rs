@@ -1,21 +1,22 @@
 use super::{error::CompletionError, response::CompletionResponse, ToolChoice, ToolDefinition};
 use crate::{
-    llms::LlmBackend,
+    llms::LLMBackend,
     requests::{
         completion::response::CompletionFinishReason, logit_bias::LogitBias,
         req_components::RequestConfig, stop_sequence::StopSequences,
     },
 };
-use alith_prompt::LlmPrompt;
+use alith_prompt::LLMPrompt;
+use std::sync::Arc;
 
 pub struct CompletionRequest {
     pub start_time: std::time::Instant,
     pub stop_sequences: StopSequences,
     pub grammar_string: Option<String>,
     pub logit_bias: Option<LogitBias>,
-    pub prompt: LlmPrompt,
+    pub prompt: LLMPrompt,
     pub config: RequestConfig,
-    pub backend: std::sync::Arc<LlmBackend>,
+    pub backend: Arc<LLMBackend>,
     pub llm_interface_errors: Vec<CompletionError>,
     pub tools: Vec<ToolDefinition>,
     pub tool_choice: ToolChoice,
@@ -30,7 +31,7 @@ impl Clone for CompletionRequest {
             logit_bias: self.logit_bias.clone(),
             prompt: self.prompt.clone(),
             config: self.config.clone(),
-            backend: std::sync::Arc::clone(&self.backend),
+            backend: Arc::clone(&self.backend),
             llm_interface_errors: Vec::new(),
             tools: Vec::new(),
             tool_choice: ToolChoice::Auto,
@@ -39,7 +40,7 @@ impl Clone for CompletionRequest {
 }
 
 impl CompletionRequest {
-    pub fn new(backend: std::sync::Arc<LlmBackend>) -> CompletionRequest {
+    pub fn new(backend: Arc<LLMBackend>) -> CompletionRequest {
         CompletionRequest {
             start_time: std::time::Instant::now(),
             stop_sequences: Default::default(),
@@ -47,7 +48,7 @@ impl CompletionRequest {
             config: RequestConfig::new(backend.model_ctx_size(), backend.inference_ctx_size()),
             prompt: backend.new_prompt(),
             grammar_string: None,
-            backend: std::sync::Arc::clone(&backend),
+            backend: Arc::clone(&backend),
             llm_interface_errors: Vec::new(),
             tools: Vec::new(),
             tool_choice: ToolChoice::default(),

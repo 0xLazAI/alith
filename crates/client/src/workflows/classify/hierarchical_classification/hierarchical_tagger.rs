@@ -2,12 +2,13 @@ use crate::components::cascade::step::StepConfig;
 use crate::components::cascade::CascadeFlow;
 
 use crate::components::grammar::*;
-use crate::LlmClient;
+use crate::LLMClient;
 
-use alith_interface::llms::LlmBackend;
+use alith_interface::llms::LLMBackend;
 use alith_interface::requests::completion::CompletionRequest;
 
 use super::tag::Tag;
+use std::sync::Arc;
 
 #[derive(Debug, Clone)]
 pub struct Critera {
@@ -25,7 +26,7 @@ impl Critera {
 }
 
 pub struct HierarchicalEntityTagger {
-    backend: std::sync::Arc<LlmBackend>,
+    backend: Arc<LLMBackend>,
     pub entity: String,
     pub input_text: String,
     pub criteria: Critera,
@@ -38,7 +39,7 @@ pub struct HierarchicalEntityTagger {
 
 impl HierarchicalEntityTagger {
     pub fn new(
-        llm_client: &LlmClient,
+        llm_client: &LLMClient,
         entity: &str,
         input_text: &str,
         criteria: &Critera,

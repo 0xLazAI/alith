@@ -12,8 +12,8 @@ use crate::requests::{
     embeddings::{EmbeddingsError, EmbeddingsRequest, EmbeddingsResponse},
 };
 use alith_devices::logging::LoggingConfig;
-use alith_models::api_model::ApiLlmModel;
-use completion::OpenAiCompletionRequest;
+use alith_models::api_model::ApiLLMModel;
+use completion::OpenAICompletionRequest;
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
 use secrecy::{ExposeSecret, Secret};
 use serde_json::json;
@@ -25,13 +25,13 @@ pub const OPENAI_ORGANIZATION_HEADER: &str = "OpenAI-Organization";
 /// Project header
 pub const OPENAI_PROJECT_HEADER: &str = "OpenAI-Project";
 
-pub struct OpenAiBackend {
-    pub(crate) client: ApiClient<OpenAiConfig>,
-    pub model: ApiLlmModel,
+pub struct OpenAIBackend {
+    pub(crate) client: ApiClient<OpenAIConfig>,
+    pub model: ApiLLMModel,
 }
 
-impl OpenAiBackend {
-    pub fn new(mut config: OpenAiConfig, model: ApiLlmModel) -> crate::Result<Self> {
+impl OpenAIBackend {
+    pub fn new(mut config: OpenAIConfig, model: ApiLLMModel) -> crate::Result<Self> {
         config.logging_config.load_logger()?;
         config.api_config.api_key = Some(config.api_config.load_api_key()?);
         Ok(Self {
@@ -46,7 +46,7 @@ impl OpenAiBackend {
     ) -> crate::Result<CompletionResponse, CompletionError> {
         match self
             .client
-            .post("/chat/completions", OpenAiCompletionRequest::new(request)?)
+            .post("/chat/completions", OpenAICompletionRequest::new(request)?)
             .await
         {
             Err(e) => Err(CompletionError::ClientError(e)),
@@ -76,14 +76,14 @@ impl OpenAiBackend {
 }
 
 #[derive(Clone, Debug)]
-pub struct OpenAiConfig {
+pub struct OpenAIConfig {
     pub api_config: ApiConfig,
     pub logging_config: LoggingConfig,
     pub org_id: String,
     pub project_id: String,
 }
 
-impl Default for OpenAiConfig {
+impl Default for OpenAIConfig {
     fn default() -> Self {
         Self {
             api_config: ApiConfig {
@@ -102,7 +102,7 @@ impl Default for OpenAiConfig {
     }
 }
 
-impl OpenAiConfig {
+impl OpenAIConfig {
     pub fn new() -> Self {
         Default::default()
     }
@@ -120,7 +120,7 @@ impl OpenAiConfig {
     }
 }
 
-impl ApiConfigTrait for OpenAiConfig {
+impl ApiConfigTrait for OpenAIConfig {
     fn headers(&self) -> HeaderMap {
         let mut headers = HeaderMap::new();
 

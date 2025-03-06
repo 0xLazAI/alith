@@ -90,7 +90,7 @@ impl TagCollection {
 
     pub async fn populate_descriptions(
         &mut self,
-        llm_client: &crate::LlmClient,
+        llm_client: &crate::LLMClient,
         criteria: &str,
     ) -> crate::Result<()> {
         TagCollectionDescriber::run(llm_client, criteria, self).await?;

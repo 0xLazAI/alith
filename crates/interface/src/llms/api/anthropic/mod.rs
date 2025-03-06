@@ -9,7 +9,7 @@ use crate::requests::completion::{
     error::CompletionError, request::CompletionRequest, response::CompletionResponse,
 };
 use alith_devices::logging::LoggingConfig;
-use alith_models::api_model::ApiLlmModel;
+use alith_models::api_model::ApiLLMModel;
 use completion::AnthropicCompletionRequest;
 use reqwest::header::HeaderMap;
 use secrecy::{ExposeSecret, Secret};
@@ -23,11 +23,11 @@ pub const ANTHROPIC_BETA_HEADER: &str = "anthropic-beta";
 
 pub struct AnthropicBackend {
     pub(crate) client: ApiClient<AnthropicConfig>,
-    pub model: ApiLlmModel,
+    pub model: ApiLLMModel,
 }
 
 impl AnthropicBackend {
-    pub fn new(mut config: AnthropicConfig, model: ApiLlmModel) -> crate::Result<Self> {
+    pub fn new(mut config: AnthropicConfig, model: ApiLLMModel) -> crate::Result<Self> {
         config.logging_config.load_logger()?;
         config.api_config.api_key = Some(config.api_config.load_api_key()?);
         Ok(Self {

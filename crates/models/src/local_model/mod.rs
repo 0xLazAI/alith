@@ -1,33 +1,33 @@
 use gguf::GgufLoader;
-use metadata::LocalLlmMetadata;
+use metadata::LocalLLMMetadata;
 
 pub mod chat_template;
 pub mod gguf;
 pub mod hf_loader;
 pub mod metadata;
 
-use super::LlmModelBase;
-pub use chat_template::LlmChatTemplate;
+use super::LLMModelBase;
+pub use chat_template::LLMChatTemplate;
 pub use gguf::{preset::GgufPresetTrait, GgufLoaderTrait};
 pub use hf_loader::HfTokenTrait;
 
-pub struct LocalLlmModel {
-    pub model_base: LlmModelBase,
+pub struct LocalLLMModel {
+    pub model_base: LLMModelBase,
     pub local_model_path: std::path::PathBuf,
-    pub model_metadata: LocalLlmMetadata,
-    pub chat_template: LlmChatTemplate,
+    pub model_metadata: LocalLLMMetadata,
+    pub chat_template: LLMChatTemplate,
 }
 
-impl Default for LocalLlmModel {
+impl Default for LocalLLMModel {
     fn default() -> Self {
         let mut loader = GgufLoader::default();
-        loader.load().expect("Failed to load LlmPreset")
+        loader.load().expect("Failed to load LLMPreset")
     }
 }
 
-impl std::fmt::Debug for LocalLlmModel {
+impl std::fmt::Debug for LocalLLMModel {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let mut debug_struct = f.debug_struct("LocalLlmModel");
+        let mut debug_struct = f.debug_struct("LocalLLMModel");
         debug_struct.field("model_id", &self.model_base.model_id);
         debug_struct.field("local_model_path", &self.local_model_path);
         debug_struct.field("model_metadata", &self.model_metadata);

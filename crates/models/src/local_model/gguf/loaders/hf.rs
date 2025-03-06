@@ -1,6 +1,6 @@
 use crate::{
-    local_model::{hf_loader::HuggingFaceLoader, metadata::LocalLlmMetadata, LocalLlmModel},
-    LlmModelBase,
+    local_model::{hf_loader::HuggingFaceLoader, metadata::LocalLLMMetadata, LocalLLMModel},
+    LLMModelBase,
 };
 
 #[derive(Default, Clone)]
@@ -13,7 +13,7 @@ pub struct GgufHfLoader {
 }
 
 impl GgufHfLoader {
-    pub fn load(&mut self, hf_loader: &HuggingFaceLoader) -> crate::Result<LocalLlmModel> {
+    pub fn load(&mut self, hf_loader: &HuggingFaceLoader) -> crate::Result<LocalLLMModel> {
         let hf_quant_file_url = if let Some(hf_quant_file_url) = self.hf_quant_file_url.as_ref() {
             hf_quant_file_url.to_owned()
         } else {
@@ -46,10 +46,10 @@ impl GgufHfLoader {
             } else {
                 None
             };
-        let model_metadata = LocalLlmMetadata::from_gguf_path(&local_model_path)?;
+        let model_metadata = LocalLLMMetadata::from_gguf_path(&local_model_path)?;
 
-        Ok(LocalLlmModel {
-            model_base: LlmModelBase {
+        Ok(LocalLLMModel {
+            model_base: LLMModelBase {
                 model_id,
                 model_ctx_size: model_metadata.context_length(),
                 inference_ctx_size: model_metadata.context_length(),

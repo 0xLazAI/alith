@@ -1,15 +1,16 @@
-use alith_interface::{llms::LlmBackend, requests::completion::CompletionRequest};
+use alith_interface::{llms::LLMBackend, requests::completion::CompletionRequest};
+use std::sync::Arc;
 use subject_of_text::ClassifySubjectOfText;
 
 pub mod hierarchical_classification;
 pub mod subject_of_text;
 
 pub struct Classify {
-    backend: std::sync::Arc<LlmBackend>,
+    backend: Arc<LLMBackend>,
 }
 
 impl Classify {
-    pub fn new(backend: std::sync::Arc<LlmBackend>) -> Self {
+    pub fn new(backend: Arc<LLMBackend>) -> Self {
         Self { backend }
     }
 

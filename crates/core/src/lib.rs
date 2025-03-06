@@ -1,6 +1,8 @@
 pub mod agent;
 pub mod chat;
 pub mod chunking;
+pub mod cleaner;
+pub mod concatenator;
 pub mod embeddings;
 pub mod executor;
 pub mod extractor;
@@ -19,7 +21,6 @@ pub mod tool;
 pub use alith_client as client;
 pub use alith_interface as interface;
 pub use alith_models as models;
-pub use alith_utils as utils;
 
 use std::sync::Arc;
 use tokio::sync::RwLock;
