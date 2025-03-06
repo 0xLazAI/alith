@@ -68,7 +68,19 @@ pub use client::{
     interface::LLMInterface,
     CompletionRequest, CompletionResponse, EmbeddingsRequest, EmbeddingsResponse,
 };
-pub use models::{api_model::ApiLLMModel, local_model::LocalLLMModel, LLMModelBase};
+pub use models::{
+    api_model::ApiLLMModel,
+    local_model::{
+        gguf::{
+            preset::{LLMPreset, LLMPresetData, TokenizerConfigPresetData, TokenizerPresetData},
+            GgufLoader,
+        },
+        hf_loader::HuggingFaceLoader,
+        GgufLoaderTrait, GgufPresetTrait, HfTokenTrait, LLMChatTemplate, LocalLLMModel,
+    },
+    tokenizer::{Tokenizer, TokenizerBackend},
+    LLMModelBase,
+};
 pub use prompt::{
     apply_chat_template, check_and_get_max_tokens, ChatTemplatePrompt, LLMPrompt, MaxTokenState,
     OpenAIPrompt, PromptMessage, PromptMessageType, PromptTokenizer, RequestTokenLimitError,

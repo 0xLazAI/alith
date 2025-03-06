@@ -1,5 +1,5 @@
 use super::ApiLLMModel;
-use crate::{tokenizer::LLMTokenizer, LLMModelBase};
+use crate::{tokenizer::Tokenizer, LLMModelBase};
 use std::sync::Arc;
 
 impl ApiLLMModel {
@@ -73,9 +73,9 @@ impl ApiLLMModel {
     }
 }
 
-pub fn model_tokenizer(_model_id: &str) -> Arc<LLMTokenizer> {
+pub fn model_tokenizer(_model_id: &str) -> Arc<Tokenizer> {
     Arc::new(
-        LLMTokenizer::new_tiktoken("gpt-4")
+        Tokenizer::new_tiktoken("gpt-4")
             .unwrap_or_else(|_| panic!("Failed to load tokenizer for gpt-4")),
     )
 }

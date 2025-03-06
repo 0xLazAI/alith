@@ -7,6 +7,10 @@ use alith_models::local_model::{
     gguf::GgufLoader, metadata::llm::DEFAULT_CONTEXT_LENGTH, LocalLLMModel,
 };
 
+pub mod llama_cpp;
+pub mod mistral_rs;
+pub mod ort;
+
 #[derive(Clone, Debug)]
 pub struct LocalLLMConfig {
     pub batch_size: u64,

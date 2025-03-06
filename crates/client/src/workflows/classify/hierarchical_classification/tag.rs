@@ -58,7 +58,6 @@ impl Tag {
             let tag_paths: Vec<&str> = part_attempt.split("::").collect();
 
             for i in (0..tag_paths.len()).rev() {
-                // println!("trying: {:?}", &parts[..=i]);
                 if let Some(tag) = self.get_tag_recursive(&tag_paths[..=i]) {
                     return Some(tag);
                 }

@@ -1,7 +1,10 @@
 use super::local_model::hf_loader::{HfTokenTrait, HuggingFaceLoader};
 use alith_prompt::PromptTokenizer;
 use anyhow::{anyhow, Result};
-use std::{fmt, path::PathBuf};
+use std::{
+    fmt,
+    path::{Path, PathBuf},
+};
 use tiktoken_rs::{get_bpe_from_model, CoreBPE};
 use tokenizers::Tokenizer as HFTokenizer;
 
@@ -24,15 +27,15 @@ impl fmt::Debug for TokenizerBackend {
 }
 
 #[derive(Debug)]
-pub struct LLMTokenizer {
+pub struct Tokenizer {
     pub tokenizer: TokenizerBackend,
     pub tokenizer_path: Option<PathBuf>,
     pub with_special_tokens: bool,
     pub white_space_token_id: u32,
 }
 
-impl LLMTokenizer {
-    pub fn new_tiktoken<T: AsRef<str>>(model_id: T) -> Result<Self> {
+impl Tokenizer {
+    pub fn new_tiktoken<S: AsRef<str>>(model_id: S) -> Result<Self> {
         let tokenizer = get_bpe_from_model(model_id.as_ref())?;
         let white_space_token_id = tokenizer.encode_ordinary(" ").remove(0);
         Ok(Self {
@@ -53,42 +56,46 @@ impl LLMTokenizer {
         })
     }
 
-    pub fn new_from_tokenizer_json(local_path: &PathBuf) -> Result<Self> {
+    pub fn new_from_tokenizer_json<P: AsRef<Path>>(local_path: P) -> Result<Self> {
+        let path = local_path.as_ref().to_path_buf().clone();
         let tokenizer = HFTokenizer::from_file(local_path).map_err(|e| anyhow!(e))?;
         let white_space_token_id = tokenizer.encode(" ", false).unwrap().get_ids()[0];
         Ok(Self {
             tokenizer: TokenizerBackend::HuggingFacesTokenizer(Box::new(tokenizer)),
-            tokenizer_path: Some(local_path.clone()),
+            tokenizer_path: Some(path),
             with_special_tokens: false,
             white_space_token_id,
         })
     }
 
-    pub fn new_from_hf_repo(hf_token: Option<&str>, repo_id: &str) -> Result<Self> {
+    pub fn new_from_hf_repo<S: AsRef<str>>(hf_token: Option<S>, repo_id: S) -> Result<Self> {
         let mut api: HuggingFaceLoader = HuggingFaceLoader::new();
         if let Some(hf_token) = hf_token {
-            *api.hf_token_mut() = Some(hf_token.to_owned());
+            *api.hf_token_mut() = Some(hf_token.as_ref().to_owned());
         }
 
-        let local_path = api.load_file("tokenizer.json", repo_id)?;
-        LLMTokenizer::new_from_tokenizer_json(&local_path)
+        let local_path = api.load_file("tokenizer.json", repo_id.as_ref())?;
+        Tokenizer::new_from_tokenizer_json(&local_path)
     }
 
+    #[inline]
     pub fn tokenize<T: AsRef<str>>(&self, str: T) -> Vec<u32> {
         self.encode(str.as_ref())
     }
 
+    #[inline]
     pub fn detokenize_one(&self, token: u32) -> Result<String> {
         self.decode(&[token])
     }
 
+    #[inline]
     pub fn detokenize_many(&self, tokens: &[u32]) -> Result<String> {
         self.decode(tokens)
     }
 
+    #[inline]
     pub fn count_tokens(&self, str: &str) -> u32 {
-        let tokens = self.tokenize(str);
-        u32::try_from(tokens.len()).unwrap()
+        self.tokenize(str).len() as u32
     }
 
     pub fn try_from_single_token_id(&self, try_from_single_token_id: u32) -> Result<String> {
@@ -192,6 +199,7 @@ impl LLMTokenizer {
         tokens.unwrap().get_ids().to_vec()
     }
 
+    #[inline]
     fn encode(&self, str: &str) -> Vec<u32> {
         match &self.tokenizer {
             TokenizerBackend::HuggingFacesTokenizer(tokenizer) => self.encode_hf(tokenizer, str),
@@ -199,14 +207,17 @@ impl LLMTokenizer {
         }
     }
 
+    #[inline]
     fn decode_tiktoken(&self, tokenizer: &CoreBPE, tokens: &[u32]) -> Result<String> {
         tokenizer.decode(tokens.to_owned()).map_err(|e| anyhow!(e))
     }
 
+    #[inline]
     fn decode_hf(&self, tokenizer: &HFTokenizer, tokens: &[u32]) -> Result<String> {
         tokenizer.decode(tokens, true).map_err(|e| anyhow!(e))
     }
 
+    #[inline]
     fn decode(&self, tokens: &[u32]) -> Result<String> {
         match &self.tokenizer {
             TokenizerBackend::HuggingFacesTokenizer(tokenizer) => self.decode_hf(tokenizer, tokens),
@@ -215,11 +226,13 @@ impl LLMTokenizer {
     }
 }
 
-impl PromptTokenizer for LLMTokenizer {
+impl PromptTokenizer for Tokenizer {
+    #[inline]
     fn tokenize(&self, input: &str) -> Vec<u32> {
         self.tokenize(input)
     }
 
+    #[inline]
     fn count_tokens(&self, str: &str) -> u32 {
         self.count_tokens(str)
     }

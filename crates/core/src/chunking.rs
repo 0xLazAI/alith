@@ -4,7 +4,7 @@ mod overlap;
 
 use crate::splitting::{Separator, SeparatorGroup, TextSplit, TextSplitter};
 
-use alith_models::tokenizer::LLMTokenizer;
+use alith_models::tokenizer::Tokenizer;
 use anyhow::Result;
 use dfs_chunker::DfsTextChunker;
 use linear_chunker::LinearChunker;
@@ -44,7 +44,7 @@ const TOKENIZER_TIKTOKEN_DEFAULT: &str = "gpt-4";
 /// Splits text by paragraphs, newlines, sentences, spaces, and finally graphemes, and builds chunks from the splits that are within the desired token ranges.
 pub struct TextChunker {
     /// An atomic reference to the tokenizer. Defaults to the TikToken tokenizer.
-    tokenizer: Arc<LLMTokenizer>,
+    tokenizer: Arc<Tokenizer>,
     /// Inclusive hard limit.
     absolute_length_max: u32,
     /// This is used solely for the [`DfsTextChunker`] to determine the minimum chunk size. Default is 75% of the `absolute_length_max`.
@@ -59,7 +59,7 @@ impl TextChunker {
     /// Creates a new instance of the [`TextChunker`] struct using the default TikToken tokenizer.
     pub fn new() -> Result<Self> {
         Ok(Self {
-            tokenizer: Arc::new(LLMTokenizer::new_tiktoken(TOKENIZER_TIKTOKEN_DEFAULT)?),
+            tokenizer: Arc::new(Tokenizer::new_tiktoken(TOKENIZER_TIKTOKEN_DEFAULT)?),
             absolute_length_max: ABSOLUTE_LENGTH_MAX_DEFAULT,
             absolute_length_min: None,
             overlap_percent: None,
@@ -67,7 +67,7 @@ impl TextChunker {
         })
     }
     /// Creates a new instance of the [`TextChunker`] struct using a custom tokenizer. For example a Hugging Face tokenizer.
-    pub fn new_with_tokenizer(custom_tokenizer: &Arc<LLMTokenizer>) -> Self {
+    pub fn new_with_tokenizer(custom_tokenizer: &Arc<Tokenizer>) -> Self {
         Self {
             tokenizer: Arc::clone(custom_tokenizer),
             absolute_length_max: ABSOLUTE_LENGTH_MAX_DEFAULT,
@@ -160,23 +160,30 @@ impl TextChunker {
             // If the text is less than the absolute_length_max, `initial_separator` will be set to Separator::None, and we return a single chunk.
             if config.initial_separator == Separator::None {
                 chunks_found.store(true, Ordering::Relaxed);
-                return Some(ChunkerResult::new(incoming_text, &config, chunking_start_time, vec![Chunk::dummy_chunk(&config, incoming_text)]));
+                return Some(ChunkerResult::new(
+                    incoming_text,
+                    &config,
+                    chunking_start_time,
+                    vec![Chunk::dummy_chunk(&config, incoming_text)],
+                ));
             };
-            // println!("Found config for separator: {:#?}", separator);
-            if config.initial_separator.group() == SeparatorGroup::Semantic && self.use_dfs_semantic_splitter {
+
+            if config.initial_separator.group() == SeparatorGroup::Semantic
+                && self.use_dfs_semantic_splitter
+            {
                 let chunks: Option<Vec<Chunk>> = DfsTextChunker::run(&config);
                 if let Some(chunks) = chunks {
                     let chunks = OverlapChunker::run(&config, chunks);
                     match chunks {
                         Ok(chunk) => {
-                        chunks_found.store(true, Ordering::Relaxed);
-                        println!(
-                            "\nSuccessfully Split with: DfsTextChunker on separator: {:#?}\ntotal chunking_duration: {:#?}.\n",
-                            separator,
-                            chunking_start_time.elapsed()
-                        );
-                        return Some(ChunkerResult::new(incoming_text, &config, chunking_start_time, chunk));
-                        },
+                            chunks_found.store(true, Ordering::Relaxed);
+                            return Some(ChunkerResult::new(
+                                incoming_text,
+                                &config,
+                                chunking_start_time,
+                                chunk,
+                            ));
+                        }
                         Err(e) => {
                             eprintln!("Error: {:#?}", e);
                         }
@@ -188,12 +195,12 @@ impl TextChunker {
             match chunks {
                 Ok(chunks) => {
                     chunks_found.store(true, Ordering::Relaxed);
-                    println!(
-                        "\nSuccessfully Split with: LinearChunker on separator: {:#?}\ntotal chunking_duration: {:#?}.\n",
-                        separator,
-                        chunking_start_time.elapsed()
-                    );
-                    Some(ChunkerResult::new(incoming_text, &config, chunking_start_time, chunks))
+                    Some(ChunkerResult::new(
+                        incoming_text,
+                        &config,
+                        chunking_start_time,
+                        chunks,
+                    ))
                 }
                 Err(e) => {
                     eprintln!("Error: {:#?}", e);
@@ -204,7 +211,7 @@ impl TextChunker {
     }
 
     #[inline]
-    fn tokenizer(&self) -> Arc<LLMTokenizer> {
+    fn tokenizer(&self) -> Arc<Tokenizer> {
         Arc::clone(&self.tokenizer)
     }
 }
@@ -217,7 +224,7 @@ pub struct ChunkerConfig {
     absolute_length_min: u32,
     length_max: f32,
     overlap_percent: Option<f32>,
-    tokenizer: Arc<LLMTokenizer>,
+    tokenizer: Arc<Tokenizer>,
     base_text: Arc<str>,
     initial_separator: Separator,
     initial_splits: VecDeque<TextSplit>,
@@ -231,7 +238,7 @@ impl ChunkerConfig {
         absolute_length_max: u32,
         absolute_length_min: Option<u32>,
         overlap_percent: Option<f32>,
-        tokenizer: Arc<LLMTokenizer>,
+        tokenizer: Arc<Tokenizer>,
     ) -> Option<Self> {
         let length_max = if let Some(overlap_percent) = overlap_percent {
             (absolute_length_max as f32 - (absolute_length_max as f32 * overlap_percent)).floor()
@@ -278,7 +285,6 @@ impl ChunkerConfig {
             });
             splits
         } else {
-            // eprintln!("No splits found for separator: {:#?}", separator);
             return None;
         };
         let splits_token_count = config.estimate_splits_token_count(&splits);
@@ -304,10 +310,6 @@ impl ChunkerConfig {
         let mut new_splits: VecDeque<TextSplit> = match split.split() {
             Some(splits) => splits,
             None => {
-                // eprintln!(
-                //     "No splits found for split: {:#?}",
-                //     split.base_text.chars().take(50).collect::<String>()
-                // );
                 return None;
             }
         };
@@ -442,7 +444,7 @@ pub struct ChunkerResult {
     incoming_text: Arc<str>,
     initial_separator: Separator,
     chunks: Vec<Chunk>,
-    tokenizer: Arc<LLMTokenizer>,
+    tokenizer: Arc<Tokenizer>,
     chunking_duration: std::time::Duration,
 }
 

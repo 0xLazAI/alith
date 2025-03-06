@@ -1,4 +1,4 @@
-use crate::tokenizer::LLMTokenizer;
+use crate::tokenizer::Tokenizer;
 use std::sync::Arc;
 
 pub mod api_model;
@@ -16,5 +16,5 @@ pub struct LLMModelBase {
     pub model_id: String,
     pub model_ctx_size: u64,
     pub inference_ctx_size: u64,
-    pub tokenizer: Arc<LLMTokenizer>,
+    pub tokenizer: Arc<Tokenizer>,
 }
