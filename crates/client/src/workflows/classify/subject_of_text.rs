@@ -202,8 +202,6 @@ impl ClassifySubjectOfText {
         cleaned.dedup();
         let lower_content = self.content.to_lowercase();
         cleaned.retain(|x| lower_content.contains(x));
-        // println!("{:?}", self.subject_strings);
-        // println!("{:?}", cleaned);
 
         cleaned
     }

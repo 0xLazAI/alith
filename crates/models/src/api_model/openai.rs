@@ -1,5 +1,5 @@
 use super::ApiLLMModel;
-use crate::{tokenizer::LLMTokenizer, LLMModelBase};
+use crate::{tokenizer::Tokenizer, LLMModelBase};
 use std::sync::Arc;
 
 impl ApiLLMModel {
@@ -152,9 +152,9 @@ impl ApiLLMModel {
     }
 }
 
-fn model_tokenizer(model_id: &str) -> Arc<LLMTokenizer> {
+fn model_tokenizer(model_id: &str) -> Arc<Tokenizer> {
     Arc::new(
-        LLMTokenizer::new_tiktoken(model_id)
+        Tokenizer::new_tiktoken(model_id)
             .unwrap_or_else(|_| panic!("Failed to load tokenizer for {model_id}")),
     )
 }

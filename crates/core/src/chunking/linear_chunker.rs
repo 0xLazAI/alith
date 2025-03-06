@@ -45,9 +45,6 @@ impl LinearChunker {
             chunker.update_estimates();
             // chunk_times.push(start.elapsed());
         }
-        // let avg_chunk_time =
-        //     chunk_times.iter().sum::<std::time::Duration>() / chunk_times.len() as u32;
-        // println!("Average chunk time: {:?}", avg_chunk_time);
         Some(chunker.chunks)
     }
 

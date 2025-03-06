@@ -28,6 +28,7 @@ impl HuggingFaceLoader {
         }
     }
 
+    #[inline]
     pub fn hf_api(&self) -> &Api {
         self.hf_api.get_or_init(|| {
             ApiBuilder::from_env()
@@ -58,6 +59,7 @@ impl HuggingFaceLoader {
         }
     }
 
+    #[inline]
     pub fn load_file<T: AsRef<str>, S: Into<String>>(
         &self,
         file_name: T,
@@ -92,6 +94,7 @@ impl HuggingFaceLoader {
         Ok(safe_tensor_paths)
     }
 
+    #[inline]
     pub fn canonicalize_local_path(local_path: PathBuf) -> Result<PathBuf> {
         local_path.canonicalize().map_err(|e| anyhow!(e))
     }

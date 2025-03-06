@@ -5,7 +5,7 @@ use crate::requests::{
     embeddings::{EmbeddingsError, EmbeddingsRequest, EmbeddingsResponse},
     logit_bias::LogitBias,
 };
-use alith_models::tokenizer::LLMTokenizer;
+use alith_models::tokenizer::Tokenizer;
 use alith_prompt::{LLMPrompt, PromptTokenizer};
 pub mod api;
 pub mod local;
@@ -107,7 +107,7 @@ impl LLMBackend {
         }
     }
 
-    pub fn tokenizer(&self) -> &Arc<LLMTokenizer> {
+    pub fn tokenizer(&self) -> &Arc<Tokenizer> {
         match self {
             LLMBackend::OpenAI(b) => &b.model.model_base.tokenizer,
             LLMBackend::Anthropic(b) => &b.model.model_base.tokenizer,
