@@ -1,0 +1,139 @@
+import { Tabs } from "nextra/components";
+
+# Model Context Protocol (MCP)
+
+Alith supports Model Context Protocol (MCP), a technique that enables AI models to dynamically 
+integrate external services and data sources during inference. This protocol acts as a bridge 
+between LLMs and various tools/APIs, allowing models to:
+
+- Access real-time context from external systems (GitHub, databases, APIs, etc.).
+- Extend capabilities without retraining by connecting to specialized tools.
+- Maintain fresh knowledge through live data connections.
+- Execute complex workflows via chained service integrations.
+
+The protocol operates through lightweight server adapters defined in the configuration file. Each MCP server:
+
+- Runs as a separate process using native runtime (Node.js/Python).
+- Implements standardized interfaces for tool discovery and execution.
+- Can chain multiple services through semantic routing.
+- Maintains security through process isolation.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+## Read MCP Servers from Config
+
+```rust
+use alith::{Agent, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::from_model_name("gpt-4")?;
+    let agent = Agent::new("simple agent", model)
+        .preamble("You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.")
+        .mcp_config_path("servers_config.json").await?;
+    let response = agent.prompt("Calculate 10 - 3").await?;
+    println!("{}", response);
+    Ok(())
+}
+```
+
+An example of MCP config servers is as follows
+
+```json
+{
+    "mcpServers": {
+        "github": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ]
+        }
+    }
+}
+```
+
+> Note: Note that most MCP servers are written in Python or Node.js, 
+> you need to install the Python package manage tool `uv` and the Node.js
+> package manage tool `npx`
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+## Read MCP Servers from Config
+
+```python
+from alith import Agent
+
+agent = Agent(
+    name="Calculator Agent",
+    model="gpt-4o-mini",
+    preamble="You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user's question.",
+    mcp_config_path="servers_config.json",
+)
+print(agent.prompt("Calculate 10 - 3"))
+```
+
+An example of MCP config servers is as follows
+
+```json
+{
+    "mcpServers": {
+        "github": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ]
+        }
+    }
+}
+```
+
+> Note: Note that most MCP servers are written in Python or Node.js, 
+> you need to install the Python package manage tool `uv` and the Node.js
+> package manage tool `npx`
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+## Read MCP Servers from Config
+
+```typescript
+import { Agent } from 'alith'
+
+const agent = new Agent({
+  name: 'A dummy Agent',
+  model: 'gpt-4',
+  preamble:
+    'You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.',
+  mcpConfigPath: 'servers_config.json',
+})
+console.log(agent.prompt('Calculate 10 - 3'))
+```
+
+An example of MCP config servers is as follows
+
+```json
+{
+    "mcpServers": {
+        "github": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ]
+        }
+    }
+}
+```
+
+> Note: Note that most MCP servers are written in Python or Node.js, 
+> you need to install the Python package manage tool `uv` and the Node.js
+> package manage tool `npx`
+
+</Tabs.Tab>
+</Tabs>
