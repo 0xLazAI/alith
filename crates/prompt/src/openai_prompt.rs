@@ -1,14 +1,15 @@
 use super::{PromptMessage, TextConcatenator};
 use crate::PromptTokenizer;
+use std::cell::RefCell;
 use std::collections::HashMap;
 use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct OpenAIPrompt {
-    pub built_prompt_hashmap: std::cell::RefCell<Option<Vec<HashMap<String, String>>>>,
-    pub total_prompt_tokens: std::cell::RefCell<Option<u64>>,
+    pub built_prompt_hashmap: RefCell<Option<Vec<HashMap<String, String>>>>,
+    pub total_prompt_tokens: RefCell<Option<u64>>,
     pub concatenator: TextConcatenator,
-    pub messages: std::cell::RefCell<Vec<PromptMessage>>,
+    pub messages: RefCell<Vec<PromptMessage>>,
     tokenizer: Arc<dyn PromptTokenizer>,
     tokens_per_message: Option<u32>,
     tokens_per_name: Option<i32>,
@@ -21,10 +22,10 @@ impl OpenAIPrompt {
         tokenizer: Arc<dyn PromptTokenizer>,
     ) -> Self {
         Self {
-            built_prompt_hashmap: std::cell::RefCell::new(None),
-            total_prompt_tokens: std::cell::RefCell::new(None),
+            built_prompt_hashmap: RefCell::new(None),
+            total_prompt_tokens: RefCell::new(None),
             concatenator: TextConcatenator::default(),
-            messages: std::cell::RefCell::new(Vec::new()),
+            messages: RefCell::new(Vec::new()),
             tokenizer,
             tokens_per_message,
             tokens_per_name,
