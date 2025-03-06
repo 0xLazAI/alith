@@ -14,7 +14,7 @@ class Store(ABC):
         query: str,
         limit: int = 3,
         score_threshold: float = 0.4,
-    ) -> List[Dict[str, Any]]:
+    ) -> List[str]:
         """Searches the storage with a query, limiting the results and applying a threshold."""
         pass
 
