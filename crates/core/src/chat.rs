@@ -1,4 +1,4 @@
-use llm_client::interface::requests::completion::ToolDefinition;
+use alith_interface::requests::completion::ToolDefinition;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::error::Error;

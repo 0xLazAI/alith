@@ -10,8 +10,12 @@ alith-knowledge = { path = "crates/knowledge" }
 alith-store = { path = "crates/store" }
 alith-inference = { path = "crates/inference" }
 alith-tools = { path = "crates/tools" }
+alith-client = { path = "crates/client" }
+alith-devices = { path = "crates/devices" }
+alith-models = { path = "crates/models" }
+alith-prompt = { path = "crates/prompt" }
+alith-interface = { path = "crates/interface" }
 
-llm_client = { git = "https://github.com/0xLazAI/llm_client", version = "0.2.0" }
 fastembed = { git = "https://github.com/Anush008/fastembed-rs", version = "4.4.0", default-features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
 uuid = { version = "1.15.1", features = ["serde", "v4"] }
 async-trait = "0.1.87"
@@ -24,12 +28,23 @@ schemars = "0.8.22"
 reqwest = { version = "0.12.7", default-features = false, features = ["rustls-tls"] }
 url = "2.5.4"
 dagrs = "0.4.2"
+serial_test = "3.1.1"
+tracing = "0.1.40"
+half = "*"
+colorful = "0.3.2"
+dotenvy = "0.15.7"
+indenter = "0.3.3"
 
 [workspace.package]
-version = "0.3.0"
+version = "0.4.0"
 edition = "2021"
 rust-version = "1.84"
 exclude = [".github/"]
+homepage = "alith.lazai.network"
+license = "Apache-2.0"
+repository = "https://github.com/0xLazAI/alith"
+authors = ["LazAI Labs Authors", "Shelby Jenkins"]
+readme = "README.md"
 
 [profile.release]
 opt-level = 3

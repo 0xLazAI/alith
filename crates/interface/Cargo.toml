@@ -1,0 +1,45 @@
+[package]
+description = "The Backend for the alith-client Crate"
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+name = "alith-interface"
+readme = "README.md"
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+alith-devices.workspace = true
+alith-models.workspace = true
+alith-prompt.workspace = true
+
+anyhow.workspace = true
+colorful.workspace = true
+dotenvy.workspace = true
+indenter.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+backoff = { version = "0.4.0", features = ["tokio"] }
+bytes = "1.7.2"
+clap = { version = "4.5.17", optional = true }
+secrecy = "0.8.0"
+sysinfo = { version = "0.31.4", optional = true, default-features = false, features = [
+    "system",
+] }
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+url = "2.5.2"
+
+[features]
+default = []
+
+[dev-dependencies]
+serial_test.workspace = true
+tokio = { workspace = true, features = ["macros", "test-util"] }
+
+[build-dependencies]
+cargo_metadata = "0.18.1"
+alith-devices.workspace = true

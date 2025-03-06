@@ -9,8 +9,12 @@ alith-knowledge.workspace = true
 alith-store.workspace = true
 alith-inference.workspace = true
 alith-tools.workspace = true
+alith-client.workspace = true
+alith-models.workspace = true
+alith-interface.workspace = true
+alith-prompt.workspace = true
+alith-devices.workspace = true
 
-llm_client.workspace = true
 async-trait.workspace = true
 tokio.workspace = true
 serde.workspace = true

@@ -1,7 +1,7 @@
-use crate::chunking::Chunk;
+use crate::chunking::Chunker;
 use std::path::PathBuf;
 
-pub trait Knowledge: Chunk {
+pub trait Knowledge: Chunker {
     /// Load the content into the memory.
     fn load(&self) -> Result<String, KnowledgeError>;
     /// Enrich the knowledge with the input string.

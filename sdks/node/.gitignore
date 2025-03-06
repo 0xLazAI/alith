@@ -200,3 +200,4 @@ package-lock.json
 
 examples/*.js
 examples/*.d.ts
+llm_logs

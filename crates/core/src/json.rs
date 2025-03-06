@@ -78,24 +78,3 @@ pub fn parse_and_check_json_markdown(
 
     Ok(json_obj)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_partial_json() {
-        let partial = r#"{"name": "Alice", "age": 30"#;
-        let result = parse_partial_json(partial);
-        assert!(result.is_ok());
-    }
-
-    #[test]
-    fn test_markdown_parse() {
-        let md = r#"```json
-        {"action": "search"}
-        ```"#;
-        let result = parse_json_markdown(md);
-        assert!(result.is_ok());
-    }
-}

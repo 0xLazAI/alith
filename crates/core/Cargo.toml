@@ -4,7 +4,10 @@ version = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-llm_client.workspace = true
+alith-client.workspace = true
+alith-models.workspace = true
+alith-interface.workspace = true
+
 anyhow.workspace = true
 async-trait.workspace = true
 schemars.workspace = true
@@ -15,12 +18,17 @@ tokio.workspace = true
 uuid.workspace = true
 fastembed.workspace = true
 dagrs.workspace = true
-regex = "1.10"
+regex = "1.11"
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
 hnsw_rs = "0.3.1"
 lru = "0.13.0"
 mcp-client = "0.1.0"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+html2text = "0.12.6"
+rayon = "1.10.0"
+unicode-properties = "0.1.3"
+unicode-segmentation = "1.11.0"
+url = "2.5.2"
 
 [features]
 inference = []
