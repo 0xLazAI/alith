@@ -38,8 +38,8 @@ export class Agent extends BaseAgent {
 			name: opts.name,
 			model: opts.model,
 			preamble: opts.preamble,
-			base_url: opts.base_url,
-			api_key: opts.api_key,
+			baseUrl: opts.baseUrl,
+			apiKey: opts.apiKey,
 			tools: tools,
 		});
 		this._provider = opts.provider;
