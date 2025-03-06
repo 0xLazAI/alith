@@ -1,7 +1,12 @@
 pub use alith_core as core;
 
+pub use alith_client as client;
+pub use alith_devices as devices;
 pub use alith_inference as inference;
+pub use alith_interface as interface;
 pub use alith_knowledge as knowledge;
+pub use alith_models as models;
+pub use alith_prompt as prompt;
 pub use alith_store as store;
 pub use alith_tools as tools;
 
@@ -19,6 +24,10 @@ pub use core::{
         chunk_text, Chunk, ChunkError, ChunkerConfig, ChunkerResult, TextChunker,
         DEFAULT_CHUNK_SIZE,
     },
+    client::{
+        interface::requests::completion::{CompletionFinishReason, GenerationSettings},
+        CompletionRequest, CompletionResponse,
+    },
     embeddings::{Embed, EmbedError, Embeddings, EmbeddingsBuilder, EmbeddingsData, TextEmbedder},
     extractor::{ExtractionError, Extractor},
     flow::{
@@ -30,10 +39,6 @@ pub use core::{
     },
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
     llm::{EmbeddingsModel, LLM},
-    llm_client::{
-        interface::requests::completion::{CompletionFinishReason, GenerationSettings},
-        CompletionRequest, CompletionResponse,
-    },
     mcp::{
         setup_mcp_clients, sse_client, stdio_client, ClientCapabilities, ClientInfo, MCPClient,
         MCPConfig, MCPError, MCPServerConfig, SseTransport, StdioTransport, Transport,
@@ -57,5 +62,4 @@ pub use knowledge::{
     string::StringKnowledge,
     text::TextFileKnowledge,
 };
-pub use llm_client;
 pub use store::qdrant::*;

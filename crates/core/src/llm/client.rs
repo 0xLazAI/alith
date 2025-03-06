@@ -13,13 +13,13 @@ use crate::embeddings::EmbeddingsData;
 use crate::embeddings::EmbeddingsError;
 use anyhow::Result;
 
-pub use llm_client as client;
-pub use llm_client::basic_completion::BasicCompletion;
-pub use llm_client::embeddings::Embeddings;
-pub use llm_client::interface::requests::completion::{CompletionRequest, CompletionResponse};
-pub use llm_client::models::api_model::ApiLlmModel;
-pub use llm_client::prelude::*;
-pub use llm_client::LlmClient;
+pub use alith_client as client;
+pub use alith_client::basic_completion::BasicCompletion;
+pub use alith_client::embeddings::Embeddings;
+pub use alith_client::prelude::*;
+pub use alith_client::LlmClient;
+pub use alith_interface::requests::completion::{CompletionRequest, CompletionResponse};
+pub use alith_models::api_model::ApiLlmModel;
 
 impl ResponseContent for CompletionResponse {
     fn content(&self) -> String {

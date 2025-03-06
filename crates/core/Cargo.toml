@@ -4,7 +4,11 @@ version = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-llm_client.workspace = true
+alith-client.workspace = true
+alith-models.workspace = true
+alith-interface.workspace = true
+alith-utils.workspace = true
+
 anyhow.workspace = true
 async-trait.workspace = true
 schemars.workspace = true

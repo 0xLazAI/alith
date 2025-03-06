@@ -1,5 +1,5 @@
 use alith::{
-    llm_client::{prelude::*, DecisionTrait},
+    client::{prelude::*, DecisionTrait},
     LLM,
 };
 

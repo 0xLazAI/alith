@@ -3,7 +3,7 @@ use schemars::{schema::RootSchema, schema_for, JsonSchema};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
-pub use llm_client::interface::requests::completion::{ToolChoice, ToolDefinition};
+pub use alith_interface::requests::completion::{ToolChoice, ToolDefinition};
 
 #[async_trait]
 pub trait Tool: Send + Sync {

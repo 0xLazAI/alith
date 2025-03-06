@@ -1,0 +1,20 @@
+[package]
+description = "LLM Prompting"
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+name = "alith-prompt"
+readme = "README.md"
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+colorful.workspace = true
+indenter.workspace = true
+thiserror.workspace = true
+
+minijinja = "2.0.1"
+
+[dev-dependencies]
+alith-models.workspace = true

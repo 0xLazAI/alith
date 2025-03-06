@@ -1,0 +1,38 @@
+[package]
+categories = ["api-bindings", "asynchronous"]
+description = "The Easiest Rust Interface for Local LLMs, and an Interface for Deterministic Signals from Probabilistic LLM Vibes"
+edition.workspace = true
+homepage.workspace = true
+keywords = ["anthropic", "gguf", "llm", "openai"]
+license.workspace = true
+name = "alith-client"
+readme = "README.md"
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+alith-devices.workspace = true
+alith-interface.workspace = true
+alith-models.workspace = true
+alith-prompt.workspace = true
+alith-utils.workspace = true
+
+anyhow.workspace = true
+colorful.workspace = true
+indenter.workspace = true
+indoc = "2.0.5"
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+url.workspace = true
+
+[features]
+default = []
+
+[dev-dependencies]
+serde.workspace = true
+serde_json.workspace = true
+serial_test.workspace = true
+tokio = { workspace = true, features = ["macros", "test-util"] }

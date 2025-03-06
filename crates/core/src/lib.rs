@@ -9,13 +9,17 @@ pub mod json;
 pub mod knowledge;
 pub mod llm;
 pub mod mcp;
-pub mod splitting;
-pub use llm_client;
 pub mod memory;
 pub mod parser;
+pub mod splitting;
 pub mod store;
 pub mod task;
 pub mod tool;
+
+pub use alith_client as client;
+pub use alith_interface as interface;
+pub use alith_models as models;
+pub use alith_utils as utils;
 
 use std::sync::Arc;
 use tokio::sync::RwLock;
