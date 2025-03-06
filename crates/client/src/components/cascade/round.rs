@@ -187,27 +187,6 @@ impl CascadeRound {
 
         Ok(())
     }
-
-    // pub async fn set_cache_up_to_last_step(
-    //     &mut self,
-    //     base_req: &mut CompletionRequest,
-    // ) -> crate::Result<()> {
-    //     let mut last_step = self.resolved_steps.pop_back().unwrap();
-    //     let generation_prefix = self.generation_prefix(&last_step)?;
-    //     match last_step
-    //         .set_cache_up_to_step(generation_prefix.as_deref(), base_req)
-    //         .await
-    //     {
-    //         Ok(..) => {
-    //             self.resolved_steps.push_back(last_step);
-    //             Ok(())
-    //         }
-    //         Err(e) => {
-    //             self.resolved_steps.push_back(last_step);
-    //             Err(e)
-    //         }
-    //     }
-    // }
 }
 
 impl std::fmt::Display for CascadeRound {

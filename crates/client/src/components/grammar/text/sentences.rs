@@ -37,6 +37,7 @@ impl Default for SentencesGrammar {
 }
 
 impl SentencesGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::Sentences(self)
     }

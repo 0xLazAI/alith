@@ -1,6 +1,4 @@
 mod dfs_chunker;
-#[cfg(test)]
-mod external_text_chunker;
 mod linear_chunker;
 mod overlap;
 

@@ -27,25 +27,30 @@ impl Default for FauxUrlGrammar {
 }
 
 impl FauxUrlGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::FauxUrl(self)
     }
 
+    #[inline]
     pub fn min_count(mut self, min_count: u8) -> Self {
         self.min_count = min_count;
         self
     }
 
+    #[inline]
     pub fn max_count(mut self, max_count: u8) -> Self {
         self.max_count = max_count;
         self
     }
 
+    #[inline]
     pub fn word_char_length(mut self, word_char_length: u8) -> Self {
         self.word_char_length = word_char_length;
         self
     }
 
+    #[inline]
     pub fn base_url<T: AsRef<str>>(mut self, base_url: T) -> Self {
         self.base_url = base_url.as_ref().to_string();
         self
@@ -66,10 +71,12 @@ impl FauxUrlGrammar {
         grammar_string.as_ref().unwrap().clone()
     }
 
+    #[inline]
     pub fn validate_clean(&self, content: &str) -> Result<String, GrammarError> {
         faux_url_validate_clean(content, &self.base_url)
     }
 
+    #[inline]
     pub fn grammar_parse(&self, content: &str) -> Result<Vec<String>, GrammarError> {
         faux_url_parse(content, &self.base_url)
     }

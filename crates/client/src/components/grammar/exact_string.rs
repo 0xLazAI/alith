@@ -10,6 +10,7 @@ pub struct ExactStringGrammar {
 }
 
 impl ExactStringGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::ExactString(self)
     }
@@ -29,6 +30,7 @@ impl ExactStringGrammar {
         self
     }
 
+    #[inline]
     pub fn add_exact_string<T: AsRef<str>>(self, exact_string: T) -> Self {
         self.add_exact_strings(&[exact_string])
     }
@@ -48,10 +50,12 @@ impl ExactStringGrammar {
         grammar_string.as_ref().unwrap().clone()
     }
 
+    #[inline]
     pub fn validate_clean(&self, content: &str) -> Result<String, GrammarError> {
         exact_string_validate_clean(content, &self.exact_strings)
     }
 
+    #[inline]
     pub fn grammar_parse(&self, content: &str) -> Result<String, GrammarError> {
         exact_string_parse(content, &self.exact_strings)
     }

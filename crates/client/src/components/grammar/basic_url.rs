@@ -20,6 +20,7 @@ impl BasicUrlGrammar {
 }
 
 impl BasicUrlGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::BasicUrl(self)
     }
@@ -32,10 +33,12 @@ impl BasicUrlGrammar {
         grammar_string.as_ref().unwrap().clone()
     }
 
+    #[inline]
     pub fn validate_clean(&self, content: &str) -> Result<String, GrammarError> {
         url_validate_clean(content)
     }
 
+    #[inline]
     pub fn grammar_parse(&self, content: &str) -> Result<Url, GrammarError> {
         url_parse(content)
     }

@@ -26,6 +26,7 @@ impl WordsGrammar {
 }
 
 impl WordsGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::Words(self)
     }

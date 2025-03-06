@@ -24,6 +24,7 @@ impl Default for TextGrammar {
 }
 
 impl TextGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::Text(self)
     }

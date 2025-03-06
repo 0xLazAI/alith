@@ -12,19 +12,23 @@ impl CustomGrammar {
         Grammar::Custom(self)
     }
 
+    #[inline]
     pub fn custom_grammar(mut self, custom_grammar: String) -> Self {
         self.custom_grammar = Some(custom_grammar);
         self
     }
 
+    #[inline]
     pub fn grammar_string(&self) -> String {
         self.custom_grammar.clone().expect("custom_grammar not set")
     }
 
+    #[inline]
     pub fn validate_clean(&self, content: &str) -> Result<String, GrammarError> {
         Ok(content.to_owned())
     }
 
+    #[inline]
     pub fn grammar_parse(&self, content: &str) -> Result<String, GrammarError> {
         Ok(content.to_owned())
     }

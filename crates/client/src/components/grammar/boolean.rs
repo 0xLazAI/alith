@@ -9,6 +9,7 @@ pub struct BooleanGrammar {
 }
 
 impl BooleanGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::Boolean(self)
     }
@@ -24,10 +25,12 @@ impl BooleanGrammar {
         grammar_string.as_ref().unwrap().clone()
     }
 
+    #[inline]
     pub fn validate_clean(&self, content: &str) -> Result<String, GrammarError> {
         boolean_validate_clean(content)
     }
 
+    #[inline]
     pub fn grammar_parse(&self, content: &str) -> Result<bool, GrammarError> {
         boolean_parse(content)
     }

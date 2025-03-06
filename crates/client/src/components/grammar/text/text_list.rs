@@ -31,9 +31,11 @@ impl Default for TextListGrammar {
 }
 
 impl TextListGrammar {
+    #[inline]
     pub fn wrap(self) -> Grammar {
         Grammar::TextList(self)
     }
+
     pub fn min_count(mut self, min_count: u8) -> Self {
         self.min_count = min_count;
         self
