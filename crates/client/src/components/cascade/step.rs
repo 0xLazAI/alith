@@ -1,6 +1,7 @@
 use super::cascade_request;
 use crate::components::grammar::Grammar;
 use alith_interface::requests::{completion::CompletionRequest, logit_bias::LogitBias};
+use std::cell::RefCell;
 
 #[derive(Clone)]
 pub enum CascadeStep {
@@ -13,7 +14,7 @@ impl CascadeStep {
         CascadeStep::Inference(InferenceStep {
             llm_content: None,
             dynamic_suffix: None,
-            outcome: std::cell::RefCell::new(None),
+            outcome: RefCell::new(None),
             step_config,
             step_counter,
         })
@@ -91,7 +92,7 @@ impl CascadeStep {
 pub struct InferenceStep {
     pub llm_content: Option<String>, // raw, unformatted result from llm.
     pub dynamic_suffix: Option<String>, // suffix to be added to the result.
-    pub outcome: std::cell::RefCell<Option<String>>,
+    pub outcome: RefCell<Option<String>>,
     pub step_config: StepConfig,
     pub step_counter: usize,
 }

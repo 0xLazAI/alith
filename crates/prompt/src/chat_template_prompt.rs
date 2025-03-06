@@ -2,17 +2,18 @@ use super::{PromptMessage, TextConcatenator};
 use crate::PromptTokenizer;
 use minijinja::value::{from_args, Value, ValueKind};
 use minijinja::{context, Environment, Error, ErrorKind};
+use std::cell::RefCell;
 use std::collections::HashMap;
 use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct ChatTemplatePrompt {
-    pub built_prompt_string: std::cell::RefCell<Option<String>>,
-    pub built_prompt_as_tokens: std::cell::RefCell<Option<Vec<u32>>>,
-    pub total_prompt_tokens: std::cell::RefCell<Option<u64>>,
+    pub built_prompt_string: RefCell<Option<String>>,
+    pub built_prompt_as_tokens: RefCell<Option<Vec<u32>>>,
+    pub total_prompt_tokens: RefCell<Option<u64>>,
     pub concatenator: TextConcatenator,
-    pub messages: std::cell::RefCell<Vec<PromptMessage>>,
-    pub generation_prefix: std::cell::RefCell<Option<String>>,
+    pub messages: RefCell<Vec<PromptMessage>>,
+    pub generation_prefix: RefCell<Option<String>>,
     pub tokenizer: Arc<dyn PromptTokenizer>,
     chat_template: String,
     bos_token: Option<String>,
@@ -31,12 +32,12 @@ impl ChatTemplatePrompt {
         tokenizer: Arc<dyn PromptTokenizer>,
     ) -> Self {
         Self {
-            built_prompt_string: std::cell::RefCell::new(None),
-            built_prompt_as_tokens: std::cell::RefCell::new(None),
-            total_prompt_tokens: std::cell::RefCell::new(None),
+            built_prompt_string: RefCell::new(None),
+            built_prompt_as_tokens: RefCell::new(None),
+            total_prompt_tokens: RefCell::new(None),
             concatenator: TextConcatenator::default(),
-            messages: std::cell::RefCell::new(Vec::new()),
-            generation_prefix: std::cell::RefCell::new(None),
+            messages: RefCell::new(Vec::new()),
+            generation_prefix: RefCell::new(None),
             tokenizer,
             chat_template: chat_template.to_owned(),
             bos_token: bos_token.map(|s| s.to_owned()),
@@ -99,9 +100,6 @@ impl std::fmt::Display for ChatTemplatePrompt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f)?;
         writeln!(f, "ChatTemplatePrompt")?;
-        // for message in self.messages.borrow().iter() {
-        //     writeln!(f, "{}", message)?;
-        // }
 
         match *self.built_prompt_string.borrow() {
             Some(ref prompt) => {
@@ -180,6 +178,7 @@ pub fn apply_chat_template(
 }
 
 /// This exists specifically for the minijinja template engine to raise an exception.
+#[inline]
 fn raise_exception(msg: String) -> Result<String, minijinja::Error> {
     Err(minijinja::Error::new(ErrorKind::InvalidOperation, msg))
 }

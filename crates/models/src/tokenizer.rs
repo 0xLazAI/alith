@@ -34,7 +34,7 @@ pub struct LLMTokenizer {
 impl LLMTokenizer {
     pub fn new_tiktoken<T: AsRef<str>>(model_id: T) -> Result<Self> {
         let tokenizer = get_bpe_from_model(model_id.as_ref())?;
-        let white_space_token_id = u32::try_from(tokenizer.encode_ordinary(" ").remove(0))?;
+        let white_space_token_id = tokenizer.encode_ordinary(" ").remove(0);
         Ok(Self {
             tokenizer: TokenizerBackend::Tiktoken(Box::new(tokenizer)),
             tokenizer_path: None,
@@ -176,20 +176,11 @@ impl LLMTokenizer {
     }
 
     fn encode_tiktoken(&self, tokenizer: &CoreBPE, str: &str) -> Vec<u32> {
-        let tokens = if self.with_special_tokens {
-            tokenizer
-                .encode_with_special_tokens(str)
-                .iter()
-                .map(|&x| u32::try_from(x).unwrap())
-                .collect()
+        if self.with_special_tokens {
+            tokenizer.encode_with_special_tokens(str)
         } else {
-            tokenizer
-                .encode_ordinary(str)
-                .iter()
-                .map(|&x| u32::try_from(x).unwrap())
-                .collect()
-        };
-        tokens
+            tokenizer.encode_ordinary(str)
+        }
     }
 
     fn encode_hf(&self, tokenizer: &HFTokenizer, str: &str) -> Vec<u32> {
@@ -209,9 +200,7 @@ impl LLMTokenizer {
     }
 
     fn decode_tiktoken(&self, tokenizer: &CoreBPE, tokens: &[u32]) -> Result<String> {
-        tokenizer
-            .decode(tokens.iter().map(|&x| x as usize).collect())
-            .map_err(|e| anyhow!(e))
+        tokenizer.decode(tokens.to_owned()).map_err(|e| anyhow!(e))
     }
 
     fn decode_hf(&self, tokenizer: &HFTokenizer, tokens: &[u32]) -> Result<String> {

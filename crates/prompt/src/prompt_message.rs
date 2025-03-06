@@ -1,5 +1,6 @@
 use super::local_content::load_content_path;
 use super::TextConcatenator;
+use std::cell::RefCell;
 use std::{collections::HashMap, path::PathBuf};
 
 #[derive(Clone, Debug, PartialEq)]
@@ -23,9 +24,9 @@ impl PromptMessageType {
 
 #[derive(Debug, Clone)]
 pub struct PromptMessage {
-    content: std::cell::RefCell<Vec<String>>,
-    pub built_message_hashmap: std::cell::RefCell<HashMap<String, String>>,
-    pub built_message_string: std::cell::RefCell<Option<String>>,
+    content: RefCell<Vec<String>>,
+    pub built_message_hashmap: RefCell<HashMap<String, String>>,
+    pub built_message_string: RefCell<Option<String>>,
     pub message_type: PromptMessageType,
     pub concatenator: TextConcatenator,
 }
@@ -59,10 +60,12 @@ impl PromptMessage {
         self
     }
 
+    #[inline]
     pub fn set_content_from_path(&self, content_path: &PathBuf) -> &Self {
         self.set_content(load_content_path(content_path))
     }
 
+    #[inline]
     pub fn prepend_content<T: AsRef<str>>(&self, content: T) -> &Self {
         if content.as_ref().is_empty() {
             return self;
@@ -81,6 +84,7 @@ impl PromptMessage {
         self
     }
 
+    #[inline]
     pub fn prepend_content_from_path(&self, content_path: &PathBuf) -> &Self {
         self.prepend_content(load_content_path(content_path))
     }
@@ -103,6 +107,7 @@ impl PromptMessage {
         self
     }
 
+    #[inline]
     pub fn append_content_from_path(&self, content_path: &PathBuf) -> &Self {
         self.append_content(load_content_path(content_path))
     }
@@ -116,6 +121,7 @@ impl PromptMessage {
     }
 
     // Builder functions
+    #[inline]
     pub fn requires_build(&self) -> bool {
         !self.content_ref().is_empty() && self.built_message_hashmap_ref().is_empty()
     }

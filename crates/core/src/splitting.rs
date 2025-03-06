@@ -1,12 +1,24 @@
+pub mod markdown;
 pub mod rule_based;
+
 use crate::cleaner::TextCleaner;
 use regex::Regex;
-pub use rule_based::split_text_into_indices;
 use std::{
     collections::VecDeque,
     ops::Range,
     sync::{Arc, LazyLock},
 };
+use text_splitter::ChunkConfigError;
+use thiserror::Error;
+
+pub use markdown::split_markdown;
+pub use rule_based::split_text_into_indices;
+
+#[derive(Error, Debug)]
+pub enum SplitError {
+    #[error("Chunk config error: {0}")]
+    ChunkConfigError(#[from] ChunkConfigError),
+}
 
 #[derive(Default)]
 pub struct TextSplitter {
