@@ -41,5 +41,5 @@ serial_test.workspace = true
 tokio = { workspace = true, features = ["macros", "test-util"] }
 
 [build-dependencies]
-cargo_metadata = "0.18.1"
+cargo_metadata = "0.19.2"
 alith-devices.workspace = true
