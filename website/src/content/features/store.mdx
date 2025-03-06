@@ -83,7 +83,6 @@ from alith import MilvusStore
 MilvusStore().save_docs(["doc1", "doc2", "doc3"])
 ```
 
-
 ## Chroma Vector Database
 
 ```python
@@ -96,7 +95,16 @@ ChromaDBStore().save_docs(["doc1", "doc2", "doc3"])
 
   <Tabs.Tab>
 
-Comming Soon
+## Qdrant Vector Database
+
+```typescript
+import { Store, QdrantStore, Embeddings, RemoteModelEmbeddings } from '../src'
+
+let embeddings: Embeddings = new RemoteModelEmbeddings('your embeddings model name', 'your API key', 'base url')
+const store: Store = new QdrantStore(embeddings)
+store.save('Hello, World')
+console.log(store.search('Hello, World'))
+```
 
 </Tabs.Tab>
 </Tabs>

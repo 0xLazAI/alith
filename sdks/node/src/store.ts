@@ -69,6 +69,18 @@ class QdrantStore implements Store {
     })
   }
 
+  async saveDocs(values: string[]): Promise<void> {
+    const vectors = await this.embedTexts(values)
+    const points = values.map((value, index) => ({
+      id: Math.random().toString(36).substring(7),
+      vector: vectors[index],
+      payload: { text: value },
+    }))
+    await this.client.upsert(this.collectionName, {
+      points,
+    })
+  }
+
   private async embedTexts(text: string[]): Promise<number[][]> {
     return this.embeddings.embedTexts(text)
   }

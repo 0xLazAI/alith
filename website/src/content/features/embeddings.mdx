@@ -50,7 +50,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
   <Tabs.Tab>
 
-## Large Language Embeddings Model
+## Remote Embeddings Model
 
 ```python
 from alith import RemoteModelEmbeddings
@@ -82,7 +82,15 @@ print(FastEmbeddings().embed_texts(["Hello", "World"]))
 
   <Tabs.Tab>
 
-Comming Soon
+## Remote Embeddings Model
+
+```typescript
+import { RemoteModelEmbeddings } from '.alith'
+
+console.log(
+  new RemoteModelEmbeddings('your embeddings model name', 'your API key', 'base url').embedTexts(['Hello', 'World']),
+)
+```
 
 </Tabs.Tab>
 </Tabs>

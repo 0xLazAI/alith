@@ -1,4 +1,5 @@
 import { DelegateAgent, type DelegateTool } from './internal'
+import { Store } from './store'
 import { type Tool, convertParametersToJson } from './tool'
 
 // Define the configuration structure for an Agent
@@ -10,12 +11,14 @@ type AgentOptions = {
   apiKey?: string // Optional API key for authentication
   tools?: Array<Tool> // Optional list of tools available to the agent
   mcpConfigPath?: string // Optional mcp config path
+  store?: Store // Optional store
 }
 
 // Represents an agent that can process prompts using tools
 class Agent {
   private _agent: DelegateAgent
   private _opts: AgentOptions
+  private _store?: Store
   /**
    * Creates an instance of Agent.
    * @param {AgentOptions} opts - The configuration object for the agent.
@@ -26,9 +29,11 @@ class Agent {
    * @param {string} [opts.apiKey] - Optional API key for authentication.
    * @param {Array<Tool>} [opts.tools] - Optional list of tools available to the agent.
    * @param {string} [opts.mcpConfigPath] - Optional mcp config path.
+   * @param {Store} [opts.store] - Optional store.
    */
   constructor(opts: AgentOptions) {
     this._opts = opts
+    this._store = opts.store
     this._agent = new DelegateAgent(
       opts.name,
       opts.model,
@@ -60,6 +65,11 @@ class Agent {
           const args_array = Object.values(tool_args)
           return tool.handler(...args_array)
         },
+      })
+    }
+    if (this._store) {
+      this._store.search(prompt).then((docs) => {
+        prompt = `${prompt}\n\n<attachments>\n${docs.join('')}</attachments>\n`
       })
     }
     return this._agent.promptWithTools(prompt, delegateTools)
