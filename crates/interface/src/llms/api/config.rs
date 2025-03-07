@@ -1,16 +1,16 @@
 use reqwest::header::HeaderMap;
-use secrecy::Secret;
+use secrecy::SecretString;
 
 #[derive(Clone, Debug)]
 pub struct ApiConfig {
     pub host: String,
     pub port: Option<String>,
-    pub api_key: Option<Secret<String>>,
+    pub api_key: Option<SecretString>,
     pub api_key_env_var: String,
 }
 
 impl ApiConfig {
-    pub(crate) fn load_api_key(&mut self) -> crate::Result<Secret<String>> {
+    pub(crate) fn load_api_key(&mut self) -> crate::Result<SecretString> {
         if let Some(api_key) = self.api_key.as_ref() {
             crate::trace!("Using api_key from parameter");
             return Ok(api_key.to_owned());
@@ -59,7 +59,7 @@ pub trait LLMApiConfigTrait {
     where
         Self: Sized,
     {
-        self.api_base_config_mut().api_key = Some(Secret::from(api_key.into()));
+        self.api_base_config_mut().api_key = Some(SecretString::from(api_key.into()));
         self
     }
 
@@ -78,5 +78,5 @@ pub trait ApiConfigTrait {
 
     fn url(&self, path: &str) -> String;
 
-    fn api_key(&self) -> &Option<Secret<String>>;
+    fn api_key(&self) -> &Option<SecretString>;
 }

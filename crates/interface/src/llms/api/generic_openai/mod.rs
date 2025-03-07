@@ -12,7 +12,7 @@ use crate::requests::{
 use alith_devices::logging::LoggingConfig;
 use alith_models::api_model::ApiLLMModel;
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
-use secrecy::{ExposeSecret, Secret};
+use secrecy::{ExposeSecret, SecretString};
 use serde_json::json;
 
 pub struct GenericApiBackend {
@@ -130,7 +130,7 @@ impl ApiConfigTrait for GenericApiConfig {
         }
     }
 
-    fn api_key(&self) -> &Option<Secret<String>> {
+    fn api_key(&self) -> &Option<SecretString> {
         &self.api_config.api_key
     }
 }

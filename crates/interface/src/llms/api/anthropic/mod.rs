@@ -12,7 +12,7 @@ use alith_devices::logging::LoggingConfig;
 use alith_models::api_model::ApiLLMModel;
 use completion::AnthropicCompletionRequest;
 use reqwest::header::HeaderMap;
-use secrecy::{ExposeSecret, Secret};
+use secrecy::{ExposeSecret, SecretString};
 
 /// Default v1 API base url
 pub const ANTHROPIC_API_HOST: &str = "api.anthropic.com/v1";
@@ -122,7 +122,7 @@ impl ApiConfigTrait for AnthropicConfig {
         format!("https://{}{}", self.api_config.host, path)
     }
 
-    fn api_key(&self) -> &Option<Secret<String>> {
+    fn api_key(&self) -> &Option<SecretString> {
         &self.api_config.api_key
     }
 }

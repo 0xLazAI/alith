@@ -15,7 +15,7 @@ use alith_devices::logging::LoggingConfig;
 use alith_models::api_model::ApiLLMModel;
 use completion::OpenAICompletionRequest;
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
-use secrecy::{ExposeSecret, Secret};
+use secrecy::{ExposeSecret, SecretString};
 use serde_json::json;
 
 /// Default v1 API base url
@@ -163,7 +163,7 @@ impl ApiConfigTrait for OpenAIConfig {
         }
     }
 
-    fn api_key(&self) -> &Option<Secret<String>> {
+    fn api_key(&self) -> &Option<SecretString> {
         &self.api_config.api_key
     }
 }
