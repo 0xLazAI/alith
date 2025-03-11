@@ -1,0 +1,39 @@
+{
+	"name": "coinbase-agentkit-alith",
+	"version": "0.1.0",
+	"type": "module",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			}
+		}
+	},
+	"files": ["dist"],
+	"dependencies": {
+		"@coinbase/agentkit": "^0.3.0",
+		"alith": "^0.4.1",
+		"dotenv": "^16.4.7",
+		"zod": "^3.24.2"
+	},
+	"scripts": {
+		"build": "npx tsc --build",
+		"clean": "rm -rf dist",
+		"lint": "biome lint .",
+		"lint:fix": "biome check --apply . --unsafe",
+		"format": "biome format --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/json-schema": "^7.0.15",
+		"typescript": "^5.4.5"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
