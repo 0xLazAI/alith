@@ -6,8 +6,8 @@
     "url": "git+https://github.com/0xLazAI/alith.git"
   },
   "license": "Apache-2.0",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "napi": {
     "name": "alith",
     "package": {
