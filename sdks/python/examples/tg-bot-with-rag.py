@@ -10,9 +10,7 @@ from telegram.ext import (
 )
 
 from langchain_community.document_loaders.github import GithubFileLoader
-from langchain_text_splitters import MarkdownTextSplitter
-from pymilvus import MilvusClient, model
-from alith import Agent
+from alith import Agent, MilvusStore, chunk_text
 
 # --------------------------------------------
 # Constants
@@ -24,18 +22,8 @@ GITHUB_REPO = "0xLazAI/alith"
 DOC_RELATIVE_PATH = "website/src/content"
 
 # --------------------------------------------
-# Init Embeddings Model and Document Database
+# Init Document Database
 # --------------------------------------------
-
-client = MilvusClient("alith.db")
-client.create_collection(
-    collection_name="alith",
-    dimension=768,
-)
-# If connection to https://huggingface.co/ failed, uncomment the following path.
-# os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-# Note: This will download a small embedding model "paraphrase-albert-small-v2" (~50MB) from Hugging Face.
-embedding_fn = model.DefaultEmbeddingFunction()
 
 
 def create_vector_store():
@@ -48,17 +36,9 @@ def create_vector_store():
         )
         is not None,
     ).load()
-    text_splitter = MarkdownTextSplitter(chunk_size=2000, chunk_overlap=200)
-    docs = [split.page_content for split in text_splitter.split_documents(docs)]
-    vectors = embedding_fn.encode_documents(docs)
-    data = [
-        {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
-        for i in range(len(vectors))
-    ]
-    client.insert(collection_name="alith", data=data)
+    docs = chunk_text(docs, overlap_percent=0.2)
+    return MilvusStore().save_docs(docs)
 
-
-create_vector_store()
 
 # --------------------------------------------
 # Init Alith Agent
@@ -68,24 +48,8 @@ agent = Agent(
     name="Telegram Bot Agent",
     model="gpt-4",
     preamble="""You are a comedian here to entertain the user using humour and jokes.""",
+    store=create_vector_store(),
 )
-
-
-def prompt_with_rag(text: str) -> str:
-    query_vectors = embedding_fn.encode_queries([text])
-    # Search from the vector database
-    res = client.search(
-        collection_name="alith",
-        data=query_vectors,
-        limit=2,
-        output_fields=["text", "subject"],
-    )
-    docs = [d["entity"]["text"] for r in res for d in r]
-    response = agent.prompt(
-        "{}\n\n<attachments>\n{}</attachments>\n".format(text, "".join(docs))
-    )
-    return response
-
 
 # --------------------------------------------
 # Init Telegram Bot
@@ -93,7 +57,7 @@ def prompt_with_rag(text: str) -> str:
 
 
 async def handle_message(update: Update, context: CallbackContext) -> None:
-    response = prompt_with_rag(update.message.text)
+    response = agent.prompt(update.message.text)
     await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
 
 
