@@ -2,8 +2,6 @@
 
 This integration provides the following methods:
 
-This integration provides two usage methods:
-
 1. **Use Agentkit actions within Alith**: You can directly leverage a variety of actions from the agentkit ecosystem without the need to rewrite them in Alith.
 
 ## Reference
