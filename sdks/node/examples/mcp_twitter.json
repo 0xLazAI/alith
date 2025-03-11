@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "agent-twitter-client-mcp": {
+      "command": "npx",
+      "args": ["-y", "agent-twitter-client-mcp"],
+      "env": {
+        "AUTH_METHOD": "cookies",
+        "TWITTER_COOKIES": "[\"auth_token=YOUR_AUTH_TOKEN; Domain=.twitter.com\", \"ct0=YOUR_CT0_VALUE; Domain=.twitter.com\", \"twid=u%3DYOUR_USER_ID; Domain=.twitter.com\"]"
+      }
+    }
+  }
+}

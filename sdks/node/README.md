@@ -2,8 +2,20 @@
 
 ## Installation
 
+- Install `alith` dependency
+
 ```shell
 npm install alith
+# Or use pnpm `pnpm install alith`
+# Or use yarn `yarn install alith`
+```
+
+- Install the `json-schema` dependency
+
+```shell
+npm i --save-dev @types/json-schema
+# Or use pnpm `pnpm install --save-dev @types/json-schema`
+# Or use yarn `yarn install --save-dev @types/json-schema`
 ```
 
 ## Quick Start

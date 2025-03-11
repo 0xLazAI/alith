@@ -1,0 +1,129 @@
+import { Steps } from "nextra/components";
+
+# Twitter Agent
+
+In this tutorial, you will learn how to create a Node.js application that integrates X/twitter with
+Alith's Model Context Protocol (MCP) feature. This allows you to use LLM models and agents to fetch
+tweets from a specific user, post a new tweet, like a tweet, quote a tweet, etc.
+
+> Note: Although we used Node.js in this tutorial, you can still use
+> Alith Rust SDK and Python SDK to complete this twitter agent.
+
+## Prerequisites
+
+Before starting, ensure you have the following:
+
+- OpenAI API Key: Sign up at OpenAI and get your API key or you can use your favorite LLM models.
+- Node.js 18+ Environment and pnpm.
+
+<Steps>
+
+## Install Required Libraries
+
+Init the project and install the necessary Node.js libraries using `pnpm`:
+
+```shell
+mkdir alith-twitter-example && cd alith-twitter-example && pnpm init
+pnpm i alith
+pnpm i --save-dev @types/json-schema
+```
+
+## Set Up Environment Variables
+
+### LLM API Key
+
+Store your API keys and tokens as environment variables for security:
+
+```shell
+export OPENAI_API_KEY="your-openai-api-key"
+```
+
+### Cookie Authentication
+
+```shell
+export AUTH_METHOD=cookies
+export TWITTER_COOKIES=["auth_token=your_auth_token; Domain=.twitter.com", "ct0=your_ct0_value; Domain=.twitter.com"]
+```
+
+To obtain cookies:
+
+1. Log in to Twitter in your browser
+2. Open Developer Tools (F12)
+3. Go to the Application tab > Cookies
+3. Copy the values of `auth_token` and `ct0` cookies
+
+### Username/Password Authentication
+
+```shell
+export AUTH_METHOD=credentials
+export TWITTER_USERNAME=your_username
+export TWITTER_PASSWORD=your_password
+export TWITTER_EMAIL=your_email@example.com  # Optional
+export TWITTER_2FA_SECRET=your_2fa_secret    # Optional, required if 2FA is enabled
+```
+
+### API Authentication
+
+```shell
+export AUTH_METHOD=api
+export TWITTER_API_KEY=your_api_key
+export TWITTER_API_SECRET_KEY=your_api_secret_key
+export TWITTER_ACCESS_TOKEN=your_access_token
+export TWITTER_ACCESS_TOKEN_SECRET=your_access_token_secret
+```
+
+## Write the Typescript Code
+
+Create a Typescript script (e.g., `index.ts`) and add the following code:
+
+> Note: We need to install tsc firstly
+
+```typescript
+import { Agent } from 'alith'
+
+const agent = new Agent({
+  name: 'A twitter agent',
+  model: 'gpt-4',
+  preamble:
+    'You are a automatic twitter agent.',
+  mcpConfigPath: 'mcp_twitter.json',
+})
+console.log(agent.prompt('Search Twitter for tweets about AI'))
+console.log(agent.prompt('Post a tweet saying "Hello from Alith Twitter Agent!"'))
+console.log(agent.prompt('Get the latest tweets from @OpenAI'))
+console.log(agent.prompt('Chat with Grok about quantum computing'))
+```
+
+## Write the MCP Config
+
+Create a JSON file named `mcp_twitter.json` and add the following code:
+
+```json
+{
+  "mcpServers": {
+    "agent-twitter-client-mcp": {
+      "command": "npx",
+      "args": ["-y", "agent-twitter-client-mcp"],
+      "env": {
+        "AUTH_METHOD": "cookies",
+        "TWITTER_COOKIES": "[\"auth_token=YOUR_AUTH_TOKEN; Domain=.twitter.com\", \"ct0=YOUR_CT0_VALUE; Domain=.twitter.com\", \"twid=u%3DYOUR_USER_ID; Domain=.twitter.com\"]"
+      }
+    }
+  }
+}
+```
+
+## Run the Application
+
+Run your Typescript script to start and test the application:
+
+```shell
+npx tsc && node index.js
+```
+
+</Steps>
+
+## References
+
+- [Alith Documentation](https://alith.lazai.network/docs)
+- [Agent Twitter Client MCP Library](https://github.com/ryanmac/agent-twitter-client-mcp)
