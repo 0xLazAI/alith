@@ -19,7 +19,11 @@ class Agent:
 
     def prompt(self, prompt: str) -> str:
         tools = [
-            create_delegate_tool(tool) if isinstance(tool, Callable) else tool
+            (
+                create_delegate_tool(tool)
+                if isinstance(tool, Callable)
+                else tool.to_delegate_tool() if isinstance(tool, Tool) else tool
+            )
             for tool in self.tools or []
         ]
         agent = _DelegateAgent(

@@ -1,5 +1,4 @@
-from dataclasses import dataclass
-from typing import Callable
+from typing import Callable, Optional
 from ._alith import DelegateTool as _DelegateTool
 from inspect import Parameter
 from pydantic import create_model, BaseModel, Field
@@ -19,8 +18,38 @@ class Tool(BaseModel):
 
     name: str
     description: str
-    args_schema: type[BaseModel] | None = None
+    definition: type[BaseModel] | None = None
+    version: str = "1.0.0"
+    author: str = "Unknown"
     handler: Callable = Field(..., exclude=True)
+
+    def to_delegate_tool(self) -> _DelegateTool:
+        if self.definition:
+            parameters = self.definition.model_json_schema()
+        else:
+            parameters = {}
+
+        def wrapper(args: ctypes.c_char_p) -> bytes:
+            """Wrapper function to match the extern "C" signature."""
+            args_str = ctypes.cast(args, ctypes.c_char_p).value.decode("utf-8")
+            args_json = json.loads(args_str)
+            result = self.handler(**args_json)
+            result_json = json.dumps(result)
+            return result_json.encode("utf-8")
+
+        cfunc_wrapper = CFUNC_TYPE(wrapper)
+        # Get function address (C pointer)
+        func_agent = ctypes.cast(cfunc_wrapper, ctypes.c_void_p).value
+
+        # Create and return DelegateTool instance
+        return _DelegateTool(
+            name=self.name,
+            version=self.version,
+            description=self.description,
+            parameters=json.dumps(parameters),
+            author=self.author,
+            func_agent=func_agent,
+        )
 
 
 def get_function_schema(f: Callable) -> str:
