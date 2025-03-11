@@ -2,7 +2,9 @@
 
 This integration provides the following methods:
 
-1. **Enable the alith chain in Langchain**: We can use the alith as the LLM node for the existing Langchain workflow and get the performance gains of alith.
+This integration provides two usage methods:
+
+1. **Use Agentkit actions within Alith**: You can directly leverage a variety of actions from the agentkit ecosystem without the need to rewrite them in Alith.
 
 ## Reference
 
