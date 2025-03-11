@@ -1730,15 +1730,15 @@ dependencies = [
 
 [[package]]
 name = "html2text"
-version = "0.12.6"
+version = "0.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "042a9677c258ac2952dd026bb0cd21972f00f644a5a38f5a215cb22cdaf6834e"
+checksum = "257509a3123de619343b8cdbabc5ef8f9c2ed188a0332b273553f80e032546d9"
 dependencies = [
- "html5ever 0.27.0",
- "markup5ever 0.12.1",
+ "html5ever 0.29.1",
+ "markup5ever 0.14.1",
  "tendril",
- "thiserror 1.0.69",
- "unicode-width 0.1.13",
+ "thiserror 2.0.12",
+ "unicode-width 0.2.0",
 ]
 
 [[package]]
