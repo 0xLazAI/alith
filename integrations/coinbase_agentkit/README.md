@@ -1,4 +1,4 @@
-# Agentkit Alith Integration
+# Coinbase Agentkit Alith Integration
 
 This integration provides the following methods:
 
