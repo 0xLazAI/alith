@@ -1,13 +1,13 @@
 {
   "name": "alith",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0xLazAI/alith.git"
   },
   "license": "Apache-2.0",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "napi": {
     "name": "alith",
     "package": {
@@ -23,8 +23,6 @@
   },
   "files": [
     "dist",
-    "src/internal.js",
-    "src/internal.d.ts",
     "LICENSE"
   ],
   "devDependencies": {
@@ -54,7 +52,7 @@
     "lint:fix": "biome check --apply . --unsafe",
     "universal": "napi universal",
     "version": "napi version",
-    "tsc": "npx tsc --build"
+    "tsc": "npx tsc --build && cp ./src/internal* dist"
   },
   "prettier": {
     "overrides": [
