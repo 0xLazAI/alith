@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Callable
 from ._alith import DelegateTool as _DelegateTool
 from inspect import Parameter
-from pydantic import create_model
+from pydantic import create_model, BaseModel, Field
 import json
 import ctypes
 import inspect
@@ -14,12 +14,13 @@ warnings.filterwarnings(action="ignore", category=RuntimeWarning)
 CFUNC_TYPE = ctypes.CFUNCTYPE(ctypes.c_char_p, ctypes.c_char_p)
 
 
-@dataclass
-class Tool:
+class Tool(BaseModel):
+    """Represents tool that can be performed by an agent."""
+
     name: str
     description: str
-    version: str
-    author: str
+    args_schema: type[BaseModel] | None = None
+    handler: Callable = Field(..., exclude=True)
 
 
 def get_function_schema(f: Callable) -> str:

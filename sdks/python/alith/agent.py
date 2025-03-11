@@ -13,7 +13,7 @@ class Agent:
     preamble: Optional[str] = field(default_factory=str)
     api_key: Optional[str] = field(default_factory=str)
     base_url: Optional[str] = field(default_factory=str)
-    tools: List[Union[Tool, Callable, _DelegateTool]] = field(default_factory=list)
+    tools: List[Union[Tool, Callable]] = field(default_factory=list)
     mcp_config_path: Optional[str] = field(default_factory=str)
     store: Optional[Store] = None
 
