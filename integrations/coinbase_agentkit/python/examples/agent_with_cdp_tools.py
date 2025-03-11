@@ -1,7 +1,5 @@
 import json
 import os
-import sys
-import time
 
 from coinbase_agentkit import (
     AgentKit,
