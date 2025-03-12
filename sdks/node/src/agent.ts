@@ -4,7 +4,7 @@ import { type Tool, convertParametersToJson } from './tool'
 
 // Define the configuration structure for an Agent
 type AgentOptions = {
-  name: string // The name of the agent
+  name?: string // Optional agent name.
   model: string // The model used by the agent
   preamble: string // Introductory text or context for the agent
   baseUrl?: string // Optional base URL for API requests
@@ -22,7 +22,7 @@ class Agent {
   /**
    * Creates an instance of Agent.
    * @param {AgentOptions} opts - The configuration object for the agent.
-   * @param {string} opts.name - The name of the agent.
+   * @param {string} opts.name - Optional agent name.
    * @param {string} opts.model - The model used by the agent.
    * @param {string} opts.preamble - Introductory text or context for the agent.
    * @param {string} [opts.baseUrl] - Optional base URL for API requests.
@@ -35,7 +35,7 @@ class Agent {
     this._opts = opts
     this._store = opts.store
     this._agent = new DelegateAgent(
-      opts.name,
+      opts.name ?? '',
       opts.model,
       opts.apiKey ?? '',
       opts.baseUrl ?? '',
@@ -80,7 +80,7 @@ class Agent {
    * @returns {string} - The name of the agent.
    */
   name(): string {
-    return this._opts.name
+    return this._opts.name ?? ''
   }
 
   /**
