@@ -1355,7 +1355,7 @@ dependencies = [
 [[package]]
 name = "fastembed"
 version = "4.6.0"
-source = "git+https://github.com/Anush008/fastembed-rs#30b19554d01f3ebacd37944ead0e262b480f1b2a"
+source = "git+https://github.com/Anush008/fastembed-rs#9a3bc93f36bf6ad4d394cc6e0df33db042a00325"
 dependencies = [
  "anyhow",
  "hf-hub",
