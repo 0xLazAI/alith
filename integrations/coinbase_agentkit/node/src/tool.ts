@@ -27,7 +27,7 @@ function convertActionToTool(action: Action): Tool {
 		description: action.description,
 		parameters: action.schema,
 		handler: async (...args: any[]) => {
-			const actionArgs = parseArgs(action.schema, args);
+			const actionArgs = parseArgs(action.schema, ...args);
 			return await action.invoke(actionArgs);
 		},
 	};

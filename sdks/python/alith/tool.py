@@ -1,4 +1,4 @@
-from typing import Callable, Optional
+from typing import Callable
 from ._alith import DelegateTool as _DelegateTool
 from inspect import Parameter
 from pydantic import create_model, BaseModel, Field
@@ -18,14 +18,14 @@ class Tool(BaseModel):
 
     name: str
     description: str
-    definition: type[BaseModel] | None = None
+    parameters: type[BaseModel] | None = None
     version: str = "1.0.0"
     author: str = "Unknown"
     handler: Callable = Field(..., exclude=True)
 
     def to_delegate_tool(self) -> _DelegateTool:
-        if self.definition:
-            parameters = self.definition.model_json_schema()
+        if self.parameters:
+            parameters = self.parameters.model_json_schema()
         else:
             parameters = {}
 
