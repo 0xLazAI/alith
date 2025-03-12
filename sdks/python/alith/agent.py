@@ -8,8 +8,8 @@ from ._alith import DelegateTool as _DelegateTool
 
 @dataclass
 class Agent:
-    name: str
     model: str
+    name: Optional[str] = field(default_factory=str)
     preamble: Optional[str] = field(default_factory=str)
     api_key: Optional[str] = field(default_factory=str)
     base_url: Optional[str] = field(default_factory=str)
@@ -27,7 +27,7 @@ class Agent:
             for tool in self.tools or []
         ]
         agent = _DelegateAgent(
-            self.name,
+            self.name or "",
             self.model,
             self.api_key,
             self.base_url,
