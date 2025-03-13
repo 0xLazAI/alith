@@ -15,5 +15,3 @@ venv.bak/
 
 # DEV
 scripts/dev___addknowledge.py
-scripts/dev___addknowledge_CEG.py
-scripts/dev___findselector.py
