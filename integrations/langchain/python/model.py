@@ -1,11 +1,11 @@
-from langchain_core.language_models import LLM
+from langchain_core.language_models import LLM as _LLM
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.outputs import GenerationChunk
 from typing import Any, Dict, Iterator, List, Optional
 from alith import Agent
 
 
-class AlithLLM(LLM):
+class LLM(_LLM):
     agent: Agent
 
     def _call(
