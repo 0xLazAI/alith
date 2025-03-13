@@ -15,7 +15,7 @@ agent = Agent(
         Tool(
             name="sub",
             description="Subtract y from x (i.e.: x - y)",
-            definition=SubToolModel,
+            parameters=SubToolModel,
             handler=lambda x, y: x - y,
         )
     ],

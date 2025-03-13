@@ -21,7 +21,7 @@ def get_alith_tools(agent_kit: AgentKit) -> list[Tool]:
         tool = Tool(
             name=action.name,
             description=action.description,
-            definition=action.args_schema,
+            parameters=action.args_schema,
             handler=action.invoke,
         )
         tools.append(tool)
