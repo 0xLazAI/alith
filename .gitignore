@@ -3,3 +3,7 @@
 .DS_store
 .vscode
 llm_logs
+.venv
+venv
+env
+.env
