@@ -34,6 +34,11 @@ This project is designed to scrape and maintain a knowledge base from the Metis 
 
 ## Usage
 
+### General
+
+**Automatic run**
+you dont really need to do anything. The Github Actions flow is running and updating the file anyway. Only point your *Alith Agent* to get knowledge from the target location *for blogs it's `knowledge/metis/blog.json`) and you are goof to go. If you need to customize it -> enjoy: 
+
 ### Local Script Execution
 
 1. **Install Dependencies**:
@@ -43,7 +48,7 @@ pip install requests beautifulsoup4
 
 2. **Run the Script**:
 ```bash
-python path/to/addknowledge_blog.py
+python scripts/addknowledge_blog.py
 ```
 
 ### GitHub Actions Workflow
