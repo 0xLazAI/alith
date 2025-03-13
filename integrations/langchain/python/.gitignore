@@ -10,8 +10,9 @@ __pycache__
 build-result/
 dist/
 alith/bin
-alith.egg-info/
+langchain_alith.egg-info/
 .eggs/
 alith/_alith*
 llm_logs
 uv.lock
+.python-version
