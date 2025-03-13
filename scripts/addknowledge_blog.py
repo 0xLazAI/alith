@@ -14,28 +14,39 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 # Define the JSON path relative to the script's location
 JSON_PATH = os.path.join(SCRIPT_DIR, "../knowledge/metis/blog.json")
 
+
 def get_latest_blog_id():
     if not os.path.exists(JSON_PATH):
         return None
     try:
         with open(JSON_PATH, "r") as file:
             data = json.load(file)
-        return data["blogs"][0]["id"] if data["blogs"] else None  # Get the latest ID from the top blog
+        return (
+            data["blogs"][0]["id"] if data["blogs"] else None
+        )  # Get the latest ID from the top blog
     except (json.JSONDecodeError, KeyError, IndexError):
         return None
+
 
 def fetch_blog_posts():
     response = requests.get(BLOG_URL)
     if response.status_code != 200:
         raise Exception("Failed to fetch blog page.")
     soup = BeautifulSoup(response.text, "html.parser")
-    return soup.find_all("div", {"role": "listitem", "class": "collection-item tech w-dyn-item"})
+    return soup.find_all(
+        "div", {"role": "listitem", "class": "collection-item tech w-dyn-item"}
+    )
+
 
 def parse_blog_item(item):
     link_tag = item.find("a", {"aria-label": "link-article"})
     link = link_tag["href"]
     date = item.find("div", class_="text-1-pc").text.strip()
-    author = item.find("div", class_="autor-tag").text.strip() if item.find("div", class_="autor-tag") else "Unknown"
+    author = (
+        item.find("div", class_="autor-tag").text.strip()
+        if item.find("div", class_="autor-tag")
+        else "Unknown"
+    )
     title = item.find("div", {"fs-cmsfilter-field": "title"}).text.strip()
     summary = item.find("div", class_="text-intro-pc").text.strip()
     return {
@@ -43,8 +54,9 @@ def parse_blog_item(item):
         "date": date,
         "author": author,
         "title": title,
-        "summary": summary
+        "summary": summary,
     }
+
 
 def scrape_blog_post(full_url):
     response = requests.get(full_url)
@@ -54,6 +66,7 @@ def scrape_blog_post(full_url):
     content = soup.get_text()
     return content
 
+
 def generate_date_hash_id(blog):
     # Generate the current date in DDMMYYYY format
     date_str = datetime.now().strftime("%d%m%Y")
@@ -62,12 +75,16 @@ def generate_date_hash_id(blog):
     # Combine date with the hash
     return f"{date_str}{hash_str}"
 
+
 def remove_old_articles(blogs):
     cutoff_date = datetime.now() - timedelta(days=DAYS_TO_KEEP)
     filtered_blogs = [
-        blog for blog in blogs if datetime.strptime(blog["date"], "%b %d, %Y") > cutoff_date
+        blog
+        for blog in blogs
+        if datetime.strptime(blog["date"], "%b %d, %Y") > cutoff_date
     ]
     return filtered_blogs
+
 
 def main():
     # Load existing data
@@ -89,7 +106,9 @@ def main():
         blog = parse_blog_item(item)
         if any(b["url"] == blog["url"] for b in blogs) or len(new_posts) >= MAX_BLOGS:
             break
-        blog["id"] = generate_date_hash_id(blog)  # Assign the new ID using date and hashing
+        blog["id"] = generate_date_hash_id(
+            blog
+        )  # Assign the new ID using date and hashing
         blog["content"] = scrape_blog_post(blog["url"])
         new_posts.append(blog)
 
@@ -98,13 +117,15 @@ def main():
         blogs = remove_old_articles(blogs)  # Remove old articles if necessary
         try:
             with open(JSON_PATH, "w") as file:
-                json.dump({
-                    "latest_id": blogs[0]["id"],  # Set the latest ID
-                    "blogs": blogs
-                }, file, indent=4)
+                json.dump(
+                    {"latest_id": blogs[0]["id"], "blogs": blogs},  # Set the latest ID
+                    file,
+                    indent=4,
+                )
             print(f"Successfully added {len(new_posts)} new blog posts.")
         except IOError as e:
             print(f"Error writing to JSON file: {e}")
+
 
 if __name__ == "__main__":
     main()
