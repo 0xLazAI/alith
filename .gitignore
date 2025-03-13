@@ -3,7 +3,16 @@
 .DS_store
 .vscode
 llm_logs
-.venv
-venv
-env
+
+# Environments
 .env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# DEV
+scripts/dev___addknowledge.py
+scripts/dev___addknowledge_CEG.py
