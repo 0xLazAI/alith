@@ -37,7 +37,8 @@ This project is designed to scrape and maintain a knowledge base from the Metis 
 ### General
 
 **Automatic run**
-you dont really need to do anything. The Github Actions flow is running and updating the file anyway. Only point your *Alith Agent* to get knowledge from the target location *for blogs it's `knowledge/metis/blog.json`) and you are goof to go. If you need to customize it -> enjoy: 
+you dont really need to do anything. The Github Actions flow is running and updating the file anyway. Only point your [Alith Agent](https://alith.lazai.network/docs/features/knowledge)
+ to get knowledge from the target location *for blogs it's `knowledge/metis/blog.json`) and you are goof to go. If you need to customize it -> enjoy: 
 
 ### Local Script Execution
 
