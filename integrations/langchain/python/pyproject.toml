@@ -8,7 +8,3 @@ license = { text = "Apache-2.0" }
 dependencies = [
     "alith>=0.4.2",
 ]
-
-[[tool.uv.index]]
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-default = true
