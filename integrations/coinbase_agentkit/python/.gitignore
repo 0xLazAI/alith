@@ -9,8 +9,8 @@ __pycache__
 *.pyc
 build-result/
 dist/
-alith/bin
-alith.egg-info/
+coinbase_agentkit_alith.egg-info/
 .eggs/
-alith/_alith*
 llm_logs
+uv.lock
+.python-version
