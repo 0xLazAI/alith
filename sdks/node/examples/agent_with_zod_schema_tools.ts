@@ -18,7 +18,7 @@ const agent = new Agent({
       name: 'subtract',
       description: 'Subtract y from x (i.e.: x - y)',
       parameters: InputSchema,
-      handler: (x, y) => {
+      handler: (x: number, y: number) => {
         return x - y
       },
     },
