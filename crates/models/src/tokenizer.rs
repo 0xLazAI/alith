@@ -100,7 +100,6 @@ impl Tokenizer {
 
     pub fn try_from_single_token_id(&self, try_from_single_token_id: u32) -> Result<String> {
         let detokenize_response = self.detokenize_one(try_from_single_token_id)?;
-        println!("detokenize_response: {}", detokenize_response);
         let mut strings_maybe: Vec<String> = detokenize_response
             .split_ascii_whitespace()
             .map(|s| s.to_string())

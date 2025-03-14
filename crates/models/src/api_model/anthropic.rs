@@ -122,9 +122,8 @@ impl ApiLLMModel {
     }
 }
 
+#[inline]
 pub fn model_tokenizer(_model_id: &str) -> Arc<Tokenizer> {
-    println!("Anthropic does not have a publically available tokenizer. See this for more information: https://github.com/javirandor/anthropic-tokenizer");
-    println!("However, since Anthropic does not support logit bias, we don't have a use for an actual tokenizer. So we can use TikToken to count tokens.");
     Arc::new(
         Tokenizer::new_tiktoken("gpt-4")
             .unwrap_or_else(|_| panic!("Failed to load tokenizer for gpt-4")),
