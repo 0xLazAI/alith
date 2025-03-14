@@ -30,4 +30,4 @@ jobs:
           git add -A
           timestamp=$(date -u)
           git commit -m "Latest data: ${timestamp}" || exit 0
-          git push https://x-access-token:${REPO_ACCESS_TOKEN}@github.com/0xLazAI/alith.git HEAD:main
+          git push https://x-access-token:${REPO_ACCESS_TOKEN}@${{ github.repository }}.git HEAD:${{ github.ref_name }}
