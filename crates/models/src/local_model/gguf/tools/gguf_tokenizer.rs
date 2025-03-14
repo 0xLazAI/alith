@@ -14,9 +14,9 @@ use tokenizers::{
 struct GgufTokenizerProps<'a> {
     model: GgmlTokenizerModel,
     tokens: &'a Vec<String>,
-    added_tokens: Option<Vec<String>>,
+    _added_tokens: Option<Vec<String>>,
     scores: Option<Vec<f32>>,
-    merges: Option<Vec<String>>,
+    _merges: Option<Vec<String>>,
     unk: Option<u32>,
     eos: u32,
     bos: u32,
@@ -27,9 +27,9 @@ impl<'a> GgufTokenizerProps<'a> {
         let props = Self {
             model: ggml.model.clone(),
             tokens: &ggml.tokens,
-            added_tokens: ggml.added_tokens.clone(),
+            _added_tokens: ggml.added_tokens.clone(),
             scores: ggml.scores.clone(),
-            merges: ggml.merges.clone(),
+            _merges: ggml.merges.clone(),
             unk: ggml.unknown_token_id,
             eos: ggml.eos_token_id,
             bos: ggml.bos_token_id,
@@ -51,14 +51,6 @@ pub fn convert_gguf_to_hf_tokenizer(ggml: &GgmlTokenizerMetadata) -> crate::Resu
         }
     };
 
-    println!(
-        "GGUF tokenizer model is `{:?}`, num tokens: {}, num added tokens: {}, num merges: {}, num scores: {}",
-        props.model,
-        tokenizer.get_vocab_size(true),
-        props.added_tokens.as_ref().map(|x| x.len()).unwrap_or(0),
-        props.merges.as_ref().map(|x| x.len()).unwrap_or(0),
-        props.scores.as_ref().map(|x| x.len()).unwrap_or(0),
-    );
     Ok(tokenizer)
 }
 
@@ -96,7 +88,6 @@ fn unigram_tokenizer(p: &GgufTokenizerProps) -> crate::Result<Tokenizer> {
             let scores = s.iter().cloned().map(|f_32| f_32 as f64);
             p.tokens.iter().cloned().zip(scores).collect()
         } else {
-            println!("unigram tokenizer is missing required metadata `tokenizer.ggml.scores`");
             p.tokens.iter().cloned().map(|s| (s, -10000.0)).collect()
         };
 

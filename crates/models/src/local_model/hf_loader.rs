@@ -41,7 +41,6 @@ impl HuggingFaceLoader {
 
     fn load_hf_token(&self) -> Option<String> {
         if let Some(hf_token) = &self.hf_token {
-            println!("Using hf_token from parameter");
             return Some(hf_token.to_owned());
         }
 
@@ -50,7 +49,7 @@ impl HuggingFaceLoader {
         match dotenvy::var(&self.hf_token_env_var) {
             Ok(hf_token) => Some(hf_token),
             Err(_) => {
-                println!(
+                eprintln!(
                     "{} not found in dotenv, nor was it set manually",
                     self.hf_token_env_var
                 );
@@ -88,7 +87,6 @@ impl HuggingFaceLoader {
                 .get(safe_tensor_filename)
                 .map_err(|e| anyhow!(e))?;
             let safe_tensor_path = Self::canonicalize_local_path(safe_tensor_path)?;
-            println!("Downloaded safe tensor: {:?}", safe_tensor_path);
             safe_tensor_paths.push(safe_tensor_path);
         }
         Ok(safe_tensor_paths)

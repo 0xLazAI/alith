@@ -1,6 +1,5 @@
 use crate::build::get_target_directory;
 
-use colorful::Colorful;
 use indenter::indented;
 
 use std::fmt::Write;
@@ -43,13 +42,6 @@ impl LoggingConfig {
         } else {
             None
         };
-
-        println!(
-            "{}",
-            format!("Starting {} Logger", self.logger_name)
-                .color(colorful::RGB::new(0, 139, 248))
-                .bold()
-        );
 
         Ok(())
     }
