@@ -1,9 +1,6 @@
 import type { Action, Content, ModelProviderName, Plugin } from "@elizaos/core";
 import type { Tool } from "alith";
-import { z } from "zod";
 import { ElizaOSAgentRuntime } from "./agent";
-
-const AnyJsonSchema = z.ZodAny;
 
 export class HandlerError extends Error {
 	constructor(message: string) {
@@ -19,9 +16,11 @@ export function convertActionToTool(
 	return {
 		name: action.name,
 		description: action.description,
-		parameters: AnyJsonSchema,
+		parameters: {
+			type: "object",
+		},
 		handler: async () => {
-			const runtime = ElizaOSAgentRuntime.createOrGet(provider);
+			const runtime = await ElizaOSAgentRuntime.set(provider);
 			const [memory, state] = ElizaOSAgentRuntime.getMemoryAndState(provider);
 			let message = null as Content | null;
 			if (!(await action.validate(runtime, memory, state))) {
