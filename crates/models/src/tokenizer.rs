@@ -9,14 +9,14 @@ use tiktoken_rs::{get_bpe_from_model, CoreBPE};
 use tokenizers::Tokenizer as HFTokenizer;
 
 pub enum TokenizerBackend {
-    HuggingFacesTokenizer(Box<HFTokenizer>),
+    HuggingFace(Box<HFTokenizer>),
     Tiktoken(Box<CoreBPE>),
 }
 
 impl fmt::Debug for TokenizerBackend {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            TokenizerBackend::HuggingFacesTokenizer(_) => {
+            TokenizerBackend::HuggingFace(_) => {
                 write!(f, "TokenizerBackend::HuggingFacesTokenizer")
             }
             TokenizerBackend::Tiktoken(_) => {
@@ -49,7 +49,7 @@ impl Tokenizer {
     pub fn new_from_tokenizer(tokenizer: HFTokenizer) -> Result<Self> {
         let white_space_token_id = tokenizer.encode(" ", false).unwrap().get_ids()[0];
         Ok(Self {
-            tokenizer: TokenizerBackend::HuggingFacesTokenizer(Box::new(tokenizer)),
+            tokenizer: TokenizerBackend::HuggingFace(Box::new(tokenizer)),
             tokenizer_path: None,
             with_special_tokens: false,
             white_space_token_id,
@@ -61,7 +61,7 @@ impl Tokenizer {
         let tokenizer = HFTokenizer::from_file(local_path).map_err(|e| anyhow!(e))?;
         let white_space_token_id = tokenizer.encode(" ", false).unwrap().get_ids()[0];
         Ok(Self {
-            tokenizer: TokenizerBackend::HuggingFacesTokenizer(Box::new(tokenizer)),
+            tokenizer: TokenizerBackend::HuggingFace(Box::new(tokenizer)),
             tokenizer_path: Some(path),
             with_special_tokens: false,
             white_space_token_id,
@@ -201,7 +201,7 @@ impl Tokenizer {
     #[inline]
     fn encode(&self, str: &str) -> Vec<u32> {
         match &self.tokenizer {
-            TokenizerBackend::HuggingFacesTokenizer(tokenizer) => self.encode_hf(tokenizer, str),
+            TokenizerBackend::HuggingFace(tokenizer) => self.encode_hf(tokenizer, str),
             TokenizerBackend::Tiktoken(tokenizer) => self.encode_tiktoken(tokenizer, str),
         }
     }
@@ -219,7 +219,7 @@ impl Tokenizer {
     #[inline]
     fn decode(&self, tokens: &[u32]) -> Result<String> {
         match &self.tokenizer {
-            TokenizerBackend::HuggingFacesTokenizer(tokenizer) => self.decode_hf(tokenizer, tokens),
+            TokenizerBackend::HuggingFace(tokenizer) => self.decode_hf(tokenizer, tokens),
             TokenizerBackend::Tiktoken(tokenizer) => self.decode_tiktoken(tokenizer, tokens),
         }
     }
