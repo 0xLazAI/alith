@@ -40,7 +40,7 @@ impl Deref for MCPClient {
     }
 }
 
-/// Set up MCP clients by reading ~/.aide/config.json, spawning each server,
+/// Set up MCP clients config from the path, spawning each server,
 /// and returning a HashMap<server_name -> Arc<Client>>.
 /// spawn a single MCP process per server, share references.
 pub async fn setup_mcp_clients<P: AsRef<Path>>(
