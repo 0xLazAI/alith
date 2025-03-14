@@ -1,15 +1,14 @@
 import { Agent } from "elizaos-alith";
-import { ModelProviderName } from "@elizaos/core";
 
-const provider = ModelProviderName.OPENAI;
 const agent = new Agent({
 	name: "A dummy Agent",
 	model: "gpt-4",
+	runtime: YourElizaOSAgentRuntime(), // Your elizaos agent runtime,
 	preamble:
-		"You are a comedian here to entertain the user using humour and jokes.",
-	provider,
+		"You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",
 	plugins: [
-		// Set your ElizaOS here.
-	]
+		// Put your elizaos plugins here.
+	],
 });
-const result = agent.prompt("Ask a question");
+const result = agent.prompt("Calculate 10 - 3");
+console.log(result);

@@ -17,8 +17,9 @@
 	"files": ["dist"],
 	"dependencies": {
 		"@elizaos/core": "0.25.6-alpha.1",
-		"alith": "^0.4.0",
+		"alith": "^0.4.2",
 		"dkg.js": "^8.0.4",
+		"sharp": "^0.33.5",
 		"tsup": "8.3.5",
 		"zod": "^3.24.2"
 	},
@@ -28,13 +29,16 @@
 		"clean": "rm -rf dist",
 		"lint": "biome lint .",
 		"lint:fix": "biome check --apply . --unsafe",
-		"format": "biome format --write ."
+		"format": "biome format --write .",
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"typescript": "^5.0.2"
+		"typescript": "^5.0.2",
+		"vitest": "^3.0.8"
 	},
 	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
 		"access": "public"
 	}
 }

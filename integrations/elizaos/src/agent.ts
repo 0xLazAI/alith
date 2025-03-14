@@ -2,6 +2,7 @@ import {
 	AgentRuntime,
 	CacheManager,
 	type Content,
+	IAgentRuntime,
 	type Memory,
 	MemoryCacheAdapter,
 	ModelProviderName,
@@ -18,22 +19,22 @@ import {
 import { convertPluginsToTools } from "./converter";
 
 export type AgentOptions = BaseAgentOptions & {
-	provider: ModelProviderName;
+	runtime: IAgentRuntime;
 	plugins?: Plugin[];
 };
 
 export class Agent extends BaseAgent {
-	private _provider: ModelProviderName;
+	private _runtime: IAgentRuntime;
 
 	public constructor(opts: AgentOptions) {
 		const tools = opts.tools ?? [];
 		for (const tool of convertPluginsToTools(
-			opts.provider,
+			opts.runtime.modelProvider,
 			opts.plugins ?? [],
 		)) {
 			tools.push(tool);
 		}
-		ElizaOSAgentRuntime.createOrGet(opts.provider);
+		ElizaOSAgentRuntime.set(opts.runtime);
 		super({
 			name: opts.name,
 			model: opts.model,
@@ -42,41 +43,28 @@ export class Agent extends BaseAgent {
 			apiKey: opts.apiKey,
 			tools: tools,
 		});
-		this._provider = opts.provider;
+		this._runtime = opts.runtime;
 	}
 	/**
 	 * Processes a prompt using the agent's tools and model.
 	 * @param {string} prompt - The input prompt to process.
 	 * @returns {string} - The result of processing the prompt.
 	 */
-	public prompt(prompt: string): string {
-		ElizaOSAgentRuntime.updateMemoryAndState(this._provider, prompt).then(
-			(_) => {
-				return super.prompt(prompt);
-			},
-		);
+	public async chat(prompt: string): Promise<string> {
+		await ElizaOSAgentRuntime.updateMemoryAndState(prompt);
 		return super.prompt(prompt);
 	}
 }
 
 export class ElizaOSAgentRuntime {
-	private static runtime: AgentRuntime | null = null;
+	private static runtime: IAgentRuntime | null = null;
 	private static memory: Memory | null = null;
 	private static state: State | null = null;
 
-	private constructor(private _provider: ModelProviderName) {}
+	private constructor() {}
 
-	public static createOrGet(provider: ModelProviderName): AgentRuntime {
-		if (!ElizaOSAgentRuntime.runtime) {
-			ElizaOSAgentRuntime.runtime = new AgentRuntime({
-				token: getTokenForProvider(provider),
-				databaseAdapter: null,
-				cacheManager: new CacheManager(new MemoryCacheAdapter()),
-				modelProvider: provider,
-			});
-			ElizaOSAgentRuntime.runtime.initialize();
-		}
-		return ElizaOSAgentRuntime.runtime;
+	public static async set(runtime: IAgentRuntime) {
+		ElizaOSAgentRuntime.runtime = runtime;
 	}
 
 	public static getMemoryAndState(
@@ -85,23 +73,17 @@ export class ElizaOSAgentRuntime {
 		return [ElizaOSAgentRuntime.memory, ElizaOSAgentRuntime.state];
 	}
 
-	public static async updateMemoryAndState(
-		provider: ModelProviderName,
-		prompt: string,
-	): Promise<void> {
-		const [memory, state] = await ElizaOSAgentRuntime.memoryAndStateFromText(
-			provider,
-			prompt,
-		);
+	public static async updateMemoryAndState(prompt: string): Promise<void> {
+		const [memory, state] =
+			await ElizaOSAgentRuntime.memoryAndStateFromText(prompt);
 		ElizaOSAgentRuntime.memory = memory;
 		ElizaOSAgentRuntime.state = state;
 	}
 
 	private static async memoryAndStateFromText(
-		provider: ModelProviderName,
 		text: string,
 	): Promise<[Memory, State]> {
-		const runtime = ElizaOSAgentRuntime.createOrGet(provider);
+		const runtime = ElizaOSAgentRuntime.runtime;
 		const content: Content = {
 			text,
 			source: "alith",
@@ -123,6 +105,7 @@ export class ElizaOSAgentRuntime {
 		const state = await runtime.composeState(userMessage, {
 			agentName: "alith",
 		});
+		console.log("sadasd:", memory);
 		return [memory, state];
 	}
 }

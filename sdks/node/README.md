@@ -61,7 +61,7 @@ const agent = new Agent({
           },
         },
       }),
-      handler: (x, y) => {
+      handler: (x: number, y: number) => {
         return x - y;
       },
     },
