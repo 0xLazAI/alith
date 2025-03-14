@@ -246,6 +246,7 @@ dependencies = [
  "colorful",
  "indenter",
  "minijinja",
+ "serde",
  "thiserror 2.0.12",
 ]
 

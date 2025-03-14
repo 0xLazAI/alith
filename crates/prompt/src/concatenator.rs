@@ -1,4 +1,6 @@
-#[derive(Clone, PartialEq, Debug, Default)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, PartialEq, Debug, Default, Serialize, Deserialize)]
 pub enum TextConcatenator {
     DoubleNewline,
     #[default]
