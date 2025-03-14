@@ -82,8 +82,8 @@ pub use models::{
     LLMModelBase,
 };
 pub use prompt::{
-    apply_chat_template, check_and_get_max_tokens, ChatTemplatePrompt, LLMPrompt, MaxTokenState,
-    OpenAIPrompt, PromptMessage, PromptMessageType, PromptTokenizer, RequestTokenLimitError,
+    apply_chat_template, check_and_get_max_tokens, ApiPrompt, LLMPrompt, LocalPrompt,
+    MaxTokenState, PromptMessage, PromptMessageType, PromptTokenizer, RequestTokenLimitError,
 };
 
 pub use async_trait::async_trait;

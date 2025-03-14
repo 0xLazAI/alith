@@ -76,10 +76,10 @@ pub struct OpenAIToolDefinition {
 impl OpenAICompletionRequest {
     pub fn new(req: &CompletionRequest) -> crate::Result<Self, CompletionError> {
         let mut messages = Vec::new();
-        match &req.prompt.get_built_prompt_hashmap() {
+        match &req.prompt.get_built_prompt_messages() {
             Ok(prompt_message) => {
                 for m in prompt_message {
-                    messages.push(CompletionRequestMessage::new(m).unwrap());
+                    messages.push(CompletionRequestMessage::new(m)?);
                 }
             }
             Err(e) => return Err(CompletionError::RequestBuilderError(e.to_string())),

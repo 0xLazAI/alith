@@ -65,21 +65,29 @@ impl LLMBackend {
 
     pub fn new_prompt(&self) -> LLMPrompt {
         match self {
-            LLMBackend::OpenAI(b) => LLMPrompt::new_openai_prompt(
+            LLMBackend::OpenAI(b) => LLMPrompt::new_api_prompt(
+                self.prompt_tokenizer(),
                 Some(b.model.tokens_per_message),
                 b.model.tokens_per_name,
-                self.prompt_tokenizer(),
             ),
-            LLMBackend::Anthropic(b) => LLMPrompt::new_openai_prompt(
+            LLMBackend::Anthropic(b) => LLMPrompt::new_api_prompt(
+                self.prompt_tokenizer(),
                 Some(b.model.tokens_per_message),
                 b.model.tokens_per_name,
-                self.prompt_tokenizer(),
             ),
-            LLMBackend::GenericApi(b) => LLMPrompt::new_openai_prompt(
+            LLMBackend::GenericApi(b) => LLMPrompt::new_api_prompt(
+                self.prompt_tokenizer(),
                 Some(b.model.tokens_per_message),
                 b.model.tokens_per_name,
-                self.prompt_tokenizer(),
             ),
+        }
+    }
+
+    pub fn get_total_prompt_tokens(&self, prompt: &LLMPrompt) -> crate::Result<u64> {
+        match self {
+            LLMBackend::OpenAI(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
+            LLMBackend::Anthropic(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
+            LLMBackend::GenericApi(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
         }
     }
 
