@@ -81,6 +81,7 @@ impl Client {
         builder.model.model_base.model_id = model.to_string();
         builder.config.api_config.api_key = Some(api_key.to_string().into());
         builder.config.api_config.host = base_url.to_string();
+        builder.config.logging_config.logger_name = "generic".to_string();
         let client = builder.init()?;
         Ok(Client { client })
     }
