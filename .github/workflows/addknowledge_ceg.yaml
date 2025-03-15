@@ -24,7 +24,7 @@ jobs:
           pip install bs4 selenium webdriver_manager
 
       - name: Run the scraping script
-        run: python scripts/addknowledge_ceg.py
+        run: python scripts/addknowledge_CEG.py
 
       - name: Commit and push if content changed
         run: |
