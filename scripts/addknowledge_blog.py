@@ -68,21 +68,36 @@ def scrape_blog_post(full_url):
 
 
 def generate_date_hash_id(blog):
-    # Generate the current date in DDMMYYYY format
-    date_str = datetime.now().strftime("%d%m%Y")
-    # Create a hash of the blog's URL using SHA-256 and take the first 8 characters
-    hash_str = hashlib.sha256(blog["url"].encode()).hexdigest()[:8]
-    # Combine date with the hash
-    return f"{date_str}{hash_str}"
+    # Try to parse the blog's publication date
+    try:
+        pub_date = datetime.strptime(blog["date"], "%b %d, %Y")
+        # Format as DDMMYYYY
+        date_str = pub_date.strftime("%d%m%Y")
+        
+        # Create a hash of the blog's URL using SHA-256 and take the first 8 characters
+        hash_str = hashlib.sha256(blog["url"].encode()).hexdigest()[:8]
+        # Combine date with the hash
+        return f"{date_str}{hash_str}"
+    except (ValueError, KeyError):
+        # If date is missing or has incorrect format, use hash of the url
+        print(f"Warning: Invalid date format for blog: '{blog['url']}'. Using url hash instead.")
+        url_hash = hashlib.sha256(blog["url"].encode()).hexdigest()[:16]
+        return url_hash
 
 
 def remove_old_articles(blogs):
     cutoff_date = datetime.now() - timedelta(days=DAYS_TO_KEEP)
-    filtered_blogs = [
-        blog
-        for blog in blogs
-        if datetime.strptime(blog["date"], "%b %d, %Y") > cutoff_date
-    ]
+    filtered_blogs = []
+    
+    for blog in blogs:
+        try:
+            blog_date = datetime.strptime(blog["date"], "%b %d, %Y")
+            if blog_date > cutoff_date:
+                filtered_blogs.append(blog)
+        except ValueError:
+            # Keep blogs with unparseable dates (they use url hash ID)
+            filtered_blogs.append(blog)
+            
     return filtered_blogs
 
 
@@ -106,9 +121,7 @@ def main():
         blog = parse_blog_item(item)
         if any(b["url"] == blog["url"] for b in blogs) or len(new_posts) >= MAX_BLOGS:
             break
-        blog["id"] = generate_date_hash_id(
-            blog
-        )  # Assign the new ID using date and hashing
+        blog["id"] = generate_date_hash_id(blog)
         blog["content"] = scrape_blog_post(blog["url"])
         new_posts.append(blog)
 

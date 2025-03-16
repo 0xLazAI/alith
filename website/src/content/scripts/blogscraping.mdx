@@ -1,0 +1,206 @@
+# Blog Scraper: Technical Description
+
+## Overview
+
+The Blog Scraper is designed to automatically collect and process blog posts from the Metis.io website. It uses a lightweight HTML parsing approach to extract relevant information efficiently and store it in a structured format suitable for consumption by Alith AI agents.
+
+## Architecture
+
+The blog scraper follows a straightforward pipeline architecture:
+
+1. **Fetch HTML**: Retrieve the blog listing page
+2. **Extract Post Metadata**: Parse HTML to identify blog posts and their metadata
+3. **Fetch Individual Posts**: Retrieve the full content of each blog post
+4. **Process and Structure**: Transform the raw data into a structured format
+5. **Store Results**: Save the processed data as JSON
+
+## Implementation Details
+
+### Core Components
+
+```
+scripts/addknowledge_blog.py     # Main scraper implementation
+.github/workflows/addknowledge_blog.yaml  # Automation workflow
+knowledge/metis/blog.json        # Output knowledge file
+```
+
+### Dependencies
+
+The blog scraper has minimal dependencies to ensure reliability:
+
+- `requests`: For making HTTP requests to the blog website
+- `beautifulsoup4`: For parsing HTML content
+- `hashlib`: For generating unique identifiers
+- Standard library modules (`json`, `datetime`, `os`)
+
+### Key Functions
+
+#### Fetching Blog Posts
+
+```python
+def fetch_blog_posts():
+    response = requests.get(BLOG_URL)
+    if response.status_code != 200:
+        raise Exception("Failed to fetch blog page.")
+    soup = BeautifulSoup(response.text, "html.parser")
+    return soup.find_all(
+        "div", {"role": "listitem", "class": "collection-item tech w-dyn-item"}
+    )
+```
+
+#### Parsing Blog Items
+
+```python
+def parse_blog_item(item):
+    link_tag = item.find("a", {"aria-label": "link-article"})
+    link = link_tag["href"]
+    date = item.find("div", class_="text-1-pc").text.strip()
+    author = (
+        item.find("div", class_="autor-tag").text.strip()
+        if item.find("div", class_="autor-tag")
+        else "Unknown"
+    )
+    title = item.find("div", {"fs-cmsfilter-field": "title"}).text.strip()
+    summary = item.find("div", class_="text-intro-pc").text.strip()
+    return {
+        "url": f"https://metis.io{link}",
+        "date": date,
+        "author": author,
+        "title": title,
+        "summary": summary,
+    }
+```
+
+#### Generating Unique IDs
+
+```python
+def generate_date_hash_id(blog):
+    try:
+        pub_date = datetime.strptime(blog["date"], "%b %d, %Y")
+        date_str = pub_date.strftime("%d%m%Y")
+        hash_str = hashlib.sha256(blog["url"].encode()).hexdigest()[:8]
+        return f"{date_str}{hash_str}"
+    except (ValueError, KeyError):
+        print(f"Warning: Invalid date format for blog: '{blog['url']}'. Using url hash instead.")
+        url_hash = hashlib.sha256(blog["url"].encode()).hexdigest()[:16]
+        return url_hash
+```
+
+### Configuration Options
+
+The blog scraper offers several configurable parameters:
+
+```python
+# Constants
+BLOG_URL = "https://metis.io/blog"  # Source URL for blog posts
+MAX_BLOGS = 10  # Maximum number of new blogs to process at once
+DAYS_TO_KEEP = 99999  # Retention period in days (set high for minimal maintenance)
+JSON_PATH = "knowledge/metis/blog.json"  # Output file path
+```
+
+### Data Flow
+
+1. The script checks for existing blog data in the JSON_PATH
+2. It fetches the latest blog posts from the Metis blog
+3. For each new post (not already in the database):
+   - Parse the metadata
+   - Generate a unique ID
+   - Scrape the full content
+   - Add to the collection
+4. Remove any posts older than DAYS_TO_KEEP (if configured)
+5. Save the updated collection back to the JSON file
+
+### Output Structure
+
+The blog scraper produces a JSON file with the following structure:
+
+```json
+{
+    "latest_id": "12032025abcd1234",
+    "blogs": [
+        {
+            "id": "12032025abcd1234",
+            "url": "https://metis.io/blog-post-url",
+            "date": "Mar 12, 2025",
+            "author": "Author Name",
+            "title": "Blog Post Title",
+            "summary": "A brief summary of the blog post...",
+            "content": "The full text content of the blog post..."
+        },
+        // Additional blog posts...
+    ]
+}
+```
+
+### Error Handling
+
+The scraper implements several error handling mechanisms:
+
+- Connection failures are caught and reported
+- Invalid date formats are handled gracefully with fallback ID generation
+- File operations use try/except blocks to prevent crashes
+- Invalid HTML structures are handled with conditional checks
+
+### Automation with GitHub Actions
+
+The blog scraper is automated through a GitHub Actions workflow that:
+
+1. Runs daily at midnight UTC
+2. Sets up the necessary Python environment
+3. Installs required dependencies
+4. Executes the scraping script
+5. Commits and pushes any changes to the repository
+
+```yaml
+name: "Knowledge Scraping - blogs" 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC 
+jobs:
+  scrape-blogs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4
+    - name: Run Your Script
+      run: |
+        echo "Running the scraping task"
+        python scripts/addknowledge_blog.py
+    - name: Commit and push if content changed
+      run: |
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest data: ${timestamp}" || exit 0
+        git push
+```
+
+## Performance Considerations
+
+The blog scraper is designed to be lightweight and efficient:
+
+- It processes only new content, avoiding redundant operations
+- The HTML parsing is targeted to specific elements, minimizing memory usage
+- The script runs quickly, typically completing in a few seconds
+- Error handling ensures that temporary failures don't disrupt the knowledge base
+
+## Customization Guide
+
+To adapt the blog scraper for other sources:
+
+1. Modify the `BLOG_URL` constant to point to the new source
+2. Update the HTML selectors in `fetch_blog_posts()` and `parse_blog_item()` functions
+3. Adjust the date format handling in `generate_date_hash_id()` if necessary
+4. Consider changing the retention period via `DAYS_TO_KEEP` based on the source's update frequency

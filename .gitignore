@@ -14,4 +14,4 @@ env.bak/
 venv.bak/
 
 # DEV
-scripts/dev___addknowledge.py
+scripts/dev_*

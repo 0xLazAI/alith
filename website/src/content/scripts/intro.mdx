@@ -1,0 +1,39 @@
+# Knowledge Scraping
+
+## Introduction
+
+Knowledge scraping is a critical component of the Alith AI agent ecosystem, enabling agents to access up-to-date information from various sources automatically. This documentation covers the knowledge scraping framework that automatically collects, processes, and maintains structured data for Alith AI agents.
+
+In the era of AI and Web3 convergence, timely and accurate information is essential for AI agents to provide value. The knowledge scraping system addresses this need by:
+
+- **Automating Data Collection**: Eliminating manual data entry and updates
+- **Standardizing Data Format**: Ensuring consistent structure for agent consumption
+- **Maintaining Freshness**: Regularly updating information from authoritative sources
+- **Preserving Provenance**: Tracking the origin and history of collected knowledge
+
+The framework currently supports two primary sources:
+- **Metis Blog** - Scrapes blog posts from the Metis.io website
+- **CEG Forum** - Collects proposals and discussions from the CEG governance forum
+
+## Why Knowledge Scraping?
+
+In the decentralized AI ecosystem that LazAI and Alith are building, knowledge scraping serves multiple purposes:
+
+1. **Data Sovereignty**: Helps maintain control over what data sources are trusted and used
+2. **Resource Efficiency**: Reduces redundant data collection efforts across multiple agents
+3. **Transparency**: Creates clear lineage of information through structured collection methods
+4. **Customization**: Allows developers to tailor knowledge sources to specific agent needs
+
+Knowledge scraping is designed to be extendable, allowing developers to add new sources as needed while maintaining a consistent interface for Alith agents to consume.
+
+## Getting Started
+
+The knowledge scraping system is fully automated through GitHub Actions workflows that run daily. This ensures your AI agents have access to the latest information without manual intervention.
+
+To start using knowledge scraping in your project:
+
+1. **Reference the Knowledge Files**: Direct your Alith agents to consume the JSON files in the `knowledge/metis` directory
+2. **Customize Sources**: Modify existing scrapers or create new ones following the templates provided
+3. **Configure Update Frequency**: Adjust GitHub Actions workflows based on how often your sources update
+
+Detailed guides for each of these steps are available in the respective technical documentation sections.

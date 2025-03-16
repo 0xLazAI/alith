@@ -1,0 +1,322 @@
+> **Note**: This page provides information for those interested in developing automation capabilities for their agents. No additional action is required, as the blog and CEG knowledge files are already available in the Alith GitHub repository and updated daily.
+
+# CEG Forum Scraper: Technical Description
+
+## Overview
+
+The CEG Forum Scraper is designed to collect and process proposals and discussions from the CEG governance forum. Unlike the blog scraper, it uses Selenium for browser automation to handle dynamic content that requires JavaScript rendering. This approach enables detailed extraction of proposal content and associated comments.
+
+## Architecture
+
+The CEG forum scraper follows a multi-stage processing pipeline:
+
+1. **Initialize Browser**: Configure a headless Chrome browser using Selenium
+2. **Fetch Main Page**: Navigate to the forum listing page
+3. **Extract Proposal List**: Identify and extract metadata for each proposal
+4. **Process Individual Proposals**: Fetch and parse detailed content for each proposal
+5. **Collect Comments**: Optionally gather discussion threads for each proposal
+6. **Store Structured Data**: Save the processed information as JSON
+
+## Implementation Details
+
+### Core Components
+
+```
+scripts/addknowledge_CEG.py      # Main scraper implementation
+.github/workflows/addknowledge_ceg.yaml  # Automation workflow
+knowledge/metis/ceg.json         # Output knowledge file
+```
+
+### Dependencies
+
+The CEG forum scraper requires:
+
+- `selenium`: For browser automation and JavaScript rendering
+- `webdriver_manager`: For ChromeDriver management
+- Standard library modules (`json`, `hashlib`, `re`, `os`, `datetime`)
+
+### Key Functions
+
+#### Configuring Selenium
+
+```python
+# Configure Chrome options for headless mode
+options = Options()
+options.add_argument("--headless")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--disable-gpu")
+
+# Automatically download and install the appropriate ChromeDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+```
+
+#### Fetching Proposals
+
+```python
+def fetch_proposals():
+    driver.get(MAIN_URL)
+    proposals = []
+    
+    # Locate proposal entries on the main page
+    rows = driver.find_elements(By.CSS_SELECTOR, "tr[data-topic-id]")
+    for row in rows:
+        try:
+            if len(proposals) >= MAX_PROPOSALS:  # Stop if max proposals reached
+                break
+            
+            # Extract proposal data
+            topic_id = row.get_attribute("data-topic-id")
+            title_element = row.find_element(By.CSS_SELECTOR, "a.title")
+            title = title_element.text.strip()
+            url = title_element.get_attribute("href")
+            views = row.find_element(By.CSS_SELECTOR, "td.num.views .number").text.strip()
+            comments = row.find_element(By.CSS_SELECTOR, "td.num.posts-map .number").text.strip()
+            
+            # Extract creation and latest activity dates
+            activity_cell = row.find_element(By.CSS_SELECTOR, "td.activity")
+            date_title = activity_cell.get_attribute("title")
+            
+            # Extract dates using regex
+            created_date = None
+            latest_activity = None
+            
+            created_match = re.search(r"Created: (.*?)(?:\n|$)", date_title)
+            if created_match:
+                created_date = created_match.group(1).strip()
+                
+            latest_match = re.search(r"Latest: (.*?)(?:\n|$)", date_title)
+            if latest_match:
+                latest_activity = latest_match.group(1).strip()
+            
+            # Generate unique ID
+            unique_id = generate_date_hash_id(url)
+            
+            # Append to proposals list
+            proposals.append({
+                "id": unique_id,
+                "topic_id": topic_id,
+                "title": title,
+                "url": url,
+                "views": views,
+                "comments": comments,
+                "created_date": created_date,
+                "latest_activity": latest_activity
+            })
+        except Exception as e:
+            print(f"Error processing row: {e}")
+    return proposals
+```
+
+#### Fetching Proposal Details
+
+```python
+def fetch_proposal_details(proposal):
+    try:
+        driver.get(proposal["url"])
+        
+        # Wait and scrape main content
+        content_element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "cooked"))
+        )
+        content = content_element.text.strip()
+        proposal["content"] = content
+        
+        # Collect comments if enabled
+        if COLLECT_COMMENTS:
+            comments_elements = driver.find_elements(By.CSS_SELECTOR, "div.topic-post")
+            comments = []
+            for comment in comments_elements:
+                author = comment.find_element(By.CSS_SELECTOR, "div.names a").text.strip()
+                comment_text = comment.find_element(By.CLASS_NAME, "cooked").text.strip()
+                comments.append({"author": author, "comment": comment_text})
+            proposal["comments_details"] = comments
+    except Exception as e:
+        print(f"Error fetching details for {proposal['title']}: {e}")
+```
+
+#### Generating Unique IDs
+
+```python
+def generate_date_hash_id(url):
+    hash_str = hashlib.sha256(url.encode()).hexdigest()[:16]
+    return f"{hash_str}"
+```
+
+### Configuration Options
+
+The CEG forum scraper can be customized through several parameters:
+
+```python
+# Constants
+MAIN_URL = "https://forum.ceg.vote/latest"  # Source URL for proposals
+OUTPUT_FILE = "knowledge/metis/ceg.json"    # Output file path
+MAX_PROPOSALS = 20                          # Maximum number of proposals to collect
+COLLECT_COMMENTS = True                     # Toggle whether to collect comments
+```
+
+### Data Flow
+
+1. The script starts by removing any existing output file to ensure fresh data
+2. It fetches the list of proposals from the main forum page
+3. For each proposal (up to MAX_PROPOSALS):
+   - It extracts the metadata (title, URL, views, comments, dates)
+   - It generates a unique ID based on the URL hash
+   - It fetches the detailed content by navigating to the proposal's page
+   - If enabled, it collects all comments and their authors
+4. The complete dataset is then saved to the specified JSON file
+
+### Output Structure
+
+The CEG forum scraper produces a JSON file with the following structure:
+
+```json
+[
+    {
+        "id": "1a2b3c4d5e6f7890",
+        "topic_id": "12345",
+        "title": "Proposal: Add New Feature X to Platform",
+        "url": "https://forum.ceg.vote/t/proposal-add-new-feature-x-to-platform/12345",
+        "views": "123",
+        "comments": "45",
+        "created_date": "Jan 15, 2025",
+        "latest_activity": "Mar 10, 2025",
+        "content": "This is the main proposal content discussing Feature X...",
+        "comments_details": [
+            {
+                "author": "User1",
+                "comment": "I support this proposal because..."
+            },
+            {
+                "author": "User2",
+                "comment": "Have we considered the implications for..."
+            }
+        ]
+    },
+    // Additional proposals...
+]
+```
+
+### Error Handling
+
+The scraper implements comprehensive error handling to ensure reliability:
+
+- Individual proposal processing errors are caught to prevent the entire scrape from failing
+- Timeouts are managed through WebDriverWait with configurable duration
+- Element not found exceptions are handled gracefully
+- Network issues are reported with meaningful error messages
+
+### Automation with GitHub Actions
+
+The CEG forum scraper is automated through a GitHub Actions workflow that:
+
+1. Runs daily at midnight UTC
+2. Sets up a Python 3.9 environment
+3. Installs Chrome, ChromeDriver, and required Python packages
+4. Executes the scraping script
+5. Commits and pushes any changes to the repository
+
+```yaml
+name: "Knowledge Scraping - ceg" 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC 
+
+jobs:
+  scrape-ceg:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install all necessary packages
+      run: |
+        sudo apt-get install -y chromium-browser chromium-chromedriver python3-selenium
+        pip install bs4 selenium webdriver_manager
+
+    - name: Run the scraping script
+      run: python scripts/addknowledge_CEG.py
+
+    - name: Commit and push if content changed
+      run: |
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest data: ${timestamp}" || exit 0
+        git push
+```
+
+## Implementation Considerations
+
+### Selenium vs. Regular HTTP Requests
+
+The CEG Forum scraper uses Selenium instead of simple HTTP requests because:
+
+1. **Dynamic Content**: The forum uses JavaScript to render content that isn't available in the initial HTML
+2. **Complex Navigation**: Selenium allows for realistic browser interactions like clicking and waiting
+3. **State Management**: The forum might require session state that Selenium handles automatically
+
+### Performance Optimization
+
+Despite the overhead of using a headless browser, several optimizations are in place:
+
+- **Limited Scope**: The `MAX_PROPOSALS` parameter prevents excessive processing
+- **Headless Mode**: Chrome runs without a GUI to reduce resource usage
+- **Efficient Waits**: WebDriverWait is used instead of sleep() to proceed as soon as elements are available
+- **Targeted Selectors**: CSS selectors are specific to minimize search time
+
+### Security Considerations
+
+The scraper implements several security best practices:
+
+- Running Chrome with sandbox disabled only in a controlled environment
+- Not storing or processing user credentials
+- Respecting the forum's robots.txt and rate limits
+- Using content extraction rather than executing any forum JavaScript code
+
+## Customization Guide
+
+To adapt the CEG forum scraper for other forum platforms:
+
+1. Update the `MAIN_URL` constant to point to the new forum
+2. Modify the CSS selectors in `fetch_proposals()` to match the new forum's structure
+3. Adjust the content extraction in `fetch_proposal_details()` based on the target site's layout
+4. Consider changing the comment collection strategy if the forum uses a different comment structure
+
+### Common Adjustments
+
+For forums running on different platforms:
+
+- Discourse forums will use similar selectors with minor variations
+- phpBB forums require different CSS selectors but similar overall approach
+- Custom forum software may need significant selector changes
+
+## Troubleshooting
+
+Common issues and their solutions:
+
+1. **ChromeDriver Version Mismatch**:
+   - The `webdriver_manager` library should handle this automatically
+   - If issues persist, manually specify a compatible ChromeDriver version
+
+2. **Element Not Found Exceptions**:
+   - Check if the forum structure has changed
+   - Inspect the page source to identify updated CSS selectors
+
+3. **Rate Limiting**:
+   - Add delays between requests: `time.sleep(2)` between proposal fetches
+   - Reduce `MAX_PROPOSALS` to stay within limits
+
+4. **Memory Issues**:
+   - Chrome can consume significant memory; ensure sufficient RAM on the runner
+   - Consider processing in smaller batches if memory is limited

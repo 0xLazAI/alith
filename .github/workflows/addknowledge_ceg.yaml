@@ -1,0 +1,36 @@
+name: "Knowledge Scraping - ceg" 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC 
+
+jobs:
+  scrape-ceg:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install all necessary packages
+        run: |
+          sudo apt-get install -y chromium-browser chromium-chromedriver python3-selenium
+          pip install bs4 selenium webdriver_manager
+
+      - name: Run the scraping script
+        run: python scripts/addknowledge_CEG.py
+
+      - name: Commit and push if content changed
+        run: |
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
