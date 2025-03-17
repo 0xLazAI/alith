@@ -31,7 +31,7 @@ impl CompletionResponse {
         Ok(Self {
             id: res.id.to_owned(),
             index: None,
-            content: choice.message.content.as_ref().unwrap().to_owned(),
+            content: choice.message.content.as_ref().cloned().unwrap_or_default(),
             finish_reason,
             completion_probabilities: None,
             truncated: false,
