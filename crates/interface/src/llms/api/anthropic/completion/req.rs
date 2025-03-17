@@ -1,6 +1,4 @@
-use crate::requests::completion::{
-    ToolChoice, ToolDefinition, error::CompletionError, request::CompletionRequest,
-};
+use crate::requests::completion::{error::CompletionError, request::CompletionRequest};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Default, Debug, Deserialize)]
@@ -53,11 +51,7 @@ pub struct AnthropicCompletionRequest {
 
     /// The tools for the request, default: None
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tools: Option<Vec<ToolDefinition>>,
-
-    /// The tool choice for the request, default: None
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub tool_choice: Option<ToolChoice>,
+    pub tools: Option<Vec<Tool>>,
 }
 
 impl AnthropicCompletionRequest {
@@ -109,12 +103,16 @@ impl AnthropicCompletionRequest {
             temperature: temperature(req.config.temperature)?,
             top_p: top_p(req.config.top_p)?,
             tools: if !req.tools.is_empty() {
-                Some(req.tools.clone())
-            } else {
-                None
-            },
-            tool_choice: if !req.tools.is_empty() {
-                Some(req.tool_choice.clone())
+                Some(
+                    req.tools
+                        .iter()
+                        .map(|t| Tool {
+                            name: t.name.clone(),
+                            description: t.description.clone(),
+                            input_schema: t.parameters.clone(),
+                        })
+                        .collect(),
+                )
             } else {
                 None
             },
@@ -152,4 +150,11 @@ fn top_p(value: Option<f32>) -> crate::Result<Option<f32>, CompletionError> {
 pub struct CompletionRequestMessage {
     pub role: String,
     pub content: String,
+}
+
+#[derive(Clone, Serialize, Default, Debug, Deserialize)]
+pub struct Tool {
+    pub name: String,
+    pub description: String,
+    pub input_schema: serde_json::Value,
 }
