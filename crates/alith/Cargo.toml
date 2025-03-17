@@ -82,5 +82,8 @@ name = "gguf_loader"
 [[example]]
 name = "tokenizer"
 
+[[example]]
+name = "device"
+
 [features]
 inference = ["alith-core/inference", "alith-inference/inference"]
