@@ -2,7 +2,6 @@ from alith import Agent
 from os import environ
 
 agent = Agent(
-    name="A dummy Agent",
     model="grok-3",
     api_key=environ["GROK_API_KEY"],
     base_url="api.grok.ai/v1",

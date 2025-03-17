@@ -1,7 +1,6 @@
 import { Agent } from "elizaos-alith";
 
 const agent = new Agent({
-	name: "A dummy Agent",
 	model: "gpt-4",
 	runtime: YourElizaOSAgentRuntime(), // Your elizaos agent runtime,
 	preamble:

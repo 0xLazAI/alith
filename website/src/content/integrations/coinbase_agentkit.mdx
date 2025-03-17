@@ -85,7 +85,6 @@ def initialize_agent() -> Agent:
 
     # Create an Alith Agent and CDP Agentkit tools.
     return Agent(
-        name="A dummy Agent",
         model="gpt-4o-mini",
         preamble=preamble,
         tools=tools,
@@ -236,7 +235,6 @@ async function main() {
 		const { tools } = await initializeAgent();
 
 		const agent = new Agent({
-			name: "A dummy Agent",
 			model: "gpt-4",
 			preamble: preamble,
 			tools: tools,

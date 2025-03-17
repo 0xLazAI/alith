@@ -129,7 +129,6 @@ async function main() {
 		const { tools } = await initializeAgent();
 
 		const agent = new Agent({
-			name: "A dummy Agent",
 			model: "gpt-4",
 			preamble: preamble,
 			tools: tools,

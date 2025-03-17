@@ -26,7 +26,6 @@ npm i --save-dev @types/json-schema
 import { Agent } from "alith";
 
 const agent = new Agent({
-  name: "A dummy Agent",
   model: "gpt-4o-mini",
   preamble:
     "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",
@@ -40,7 +39,6 @@ console.log(agent.prompt("Calculate 10 - 3"));
 import { Agent } from "alith";
 
 const agent = new Agent({
-  name: "A dummy Agent",
   model: "gpt-4o-mini",
   preamble:
     "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",

@@ -74,7 +74,6 @@ def initialize_agent() -> Agent:
 
     # Create an Alith Agent and CDP Agentkit tools.
     return Agent(
-        name="A dummy Agent",
         model="gpt-4o-mini",
         preamble=preamble,
         tools=tools,
