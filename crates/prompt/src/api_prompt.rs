@@ -1,4 +1,4 @@
-use crate::{token_count::total_prompt_tokens_openai_format, PromptTokenizer};
+use crate::{PromptTokenizer, token_count::total_prompt_tokens_openai_format};
 use serde::Serialize;
 use std::{
     collections::HashMap,

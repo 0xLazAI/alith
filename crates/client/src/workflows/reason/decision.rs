@@ -1,6 +1,6 @@
 use super::{ReasonResult, ReasonTrait};
 use crate::{
-    components::{instruct_prompt::InstructPrompt, InstructPromptTrait},
+    components::{InstructPromptTrait, instruct_prompt::InstructPrompt},
     primitives::*,
 };
 use alith_interface::requests::{

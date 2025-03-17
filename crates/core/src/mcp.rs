@@ -1,9 +1,9 @@
 use crate::tool::ToolDefinition;
+pub use mcp_client::Error;
+pub use mcp_client::McpService;
 pub use mcp_client::client::{ClientCapabilities, ClientInfo};
 use mcp_client::client::{McpClient, McpClientTrait};
 pub use mcp_client::transport::{SseTransport, StdioTransport, Transport};
-pub use mcp_client::Error;
-pub use mcp_client::McpService;
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::ops::Deref;

@@ -1,6 +1,6 @@
 use crate::PromptTokenizer;
-use minijinja::value::{from_args, Value, ValueKind};
-use minijinja::{context, Environment, Error, ErrorKind};
+use minijinja::value::{Value, ValueKind, from_args};
+use minijinja::{Environment, Error, ErrorKind, context};
 use serde::Serialize;
 use std::collections::HashMap;
 use std::sync::Mutex;

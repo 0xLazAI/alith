@@ -21,7 +21,8 @@ impl DfsTextChunker {
             .any(|split: &TextSplit| split.token_count.unwrap() as f32 > config.length_max)
         {
             eprintln!(
-                "\nPure semantic chunking is impossible for separator: {:#?}.\nA splits token count is more than length_max: {:#?}.", config.initial_separator, config.length_max,
+                "\nPure semantic chunking is impossible for separator: {:#?}.\nA splits token count is more than length_max: {:#?}.",
+                config.initial_separator, config.length_max,
             );
             return None;
         };

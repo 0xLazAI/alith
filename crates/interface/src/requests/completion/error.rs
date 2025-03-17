@@ -21,9 +21,7 @@ pub enum CompletionError {
     ResponseContentEmpty,
     #[error("StopLimitRetry: stopped_limit == true && retry_stopped_limit == true")]
     StopLimitRetry,
-    #[error(
-        "NoRequiredStopSequence: One of the sequences is required, but response has has None."
-    )]
+    #[error("NoRequiredStopSequence: One of the sequences is required, but response has has None.")]
     NoRequiredStopSequence,
     #[error(
         "NonMatchingStopSequence: One of the sequences is required, but response's stop sequence was: {0}."

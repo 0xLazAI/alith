@@ -1,4 +1,4 @@
-use super::{create_range, Grammar, GrammarError, GrammarSetterTrait, RefCell};
+use super::{Grammar, GrammarError, GrammarSetterTrait, RefCell, create_range};
 
 #[derive(Clone, Default, PartialEq)]
 pub struct WordsGrammar {

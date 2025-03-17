@@ -34,7 +34,10 @@ impl CpuConfig {
                     self.use_percentage
                 );
             } else {
-                crate::warn!("Percentage of total CPU must be between 0.0 and 1.0. use_percentage: {}. Falling back to default value of 0.70", self.use_percentage);
+                crate::warn!(
+                    "Percentage of total CPU must be between 0.0 and 1.0. use_percentage: {}. Falling back to default value of 0.70",
+                    self.use_percentage
+                );
                 self.use_percentage = 0.70;
             }
         }
@@ -58,10 +61,10 @@ impl CpuConfig {
                     );
                 } else {
                     crate::warn!(
-                    "Requested threads {} is greater than the number of available physical CPU cores {}. Using the number of available physical CPU cores",
-                    threads,
-                    self.num_cpus
-                );
+                        "Requested threads {} is greater than the number of available physical CPU cores {}. Using the number of available physical CPU cores",
+                        threads,
+                        self.num_cpus
+                    );
                     Ok(Some(self.num_cpus as i16))
                 }
             } else {

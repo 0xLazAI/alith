@@ -1,6 +1,6 @@
 use super::{
-    build_disallowed, create_range, Grammar, GrammarError, GrammarSetterTrait, RefCell,
-    NEWLINE_CHARS,
+    Grammar, GrammarError, GrammarSetterTrait, NEWLINE_CHARS, RefCell, build_disallowed,
+    create_range,
 };
 
 #[derive(Clone, PartialEq)]

@@ -4,17 +4,17 @@ use alith_core::{
 };
 use async_trait::async_trait;
 pub use qdrant_client::{
-    qdrant::{
-        point_id::PointIdOptions, CreateCollectionBuilder, DeletePointsBuilder, Distance, PointId,
-        PointStruct, Query, QueryPoints, QueryPointsBuilder, UpsertPointsBuilder,
-        VectorParamsBuilder,
-    },
     Qdrant as QdrantClient, QdrantBuilder, QdrantError,
+    qdrant::{
+        CreateCollectionBuilder, DeletePointsBuilder, Distance, PointId, PointStruct, Query,
+        QueryPoints, QueryPointsBuilder, UpsertPointsBuilder, VectorParamsBuilder,
+        point_id::PointIdOptions,
+    },
 };
 use serde_json::Map;
 use std::sync::{
-    atomic::{AtomicUsize, Ordering},
     Arc,
+    atomic::{AtomicUsize, Ordering},
 };
 
 pub const DEFAULT_COLLECTION_NAME: &str = "alith";

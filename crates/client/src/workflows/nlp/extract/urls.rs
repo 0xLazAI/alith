@@ -1,6 +1,6 @@
 use crate::{
     components::{
-        cascade::{step::StepConfig, CascadeFlow},
+        cascade::{CascadeFlow, step::StepConfig},
         instruct_prompt::{InstructPrompt, InstructPromptTrait},
     },
     primitives::*,
@@ -108,7 +108,10 @@ impl ExtractUrls {
         );
         flow.last_round()?.run_all_steps(&mut self.base_req).await?;
 
-        let initial_qualities_task = format!("We are extracting URLs from text using the instructions:\n{} Briefly describe the criteria of the URLs to be extracted.", self.instruct_prompt.build_instructions().unwrap());
+        let initial_qualities_task = format!(
+            "We are extracting URLs from text using the instructions:\n{} Briefly describe the criteria of the URLs to be extracted.",
+            self.instruct_prompt.build_instructions().unwrap()
+        );
         let config = StepConfig {
             step_prefix: Some("Criteria: ".to_owned()),
             grammar: TextPrimitive::default().text_token_length(200).grammar(),
@@ -118,7 +121,11 @@ impl ExtractUrls {
             .add_inference_step(&config);
         flow.last_round()?.run_all_steps(&mut self.base_req).await?;
 
-        let refine_criteria_task = format!("Reframe the instructions and criteria into a statment used to evaluate if a URL should be extracted. This statement should have a boolean answer. The answer should represent whether or not the URL satisfies the criteria. This should be a single sentence 'is' statment; as in, 'The URL is <criteria>: true or false'.\nCriteria:\n{}\nInstructions:\n{}", flow.primitive_result().unwrap(), self.instruct_prompt.build_instructions().unwrap());
+        let refine_criteria_task = format!(
+            "Reframe the instructions and criteria into a statment used to evaluate if a URL should be extracted. This statement should have a boolean answer. The answer should represent whether or not the URL satisfies the criteria. This should be a single sentence 'is' statment; as in, 'The URL is <criteria>: true or false'.\nCriteria:\n{}\nInstructions:\n{}",
+            flow.primitive_result().unwrap(),
+            self.instruct_prompt.build_instructions().unwrap()
+        );
         let config = StepConfig {
             step_prefix: Some("The URL is ".to_owned()),
             stop_word_done: ": true or false".to_owned(),
@@ -201,7 +208,11 @@ impl ExtractUrls {
         flow: &mut CascadeFlow,
         primitive: &mut ExactStringPrimitive,
     ) -> Result<()> {
-        let task = format!("Text with URLs to extract:\n{}\nReturn the URL that is most likely relevant to the criteria. If you are certain the text contains no qualifying URLs say 'No qualifying URLs.'.\nCriteria:\n This URL is {}.",self.instruct_prompt.build_supporting_material().unwrap(), self.criteria.as_ref().unwrap());
+        let task = format!(
+            "Text with URLs to extract:\n{}\nReturn the URL that is most likely relevant to the criteria. If you are certain the text contains no qualifying URLs say 'No qualifying URLs.'.\nCriteria:\n This URL is {}.",
+            self.instruct_prompt.build_supporting_material().unwrap(),
+            self.criteria.as_ref().unwrap()
+        );
         flow.new_round(task).step_separator = None;
         flow.last_round()?.open_round(&mut self.base_req)?;
         for i in 1..=primitive.allowed_strings.len() {

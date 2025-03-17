@@ -8,8 +8,8 @@
 //! 7. Add a test to llm_client/llm_models/tests/it/preset.rs for the new model
 //! 8. Add a test_base_generation_prefix test case to llm_client/llm_models/tests/it/metadata.rs for the new model
 use crate::local_model::{
-    gguf::loaders::preset::GgufPresetLoader, hf_loader::HuggingFaceLoader,
-    metadata::config_json::ConfigJson, GgufLoader, LocalLLMModel,
+    GgufLoader, LocalLLMModel, gguf::loaders::preset::GgufPresetLoader,
+    hf_loader::HuggingFaceLoader, metadata::config_json::ConfigJson,
 };
 
 fn presets_path() -> std::path::PathBuf {

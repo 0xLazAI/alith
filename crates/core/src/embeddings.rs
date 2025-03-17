@@ -20,7 +20,7 @@ pub trait Embeddings: Clone + Send + Sync {
 
     /// Generate embeddings for a list of texts
     async fn embed_texts(&self, input: Vec<String>)
-        -> Result<Vec<EmbeddingsData>, EmbeddingsError>;
+    -> Result<Vec<EmbeddingsData>, EmbeddingsError>;
 }
 
 // Trait that defines the embedding process for a document

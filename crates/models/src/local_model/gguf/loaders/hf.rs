@@ -1,6 +1,6 @@
 use crate::{
-    local_model::{hf_loader::HuggingFaceLoader, metadata::LocalLLMMetadata, LocalLLMModel},
     LLMModelBase,
+    local_model::{LocalLLMModel, hf_loader::HuggingFaceLoader, metadata::LocalLLMMetadata},
 };
 
 #[derive(Default, Clone)]

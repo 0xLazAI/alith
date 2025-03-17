@@ -11,7 +11,7 @@ use crate::requests::{
 };
 use alith_devices::logging::LoggingConfig;
 use alith_models::api_model::ApiLLMModel;
-use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
+use reqwest::header::{AUTHORIZATION, HeaderMap, HeaderValue};
 use secrecy::{ExposeSecret, SecretString};
 use serde_json::json;
 

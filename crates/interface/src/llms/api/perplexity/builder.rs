@@ -1,12 +1,12 @@
 use crate::llms::{
+    LLMBackend,
     api::{
         config::{ApiConfig, LLMApiConfigTrait},
         generic_openai::{GenericApiBackend, GenericApiConfig},
     },
-    LLMBackend,
 };
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
-use alith_models::api_model::{perplexity::PerplexityModelTrait, ApiLLMModel};
+use alith_models::api_model::{ApiLLMModel, perplexity::PerplexityModelTrait};
 use std::sync::Arc;
 
 pub struct PerplexityBackendBuilder {

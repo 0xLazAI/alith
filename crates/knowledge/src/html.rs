@@ -1,11 +1,11 @@
-use html_to_markdown::{markdown, TagHandler};
+use html_to_markdown::{TagHandler, markdown};
 use std::io::Read;
 use std::sync::RwLock;
 use std::{cell::RefCell, rc::Rc};
 use url::Url;
 
 use alith_core::{
-    chunking::{chunk_text, ChunkError, Chunker},
+    chunking::{ChunkError, Chunker, chunk_text},
     knowledge::{Knowledge, KnowledgeError},
 };
 

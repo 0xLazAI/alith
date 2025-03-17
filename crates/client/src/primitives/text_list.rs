@@ -1,5 +1,5 @@
 use super::PrimitiveTrait;
-use crate::components::grammar::{text::text_list::TextListGrammar, Grammar};
+use crate::components::grammar::{Grammar, text::text_list::TextListGrammar};
 use anyhow::Result;
 use std::slice::{Iter, IterMut};
 use std::vec::IntoIter;

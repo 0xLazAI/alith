@@ -1,8 +1,8 @@
 use crate::{
     components::{
-        cascade::{step::StepConfig, CascadeFlow},
-        instruct_prompt::InstructPrompt,
         InstructPromptTrait,
+        cascade::{CascadeFlow, step::StepConfig},
+        instruct_prompt::InstructPrompt,
     },
     primitives::*,
 };

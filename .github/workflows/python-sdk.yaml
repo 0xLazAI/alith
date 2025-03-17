@@ -28,7 +28,7 @@ jobs:
           python-version: '3.12'
       - name: Install Alith node SDK test
         run: python3 -m pip install alith
-      - uses: PyO3/maturin-action@v1
+      - uses: PyO3/maturin-action@v1.47.2
         with:
           working-directory: "sdks/python"
           command: sdist
@@ -46,7 +46,7 @@ jobs:
         target: [ x86_64, aarch64 ]
     steps:
       - uses: actions/checkout@v4
-      - uses: PyO3/maturin-action@v1
+      - uses: PyO3/maturin-action@v1.47.2
         with:
           target: ${{ matrix.target }}
           manylinux: auto
@@ -66,7 +66,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: PyO3/maturin-action@v1
+      - uses: PyO3/maturin-action@v1.47.2
         with:
           working-directory: "sdks/python"
           command: build
@@ -81,7 +81,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: PyO3/maturin-action@v1
+      - uses: PyO3/maturin-action@v1.47.2
         with:
           working-directory: "sdks/python"
           command: build

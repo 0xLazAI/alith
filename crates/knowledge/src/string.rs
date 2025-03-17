@@ -1,5 +1,5 @@
 use alith_core::{
-    chunking::{chunk_text, ChunkError, Chunker},
+    chunking::{ChunkError, Chunker, chunk_text},
     knowledge::{Knowledge, KnowledgeError},
 };
 use anyhow::Result;

@@ -134,7 +134,9 @@ fn create_range<T: AsRef<str>>(min_count: u8, max_count: u8, stop_word_done: &Op
     };
     let max_count = match max_count.cmp(&min_count) {
         std::cmp::Ordering::Less => {
-            eprintln!("Max count must be greater than or equal to min count. Setting max count to min count.");
+            eprintln!(
+                "Max count must be greater than or equal to min count. Setting max count to min count."
+            );
             min_count
         }
         _ => max_count,

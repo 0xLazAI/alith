@@ -1,5 +1,5 @@
 //! Downloads to Path: "/root/.cache/huggingface/hub/
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use dotenvy::dotenv;
 use hf_hub::api::sync::{Api, ApiBuilder};
 use std::{cell::OnceCell, path::PathBuf};
@@ -99,13 +99,19 @@ impl HuggingFaceLoader {
 
     pub fn parse_full_model_url(model_url: &str) -> (String, String, String) {
         if !model_url.starts_with("https://huggingface.co") {
-            panic!("URL does not start with https://huggingface.co\n Format should be like: https://huggingface.co/TheBloke/zephyr-7B-alpha-GGUF/blob/main/zephyr-7b-alpha.Q8_0.gguf");
+            panic!(
+                "URL does not start with https://huggingface.co\n Format should be like: https://huggingface.co/TheBloke/zephyr-7B-alpha-GGUF/blob/main/zephyr-7b-alpha.Q8_0.gguf"
+            );
         } else if !model_url.ends_with(".gguf") {
-            panic!("URL does not end with .gguf\n Format should be like: https://huggingface.co/TheBloke/zephyr-7B-alpha-GGUF/blob/main/zephyr-7b-alpha.Q8_0.gguf");
+            panic!(
+                "URL does not end with .gguf\n Format should be like: https://huggingface.co/TheBloke/zephyr-7B-alpha-GGUF/blob/main/zephyr-7b-alpha.Q8_0.gguf"
+            );
         } else {
             let parts: Vec<&str> = model_url.split('/').collect();
             if parts.len() < 5 {
-                panic!("URL does not have enough parts\n Format should be like: https://huggingface.co/TheBloke/zephyr-7B-alpha-GGUF/blob/main/zephyr-7b-alpha.Q8_0.gguf");
+                panic!(
+                    "URL does not have enough parts\n Format should be like: https://huggingface.co/TheBloke/zephyr-7B-alpha-GGUF/blob/main/zephyr-7b-alpha.Q8_0.gguf"
+                );
             }
             let model_id = parts[4].to_string();
             let repo_id = format!("{}/{}", parts[3], parts[4]);

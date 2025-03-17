@@ -5,7 +5,7 @@ use alith_interface::requests::{
     completion::{CompletionFinishReason, CompletionRequest},
     stop_sequence::StoppingSequence,
 };
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use core::panic;
 pub use round::CascadeRound;
 use step::InferenceStep;

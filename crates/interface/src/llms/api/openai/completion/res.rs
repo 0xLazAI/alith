@@ -19,12 +19,12 @@ impl CompletionResponse {
             Some(FinishReason::ContentFilter) => {
                 return Err(CompletionError::StopReasonUnsupported(
                     "FinishReason::ContentFilter is not supported".to_owned(),
-                ))
+                ));
             }
             Some(FinishReason::FunctionCall) => {
                 return Err(CompletionError::StopReasonUnsupported(
                     "FinishReason::FunctionCall is not supported".to_owned(),
-                ))
+                ));
             }
             None => CompletionFinishReason::Eos,
         };

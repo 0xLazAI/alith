@@ -294,7 +294,9 @@ impl LLMPrompt {
                     "Cannot build prompt when the current inference message is PromptMessageType::Assistant"
                 )
             } else if last.message_type == PromptMessageType::System {
-                crate::bail!("Cannot build prompt when the current inference message is PromptMessageType::System")
+                crate::bail!(
+                    "Cannot build prompt when the current inference message is PromptMessageType::System"
+                )
             } else {
                 Ok(())
             }
@@ -325,10 +327,12 @@ impl LLMPrompt {
             // Rule 3: Ensure alternating User/Assistant messages after the first message
             if i > 0 {
                 match (last_message_type, message_type) {
-                    (Some(PromptMessageType::User), PromptMessageType::Assistant) => {},
-                    (Some(PromptMessageType::Assistant), PromptMessageType::User) => {},
-                    (Some(PromptMessageType::System), PromptMessageType::User) => {},
-                    _ => panic!("Messages must alternate between User and Assistant after the first message (which can be System)."),
+                    (Some(PromptMessageType::User), PromptMessageType::Assistant) => {}
+                    (Some(PromptMessageType::Assistant), PromptMessageType::User) => {}
+                    (Some(PromptMessageType::System), PromptMessageType::User) => {}
+                    _ => panic!(
+                        "Messages must alternate between User and Assistant after the first message (which can be System)."
+                    ),
                 }
             }
             last_message_type = Some(message_type.clone());

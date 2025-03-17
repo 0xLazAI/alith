@@ -1,10 +1,10 @@
 use super::{OpenAIBackend, OpenAIConfig};
 use crate::llms::{
-    api::config::{ApiConfig, LLMApiConfigTrait},
     LLMBackend,
+    api::config::{ApiConfig, LLMApiConfigTrait},
 };
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
-use alith_models::api_model::{openai::OpenAIModelTrait, ApiLLMModel};
+use alith_models::api_model::{ApiLLMModel, openai::OpenAIModelTrait};
 use std::sync::Arc;
 
 pub struct OpenAIBackendBuilder {

@@ -1,10 +1,10 @@
 use crate::local_model::{
+    LocalLLMModel,
     gguf::{
         load_chat_template, load_tokenizer, memory::estimate_quantization_level, preset::LLMPreset,
     },
     hf_loader::HuggingFaceLoader,
     metadata::LocalLLMMetadata,
-    LocalLLMModel,
 };
 pub(crate) const DEFAULT_PRESET_CONTEXT_LENGTH: u64 = 4096;
 

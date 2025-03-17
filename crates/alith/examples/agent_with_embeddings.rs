@@ -1,4 +1,4 @@
-use alith::{Embed, EmbedError, EmbeddingsBuilder, TextEmbedder, LLM};
+use alith::{Embed, EmbedError, EmbeddingsBuilder, LLM, TextEmbedder};
 
 #[derive(Debug)]
 pub struct Foo {

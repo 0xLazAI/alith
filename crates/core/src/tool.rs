@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use schemars::{schema::RootSchema, schema_for, JsonSchema};
+use schemars::{JsonSchema, schema::RootSchema, schema_for};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 

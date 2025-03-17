@@ -4,7 +4,7 @@ use alith_devices::devices::DeviceConfig;
 #[cfg(target_os = "macos")]
 use alith_devices::devices::MetalConfig;
 use alith_models::local_model::{
-    gguf::GgufLoader, metadata::llm::DEFAULT_CONTEXT_LENGTH, LocalLLMModel,
+    LocalLLMModel, gguf::GgufLoader, metadata::llm::DEFAULT_CONTEXT_LENGTH,
 };
 
 pub mod llama_cpp;
@@ -39,7 +39,11 @@ impl LocalLLMConfig {
         };
 
         if self.inference_ctx_size > model.model_metadata.context_length() {
-            eprintln!("Given value for ctx_size {} is greater than the model's max {}. Using the models max.", self.inference_ctx_size, model.model_metadata.context_length());
+            eprintln!(
+                "Given value for ctx_size {} is greater than the model's max {}. Using the models max.",
+                self.inference_ctx_size,
+                model.model_metadata.context_length()
+            );
             self.inference_ctx_size = model.model_metadata.context_length();
         };
 
@@ -68,8 +72,9 @@ impl LocalLLMConfig {
         {
             if self.inference_ctx_size > preset_with_max_ctx_size {
                 crate::info!(
-                        "Given value for ctx_size {} is greater than preset_with_max_ctx_size {preset_with_max_ctx_size}. Using preset_with_max_ctx_size.", self.inference_ctx_size
-                    );
+                    "Given value for ctx_size {} is greater than preset_with_max_ctx_size {preset_with_max_ctx_size}. Using preset_with_max_ctx_size.",
+                    self.inference_ctx_size
+                );
                 self.inference_ctx_size = preset_with_max_ctx_size;
             };
         } else {

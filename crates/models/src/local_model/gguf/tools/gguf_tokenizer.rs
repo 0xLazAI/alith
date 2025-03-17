@@ -3,12 +3,12 @@
 use crate::local_model::metadata::tokenizer::{GgmlTokenizerMetadata, GgmlTokenizerModel};
 use anyhow::Context;
 use tokenizers::{
+    AddedToken, DecoderWrapper, NormalizerWrapper, Tokenizer,
     decoders::{
         self, byte_fallback::ByteFallback, byte_level::ByteLevel, fuse::Fuse, strip::Strip,
     },
     models::unigram::Unigram,
     normalizers::{self, Prepend, Replace},
-    AddedToken, DecoderWrapper, NormalizerWrapper, Tokenizer,
 };
 
 struct GgufTokenizerProps<'a> {

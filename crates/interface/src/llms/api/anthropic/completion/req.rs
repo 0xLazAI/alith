@@ -1,5 +1,5 @@
 use crate::requests::completion::{
-    error::CompletionError, request::CompletionRequest, ToolChoice, ToolDefinition,
+    ToolChoice, ToolDefinition, error::CompletionError, request::CompletionRequest,
 };
 use serde::{Deserialize, Serialize};
 
@@ -84,7 +84,7 @@ impl AnthropicCompletionRequest {
                             return Err(CompletionError::RequestBuilderError(format!(
                                 "Role {} not supported",
                                 role
-                            )))
+                            )));
                         }
                     }
                 }
@@ -93,7 +93,7 @@ impl AnthropicCompletionRequest {
                 return Err(CompletionError::RequestBuilderError(format!(
                     "Error building prompt: {}",
                     e
-                )))
+                )));
             }
         }
 

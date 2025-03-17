@@ -54,11 +54,7 @@ impl PrimitiveTrait for BooleanPrimitive {
 impl ReasonTrait for BooleanPrimitive {
     fn primitive_to_result_index(&self, content: &str) -> u32 {
         let output = self.parse_to_primitive(content).unwrap();
-        if output {
-            1
-        } else {
-            0
-        }
+        if output { 1 } else { 0 }
     }
 
     fn result_index_to_primitive(&self, result_index: Option<u32>) -> Result<Option<bool>> {

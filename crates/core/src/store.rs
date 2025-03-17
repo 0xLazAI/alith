@@ -104,7 +104,7 @@ impl<E: Embeddings> Storage for InMemoryStorage<E> {
             .map(|result| {
                 result
                     .iter()
-                    .map(|result| (result.0, data[result.0 .0].document.clone(), result.1))
+                    .map(|result| (result.0, data[result.0.0].document.clone(), result.1))
                     .collect::<Vec<_>>()
             })
     }

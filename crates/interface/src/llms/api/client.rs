@@ -1,10 +1,10 @@
 use super::error::map_serialization_error;
 use super::{
     config::ApiConfigTrait,
-    error::{map_deserialization_error, ClientError, WrappedError},
+    error::{ClientError, WrappedError, map_deserialization_error},
 };
 use bytes::Bytes;
-use serde::{de::DeserializeOwned, Serialize};
+use serde::{Serialize, de::DeserializeOwned};
 
 #[derive(Debug, Clone)]
 pub struct ApiClient<C: ApiConfigTrait> {

@@ -1,10 +1,10 @@
 use super::{AnthropicBackend, AnthropicConfig};
 use crate::llms::{
-    api::config::{ApiConfig, LLMApiConfigTrait},
     LLMBackend,
+    api::config::{ApiConfig, LLMApiConfigTrait},
 };
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
-use alith_models::api_model::{anthropic::AnthropicModelTrait, ApiLLMModel};
+use alith_models::api_model::{ApiLLMModel, anthropic::AnthropicModelTrait};
 use std::sync::Arc;
 
 // Everything here can be implemented for any struct.

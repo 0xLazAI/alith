@@ -14,10 +14,10 @@ use crate::embeddings::EmbeddingsError;
 use anyhow::Result;
 
 pub use alith_client as client;
+pub use alith_client::LLMClient;
 pub use alith_client::basic_completion::BasicCompletion;
 pub use alith_client::embeddings::Embeddings;
 pub use alith_client::prelude::*;
-pub use alith_client::LLMClient;
 pub use alith_interface::requests::completion::{CompletionRequest, CompletionResponse};
 pub use alith_models::api_model::ApiLLMModel;
 

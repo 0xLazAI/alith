@@ -1,4 +1,4 @@
-use super::{build_disallowed, Grammar, GrammarError, GrammarSetterTrait, RefCell, NEWLINE_CHARS};
+use super::{Grammar, GrammarError, GrammarSetterTrait, NEWLINE_CHARS, RefCell, build_disallowed};
 
 #[derive(Clone, PartialEq)]
 pub struct TextGrammar {
