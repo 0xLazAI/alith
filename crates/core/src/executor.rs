@@ -1,9 +1,9 @@
+use crate::Ref;
 use crate::chat::{Completion, Request, ResponseContent, ResponseToolCalls, ToolCall};
 use crate::knowledge::Knowledge;
 use crate::mcp::MCPClient;
 use crate::memory::{Memory, Message};
 use crate::tool::Tool;
-use crate::Ref;
 use std::sync::Arc;
 
 /// Manages the execution of tasks using an LLM, tools, and (optionally) memory components.

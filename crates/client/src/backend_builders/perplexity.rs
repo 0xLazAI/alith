@@ -1,13 +1,13 @@
 use crate::LLMClient;
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
 use alith_interface::llms::{
+    LLMBackend,
     api::{
         config::{ApiConfig, LLMApiConfigTrait},
         generic_openai::{GenericApiBackend, GenericApiConfig},
     },
-    LLMBackend,
 };
-use alith_models::api_model::{perplexity::PerplexityModelTrait, ApiLLMModel};
+use alith_models::api_model::{ApiLLMModel, perplexity::PerplexityModelTrait};
 use std::sync::Arc;
 
 // Everything here can be implemented for any struct.

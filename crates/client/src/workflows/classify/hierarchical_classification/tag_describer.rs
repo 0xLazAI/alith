@@ -1,7 +1,7 @@
-use crate::components::cascade::step::StepConfig;
-use crate::components::cascade::CascadeFlow;
-use crate::components::grammar::NoneGrammar;
 use crate::LLMClient;
+use crate::components::cascade::CascadeFlow;
+use crate::components::cascade::step::StepConfig;
+use crate::components::grammar::NoneGrammar;
 
 use alith_interface::requests::completion::CompletionRequest;
 use serde::{Deserialize, Serialize};

@@ -1,6 +1,6 @@
 use super::{
-    hf_loader::HuggingFaceLoader, metadata::LocalLLMMetadata, GgufPresetTrait, HfTokenTrait,
-    LLMChatTemplate, LocalLLMModel,
+    GgufPresetTrait, HfTokenTrait, LLMChatTemplate, LocalLLMModel, hf_loader::HuggingFaceLoader,
+    metadata::LocalLLMMetadata,
 };
 use crate::tokenizer::Tokenizer;
 use loaders::{hf::GgufHfLoader, local::GgufLocalLoader, preset::GgufPresetLoader};

@@ -1,11 +1,11 @@
 use super::local_model::hf_loader::{HfTokenTrait, HuggingFaceLoader};
 use alith_prompt::PromptTokenizer;
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use std::{
     fmt,
     path::{Path, PathBuf},
 };
-use tiktoken_rs::{get_bpe_from_model, CoreBPE};
+use tiktoken_rs::{CoreBPE, get_bpe_from_model};
 use tokenizers::Tokenizer as HFTokenizer;
 
 pub enum TokenizerBackend {

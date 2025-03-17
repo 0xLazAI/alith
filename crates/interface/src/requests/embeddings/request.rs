@@ -1,7 +1,7 @@
 use crate::{llms::LLMBackend, requests::req_components::RequestConfig};
 use std::sync::Arc;
 
-use super::{response::EmbeddingsResponse, EmbeddingsError};
+use super::{EmbeddingsError, response::EmbeddingsResponse};
 
 pub struct EmbeddingsRequest {
     pub model: String,

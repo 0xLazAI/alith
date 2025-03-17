@@ -1,13 +1,13 @@
 use crate::LLMClient;
 use alith_devices::logging::{LoggingConfig, LoggingConfigTrait};
 use alith_interface::llms::{
+    LLMBackend,
     api::{
         anthropic::{AnthropicBackend, AnthropicConfig},
         config::{ApiConfig, LLMApiConfigTrait},
     },
-    LLMBackend,
 };
-use alith_models::api_model::{anthropic::AnthropicModelTrait, ApiLLMModel};
+use alith_models::api_model::{ApiLLMModel, anthropic::AnthropicModelTrait};
 use std::sync::Arc;
 
 // Everything here can be implemented for any struct.

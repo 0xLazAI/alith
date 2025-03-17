@@ -1,4 +1,4 @@
-use alith::{chunk_text, Agent, EmbeddingsBuilder, InMemoryStorage, LLM};
+use alith::{Agent, EmbeddingsBuilder, InMemoryStorage, LLM, chunk_text};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

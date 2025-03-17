@@ -1,4 +1,4 @@
-use alith_prompt::{check_and_get_max_tokens, MaxTokenState, RequestTokenLimitError};
+use alith_prompt::{MaxTokenState, RequestTokenLimitError, check_and_get_max_tokens};
 
 #[derive(Clone)]
 pub struct RequestConfig {
@@ -197,7 +197,9 @@ impl RequestConfig {
         token_increase_factor: Option<f32>,
     ) -> crate::Result<(), RequestTokenLimitError> {
         let token_increase_factor = token_increase_factor.unwrap_or(Self::DEFAULT_INCREASE_FACTOR);
-        crate::info!("Attempting to increase requested_response_tokens by {token_increase_factor} before retrying.");
+        crate::info!(
+            "Attempting to increase requested_response_tokens by {token_increase_factor} before retrying."
+        );
 
         if self.actual_request_tokens.is_none() || self.requested_response_tokens.is_none() {
             self.set_max_tokens_for_request(total_prompt_tokens)?; // To ensure both token sets are set

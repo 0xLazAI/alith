@@ -1,10 +1,10 @@
 use crate::{
+    LLMModelBase,
     local_model::{
+        LocalLLMModel,
         gguf::{load_chat_template, load_tokenizer},
         metadata::LocalLLMMetadata,
-        LocalLLMModel,
     },
-    LLMModelBase,
 };
 
 #[derive(Default, Clone)]

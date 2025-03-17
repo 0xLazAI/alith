@@ -6,10 +6,10 @@ pub mod local_model;
 pub mod tokenizer;
 
 #[allow(unused_imports)]
-pub(crate) use anyhow::{anyhow, bail, Error, Result};
+pub(crate) use anyhow::{Error, Result, anyhow, bail};
 
 #[allow(unused_imports)]
-pub(crate) use tracing::{debug, error, info, span, trace, warn, Level};
+pub(crate) use tracing::{Level, debug, error, info, span, trace, warn};
 
 #[derive(Clone)]
 pub struct LLMModelBase {

@@ -1,6 +1,6 @@
 use alith::store::qdrant::{
-    CreateCollectionBuilder, Distance, QdrantClient, QdrantStorage, VectorParamsBuilder,
-    DEFAULT_COLLECTION_NAME,
+    CreateCollectionBuilder, DEFAULT_COLLECTION_NAME, Distance, QdrantClient, QdrantStorage,
+    VectorParamsBuilder,
 };
 use alith::{Agent, EmbeddingsBuilder, LLM};
 

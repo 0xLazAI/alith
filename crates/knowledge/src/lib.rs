@@ -4,6 +4,6 @@ pub mod string;
 pub mod text;
 
 pub use alith_core::{
-    chunking::{chunk_text, ChunkError, Chunker},
+    chunking::{ChunkError, Chunker, chunk_text},
     knowledge::{FileKnowledge, Knowledge, KnowledgeError},
 };

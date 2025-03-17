@@ -1,10 +1,10 @@
 use super::{
-    decision::DecisionTrait, PrimitiveTrait, ReasonResult, ReasonTrait, SentencesPrimitive,
+    PrimitiveTrait, ReasonResult, ReasonTrait, SentencesPrimitive, decision::DecisionTrait,
 };
 use crate::components::{
-    cascade::{step::StepConfig, CascadeFlow},
-    instruct_prompt::InstructPrompt,
     InstructPromptTrait,
+    cascade::{CascadeFlow, step::StepConfig},
+    instruct_prompt::InstructPrompt,
 };
 use alith_interface::requests::{
     completion::CompletionRequest,
@@ -155,7 +155,9 @@ impl<P: PrimitiveTrait + ReasonTrait> ReasonOneRound<P> {
 
         Ok(match (instructions, supporting_material) {
             (Some(instructions), Some(supporting_material)) => {
-                format!("The user provided some supporting material: {supporting_material}\n The user's request is: {instructions}", )
+                format!(
+                    "The user provided some supporting material: {supporting_material}\n The user's request is: {instructions}",
+                )
             }
             (Some(instructions), None) => {
                 format!("The user's request is: {instructions}",)

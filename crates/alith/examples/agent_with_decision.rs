@@ -1,6 +1,6 @@
 use alith::{
-    client::{prelude::*, DecisionTrait},
     LLM,
+    client::{DecisionTrait, prelude::*},
 };
 
 #[tokio::main]

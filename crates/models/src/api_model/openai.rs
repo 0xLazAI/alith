@@ -1,5 +1,5 @@
 use super::ApiLLMModel;
-use crate::{tokenizer::Tokenizer, LLMModelBase};
+use crate::{LLMModelBase, tokenizer::Tokenizer};
 use std::sync::Arc;
 
 impl ApiLLMModel {

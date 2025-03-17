@@ -1,8 +1,8 @@
 pub use crate::{
+    LLMClient,
     components::InstructPromptTrait,
     primitives::PrimitiveTrait,
-    workflows::reason::{decision::DecisionTrait, ReasonTrait},
-    LLMClient,
+    workflows::reason::{ReasonTrait, decision::DecisionTrait},
 };
 #[cfg(any(target_os = "linux", target_os = "windows"))]
 pub use alith_devices::devices::CudaConfig;

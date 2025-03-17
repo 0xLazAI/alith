@@ -1,9 +1,9 @@
 pub use ort::{
+    Result,
     execution_providers::{
         CANNExecutionProvider, CPUExecutionProvider, CUDAExecutionProvider, CoreMLExecutionProvider,
     },
     info, init, inputs,
-    session::{builder::GraphOptimizationLevel, Session},
+    session::{Session, builder::GraphOptimizationLevel},
     value::TensorRef,
-    Result,
 };

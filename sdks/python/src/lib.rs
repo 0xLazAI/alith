@@ -1,4 +1,4 @@
-use alith::{Agent, Tool, LLM};
+use alith::{Agent, LLM, Tool};
 use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
 

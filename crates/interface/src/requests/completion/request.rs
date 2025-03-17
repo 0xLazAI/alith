@@ -1,4 +1,4 @@
-use super::{error::CompletionError, response::CompletionResponse, ToolChoice, ToolDefinition};
+use super::{ToolChoice, ToolDefinition, error::CompletionError, response::CompletionResponse};
 use crate::{
     llms::LLMBackend,
     requests::{
@@ -152,7 +152,7 @@ impl CompletionRequest {
                             return Ok(res);
                         }
                         CompletionFinishReason::Eos | CompletionFinishReason::ToolsCall => {
-                            return Ok(res)
+                            return Ok(res);
                         }
                     }
                 }

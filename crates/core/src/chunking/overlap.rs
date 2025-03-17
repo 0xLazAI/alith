@@ -194,7 +194,9 @@ impl OverlapChunker {
                 return Ok(());
             }
             if splits.is_empty() {
-                return Err(anyhow!("overlap error: splits is empty, but chunk token count is not within min and max."));
+                return Err(anyhow!(
+                    "overlap error: splits is empty, but chunk token count is not within min and max."
+                ));
             }
             let split = if backwards {
                 splits.pop_back().unwrap()

@@ -44,7 +44,8 @@ pub fn check_and_get_max_tokens(
     let requested_tokens = if let Some(requested_tokens) = requested_tokens {
         if requested_tokens > available_tokens {
             eprintln!(
-                "requested_tokens ({requested_tokens}) is greater than available_tokens ({}). Using available_tokens for request.", available_tokens
+                "requested_tokens ({requested_tokens}) is greater than available_tokens ({}). Using available_tokens for request.",
+                available_tokens
             );
             available_tokens
         } else {

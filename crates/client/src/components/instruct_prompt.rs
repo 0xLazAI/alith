@@ -1,5 +1,5 @@
 use alith_prompt::{PromptMessage, PromptMessageType, TextConcatenator, TextConcatenatorTrait};
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 
 #[derive(Clone)]
 pub struct InstructPrompt {
@@ -68,7 +68,7 @@ impl InstructPrompt {
                 (None, Some(supporting_material)) => supporting_material,
 
                 (None, None) => {
-                    return Err(anyhow!("No instructions or supporting material found"))
+                    return Err(anyhow!("No instructions or supporting material found"));
                 }
             },
         )

@@ -3,7 +3,7 @@ name: node-sdk
 env:
   DEBUG: napi:*
   MACOSX_DEPLOYMENT_TARGET: '10.13'
-  RUST_VERSION: 1.84.1
+  RUST_VERSION: 1.85
 
 on:
   push:
@@ -61,7 +61,7 @@ jobs:
               -e NAPI_TARGET=x86_64-unknown-linux-gnu \
               -w /build/sdks/node \
               ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian \
-              bash -c "npm run build"
+              bash -c "rustup update stable && npm run build"
               cd sdks/node
               # change owner to current user
               sudo chown -R 1001:121 *.node

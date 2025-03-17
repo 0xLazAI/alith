@@ -28,7 +28,7 @@ impl CompletionResponse {
             StopReason::ToolUse => {
                 return Err(CompletionError::StopReasonUnsupported(
                     "StopReason::ToolUse is not supported".to_owned(),
-                ))
+                ));
             }
         };
 
@@ -57,12 +57,15 @@ impl CompletionResponse {
             timing_usage: TimingUsage::new_from_generic(req.start_time),
             token_usage: TokenUsage::new_from_anthropic(&res),
             tool_calls: match res.content.as_slice() {
-                [CompletionContent::ToolUse {
-                    name,
-                    input,
-                    id,
-                    r#type,
-                }, ..] => Some(vec![ToolCall {
+                [
+                    CompletionContent::ToolUse {
+                        name,
+                        input,
+                        id,
+                        r#type,
+                    },
+                    ..,
+                ] => Some(vec![ToolCall {
                     id: id.to_owned(),
                     r#type: r#type.to_owned(),
                     function: Function {

@@ -1,13 +1,13 @@
 use crate::chat::{Completion, Document, Message, Request};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
-use crate::mcp::{setup_mcp_clients, sse_client, stdio_client, MCPClient, MCPError};
+use crate::mcp::{MCPClient, MCPError, setup_mcp_clients, sse_client, stdio_client};
 use crate::memory::Memory;
 use crate::store::{Storage, VectorStoreError};
 use crate::task::TaskError;
 use crate::tool::Tool;
-use crate::{make_ref, Ref};
-use futures::{stream, StreamExt, TryStreamExt};
+use crate::{Ref, make_ref};
+use futures::{StreamExt, TryStreamExt, stream};
 use std::collections::HashMap;
 use std::path::Path;
 use std::sync::Arc;

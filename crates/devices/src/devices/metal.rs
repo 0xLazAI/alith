@@ -99,7 +99,10 @@ impl MetalConfig {
                     self.use_percentage
                 );
             } else {
-                crate::warn!("Percentage of total RAM must be between 0.0 and 1.0. use_percentage: {}. Falling back to default value of 0.90", self.use_percentage);
+                crate::warn!(
+                    "Percentage of total RAM must be between 0.0 and 1.0. use_percentage: {}. Falling back to default value of 0.90",
+                    self.use_percentage
+                );
                 self.use_percentage = 0.90;
             }
         }

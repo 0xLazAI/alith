@@ -1,4 +1,4 @@
-use std::ffi::{c_char, CString};
+use std::ffi::{CString, c_char};
 
 use alith::{Tool, ToolDefinition, ToolError};
 use async_trait::async_trait;

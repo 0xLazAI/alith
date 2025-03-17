@@ -8,7 +8,7 @@ pub mod metadata;
 
 use super::LLMModelBase;
 pub use chat_template::LLMChatTemplate;
-pub use gguf::{preset::GgufPresetTrait, GgufLoaderTrait};
+pub use gguf::{GgufLoaderTrait, preset::GgufPresetTrait};
 pub use hf_loader::HfTokenTrait;
 
 pub struct LocalLLMModel {
