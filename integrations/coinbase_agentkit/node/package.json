@@ -17,7 +17,7 @@
 	"files": ["dist"],
 	"dependencies": {
 		"@coinbase/agentkit": "^0.3.0",
-		"alith": "^0.4.1",
+		"alith": "^0.4.2",
 		"dotenv": "^16.4.7",
 		"zod": "^3.24.2"
 	},

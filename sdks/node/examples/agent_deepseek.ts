@@ -1,7 +1,6 @@
 import { Agent } from 'alith'
 
 const agent = new Agent({
-  name: 'A dummy Agent',
   model: 'deepseek-chat', // or `deepseek-reasoner` for DeepSeek R1
   apiKey: '<Your API Key>',
   baseUrl: 'api.deepseek.com',

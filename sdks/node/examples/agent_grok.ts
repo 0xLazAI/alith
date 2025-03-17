@@ -1,7 +1,6 @@
 import { Agent } from 'alith'
 
 const agent = new Agent({
-  name: 'A dummy Agent',
   model: 'grok-3',
   apiKey: '<Your API Key>',
   baseUrl: 'api.grok.ai/v1',

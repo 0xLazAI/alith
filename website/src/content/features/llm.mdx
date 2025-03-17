@@ -161,7 +161,6 @@ Write the code.
 from alith import Agent
 
 agent = Agent(
-    name="A dummy Agent",
     model="gpt-4o-mini",
     preamble="You are a comedian here to entertain the user using humour and jokes.",
 )
@@ -176,7 +175,6 @@ Here, we take the DeepSeek model as the example.
 from alith import Agent
 
 agent = Agent(
-    name="A dummy Agent",
     model="deepseek-chat", # or `deepseek-reasoner` for DeepSeek R1
     api_key="<Your API Key>", # Replace with your api key or read it from env.
     base_url="api.deepseek.com",
@@ -207,7 +205,6 @@ Write the code.
 from alith import Agent
 
 agent = Agent(
-    name="A dummy Agent",
     model="claude-3-5-sonnet",
     preamble="You are a comedian here to entertain the user using humour and jokes.",
 )
@@ -240,7 +237,6 @@ Write the code.
 import { Agent } from "alith";
 
 const agent = new Agent({
-  name: "A dummy Agent",
   model: "gpt-4",
   preamble:
     "You are a comedian here to entertain the user using humour and jokes.",
@@ -256,7 +252,6 @@ Here, we take the DeepSeek model as the example.
 import { Agent } from "alith";
 
 const agent = new Agent({
-  name: "A dummy Agent",
   model: "deepseek-chat", // or `deepseek-reasoner` for DeepSeek R1
   apiKey: "<Your API Key>",
   baseUrl: "api.deepseek.com",
@@ -288,7 +283,6 @@ Write the code.
 import { Agent } from "alith";
 
 const agent = new Agent({
-  name: "A dummy Agent",
   model: "claude-3-5-sonnet",
   preamble:
     "You are a comedian here to entertain the user using humour and jokes.",
