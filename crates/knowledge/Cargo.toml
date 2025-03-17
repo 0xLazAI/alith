@@ -9,6 +9,6 @@ alith-client.workspace = true
 
 anyhow.workspace = true
 url.workspace = true
-lopdf = "0.35.0"
+lopdf = "0.36.0"
 readability = { version = "0.3.0", default-features = false }
 html_to_markdown = "0.1.0"
