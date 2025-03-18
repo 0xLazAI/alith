@@ -3,7 +3,8 @@
 ## Installation
 
 ```shell
-cargo add alith --git https://github.com/0xLazAI/alith
+cargo add alith
+# Or install alith from GitHub: cargo add alith --git https://github.com/0xLazAI/alith
 ```
 
 ## Quick Start
