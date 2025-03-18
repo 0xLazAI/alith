@@ -284,6 +284,16 @@ impl LLMPrompt {
         }
     }
 
+    pub fn total_prompt_tokens(&self) -> usize {
+        if let Some(api_prompt) = &self.api_prompt {
+            api_prompt.get_total_prompt_tokens().unwrap_or_default()
+        } else if let Some(local_prompt) = &self.local_prompt {
+            local_prompt.get_total_prompt_tokens().unwrap_or_default()
+        } else {
+            0
+        }
+    }
+
     // Builder methods
     //
 
@@ -415,8 +425,6 @@ impl Clone for LLMPrompt {
 impl std::fmt::Display for LLMPrompt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f)?;
-        writeln!(f, "LlmPrompt")?;
-
         // Builds prompt if not already built, but skips the precheck.
         if self.get_built_prompt_messages().is_err() {
             match self.build_prompt() {
@@ -434,6 +442,8 @@ impl std::fmt::Display for LLMPrompt {
         if let Some(api_prompt) = &self.api_prompt {
             write!(f, "{}", api_prompt)?;
         }
+
+        write!(f, "messages:\n{}", self.messages)?;
 
         Ok(())
     }

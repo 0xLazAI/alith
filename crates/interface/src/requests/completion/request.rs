@@ -75,7 +75,7 @@ impl CompletionRequest {
             .map_err(|e| CompletionError::RequestBuilderError(e.to_string()))?;
 
         self.config
-            .set_max_tokens_for_request(total_prompt_tokens)
+            .set_max_tokens_for_request(total_prompt_tokens as u64)
             .map_err(CompletionError::RequestTokenLimitError)?;
 
         let mut retry_count: u8 = 0;
@@ -131,7 +131,7 @@ impl CompletionRequest {
                             retry_count += 1;
                             if self.config.increase_limit_on_fail {
                                 self.config
-                                    .increase_token_limit(total_prompt_tokens, None)?;
+                                    .increase_token_limit(total_prompt_tokens as u64, None)?;
                             }
                             continue;
                         };
@@ -145,7 +145,7 @@ impl CompletionRequest {
                                 tracing::warn!(?llm_interface_error);
                                 self.llm_interface_errors.push(llm_interface_error);
                                 self.config
-                                    .increase_token_limit(total_prompt_tokens, None)?;
+                                    .increase_token_limit(total_prompt_tokens as u64, None)?;
                                 retry_count += 1;
                                 continue;
                             }
@@ -187,7 +187,12 @@ impl std::fmt::Display for CompletionRequest {
         writeln!(f)?;
         writeln!(f, "CompletionRequest:")?;
 
-        writeln!(f, "  prompt: {}", self.prompt)?;
+        writeln!(
+            f,
+            "  total_prompt_tokens: {}",
+            self.prompt.total_prompt_tokens()
+        )?;
+        write!(f, "  messages:\n\n{}", self.prompt.messages)?;
         writeln!(f, "  stop_sequences: {:?}", self.stop_sequences.to_vec())?;
         writeln!(f, "  grammar_string: {:?}", self.grammar_string)?;
         write!(f, "  config: {}", self.config)?;

@@ -94,7 +94,7 @@ pub(crate) fn total_prompt_tokens_openai_format(
     tokens_per_message: Option<u32>,
     tokens_per_name: Option<i32>,
     tokenizer: &Arc<dyn PromptTokenizer>,
-) -> u64 {
+) -> usize {
     let tokens_per_message = tokens_per_message.unwrap_or(0);
     let mut num_tokens: u64 = 0;
     for message in prompt {
@@ -115,7 +115,7 @@ pub(crate) fn total_prompt_tokens_openai_format(
         }
     }
     num_tokens += 3; // every reply is primed with <|start|>assistant<|message|>
-    num_tokens
+    num_tokens as usize
 }
 
 #[derive(Debug, Clone)]

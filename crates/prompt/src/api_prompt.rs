@@ -20,7 +20,7 @@ pub struct ApiPrompt {
     tokens_per_message: Option<u32>,
     tokens_per_name: Option<i32>,
     built_prompt_messages: Mutex<Option<Vec<HashMap<String, String>>>>,
-    total_prompt_tokens: Mutex<Option<u64>>,
+    total_prompt_tokens: Mutex<Option<usize>>,
 }
 
 impl ApiPrompt {
@@ -83,7 +83,7 @@ impl ApiPrompt {
     /// # Errors
     ///
     /// Returns an error if the prompt has not been built yet.
-    pub fn get_total_prompt_tokens(&self) -> Result<u64, crate::Error> {
+    pub fn get_total_prompt_tokens(&self) -> Result<usize, crate::Error> {
         match &*self.total_prompt_tokens() {
             Some(prompt) => Ok(*prompt),
             None => crate::bail!(
@@ -118,7 +118,7 @@ impl ApiPrompt {
         })
     }
 
-    fn total_prompt_tokens(&self) -> MutexGuard<'_, Option<u64>> {
+    fn total_prompt_tokens(&self) -> MutexGuard<'_, Option<usize>> {
         self.total_prompt_tokens.lock().unwrap_or_else(|e| {
             panic!(
                 "ApiPrompt Error - total_prompt_tokens not available: {:?}",
@@ -142,13 +142,9 @@ impl Clone for ApiPrompt {
 
 impl std::fmt::Display for ApiPrompt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        writeln!(f)?;
-        writeln!(f, "ApiPrompt")?;
-
         match *self.total_prompt_tokens() {
             Some(ref prompt) => {
-                writeln!(f, "total_prompt_tokens:\n\n{}", prompt)?;
-                writeln!(f)?;
+                writeln!(f, "total_prompt_tokens: {}", prompt)?;
             }
             None => writeln!(f, "total_prompt_tokens: None")?,
         };
