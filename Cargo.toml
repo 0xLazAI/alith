@@ -16,7 +16,7 @@ alith-models = { path = "crates/models" }
 alith-prompt = { path = "crates/prompt" }
 alith-interface = { path = "crates/interface" }
 
-fastembed = { git = "https://github.com/Anush008/fastembed-rs", version = "4.4.0", default-features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
+fastembed = { version = "4.6.0", default-features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
 uuid = { version = "1.16.0", features = ["serde", "v4"] }
 async-trait = "0.1.88"
 serde = { version = "1.0.219", features = ["derive"] }
@@ -30,7 +30,7 @@ url = "2.5.4"
 dagrs = "0.4.2"
 serial_test = "3.1.1"
 tracing = "0.1.40"
-half = "*"
+half = "2.5.0"
 colorful = "0.3.2"
 dotenvy = "0.15.7"
 indenter = "0.3.3"
@@ -41,7 +41,7 @@ version = "0.4.3"
 edition = "2024"
 rust-version = "1.85"
 exclude = [".github/"]
-homepage = "alith.lazai.network"
+homepage = "https://alith.lazai.network"
 license = "Apache-2.0"
 repository = "https://github.com/0xLazAI/alith"
 authors = ["LazAI Labs Authors", "Shelby Jenkins"]

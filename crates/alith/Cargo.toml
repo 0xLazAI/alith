@@ -1,7 +1,13 @@
 [package]
 name = "alith"
-version = { workspace = true }
-edition = { workspace = true }
+description = "Alith AI Framework"
+edition.workspace = true
+homepage.workspace = true
+version.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+keywords = ["ai", "agent", "data", "model"]
 
 [dependencies]
 alith-core.workspace = true

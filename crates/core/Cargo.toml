@@ -1,7 +1,12 @@
 [package]
 name = "alith-core"
-version = { workspace = true }
-edition = { workspace = true }
+description = "Alith core package"
+version.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
 
 [dependencies]
 alith-client.workspace = true

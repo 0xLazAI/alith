@@ -1,7 +1,12 @@
 [package]
 name = "alith-knowledge"
-version = { workspace = true }
-edition = { workspace = true }
+description = "Alith knowledge package"
+version.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
 
 [dependencies]
 alith-core.workspace = true
