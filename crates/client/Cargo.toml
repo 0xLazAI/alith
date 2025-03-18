@@ -3,12 +3,12 @@ categories = ["api-bindings", "asynchronous"]
 description = "The Easiest Rust Interface for Local LLMs, and an Interface for Deterministic Signals from Probabilistic LLM Vibes"
 edition.workspace = true
 homepage.workspace = true
+version.workspace = true
 keywords = ["anthropic", "gguf", "llm", "openai"]
 license.workspace = true
 name = "alith-client"
 readme = "README.md"
 repository.workspace = true
-version.workspace = true
 
 [dependencies]
 alith-devices.workspace = true
