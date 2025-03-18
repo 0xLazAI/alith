@@ -236,8 +236,7 @@ impl std::fmt::Display for LocalPrompt {
 
         match *self.built_prompt_string() {
             Some(ref prompt) => {
-                writeln!(f, "built_prompt_string:\n\n{}", prompt)?;
-                writeln!(f)?;
+                writeln!(f, "built_prompt_string: {}", prompt)?;
             }
             None => writeln!(f, "built_prompt_string: None")?,
         };
@@ -245,7 +244,6 @@ impl std::fmt::Display for LocalPrompt {
         match *self.total_prompt_tokens() {
             Some(ref prompt) => {
                 writeln!(f, "total_prompt_tokens: {}", prompt)?;
-                writeln!(f)?;
             }
             None => writeln!(f, "total_prompt_tokens: None")?,
         };

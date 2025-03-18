@@ -83,7 +83,7 @@ impl LLMBackend {
         }
     }
 
-    pub fn get_total_prompt_tokens(&self, prompt: &LLMPrompt) -> crate::Result<u64> {
+    pub fn get_total_prompt_tokens(&self, prompt: &LLMPrompt) -> crate::Result<usize> {
         match self {
             LLMBackend::OpenAI(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
             LLMBackend::Anthropic(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
