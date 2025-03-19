@@ -25,7 +25,7 @@ tokio = { version = "1.44.1", features = ["full"] }
 anyhow = "1.0.97"
 thiserror = "2.0.12"
 schemars = "0.8.22"
-reqwest = { version = "0.12.14", default-features = false, features = ["rustls-tls"] }
+reqwest = { version = "0.12.15", default-features = false, features = ["rustls-tls"] }
 url = "2.5.4"
 dagrs = "0.4.2"
 serial_test = "3.1.1"
