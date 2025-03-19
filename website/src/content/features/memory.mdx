@@ -26,36 +26,41 @@ async fn main() -> Result<(), anyhow::Error> {
 }
 ```
 
-## RLU Cache Memory
+  </Tabs.Tab>
 
-```rust
-use alith::{Agent, RLUCacheMemory, LLM};
+  <Tabs.Tab>
 
-#[tokio::main]
-async fn main() -> Result<(), anyhow::Error> {
-    let model = LLM::from_model_name("gpt-4")?;
-    let mut agent = Agent::new("simple agent", model)
-        .preamble("You are a searcher. When I ask questions about Web3, you can search from the Internet and answer them. When you encounter other questions, you can directly answer them.")
-        .memory(RLUCacheMemory::new(10));
-    let response = agent.prompt("What's BitCoin?").await?;
+## Window Buffer Memory
 
-    println!("{}", response);
+```python
+from alith import Agent, WindowBufferMemory
+import os
 
-    Ok(())
-}
+agent = Agent(
+    model="gpt-4",
+    preamble="You are a comedian here to entertain the user using humour and jokes.",
+    memory=WindowBufferMemory(),
+)
+print(agent.prompt("Entertain me!"))
+print(agent.prompt("Entertain me again!"))
 ```
 
   </Tabs.Tab>
 
   <Tabs.Tab>
 
-Comming Soon
+## Window Buffer Memory
 
-  </Tabs.Tab>
+```typescript
+import { Agent, WindowBufferMemory } from 'alith'
 
-  <Tabs.Tab>
-
-Comming Soon
+const agent = new Agent({
+  model: 'gpt-4',
+  memory: new WindowBufferMemory(),
+})
+console.log(agent.prompt('Calculate 10 - 3'))
+console.log(agent.prompt('Calculate 10 - 3 again'))
+```
 
 </Tabs.Tab>
 </Tabs>

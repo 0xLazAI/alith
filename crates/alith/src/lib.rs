@@ -42,7 +42,7 @@ pub use core::{
         ClientCapabilities, ClientInfo, MCPClient, MCPConfig, MCPError, MCPServerConfig,
         SseTransport, StdioTransport, Transport, setup_mcp_clients, sse_client, stdio_client,
     },
-    memory::{Memory, Message, MessageType, RLUCacheMemory, WindowBufferMemory},
+    memory::{Memory, Message, MessageType, WindowBufferMemory},
     parser::{JsonParser, MarkdownParser, Parser, ParserError, StringParser, TrimParser},
     splitting::{
         Separator, SeparatorGroup, SplitError, TextSplit, TextSplitter, split_markdown, split_text,

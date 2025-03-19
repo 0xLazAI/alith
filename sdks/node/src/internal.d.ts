@@ -23,6 +23,11 @@ export declare function chunkText(
   maxChunkTokenSize?: number | undefined | null,
   overlapPercent?: number | undefined | null,
 ): Array<string>
+export interface Message {
+  /** "system", "user", "assistant" or "tool". */
+  role: string
+  content: string
+}
 export declare class DelegateAgent {
   model: string
   name: string
@@ -31,6 +36,7 @@ export declare class DelegateAgent {
   preamble: string
   mcpConfigPath: string
   constructor(name: string, model: string, apiKey: string, baseUrl: string, preamble: string, mcpConfigPath: string)
-  promptWithTools(prompt: string, delegateTools: Array<DelegateTool>): string
+  promptWithTools(prompt: string, history: Array<Message>, delegateTools: Array<DelegateTool>): string
   prompt(prompt: string): string
+  chat(prompt: string, history: Array<Message>): string
 }

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use std::{num::NonZeroUsize, sync::Arc};
+use std::sync::Arc;
 use tokio::sync::Mutex;
 
 /// Represents the type of a message.
@@ -207,62 +207,5 @@ impl Memory for WindowBufferMemory {
     /// Clears all messages from the buffer.
     fn clear(&mut self) {
         self.messages.clear();
-    }
-}
-
-/// A memory structure that stores messages in an LRU (Least Recently Used) cache.
-pub struct RLUCacheMemory {
-    cache: lru::LruCache<String, Message>,
-    capacity: usize,
-}
-
-impl RLUCacheMemory {
-    /// Creates a new `RLUCacheMemory` with the specified capacity.
-    pub fn new(capacity: usize) -> Self {
-        Self {
-            cache: lru::LruCache::new(NonZeroUsize::new(capacity).unwrap()),
-            capacity,
-        }
-    }
-
-    /// Get the capacity.
-    #[inline]
-    pub fn capacity(&self) -> usize {
-        self.capacity
-    }
-}
-
-impl Memory for RLUCacheMemory {
-    /// Returns all messages in the cache.
-    fn messages(&self) -> Vec<Message> {
-        self.cache.iter().map(|(_, msg)| msg.clone()).collect()
-    }
-
-    /// Adds a message to the cache, evicting the least recently used message if the cache is full.
-    fn add_message(&mut self, message: Message) {
-        let id = message
-            .id
-            .clone()
-            .unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
-        self.cache.put(id, message);
-    }
-
-    /// Clears all messages from the cache.
-    fn clear(&mut self) {
-        self.cache.clear();
-    }
-}
-
-/// Converts `RLUCacheMemory` into an `Arc<dyn Memory>`.
-impl From<RLUCacheMemory> for Arc<dyn Memory> {
-    fn from(val: RLUCacheMemory) -> Self {
-        Arc::new(val)
-    }
-}
-
-/// Converts `RLUCacheMemory` into an `Arc<Mutex<dyn Memory>>`.
-impl From<RLUCacheMemory> for Arc<Mutex<dyn Memory>> {
-    fn from(val: RLUCacheMemory) -> Self {
-        Arc::new(Mutex::new(val))
     }
 }

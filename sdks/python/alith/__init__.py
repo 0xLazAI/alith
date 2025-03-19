@@ -14,6 +14,7 @@ from .store import (
     MilvusStore,
     MILVUS_AVAILABLE,
 )
+from .memory import Memory, Message, MessageBuilder, WindowBufferMemory
 from .chunking import chunk_text
 from .extractor import Extractor
 
@@ -32,4 +33,8 @@ __all__ = [
     "MILVUS_AVAILABLE",
     "chunk_text",
     "Extractor",
+    "Memory",
+    "WindowBufferMemory",
+    "Message",
+    "MessageBuilder",
 ]
