@@ -17,8 +17,8 @@ ort = { version = "=2.0.0-rc.9", default-features = false, features = [
   "cuda",
   "tensorrt",
   "fetch-models",
-] }
+], optional = true }
 tokenizers = "0.21.1"
 
 [features]
-inference = []
+inference = ["ort"]
