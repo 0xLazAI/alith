@@ -45,9 +45,10 @@ pub const LLAMA_3_1_70B_INSTRUCT: &str = "llama-3.1-70b-instruct";
 
 // Remote Sonar models
 
-pub const SONAR_SMALL: &str = "sonar_small";
-pub const SONAR_LARGE: &str = "sonar_large";
-pub const SONAR_HUGE: &str = "sonar_huge";
+pub const SONAR: &str = "sonar";
+pub const SONAR_PRO: &str = "sonar-pro";
+pub const SONAR_REASONING: &str = "sonar-reasoning";
+pub const SONAR_REASONING_PRO: &str = "sonar-reasoning-pro";
 
 pub mod openai_compatible {
     pub const DEEPSEEK_BASE_URL: &str = "https://api.deepseek.com";
