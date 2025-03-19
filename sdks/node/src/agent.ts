@@ -1,17 +1,19 @@
 import { DelegateAgent, type DelegateTool } from './internal'
 import { Store } from './store'
+import { Memory } from './memory'
 import { type Tool, convertParametersToJson } from './tool'
 
 // Define the configuration structure for an Agent
 type AgentOptions = {
   name?: string // Optional agent name.
-  model: string // The model used by the agent
-  preamble?: string // Introductory text or context for the agent
-  baseUrl?: string // Optional base URL for API requests
-  apiKey?: string // Optional API key for authentication
-  tools?: Array<Tool> // Optional list of tools available to the agent
-  mcpConfigPath?: string // Optional mcp config path
-  store?: Store // Optional store
+  model: string // The model used by the agent.
+  preamble?: string // Introductory text or context for the agent.
+  baseUrl?: string // Optional base URL for API requests.
+  apiKey?: string // Optional API key for authentication.
+  tools?: Array<Tool> // Optional list of tools available to the agent.
+  mcpConfigPath?: string // Optional mcp config path.
+  store?: Store // Optional store for the knowledge index.
+  memory?: Memory // Optional memory for the agent conversation context.
 }
 
 // Represents an agent that can process prompts using tools
@@ -19,6 +21,7 @@ class Agent {
   private _agent: DelegateAgent
   private _opts: AgentOptions
   private _store?: Store
+  private _memory?: Memory
   /**
    * Creates an instance of Agent.
    * @param {AgentOptions} opts - The configuration object for the agent.
@@ -29,11 +32,13 @@ class Agent {
    * @param {string} [opts.apiKey] - Optional API key for authentication.
    * @param {Array<Tool>} [opts.tools] - Optional list of tools available to the agent.
    * @param {string} [opts.mcpConfigPath] - Optional mcp config path.
-   * @param {Store} [opts.store] - Optional store.
+   * @param {Store} [opts.store] - Optional store for the knowledge index.
+   * @param {Memory} [opts.memory] - Optional memory for the agent conversation context.
    */
   constructor(opts: AgentOptions) {
     this._opts = opts
     this._store = opts.store
+    this._memory = opts.memory
     this._agent = new DelegateAgent(
       opts.name ?? '',
       opts.model,
@@ -73,7 +78,13 @@ class Agent {
         prompt = `${prompt}\n\n<attachments>\n${docs.join('')}</attachments>\n`
       })
     }
-    return this._agent.promptWithTools(prompt, delegateTools)
+    if (this._memory) {
+      const result = this._agent.promptWithTools(prompt, this._memory.messages(), delegateTools)
+      this._memory.addUserMessage(prompt)
+      this._memory.addAIMessage(result)
+      return result
+    }
+    return this._agent.promptWithTools(prompt, [], delegateTools)
   }
 
   /**

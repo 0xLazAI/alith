@@ -2,8 +2,8 @@ from dataclasses import dataclass, field
 from typing import List, Union, Callable, Optional
 from .tool import Tool, create_delegate_tool
 from .store import Store
+from .memory import Memory
 from ._alith import DelegateAgent as _DelegateAgent
-from ._alith import DelegateTool as _DelegateTool
 
 
 @dataclass
@@ -16,6 +16,7 @@ class Agent:
     tools: List[Union[Tool, Callable]] = field(default_factory=list)
     mcp_config_path: Optional[str] = field(default_factory=str)
     store: Optional[Store] = None
+    memory: Optional[Memory] = None
 
     def prompt(self, prompt: str) -> str:
         tools = [
@@ -40,4 +41,10 @@ class Agent:
             prompt = "{}\n\n<attachments>\n{}</attachments>\n".format(
                 prompt, "".join(docs)
             )
-        return agent.prompt(prompt)
+        if self.memory:
+            result = agent.chat(prompt, self.memory.messages())
+            self.memory.add_user_message(prompt)
+            self.memory.add_ai_message(result)
+            return result
+        else:
+            return agent.prompt(prompt)

@@ -62,6 +62,7 @@ impl DelegateAgent {
     pub fn prompt_with_tools(
         &self,
         prompt: String,
+        history: Vec<Message>,
         delegate_tools: Vec<DelegateTool>,
     ) -> Result<String> {
         let mut tools = vec![];
@@ -79,6 +80,9 @@ impl DelegateAgent {
             },
             tools,
         );
+        let history = unsafe {
+            std::mem::transmute::<Vec<Message>, Vec<alith::core::chat::Message>>(history)
+        };
         agent.preamble = self.preamble.clone();
         let rt =
             Runtime::new().map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))?;
@@ -86,13 +90,26 @@ impl DelegateAgent {
             if !self.mcp_config_path.is_empty() {
                 agent = agent.mcp_config_path(&self.mcp_config_path).await?;
             }
-            agent.prompt(&prompt).await
+            agent.chat(&prompt, history).await
         });
         result.map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))
     }
 
     #[napi]
     pub fn prompt(&self, prompt: String) -> Result<String> {
-        self.prompt_with_tools(prompt, vec![])
+        self.prompt_with_tools(prompt, vec![], vec![])
     }
+
+    #[napi]
+    pub fn chat(&self, prompt: String, history: Vec<Message>) -> Result<String> {
+        self.prompt_with_tools(prompt, history, vec![])
+    }
+}
+
+#[napi(object)]
+#[derive(Clone, Debug)]
+pub struct Message {
+    /// "system", "user", "assistant" or "tool".
+    pub role: String,
+    pub content: String,
 }

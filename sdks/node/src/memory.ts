@@ -1,54 +1,20 @@
-enum MessageType {
-  SYSTEM = 'system',
-  HUMAN = 'human',
-  AI = 'ai',
-  TOOL = 'tool',
-}
+import { Message } from './internal'
 
-const MessageTypeMap: Record<MessageType, string> = {
-  [MessageType.SYSTEM]: 'system',
-  [MessageType.HUMAN]: 'user',
-  [MessageType.AI]: 'assistant',
-  [MessageType.TOOL]: 'tool',
-}
-
-class Message {
-  content: string
-  message_type: MessageType
-  id?: string
-  tool_calls?: Record<string, any>
-
-  constructor(
-    content: string,
-    message_type: MessageType = MessageType.SYSTEM,
-    id?: string,
-    tool_calls?: Record<string, any>,
-  ) {
-    this.content = content
-    this.message_type = message_type
-    this.id = id
-    this.tool_calls = tool_calls
-  }
-
+class MessageBuilder {
   static newHumanMessage(content: string): Message {
-    return new Message(content, MessageType.HUMAN)
+    return { role: 'user', content }
   }
 
   static newSystemMessage(content: string): Message {
-    return new Message(content, MessageType.SYSTEM)
+    return { role: 'system', content }
   }
 
-  static newToolMessage(content: string, id: string): Message {
-    return new Message(content, MessageType.TOOL, id)
+  static newToolMessage(content: string): Message {
+    return { role: 'tool', content }
   }
 
   static newAIMessage(content: string): Message {
-    return new Message(content, MessageType.AI)
-  }
-
-  withToolCalls(tool_calls: Record<string, any>): this {
-    this.tool_calls = tool_calls
-    return this
+    return { role: 'assistant', content }
   }
 
   static messagesFromValue(value: string | object | object[]): Message[] {
@@ -61,11 +27,13 @@ class Message {
       parsed = value
     }
 
-    return parsed.map((item: any) => new Message(item.content, item.message_type, item.id, item.tool_calls))
+    return parsed.map((item: any) => {
+      return { role: item.role, content: item.content }
+    })
   }
 
   static messagesToString(messages: Message[]): string {
-    return messages.map((msg) => `${MessageTypeMap[msg.message_type]}: ${msg.content}`).join('\n')
+    return messages.map((msg) => `${msg.role}: ${msg.content}`).join('\n')
   }
 }
 
@@ -88,11 +56,11 @@ class WindowBufferMemory implements Memory {
   }
 
   addUserMessage(message: string): void {
-    this.addMessage(Message.newHumanMessage(message))
+    this.addMessage(MessageBuilder.newHumanMessage(message))
   }
 
   addAIMessage(message: string): void {
-    this.addMessage(Message.newAIMessage(message))
+    this.addMessage(MessageBuilder.newAIMessage(message))
   }
 
   addMessage(message: Message): void {
@@ -108,9 +76,9 @@ class WindowBufferMemory implements Memory {
 
   toString(): string {
     return this.messages()
-      .map((msg) => `${MessageTypeMap[msg.message_type]}: ${msg.content}`)
+      .map((msg) => `${msg.role}: ${msg.content}`)
       .join('\n')
   }
 }
 
-export { Memory, Message, MessageType, MessageTypeMap, WindowBufferMemory }
+export { Memory, Message, MessageBuilder, WindowBufferMemory }

@@ -2,7 +2,7 @@ import { Agent, AgentOptions } from './agent'
 import { Tool } from './tool'
 import { chunkText } from './internal'
 import { Embeddings, RemoteModelEmbeddings } from './embeddings'
-import { Memory, Message, MessageType, MessageTypeMap, WindowBufferMemory } from './memory'
+import { Memory, Message, MessageBuilder, WindowBufferMemory } from './memory'
 import { Store, QdrantStore, QdrantClient, QdrantClientParams } from './store'
 import { Extractor, parseArgs } from './extrator'
 
@@ -15,8 +15,7 @@ export {
   RemoteModelEmbeddings,
   Memory,
   Message,
-  MessageType,
-  MessageTypeMap,
+  MessageBuilder,
   WindowBufferMemory,
   Store,
   QdrantStore,

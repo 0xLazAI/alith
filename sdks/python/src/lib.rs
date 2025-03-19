@@ -8,22 +8,8 @@ use tokio::runtime::Runtime;
 use tool::DelegateTool;
 
 #[pyclass]
-#[derive(Clone)]
 pub struct DelegateAgent {
-    #[pyo3(get, set)]
-    pub model: String,
-    #[pyo3(get, set)]
-    pub name: String,
-    #[pyo3(get, set)]
-    pub api_key: String,
-    #[pyo3(get, set)]
-    pub base_url: String,
-    #[pyo3(get, set)]
-    pub preamble: String,
-    #[pyo3(get, set)]
-    pub tools: Vec<DelegateTool>,
-    #[pyo3(get, set)]
-    pub mcp_config_path: String,
+    agent: Agent<LLM>,
 }
 
 #[pymethods]
@@ -37,44 +23,70 @@ impl DelegateAgent {
         preamble: String,
         tools: Vec<DelegateTool>,
         mcp_config_path: String,
-    ) -> Self {
-        DelegateAgent {
-            model,
-            name,
-            api_key,
-            base_url,
-            preamble,
-            tools,
-            mcp_config_path,
-        }
-    }
-
-    pub fn prompt(&self, prompt: &str) -> PyResult<String> {
-        let tools = self
-            .tools
+    ) -> PyResult<Self> {
+        let tools = tools
             .iter()
             .map(|t| Box::new(t.clone()) as Box<dyn Tool>)
             .collect::<Vec<_>>();
-        let mut agent = Agent::new_with_tools(
-            self.name.to_string(),
-            if self.base_url.is_empty() {
-                LLM::from_model_name(&self.model)
+        let agent = Agent::new_with_tools(
+            name,
+            if base_url.is_empty() {
+                LLM::from_model_name(&model)
                     .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
             } else {
-                LLM::openai_compatible_model(&self.api_key, &self.base_url, &self.model)
+                LLM::openai_compatible_model(&api_key, &base_url, &model)
                     .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
             },
             tools,
-        );
-        agent.preamble = self.preamble.clone();
+        )
+        .preamble(preamble);
+        let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
+        let agent = rt
+            .block_on(async {
+                if !mcp_config_path.is_empty() {
+                    agent.mcp_config_path(&mcp_config_path).await
+                } else {
+                    Ok(agent)
+                }
+            })
+            .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
+        Ok(DelegateAgent { agent })
+    }
+
+    pub fn prompt(&mut self, prompt: &str) -> PyResult<String> {
+        let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
+        let result = rt.block_on(async { self.agent.prompt(prompt).await });
+        result.map_err(|e| PyErr::new::<PyException, _>(e.to_string()))
+    }
+
+    pub fn chat(&mut self, prompt: &str, history: Vec<Message>) -> PyResult<String> {
         let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
         let result = rt.block_on(async {
-            if !self.mcp_config_path.is_empty() {
-                agent = agent.mcp_config_path(&self.mcp_config_path).await?;
-            }
-            agent.prompt(prompt).await
+            self.agent
+                .chat(prompt, unsafe {
+                    std::mem::transmute::<Vec<Message>, Vec<alith::core::chat::Message>>(history)
+                })
+                .await
         });
         result.map_err(|e| PyErr::new::<PyException, _>(e.to_string()))
+    }
+}
+
+#[pyclass]
+#[derive(Clone, Debug)]
+pub struct Message {
+    /// "system", "user", "assistant" or "tool".
+    #[pyo3(get, set)]
+    pub role: String,
+    #[pyo3(get, set)]
+    pub content: String,
+}
+
+#[pymethods]
+impl Message {
+    #[new]
+    pub fn new(role: String, content: String) -> Self {
+        Self { role, content }
     }
 }
 
@@ -107,6 +119,7 @@ fn chunk_text(
 fn _alith(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<DelegateAgent>()?;
     m.add_class::<DelegateTool>()?;
+    m.add_class::<Message>()?;
     m.add_function(wrap_pyfunction!(chunk_text, m)?)?;
     Ok(())
 }
