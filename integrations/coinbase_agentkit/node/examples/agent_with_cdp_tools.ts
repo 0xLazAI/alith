@@ -1,4 +1,4 @@
-import { getAlithAITools } from "coinbase-agentkit-alith";
+import { getAlithTools } from "coinbase-agentkit-alith";
 import { Agent } from "alith";
 import {
 	AgentKit,
@@ -110,7 +110,7 @@ async function initializeAgent() {
 			],
 		});
 
-		const tools = getAlithAITools(agentKit);
+		const tools = getAlithTools(agentKit);
 		return { tools };
 	} catch (error) {
 		console.error("Failed to initialize agent:", error);
