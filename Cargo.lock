@@ -4812,9 +4812,9 @@ dependencies = [
 
 [[package]]
 name = "text-splitter"
-version = "0.24.1"
+version = "0.24.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "698b22fc8ce5bef13475143a43e87df82440e66b2a18d7655d1425dd36580a53"
+checksum = "d2ccb8f11d97bd7f4fe5478338937de98fbb104837afe33f28c16bf3dc2be562"
 dependencies = [
  "ahash",
  "auto_enums",
