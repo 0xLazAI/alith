@@ -17,7 +17,7 @@
 	"files": ["dist"],
 	"dependencies": {
 		"@elizaos/core": "0.25.6-alpha.1",
-		"alith": "^0.4.2",
+		"alith": "^0.4.4",
 		"dkg.js": "^8.0.4",
 		"sharp": "^0.33.5",
 		"tsup": "8.3.5",

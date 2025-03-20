@@ -57,7 +57,7 @@ def initialize_agent() -> Agent:
     with open(wallet_data_file, "w") as f:
         f.write(wallet_data_json)
 
-    # use get_langchain_tools
+    # Convert agentkit actions to Alith tools.
     tools = get_alith_tools(agentkit)
 
     preamble = (
