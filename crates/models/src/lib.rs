@@ -1,9 +1,12 @@
-use crate::tokenizer::Tokenizer;
 use std::sync::Arc;
 
 pub mod api_model;
 pub mod local_model;
 pub mod tokenizer;
+pub mod tokens;
+
+pub use tokenizer::Tokenizer;
+pub use tokens::{Token, Tokens};
 
 #[allow(unused_imports)]
 pub(crate) use anyhow::{Error, Result, anyhow, bail};

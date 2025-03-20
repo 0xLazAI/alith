@@ -1,4 +1,5 @@
 use super::local_model::hf_loader::{HfTokenTrait, HuggingFaceLoader};
+use crate::tokens::{Token, Tokens};
 use alith_prompt::PromptTokenizer;
 use anyhow::{Result, anyhow};
 use std::{
@@ -11,16 +12,22 @@ use tokenizers::Tokenizer as HFTokenizer;
 pub enum TokenizerBackend {
     HuggingFace(Box<HFTokenizer>),
     Tiktoken(Box<CoreBPE>),
+    #[cfg(feature = "sentencepiece")]
+    SentencePiece(Box<sentencepiece::SentencePieceProcessor>),
 }
 
 impl fmt::Debug for TokenizerBackend {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             TokenizerBackend::HuggingFace(_) => {
-                write!(f, "TokenizerBackend::HuggingFacesTokenizer")
+                write!(f, "TokenizerBackend::HuggingFace")
             }
             TokenizerBackend::Tiktoken(_) => {
                 write!(f, "TokenizerBackend::Tiktoken")
+            }
+            #[cfg(feature = "sentencepiece")]
+            TokenizerBackend::SentencePiece(_) => {
+                write!(f, "TokenizerBackend::SentencePiece")
             }
         }
     }
@@ -31,7 +38,7 @@ pub struct Tokenizer {
     pub tokenizer: TokenizerBackend,
     pub tokenizer_path: Option<PathBuf>,
     pub with_special_tokens: bool,
-    pub white_space_token_id: u32,
+    pub white_space_token_id: Token,
 }
 
 impl Tokenizer {
@@ -47,7 +54,10 @@ impl Tokenizer {
     }
 
     pub fn new_from_tokenizer(tokenizer: HFTokenizer) -> Result<Self> {
-        let white_space_token_id = tokenizer.encode(" ", false).unwrap().get_ids()[0];
+        let white_space_token_id = tokenizer
+            .encode(" ", false)
+            .map_err(|err| anyhow!(err))?
+            .get_ids()[0];
         Ok(Self {
             tokenizer: TokenizerBackend::HuggingFace(Box::new(tokenizer)),
             tokenizer_path: None,
@@ -78,18 +88,36 @@ impl Tokenizer {
         Tokenizer::new_from_tokenizer_json(&local_path)
     }
 
+    #[cfg(feature = "sentencepiece")]
+    pub fn new_from_sp(tokenizer: sentencepiece::SentencePieceProcessor) -> Result<Self> {
+        let white_space_token_id = tokenizer.encode(" ").map_err(|err| anyhow!(err))?[0].id;
+        Ok(Self {
+            tokenizer: TokenizerBackend::SentencePiece(Box::new(tokenizer)),
+            tokenizer_path: None,
+            with_special_tokens: false,
+            white_space_token_id,
+        })
+    }
+
+    #[cfg(feature = "sentencepiece")]
+    pub fn new_from_sp_file(path: impl AsRef<Path>) -> Result<Self> {
+        let tokenizer = sentencepiece::SentencePieceProcessor::open(path)
+            .map_err(|err| anyhow!(format!("Error loading tokenizer: {}", err)))?;
+        Self::new_from_sp(tokenizer)
+    }
+
     #[inline]
-    pub fn tokenize<T: AsRef<str>>(&self, str: T) -> Vec<u32> {
+    pub fn tokenize<T: AsRef<str>>(&self, str: T) -> Tokens {
         self.encode(str.as_ref())
     }
 
     #[inline]
-    pub fn detokenize_one(&self, token: u32) -> Result<String> {
+    pub fn detokenize_one(&self, token: Token) -> Result<String> {
         self.decode(&[token])
     }
 
     #[inline]
-    pub fn detokenize_many(&self, tokens: &[u32]) -> Result<String> {
+    pub fn detokenize_many(&self, tokens: &[Token]) -> Result<String> {
         self.decode(tokens)
     }
 
@@ -98,7 +126,7 @@ impl Tokenizer {
         self.tokenize(str).len() as u32
     }
 
-    pub fn try_from_single_token_id(&self, try_from_single_token_id: u32) -> Result<String> {
+    pub fn try_from_single_token_id(&self, try_from_single_token_id: Token) -> Result<String> {
         let detokenize_response = self.detokenize_one(try_from_single_token_id)?;
         let mut strings_maybe: Vec<String> = detokenize_response
             .split_ascii_whitespace()
@@ -117,8 +145,8 @@ impl Tokenizer {
         }
     }
 
-    pub fn try_into_single_token(&self, try_into_single_token: &str) -> Result<u32> {
-        let mut tokens = self.tokenize(try_into_single_token);
+    pub fn try_into_single_token(&self, try_into_single_token: &str) -> Result<Token> {
+        let mut tokens = self.tokenize(try_into_single_token).to_vec();
         match tokens.len() {
             0 => Err(anyhow!("No token found in text: {}", try_into_single_token)),
             1 => Ok(tokens.remove(0)),
@@ -140,7 +168,7 @@ impl Tokenizer {
     ///
     /// A new string that represents the normalized window of text, or the original
     /// text if its token count is less than or equal to `target_token_size`.
-    pub fn create_text_window(&self, text: &str, target_token_size: u32) -> String {
+    pub fn create_text_window(&self, text: &str, target_token_size: Token) -> String {
         let tokens = self.tokenize(text);
         if tokens.len() <= target_token_size as usize {
             return text.to_string();
@@ -181,46 +209,74 @@ impl Tokenizer {
         self.detokenize_many(preserved_tokens).unwrap()
     }
 
-    fn encode_tiktoken(&self, tokenizer: &CoreBPE, str: &str) -> Vec<u32> {
+    fn encode_tiktoken(&self, tokenizer: &CoreBPE, str: &str) -> Tokens {
         if self.with_special_tokens {
-            tokenizer.encode_with_special_tokens(str)
+            tokenizer.encode_with_special_tokens(str).into()
         } else {
-            tokenizer.encode_ordinary(str)
+            tokenizer.encode_ordinary(str).into()
         }
     }
 
-    fn encode_hf(&self, tokenizer: &HFTokenizer, str: &str) -> Vec<u32> {
+    fn encode_hf(&self, tokenizer: &HFTokenizer, str: &str) -> Tokens {
         let tokens = if self.with_special_tokens {
             tokenizer.encode(str, true)
         } else {
             tokenizer.encode(str, false)
         };
-        tokens.unwrap().get_ids().to_vec()
+        tokens.map_err(|err| anyhow!(err)).unwrap().get_ids().into()
+    }
+
+    #[cfg(feature = "sentencepiece")]
+    fn encode_sp(&self, tokenizer: &sentencepiece::SentencePieceProcessor, str: &str) -> Tokens {
+        let tokens = tokenizer.encode(str);
+        tokens
+            .map_err(|err| anyhow!(err))
+            .unwrap()
+            .iter()
+            .map(|e| e.id)
+            .collect::<Vec<Token>>()
+            .into()
     }
 
     #[inline]
-    fn encode(&self, str: &str) -> Vec<u32> {
+    fn encode(&self, str: &str) -> Tokens {
         match &self.tokenizer {
             TokenizerBackend::HuggingFace(tokenizer) => self.encode_hf(tokenizer, str),
             TokenizerBackend::Tiktoken(tokenizer) => self.encode_tiktoken(tokenizer, str),
+            #[cfg(feature = "sentencepiece")]
+            TokenizerBackend::SentencePiece(tokenizer) => self.encode_sp(tokenizer, str),
         }
     }
 
     #[inline]
-    fn decode_tiktoken(&self, tokenizer: &CoreBPE, tokens: &[u32]) -> Result<String> {
+    fn decode_tiktoken(&self, tokenizer: &CoreBPE, tokens: &[Token]) -> Result<String> {
         tokenizer.decode(tokens.to_owned()).map_err(|e| anyhow!(e))
     }
 
     #[inline]
-    fn decode_hf(&self, tokenizer: &HFTokenizer, tokens: &[u32]) -> Result<String> {
-        tokenizer.decode(tokens, true).map_err(|e| anyhow!(e))
+    fn decode_hf(&self, tokenizer: &HFTokenizer, tokens: &[Token]) -> Result<String> {
+        tokenizer.decode(tokens, true).map_err(|err| anyhow!(err))
+    }
+
+    #[cfg(feature = "sentencepiece")]
+    #[inline]
+    fn decode_sp(
+        &self,
+        tokenizer: &sentencepiece::SentencePieceProcessor,
+        tokens: &[Token],
+    ) -> Result<String> {
+        tokenizer
+            .decode_piece_ids(tokens)
+            .map_err(|err| anyhow!(err))
     }
 
     #[inline]
-    fn decode(&self, tokens: &[u32]) -> Result<String> {
+    fn decode(&self, tokens: &[Token]) -> Result<String> {
         match &self.tokenizer {
             TokenizerBackend::HuggingFace(tokenizer) => self.decode_hf(tokenizer, tokens),
             TokenizerBackend::Tiktoken(tokenizer) => self.decode_tiktoken(tokenizer, tokens),
+            #[cfg(feature = "sentencepiece")]
+            TokenizerBackend::SentencePiece(tokenizer) => self.decode_sp(tokenizer, tokens),
         }
     }
 }
@@ -228,7 +284,7 @@ impl Tokenizer {
 impl PromptTokenizer for Tokenizer {
     #[inline]
     fn tokenize(&self, input: &str) -> Vec<u32> {
-        self.tokenize(input)
+        self.tokenize(input).into()
     }
 
     #[inline]
