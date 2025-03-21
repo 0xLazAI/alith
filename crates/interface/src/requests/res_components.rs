@@ -22,6 +22,7 @@ pub struct TopProbabilities {
 }
 
 /// The settings used to generate the completion.
+#[derive(Default)]
 pub struct GenerationSettings {
     /// The model used
     pub model: String,
@@ -42,6 +43,13 @@ pub struct GenerationSettings {
 }
 
 impl GenerationSettings {
+    pub fn new_from_model(model: &str) -> Self {
+        Self {
+            model: model.to_owned(),
+            ..Default::default()
+        }
+    }
+
     pub fn new_from_openai(req: &CompletionRequest, res: &OpenAICompletionResponse) -> Self {
         Self {
             model: res.model.to_owned(),

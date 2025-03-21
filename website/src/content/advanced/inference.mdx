@@ -28,7 +28,7 @@ To further demonstrate the integration capabilities, here's an example of invoki
 ```rust
 use alith::{
     inference::{
-        ort::{
+        engines::ort::{
             init, inputs, CUDAExecutionProvider, GraphOptimizationLevel, Result, Session, TensorRef,
         },
         tokenizers::Tokenizer,
@@ -151,3 +151,5 @@ async fn main() -> Result<(), anyhow::Error> {
     Ok(())
 }
 ```
+ 
+### MistralRs
