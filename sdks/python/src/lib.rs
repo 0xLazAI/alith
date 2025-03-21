@@ -40,8 +40,8 @@ impl DelegateAgent {
             tools,
         )
         .preamble(preamble);
-        let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
-        let agent = rt
+        let runtime = pyo3_async_runtimes::tokio::get_runtime();
+        let agent = runtime
             .block_on(async {
                 if !mcp_config_path.is_empty() {
                     agent.mcp_config_path(&mcp_config_path).await

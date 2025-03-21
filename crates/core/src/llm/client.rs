@@ -123,6 +123,9 @@ impl Completion for Client {
         if let Some(max_tokens) = request.max_tokens {
             completion.max_tokens(max_tokens.try_into().unwrap());
         }
+        if let Some(top_p) = request.top_p {
+            completion.top_p(top_p);
+        }
         // Construct the prompt
         let prompt = completion.prompt();
         // Add preamble if provided
@@ -144,24 +147,10 @@ impl Completion for Client {
                 .map_err(|err| CompletionError::Normal(err.to_string()))?
                 .set_content(&msg.content);
         }
-        let mut input = request.prompt.clone();
-        // Add knowledge sources if provided
-        for knowledge in &request.knowledges {
-            input.push('\n');
-            input.push_str(knowledge);
-        }
-        // Add user prompt with or without the document context
-        if request.documents.is_empty() {
-            prompt
-                .add_user_message()
-                .map_err(|err| CompletionError::Normal(err.to_string()))?
-                .set_content(&input);
-        } else {
-            prompt
-                .add_user_message()
-                .map_err(|err| CompletionError::Normal(err.to_string()))?
-                .set_content(request.prompt_with_context(input));
-        }
+        prompt
+            .add_user_message()
+            .map_err(|err| CompletionError::Normal(err.to_string()))?
+            .set_content(request.effective_prompt().as_str());
         // Add custom tools
         completion.base_req.tools.append(&mut request.tools.clone());
         // Execute the completion request

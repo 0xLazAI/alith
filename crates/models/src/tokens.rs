@@ -1,5 +1,8 @@
 //! Reference: https://github.com/ai-dynamo/dynamo/blob/main/lib/llm/src/tokens.rs
 
+/// The token ID type
+pub type TokenIdType = u32;
+pub type TokenType = Option<String>;
 pub type Token = u32;
 
 #[derive(Debug, Clone, Default)]
