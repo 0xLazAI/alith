@@ -71,13 +71,18 @@ impl LLMChatTemplate {
 
     /// Applies a chat template to a message, given a message and a chat template.
     #[inline]
-    pub fn apply(&self, messages: &[HashMap<String, String>]) -> String {
+    pub fn apply(
+        &self,
+        messages: &[HashMap<String, String>],
+        add_generation_prompt: bool,
+    ) -> String {
         alith_prompt::apply_chat_template(
             messages,
             &self.chat_template,
             self.bos_token.as_deref(),
             &self.eos_token,
             self.unk_token.as_deref(),
+            add_generation_prompt,
         )
     }
 
@@ -100,6 +105,7 @@ impl LLMChatTemplate {
             self.bos_token.as_deref(),
             &self.eos_token,
             self.unk_token.as_deref(),
+            true,
         );
         let message_1 = message_1
             .trim_end_matches(self.eos_token.as_str())
@@ -110,6 +116,7 @@ impl LLMChatTemplate {
             self.bos_token.as_deref(),
             &self.eos_token,
             self.unk_token.as_deref(),
+            true,
         );
 
         // Find the point where the outputs start to differ
@@ -179,7 +186,7 @@ mod tests {
                 ("content".to_string(), "test_user_message_2".to_string()),
             ]),
         ];
-        let result = template.apply(messages);
+        let result = template.apply(messages, false);
         assert_eq!(
             result,
             "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\ntest_system_message<|eot_id|><|start_header_id|>user<|end_header_id|>\n\ntest_user_message_1<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\ntest_user_message_2<|eot_id|>"
