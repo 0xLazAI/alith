@@ -126,6 +126,9 @@ pub struct Request {
     /// So 0.1 means only the tokens comprising the top 10% probability mass are considered.
     pub top_p: Option<f32>, // min: 0, max: 1, default: 1
 
+    /// Top-K sampling described in academic paper "The Curious Case of Neural Text Degeneration" https://arxiv.org/abs/1904.09751
+    pub top_k: Option<usize>,
+
     /// A collection of tools available for tool-based interactions with the model.
     ///
     /// Tools are external systems, APIs, or utilities that the model can invoke to perform
@@ -156,6 +159,7 @@ impl Request {
             history: Vec::new(),
             max_tokens: None,
             top_p: None,
+            top_k: None,
             temperature: None,
             tools: Vec::new(),
             documents: Vec::new(),
@@ -195,6 +199,33 @@ impl Request {
         } else {
             self.prompt_with_context(input)
         }
+    }
+
+    /// Returns the map messages like
+    /// ```no_check
+    /// [
+    ///     {"role": "system", "content": "system_msg"},
+    ///     {"role": "user", "content": "user_msg"},
+    ///     {"role": "assistant", "content": "ai_msg"},
+    /// ]
+    /// ```
+    pub fn map_messages(&self) -> Vec<HashMap<String, String>> {
+        let mut messages = Vec::new();
+        messages.push(HashMap::from([
+            ("role".to_string(), "system".to_string()),
+            ("content".to_string(), self.preamble.clone()),
+        ]));
+        for m in &self.history {
+            messages.push(HashMap::from([
+                ("role".to_string(), m.role.clone()),
+                ("content".to_string(), m.content.clone()),
+            ]));
+        }
+        messages.push(HashMap::from([
+            ("role".to_string(), "user".to_string()),
+            ("content".to_string(), self.effective_prompt()),
+        ]));
+        messages
     }
 }
 

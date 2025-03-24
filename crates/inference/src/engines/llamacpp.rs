@@ -12,6 +12,7 @@ use alith_core::{
         CompletionFinishReason, GenerationSettings, TimingUsage, TokenUsage,
     },
 };
+use alith_models::local_model::{GgufLoader, GgufLoaderTrait, LocalLLMModel};
 use llama_cpp_2::{
     LLamaCppError,
     context::{LlamaContext, params::LlamaContextParams},
@@ -37,12 +38,14 @@ struct ContextWrapper(LlamaContext<'static>);
 unsafe impl Send for ContextWrapper {} // LlamaContext has a NonNull which is !Send
 unsafe impl Sync for ContextWrapper {} // LlamaContext has a NonNull which is !Sync
 
-pub struct LlamaEngine {}
+pub struct LlamaEngine {
+    model: LocalLLMModel,
+}
 
 impl LlamaEngine {
     pub async fn new<P: AsRef<Path>>(model_path: P) -> Result<Self, InferenceError> {
         let backend = LlamaBackend::init()?;
-        let model = load_model(&backend, model_path)?;
+        let model = load_model(&backend, model_path.as_ref())?;
         LLAMA_MODEL
             .set(model)
             .map_err(|err| InferenceError::General(err.to_string()))?;
@@ -60,7 +63,12 @@ impl LlamaEngine {
         LLAMA_BACKEND
             .set(backend)
             .map_err(|err| InferenceError::General(err.to_string()))?;
-        Ok(LlamaEngine {})
+        Ok(LlamaEngine {
+            model: GgufLoader::default()
+                .local_quant_file_path(model_path.as_ref())
+                .load()
+                .map_err(|err| InferenceError::General(err.to_string()))?,
+        })
     }
 }
 
@@ -88,8 +96,12 @@ impl Completion for LlamaEngine {
     ) -> Result<Self::Response, CompletionError> {
         let model = LLAMA_MODEL.get().unwrap();
         let mut llama_context = LLAMA_CONTEXTS[0].get().unwrap().lock().unwrap();
+        let input = self
+            .model
+            .chat_template
+            .apply(&request.map_messages(), true);
         let tokens_list = model
-            .str_to_token(&request.effective_prompt(), AddBos::Always)
+            .str_to_token(&input, AddBos::Always)
             .map_err(|err| CompletionError::Inference(err.to_string()))?;
         let limit = DEFAULT_MAX_TOKENS; // - prompt_tokens;
         let max_output_tokens = std::cmp::min(request.max_tokens.unwrap_or(limit), limit);
@@ -112,6 +124,16 @@ impl Completion for LlamaEngine {
             .map_err(|err| CompletionError::Inference(err.to_string()))?;
 
         let mut sampler = LlamaSampler::greedy();
+        if let Some(temperature) = request.temperature {
+            sampler = LlamaSampler::chain([sampler, LlamaSampler::temp(temperature)], false);
+        }
+        if let Some(top_p) = request.top_p {
+            sampler = LlamaSampler::chain([sampler, LlamaSampler::top_p(top_p, 1)], false);
+        }
+        if let Some(top_k) = request.top_k {
+            sampler = LlamaSampler::chain([sampler, LlamaSampler::top_k(top_k as i32)], false)
+        }
+
         let mut n_cur = batch.n_tokens() as u32;
 
         let mut output_tokens = Vec::with_capacity(max_output_tokens);
@@ -131,13 +153,14 @@ impl Completion for LlamaEngine {
             if model.is_eog_token(token) {
                 break;
             }
-            let output_bytes = model
-                .token_to_bytes(token, Special::Tokenize)
-                .map_err(|err| CompletionError::Inference(err.to_string()))?;
-            // Use `Decoder.decode_to_string()` to avoid the intermediate buffer
-            let mut output_string = String::with_capacity(32);
-            let _decode_result = decoder.decode_to_string(&output_bytes, &mut output_string, false);
-            output.push_str(&output_string);
+            let output_bytes = model.token_to_bytes(token, Special::Tokenize);
+            if let Ok(output_bytes) = output_bytes {
+                // Use `Decoder.decode_to_string()` to avoid the intermediate buffer
+                let mut output_string = String::with_capacity(32);
+                let _decode_result =
+                    decoder.decode_to_string(&output_bytes, &mut output_string, false);
+                output.push_str(&output_string);
+            };
             output_tokens.push(token.0 as u32);
             batch.clear();
             if let Err(err) = batch.add(token, n_cur as i32, &[0], true) {
@@ -158,7 +181,7 @@ impl Completion for LlamaEngine {
                 .map_err(|err| CompletionError::Inference(err.to_string()))?;
         }
         Ok(CompletionResponse {
-            id: "".to_string(),
+            id: self.model.model_base.model_id.clone(),
             index: None,
             content: output,
             finish_reason,

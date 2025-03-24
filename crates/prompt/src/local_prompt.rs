@@ -155,6 +155,7 @@ impl LocalPrompt {
             self.bos_token.as_deref(),
             &self.eos_token,
             self.unk_token.as_deref(),
+            true,
         );
 
         {
@@ -271,6 +272,7 @@ pub fn apply_chat_template(
     bos_token: Option<&str>,
     eos_token: &str,
     unk_token: Option<&str>,
+    add_generation_prompt: bool,
 ) -> String {
     let mut env = Environment::new();
     env.set_lstrip_blocks(true);
@@ -303,7 +305,7 @@ pub fn apply_chat_template(
 
     tmpl.render(context! {
         messages => messages,
-        add_generation_prompt => false,
+        add_generation_prompt => add_generation_prompt,
         bos_token => bos_token,
         eos_token => eos_token,
         unk_token => unk_token,

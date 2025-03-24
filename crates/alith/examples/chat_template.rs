@@ -14,11 +14,7 @@ fn main() -> Result<(), anyhow::Error> {
             ("role".to_string(), "user".to_string()),
             ("content".to_string(), "test_user_message_1".to_string()),
         ]),
-        HashMap::from([
-            ("role".to_string(), "assistant".to_string()),
-            ("content".to_string(), "test_user_message_2".to_string()),
-        ]),
     ];
-    println!("{}", model.chat_template.apply(messages));
+    println!("{}", model.chat_template.apply(messages, true));
     Ok(())
 }

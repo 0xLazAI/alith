@@ -1,4 +1,3 @@
-use gguf::GgufLoader;
 use metadata::LocalLLMMetadata;
 
 pub mod chat_template;
@@ -8,7 +7,7 @@ pub mod metadata;
 
 use super::LLMModelBase;
 pub use chat_template::LLMChatTemplate;
-pub use gguf::{GgufLoaderTrait, preset::GgufPresetTrait};
+pub use gguf::{GgufLoader, GgufLoaderTrait, preset::GgufPresetTrait};
 pub use hf_loader::HfTokenTrait;
 use std::path::PathBuf;
 
