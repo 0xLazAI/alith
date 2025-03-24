@@ -121,6 +121,11 @@ pub struct Request {
     /// uses a default temperature.
     pub temperature: Option<f32>,
 
+    /// An alternative to sampling with temperature, called nucleus sampling,
+    /// where the model considers the results of the tokens with top_p probability mass.
+    /// So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+    pub top_p: Option<f32>, // min: 0, max: 1, default: 1
+
     /// A collection of tools available for tool-based interactions with the model.
     ///
     /// Tools are external systems, APIs, or utilities that the model can invoke to perform
@@ -150,6 +155,7 @@ impl Request {
             knowledges: Vec::new(),
             history: Vec::new(),
             max_tokens: None,
+            top_p: None,
             temperature: None,
             tools: Vec::new(),
             documents: Vec::new(),
@@ -173,6 +179,21 @@ impl Request {
             )
         } else {
             prompt.clone()
+        }
+    }
+
+    pub fn effective_prompt(&self) -> String {
+        let mut input = self.prompt.clone();
+        // Add knowledge sources if provided
+        for knowledge in &self.knowledges {
+            input.push('\n');
+            input.push_str(knowledge);
+        }
+        // Add user prompt with or without the document context
+        if self.documents.is_empty() {
+            input
+        } else {
+            self.prompt_with_context(input)
         }
     }
 }
@@ -250,4 +271,7 @@ pub enum CompletionError {
     Normal(String),
     #[error("An inference error occurred: {0}")]
     Inference(String),
+    /// JSON error (e.g.: serialization, deserialization, etc.)
+    #[error("JSON error: {0}")]
+    JsonError(#[from] serde_json::Error),
 }

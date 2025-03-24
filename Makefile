@@ -13,8 +13,11 @@ accept:
 fmt:
 	cargo fmt --all
 
-clippy:
+clippy-all:
 	cargo clippy --workspace --all-features --benches --examples --tests -- -D warnings
+
+clippy:
+	cargo clippy --workspace -- -D warnings
 
 fix:
 	cargo clippy --workspace --all-features --benches --examples --tests --fix --allow-dirty

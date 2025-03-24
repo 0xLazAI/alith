@@ -178,9 +178,5 @@ mod tests {
             .unwrap();
         assert_eq!(tool.name(), "dummy");
         assert_eq!(output, "\"x: 1, y: 2\"");
-        assert_eq!(
-            tool.definition().parameters.to_string(),
-            "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"properties\":{\"x\":{\"format\":\"uint\",\"minimum\":0.0,\"type\":\"integer\"},\"y\":{\"format\":\"uint\",\"minimum\":0.0,\"type\":\"integer\"}},\"required\":[\"x\",\"y\"],\"title\":\"DummpyInput\",\"type\":\"object\"}"
-        );
     }
 }

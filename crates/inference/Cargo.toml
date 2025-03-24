@@ -10,15 +10,56 @@ repository.workspace = true
 
 [dependencies]
 alith-core.workspace = true
+alith-models.workspace = true
 
+tokio.workspace = true
 thiserror.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+tokio-util = { version = "0.7", features = ["codec", "net"] }
+
+# ONNX Runtime
 ort = { version = "=2.0.0-rc.9", default-features = false, features = [
   "ndarray",
   "cuda",
   "tensorrt",
   "fetch-models",
 ], optional = true }
-tokenizers = "0.21.1"
+
+# mistralrs
+indexmap = { version = "2.6" }
+mistralrs = { git = "https://github.com/EricLBuehler/mistral.rs.git", rev = "aaafc2ef", optional = true }
+
+# vLLM
+
+# sglang
+
+# Python
+pythonize = { version = "0.23", optional = true }
+either = "1.15.0"
+async-stream = "0.3.6"
+encoding_rs = "0.8.35"
+
+[target.'cfg(not(windows))'.dependencies]
+# llamacpp
+llama-cpp-2 = { version = "0.1.102", optional = true }
 
 [features]
-inference = ["ort"]
+ort = ["dep:ort"]
+llamacpp = ["dep:llama-cpp-2"]
+mistralrs = ["dep:mistralrs"]
+sglang = []
+trtllm = []
+vllm = []
+python = ["dep:pythonize"]
+
+# Need to install CUDA toolkit for developping including nvcc, cudnn, cublas, etc.
+# cuda = ["mistralrs/cuda", "llama-cpp-2/cuda"]
+# metal = ["mistralrs/metal", "llama-cpp-2/metal"]
+# vulkan = ["llama-cpp-2/vulkan"]
+cuda = []
+metal = []
+vulkan = []

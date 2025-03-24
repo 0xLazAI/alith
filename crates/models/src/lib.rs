@@ -6,7 +6,7 @@ pub mod tokenizer;
 pub mod tokens;
 
 pub use tokenizer::Tokenizer;
-pub use tokens::{Token, Tokens};
+pub use tokens::{Token, TokenIdType, TokenType, Tokens};
 
 #[allow(unused_imports)]
 pub(crate) use anyhow::{Error, Result, anyhow, bail};

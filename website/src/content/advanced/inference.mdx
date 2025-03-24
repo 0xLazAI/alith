@@ -28,7 +28,7 @@ To further demonstrate the integration capabilities, here's an example of invoki
 ```rust
 use alith::{
     inference::{
-        ort::{
+        engines::ort::{
             init, inputs, CUDAExecutionProvider, GraphOptimizationLevel, Result, Session, TensorRef,
         },
         tokenizers::Tokenizer,
@@ -148,6 +148,34 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let response = agent.prompt("Entertain me!").await?;
     println!("{}", response);
+    Ok(())
+}
+```
+ 
+### MistralRs
+
+```rust
+use alith::{Agent, inference::MistralRsEngine};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = MistralRsEngine::new("/root/models/qwen2.5-1.5b-instruct-q5_k_m.gguf").await?;
+    let agent = Agent::new("simple agent", model);
+    println!("{}", agent.prompt("Calculate 10 - 3").await?);
+    Ok(())
+}
+```
+
+### Llamacpp
+
+```rust
+use alith::{Agent, inference::LlamaEngine};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LlamaEngine::new("/root/models/qwen2.5-1.5b-instruct-q5_k_m.gguf").await?;
+    let agent = Agent::new("simple agent", model);
+    println!("{}", agent.prompt("Calculate 10 - 3").await?);
     Ok(())
 }
 ```
