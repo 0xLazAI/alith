@@ -19,7 +19,7 @@ napi-derive = "2.16.13"
 napi-sys = "2.4.0"
 
 [build-dependencies]
-napi-build = "2.1.5"
+napi-build = "2.1.6"
 
 [profile.release]
 lto = true
