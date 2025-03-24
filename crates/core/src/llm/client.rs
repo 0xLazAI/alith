@@ -7,10 +7,12 @@ use crate::chat::Completion;
 use crate::chat::CompletionError;
 use crate::chat::Request;
 use crate::chat::ResponseContent;
+use crate::chat::ResponseTokenUsage;
 use crate::chat::ResponseToolCalls;
 use crate::chat::ToolCall;
 use crate::embeddings::EmbeddingsData;
 use crate::embeddings::EmbeddingsError;
+use alith_interface::requests::completion::TokenUsage;
 use anyhow::Result;
 
 pub use alith_client as client;
@@ -20,12 +22,6 @@ pub use alith_client::embeddings::Embeddings;
 pub use alith_client::prelude::*;
 pub use alith_interface::requests::completion::{CompletionRequest, CompletionResponse};
 pub use alith_models::api_model::ApiLLMModel;
-
-impl ResponseContent for CompletionResponse {
-    fn content(&self) -> String {
-        self.content.to_string()
-    }
-}
 
 pub struct Client {
     pub(crate) client: LLMClient,
@@ -87,6 +83,12 @@ impl Client {
     }
 }
 
+impl ResponseContent for CompletionResponse {
+    fn content(&self) -> String {
+        self.content.to_string()
+    }
+}
+
 impl ResponseToolCalls for CompletionResponse {
     fn toolcalls(&self) -> Vec<ToolCall> {
         self.tool_calls
@@ -102,6 +104,12 @@ impl ResponseToolCalls for CompletionResponse {
                 },
             })
             .collect()
+    }
+}
+
+impl ResponseTokenUsage for CompletionResponse {
+    fn token_usage(&self) -> TokenUsage {
+        self.token_usage.clone()
     }
 }
 

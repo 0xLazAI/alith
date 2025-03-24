@@ -170,6 +170,7 @@ impl std::fmt::Display for TimingUsage {
 }
 
 /// Token statistics for the completion request.
+#[derive(Debug, Clone)]
 pub struct TokenUsage {
     /// Number of tokens from the prompt which could be re-used from previous completion (n_past)
     pub tokens_cached: Option<u32>,
