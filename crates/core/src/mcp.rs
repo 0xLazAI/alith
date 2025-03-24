@@ -40,6 +40,19 @@ impl Deref for MCPClient {
     }
 }
 
+/// Init MCP logging.
+#[inline]
+pub fn init_logging() {
+    // Initialize logging
+    tracing_subscriber::fmt()
+        .with_env_filter(
+            EnvFilter::from_default_env()
+                .add_directive("mcp_client=debug".parse().unwrap())
+                .add_directive("eventsource_client=info".parse().unwrap()),
+        )
+        .init();
+}
+
 /// Set up MCP clients config from the path, spawning each server,
 /// and returning a HashMap<server_name -> Arc<Client>>.
 /// spawn a single MCP process per server, share references.
@@ -76,14 +89,6 @@ pub async fn sse_client<S: AsRef<str>>(
     sse_url: S,
     env: HashMap<String, String>,
 ) -> Result<MCPClient, MCPError> {
-    // Initialize logging
-    tracing_subscriber::fmt()
-        .with_env_filter(
-            EnvFilter::from_default_env()
-                .add_directive("mcp_client=debug".parse().unwrap())
-                .add_directive("eventsource_client=info".parse().unwrap()),
-        )
-        .init();
     // Create the base transport
     let transport = SseTransport::new(sse_url.as_ref(), env);
     // Start transport
@@ -127,14 +132,6 @@ pub async fn stdio_client<S: AsRef<str>>(
     args: Vec<S>,
     env: HashMap<String, String>,
 ) -> Result<MCPClient, MCPError> {
-    // Initialize logging
-    tracing_subscriber::fmt()
-        .with_env_filter(
-            EnvFilter::from_default_env()
-                .add_directive("mcp_client=debug".parse().unwrap())
-                .add_directive("eventsource_client=info".parse().unwrap()),
-        )
-        .init();
     // Create the base transport
     let transport = StdioTransport::new(
         command.as_ref().to_string(),

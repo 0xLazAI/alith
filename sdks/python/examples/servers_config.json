@@ -12,7 +12,7 @@
             "args": [
                 "-y",
                 "@modelcontextprotocol/server-filesystem",
-                "/root/alith/crates/alith"
+                "/root/alith/sdks/python/examples"
             ]
         }
     }

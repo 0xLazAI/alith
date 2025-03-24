@@ -150,6 +150,20 @@ where
         Ok(self)
     }
 
+    /// Set the MCP server config path.
+    pub async fn start_mcp_servers<P: AsRef<Path>>(
+        &mut self,
+        path: P,
+    ) -> anyhow::Result<(), MCPError> {
+        let clients = setup_mcp_clients(path).await?;
+        let mut mcp_clients = self.mcp_clients.write().await;
+        mcp_clients.clear();
+        for (_, client) in clients {
+            mcp_clients.push(client);
+        }
+        Ok(())
+    }
+
     /// Set the MCP sse client.
     #[inline]
     pub async fn mcp_sse_client<S: AsRef<str> + 'static>(

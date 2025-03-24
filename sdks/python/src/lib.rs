@@ -1,4 +1,4 @@
-use alith::{Agent, LLM, Tool};
+use alith::{Agent, LLM, TaskError, Tool};
 use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
 
@@ -10,6 +10,7 @@ use tool::DelegateTool;
 #[pyclass]
 pub struct DelegateAgent {
     agent: Agent<LLM>,
+    mcp_config_path: String,
 }
 
 #[pymethods]
@@ -50,18 +51,31 @@ impl DelegateAgent {
                 }
             })
             .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
-        Ok(DelegateAgent { agent })
+        Ok(DelegateAgent {
+            agent,
+            mcp_config_path,
+        })
     }
 
     pub fn prompt(&mut self, prompt: &str) -> PyResult<String> {
         let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
-        let result = rt.block_on(async { self.agent.prompt(prompt).await });
+        let result = rt.block_on(async {
+            self.agent
+                .start_mcp_servers(&self.mcp_config_path)
+                .await
+                .map_err(TaskError::MCPError)?;
+            self.agent.prompt(prompt).await
+        });
         result.map_err(|e| PyErr::new::<PyException, _>(e.to_string()))
     }
 
     pub fn chat(&mut self, prompt: &str, history: Vec<Message>) -> PyResult<String> {
         let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
         let result = rt.block_on(async {
+            self.agent
+                .start_mcp_servers(&self.mcp_config_path)
+                .await
+                .map_err(TaskError::MCPError)?;
             self.agent
                 .chat(prompt, unsafe {
                     std::mem::transmute::<Vec<Message>, Vec<alith::core::chat::Message>>(history)
