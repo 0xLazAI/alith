@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use super::metadata::tokenizer::TokenizerMetadata;
 use anyhow::Context;
 use serde::Deserialize;
+use std::path::PathBuf;
 
 #[derive(Deserialize, Clone, PartialEq)]
 pub struct LLMChatTemplate {
@@ -14,9 +15,7 @@ pub struct LLMChatTemplate {
 }
 
 impl LLMChatTemplate {
-    pub fn from_local_path(
-        tokenizer_config_local_path: &std::path::PathBuf,
-    ) -> crate::Result<Self> {
+    pub fn from_local_path(tokenizer_config_local_path: &PathBuf) -> crate::Result<Self> {
         let file = std::fs::File::open(tokenizer_config_local_path)?;
         let reader = std::io::BufReader::new(file);
         let mut chat_template: LLMChatTemplate = serde_json::from_reader(reader)?;
@@ -68,6 +67,18 @@ impl LLMChatTemplate {
         };
         chat_template.set_generation_prefix()?;
         Ok(chat_template)
+    }
+
+    /// Applies a chat template to a message, given a message and a chat template.
+    #[inline]
+    pub fn apply(&self, messages: &[HashMap<String, String>]) -> String {
+        alith_prompt::apply_chat_template(
+            messages,
+            &self.chat_template,
+            self.bos_token.as_deref(),
+            &self.eos_token,
+            self.unk_token.as_deref(),
+        )
     }
 
     fn set_generation_prefix(&mut self) -> crate::Result<()> {
@@ -134,5 +145,44 @@ impl std::fmt::Debug for LLMChatTemplate {
         debug_struct.field("eos_token", &self.eos_token);
         debug_struct.field("unk_token", &self.unk_token);
         debug_struct.finish()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::{collections::HashMap, path::PathBuf};
+
+    use super::LLMChatTemplate;
+
+    #[test]
+    fn test_apply_chat_template() {
+        let path = PathBuf::new()
+            .join("src")
+            .join("local_model")
+            .join("gguf")
+            .join("preset")
+            .join("llama")
+            .join("llama3_1_8b_instruct")
+            .join("tokenizer_config.json");
+        let template = LLMChatTemplate::from_local_path(&path).unwrap();
+        let messages = &[
+            HashMap::from([
+                ("role".to_string(), "system".to_string()),
+                ("content".to_string(), "test_system_message".to_string()),
+            ]),
+            HashMap::from([
+                ("role".to_string(), "user".to_string()),
+                ("content".to_string(), "test_user_message_1".to_string()),
+            ]),
+            HashMap::from([
+                ("role".to_string(), "assistant".to_string()),
+                ("content".to_string(), "test_user_message_2".to_string()),
+            ]),
+        ];
+        let result = template.apply(messages);
+        assert_eq!(
+            result,
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\ntest_system_message<|eot_id|><|start_header_id|>user<|end_header_id|>\n\ntest_user_message_1<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\ntest_user_message_2<|eot_id|>"
+        );
     }
 }

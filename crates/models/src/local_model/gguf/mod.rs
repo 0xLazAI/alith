@@ -4,6 +4,7 @@ use super::{
 };
 use crate::tokenizer::Tokenizer;
 use loaders::{hf::GgufHfLoader, local::GgufLocalLoader, preset::GgufPresetLoader};
+use std::path::PathBuf;
 use std::sync::Arc;
 use tools::gguf_tokenizer::convert_gguf_to_hf_tokenizer;
 
@@ -59,7 +60,7 @@ impl GgufPresetTrait for GgufLoader {
 }
 
 pub(crate) fn load_tokenizer(
-    local_tokenizer_path: &Option<std::path::PathBuf>,
+    local_tokenizer_path: &Option<PathBuf>,
     model_metadata: &LocalLLMMetadata,
 ) -> crate::Result<Arc<Tokenizer>> {
     if let Some(local_tokenizer_path) = &local_tokenizer_path {
@@ -85,7 +86,7 @@ pub(crate) fn load_tokenizer(
 }
 
 pub(crate) fn load_chat_template(
-    local_tokenizer_config_path: &Option<std::path::PathBuf>,
+    local_tokenizer_config_path: &Option<PathBuf>,
     model_metadata: &LocalLLMMetadata,
 ) -> crate::Result<LLMChatTemplate> {
     if let Some(local_tokenizer_config_path) = local_tokenizer_config_path {
@@ -114,10 +115,7 @@ pub trait GgufLoaderTrait {
 
     /// Sets the local path to the quantized model file.
     /// Use the /full/path/and/filename.gguf
-    fn local_quant_file_path<S: Into<std::path::PathBuf>>(
-        &mut self,
-        local_quant_file_path: S,
-    ) -> &mut Self {
+    fn local_quant_file_path<S: Into<PathBuf>>(&mut self, local_quant_file_path: S) -> &mut Self {
         self.gguf_loader().gguf_local_loader.local_quant_file_path =
             Some(local_quant_file_path.into());
         self

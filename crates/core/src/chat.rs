@@ -37,7 +37,7 @@ pub trait Prompt: Send + Sync {
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Message {
-    /// "system", "user", or "assistant"
+    /// "system", "user", "tool", or "assistant"
     pub role: String,
     pub content: String,
 }

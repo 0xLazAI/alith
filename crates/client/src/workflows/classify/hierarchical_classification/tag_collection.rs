@@ -1,5 +1,6 @@
 use super::{tag::Tag, tag_describer::TagCollectionDescriber};
 use serde::{Deserialize, Serialize};
+use std::path::PathBuf;
 
 const OUTPUT_DIR: &str = "generations";
 const DEFAULT_COLLECTION_NAME: &str = "default_collection";
@@ -7,9 +8,9 @@ const DEFAULT_COLLECTION_NAME: &str = "default_collection";
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TagCollection {
     pub collection_name: Option<String>,
-    pub from_text_file_path: Option<std::path::PathBuf>,
+    pub from_text_file_path: Option<PathBuf>,
     pub from_string: Option<String>,
-    pub output_dir_path: std::path::PathBuf,
+    pub output_dir_path: PathBuf,
     pub tag_path_seperator: String,
     contents: String,
     pub root_tag: Option<Tag>,
@@ -39,10 +40,7 @@ impl TagCollection {
         self
     }
 
-    pub fn from_text_file_path<P: Into<std::path::PathBuf>>(
-        mut self,
-        from_text_file_path: P,
-    ) -> Self {
+    pub fn from_text_file_path<P: Into<PathBuf>>(mut self, from_text_file_path: P) -> Self {
         self.from_text_file_path = Some(from_text_file_path.into());
         self
     }
@@ -52,7 +50,7 @@ impl TagCollection {
         self
     }
 
-    pub fn output_dir_path<P: AsRef<std::path::PathBuf>>(mut self, output_dir_path: P) -> Self {
+    pub fn output_dir_path<P: AsRef<PathBuf>>(mut self, output_dir_path: P) -> Self {
         self.output_dir_path = output_dir_path.as_ref().to_owned();
         self
     }
@@ -208,7 +206,7 @@ impl TagCollection {
         let filename = format!("{collection_name}.json");
 
         // Create a PathBuf for the directory
-        let mut file_path = std::path::PathBuf::from(OUTPUT_DIR);
+        let mut file_path = PathBuf::from(OUTPUT_DIR);
 
         // Create the directory if it doesn't exist
         std::fs::create_dir_all(&file_path)?;

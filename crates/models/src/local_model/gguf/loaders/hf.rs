@@ -2,6 +2,7 @@ use crate::{
     LLMModelBase,
     local_model::{LocalLLMModel, hf_loader::HuggingFaceLoader, metadata::LocalLLMMetadata},
 };
+use std::path::PathBuf;
 
 #[derive(Default, Clone)]
 pub struct GgufHfLoader {
@@ -72,7 +73,7 @@ impl GgufHfLoader {
         hf_loader: &HuggingFaceLoader,
         repo_id: &str,
         file: &str,
-    ) -> Option<std::path::PathBuf> {
+    ) -> Option<PathBuf> {
         match hf_loader.load_file(file, repo_id) {
             Ok(path) => Some(path),
             Err(e) => {

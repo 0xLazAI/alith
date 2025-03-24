@@ -1,6 +1,6 @@
 use crate::local_model::gguf::memory::estimate_context_size;
 use serde::Deserialize;
-use std::{fs::File, io::BufReader};
+use std::{fs::File, io::BufReader, path::PathBuf};
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct ConfigJson {
@@ -31,7 +31,7 @@ pub struct ConfigJson {
 }
 
 impl ConfigJson {
-    pub fn from_local_path(config_json_path: &std::path::PathBuf) -> crate::Result<Self> {
+    pub fn from_local_path(config_json_path: &PathBuf) -> crate::Result<Self> {
         let file = File::open(config_json_path)?;
         let reader = BufReader::new(file);
         let config: ConfigJson = serde_json::from_reader(reader)?;

@@ -256,8 +256,11 @@ impl std::fmt::Display for LocalPrompt {
 ///
 /// # Arguments
 ///
-/// * `message` - The message as a HashMap.
-/// * `chat_template` - The chat template as a String.
+/// * `messages` - A slice of HashMaps, where each HashMap represents a message with key-value pairs.
+/// * `chat_template` - The chat template as a String, which defines the structure for formatting messages.
+/// * `bos_token` - An optional beginning-of-sequence token, used to mark the start of the formatted message sequence.
+/// * `eos_token` - The end-of-sequence token, used to mark the end of the formatted message sequence.
+/// * `unk_token` - An optional unknown token, used to replace any unknown or invalid tokens in the message.
 ///
 /// # Returns
 ///
