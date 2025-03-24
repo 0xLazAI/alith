@@ -1,4 +1,4 @@
-#[cfg(feature = "llamacpp")]
+#[cfg(all(feature = "llamacpp", not(target_os = "windows")))]
 pub mod llamacpp;
 #[cfg(feature = "mistralrs")]
 pub mod mistralrs;

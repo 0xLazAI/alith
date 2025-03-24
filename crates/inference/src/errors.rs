@@ -7,7 +7,7 @@ pub enum InferenceError {
     #[error("Engine error: {0}")]
     EngineError(String),
     #[error("Llamacpp error: {0}")]
-    #[cfg(feature = "llamacpp")]
+    #[cfg(all(feature = "llamacpp", not(target_os = "windows")))]
     LlamaCpp(#[from] llama_cpp_2::LLamaCppError),
     #[error("MistralRs error: {0}")]
     #[cfg(feature = "mistralrs")]

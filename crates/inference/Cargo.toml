@@ -29,9 +29,6 @@ ort = { version = "=2.0.0-rc.9", default-features = false, features = [
   "fetch-models",
 ], optional = true }
 
-# llamacpp
-llama-cpp-2 = { version = "0.1.102", optional = true }
-
 # mistralrs
 indexmap = { version = "2.6" }
 mistralrs = { git = "https://github.com/EricLBuehler/mistral.rs.git", rev = "aaafc2ef", optional = true }
@@ -45,6 +42,10 @@ pythonize = { version = "0.23", optional = true }
 either = "1.15.0"
 async-stream = "0.3.6"
 encoding_rs = "0.8.35"
+
+[target.'cfg(not(windows))'.dependencies]
+# llamacpp
+llama-cpp-2 = { version = "0.1.102", optional = true }
 
 [features]
 ort = ["dep:ort"]
