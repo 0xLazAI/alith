@@ -14,7 +14,7 @@ async-trait.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
-napi = { version = "2.16.16", default-features = false, features = ["napi4"] }
+napi = { version = "2.16.17", default-features = false, features = ["napi4"] }
 napi-derive = "2.16.13"
 napi-sys = "2.4.0"
 
