@@ -6,13 +6,14 @@ use crate::{
         metadata::LocalLLMMetadata,
     },
 };
+use std::path::PathBuf;
 
 #[derive(Default, Clone)]
 pub struct GgufLocalLoader {
-    pub local_quant_file_path: Option<std::path::PathBuf>,
-    pub local_config_path: Option<std::path::PathBuf>,
-    pub local_tokenizer_path: Option<std::path::PathBuf>,
-    pub local_tokenizer_config_path: Option<std::path::PathBuf>,
+    pub local_quant_file_path: Option<PathBuf>,
+    pub local_config_path: Option<PathBuf>,
+    pub local_tokenizer_path: Option<PathBuf>,
+    pub local_tokenizer_config_path: Option<PathBuf>,
     pub model_id: Option<String>,
 }
 

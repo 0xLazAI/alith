@@ -11,10 +11,11 @@ use crate::local_model::{
     GgufLoader, LocalLLMModel, gguf::loaders::preset::GgufPresetLoader,
     hf_loader::HuggingFaceLoader, metadata::config_json::ConfigJson,
 };
+use std::path::PathBuf;
 
-fn presets_path() -> std::path::PathBuf {
+fn presets_path() -> PathBuf {
     let cargo_manifest_dir = env!("CARGO_MANIFEST_DIR");
-    std::path::PathBuf::from(cargo_manifest_dir)
+    PathBuf::from(cargo_manifest_dir)
         .join("src")
         .join("local_model")
         .join("gguf")
@@ -37,8 +38,9 @@ pub struct TokenizerPresetData {
     pub hf_repo: Option<String>,
     pub hf_filename: Option<String>,
 }
+
 impl TokenizerPresetData {
-    pub fn load(&self, hf_loader: &HuggingFaceLoader) -> crate::Result<std::path::PathBuf> {
+    pub fn load(&self, hf_loader: &HuggingFaceLoader) -> crate::Result<PathBuf> {
         if let Some(local_path) = self.local_path.clone() {
             let path = presets_path().join(local_path);
             match std::fs::File::open(&path) {
@@ -54,14 +56,16 @@ impl TokenizerPresetData {
         }
     }
 }
+
 #[derive(Debug, Clone, serde::Deserialize)]
 pub struct TokenizerConfigPresetData {
     pub local_path: Option<String>,
     pub hf_repo: Option<String>,
     pub hf_filename: Option<String>,
 }
+
 impl TokenizerConfigPresetData {
-    pub fn load(&self, hf_loader: &HuggingFaceLoader) -> crate::Result<std::path::PathBuf> {
+    pub fn load(&self, hf_loader: &HuggingFaceLoader) -> crate::Result<PathBuf> {
         if let Some(local_path) = self.local_path.clone() {
             let path = presets_path().join(local_path);
             match std::fs::File::open(&path) {
@@ -83,7 +87,7 @@ impl TokenizerConfigPresetData {
 impl LLMPresetData {
     pub fn new<P: AsRef<std::path::Path>>(path: P) -> LLMPresetData {
         let cargo_manifest_dir = env!("CARGO_MANIFEST_DIR");
-        let path = std::path::PathBuf::from(cargo_manifest_dir)
+        let path = PathBuf::from(cargo_manifest_dir)
             .join("src")
             .join("local_model")
             .join("gguf")
@@ -164,9 +168,7 @@ macro_rules! generate_models {
                 self.get_data().number_of_parameters as f64 * 1_000_000_000.0
             }
 
-
-
-            fn preset_dir_path(&self) -> std::path::PathBuf {
+            fn preset_dir_path(&self) -> PathBuf {
                 match self {
                     $(
                         Self::$variant => {
@@ -177,20 +179,18 @@ macro_rules! generate_models {
                 }
             }
 
-            pub fn config_json_path(&self) -> std::path::PathBuf {
+            pub fn config_json_path(&self) -> PathBuf {
                 let preset_config_path = self.preset_dir_path();
                 preset_config_path.join("config.json")
             }
 
-            pub fn load_tokenizer(&self,hf_loader: &HuggingFaceLoader) -> crate::Result<std::path::PathBuf> {
+            pub fn load_tokenizer(&self,hf_loader: &HuggingFaceLoader) -> crate::Result<PathBuf> {
                 self.get_data().tokenizer_preset_data.load(hf_loader)
             }
 
-            pub fn load_tokenizer_config(&self,hf_loader: &HuggingFaceLoader) -> crate::Result<std::path::PathBuf> {
+            pub fn load_tokenizer_config(&self,hf_loader: &HuggingFaceLoader) -> crate::Result<PathBuf> {
                 self.get_data().tokenizer_config_preset_data.load(hf_loader)
             }
-
-
 
             pub fn load(&self) -> crate::Result<LocalLLMModel> {
                 let mut loader = GgufLoader::default();
@@ -232,8 +232,6 @@ macro_rules! generate_models {
             )*
 
         }
-
-
     };
 }
 

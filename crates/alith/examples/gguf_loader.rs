@@ -11,5 +11,10 @@ fn main() -> Result<(), anyhow::Error> {
         .hf_quant_file_url("https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/blob/main/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf")
         .hf_config_repo_id("meta-llama/Meta-Llama-3-8B-Instruct")
         .load()?;
+
+    // We can also load the model from the local path
+    let _model = GgufLoader::default()
+        .local_quant_file_path("/root/models/qwen2.5-1.5b-instruct-q5_k_m.gguf")
+        .load()?;
     Ok(())
 }

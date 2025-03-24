@@ -10,10 +10,11 @@ use super::LLMModelBase;
 pub use chat_template::LLMChatTemplate;
 pub use gguf::{GgufLoaderTrait, preset::GgufPresetTrait};
 pub use hf_loader::HfTokenTrait;
+use std::path::PathBuf;
 
 pub struct LocalLLMModel {
     pub model_base: LLMModelBase,
-    pub local_model_path: std::path::PathBuf,
+    pub local_model_path: PathBuf,
     pub model_metadata: LocalLLMMetadata,
     pub chat_template: LLMChatTemplate,
 }
