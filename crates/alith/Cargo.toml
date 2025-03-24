@@ -83,6 +83,14 @@ name = "agent_with_cot"
 name = "agent_with_decision"
 
 [[example]]
+name = "agent_with_llamacpp"
+required-features = ["llamacpp"]
+
+[[example]]
+name = "agent_with_mistralrs"
+required-features = ["mistralrs"]
+
+[[example]]
 name = "hf_loader"
 
 [[example]]
@@ -95,4 +103,11 @@ name = "tokenizer"
 name = "device"
 
 [features]
-inference = ["alith-core/inference", "alith-inference/inference"]
+inference = ["alith-core/inference"]
+ort = ["alith-inference/ort"]
+llamacpp = ["alith-inference/llamacpp"]
+mistralrs = ["alith-inference/mistralrs"]
+python = ["alith-inference/python"]
+sglang = ["alith-inference/sglang"]
+trtllm = ["alith-inference/trtllm"]
+vllm = ["alith-inference/vllm"]

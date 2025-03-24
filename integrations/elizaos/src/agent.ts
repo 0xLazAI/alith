@@ -105,7 +105,6 @@ export class ElizaOSAgentRuntime {
 		const state = await runtime.composeState(userMessage, {
 			agentName: "alith",
 		});
-		console.log("sadasd:", memory);
 		return [memory, state];
 	}
 }
