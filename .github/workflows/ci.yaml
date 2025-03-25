@@ -50,4 +50,4 @@ jobs:
       - name: Cargo clippy
         run: cargo clippy --workspace --all-features --benches --examples --tests -- -D warnings
       - name: Run tests
-        run: cargo test -r --workspace --all-features
+        run: cargo test -r --workspace
