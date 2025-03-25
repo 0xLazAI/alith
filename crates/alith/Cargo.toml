@@ -91,6 +91,10 @@ name = "agent_with_mistralrs"
 required-features = ["mistralrs"]
 
 [[example]]
+name = "agent_with_ort"
+required-features = ["ort"]
+
+[[example]]
 name = "hf_loader"
 
 [[example]]

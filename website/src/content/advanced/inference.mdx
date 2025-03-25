@@ -4,11 +4,12 @@ Alith is designed to provide comprehensive integration support for modern infere
 
 ## Core Inference Engines
 
-- **ONNX Runtime**: Production-grade execution with cross-platform optimizations.
-- **llamacpp**: Lightweight CPU inference with GGUF quantization support.
-- **llamafile**: Single-file deployment for edge computing scenarios
+- **Llamacpp**: Lightweight CPU inference with GGUF quantization support.
+- **MistralRs**: Built in Rust, it leverages low-level optimizations for Mistral-family models, ideal for scenarios requiring low-latency streaming (e.g., chatbots).
 - **vLLM**: High-throughput GPU serving with PagedAttention.
 - **SGLang**: Advanced structured generation for complex workflows.
+- **ONNX Runtime**: Production-grade execution with cross-platform optimizations.
+- **Python**: Native Python runtime integration for prototyping and production, supporting popular frameworks (PyTorch, TensorFlow) and custom scripting.
 
 ## Custom Operator Ecosystem
 
@@ -18,153 +19,6 @@ We extend framework capabilities through platform-specific optimizations:
 - CUDA/HIP kernels for GPU-specific optimizations
 
 ## Integrations
-
-### ONNX Runtime
-
-To further demonstrate the integration capabilities, here's an example of invoking an ONNX model in Alith:
-
-> Note that running this program will pull the embeddings model from Hugging Face and start the inference engine locally for inference, so we need to turn on the inference feature.
-
-```rust
-use alith::{
-    inference::{
-        engines::ort::{
-            init, inputs, CUDAExecutionProvider, GraphOptimizationLevel, Result, Session, TensorRef,
-        },
-        tokenizers::Tokenizer,
-    },
-    Agent,
-};
-use alith::{Completion, CompletionError, ResponseContent, ResponseToolCalls, ToolCall};
-use rand::Rng;
-use std::future::Future;
-use std::path::Path;
-
-/// Max tokens to generate
-const GEN_TOKENS: usize = 90;
-/// Top_K -> Sample from the k most likely next tokens at each step. Lower k focuses on higher probability tokens.
-const TOP_K: usize = 5;
-
-pub struct GPT2 {
-    session: Session,
-    tokenizer: Tokenizer,
-}
-
-pub struct Response(String);
-
-impl ResponseToolCalls for Response {
-    fn toolcalls(&self) -> Vec<ToolCall> {
-        vec![]
-    }
-}
-
-impl ResponseContent for Response {
-    fn content(&self) -> String {
-        self.0.to_string()
-    }
-}
-
-impl Completion for GPT2 {
-    type Response = Response;
-
-    fn completion(
-        &mut self,
-        request: alith::Request,
-    ) -> impl Future<Output = Result<Self::Response, alith::CompletionError>> {
-        let mut rng = rand::thread_rng();
-        async {
-            let tokens = self
-                .tokenizer
-                .encode(request.prompt, false)
-                .map_err(|err| CompletionError::Inference(err.to_string()))?;
-            let mut tokens = tokens
-                .get_ids()
-                .iter()
-                .map(|i| *i as i64)
-                .collect::<Vec<_>>();
-            let mut output = String::new();
-            for _ in 0..request.max_tokens.unwrap_or(GEN_TOKENS) {
-                // Raw tensor construction takes a tuple of (dimensions, data).
-                // The model expects our input to have shape [B, _, S]
-                let input = TensorRef::from_array_view((
-                    vec![1, 1, tokens.len() as i64],
-                    tokens.as_slice(),
-                ))?;
-                let outputs = self
-                    .session
-                    .run(inputs![input])
-                    .map_err(|err| CompletionError::Inference(err.to_string()))?;
-                let (dim, mut probabilities) = outputs["output1"]
-                    .try_extract_raw_tensor()
-                    .map_err(|err| CompletionError::Inference(err.to_string()))?;
-                // The output tensor will have shape [B, _, S, V]
-                // We want only the probabilities for the last token in this sequence, which will be the next most likely token
-                // according to the model
-                let (seq_len, vocab_size) = (dim[2] as usize, dim[3] as usize);
-                probabilities = &probabilities[(seq_len - 1) * vocab_size..];
-                // Sort each token by probability
-                let mut probabilities: Vec<(usize, f32)> =
-                    probabilities.iter().copied().enumerate().collect();
-                probabilities.sort_unstable_by(|a, b| {
-                    b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Less)
-                });
-                // Sample using top-k sampling
-                let token = probabilities[rng.gen_range(0..=TOP_K)].0 as i64;
-                // Add our generated token to the input sequence
-                tokens.push(token);
-                let token_str = self.tokenizer.decode(&[token as u32], true).unwrap();
-                output.push_str(&token_str);
-            }
-            Ok(Response(output))
-        }
-    }
-}
-
-#[tokio::main]
-async fn main() -> Result<(), anyhow::Error> {
-    // Create the ONNX Runtime environment, enabling CUDA execution providers for all sessions created in this process.
-    init()
-        .with_name("GPT-2")
-        .with_execution_providers([CUDAExecutionProvider::default().build()])
-        .commit()?;
-    // Load GPT2 model
-    let session = Session::builder()?
-        .with_optimization_level(GraphOptimizationLevel::Level1)?
-        .with_intra_threads(1)?
-        .commit_from_url(
-            "https://parcel.pyke.io/v2/cdn/assetdelivery/ortrsv2/ex_models/gpt2.onnx",
-        )?;
-    // Load the tokenizer and encode the prompt into a sequence of tokens.
-    let tokenizer = Tokenizer::from_file(
-        Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("data")
-            .join("tokenizer.json"),
-    )
-    .unwrap();
-
-    let gpt2 = GPT2 { session, tokenizer };
-    let agent = Agent::new("simple agent", gpt2)
-        .preamble("You are a comedian here to entertain the user using humour and jokes.");
-
-    let response = agent.prompt("Entertain me!").await?;
-    println!("{}", response);
-    Ok(())
-}
-```
- 
-### MistralRs
-
-```rust
-use alith::{Agent, inference::MistralRsEngine};
-
-#[tokio::main]
-async fn main() -> Result<(), anyhow::Error> {
-    let model = MistralRsEngine::new("/root/models/qwen2.5-1.5b-instruct-q5_k_m.gguf").await?;
-    let agent = Agent::new("simple agent", model);
-    println!("{}", agent.prompt("Calculate 10 - 3").await?);
-    Ok(())
-}
-```
 
 ### Llamacpp
 
@@ -179,3 +33,46 @@ async fn main() -> Result<(), anyhow::Error> {
     Ok(())
 }
 ```
+
+> Note: we need to open the `llamacpp` feature to run the code.
+
+### MistralRs
+
+```rust
+use alith::{Agent, inference::MistralRsEngine};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = MistralRsEngine::new("/root/models/qwen2.5-1.5b-instruct-q5_k_m.gguf").await?;
+    let agent = Agent::new("simple agent", model);
+    println!("{}", agent.prompt("Calculate 10 - 3").await?);
+    Ok(())
+}
+```
+
+> Note: we need to open the `mistralrs` feature to run the code.
+
+### ONNX Runtime
+
+```rust
+use alith::{
+    Agent,
+    inference::engines::ort::{GraphOptimizationLevel, ort_init, present::GPT2},
+};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    ort_init()?;
+    let model = GPT2::new(
+        "https://cdn.pyke.io/0/pyke:ort-rs/example-models@0.0.0/gpt2.onnx",
+        "tokenizer.json",
+        GraphOptimizationLevel::Level1,
+        1,
+    )?;
+    let agent = Agent::new("simple agent", model);
+    println!("{}", agent.prompt("Calculate 10 - 3").await?);
+    Ok(())
+}
+```
+
+> Note: we need to open the `ort` feature to run the code.

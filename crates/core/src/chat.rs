@@ -1,4 +1,7 @@
-use alith_interface::requests::completion::{TokenUsage, ToolDefinition};
+pub use crate::client::{
+    CompletionRequest as BackendCompletionRequest, CompletionResponse as Response,
+};
+pub use alith_interface::requests::completion::{TokenUsage, ToolDefinition};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::error::Error;
