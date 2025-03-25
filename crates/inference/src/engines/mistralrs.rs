@@ -109,8 +109,6 @@ impl Completion for MistralRsEngine {
                 prompt_tokens: response.usage.prompt_tokens as u32,
                 completion_tokens: response.usage.completion_tokens as u32,
                 total_tokens: response.usage.total_tokens as u32,
-                dollar_cost: None,
-                cents_cost: None,
             },
             tool_calls: Some(
                 choice

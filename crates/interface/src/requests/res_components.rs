@@ -180,10 +180,6 @@ pub struct TokenUsage {
     pub completion_tokens: u32,
     /// Total number of tokens used in the request (prompt + completion).
     pub total_tokens: u32,
-    /// Dollar cost of the request.
-    pub dollar_cost: Option<f32>,
-    /// Cents cost of the request.
-    pub cents_cost: Option<f32>,
 }
 
 impl TokenUsage {
@@ -194,8 +190,6 @@ impl TokenUsage {
                 prompt_tokens: usage.prompt_tokens,
                 completion_tokens: usage.completion_tokens,
                 total_tokens: usage.total_tokens,
-                dollar_cost: None,
-                cents_cost: None,
             }
         } else {
             Self {
@@ -203,8 +197,6 @@ impl TokenUsage {
                 prompt_tokens: 0,
                 completion_tokens: 0,
                 total_tokens: 0,
-                dollar_cost: None,
-                cents_cost: None,
             }
         }
     }
@@ -215,8 +207,6 @@ impl TokenUsage {
             prompt_tokens: res.usage.input_tokens,
             completion_tokens: res.usage.output_tokens,
             total_tokens: res.usage.input_tokens + res.usage.output_tokens,
-            dollar_cost: None,
-            cents_cost: None,
         }
     }
 }
@@ -227,8 +217,6 @@ impl std::fmt::Display for TokenUsage {
         writeln!(f, "    tokens_cached: {:?}", self.tokens_cached)?;
         writeln!(f, "    prompt_tokens: {:?}", self.prompt_tokens)?;
         writeln!(f, "    completion_tokens: {:?}", self.completion_tokens)?;
-        writeln!(f, "    total_tokens: {:?}", self.total_tokens)?;
-        writeln!(f, "    dollar_cost: {:?}", self.dollar_cost)?;
-        writeln!(f, "    cents_cost: {:?}", self.cents_cost)
+        writeln!(f, "    total_tokens: {:?}", self.total_tokens)
     }
 }
