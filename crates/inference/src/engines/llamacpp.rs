@@ -194,8 +194,6 @@ impl Completion for LlamaEngine {
                 prompt_tokens: (last_index + 1) as u32,
                 completion_tokens: output_tokens.len() as u32,
                 total_tokens: (last_index as usize + 1 + output_tokens.len()) as u32,
-                dollar_cost: None,
-                cents_cost: None,
             },
             // TODO: tool calls
             tool_calls: None,

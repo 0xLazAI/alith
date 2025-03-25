@@ -105,8 +105,6 @@ impl Completion for GPT2 {
                 prompt_tokens: prompt_tokens as u32,
                 completion_tokens: max_tokens as u32,
                 total_tokens: (prompt_tokens + max_tokens) as u32,
-                dollar_cost: None,
-                cents_cost: None,
             },
             tool_calls: None,
         })
