@@ -22,10 +22,8 @@ serde_json.workspace = true
 tokio-util = { version = "0.7", features = ["codec", "net"] }
 
 # ONNX Runtime
-ort = { version = "=2.0.0-rc.9", default-features = false, features = [
+ort = { "git" = "https://github.com/pykeio/ort.git", default-features = false, features = [
   "ndarray",
-  "cuda",
-  "tensorrt",
   "fetch-models",
 ], optional = true }
 
@@ -42,6 +40,7 @@ pythonize = { version = "0.23", optional = true }
 either = "1.15.0"
 async-stream = "0.3.6"
 encoding_rs = "0.8.35"
+rand = "0.9.0"
 
 [target.'cfg(not(windows))'.dependencies]
 # llamacpp
@@ -52,14 +51,16 @@ ort = ["dep:ort"]
 llamacpp = ["dep:llama-cpp-2"]
 mistralrs = ["dep:mistralrs"]
 sglang = []
+trt = ["ort/tensorrt"]
 trtllm = []
 vllm = []
 python = ["dep:pythonize"]
 
 # Need to install CUDA toolkit for developping including nvcc, cudnn, cublas, etc.
-# cuda = ["mistralrs/cuda", "llama-cpp-2/cuda"]
+# Commnent this line to prevent lint errors.
+# cuda = ["ort/cuda", "mistralrs/cuda", "llama-cpp-2/cuda"]
 # metal = ["mistralrs/metal", "llama-cpp-2/metal"]
 # vulkan = ["llama-cpp-2/vulkan"]
-cuda = []
+cuda = ["ort/cuda"]
 metal = []
 vulkan = []

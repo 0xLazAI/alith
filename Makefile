@@ -7,6 +7,9 @@ check:
 test:
 	cargo test -r --workspace --all-features
 
+test-all:
+	cargo test -r --workspace
+
 accept:
 	cargo insta accept --all
 

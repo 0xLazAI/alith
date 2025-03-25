@@ -1,6 +1,5 @@
 pub mod completion;
 pub mod embeddings;
-// pub mod constraints;
 pub mod logit_bias;
 pub mod req_components;
 pub mod res_components;
