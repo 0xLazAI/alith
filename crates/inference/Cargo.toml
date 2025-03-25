@@ -55,6 +55,7 @@ trt = ["ort/tensorrt"]
 trtllm = []
 vllm = []
 python = ["dep:pythonize"]
+wasm = []
 
 # Need to install CUDA toolkit for developping including nvcc, cudnn, cublas, etc.
 # Commnent this line to prevent lint errors.
