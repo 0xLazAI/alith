@@ -136,3 +136,73 @@ An example of MCP config servers is as follows
 
 </Tabs.Tab>
 </Tabs>
+
+## Write an MCP Server
+
+Of course, writing an MCP Server is also easy. Here, we take using Python to write a simple Web3 interactive MCP Server as an example.
+
+- Install the `mcp` dependency.
+
+```shell
+python3 -m pip install mcp -U
+```
+
+- Write the MCP Server code named `mcp_server.py`.
+
+```python
+from mcp.server.fastmcp import FastMCP
+from web3 import Web3
+
+# Initialize the MCP server
+mcp = FastMCP("MetisBlockServer")
+
+# Connect to Metis mainnet
+w3 = Web3(Web3.HTTPProvider("https://andromeda.metis.io/?owner=1088"))
+
+
+# MCP Tool: Fetch Latest Block Number (already working)
+@mcp.tool()
+def get_latest_block() -> int:
+    """Fetches the latest block number from Metis mainnet."""
+    return w3.eth.block_number
+
+
+# MCP Tool: Fetch Previous Block Number (already working)
+@mcp.tool()
+def get_previous_block() -> int:
+    """Fetches the previous block number from Metis mainnet."""
+    latest_block = get_latest_block()
+    return latest_block - 1
+
+
+# Run the MCP server
+if __name__ == "__main__":
+    mcp.run()
+```
+
+Then you can append the following config to your MCP config file `servers_config.json`.
+
+```json
+{
+    "mcpServers": {
+        "metis": {
+            "command": "python3",
+            "args": [
+                "mcp_server.py"
+            ]
+        }
+    }
+}
+```
+
+At last, you can run the Alith agent code.
+
+```python
+from alith import Agent
+
+agent = Agent(
+    model="gpt-4",
+    mcp_config_path="servers_config.json",
+)
+print(agent.prompt("What is the latest block number on Metis mainnet?"))
+```
