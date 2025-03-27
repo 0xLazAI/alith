@@ -60,10 +60,12 @@ impl DelegateAgent {
     pub fn prompt(&mut self, prompt: &str) -> PyResult<String> {
         let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
         let result = rt.block_on(async {
-            self.agent
-                .start_mcp_servers(&self.mcp_config_path)
-                .await
-                .map_err(TaskError::MCPError)?;
+            if !self.mcp_config_path.is_empty() {
+                self.agent
+                    .start_mcp_servers(&self.mcp_config_path)
+                    .await
+                    .map_err(TaskError::MCPError)?;
+            }
             self.agent.prompt(prompt).await
         });
         result.map_err(|e| PyErr::new::<PyException, _>(e.to_string()))
@@ -72,10 +74,12 @@ impl DelegateAgent {
     pub fn chat(&mut self, prompt: &str, history: Vec<Message>) -> PyResult<String> {
         let rt = Runtime::new().map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?;
         let result = rt.block_on(async {
-            self.agent
-                .start_mcp_servers(&self.mcp_config_path)
-                .await
-                .map_err(TaskError::MCPError)?;
+            if !self.mcp_config_path.is_empty() {
+                self.agent
+                    .start_mcp_servers(&self.mcp_config_path)
+                    .await
+                    .map_err(TaskError::MCPError)?;
+            }
             self.agent
                 .chat(prompt, unsafe {
                     std::mem::transmute::<Vec<Message>, Vec<alith::core::chat::Message>>(history)
