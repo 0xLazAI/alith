@@ -95,6 +95,10 @@ name = "agent_with_ort"
 required-features = ["ort"]
 
 [[example]]
+name = "agent_with_llamacpp_server"
+required-features = ["llamacpp"]
+
+[[example]]
 name = "hf_loader"
 
 [[example]]
