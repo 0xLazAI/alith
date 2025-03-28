@@ -10,7 +10,7 @@ impl ApiLLMModel {
             "gpt-4-turbo" => Self::gpt_4_turbo(),
             "gpt-4o" => Self::gpt_4_o(),
             "gpt-3.5-turbo" => Self::gpt_3_5_turbo(),
-            "gpt-4o-mini" => Self::gpt_3_5_turbo(),
+            "gpt-4o-mini" => Self::gpt_4_o_mini(),
             _ => panic!("Model ID ({model_id}) not found for ApiLLMModel"),
         }
     }
