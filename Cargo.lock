@@ -159,7 +159,7 @@ dependencies = [
  "nvml-wrapper",
  "objc2",
  "objc2-metal",
- "sysinfo 0.33.1",
+ "sysinfo 0.34.0",
  "thiserror 2.0.12",
  "tracing",
  "tracing-appender",
@@ -210,7 +210,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serial_test",
- "sysinfo 0.33.1",
+ "sysinfo 0.34.0",
  "thiserror 2.0.12",
  "tokio",
  "tracing",
@@ -3939,6 +3939,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "objc2-core-foundation"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "daeaf60f25471d26948a1c2f840e3f7d86f4109e3af4e8e4b5cd70c39690d925"
+dependencies = [
+ "bitflags 2.9.0",
+]
+
+[[package]]
 name = "objc2-encode"
 version = "4.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5824,14 +5833,14 @@ dependencies = [
 
 [[package]]
 name = "sysinfo"
-version = "0.33.1"
+version = "0.34.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4fc858248ea01b66f19d8e8a6d55f41deaf91e9d495246fd01368d99935c6c01"
+checksum = "36913edff7a70c19d204c379e484b2a04d121fbb4e68bebc9fea651eb4386397"
 dependencies = [
- "core-foundation-sys",
  "libc",
  "memchr",
  "ntapi",
+ "objc2-core-foundation",
  "windows 0.57.0",
 ]
 
