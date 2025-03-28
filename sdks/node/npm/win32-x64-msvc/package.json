@@ -1,7 +1,7 @@
 {
   "name": "@lazai-labs/alith-win32-x64-msvc",
   "repository": "https://github.com/0xLazAI/alith",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "os": [
     "win32"
   ],

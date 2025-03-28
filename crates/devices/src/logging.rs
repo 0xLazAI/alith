@@ -22,7 +22,11 @@ impl Default for LoggingConfig {
     fn default() -> Self {
         Self {
             level: tracing::Level::INFO,
-            logging_enabled: true,
+            logging_enabled: if std::env::var("ALITH_DISABLE_LOG").is_ok() {
+                false
+            } else {
+                true
+            },
             logger_name: "llm_interface".to_string(),
             log_path: None,
             _tracing_guard: None,
