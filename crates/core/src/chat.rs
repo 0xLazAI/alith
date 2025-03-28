@@ -85,7 +85,7 @@ impl std::fmt::Display for Document {
 /// and enhance its outputs with additional tools, documents, and contextual information.
 /// It is suited for a wide range of use cases, from simple prompt completions to
 /// advanced multi-turn interactions or tool-augmented tasks.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Request {
     /// The user-provided input text that the language model must complete or respond to.
     ///
@@ -296,7 +296,7 @@ pub trait Completion {
     fn completion(
         &mut self,
         request: Request,
-    ) -> impl std::future::Future<Output = Result<Self::Response, CompletionError>>;
+    ) -> impl std::future::Future<Output = Result<Self::Response, CompletionError>> + Send;
 }
 
 /// An enumeration of possible errors that may occur during completion operations.

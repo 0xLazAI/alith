@@ -32,7 +32,7 @@ pub struct OpenAICompletionRequest {
     ///
     /// The total length of input tokens and generated tokens is limited by the model's context length. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_tokens: Option<u64>,
+    pub max_tokens: Option<usize>,
 
     /// min: 0.0, max: 2.0, default: None
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -65,6 +65,10 @@ pub struct OpenAICompletionRequest {
     /// The tool choice for the request, default: None
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tool_choice: Option<String>,
+
+    /// Whether to stream back partial progress.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stream: Option<bool>, // default: false
 }
 
 #[derive(Clone, Serialize, Debug, Deserialize)]
@@ -92,7 +96,7 @@ impl OpenAICompletionRequest {
             frequency_penalty: req.config.frequency_penalty,
             logprobs: None,
             top_logprobs: None,
-            max_tokens: req.config.actual_request_tokens,
+            max_tokens: req.config.actual_request_tokens.map(|t| t as usize),
             presence_penalty: Some(req.config.presence_penalty),
             stop: Stop::new(&req.stop_sequences)?,
             temperature: Some(req.config.temperature),
@@ -115,6 +119,7 @@ impl OpenAICompletionRequest {
             } else {
                 None
             },
+            stream: None,
         })
     }
 }
