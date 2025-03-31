@@ -25,11 +25,7 @@ impl CompletionResponse {
                 }
             }
             StopReason::MaxTokens => CompletionFinishReason::StopLimit,
-            StopReason::ToolUse => {
-                return Err(CompletionError::StopReasonUnsupported(
-                    "StopReason::ToolUse is not supported".to_owned(),
-                ));
-            }
+            StopReason::ToolUse => CompletionFinishReason::ToolsCall,
         };
 
         if res.content.is_empty() {
