@@ -4,8 +4,16 @@ use napi_derive::napi;
 
 mod tool;
 
+use once_cell::sync::Lazy;
 use tokio::runtime::Runtime;
 use tool::DelegateTool;
+
+pub(crate) static GLOBAL_RUNTIME: Lazy<Runtime> = Lazy::new(|| {
+    tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .build()
+        .unwrap()
+});
 
 #[napi]
 pub struct DelegateAgent {
@@ -84,9 +92,7 @@ impl DelegateAgent {
             std::mem::transmute::<Vec<Message>, Vec<alith::core::chat::Message>>(history)
         };
         agent.preamble = self.preamble.clone();
-        let rt =
-            Runtime::new().map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))?;
-        let result = rt.block_on(async {
+        let result = GLOBAL_RUNTIME.block_on(async {
             if !self.mcp_config_path.is_empty() {
                 agent = agent.mcp_config_path(&self.mcp_config_path).await?;
             }

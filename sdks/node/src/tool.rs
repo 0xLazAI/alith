@@ -1,9 +1,10 @@
 use alith::{Tool, ToolDefinition, ToolError};
 use async_trait::async_trait;
 
-use napi::{Env, JsFunction, JsString};
+use napi::{Env, JsFunction, JsString, JsUnknown, bindgen_prelude::FromNapiValue};
 use napi_derive::napi;
 
+use crate::GLOBAL_RUNTIME;
 use crate::sys;
 
 use super::ValueType;
@@ -43,15 +44,43 @@ impl DelegateTool {
             .handler
             .call(None, &[js_input])
             .map_err(|_| ToolError::InvalidOutput)?;
-        let result_str: JsString = result
-            .coerce_to_string()
-            .map_err(|_| ToolError::InvalidOutput)?;
-        Ok(result_str
-            .into_utf8()
-            .map_err(|_| ToolError::InvalidOutput)?
-            .as_str()
-            .map_err(|_| ToolError::InvalidOutput)?
-            .to_string())
+        // Deal promise result
+        if result
+            .is_promise()
+            .map_err(|err| ToolError::NormalError(Box::new(err)))?
+        {
+            let result: Value = unsafe { std::mem::transmute(result) };
+            let promise = unsafe {
+                napi::bindgen_prelude::Promise::<JsUnknown>::from_napi_value(
+                    func_value.env,
+                    result._value,
+                )
+                .map_err(|_| ToolError::InvalidOutput)
+            }?;
+            let result = GLOBAL_RUNTIME
+                .block_on(async { promise.await.map_err(|_| ToolError::InvalidOutput) })?;
+
+            let result_str: JsString = result
+                .coerce_to_string()
+                .map_err(|_| ToolError::InvalidOutput)?;
+
+            Ok(result_str
+                .into_utf8()
+                .map_err(|_| ToolError::InvalidOutput)?
+                .as_str()
+                .map_err(|_| ToolError::InvalidOutput)?
+                .to_string())
+        } else {
+            let result_str: JsString = result
+                .coerce_to_string()
+                .map_err(|_| ToolError::InvalidOutput)?;
+            Ok(result_str
+                .into_utf8()
+                .map_err(|_| ToolError::InvalidOutput)?
+                .as_str()
+                .map_err(|_| ToolError::InvalidOutput)?
+                .to_string())
+        }
     }
 }
 
