@@ -2,6 +2,7 @@ import { DelegateAgent, type DelegateTool } from './internal'
 import { Store } from './store'
 import { Memory } from './memory'
 import { type Tool, convertParametersToJson } from './tool'
+import { loopWhile } from 'deasync'
 
 // Define the configuration structure for an Agent
 type AgentOptions = {
@@ -69,14 +70,34 @@ class Agent {
           const tool_args = JSON.parse(args)
           const args_array = Object.values(tool_args)
           const result = tool.handler(...args_array)
-          return JSON.stringify(result)
+          var done = false
+          var result_json = JSON.stringify({})
+          if (result instanceof Promise) {
+            result
+              .then((res) => {
+                result_json = JSON.stringify(res)
+                done = true
+              })
+              .catch((error) => {
+                result_json = JSON.stringify({ error: String(error) })
+                done = true
+              })
+            loopWhile(() => !done)
+          } else {
+            result_json = JSON.stringify(result)
+          }
+          return result_json
         },
       })
     }
+    // Sync search documents from the store
     if (this._store) {
+      var done = false
       this._store.search(prompt).then((docs) => {
         prompt = `${prompt}\n\n<attachments>\n${docs.join('')}</attachments>\n`
+        done = true
       })
+      loopWhile(() => !done)
     }
     if (this._memory) {
       const result = this._agent.promptWithTools(prompt, this._memory.messages(), delegateTools)
