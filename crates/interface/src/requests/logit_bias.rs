@@ -262,7 +262,7 @@ impl FromWords {
                     ));
                 } else if words_maybe.len() > 1 {
                     return Err(crate::anyhow!(
-                        "logit_bias contains a word seperated by whitespace. Given word: {}",
+                        "logit_bias contains a word separated by whitespace. Given word: {}",
                         word_maybe
                     ));
                 } else {
