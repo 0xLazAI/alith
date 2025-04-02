@@ -10,7 +10,7 @@ Alith provides a Store feature that allows you to persist and retrieve data acro
 ## Memory Store
 
 ```rust
-use alith::{Agent, InMemoryStorage, LLM};
+use alith::{Agent, Chat, InMemoryStorage, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -40,7 +40,7 @@ use alith::store::qdrant::{
     CreateCollectionBuilder, Distance, QdrantClient, QdrantStorage, VectorParamsBuilder,
     DEFAULT_COLLECTION_NAME,
 };
-use alith::{Agent, EmbeddingsBuilder, LLM};
+use alith::{Agent, Chat, EmbeddingsBuilder, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

@@ -57,8 +57,10 @@ impl DelegateTool {
                 )
                 .map_err(|_| ToolError::InvalidOutput)
             }?;
-            let result = GLOBAL_RUNTIME
-                .block_on(async { promise.await.map_err(|_| ToolError::InvalidOutput) })?;
+            let task = tokio::task::LocalSet::new();
+            let result = task.block_on(&GLOBAL_RUNTIME, async {
+                promise.await.map_err(|_| ToolError::InvalidOutput)
+            })?;
 
             let result_str: JsString = result
                 .coerce_to_string()

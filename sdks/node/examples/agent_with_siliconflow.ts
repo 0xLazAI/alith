@@ -5,4 +5,4 @@ const agent = new Agent({
   baseUrl: 'api.siliconflow.cn/v1',
   apiKey: process.env.LLM_API_KEY,
 })
-console.log(agent.prompt('Calculate 10 - 3'))
+console.log(await agent.prompt('Calculate 10 - 3'))

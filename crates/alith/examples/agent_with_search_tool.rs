@@ -1,4 +1,4 @@
-use alith::{Agent, LLM, SearchTool};
+use alith::{Agent, Chat, LLM, SearchTool};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

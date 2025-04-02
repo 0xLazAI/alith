@@ -64,7 +64,7 @@ impl<M: Completion> Executor<M> {
     }
 
     /// Add a user message into the memory if the memory has been set.
-    async fn add_user_message(&self, message: &dyn std::fmt::Display) {
+    async fn add_user_message(&self, message: &str) {
         if let Some(memory) = &self.memory {
             let mut memory = memory.write().await;
             memory.add_user_message(message);
@@ -72,7 +72,7 @@ impl<M: Completion> Executor<M> {
     }
 
     /// Add an AI message into the memory if the memory has been set.
-    async fn add_ai_message(&self, message: &dyn std::fmt::Display) {
+    async fn add_ai_message(&self, message: &str) {
         if let Some(memory) = &self.memory {
             let mut memory = memory.write().await;
             memory.add_ai_message(message);
@@ -80,13 +80,10 @@ impl<M: Completion> Executor<M> {
     }
 
     /// Add an AI message into the memory if the memory has been set.
-    async fn add_ai_message_with_tool_call(
-        &self,
-        tool_call: &dyn std::fmt::Display,
-    ) -> anyhow::Result<()> {
+    async fn add_ai_message_with_tool_call(&self, tool_call: &str) -> anyhow::Result<()> {
         if let Some(memory) = &self.memory {
             let mut memory = memory.write().await;
-            let tool_call: serde_json::Value = serde_json::from_str(&format!("{tool_call}"))?;
+            let tool_call: serde_json::Value = serde_json::from_str(tool_call)?;
             memory.add_message(Message::new_ai_message("").with_tool_calls(tool_call));
         }
         Ok(())

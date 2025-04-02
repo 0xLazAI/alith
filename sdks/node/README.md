@@ -30,7 +30,7 @@ const agent = new Agent({
   preamble:
     "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",
 });
-console.log(agent.prompt("Calculate 10 - 3"));
+console.log(await agent.prompt("Calculate 10 - 3"));
 ```
 
 - Agent with Tools
@@ -65,7 +65,7 @@ const agent = new Agent({
     },
   ],
 });
-console.log(agent.prompt("Calculate 10 - 3"));
+console.log(await agent.prompt("Calculate 10 - 3"));
 ```
 
 ## Examples

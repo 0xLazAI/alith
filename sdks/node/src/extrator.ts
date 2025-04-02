@@ -4,7 +4,7 @@ import { Agent } from './agent'
 export class Extractor {
   constructor(public agent: Agent, public model: z.ZodSchema) {}
 
-  extract(input: string): z.infer<typeof this.model> {
+  async extract(input: string): Promise<z.infer<typeof this.model>> {
     const agent = new Agent({
       name: this.agent.name(),
       model: this.agent.model(),
@@ -23,7 +23,7 @@ data structure.
         },
       ],
     })
-    const result = agent.prompt(input)
+    const result = await agent.prompt(input)
     return this.model.parse(JSON.parse(result))
   }
 }
@@ -32,30 +32,45 @@ export function parseArgs<TActionSchema extends z.ZodTypeAny = z.ZodTypeAny>(
   argsSchema: TActionSchema,
   ...args: any[]
 ): z.infer<TActionSchema> {
-  // If the schema is not an object, parse the arguments directly
-  if (!(argsSchema instanceof z.ZodObject)) {
-    return argsSchema.parse(args[0]) // Assume the first argument is the value
-  }
-
   // If the schema is an object, parse the arguments into an object
-  const properties = argsSchema.shape
-  const argsObject: Record<string, any> = {}
-  let index = 0
-  for (const key in properties) {
-    if (properties.hasOwnProperty(key)) {
-      const value =
-        args[index] !== undefined
-          ? args[index]
-          : properties[key] instanceof z.ZodString
-          ? ''
-          : properties[key] instanceof z.ZodNumber
-          ? 0
-          : properties[key] instanceof z.ZodBoolean
-          ? false
-          : null
-      argsObject[key] = value
-      index++
+  if (isZodObject(argsSchema)) {
+    const properties = argsSchema.shape
+    const argsObject: Record<string, any> = {}
+    let index = 0
+
+    for (const key in properties) {
+      if (properties.hasOwnProperty(key)) {
+        if (index >= args.length) {
+          const defaultValue = getDefaultValue(properties[key], args[index])
+          argsObject[key] = defaultValue
+        } else {
+          argsObject[key] = args[index]
+        }
+        index++
+      }
     }
+    return argsSchema.parse(argsObject)
   }
-  return argsSchema.parse(argsObject)
+  // If the schema is not an object, parse the arguments directly
+  return argsSchema.parse(args[0])
+}
+
+function isZodObject(schema: any): schema is z.ZodObject<Record<string, any>> {
+  return (
+    schema instanceof z.ZodObject ||
+    (schema?._def && schema._def.typeName === 'ZodObject') ||
+    (typeof schema.shape === 'function' && schema.shape().constructor.name === 'Object')
+  )
+}
+
+function getDefaultValue(zodType: any, value: any): any {
+  if (zodType instanceof z.ZodString) {
+    return ''
+  } else if (zodType instanceof z.ZodNumber) {
+    return 0
+  } else if (zodType instanceof z.ZodBoolean) {
+    return false
+  } else {
+    return parseArgs(zodType, value)
+  }
 }

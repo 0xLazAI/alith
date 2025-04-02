@@ -1,5 +1,8 @@
 use crate::mcp::MCPError;
-use crate::{agent::Agent, chat::Completion};
+use crate::{
+    agent::Agent,
+    chat::{Chat, Completion},
+};
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 use tokio::sync::RwLock;
@@ -21,7 +24,7 @@ pub struct TaskMetadata {
     pub created_at: u64,
 }
 
-impl<M: Completion> Task<M> {
+impl<M: Completion + Send + Sync> Task<M> {
     /// Creates a new task.
     pub fn new(agent: Arc<RwLock<Agent<M>>>, prompt: String) -> Self {
         Self {

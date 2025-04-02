@@ -1,4 +1,4 @@
-use alith::{Agent, InMemoryStorage, LLM};
+use alith::{Agent, Chat, InMemoryStorage, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

@@ -1,12 +1,12 @@
 pub use crate::client::{
     CompletionRequest as BackendCompletionRequest, CompletionResponse as Response,
 };
+use crate::store::DocumentId;
+use crate::task::TaskError;
 pub use alith_interface::requests::completion::{TokenUsage, ToolDefinition};
+use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::error::Error;
-
-use crate::store::DocumentId;
 
 /// A trait representing a prompt-based interaction mechanism.
 ///
@@ -19,10 +19,8 @@ use crate::store::DocumentId;
 /// # Requirements
 /// Implementors of this trait must ensure thread safety (`Send` and `Sync`)
 /// and provide an asynchronous implementation for the `prompt` method.
-pub trait Prompt: Send + Sync {
-    /// The error type associated with the `prompt` operation.
-    type PromptError: Error + Send + Sync;
-
+#[async_trait]
+pub trait Chat: Send + Sync {
     /// Processes the given prompt and returns a response asynchronously.
     ///
     /// # Arguments
@@ -32,10 +30,9 @@ pub trait Prompt: Send + Sync {
     /// A future that resolves to either:
     /// - `Ok(String)`: The generated response as a string.
     /// - `Err(Self::PromptError)`: An error that occurred during prompt processing.
-    fn prompt(
-        &self,
-        prompt: &str,
-    ) -> impl std::future::Future<Output = Result<String, Self::PromptError>> + Send;
+    async fn prompt(&self, prompt: &str) -> Result<String, TaskError>;
+    /// Processes the given prompt and history and returns a response asynchronously.
+    async fn chat(&self, prompt: &str, history: Vec<Message>) -> Result<String, TaskError>;
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

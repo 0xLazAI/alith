@@ -133,7 +133,7 @@ async function main() {
 			preamble: preamble,
 			tools: tools,
 		});
-		console.log(agent.prompt("Entertain me!"));
+		console.log(await agent.prompt("Entertain me!"));
 	} catch (error) {
 		console.error("Error:", error);
 		process.exit(1);

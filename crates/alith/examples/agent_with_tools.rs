@@ -1,4 +1,4 @@
-use alith::{Agent, LLM, StructureTool, ToolError};
+use alith::{Agent, Chat, LLM, StructureTool, ToolError};
 use async_trait::async_trait;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};

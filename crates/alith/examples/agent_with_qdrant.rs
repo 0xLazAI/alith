@@ -2,7 +2,7 @@ use alith::store::qdrant::{
     CreateCollectionBuilder, DEFAULT_COLLECTION_NAME, Distance, QdrantClient, QdrantStorage,
     VectorParamsBuilder,
 };
-use alith::{Agent, EmbeddingsBuilder, LLM};
+use alith::{Agent, Chat, EmbeddingsBuilder, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

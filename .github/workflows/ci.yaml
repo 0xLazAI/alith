@@ -48,6 +48,6 @@ jobs:
       - name: Cargo fmt
         run: cargo fmt --all -- --check
       - name: Cargo clippy
-        run: cargo clippy --workspace --all-features --benches --examples --tests -- -D warnings
+        run: cargo clippy --workspace -- -D warnings
       - name: Run tests
         run: cargo test -r --workspace

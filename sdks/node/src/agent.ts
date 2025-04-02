@@ -2,7 +2,6 @@ import { DelegateAgent, type DelegateTool } from './internal'
 import { Store } from './store'
 import { Memory } from './memory'
 import { type Tool, convertParametersToJson } from './tool'
-import { loopWhile } from 'deasync'
 
 // Define the configuration structure for an Agent
 type AgentOptions = {
@@ -55,7 +54,7 @@ class Agent {
    * @param {string} prompt - The input prompt to process.
    * @returns {string} - The result of processing the prompt.
    */
-  prompt(prompt: string): string {
+  async prompt(prompt: string): Promise<string> {
     // Delegate the prompt processing to the underlying agent and return the result
     const tools = this._opts.tools ?? []
     const delegateTools: Array<DelegateTool> = []
@@ -66,23 +65,15 @@ class Agent {
         description: tool.description,
         parameters: convertParametersToJson(tool.parameters),
         author: tool.author ?? '',
-        handler: (args: string) => {
+        handler: async (args: string) => {
           const tool_args = JSON.parse(args)
           const args_array = Object.values(tool_args)
           const result = tool.handler(...args_array)
-          var done = false
-          var result_json = JSON.stringify({})
+          console.log('asd:', result)
+          var result_json
           if (result instanceof Promise) {
-            result
-              .then((res) => {
-                result_json = JSON.stringify(res)
-                done = true
-              })
-              .catch((error) => {
-                result_json = JSON.stringify({ error: String(error) })
-                done = true
-              })
-            loopWhile(() => !done)
+            result_json = JSON.stringify(await result)
+            console.log('asd:', result_json)
           } else {
             result_json = JSON.stringify(result)
           }
@@ -92,12 +83,8 @@ class Agent {
     }
     // Sync search documents from the store
     if (this._store) {
-      var done = false
-      this._store.search(prompt).then((docs) => {
-        prompt = `${prompt}\n\n<attachments>\n${docs.join('')}</attachments>\n`
-        done = true
-      })
-      loopWhile(() => !done)
+      const docs = await this._store.search(prompt)
+      prompt = `${prompt}\n\n<attachments>\n${docs.join('')}</attachments>\n`
     }
     if (this._memory) {
       const result = this._agent.promptWithTools(prompt, this._memory.messages(), delegateTools)

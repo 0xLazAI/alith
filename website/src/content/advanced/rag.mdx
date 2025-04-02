@@ -10,7 +10,7 @@ Alith supports Retrieval-Augmented Generation (RAG), a technique that combines r
 ## RAG with Memory
 
 ```rust
-use alith::{Agent, EmbeddingsBuilder, InMemoryStorage, LLM};
+use alith::{Agent, Chat, EmbeddingsBuilder, InMemoryStorage, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -46,7 +46,7 @@ use alith::store::qdrant::{
     CreateCollectionBuilder, Distance, QdrantClient, QdrantStorage, VectorParamsBuilder,
     DEFAULT_COLLECTION_NAME,
 };
-use alith::{Agent, EmbeddingsBuilder, LLM};
+use alith::{Agent, Chat, EmbeddingsBuilder, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -125,7 +125,7 @@ const agent = new Agent({
   preamble: 'You are a comedian here to entertain the user using humour and jokes.',
   store,
 })
-console.log(agent.prompt('Entertain me!'))
+console.log(await agent.prompt('Entertain me!'))
 ```
 
 </Tabs.Tab>
