@@ -27,4 +27,4 @@ const agent = new Agent({
     },
   ],
 })
-console.log(agent.prompt('Calculate 10 - 3'))
+console.log(await agent.prompt('Calculate 10 - 3'))

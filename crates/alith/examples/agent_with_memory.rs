@@ -1,4 +1,4 @@
-use alith::{Agent, LLM, WindowBufferMemory};
+use alith::{Agent, Chat, LLM, WindowBufferMemory};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

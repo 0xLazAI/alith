@@ -1,4 +1,4 @@
-use alith::{Agent, inference::MistralRsEngine};
+use alith::{Agent, Chat, inference::MistralRsEngine};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

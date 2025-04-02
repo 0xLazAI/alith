@@ -32,7 +32,7 @@ cargo add tokio async_trait schemars serde anyhow
 ## Write the Code
 
 ```rust
-use alith::{Agent, LLM};
+use alith::{Agent, Chat, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -157,7 +157,7 @@ const agent = new Agent({
   preamble:
     "You are a comedian here to entertain the user using humour and jokes.",
 });
-console.log(agent.prompt("Entertain me!"));
+console.log(await agent.prompt("Entertain me!"));
 ```
 
 ## Model Provider Settings

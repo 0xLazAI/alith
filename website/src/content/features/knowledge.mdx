@@ -10,7 +10,7 @@ Alith supports knowledge bases, **allowing agents to access structured or unstru
 ## String Source Knowledge
 
 ```rust
-use alith::{Agent, LLM, Knowledge, StringKnowledge};
+use alith::{Agent, Chat, LLM, Knowledge, StringKnowledge};
 use std::sync::Arc;
 
 #[tokio::main]
@@ -33,7 +33,7 @@ async fn main() -> Result<(), anyhow::Error> {
 ## Text Source Knowledge
 
 ```rust
-use alith::{Agent, LLM, Knowledge, TextFileKnowledge};
+use alith::{Agent, Chat, LLM, Knowledge, TextFileKnowledge};
 use std::sync::Arc;
 
 #[tokio::main]
@@ -56,7 +56,7 @@ async fn main() -> Result<(), anyhow::Error> {
 ## PDF Source Knowledge
 
 ```rust
-use alith::{Agent, LLM, Knowledge, PdfFileKnowledge};
+use alith::{Agent, Chat, LLM, Knowledge, PdfFileKnowledge};
 use std::sync::Arc;
 
 #[tokio::main]
@@ -79,7 +79,7 @@ async fn main() -> Result<(), anyhow::Error> {
 ## HTML Source Knowledge
 
 ```rust
-use alith::{Agent, LLM, HtmlKnowledge, Knowledge,};
+use alith::{Agent, Chat, LLM, HtmlKnowledge, Knowledge,};
 use std::io::Cursor;
 use std::sync::Arc;
 use url::Url;

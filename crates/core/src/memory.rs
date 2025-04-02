@@ -112,12 +112,12 @@ pub trait Memory: Send + Sync {
     fn messages(&self) -> Vec<Message>;
 
     /// Adds a user (human) message to the memory.
-    fn add_user_message(&mut self, message: &dyn std::fmt::Display) {
+    fn add_user_message(&mut self, message: &str) {
         self.add_message(Message::new_human_message(message.to_string()));
     }
 
     /// Adds an AI (LLM) message to the memory.
-    fn add_ai_message(&mut self, message: &dyn std::fmt::Display) {
+    fn add_ai_message(&mut self, message: &str) {
         self.add_message(Message::new_ai_message(message.to_string()));
     }
 

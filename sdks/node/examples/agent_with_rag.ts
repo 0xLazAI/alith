@@ -9,4 +9,4 @@ const agent = new Agent({
   preamble: 'You are a comedian here to entertain the user using humour and jokes.',
   store,
 })
-console.log(agent.prompt('Entertain me!'))
+console.log(await agent.prompt('Entertain me!'))

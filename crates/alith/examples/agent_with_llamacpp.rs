@@ -1,5 +1,5 @@
 #[cfg(not(target_os = "windows"))]
-use alith::{Agent, inference::LlamaEngine};
+use alith::{Agent, Chat, inference::LlamaEngine};
 
 #[cfg(not(target_os = "windows"))]
 #[tokio::main]

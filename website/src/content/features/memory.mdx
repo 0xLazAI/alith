@@ -10,7 +10,7 @@ Alith supports memory functionality, **allowing agents to retain and recall info
 ## Window Buffer Memory
 
 ```rust
-use alith::{Agent, WindowBufferMemory, LLM};
+use alith::{Agent, Chat, WindowBufferMemory, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -58,8 +58,8 @@ const agent = new Agent({
   model: 'gpt-4',
   memory: new WindowBufferMemory(),
 })
-console.log(agent.prompt('Calculate 10 - 3'))
-console.log(agent.prompt('Calculate 10 - 3 again'))
+console.log(await agent.prompt('Calculate 10 - 3'))
+console.log(await agent.prompt('Calculate 10 - 3 again'))
 ```
 
 </Tabs.Tab>

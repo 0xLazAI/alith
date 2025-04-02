@@ -1,4 +1,4 @@
-use alith::{Agent, LLM, Tool};
+use alith::{Agent, Chat, LLM, Tool};
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
 

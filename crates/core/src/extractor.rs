@@ -2,7 +2,7 @@ use std::marker::PhantomData;
 
 use crate::{
     agent::Agent,
-    chat::Completion,
+    chat::{Chat, Completion},
     task::TaskError,
     tool::{StructureTool, ToolError},
 };
@@ -19,7 +19,7 @@ where
 
 impl<M> Extractor<M>
 where
-    M: Completion,
+    M: Completion + Send + Sync,
 {
     /// Constructor for Extractor that initializes the agent with the given model.
     #[inline]

@@ -23,7 +23,7 @@ We extend framework capabilities through platform-specific optimizations:
 ### Llamacpp
 
 ```rust
-use alith::{Agent, inference::LlamaEngine};
+use alith::{Agent, Chat, inference::LlamaEngine};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -39,7 +39,7 @@ async fn main() -> Result<(), anyhow::Error> {
 ### MistralRs
 
 ```rust
-use alith::{Agent, inference::MistralRsEngine};
+use alith::{Agent, Chat, inference::MistralRsEngine};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -56,7 +56,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
 ```rust
 use alith::{
-    Agent,
+    Agent, Chat,
     inference::engines::ort::{GraphOptimizationLevel, ort_init, present::GPT2},
 };
 

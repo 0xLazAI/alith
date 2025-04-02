@@ -17,7 +17,7 @@ pub use core::llm::{
 pub use core::{
     agent::Agent,
     chat::{
-        Completion, CompletionError, Message as ChatMessage, Prompt, Request, ResponseContent,
+        Chat, Completion, CompletionError, Message as ChatMessage, Request, ResponseContent,
         ResponseTokenUsage, ResponseToolCalls, ToolCall,
     },
     chunking::{

@@ -1,5 +1,6 @@
 use alith::{
-    Agent, HtmlKnowledge, Knowledge, LLM, PdfFileKnowledge, StringKnowledge, TextFileKnowledge,
+    Agent, Chat, HtmlKnowledge, Knowledge, LLM, PdfFileKnowledge, StringKnowledge,
+    TextFileKnowledge,
 };
 use std::io::Cursor;
 use std::sync::Arc;

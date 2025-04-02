@@ -10,7 +10,7 @@ Alith allows you to **define tools that agents can use to perform specific tasks
 ## Custom Calculation Tool
 
 ```rust
-use alith::{Agent, StructureTool, ToolError, LLM};
+use alith::{Agent, Chat, StructureTool, ToolError, LLM};
 use async_trait::async_trait;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -79,7 +79,7 @@ async fn main() -> Result<(), anyhow::Error> {
 ## Builtin Search Tool
 
 ```rust
-use alith::{Agent, SearchTool, LLM};
+use alith::{Agent, Chat, SearchTool, LLM};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -160,7 +160,7 @@ const agent = new Agent({
     },
   ],
 });
-console.log(agent.prompt("Calculate 10 - 3"));
+console.log(await agent.prompt("Calculate 10 - 3"));
 ```
 
 </Tabs.Tab>

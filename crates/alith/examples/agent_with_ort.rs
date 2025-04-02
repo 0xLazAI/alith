@@ -1,5 +1,5 @@
 use alith::{
-    Agent,
+    Agent, Chat,
     inference::engines::ort::{GraphOptimizationLevel, ort_init, present::GPT2},
 };
 

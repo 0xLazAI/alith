@@ -1,4 +1,4 @@
-use crate::chat::{Completion, Document, Message, Request};
+use crate::chat::{Chat, Completion, Document, Message, Request};
 use crate::executor::Executor;
 use crate::knowledge::Knowledge;
 use crate::mcp::{MCPClient, MCPError, setup_mcp_clients, sse_client, stdio_client};
@@ -7,6 +7,7 @@ use crate::store::{Storage, VectorStoreError};
 use crate::task::TaskError;
 use crate::tool::Tool;
 use crate::{Ref, make_ref};
+use async_trait::async_trait;
 use futures::{StreamExt, TryStreamExt, stream};
 use std::collections::HashMap;
 use std::path::Path;
@@ -18,7 +19,7 @@ pub struct Agent<M: Completion> {
     /// The model to use.
     pub model: Ref<M>,
     /// Indexed storage for the agent.
-    pub store_indices: Vec<(usize, Box<dyn Storage>)>,
+    pub store_indices: Vec<(usize, Box<dyn Storage + Send>)>,
     /// The tools to use.
     pub tools: Ref<Vec<Box<dyn Tool>>>,
     /// Knowledge sources for the agent.
@@ -186,9 +187,12 @@ where
             .mcp_client(stdio_client(command, args, env).await?)
             .await)
     }
+}
 
+#[async_trait]
+impl<M: Completion + Send + Sync> Chat for Agent<M> {
     /// Processes a prompt using the agent.
-    pub async fn prompt(&self, prompt: &str) -> Result<String, TaskError> {
+    async fn prompt(&self, prompt: &str) -> Result<String, TaskError> {
         // Add chat conversion history.
         let history = if let Some(memory) = &self.memory {
             let memory = memory.read().await;
@@ -207,7 +211,7 @@ where
     }
 
     /// Processes a prompt using the agent.
-    pub async fn chat(&self, prompt: &str, history: Vec<Message>) -> Result<String, TaskError> {
+    async fn chat(&self, prompt: &str, history: Vec<Message>) -> Result<String, TaskError> {
         let mut executor = Executor::new(
             self.model.clone(),
             self.knowledges.clone(),
