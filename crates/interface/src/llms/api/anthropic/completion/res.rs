@@ -32,9 +32,6 @@ impl CompletionResponse {
             return Err(CompletionError::ResponseContentEmpty);
         }
 
-        if res.content.len() > 1 {
-            return Err(CompletionError::ResponseContentEmpty);
-        }
         let content = res
             .content
             .first()
