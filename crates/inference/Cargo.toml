@@ -38,7 +38,7 @@ ort = { "git" = "https://github.com/pykeio/ort.git", default-features = false, f
 ], optional = true }
 
 # mistralrs
-indexmap = { version = "2.6" }
+indexmap = { version = "2.9" }
 mistralrs = { git = "https://github.com/EricLBuehler/mistral.rs.git", rev = "aaafc2ef", optional = true }
 
 # vLLM
