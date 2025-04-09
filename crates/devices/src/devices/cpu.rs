@@ -11,7 +11,7 @@ impl Default for CpuConfig {
         let mut sys = sysinfo::System::new_all();
         sys.refresh_all();
 
-        let num_cpus = match sys.physical_core_count() {
+        let num_cpus = match sysinfo::System::physical_core_count() {
             Some(cores) => cores,
             None => sys.cpus().len(), // Fallback to logical core count for VMs
         };
