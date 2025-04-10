@@ -1271,16 +1271,14 @@ dependencies = [
 
 [[package]]
 name = "dagrs"
-version = "0.4.2"
+version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd84a736ffb5752612e39db805a3073a001011bda13dd7914f606f32b1fbb669"
+checksum = "b882d44427b364521d88290e26fdb4effc0f0dccf98e8e6f65d3ad29688c0b30"
 dependencies = [
  "async-trait",
  "dagrs-derive",
- "env_logger",
  "futures",
  "log",
- "proc-macro2",
  "tokio",
 ]
 
