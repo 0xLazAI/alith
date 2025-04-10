@@ -3033,7 +3033,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fc2f4eb4bc735547cfed7c0a4922cbd04a4655978c09b54f1f7b228750664c34"
 dependencies = [
  "cfg-if",
- "windows-targets 0.52.6",
+ "windows-targets 0.48.5",
 ]
 
 [[package]]
@@ -4082,7 +4082,7 @@ dependencies = [
 [[package]]
 name = "ort"
 version = "2.0.0-rc.9"
-source = "git+https://github.com/pykeio/ort.git#6e44003e3455ab4fad8832c9c7964dc756e5a406"
+source = "git+https://github.com/pykeio/ort.git#67dde364e9b15c0f810bce2c4226abc11e4a4fec"
 dependencies = [
  "ndarray",
  "ort-sys 2.0.0-rc.9 (git+https://github.com/pykeio/ort.git)",
@@ -4108,7 +4108,7 @@ dependencies = [
 [[package]]
 name = "ort-sys"
 version = "2.0.0-rc.9"
-source = "git+https://github.com/pykeio/ort.git#6e44003e3455ab4fad8832c9c7964dc756e5a406"
+source = "git+https://github.com/pykeio/ort.git#67dde364e9b15c0f810bce2c4226abc11e4a4fec"
 dependencies = [
  "pkg-config",
 ]
