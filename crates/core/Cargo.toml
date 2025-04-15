@@ -26,7 +26,7 @@ dagrs.workspace = true
 regex = "1.11"
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
 hnsw_rs = "0.3.1"
-lru = "0.13.0"
+lru = "0.14.0"
 mcp-client = "0.1.0"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 html2text = "0.14.3"
