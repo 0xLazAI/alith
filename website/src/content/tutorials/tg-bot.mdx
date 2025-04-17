@@ -1,4 +1,4 @@
-import { Steps } from "nextra/components";
+import { Steps, Tabs } from "nextra/components";
 
 # Telegram Bot
 
@@ -21,8 +21,86 @@ Before starting, ensure you have the following:
 - Telegram Bot Token: Create a Telegram Bot and retrieve the Bot Token.
 - Python Environment: Install Python (3.8 or higher) and set up a virtual environment.
 
-<Steps>
+<Tabs items={['Rust', 'Python']}>
+  <Tabs.Tab>
+  <Steps>
+## Install Required Libraries
 
+Install the necessary Rust libraries using `cargo`:
+
+```shell
+cargo add alith teloxide dotenv
+```
+
+## Create a Telegram Bot
+
+1. Search for **BotFather** in Telegram and interact with it.
+2. Send the `/newbot` command to create a new bot.
+3. Follow the prompts to provide a name and username for your bot, and save the generated Bot Token.
+
+## Set Up Environment Variables
+
+Store your API keys and tokens as environment variables for security:
+
+```shell
+export OPENAI_API_KEY="your-openai-api-key"
+export TELOXIDE_TOKEN="your-telegram-bot-token"
+```
+
+## Write the Telegram Bot Code
+
+Create a Rust project `cargo init` and add the following code in `main.rs`:
+
+```rust
+use alith::{Completion, Request, core::llm::client::Client};
+
+use anyhow::Error;
+use teloxide::prelude::*;
+use dotenv::dotenv;
+
+#[tokio::main]
+async fn main() -> Result<(), Error> {
+    dotenv().ok();
+    log::info!("Starting command bot...");
+
+    let telegram_bot = Bot::from_env();
+
+    let client = Client::from_model_name("gpt-3.5-turbo").expect("Failed to create LLM");
+
+    let handler = Update::filter_message().endpoint(|bot: Bot, msg: Message, mut client: Client| async move {
+        if let Some(text) = msg.text() {
+             let result = client.completion(Request::new(text.to_string(), r#"You are a spam detector here to assist the user in identifying spam messages. 
+                 Respond with a clear yes/no and a brief explanation why."#.to_string())).await.unwrap();
+             let response_text = result.content;
+             bot.send_message(msg.chat.id, response_text).await?;
+         } else {
+             bot.send_message(msg.chat.id, "Please send a text message to check for spam.").await?;
+         }
+         respond(())
+     });
+ 
+     Dispatcher::builder(telegram_bot, handler)
+         .dependencies(dptree::deps![client])
+         .enable_ctrlc_handler()
+         .build()
+         .dispatch()
+         .await;
+    
+    Ok(())
+}
+```
+
+## Run the Telegram Bot
+
+Run your Rust script to start the bot:
+
+```shell
+cargo run --release
+```
+</Steps>
+  </Tabs.Tab>
+  <Tabs.Tab>
+  <Steps>
 ## Install Required Libraries
 
 Install the necessary Python libraries using `pip`:
@@ -94,13 +172,16 @@ if __name__ == "__main__":
 
 ```
 
-## Run the Slack Bot
+## Run the Telegram Bot
 
 Run your Python script to start the bot:
 
 ```shell
 python3 tg-bot.py
 ```
+</Steps>
+  </Tabs.Tab>
+</Tabs>
 
 ## Test the Bot
 
@@ -124,7 +205,6 @@ Here are some ideas to improve your bot:
 3. Custom Commands: Allow users to trigger specific actions (e.g., `/ask` for questions).
 4. Rate Limiting: Prevent abuse by limiting the number of requests per user.
 
-</Steps>
 
 ## References
 
