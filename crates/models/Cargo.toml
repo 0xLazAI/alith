@@ -21,7 +21,11 @@ tracing.workspace = true
 half.workspace = true
 tiktoken-rs.workspace = true
 
-hf-hub = { version = "0.4.2", default-features = false, features = ["ureq", "tokio", "rustls-tls"] }
+hf-hub = { version = "0.4.2", default-features = false, features = [
+    "ureq",
+    "tokio",
+    "rustls-tls",
+] }
 byteorder = "1.5.0"
 minijinja = "2.9.0"
 paste = "1.0.15"

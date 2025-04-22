@@ -85,6 +85,7 @@ dependencies = [
  "alith-models",
  "alith-prompt",
  "alith-store",
+ "alith-tee",
  "alith-tools",
  "anyhow",
  "async-trait",
@@ -327,6 +328,19 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+]
+
+[[package]]
+name = "alith-tee"
+version = "0.5.1"
+dependencies = [
+ "alith-core",
+ "async-trait",
+ "reqwest 0.12.15",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.12",
+ "url",
 ]
 
 [[package]]
