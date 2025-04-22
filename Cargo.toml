@@ -15,8 +15,12 @@ alith-devices = { path = "crates/devices" }
 alith-models = { path = "crates/models" }
 alith-prompt = { path = "crates/prompt" }
 alith-interface = { path = "crates/interface" }
+alith-tee = { path = "crates/tee" }
 
-fastembed = { version = "4.7.0", default-features = false, features = ["ort-download-binaries", "hf-hub-rustls-tls"] }
+fastembed = { version = "4.7.0", default-features = false, features = [
+    "ort-download-binaries",
+    "hf-hub-rustls-tls",
+] }
 uuid = { version = "1.16.0", features = ["serde", "v4"] }
 async-trait = "0.1.88"
 serde = { version = "1.0.219", features = ["derive"] }
@@ -25,7 +29,9 @@ tokio = { version = "1.44.2", features = ["full"] }
 anyhow = "1.0.98"
 thiserror = "2.0.12"
 schemars = "0.8.22"
-reqwest = { version = "0.12.15", default-features = false, features = ["rustls-tls"] }
+reqwest = { version = "0.12.15", default-features = false, features = [
+    "rustls-tls",
+] }
 url = "2.5.4"
 dagrs = "0.4.4"
 serial_test = "3.1.1"

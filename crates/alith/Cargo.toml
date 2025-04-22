@@ -20,6 +20,7 @@ alith-models.workspace = true
 alith-interface.workspace = true
 alith-prompt.workspace = true
 alith-devices.workspace = true
+alith-tee = { workspace = true, optional = true }
 
 async-trait.workspace = true
 tokio.workspace = true
@@ -30,6 +31,17 @@ reqwest.workspace = true
 url.workspace = true
 
 rand = "0.9"
+
+[features]
+inference = ["alith-core/inference"]
+ort = ["alith-inference/ort"]
+llamacpp = ["alith-inference/llamacpp"]
+mistralrs = ["alith-inference/mistralrs"]
+python = ["alith-inference/python"]
+sglang = ["alith-inference/sglang"]
+trtllm = ["alith-inference/trtllm"]
+vllm = ["alith-inference/vllm"]
+tee = ["dep:alith-tee"]
 
 [[example]]
 name = "agent"
@@ -112,13 +124,3 @@ name = "tokenizer"
 
 [[example]]
 name = "device"
-
-[features]
-inference = ["alith-core/inference"]
-ort = ["alith-inference/ort"]
-llamacpp = ["alith-inference/llamacpp"]
-mistralrs = ["alith-inference/mistralrs"]
-python = ["alith-inference/python"]
-sglang = ["alith-inference/sglang"]
-trtllm = ["alith-inference/trtllm"]
-vllm = ["alith-inference/vllm"]
