@@ -15,4 +15,4 @@ async-trait.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 tokio.workspace = true
-qdrant-client = "1.13.0"
+qdrant-client = "1.14.0"
