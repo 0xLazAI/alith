@@ -5,12 +5,14 @@ use std::sync::Arc;
 impl ApiLLMModel {
     pub fn openai_model_from_model_id(model_id: &str) -> ApiLLMModel {
         match model_id {
+            "gpt-3.5-turbo" => Self::gpt_3_5_turbo(),
             "gpt-4" => Self::gpt_4(),
             "gpt-4-32k" => Self::gpt_4_32k(),
             "gpt-4-turbo" => Self::gpt_4_turbo(),
             "gpt-4o" => Self::gpt_4_o(),
-            "gpt-3.5-turbo" => Self::gpt_3_5_turbo(),
             "gpt-4o-mini" => Self::gpt_4_o_mini(),
+            "gpt-4.1" => Self::gpt_4_1(),
+            "gpt-4.5" => Self::gpt_4_5(),
             _ => panic!("Model ID ({model_id}) not found for ApiLLMModel"),
         }
     }
@@ -148,6 +150,40 @@ impl ApiLLMModel {
             cost_per_m_out_tokens: 60.00,
             tokens_per_message: 4,
             tokens_per_name: Some(-1),
+        }
+    }
+
+    pub fn gpt_4_1() -> ApiLLMModel {
+        let model_id = "gpt-4.1".to_string();
+        let tokenizer = model_tokenizer(&model_id);
+        ApiLLMModel {
+            model_base: LLMModelBase {
+                model_id,
+                model_ctx_size: 8192,
+                inference_ctx_size: 4096,
+                tokenizer,
+            },
+            cost_per_m_in_tokens: 30.00,
+            cost_per_m_out_tokens: 60.00,
+            tokens_per_message: 3,
+            tokens_per_name: Some(1),
+        }
+    }
+
+    pub fn gpt_4_5() -> ApiLLMModel {
+        let model_id = "gpt-4.5".to_string();
+        let tokenizer = model_tokenizer(&model_id);
+        ApiLLMModel {
+            model_base: LLMModelBase {
+                model_id,
+                model_ctx_size: 8192,
+                inference_ctx_size: 4096,
+                tokenizer,
+            },
+            cost_per_m_in_tokens: 30.00,
+            cost_per_m_out_tokens: 60.00,
+            tokens_per_message: 3,
+            tokens_per_name: Some(1),
         }
     }
 }
