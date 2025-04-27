@@ -18,12 +18,12 @@ use std::sync::Arc;
 
 // OpenAI models
 
-pub const GPT_4_5: &str = "gpt-4.5";
+pub const GPT_3_5_TURBO: &str = "gpt-3.5-turbo";
 pub const GPT_4: &str = "gpt-4";
 pub const GPT_4_32K: &str = "gpt-4-32k";
 pub const GPT_4_TURBO: &str = "gpt-4-turbo";
-pub const GPT_3_5_TURBO: &str = "gpt-3.5-turbo";
-pub const GPT_4O_MINI: &str = "gpt-4o-mini";
+pub const GPT_4_1: &str = "gpt-4.1";
+pub const GPT_4_5: &str = "gpt-4.5";
 
 // Anthropic models
 
