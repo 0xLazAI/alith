@@ -17,7 +17,7 @@ alith-prompt = { path = "crates/prompt" }
 alith-interface = { path = "crates/interface" }
 alith-tee = { path = "crates/tee" }
 
-fastembed = { version = "4.7.0", default-features = false, features = [
+fastembed = { version = "4.8.0", default-features = false, features = [
     "ort-download-binaries",
     "hf-hub-rustls-tls",
 ] }
