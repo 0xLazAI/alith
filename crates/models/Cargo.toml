@@ -27,7 +27,7 @@ hf-hub = { version = "0.4.2", default-features = false, features = [
     "rustls-tls",
 ] }
 byteorder = "1.5.0"
-minijinja = "2.9.0"
+minijinja = "2.10.0"
 paste = "1.0.15"
 tokenizers = "0.21.1"
 sentencepiece = { version = "0.11.3", optional = true }

@@ -15,7 +15,7 @@ indenter.workspace = true
 thiserror.workspace = true
 serde.workspace = true
 
-minijinja = "2.9.0"
+minijinja = "2.10.0"
 
 [dev-dependencies]
 alith-models.workspace = true
