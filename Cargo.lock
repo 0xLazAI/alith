@@ -4119,7 +4119,7 @@ dependencies = [
 [[package]]
 name = "ort"
 version = "2.0.0-rc.9"
-source = "git+https://github.com/pykeio/ort.git#3abbddcb151deed0f80384c80d8f497fa6276a81"
+source = "git+https://github.com/pykeio/ort.git#0b7372442f6537f5129a2c14450010c53bc32252"
 dependencies = [
  "ndarray",
  "ort-sys 2.0.0-rc.9 (git+https://github.com/pykeio/ort.git)",
@@ -4145,7 +4145,7 @@ dependencies = [
 [[package]]
 name = "ort-sys"
 version = "2.0.0-rc.9"
-source = "git+https://github.com/pykeio/ort.git#3abbddcb151deed0f80384c80d8f497fa6276a81"
+source = "git+https://github.com/pykeio/ort.git#0b7372442f6537f5129a2c14450010c53bc32252"
 dependencies = [
  "pkg-config",
 ]
