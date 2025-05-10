@@ -158,7 +158,7 @@ dependencies = [
  "colorful",
  "indenter",
  "nvml-wrapper",
- "objc2",
+ "objc2 0.6.1",
  "objc2-metal",
  "sysinfo 0.35.0",
  "thiserror 2.0.12",
@@ -753,7 +753,7 @@ version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2c132eebf10f5cad5289222520a4a058514204aed6d791f1cf4fe8088b82d15f"
 dependencies = [
- "objc2",
+ "objc2 0.5.2",
 ]
 
 [[package]]
@@ -4008,6 +4008,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "objc2"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "88c6597e14493ab2e44ce58f2fdecf095a51f12ca57bec060a11c57332520551"
+dependencies = [
+ "objc2-encode",
+]
+
+[[package]]
 name = "objc2-core-foundation"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4031,7 +4040,7 @@ dependencies = [
  "bitflags 2.9.0",
  "block2",
  "libc",
- "objc2",
+ "objc2 0.5.2",
 ]
 
 [[package]]
@@ -4052,7 +4061,7 @@ checksum = "dd0cba1276f6023976a406a14ffa85e1fdd19df6b0f737b063b95f6c8c7aadd6"
 dependencies = [
  "bitflags 2.9.0",
  "block2",
- "objc2",
+ "objc2 0.5.2",
  "objc2-foundation",
 ]
 
