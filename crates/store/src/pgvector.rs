@@ -136,6 +136,7 @@ impl<E: Embeddings> PgVectorStorage<E> {
         Ok(vec.iter().map(|&x| x as f32).collect::<Vec<f32>>().into())
     }
 
+    /// Insert documents into the storage
     pub async fn insert_documents(
         &self,
         documents: Vec<EmbeddingsData>,

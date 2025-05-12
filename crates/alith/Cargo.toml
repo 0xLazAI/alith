@@ -33,6 +33,9 @@ url.workspace = true
 rand = "0.9"
 
 [features]
+# Default features
+default = []
+
 # Inference features
 inference = ["alith-core/inference"]
 ort = ["alith-inference/ort"]
@@ -47,6 +50,7 @@ tee = ["dep:alith-tee"]
 # Store features
 qdrant = ["alith-store/qdrant"]
 pgvector = ["alith-store/pgvector"]
+milvus = ["alith-store/milvus"]
 
 [[example]]
 name = "agent"
@@ -97,6 +101,10 @@ required-features = ["pgvector"]
 [[example]]
 name = "agent_with_qdrant"
 required-features = ["qdrant"]
+
+[[example]]
+name = "agent_with_milvus"
+required-features = ["milvus"]
 
 [[example]]
 name = "agent_with_cot"
