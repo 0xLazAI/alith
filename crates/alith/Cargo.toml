@@ -33,6 +33,7 @@ url.workspace = true
 rand = "0.9"
 
 [features]
+# Inference features
 inference = ["alith-core/inference"]
 ort = ["alith-inference/ort"]
 llamacpp = ["alith-inference/llamacpp"]
@@ -42,6 +43,10 @@ sglang = ["alith-inference/sglang"]
 trtllm = ["alith-inference/trtllm"]
 vllm = ["alith-inference/vllm"]
 tee = ["dep:alith-tee"]
+
+# Store features
+qdrant = ["alith-store/qdrant"]
+pgvector = ["alith-store/pgvector"]
 
 [[example]]
 name = "agent"
@@ -86,7 +91,12 @@ name = "agent_with_embeddings"
 name = "agent_with_rag"
 
 [[example]]
+name = "agent_with_pgvector"
+required-features = ["pgvector"]
+
+[[example]]
 name = "agent_with_qdrant"
+required-features = ["qdrant"]
 
 [[example]]
 name = "agent_with_cot"

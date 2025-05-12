@@ -15,4 +15,20 @@ async-trait.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 tokio.workspace = true
-qdrant-client = "1.14.0"
+
+# Qdrant
+qdrant-client = { version = "1.14.0", optional = true }
+
+# PGVector
+pgvector = { version = "0.4.0", features = ["sqlx"], optional = true }
+sqlx = { version = "0.8.5", features = [
+    "runtime-tokio",
+    "postgres",
+    "uuid",
+    "json",
+], optional = true }
+uuid = { version = "1.11.0", features = ["v4", "serde"], optional = true }
+
+[features]
+qdrant = ["dep:qdrant-client"]
+pgvector = ["dep:pgvector", "dep:sqlx", "dep:uuid"]

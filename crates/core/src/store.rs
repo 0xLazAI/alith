@@ -20,17 +20,19 @@ pub enum VectorStoreError {
     SearchError(String),
 }
 
-pub type TopNResults = Result<Vec<(DocumentId, String, f32)>, VectorStoreError>;
+pub type TopNItem = (DocumentId, String, f32);
+pub type TopNResults = Result<Vec<TopNItem>, VectorStoreError>;
+pub type TopNResult = Result<TopNItem, VectorStoreError>;
 
-#[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd, Deserialize)]
-pub struct DocumentId(pub usize);
+#[derive(Debug, Clone, Hash, Eq, PartialEq, Ord, PartialOrd, Deserialize)]
+pub struct DocumentId(pub String);
 
 impl Serialize for DocumentId {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
-        serializer.serialize_u64(self.0 as u64)
+        serializer.serialize_str(self.0.as_str())
     }
 }
 
@@ -104,7 +106,13 @@ impl<E: Embeddings> Storage for InMemoryStorage<E> {
             .map(|result| {
                 result
                     .iter()
-                    .map(|result| (result.0, data[result.0.0].document.clone(), result.1))
+                    .map(|result| {
+                        (
+                            result.0.clone(),
+                            data[result.0.0.parse::<usize>().unwrap()].document.clone(),
+                            result.1,
+                        )
+                    })
                     .collect::<Vec<_>>()
             })
     }
@@ -135,7 +143,7 @@ impl<E: Embeddings> InMemoryStorage<E> {
                     .filter_map(|v| {
                         let score = 1.0 - v.distance;
                         if score > threshold {
-                            Some((DocumentId(v.d_id), score))
+                            Some((DocumentId(v.d_id.to_string()), score))
                         } else {
                             None
                         }

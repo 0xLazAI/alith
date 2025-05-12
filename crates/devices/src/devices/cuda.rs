@@ -171,16 +171,8 @@ impl CudaDevice {
         if let Ok(nvml_device) = nvml.device_by_index(ordinal) {
             if let Ok(memory_info) = nvml_device.memory_info() {
                 if memory_info.total != 0 {
-                    let name = if let Ok(name) = nvml_device.name() {
-                        Some(name)
-                    } else {
-                        None
-                    };
-                    let power_limit = if let Ok(power_limit) = nvml_device.enforced_power_limit() {
-                        Some(power_limit)
-                    } else {
-                        None
-                    };
+                    let name = nvml_device.name().ok();
+                    let power_limit = nvml_device.enforced_power_limit().ok();
                     let (driver_major, driver_minor) = if let Ok(cuda_compute_capability) =
                         nvml_device.cuda_compute_capability()
                     {

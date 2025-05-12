@@ -20,7 +20,7 @@ use std::sync::{
 pub const DEFAULT_COLLECTION_NAME: &str = "alith";
 static ID: AtomicUsize = AtomicUsize::new(0);
 
-/// In-memory storage implementation.
+/// Qdrant storage implementation.
 pub struct QdrantStorage<E: Embeddings> {
     client: QdrantClient,
     embeddings: Arc<E>,
@@ -131,7 +131,7 @@ impl<E: Embeddings> Storage for QdrantStorage<E> {
                     .map(|v| v.as_str().cloned().unwrap_or_default())
                     .unwrap_or_default();
                 Ok::<(DocumentId, std::string::String, f32), VectorStoreError>((
-                    DocumentId(id_usize),
+                    DocumentId(id_usize.to_string()),
                     document,
                     point.score,
                 ))

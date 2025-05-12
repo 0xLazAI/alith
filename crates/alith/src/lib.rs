@@ -60,6 +60,9 @@ pub use knowledge::{
     string::StringKnowledge,
     text::TextFileKnowledge,
 };
+#[cfg(feature = "pgvector")]
+pub use store::pgvector::*;
+#[cfg(feature = "qdrant")]
 pub use store::qdrant::*;
 pub use tools::search::{Search, SearchProvider, SearchResult, SearchResults, SearchTool};
 
