@@ -3,7 +3,7 @@ name: node-sdk
 env:
   DEBUG: napi:*
   MACOSX_DEPLOYMENT_TARGET: '10.13'
-  RUST_VERSION: 1.85
+  RUST_VERSION: 1.86
 
 on:
   push:

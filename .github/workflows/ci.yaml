@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 env:
-  RUST_VERSION: 1.85
+  RUST_VERSION: 1.86
   MACOSX_DEPLOYMENT_TARGET: '12.0'
 
 jobs:
