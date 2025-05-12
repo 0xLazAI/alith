@@ -60,6 +60,8 @@ pub use knowledge::{
     string::StringKnowledge,
     text::TextFileKnowledge,
 };
+#[cfg(feature = "milvus")]
+pub use store::milvus::*;
 #[cfg(feature = "pgvector")]
 pub use store::pgvector::*;
 #[cfg(feature = "qdrant")]
