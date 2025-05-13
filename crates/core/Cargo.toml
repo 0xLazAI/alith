@@ -29,7 +29,7 @@ hnsw_rs = "0.3.1"
 lru = "0.14.0"
 mcp-client = "0.1.0"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-html2text = "0.14.4"
+html2text = "0.15.0"
 rayon = "1.10.0"
 unicode-properties = "0.1.3"
 unicode-segmentation = "1.11.0"
