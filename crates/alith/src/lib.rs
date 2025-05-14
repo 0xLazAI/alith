@@ -7,6 +7,7 @@ pub use alith_knowledge as knowledge;
 pub use alith_models as models;
 pub use alith_prompt as prompt;
 pub use alith_store as store;
+pub use alith_tee as tee;
 pub use alith_tools as tools;
 
 #[cfg(feature = "inference")]

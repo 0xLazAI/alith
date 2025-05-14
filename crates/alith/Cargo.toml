@@ -20,7 +20,7 @@ alith-models.workspace = true
 alith-interface.workspace = true
 alith-prompt.workspace = true
 alith-devices.workspace = true
-alith-tee = { workspace = true, optional = true }
+alith-tee.workspace = true
 
 async-trait.workspace = true
 tokio.workspace = true
@@ -45,12 +45,16 @@ python = ["alith-inference/python"]
 sglang = ["alith-inference/sglang"]
 trtllm = ["alith-inference/trtllm"]
 vllm = ["alith-inference/vllm"]
-tee = ["dep:alith-tee"]
 
 # Store features
 qdrant = ["alith-store/qdrant"]
 pgvector = ["alith-store/pgvector"]
 milvus = ["alith-store/milvus"]
+
+# TEE fearures
+azure-tee = ["alith-tee/azure-tee"]
+marlin = ["alith-tee/marlin"]
+phala = ["alith-tee/phala"]
 
 [[example]]
 name = "agent"
@@ -127,6 +131,10 @@ required-features = ["ort"]
 [[example]]
 name = "agent_with_llamacpp_server"
 required-features = ["llamacpp"]
+
+[[example]]
+name = "agent_with_phala_tee"
+required-features = ["phala"]
 
 [[example]]
 name = "hf_loader"
