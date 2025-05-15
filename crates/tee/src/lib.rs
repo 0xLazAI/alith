@@ -1,3 +1,5 @@
+#[cfg(feature = "aws-tee")]
+pub mod aws;
 #[cfg(feature = "azure-tee")]
 pub mod azure;
 #[cfg(feature = "marlin")]

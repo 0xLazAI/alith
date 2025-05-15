@@ -52,6 +52,7 @@ pgvector = ["alith-store/pgvector"]
 milvus = ["alith-store/milvus"]
 
 # TEE fearures
+aws-tee = ["alith-tee/aws-tee"]
 azure-tee = ["alith-tee/azure-tee"]
 marlin = ["alith-tee/marlin"]
 phala = ["alith-tee/phala"]
