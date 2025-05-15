@@ -1,5 +1,6 @@
 pub use alith_client as client;
 pub use alith_core as core;
+pub use alith_data as data;
 pub use alith_devices as devices;
 pub use alith_inference as inference;
 pub use alith_interface as interface;

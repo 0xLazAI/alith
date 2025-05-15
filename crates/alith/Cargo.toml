@@ -12,6 +12,7 @@ keywords = ["ai", "agent", "data", "model"]
 [dependencies]
 alith-core.workspace = true
 alith-knowledge.workspace = true
+alith-data.workspace = true
 alith-store.workspace = true
 alith-inference.workspace = true
 alith-tools.workspace = true
