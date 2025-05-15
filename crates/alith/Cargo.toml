@@ -137,6 +137,10 @@ name = "agent_with_phala_tee"
 required-features = ["phala"]
 
 [[example]]
+name = "agent_with_marlin_tee"
+required-features = ["marlin"]
+
+[[example]]
 name = "hf_loader"
 
 [[example]]
