@@ -6,14 +6,14 @@ use anyhow::Result;
 use async_trait::async_trait;
 use client::{Client, CompletionResponse};
 
-#[cfg(feature = "inference")]
+#[cfg(feature = "fastembed")]
 use fastembed::TextEmbedding;
-#[cfg(feature = "inference")]
+#[cfg(feature = "fastembed")]
 pub use fastembed::{
     EmbeddingModel as FastEmbeddingsModelName, ExecutionProviderDispatch,
     InitOptions as FastEmbeddingsModelOptions,
 };
-#[cfg(feature = "inference")]
+#[cfg(feature = "fastembed")]
 use std::sync::Arc;
 
 // OpenAI models
@@ -127,13 +127,13 @@ impl Embeddings for EmbeddingsModel {
     }
 }
 
-#[cfg(feature = "inference")]
+#[cfg(feature = "fastembed")]
 #[derive(Clone)]
 pub struct FastEmbeddingsModel {
     model: Arc<TextEmbedding>,
 }
 
-#[cfg(feature = "inference")]
+#[cfg(feature = "fastembed")]
 impl FastEmbeddingsModel {
     /// Try to generate a new TextEmbedding Instance.
     ///
@@ -158,7 +158,7 @@ impl FastEmbeddingsModel {
     }
 }
 
-#[cfg(feature = "inference")]
+#[cfg(feature = "fastembed")]
 #[async_trait]
 impl Embeddings for FastEmbeddingsModel {
     const MAX_DOCUMENTS: usize = 1024;
