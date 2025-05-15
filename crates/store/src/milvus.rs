@@ -68,7 +68,7 @@ impl<E: Embeddings> MilvusStorage<E> {
         for document in &documents {
             let embed_column = MilvusFieldColumn::new(
                 collection.get_field(DEFAULT_MILVUS_VEC_FIELD).unwrap(),
-                document.vec.iter().map(|v| *v as f32).collect::<Vec<f32>>(),
+                document.f32_vec(),
             );
             let text_column = MilvusFieldColumn::new(
                 collection.get_field(DEFAULT_MILVUS_TEXT_FIELD).unwrap(),

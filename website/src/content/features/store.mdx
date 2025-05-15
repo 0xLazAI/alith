@@ -158,6 +158,46 @@ You will find additional non-standard word definitions that could be useful belo
 }
 ```
 
+## ChromaDB
+
+> Note: we need to enable the `chromadb` feature in the `alith` crate to use this example.
+
+```rust
+use alith::store::chromadb::{ChromaClient, ChromaStorage};
+use alith::{Agent, Chat, EmbeddingsBuilder, LLM};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let model = LLM::from_model_name("gpt-4")?;
+    let embeddings_model = model.embeddings_model("text-embedding-3-small");
+    let data = EmbeddingsBuilder::new(embeddings_model.clone())
+        .documents(vec!["doc0", "doc1", "doc2"])
+        .unwrap()
+        .build()
+        .await?;
+
+    // With default ChromaClientOptions
+    // Defaults to http://localhost:8000
+    let client: ChromaClient = ChromaClient::new(Default::default()).await?;
+
+    let storage = ChromaStorage::from_multiple_documents(client, embeddings_model, data).await?;
+
+    let agent = Agent::new("simple agent", model)
+        .preamble(
+            r#"
+You are a dictionary assistant here to assist the user in understanding the meaning of words.
+You will find additional non-standard word definitions that could be useful below.
+"#,
+        )
+        .store_index(1, storage);
+    let response = agent.prompt("What does \"glarb-glarb\" mean?").await?;
+
+    println!("{}", response);
+
+    Ok(())
+}
+```
+
   </Tabs.Tab>
 
   <Tabs.Tab>
