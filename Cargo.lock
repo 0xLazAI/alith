@@ -118,6 +118,7 @@ dependencies = [
  "reqwest 0.12.15",
  "schemars",
  "serde",
+ "sqlx",
  "tokio",
  "url",
 ]

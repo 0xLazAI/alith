@@ -24,11 +24,11 @@ alloy = { version = "1.0.1", default-features = false, features = [
     "signer-local",
     "reqwest-rustls-tls",
 ] }
-sequoia-openpgp = "2.0.0"
+sequoia-openpgp = { version = "2.0.0", optional = true }
 
 [features]
 dropbox = []
 google_drive = []
 ipfs = []
-crypto = []
+crypto = ["dep:sequoia-openpgp"]
 wallet = []
