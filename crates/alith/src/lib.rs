@@ -10,7 +10,7 @@ pub use alith_store as store;
 pub use alith_tee as tee;
 pub use alith_tools as tools;
 
-#[cfg(feature = "inference")]
+#[cfg(feature = "fastembed")]
 pub use core::llm::{
     ExecutionProviderDispatch, FastEmbeddingsModel, FastEmbeddingsModelName,
     FastEmbeddingsModelOptions,

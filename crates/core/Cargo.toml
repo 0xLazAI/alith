@@ -21,7 +21,6 @@ serde_json.workspace = true
 thiserror.workspace = true
 tokio.workspace = true
 uuid.workspace = true
-fastembed.workspace = true
 dagrs.workspace = true
 regex = "1.11"
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
@@ -36,5 +35,8 @@ unicode-segmentation = "1.11.0"
 url = "2.5.2"
 text-splitter = { version = "0.26.0", features = ["markdown", "tiktoken-rs"] }
 
+# Fastembed
+fastembed = { workspace = true, optional = true }
+
 [features]
-inference = []
+fastembed = ["dep:fastembed"]

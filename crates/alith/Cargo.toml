@@ -37,7 +37,7 @@ rand = "0.9"
 default = []
 
 # Inference features
-inference = ["alith-core/inference"]
+fastembed = ["alith-core/fastembed"]
 ort = ["alith-inference/ort"]
 llamacpp = ["alith-inference/llamacpp"]
 mistralrs = ["alith-inference/mistralrs"]
