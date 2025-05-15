@@ -50,6 +50,7 @@ vllm = ["alith-inference/vllm"]
 qdrant = ["alith-store/qdrant"]
 pgvector = ["alith-store/pgvector"]
 milvus = ["alith-store/milvus"]
+chromadb = ["alith-store/chromadb"]
 
 # TEE fearures
 azure-tee = ["alith-tee/azure-tee"]
@@ -109,6 +110,10 @@ required-features = ["qdrant"]
 [[example]]
 name = "agent_with_milvus"
 required-features = ["milvus"]
+
+[[example]]
+name = "agent_with_chromadb"
+required-features = ["chromadb"]
 
 [[example]]
 name = "agent_with_cot"

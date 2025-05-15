@@ -32,7 +32,12 @@ uuid = { version = "1.11.0", features = ["v4", "serde"], optional = true }
 # Milvus
 milvus-sdk-rust = { git = "https://github.com/milvus-io/milvus-sdk-rust", optional = true }
 
+# ChromaDB
+chromadb = { version = "2.2.2", optional = true }
+blake3 = { version = "1.8.2", optional = true }
+
 [features]
 qdrant = ["dep:qdrant-client"]
 pgvector = ["dep:pgvector", "dep:sqlx", "dep:uuid"]
 milvus = ["dep:milvus-sdk-rust"]
+chromadb = ["dep:chromadb", "dep:blake3"]

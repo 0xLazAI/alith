@@ -13,6 +13,13 @@ pub struct EmbeddingsData {
     pub vec: Vec<f64>,
 }
 
+impl EmbeddingsData {
+    #[inline]
+    pub fn f32_vec(&self) -> Vec<f32> {
+        self.vec.iter().map(|v| *v as f32).collect()
+    }
+}
+
 /// Trait for embeddings
 #[async_trait]
 pub trait Embeddings: Clone + Send + Sync {

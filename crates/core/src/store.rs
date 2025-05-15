@@ -18,6 +18,8 @@ pub enum VectorStoreError {
     MissingIdError(String),
     #[error("Search error: {0}")]
     SearchError(String),
+    #[error("Custom error: {0}")]
+    CustomError(String),
 }
 
 pub type TopNItem = (DocumentId, String, f32);

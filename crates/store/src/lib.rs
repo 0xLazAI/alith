@@ -1,3 +1,5 @@
+#[cfg(feature = "chromadb")]
+pub mod chromadb;
 #[cfg(feature = "milvus")]
 pub mod milvus;
 #[cfg(feature = "pgvector")]
