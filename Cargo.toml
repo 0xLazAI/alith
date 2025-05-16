@@ -46,7 +46,7 @@ tiktoken-rs = "0.6.0"
 hex = "0.4.3"
 
 [workspace.package]
-version = "0.5.1"
+version = "0.6.0"
 edition = "2024"
 rust-version = "1.86"
 exclude = [".github/"]
