@@ -19,16 +19,20 @@ thiserror.workspace = true
 anyhow.workspace = true
 uuid.workspace = true
 tokio.workspace = true
+rand.workspace = true
+
 alloy = { version = "1.0.1", default-features = false, features = [
     "signers",
     "signer-local",
     "reqwest-rustls-tls",
-] }
+], optional = true }
 sequoia-openpgp = { version = "2.0.0", optional = true }
+rsa = { version = "0.9.8", optional = true }
+rand_core = { version = "0.9.3", optional = true }
 
 [features]
 dropbox = []
 google_drive = []
 ipfs = []
-crypto = ["dep:sequoia-openpgp"]
-wallet = []
+crypto = ["dep:sequoia-openpgp", "dep:rsa", "dep:rand_core"]
+wallet = ["dep:alloy"]

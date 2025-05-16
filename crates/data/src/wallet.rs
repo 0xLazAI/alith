@@ -52,6 +52,14 @@ impl LocalEthWallet {
         Self::new(std::env::var("PRIVATE_KEY")?)
     }
 
+    /// Creates a new wallet instance from a random keypair seeded.
+    #[inline]
+    pub fn random() -> Result<Self, WalletError> {
+        let signer = PrivateKeySigner::random();
+        let address = signer.address();
+        Ok(Self { address, signer })
+    }
+
     /// Signs an arbitrary message
     ///
     /// # Arguments
