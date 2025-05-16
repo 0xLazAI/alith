@@ -1,5 +1,6 @@
-use alith::store::pgvector::{PgPoolOptions, PgVectorStorage, migrate, sqlx};
+use alith::store::pgvector::{PgPoolOptions, PgVectorStorage};
 use alith::{Agent, Chat, EmbeddingsBuilder, LLM};
+use sqlx::{migrate, query};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -21,7 +22,7 @@ async fn main() -> Result<(), anyhow::Error> {
     // Make sure database is setup
     migrate!("examples/pgvector_migarations").run(&pool).await?;
     // Delete documents from table to have a clean start (optional, not recommended for production)
-    sqlx::query("TRUNCATE alith").execute(&pool).await?;
+    query("TRUNCATE alith").execute(&pool).await?;
     let storage = PgVectorStorage::from_multiple_documents(pool, embeddings_model, data).await?;
 
     let agent = Agent::new("simple agent", model)

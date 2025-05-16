@@ -12,6 +12,7 @@ keywords = ["ai", "agent", "data", "model"]
 [dependencies]
 alith-core.workspace = true
 alith-knowledge.workspace = true
+alith-data.workspace = true
 alith-store.workspace = true
 alith-inference.workspace = true
 alith-tools.workspace = true
@@ -31,6 +32,12 @@ reqwest.workspace = true
 url.workspace = true
 
 rand = "0.9"
+sqlx = { version = "0.8.5", features = [
+    "runtime-tokio",
+    "postgres",
+    "uuid",
+    "json",
+], optional = true }
 
 [features]
 # Default features
@@ -48,7 +55,7 @@ vllm = ["alith-inference/vllm"]
 
 # Store features
 qdrant = ["alith-store/qdrant"]
-pgvector = ["alith-store/pgvector"]
+pgvector = ["alith-store/pgvector", "dep:sqlx"]
 milvus = ["alith-store/milvus"]
 chromadb = ["alith-store/chromadb"]
 
@@ -57,6 +64,9 @@ aws-tee = ["alith-tee/aws-tee"]
 azure-tee = ["alith-tee/azure-tee"]
 marlin = ["alith-tee/marlin"]
 phala = ["alith-tee/phala"]
+
+# Crypto features
+crypto = ["alith-data/crypto", "alith-tee/crypto"]
 
 [[example]]
 name = "agent"

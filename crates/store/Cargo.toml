@@ -27,7 +27,7 @@ sqlx = { version = "0.8.5", features = [
     "uuid",
     "json",
 ], optional = true }
-uuid = { version = "1.11.0", features = ["v4", "serde"], optional = true }
+uuid = { workspace = true, features = ["v4", "serde"], optional = true }
 
 # Milvus
 milvus-sdk-rust = { git = "https://github.com/milvus-io/milvus-sdk-rust", optional = true }
