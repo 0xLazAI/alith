@@ -6,4 +6,5 @@
 #[cfg(feature = "crypto")]
 pub mod crypto;
 pub mod storage;
+#[cfg(feature = "wallet")]
 pub mod wallet;

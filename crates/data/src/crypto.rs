@@ -10,7 +10,10 @@ use openpgp::{
     serialize::stream::{Armorer, Encryptor, LiteralWriter, Message},
     types::SymmetricAlgorithm,
 };
-use sequoia_openpgp as openpgp;
+pub use rand;
+pub use rand_core;
+pub use rsa::{Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey};
+pub use sequoia_openpgp as openpgp;
 use std::io::{Read, Write};
 
 /// Encrypts data using PGP encryption with a password.
@@ -24,11 +27,11 @@ use std::io::{Read, Write};
 ///
 /// # Returns
 /// A Result containing the encrypted data as a Vec<u8>
-pub fn encrypt<S: AsRef<[u8]>>(data: S, signature: String) -> Result<Vec<u8>> {
+pub fn encrypt<S: AsRef<[u8]>>(data: S, password: String) -> Result<Vec<u8>> {
     let mut sink = Vec::new();
     let message = Message::new(&mut sink);
     let message = Armorer::new(message).build()?;
-    let password = Password::from(signature);
+    let password = Password::from(password);
     let message = Encryptor::with_passwords(message, Some(password))
         .symmetric_algo(SymmetricAlgorithm::AES256)
         .build()?;
@@ -49,8 +52,8 @@ pub fn encrypt<S: AsRef<[u8]>>(data: S, signature: String) -> Result<Vec<u8>> {
 ///
 /// # Returns
 /// A Result containing the decrypted data as a Vec<u8>
-pub fn decrypt<S: AsRef<[u8]>>(data: S, signature: String) -> Result<Vec<u8>> {
-    let h = Helper { signature };
+pub fn decrypt<S: AsRef<[u8]>>(data: S, password: String) -> Result<Vec<u8>> {
+    let h = Helper { password };
     let p = &StandardPolicy::new();
     let mut v = DecryptorBuilder::from_bytes(data.as_ref())?.with_policy(p, None, h)?;
     let mut content = Vec::new();
@@ -60,7 +63,7 @@ pub fn decrypt<S: AsRef<[u8]>>(data: S, signature: String) -> Result<Vec<u8>> {
 
 // This fetches keys and computes the validity of the verification.
 struct Helper {
-    signature: String,
+    password: String,
 }
 
 impl VerificationHelper for Helper {
@@ -82,7 +85,7 @@ impl DecryptionHelper for Helper {
         _sym_algo: Option<SymmetricAlgorithm>,
         decrypt: &mut dyn FnMut(Option<SymmetricAlgorithm>, &SessionKey) -> bool,
     ) -> Result<Option<Cert>> {
-        let password = Password::from(self.signature.clone());
+        let password = Password::from(self.password.clone());
         skesks[0]
             .decrypt(&password)
             .map(|(algo, session_key)| decrypt(algo, &session_key))?;
@@ -92,16 +95,28 @@ impl DecryptionHelper for Helper {
 
 #[cfg(test)]
 mod tests {
-    use crate::crypto::{decrypt, encrypt};
+    use crate::{
+        crypto::{decrypt, encrypt},
+        wallet::LocalEthWallet,
+    };
+    use alloy::hex;
     use anyhow::Result;
+    use rsa::{Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey};
 
-    #[test]
-    fn test_crypto() -> Result<()> {
-        let data = b"Hello, PGP!";
-        let password = "strong_password";
-        let encrypted = encrypt(data, password.to_string())?;
-        let decrypted = decrypt(&encrypted, password.to_string())?;
-        assert_eq!(decrypted.as_slice(), data);
+    #[tokio::test]
+    async fn test_openpgp() -> Result<()> {
+        let privacy_data = b"Hello, Privacy Data with PGP!";
+        let password = LocalEthWallet::random()?.sign().await?;
+        let mut rng = rand::thread_rng();
+        let priv_key = RsaPrivateKey::new(&mut rng, 3072)?;
+        let pub_key = RsaPublicKey::from(&priv_key);
+        let encrypted_key = pub_key.encrypt(&mut rng, Pkcs1v15Encrypt, password.as_bytes())?;
+        let encrypted_data = encrypt(privacy_data, password.to_string())?;
+        println!("Encrypted data: {:?}", hex::encode(&encrypted_data));
+        println!("Encrypted key: {:?}", hex::encode(&encrypted_key));
+        let password = priv_key.decrypt(Pkcs1v15Encrypt, &encrypted_key)?;
+        let decrypted_data = decrypt(&encrypted_data, String::from_utf8(password)?)?;
+        assert_eq!(decrypted_data.as_slice(), privacy_data);
         Ok(())
     }
 }

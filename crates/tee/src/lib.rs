@@ -6,5 +6,3 @@ pub mod azure;
 pub mod marlin;
 #[cfg(feature = "phala")]
 pub mod phala;
-#[cfg(feature = "crypto")]
-pub mod secret;
