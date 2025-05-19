@@ -52,7 +52,7 @@ impl Completion for GPT2 {
         let prompt_tokens = tokens.len();
         let max_tokens = request.max_tokens.unwrap_or(GEN_TOKENS);
         let mut output = String::new();
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let top_k = request.top_k.unwrap_or(TOP_K);
         for _ in 0..max_tokens {
             // Raw tensor construction takes a tuple of (shape, data).
@@ -80,7 +80,7 @@ impl Completion for GPT2 {
                 .sort_unstable_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Less));
 
             // Sample using top-k sampling
-            let token = probabilities[rng.gen_range(0..=top_k)].0 as i64;
+            let token = probabilities[rng.random_range(0..=top_k)].0 as i64;
 
             // Add our generated token to the input sequence
             tokens.push(token);
