@@ -22,7 +22,7 @@ fastembed = { version = "4.8.0", default-features = false, features = [
     "ort-download-binaries",
     "hf-hub-rustls-tls",
 ] }
-rand = "0.8"
+rand = "0.9"
 uuid = { version = "1.16.0", features = ["serde", "v4"] }
 async-trait = "0.1.88"
 serde = { version = "1.0.219", features = ["derive"] }
