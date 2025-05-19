@@ -179,6 +179,10 @@ name = "agent_with_dropbox"
 required-features = ["dropbox"]
 
 [[example]]
+name = "agent_with_pinata_ipfs"
+required-features = ["ipfs"]
+
+[[example]]
 name = "hf_loader"
 
 [[example]]
