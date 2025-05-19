@@ -1,4 +1,4 @@
-use alith::data::storage::{FileUploader, PinataIPFS, UploadOptions};
+use alith::data::storage::{DataStorage, PinataIPFS, UploadOptions};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {

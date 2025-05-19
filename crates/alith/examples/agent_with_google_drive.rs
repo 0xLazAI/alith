@@ -1,13 +1,13 @@
-use alith::data::storage::{FileUploader, GoogleDriveUploader, UploadOptions};
+use alith::data::storage::{DataStorage, GoogleDriveStorage, UploadOptions};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let data = b"Your Data";
     let name = "file.txt";
-    let uploader = GoogleDriveUploader::default();
+    let storage = GoogleDriveStorage::default();
     println!(
         "Upload file to the google drive: {:?}",
-        uploader
+        storage
             .upload(
                 UploadOptions::builder()
                     .data(data.to_vec())

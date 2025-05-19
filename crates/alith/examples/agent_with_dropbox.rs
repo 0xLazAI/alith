@@ -1,12 +1,12 @@
-use alith::data::storage::{DropboxUploader, FileUploader, UploadOptions};
+use alith::data::storage::{DataStorage, DropboxStorage, UploadOptions};
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let data = b"Your Data";
     let name = "file.txt";
     let token = std::env::var("DROPBOX_API_TOKEN")?;
-    let uploader = DropboxUploader::default();
-    let file_meta = uploader
+    let storage = DropboxStorage::default();
+    let file_meta = storage
         .upload(
             UploadOptions::builder()
                 .data(data.to_vec())
@@ -18,7 +18,7 @@ async fn main() -> Result<(), anyhow::Error> {
     println!("Upload file to the dropbox: {:?}", file_meta);
     println!(
         "Get the shared link: {:?}",
-        uploader.get_share_link(token, file_meta.id).await?
+        storage.get_share_link(token, file_meta.id).await?
     );
     Ok(())
 }

@@ -1,4 +1,4 @@
-use crate::storage::{FileMetadata, FileUploader, StorageType, UploadOptions};
+use crate::storage::{DataStorage, FileMetadata, GetShareLinkOptions, StorageType, UploadOptions};
 use anyhow::Result;
 use reqwest::Client;
 use serde_json::json;
@@ -9,12 +9,12 @@ pub const DEFAULT_FOLDER: &str = "alith";
 pub const DROPBOX_DEFAULT_FOLDER_ENV: &str = "DROPBOX_DEFAULT_FOLDER";
 
 #[derive(Debug, Clone)]
-pub struct DropboxUploader {
+pub struct DropboxStorage {
     client: Client,
     pub folder: String,
 }
 
-impl Default for DropboxUploader {
+impl Default for DropboxStorage {
     fn default() -> Self {
         Self {
             client: Default::default(),
@@ -23,7 +23,7 @@ impl Default for DropboxUploader {
     }
 }
 
-impl DropboxUploader {
+impl DropboxStorage {
     pub fn new<S: AsRef<str>>(folder: Option<S>) -> Self {
         Self {
             client: Client::new(),
@@ -86,7 +86,7 @@ impl DropboxUploader {
 }
 
 #[async_trait::async_trait]
-impl FileUploader for DropboxUploader {
+impl DataStorage for DropboxStorage {
     async fn upload(&self, opts: UploadOptions) -> Result<FileMetadata> {
         let UploadOptions { name, data, token } = opts;
         let size = data.len();
@@ -136,6 +136,11 @@ impl FileUploader for DropboxUploader {
             size,
             modified_time: Some(server_modified.to_string()),
         })
+    }
+
+    async fn get_share_link(&self, opts: GetShareLinkOptions) -> Result<String> {
+        let GetShareLinkOptions { token, id } = opts;
+        Ok(self.get_share_link(token, id).await?)
     }
 
     #[inline]

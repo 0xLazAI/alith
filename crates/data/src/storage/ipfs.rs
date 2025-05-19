@@ -1,4 +1,4 @@
-use crate::storage::{FileMetadata, FileUploader, StorageType, UploadOptions};
+use crate::storage::{DataStorage, FileMetadata, GetShareLinkOptions, StorageType, UploadOptions};
 use anyhow::{Context, Result};
 use reqwest::{Client, multipart};
 use serde::{Deserialize, Serialize};
@@ -41,7 +41,7 @@ impl PinataIPFS {
 }
 
 #[async_trait::async_trait]
-impl FileUploader for PinataIPFS {
+impl DataStorage for PinataIPFS {
     async fn upload(&self, opts: UploadOptions) -> Result<FileMetadata> {
         let UploadOptions { name, data, token } = opts;
         let url = "https://uploads.pinata.cloud/v3/files";
@@ -65,6 +65,11 @@ impl FileUploader for PinataIPFS {
         }
         let resp = response.json::<PinataUploadResponse>().await?;
         Ok(resp.data.into())
+    }
+
+    async fn get_share_link(&self, opts: GetShareLinkOptions) -> Result<String> {
+        let GetShareLinkOptions { token, id } = opts;
+        Ok(self.get_share_link(token, id).await?)
     }
 
     #[inline]

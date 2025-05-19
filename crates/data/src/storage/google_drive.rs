@@ -1,4 +1,4 @@
-use crate::storage::{FileMetadata, FileUploader, StorageType, UploadOptions};
+use crate::storage::{DataStorage, FileMetadata, GetShareLinkOptions, StorageType, UploadOptions};
 use anyhow::{Context, Result};
 use reqwest::{Client, multipart};
 use serde::{Deserialize, Serialize};
@@ -11,12 +11,12 @@ pub const GOOGLE_DRIVE_DEFAULT_FOLDER_ENV: &str = "GOOGLE_DRIVE_DEFAULT_FOLDER";
 pub const GOOGLE_DRIVE_URL: &str = "https://www.googleapis.com/drive/v3/files";
 
 #[derive(Debug, Clone)]
-pub struct GoogleDriveUploader {
+pub struct GoogleDriveStorage {
     client: Client,
     pub folder: String,
 }
 
-impl Default for GoogleDriveUploader {
+impl Default for GoogleDriveStorage {
     fn default() -> Self {
         Self {
             client: Default::default(),
@@ -25,7 +25,7 @@ impl Default for GoogleDriveUploader {
     }
 }
 
-impl GoogleDriveUploader {
+impl GoogleDriveStorage {
     pub fn new<S: AsRef<str>>(folder: Option<S>) -> Self {
         Self {
             client: Client::new(),
@@ -156,7 +156,7 @@ impl GoogleDriveUploader {
 }
 
 #[async_trait::async_trait]
-impl FileUploader for GoogleDriveUploader {
+impl DataStorage for GoogleDriveStorage {
     async fn upload(&self, opts: UploadOptions) -> Result<FileMetadata> {
         let UploadOptions { name, data, token } = opts;
         let size = data.len();
@@ -203,6 +203,11 @@ impl FileUploader for GoogleDriveUploader {
             .into();
         file_metadata.size = size;
         Ok(file_metadata)
+    }
+
+    async fn get_share_link(&self, opts: GetShareLinkOptions) -> Result<String> {
+        let GetShareLinkOptions { token, id } = opts;
+        Ok(self.get_share_link(token, id).await?)
     }
 
     #[inline]
