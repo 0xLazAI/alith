@@ -19,7 +19,7 @@ Besides, Alith is a decentralized AI agent framework tailored to harness the cap
 + **Workflow Support**: Implementing any workflow pattern through processes - from simple sequential and hierarchical processes to complex custom orchestration patterns with conditional branching and parallel execution.
 + **Cross-Language Support**: Provides SDKs for Rust, Python and Node.js, making it easily accessible to different developers.
 + **High-Performance Inference**: Leverage the performance advantages of Rust and quick model inference technologies including graph optimization, model compression, JIT/AOT compilation with GPU coprocessors, etc.
-+ **Web3 Friendly and Secure**: Out-of-the-box Web3 plugin allows developers to easily and securely integrate blockchain capabilities into TEE-based AI agent frameworks and their applications.
++ **Web3 Friendly and Secure**: Out-of-the-box Web3 plugin allows developers to easily and securely integrate blockchain capabilities into TEE-based AI agent frameworks and their applications with privacy data.
 
 ## Architecture
 
