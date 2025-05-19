@@ -21,4 +21,4 @@ once_cell = "1.21.3"
 futures = "0.3.31"
 
 [build-dependencies]
-napi-build = "2.1.6"
+napi-build = "2.2.0"
