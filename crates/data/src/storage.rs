@@ -8,8 +8,12 @@ pub mod google_drive;
 #[cfg(feature = "ipfs")]
 pub mod ipfs;
 
+#[cfg(feature = "dropbox")]
+pub use dropbox::{DROPBOX_DEFAULT_FOLDER_ENV, DropboxUploader};
 #[cfg(feature = "google-drive")]
-pub use google_drive::{FileDetails, GoogleDriveUploader};
+pub use google_drive::{
+    FileDetails, GOOGLE_DRIVE_DEFAULT_FOLDER_ENV, GOOGLE_DRIVE_URL, GoogleDriveUploader,
+};
 
 #[derive(Debug, Clone, Copy)]
 pub enum StorageType {
@@ -47,7 +51,7 @@ impl Display for StorageType {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct FileMetadata {
     pub id: String,
     pub name: String,

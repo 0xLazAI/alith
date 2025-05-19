@@ -175,6 +175,10 @@ name = "agent_with_google_drive"
 required-features = ["google-drive"]
 
 [[example]]
+name = "agent_with_dropbox"
+required-features = ["dropbox"]
+
+[[example]]
 name = "hf_loader"
 
 [[example]]

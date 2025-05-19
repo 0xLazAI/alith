@@ -10,10 +10,19 @@ pub const GOOGLE_DRIVE_DEFAULT_FOLDER_ENV: &str = "GOOGLE_DRIVE_DEFAULT_FOLDER";
 /// Google drive base url.
 pub const GOOGLE_DRIVE_URL: &str = "https://www.googleapis.com/drive/v3/files";
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone)]
 pub struct GoogleDriveUploader {
     client: Client,
     pub folder: String,
+}
+
+impl Default for GoogleDriveUploader {
+    fn default() -> Self {
+        Self {
+            client: Default::default(),
+            folder: get_folder::<&str>(None),
+        }
+    }
 }
 
 impl GoogleDriveUploader {
