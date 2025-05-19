@@ -10,8 +10,6 @@ use openpgp::{
     serialize::stream::{Armorer, Encryptor, LiteralWriter, Message},
     types::SymmetricAlgorithm,
 };
-pub use rand;
-pub use rand_core;
 pub use rsa::{Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey};
 pub use sequoia_openpgp as openpgp;
 use std::io::{Read, Write};
@@ -107,7 +105,7 @@ mod tests {
     async fn test_openpgp() -> Result<()> {
         let privacy_data = b"Hello, Privacy Data with PGP!";
         let password = LocalEthWallet::random()?.sign().await?;
-        let mut rng = rand::thread_rng();
+        let mut rng = rand_08::thread_rng();
         let priv_key = RsaPrivateKey::new(&mut rng, 3072)?;
         let pub_key = RsaPublicKey::from(&priv_key);
         let encrypted_key = pub_key.encrypt(&mut rng, Pkcs1v15Encrypt, password.as_bytes())?;

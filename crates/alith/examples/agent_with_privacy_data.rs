@@ -33,7 +33,7 @@ async fn main() -> Result<(), anyhow::Error> {
     // 2. Get the signature from user's wallet.
     let signature = LocalEthWallet::random()?.sign().await?;
     // 3. Generate the RSA private key and public key
-    let mut rng = rand::thread_rng();
+    let mut rng = rand_08::thread_rng();
     let priv_key = RsaPrivateKey::new(&mut rng, 3072)?;
     let pub_key = RsaPublicKey::from(&priv_key);
     // 4. Encrypt the privacy data and password

@@ -31,6 +31,7 @@ schemars.workspace = true
 reqwest.workspace = true
 url.workspace = true
 rand.workspace = true
+rand_08.workspace = true
 hex.workspace = true
 
 sqlx = { version = "0.8.5", features = [
@@ -71,6 +72,11 @@ crypto = ["alith-data/crypto"]
 
 # Wallet features
 wallet = ["alith-data/wallet"]
+
+# Data Availability (DA)
+ipfs = ["alith-data/ipfs"]
+dropbox = ["alith-data/dropbox"]
+google-drive = ["alith-data/google-drive"]
 
 [[example]]
 name = "agent"
@@ -163,6 +169,10 @@ required-features = ["marlin"]
 [[example]]
 name = "agent_with_privacy_data"
 required-features = ["crypto", "marlin", "wallet"]
+
+[[example]]
+name = "agent_with_google_drive"
+required-features = ["google-drive"]
 
 [[example]]
 name = "hf_loader"

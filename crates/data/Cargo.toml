@@ -10,7 +10,6 @@ repository.workspace = true
 
 [dependencies]
 alith-core.workspace = true
-reqwest.workspace = true
 url.workspace = true
 async-trait.workspace = true
 serde.workspace = true
@@ -20,6 +19,9 @@ anyhow.workspace = true
 uuid.workspace = true
 tokio.workspace = true
 rand.workspace = true
+rand_08.workspace = true
+bon.workspace = true
+reqwest = {workspace = true, features = ["json", "multipart"]}
 
 alloy = { version = "1.0.1", default-features = false, features = [
     "signers",
@@ -32,7 +34,7 @@ rand_core = { version = "0.9.3", optional = true }
 
 [features]
 dropbox = []
-google_drive = []
+google-drive = []
 ipfs = []
 crypto = ["dep:sequoia-openpgp", "dep:rsa", "dep:rand_core"]
 wallet = ["dep:alloy"]
