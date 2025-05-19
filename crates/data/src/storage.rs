@@ -9,9 +9,9 @@ pub mod google_drive;
 pub mod ipfs;
 
 #[cfg(feature = "dropbox")]
-pub use dropbox::{DROPBOX_DEFAULT_FOLDER_ENV, DropboxUploader};
+pub use dropbox::{DROPBOX_DEFAULT_FOLDER_ENV, DropboxStorage};
 #[cfg(feature = "google-drive")]
-pub use google_drive::{GOOGLE_DRIVE_DEFAULT_FOLDER_ENV, GOOGLE_DRIVE_URL, GoogleDriveUploader};
+pub use google_drive::{GOOGLE_DRIVE_DEFAULT_FOLDER_ENV, GOOGLE_DRIVE_URL, GoogleDriveStorage};
 #[cfg(feature = "ipfs")]
 pub use ipfs::{IPFS_API_KEY_ENV, IPFS_API_SECRET_ENV, IPFS_GATEWAY_ENV, IPFS_JWT_ENV, PinataIPFS};
 
@@ -29,8 +29,9 @@ pub enum StorageError {
 }
 
 #[async_trait::async_trait]
-pub trait FileUploader {
+pub trait DataStorage {
     async fn upload(&self, opts: UploadOptions) -> Result<FileMetadata>;
+    async fn get_share_link(&self, opts: GetShareLinkOptions) -> Result<String>;
     fn storage_type(&self) -> StorageType;
 }
 
@@ -39,6 +40,12 @@ pub struct UploadOptions {
     pub name: String,
     pub data: Vec<u8>,
     pub token: String,
+}
+
+#[derive(Clone, bon::Builder)]
+pub struct GetShareLinkOptions {
+    pub token: String,
+    pub id: String,
 }
 
 impl Display for StorageType {
