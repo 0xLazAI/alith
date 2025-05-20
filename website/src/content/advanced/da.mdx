@@ -1,0 +1,181 @@
+import { Tabs } from "nextra/components";
+
+# Data Availability (DA)
+
+Alith supports users to interact with various Data Availability (DA) layers, and natively 
+supports uploading privacy data to DA for sharing after encryption. Different ends use RSA 
+for encryption, which facilitates privacy collaboration and supports verifying the integrity 
+of privacy data in TEE.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+## Privacy Data Encryption and Decryption
+
+In Alith, we use OpenPGP to encrypt and decrypt the privacy data. OpenPGP encryption process: 
+Randomly generate a Key and use it to encrypt data using a symmetric encryption algorithm. 
+Finally, use an asymmetric encryption algorithm (RSA) to encrypt the recipient's Key using 
+the receiver's public key to obtain encrypted data.
+
+Specifically, we obtain a random key from the user's Web3 wallet, such as Metamask, and use 
+this random key to encrypt the user's private data. This process verifies the sender's identity, 
+and then uses the asymmetric encryption algorithm (RSA) to encrypt the recipient's key to obtain 
+the encrypted data. We then upload the encrypted data to DA (such as IPFS, Google Drive, or Dropbox), 
+and register the encrypted data URL and Encrypt key to the LazAI contract. The test data verifier 
+can decrypt the encrypted key using the private key and download the private data for decryption 
+through the URL. The decryption process is placed in TEE to ensure data security. Will not be 
+tampered with, and then decrypted data and TEE generates proof and uploads it to LazAI contract 
+for verification.
+
+> Note: we need to enable the `wallet`, `marlin` and `crypto` features in the `alith` crate to use this example.
+
+```rust
+use alith::{
+    data::{
+        crypto::{Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey, decrypt, encrypt},
+        wallet::LocalEthWallet,
+    },
+    tee::marlin::{AttestationRequest, MarlinClient},
+};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    // 1. Prepare the privacy data
+    let privacy_data = b"Your Privacy Data";
+    // 2. Get the signature from user's wallet.
+    let signature = LocalEthWallet::random()?.sign().await?;
+    // 3. Generate the RSA private key and public key
+    let mut rng = rand_08::thread_rng();
+    let priv_key = RsaPrivateKey::new(&mut rng, 3072)?;
+    let pub_key = RsaPublicKey::from(&priv_key);
+    // 4. Encrypt the privacy data and password
+    let encrypted_key = pub_key.encrypt(&mut rng, Pkcs1v15Encrypt, signature.as_bytes())?;
+    let encrypted_data = encrypt(privacy_data, signature.to_string())?;
+    println!("Encrypted data: {:?}", hex::encode(&encrypted_data));
+    println!("Encrypted key: {:?}", hex::encode(&encrypted_key));
+    // 5. Decrypt the privacy data password using the RSA private key.
+    let password = priv_key.decrypt(Pkcs1v15Encrypt, &encrypted_key)?;
+    // 6. Decrypt the privacy data using the password
+    let decrypted_data = decrypt(&encrypted_data, String::from_utf8(password)?)?;
+    assert_eq!(decrypted_data.as_slice(), privacy_data);
+    // 7. Generate the proof in the TEE.
+    let client = MarlinClient::default();
+    println!(
+        "Generate the attestation within TEE: {:?}",
+        client
+            .attestation_hex(AttestationRequest {
+                user_data: Some(decrypted_data),
+                ..Default::default()
+            })
+            .await?
+    );
+    Ok(())
+}
+```
+
+## Data Storage
+
+### IPFS
+
+> Note: we need to enable the `ipfs` feature in the `alith` crate to use this example.
+
+```rust
+use alith::data::storage::{DataStorage, PinataIPFS, UploadOptions};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let data = b"Your Data";
+    let name = "file.txt";
+    let token = std::env::var("IPFS_JWT")?;
+    let ipfs = PinataIPFS::default();
+    let file_meta = ipfs
+        .upload(
+            UploadOptions::builder()
+                .data(data.to_vec())
+                .name(name.to_string())
+                .token(token.clone())
+                .build(),
+        )
+        .await?;
+    println!("Upload file to the Pinata IPFS: {:?}", file_meta);
+    println!(
+        "Get the shared link: {:?}",
+        ipfs.get_share_link(token, file_meta.id).await?
+    );
+    Ok(())
+}
+```
+
+### Google Drive
+
+> Note: we need to enable the `google-drive` feature in the `alith` crate to use this example.
+
+```rust
+use alith::data::storage::{DataStorage, GoogleDriveStorage, UploadOptions};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let data = b"Your Data";
+    let name = "file.txt";
+    let storage = GoogleDriveStorage::default();
+    println!(
+        "Upload file to the google drive: {:?}",
+        storage
+            .upload(
+                UploadOptions::builder()
+                    .data(data.to_vec())
+                    .name(name.to_string())
+                    .token(std::env::var("GOOGLE_DRIVE_API_KEY")?)
+                    .build()
+            )
+            .await?
+    );
+    Ok(())
+}
+```
+
+### Dropbox
+
+> Note: we need to enable the `dropbox` feature in the `alith` crate to use this example.
+
+```rust
+use alith::data::storage::{DataStorage, DropboxStorage, UploadOptions};
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let data = b"Your Data";
+    let name = "file.txt";
+    let token = std::env::var("DROPBOX_API_TOKEN")?;
+    let storage = DropboxStorage::default();
+    let file_meta = storage
+        .upload(
+            UploadOptions::builder()
+                .data(data.to_vec())
+                .name(name.to_string())
+                .token(token.clone())
+                .build(),
+        )
+        .await?;
+    println!("Upload file to the dropbox: {:?}", file_meta);
+    println!(
+        "Get the shared link: {:?}",
+        storage.get_share_link(token, file_meta.id).await?
+    );
+    Ok(())
+}
+```
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+Comming Soon
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+Comming Soon
+
+</Tabs.Tab>
+</Tabs>
