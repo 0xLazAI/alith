@@ -137,7 +137,6 @@ dependencies = [
  "futures",
  "hnsw_rs",
  "html2text",
- "lru 0.14.0",
  "mcp-client",
  "rayon",
  "regex",
@@ -240,7 +239,6 @@ dependencies = [
  "backoff",
  "bytes",
  "cargo_metadata",
- "clap",
  "colorful",
  "dotenvy",
  "indenter",
@@ -653,7 +651,7 @@ dependencies = [
  "either",
  "futures",
  "futures-utils-wasm",
- "lru 0.13.0",
+ "lru",
  "parking_lot",
  "pin-project",
  "reqwest 0.12.15",
@@ -4753,15 +4751,6 @@ name = "lru"
 version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "227748d55f2f0ab4735d87fd623798cb6b664512fe979705f829c9f81c934465"
-dependencies = [
- "hashbrown 0.15.3",
-]
-
-[[package]]
-name = "lru"
-version = "0.14.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9f8cc7106155f10bdf99a6f379688f543ad6596a415375b36a59a054ceda1198"
 dependencies = [
  "hashbrown 0.15.3",
 ]

@@ -25,9 +25,8 @@ thiserror.workspace = true
 tokio.workspace = true
 tracing.workspace = true
 url.workspace = true
-
-indoc = "2.0.6"
-linkify = "0.10.0"
+indoc.workspace = true
+linkify.workspace = true
 
 [features]
 default = []

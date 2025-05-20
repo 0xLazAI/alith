@@ -13,6 +13,6 @@ mod tests {
     #[test]
     fn test_format_size() {
         let txt = "Your Data";
-        assert_eq!(format_size(txt.as_bytes().len()), "9 B");
+        assert_eq!(format_size(txt.len()), "9 B");
     }
 }

@@ -24,14 +24,10 @@ bon.workspace = true
 bytesize.workspace = true
 reqwest = { workspace = true, features = ["json", "multipart"] }
 
-alloy = { version = "1.0.1", default-features = false, features = [
-    "signers",
-    "signer-local",
-    "reqwest-rustls-tls",
-], optional = true }
-sequoia-openpgp = { version = "2.0.0", optional = true }
-rsa = { version = "0.9.8", optional = true }
-rand_core = { version = "0.9.3", optional = true }
+alloy = { workspace = true, optional = true }
+sequoia-openpgp = { workspace = true, optional = true }
+rsa = { workspace = true, optional = true }
+rand_core = { workspace = true, optional = true }
 
 [features]
 dropbox = []
