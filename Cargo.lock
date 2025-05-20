@@ -5828,7 +5828,7 @@ dependencies = [
 [[package]]
 name = "ort"
 version = "2.0.0-rc.9"
-source = "git+https://github.com/pykeio/ort.git#431425455bd2c40a5da952229114437d11d91fd8"
+source = "git+https://github.com/pykeio/ort.git#b12b9036664e37c95e1e6a21df7e9012f4c95580"
 dependencies = [
  "ndarray",
  "ort-sys 2.0.0-rc.9 (git+https://github.com/pykeio/ort.git)",
@@ -5854,7 +5854,7 @@ dependencies = [
 [[package]]
 name = "ort-sys"
 version = "2.0.0-rc.9"
-source = "git+https://github.com/pykeio/ort.git#431425455bd2c40a5da952229114437d11d91fd8"
+source = "git+https://github.com/pykeio/ort.git#b12b9036664e37c95e1e6a21df7e9012f4c95580"
 dependencies = [
  "pkg-config",
 ]
@@ -7595,7 +7595,7 @@ checksum = "015e5fc3d023418b9db98ca9a7f3e90b305872eeafe5ca45c5c32b5eb335c1e8"
 dependencies = [
  "anyhow",
  "argon2",
- "base64 0.22.1",
+ "base64 0.21.7",
  "buffered-reader",
  "bzip2",
  "chrono",
