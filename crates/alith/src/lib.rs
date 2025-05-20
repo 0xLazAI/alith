@@ -94,4 +94,7 @@ pub use prompt::{
     PromptTokenizer, RequestTokenLimitError, apply_chat_template, check_and_get_max_tokens,
 };
 
+#[cfg(feature = "lazai")]
+pub use alith_lazai as lazai;
+
 pub use async_trait::async_trait;

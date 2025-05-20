@@ -1,0 +1,30 @@
+[package]
+name = "alith-lazai"
+description = "Alith LazAI package"
+version.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+
+[dependencies]
+alith-data = { workspace = true, features = ["wallet"] }
+
+thiserror.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+reqwest.workspace = true
+url.workspace = true
+alloy = { workspace = true, features = [
+    "rpc",
+    "transports",
+    "network",
+    "sol-types",
+    "rpc-types",
+    "providers",
+    "reqwest-rustls-tls",
+] }
+serde.workspace = true
+
+[features]
