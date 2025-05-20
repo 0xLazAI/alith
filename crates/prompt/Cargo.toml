@@ -14,8 +14,7 @@ colorful.workspace = true
 indenter.workspace = true
 thiserror.workspace = true
 serde.workspace = true
-
-minijinja = "2.10.2"
+minijinja.workspace = true
 
 [dev-dependencies]
 alith-models.workspace = true

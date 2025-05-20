@@ -23,16 +23,14 @@ rand.workspace = true
 # Server
 
 reqwest.workspace = true
-tokio-util = { version = "0.7", features = ["codec", "net"] }
-tokio-graceful = "0.2.2"
-tokio-stream = { version = "0.1.15", default-features = false, features = [
-  "sync",
-] }
-hyper = { version = "1.0", features = ["full"] }
-hyper-util = { version = "0.1", features = ["server-auto", "client-legacy"] }
-futures-util = "0.3.29"
-http = "1.1.0"
-http-body-util = "0.1"
+tokio-util.workspace = true
+tokio-graceful.workspace = true
+tokio-stream.workspace = true
+hyper.workspace = true
+hyper-util.workspace = true
+futures-util.workspace = true
+http.workspace = true
+http-body-util.workspace = true
 
 # ONNX Runtime
 ort = { "git" = "https://github.com/pykeio/ort.git", default-features = false, features = [
@@ -41,7 +39,7 @@ ort = { "git" = "https://github.com/pykeio/ort.git", default-features = false, f
 ], optional = true }
 
 # mistralrs
-indexmap = { version = "2.9" }
+indexmap.workspace = true
 mistralrs = { git = "https://github.com/EricLBuehler/mistral.rs.git", rev = "aaafc2ef", optional = true }
 
 # vLLM
@@ -50,11 +48,11 @@ mistralrs = { git = "https://github.com/EricLBuehler/mistral.rs.git", rev = "aaa
 
 # Python
 pythonize = { version = "0.23", optional = true }
-either = "1.15.0"
-async-stream = "0.3.6"
-encoding_rs = "0.8.35"
-bytes = "1.10.1"
-chrono = "0.4.41"
+either.workspace = true
+async-stream.workspace = true
+encoding_rs.workspace = true
+bytes.workspace = true
+chrono.workspace = true
 
 [target.'cfg(not(windows))'.dependencies]
 # llamacpp
