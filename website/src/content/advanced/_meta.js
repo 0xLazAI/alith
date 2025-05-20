@@ -3,6 +3,7 @@ export default {
   mcp: "",
   cot: "",
   tee: "",
+  da: "",
   decision: "",
   inference: ""
 };
