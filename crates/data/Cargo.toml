@@ -21,7 +21,8 @@ tokio.workspace = true
 rand.workspace = true
 rand_08.workspace = true
 bon.workspace = true
-reqwest = {workspace = true, features = ["json", "multipart"]}
+bytesize.workspace = true
+reqwest = { workspace = true, features = ["json", "multipart"] }
 
 alloy = { version = "1.0.1", default-features = false, features = [
     "signers",

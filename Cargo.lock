@@ -163,6 +163,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "bon",
+ "bytesize",
  "rand 0.8.5",
  "rand 0.9.1",
  "rand_core 0.9.3",
@@ -1725,6 +1726,12 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 dependencies = [
  "serde",
 ]
+
+[[package]]
+name = "bytesize"
+version = "2.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a3c8f83209414aacf0eeae3cf730b18d6981697fba62f200fcfb92b9f082acba"
 
 [[package]]
 name = "bzip2"
