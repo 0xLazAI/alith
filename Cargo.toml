@@ -81,7 +81,7 @@ sha2 = "0.10.9"
 scraper = "0.23.1"
 
 # SQL and Store Deps
-sqlx = { version = "0.8.5", features = [
+sqlx = { version = "0.8.6", features = [
     "runtime-tokio",
     "postgres",
     "uuid",
