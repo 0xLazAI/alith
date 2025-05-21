@@ -20,7 +20,7 @@ pub struct Client {
 }
 
 impl Client {
-    /// New the LazAI client wieh the chain config and wallet.
+    /// New the LazAI client with the chain config and wallet.
     pub fn new(
         wallet: Wallet,
         chain_config: ChainConfig,
