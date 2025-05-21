@@ -1,3 +1,7 @@
+pub use base64::{
+    DecodeError as Base64DecodeError, Engine as Base64Engine,
+    engine::general_purpose::STANDARD as BASE64_STANDARD,
+};
 use openpgp::{
     Cert, Result,
     crypto::{Password, SessionKey},
@@ -10,7 +14,10 @@ use openpgp::{
     serialize::stream::{Armorer, Encryptor, LiteralWriter, Message},
     types::SymmetricAlgorithm,
 };
-pub use rsa::{Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey};
+pub use rsa::{
+    Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey,
+    pkcs8::{DecodePrivateKey, DecodePublicKey, EncodePrivateKey, EncodePublicKey},
+};
 pub use sequoia_openpgp as openpgp;
 use std::io::{Read, Write};
 

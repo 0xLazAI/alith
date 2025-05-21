@@ -13,10 +13,5 @@ async fn main() -> Result<(), anyhow::Error> {
     );
     client.transfer(to, value, 21000, None).await?;
     println!("Transfer value {} to {}", to, value);
-    let file_id = client.add_file(url).await?;
-    println!(
-        "Get the privacy file information {:?}",
-        client.get_file(file_id).await?.ownerAddress
-    );
     Ok(())
 }
