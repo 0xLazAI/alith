@@ -1,5 +1,5 @@
 use alith::data::crypto::{BASE64_STANDARD, Base64Engine, Pkcs1v15Encrypt, RsaPublicKey};
-use alith::lazai::{Client, U256, Wallet, address};
+use alith::lazai::{Client, Permission, U256, Wallet, address};
 use alith_data::crypto::RsaPrivateKey;
 
 #[tokio::main]
@@ -24,7 +24,16 @@ async fn main() -> Result<(), anyhow::Error> {
     );
     client.transfer(to, value, 21000, None).await?;
     println!("Transfer value {} to {}", to, value);
-    let file_id = client.add_file(url, encrypted_key).await?;
+    let file_id = client.add_file(url).await?;
+    client
+        .add_permission_for_file(
+            file_id,
+            Permission {
+                account: client.config.data_registry_address,
+                key: encrypted_key,
+            },
+        )
+        .await?;
     println!(
         "Get the privacy file information {:?}",
         client.get_file(file_id).await?.ownerAddress

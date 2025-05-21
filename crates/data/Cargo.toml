@@ -27,7 +27,7 @@ reqwest = { workspace = true, features = ["json", "multipart"] }
 base64 = { workspace = true, optional = true }
 alloy = { workspace = true, optional = true }
 sequoia-openpgp = { workspace = true, optional = true }
-rsa = { workspace = true, fearures = ["pem"], optional = true }
+rsa = { workspace = true, features = ["pem"], optional = true }
 rand_core = { workspace = true, optional = true }
 
 [features]
