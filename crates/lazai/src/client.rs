@@ -20,7 +20,7 @@ use crate::{
 #[derive(Debug, Clone)]
 pub struct Client {
     manager: ChainManager,
-    config: ContractConfig,
+    pub config: ContractConfig,
 }
 
 impl Client {
@@ -46,14 +46,10 @@ impl Client {
     }
 
     /// Add privacy data url and encrypted key base64 format into the data registry on LazAI.
-    pub async fn add_file(
-        &self,
-        url: impl AsRef<str>,
-        encrypted_key: impl AsRef<str>,
-    ) -> Result<U256, ClientError> {
+    pub async fn add_file(&self, url: impl AsRef<str>) -> Result<U256, ClientError> {
         let contract = self.data_registry_contract();
         self.send_transaction(
-            contract.addFile(url.as_ref().to_string(), encrypted_key.as_ref().to_string()),
+            contract.addFile(url.as_ref().to_string()),
             self.config.data_registry_address,
             None,
         )
