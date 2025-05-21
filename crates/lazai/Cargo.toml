@@ -24,6 +24,7 @@ alloy = { workspace = true, features = [
     "rpc-types",
     "providers",
     "reqwest-rustls-tls",
+    "contract",
 ] }
 serde.workspace = true
 
