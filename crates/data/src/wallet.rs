@@ -24,6 +24,7 @@ pub enum WalletError {
 /// - Initialization from private key
 /// - Message signing capabilities
 /// - Default message signing
+#[derive(Debug, Clone)]
 pub struct LocalEthWallet {
     /// Ethereum address derived from private key
     pub address: Address,

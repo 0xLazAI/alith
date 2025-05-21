@@ -1,4 +1,5 @@
 use crate::wallet::LocalEthWallet;
+use alith_data::wallet::WalletError;
 use alloy::{
     network::{EthereumWallet, TransactionBuilder},
     primitives::{Address, ChainId, TxKind, U256},
@@ -17,6 +18,7 @@ use thiserror::Error;
 pub const DEVNET_NETWORK: &str = "LazAI Devnet";
 pub const TESTNET_NETWORK: &str = "LazAI Testnet";
 pub const LOCAL_CHAIN_ENDPOINT: &str = "http://localhost:8545";
+pub const TESTNET_ENDPOINT: &str = "https://lazi-testnet.metisdevops.link";
 pub const TESTNET_CHAINID: ChainId = 133718;
 
 pub type Wallet = LocalEthWallet;
@@ -40,7 +42,7 @@ impl ChainConfig {
     pub fn testnet() -> Self {
         Self {
             network: TESTNET_NETWORK.to_string(),
-            chain_endpoint: LOCAL_CHAIN_ENDPOINT.to_string(),
+            chain_endpoint: TESTNET_ENDPOINT.to_string(),
             chain_id: TESTNET_CHAINID,
             gas_multiplier: 1.5,
             max_retries: 3,
@@ -70,13 +72,15 @@ pub enum ChainError {
     ConfigError(String),
     #[error("Contract error: {0}")]
     ContractError(String),
+    #[error("Wallet error: {0}")]
+    WalletError(#[from] WalletError),
     #[error("Url error: {0}")]
     UrlError(#[from] url::ParseError),
     #[error("Rpc error: {0}")]
     RpcError(#[from] RpcError<TransportErrorKind>),
 }
 
-type AlloyProvider = FillProvider<
+pub type AlloyProvider = FillProvider<
     JoinFill<
         Identity,
         JoinFill<GasFiller, JoinFill<BlobGasFiller, JoinFill<NonceFiller, ChainIdFiller>>>,
@@ -84,10 +88,11 @@ type AlloyProvider = FillProvider<
     RootProvider,
 >;
 
+#[derive(Debug, Clone)]
 pub struct ChainManager {
     pub config: ChainConfig,
     pub wallet: Wallet,
-    provider: AlloyProvider,
+    pub provider: AlloyProvider,
     nonce_lock: Arc<Mutex<u32>>,
 }
 
@@ -105,6 +110,11 @@ impl ChainManager {
     }
 
     #[inline]
+    pub fn new_default() -> Result<Self, ChainError> {
+        Self::new(ChainConfig::default(), Wallet::from_env()?)
+    }
+
+    #[inline]
     pub async fn get_current_block(&self) -> Result<u64, ChainError> {
         Ok(self.provider.get_block_number().await?)
     }
@@ -112,6 +122,24 @@ impl ChainManager {
     #[inline]
     pub async fn get_balance(&self, address: Address) -> Result<U256, ChainError> {
         Ok(self.provider.get_balance(address).await?)
+    }
+
+    #[inline]
+    pub async fn get_nonce(&self) -> Result<u64, ChainError> {
+        Ok(self
+            .provider
+            .get_transaction_count(self.wallet.address)
+            .await?)
+    }
+
+    #[inline]
+    pub async fn get_gas_price(&self) -> Result<u128, ChainError> {
+        Ok(self.provider.get_gas_price().await?)
+    }
+
+    #[inline]
+    pub async fn get_max_priority_fee_per_gas(&self) -> Result<u128, ChainError> {
+        Ok(self.provider.get_max_priority_fee_per_gas().await?)
     }
 
     #[inline]
@@ -128,6 +156,7 @@ impl ChainManager {
         .await?)
     }
 
+    #[inline]
     pub async fn transfer(
         &self,
         to: Address,
@@ -135,10 +164,7 @@ impl ChainManager {
         gas_limit: u64,
         gas_price: Option<u128>,
     ) -> Result<(), ChainError> {
-        let nonce = self
-            .provider
-            .get_transaction_count(self.wallet.address)
-            .await?;
+        let nonce = self.get_nonce().await?;
 
         let gas_price = match gas_price {
             Some(price) => price,
@@ -165,6 +191,7 @@ impl ChainManager {
         Ok(())
     }
 
+    #[inline]
     pub async fn estimate_gas(
         &self,
         to: Address,
@@ -181,7 +208,13 @@ impl ChainManager {
                 input: TransactionInput::maybe_input(data.map(|d| d.into())),
                 ..Default::default()
             })
-            .await?)
+            .await?
+            * 2)
+    }
+
+    #[inline]
+    pub async fn estimate_tx_gas(&self, tx: TransactionRequest) -> Result<u64, ChainError> {
+        Ok(self.provider.estimate_gas(tx).await? * 2)
     }
 
     pub async fn clear_pending_transactions(&self) -> Result<(), ChainError> {

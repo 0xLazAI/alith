@@ -39,7 +39,7 @@ sqlx = { workspace = true, optional = true }
 
 [features]
 # Default features
-default = ["lazai"]
+default = []
 
 # Inference features
 fastembed = ["alith-core/fastembed"]
