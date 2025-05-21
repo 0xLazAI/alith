@@ -22,6 +22,7 @@ alith-interface.workspace = true
 alith-prompt.workspace = true
 alith-devices.workspace = true
 alith-tee.workspace = true
+alith-lazai = { workspace = true, optional = true }
 
 async-trait.workspace = true
 tokio.workspace = true
@@ -38,7 +39,7 @@ sqlx = { workspace = true, optional = true }
 
 [features]
 # Default features
-default = []
+default = ["lazai"]
 
 # Inference features
 fastembed = ["alith-core/fastembed"]
@@ -72,6 +73,9 @@ wallet = ["alith-data/wallet"]
 ipfs = ["alith-data/ipfs"]
 dropbox = ["alith-data/dropbox"]
 google-drive = ["alith-data/google-drive"]
+
+# LazAI features
+lazai = ["dep:alith-lazai"]
 
 [[example]]
 name = "agent"
@@ -176,6 +180,10 @@ required-features = ["dropbox"]
 [[example]]
 name = "agent_with_pinata_ipfs"
 required-features = ["ipfs"]
+
+[[example]]
+name = "agent_with_lazai"
+required-features = ["lazai"]
 
 [[example]]
 name = "hf_loader"
