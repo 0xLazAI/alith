@@ -1,5 +1,4 @@
-use crate::wallet::LocalEthWallet;
-use alith_data::wallet::WalletError;
+pub use crate::wallet::{LocalEthWallet, WalletError};
 use alloy::{
     network::{EthereumWallet, TransactionBuilder},
     primitives::{Address, ChainId, TxKind, U256},

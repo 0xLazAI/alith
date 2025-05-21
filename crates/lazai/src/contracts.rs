@@ -80,7 +80,7 @@ sol! {
 
         function getFile(uint256 fileId) view returns (File memory);
         function getFileIdByUrl(string memory url) view returns (uint256);
-        function getFilePermissions(uint256 fileId, address account) view returns (string memory);
+        function getFilePermission(uint256 fileId, address account) view returns (string memory);
         function getFileProof(uint256 fileId, uint256 index) view returns (Proof memory);
         function getFilesCount() view returns (uint256);
 
@@ -97,20 +97,69 @@ sol! {
         function revokeRole(bytes32 role, address account);
         function setRoleAdmin(bytes32 role, bytes32 adminRole);
     }
+
+    event TeeAdded(address indexed teeAddress);
+
+    event TeeRemoved(address indexed teeAddress);
+
+    struct TeeInfo {
+        address teeAddress;
+        string url;
+        uint8 status;
+        uint256 amount;
+        uint256 withdrawnAmount;
+        uint256 jobsCount;
+        string publicKey;
+    }
+
+    #[sol(rpc)]
+    interface ITeePool {
+        // Role View functions
+
+        function ADMIN_ROLE() view returns (bytes32);
+        function MAINTAINER_ROLE() view returns (bytes32);
+
+        // Data registry contract functions
+
+        function dataRegistryAddress() view returns (address);
+        function updateDataRegistryAddress(address newDataRegistryAddress);
+
+        // TEE related fee
+
+        function fee() view returns (uint256);
+        function updateFee(uint256 newFee);
+
+        // TEE operations
+
+        function teeList() view returns (address[] memory);
+        function teeListAt(uint256 index) view returns (TeeInfo memory);
+        function teesCount() view returns (uint256);
+
+        function getTee(address teeAddress) view returns (TeeInfo memory);
+        function addTee(address teeAddress, string memory url, string memory publicKey);
+        function removeTee(address teeAddress);
+        function isTee(address teeAddress) view returns (bool);
+
+        function claim();
+    }
 }
 
 pub const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS: Address =
     address!("0x4141410000000000000000000000000000000000");
+pub const DEFAULT_DATA_TEE_POOL_CONTRACT_ADDRESS: Address =
+    address!("0x4242420000000000000000000000000000000000");
 
 #[derive(Debug, Clone)]
 pub struct ContractConfig {
     pub data_registry_address: Address,
+    pub tee_pool_address: Address,
 }
 
 impl Default for ContractConfig {
     fn default() -> Self {
         Self {
             data_registry_address: DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
+            tee_pool_address: DEFAULT_DATA_TEE_POOL_CONTRACT_ADDRESS,
         }
     }
 }

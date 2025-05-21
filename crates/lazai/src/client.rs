@@ -1,16 +1,20 @@
 use alloy::{
     contract::{CallBuilder, CallDecoder},
     network::{Ethereum, EthereumWallet, TransactionBuilder, TransactionBuilderError},
-    primitives::{Address, U256},
+    primitives::{Address, U256, keccak256},
     providers::Provider,
+    sol_types::SolValue,
 };
 use std::ops::Deref;
 use thiserror::Error;
 
 use crate::{
-    ChainConfig, ChainError, ChainManager, Wallet,
+    ChainConfig, ChainError, ChainManager, Proof, ProofData, Wallet, WalletError,
     chain::AlloyProvider,
-    contracts::{ContractConfig, File, IDataRegistry::IDataRegistryInstance},
+    contracts::{
+        ContractConfig, File, IDataRegistry::IDataRegistryInstance, ITeePool::ITeePoolInstance,
+        Permission, TeeInfo,
+    },
 };
 
 #[derive(Debug, Clone)]
@@ -54,7 +58,41 @@ impl Client {
         self.get_file_id_by_url(url).await
     }
 
-    /// Get the file id by the url
+    /// Add privacy data url into the data registry on LazAI.
+    pub async fn add_file_with_permissions(
+        &self,
+        url: impl AsRef<str>,
+        owner: Address,
+        permissions: Vec<Permission>,
+    ) -> Result<U256, ClientError> {
+        let contract = self.data_registry_contract();
+        self.send_transaction(
+            contract.addFileWithPermissions(url.as_ref().to_string(), owner, permissions),
+            self.config.data_registry_address,
+            None,
+        )
+        .await?;
+
+        self.get_file_id_by_url(url).await
+    }
+
+    /// Add the permission for the file.
+    pub async fn add_permission_for_file(
+        &self,
+        file_id: U256,
+        permission: Permission,
+    ) -> Result<(), ClientError> {
+        let contract = self.data_registry_contract();
+        self.send_transaction(
+            contract.addPermissionForFile(file_id, permission.account, permission.key),
+            self.config.data_registry_address,
+            None,
+        )
+        .await?;
+        Ok(())
+    }
+
+    /// Get the file id by the url.
     pub async fn get_file_id_by_url(&self, url: impl AsRef<str>) -> Result<U256, ClientError> {
         let contract = self.data_registry_contract();
         let builder = self
@@ -86,6 +124,138 @@ impl Client {
             .await
             .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
         Ok(file)
+    }
+
+    /// Get the encryption key for the account on LazAI.
+    pub async fn get_file_permission(
+        &self,
+        file_id: U256,
+        account: Address,
+    ) -> Result<String, ClientError> {
+        let contract = self.data_registry_contract();
+        let builder = self
+            .call_builder(
+                contract.getFilePermission(file_id, account),
+                self.config.data_registry_address,
+                None,
+            )
+            .await?;
+        let key = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(key)
+    }
+
+    /// Get the file proof on LazAI.
+    pub async fn get_file_proof(&self, file_id: U256, index: U256) -> Result<Proof, ClientError> {
+        let contract = self.data_registry_contract();
+        let builder = self
+            .call_builder(
+                contract.getFileProof(file_id, index),
+                self.config.data_registry_address,
+                None,
+            )
+            .await?;
+        let proof = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(proof)
+    }
+
+    /// Get the file total count.
+    pub async fn get_files_count(&self) -> Result<U256, ClientError> {
+        let contract = self.data_registry_contract();
+        let builder = self
+            .call_builder(
+                contract.getFilesCount(),
+                self.config.data_registry_address,
+                None,
+            )
+            .await?;
+        let count = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(count)
+    }
+
+    pub async fn add_proof(&self, file_id: U256, data: ProofData) -> Result<(), ClientError> {
+        let packed_data = keccak256(data.abi_encode());
+        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
+        let proof = Proof {
+            signature: signature.as_bytes().to_vec().into(),
+            data,
+        };
+        let contract = self.data_registry_contract();
+        self.send_transaction(
+            contract.addProof(file_id, proof),
+            self.config.data_registry_address,
+            None,
+        )
+        .await?;
+
+        Ok(())
+    }
+
+    pub async fn add_tee(
+        &self,
+        address: Address,
+        url: impl AsRef<str>,
+        public_key: impl AsRef<str>,
+    ) -> Result<(), ClientError> {
+        let contract = self.tee_pool_contract();
+        self.send_transaction(
+            contract.addTee(
+                address,
+                url.as_ref().to_string(),
+                public_key.as_ref().to_string(),
+            ),
+            self.config.tee_pool_address,
+            None,
+        )
+        .await?;
+
+        Ok(())
+    }
+
+    pub async fn get_tee(&self, address: Address) -> Result<Option<TeeInfo>, ClientError> {
+        let contract = self.tee_pool_contract();
+        let builder = self
+            .call_builder(contract.getTee(address), self.config.tee_pool_address, None)
+            .await?;
+        let info = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        if info.url.is_empty() {
+            Ok(None)
+        } else {
+            Ok(Some(info))
+        }
+    }
+
+    /// Get the tee address list
+    pub async fn tee_list(&self) -> Result<Vec<Address>, ClientError> {
+        let contract = self.tee_pool_contract();
+        let builder = self
+            .call_builder(contract.teeList(), self.config.tee_pool_address, None)
+            .await?;
+        let list = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(list)
+    }
+
+    /// Claim any rewards for TEE validators
+    pub async fn claim_tee(&self) -> Result<(), ClientError> {
+        let contract = self.tee_pool_contract();
+        self.send_transaction(contract.claim(), self.config.tee_pool_address, None)
+            .await?;
+
+        Ok(())
     }
 
     #[inline]
@@ -142,6 +312,11 @@ impl Client {
     fn data_registry_contract(&self) -> IDataRegistryInstance<&AlloyProvider> {
         IDataRegistryInstance::new(self.config.data_registry_address, &self.manager.provider)
     }
+
+    #[inline]
+    fn tee_pool_contract(&self) -> ITeePoolInstance<&AlloyProvider> {
+        ITeePoolInstance::new(self.config.tee_pool_address, &self.manager.provider)
+    }
 }
 
 impl AsRef<ChainManager> for Client {
@@ -170,6 +345,8 @@ pub enum ClientError {
     ChainError(#[from] ChainError),
     #[error("Tx build error: {0}")]
     TxBuildError(#[from] TransactionBuilderError<Ethereum>),
+    #[error("Wallet error: {0}")]
+    WalletError(#[from] WalletError),
     #[error("Contract call error: {0}")]
     ContractCallError(String),
 }
