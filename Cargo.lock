@@ -6065,9 +6065,9 @@ dependencies = [
 
 [[package]]
 name = "pgvector"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e0e8871b6d7ca78348c6cd29b911b94851f3429f0cd403130ca17f26c1fb91a6"
+checksum = "fc58e2d255979a31caa7cabfa7aac654af0354220719ab7a68520ae7a91e8c0b"
 dependencies = [
  "sqlx",
 ]
@@ -7673,7 +7673,7 @@ checksum = "015e5fc3d023418b9db98ca9a7f3e90b305872eeafe5ca45c5c32b5eb335c1e8"
 dependencies = [
  "anyhow",
  "argon2",
- "base64 0.21.7",
+ "base64 0.22.1",
  "buffered-reader",
  "bzip2",
  "chrono",
