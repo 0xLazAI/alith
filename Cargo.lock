@@ -162,6 +162,7 @@ dependencies = [
  "alloy",
  "anyhow",
  "async-trait",
+ "base64 0.22.1",
  "bon",
  "bytesize",
  "rand 0.8.5",

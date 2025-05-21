@@ -55,6 +55,7 @@ sol! {
         uint256 id;
         address ownerAddress;
         string url;
+        string encryptedKey;
     }
 
     // Data registry interface
@@ -68,7 +69,7 @@ sol! {
 
         // Privacy data and file operations
 
-        function addFile(string memory url) returns (uint256);
+        function addFile(string memory url, string memory encryptedKey) returns (uint256);
         function addFileWithPermissions(
             string memory url,
             address ownerAddress,

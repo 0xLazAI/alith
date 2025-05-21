@@ -24,14 +24,15 @@ bon.workspace = true
 bytesize.workspace = true
 reqwest = { workspace = true, features = ["json", "multipart"] }
 
+base64 = { workspace = true, optional = true }
 alloy = { workspace = true, optional = true }
 sequoia-openpgp = { workspace = true, optional = true }
-rsa = { workspace = true, optional = true }
+rsa = { workspace = true, fearures = ["pem"], optional = true }
 rand_core = { workspace = true, optional = true }
 
 [features]
 dropbox = []
 google-drive = []
 ipfs = []
-crypto = ["dep:sequoia-openpgp", "dep:rsa", "dep:rand_core"]
+crypto = ["dep:sequoia-openpgp", "dep:rsa", "dep:rand_core", "dep:base64"]
 wallet = ["dep:alloy"]
