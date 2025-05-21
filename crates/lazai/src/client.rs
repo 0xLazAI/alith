@@ -20,7 +20,7 @@ pub struct Client {
 }
 
 impl Client {
-    /// New the LazAI client wieh the chain config and wallet.
+    /// New the LazAI client with the chain config and wallet.
     pub fn new(
         wallet: Wallet,
         chain_config: ChainConfig,
@@ -59,7 +59,7 @@ impl Client {
         let contract = self.data_registry_contract();
         let builder = self
             .call_builder(
-                contract.getfileIdByUrl(url.as_ref().to_string()),
+                contract.getFileIdByUrl(url.as_ref().to_string()),
                 self.config.data_registry_address,
                 None,
             )
@@ -76,7 +76,7 @@ impl Client {
         let contract = self.data_registry_contract();
         let builder = self
             .call_builder(
-                contract.getfile(file_id),
+                contract.getFile(file_id),
                 self.config.data_registry_address,
                 None,
             )

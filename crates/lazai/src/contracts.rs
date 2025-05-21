@@ -78,11 +78,11 @@ sol! {
 
         // File view functions
 
-        function getfile(uint256 fileId) view returns (File memory);
-        function getfileIdByUrl(string memory url) view returns (uint256);
-        function getfilePermissions(uint256 fileId, address account) view returns (string memory);
-        function getfileProof(uint256 fileId, uint256 index) view returns (Proof memory);
-        function getfilesCount() view returns (uint256);
+        function getFile(uint256 fileId) view returns (File memory);
+        function getFileIdByUrl(string memory url) view returns (uint256);
+        function getFilePermissions(uint256 fileId, address account) view returns (string memory);
+        function getFileProof(uint256 fileId, uint256 index) view returns (Proof memory);
+        function getFilesCount() view returns (uint256);
 
         // Proof operations
 
