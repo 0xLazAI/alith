@@ -49,7 +49,7 @@ sol! {
         bool verified;
     }
 
-    // Data registry interface
+    // Data registry contract interface
 
     #[sol(rpc)]
     interface IDataRegistry {
@@ -97,28 +97,28 @@ sol! {
         // Owner and Contract addresses
 
         function tokenAddress() external view returns (DataAnchorToken);
-        function teeAddress() external view returns (ITeePool);
+        function verifiedComputingAddress() external view returns (IVerifiedComputing);
 
         // Request reward and token
         function requestReward(uint256 fileId, uint256 proofIndex) external;
     }
 
-    event TeeAdded(address indexed teeAddress);
+    event NodeAdded(address indexed nodeAddress);
 
-    event TeeRemoved(address indexed teeAddress);
+    event NodeRemoved(address indexed nodeAddress);
 
-    struct TeeInfo {
-        address teeAddress;
+    struct NodeInfo {
+        address nodeAddress;
         string url;
         uint8 status;
         uint256 amount;
-        uint256 withdrawnAmount;
-        uint256 jobsCount;
         string publicKey;
     }
 
+    // Verified Computing Contract for privacy data and inference in CPU/GPU TEE.
+
     #[sol(rpc)]
-    interface ITeePool {
+    interface IVerifiedComputing {
         // Role View functions
 
         function ADMIN_ROLE() view returns (bytes32);
@@ -129,26 +129,27 @@ sol! {
         function dataRegistryAddress() view returns (address);
         function updateDataRegistryAddress(address newDataRegistryAddress);
 
-        // TEE related fee
+        // Fee operations
 
         function fee() view returns (uint256);
         function updateFee(uint256 newFee);
 
-        // TEE operations
+        // Node operations
 
-        function teeList() view returns (address[] memory);
-        function teeListAt(uint256 index) view returns (TeeInfo memory);
-        function teesCount() view returns (uint256);
+        function nodeList() view returns (address[] memory);
+        function nodeListAt(uint256 index) view returns (NodeInfo memory);
+        function nodeCount() view returns (uint256);
 
-        function getTee(address teeAddress) view returns (TeeInfo memory);
-        function addTee(address teeAddress, string memory url, string memory publicKey);
-        function removeTee(address teeAddress);
-        function isTee(address teeAddress) view returns (bool);
+        function getNode(address nodeAddress) view returns (NodeInfo memory);
+        function addNode(address nodeAddress, string memory url, string memory publicKey);
+        function removeNode(address nodeAddress);
 
         function claim();
 
         function requestProof(uint256 fileId) external payable;
     }
+
+    // DAT Token
 
     #[sol(rpc)]
     interface IERC721 {
@@ -174,20 +175,20 @@ sol! {
 
 pub const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS: Address =
     address!("0x4141410000000000000000000000000000000000");
-pub const DEFAULT_DATA_TEE_POOL_CONTRACT_ADDRESS: Address =
+pub const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS: Address =
     address!("0x4242420000000000000000000000000000000000");
 
 #[derive(Debug, Clone)]
 pub struct ContractConfig {
     pub data_registry_address: Address,
-    pub tee_pool_address: Address,
+    pub verified_computing_address: Address,
 }
 
 impl Default for ContractConfig {
     fn default() -> Self {
         Self {
             data_registry_address: DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
-            tee_pool_address: DEFAULT_DATA_TEE_POOL_CONTRACT_ADDRESS,
+            verified_computing_address: DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
         }
     }
 }

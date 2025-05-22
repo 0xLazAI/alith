@@ -12,8 +12,8 @@ use crate::{
     ChainConfig, ChainError, ChainManager, Proof, ProofData, Wallet, WalletError,
     chain::AlloyProvider,
     contracts::{
-        ContractConfig, File, IDataRegistry::IDataRegistryInstance, ITeePool::ITeePoolInstance,
-        Permission, TeeInfo,
+        ContractConfig, File, IDataRegistry::IDataRegistryInstance,
+        IVerifiedComputing::IVerifiedComputingInstance, NodeInfo, Permission,
     },
 };
 
@@ -199,20 +199,20 @@ impl Client {
         Ok(())
     }
 
-    pub async fn add_tee(
+    pub async fn add_node(
         &self,
         address: Address,
         url: impl AsRef<str>,
         public_key: impl AsRef<str>,
     ) -> Result<(), ClientError> {
-        let contract = self.tee_pool_contract();
+        let contract = self.verified_computing_contract();
         self.send_transaction(
-            contract.addTee(
+            contract.addNode(
                 address,
                 url.as_ref().to_string(),
                 public_key.as_ref().to_string(),
             ),
-            self.config.tee_pool_address,
+            self.config.verified_computing_address,
             None,
         )
         .await?;
@@ -220,10 +220,14 @@ impl Client {
         Ok(())
     }
 
-    pub async fn get_tee(&self, address: Address) -> Result<Option<TeeInfo>, ClientError> {
-        let contract = self.tee_pool_contract();
+    pub async fn get_node(&self, address: Address) -> Result<Option<NodeInfo>, ClientError> {
+        let contract = self.verified_computing_contract();
         let builder = self
-            .call_builder(contract.getTee(address), self.config.tee_pool_address, None)
+            .call_builder(
+                contract.getNode(address),
+                self.config.verified_computing_address,
+                None,
+            )
             .await?;
         let info = builder
             .call()
@@ -236,11 +240,15 @@ impl Client {
         }
     }
 
-    /// Get the tee address list
-    pub async fn tee_list(&self) -> Result<Vec<Address>, ClientError> {
-        let contract = self.tee_pool_contract();
+    /// Get the node address list
+    pub async fn node_list(&self) -> Result<Vec<Address>, ClientError> {
+        let contract = self.verified_computing_contract();
         let builder = self
-            .call_builder(contract.teeList(), self.config.tee_pool_address, None)
+            .call_builder(
+                contract.nodeList(),
+                self.config.verified_computing_address,
+                None,
+            )
             .await?;
         let list = builder
             .call()
@@ -249,11 +257,15 @@ impl Client {
         Ok(list)
     }
 
-    /// Claim any rewards for TEE validators
-    pub async fn claim_tee(&self) -> Result<(), ClientError> {
-        let contract = self.tee_pool_contract();
-        self.send_transaction(contract.claim(), self.config.tee_pool_address, None)
-            .await?;
+    /// Claim any rewards for node validators
+    pub async fn claim(&self) -> Result<(), ClientError> {
+        let contract = self.verified_computing_contract();
+        self.send_transaction(
+            contract.claim(),
+            self.config.verified_computing_address,
+            None,
+        )
+        .await?;
 
         Ok(())
     }
@@ -314,8 +326,11 @@ impl Client {
     }
 
     #[inline]
-    fn tee_pool_contract(&self) -> ITeePoolInstance<&AlloyProvider> {
-        ITeePoolInstance::new(self.config.tee_pool_address, &self.manager.provider)
+    fn verified_computing_contract(&self) -> IVerifiedComputingInstance<&AlloyProvider> {
+        IVerifiedComputingInstance::new(
+            self.config.verified_computing_address,
+            &self.manager.provider,
+        )
     }
 }
 
