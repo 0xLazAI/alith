@@ -9,5 +9,5 @@ pub use alith_data::wallet;
 pub use alloy::primitives::{Address, ChainId, TxKind, U256, address};
 pub use chain::{ChainConfig, ChainError, ChainManager, Wallet, WalletError};
 pub use client::Client;
-pub use contracts::{ContractConfig, File, NodeInfo, Permission};
+pub use contracts::{ContractConfig, FileResponse as File, NodeInfo, Permission};
 pub use proof::{Proof, ProofAdded, ProofData};
