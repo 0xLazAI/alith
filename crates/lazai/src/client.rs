@@ -12,7 +12,7 @@ use crate::{
     ChainConfig, ChainError, ChainManager, Proof, ProofData, Wallet, WalletError,
     chain::AlloyProvider,
     contracts::{
-        ContractConfig, File, IDataRegistry::IDataRegistryInstance,
+        ContractConfig, FileResponse as File, IDataRegistry::IDataRegistryInstance,
         IVerifiedComputing::IVerifiedComputingInstance, NodeInfo, Permission,
     },
 };
@@ -169,7 +169,7 @@ impl Client {
         let contract = self.data_registry_contract();
         let builder = self
             .call_builder(
-                contract.getFilesCount(),
+                contract.filesCount(),
                 self.config.data_registry_address,
                 None,
             )
