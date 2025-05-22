@@ -166,6 +166,10 @@ name = "agent_with_marlin_tee"
 required-features = ["marlin"]
 
 [[example]]
+name = "rsa"
+required-features = ["crypto"]
+
+[[example]]
 name = "agent_with_privacy_data"
 required-features = ["crypto", "marlin", "wallet"]
 
