@@ -6,7 +6,7 @@ use alloy::{
         Identity, Provider, ProviderBuilder, RootProvider,
         fillers::{BlobGasFiller, ChainIdFiller, FillProvider, GasFiller, JoinFill, NonceFiller},
     },
-    rpc::types::{BlockId, TransactionInput, TransactionRequest},
+    rpc::types::{BlockId, TransactionInput, TransactionReceipt, TransactionRequest},
     transports::{RpcError, TransportErrorKind},
 };
 use reqwest::Url;
@@ -162,7 +162,7 @@ impl ChainManager {
         value: U256,
         gas_limit: u64,
         gas_price: Option<u128>,
-    ) -> Result<(), ChainError> {
+    ) -> Result<TransactionReceipt, ChainError> {
         let nonce = self.get_nonce().await?;
 
         let gas_price = match gas_price {
@@ -186,8 +186,12 @@ impl ChainManager {
             .await
             .map_err(|err| ChainError::SigningError(err.to_string()))?;
 
-        let _ = self.provider.send_tx_envelope(tx_envelope).await?;
-        Ok(())
+        self.provider
+            .send_tx_envelope(tx_envelope)
+            .await?
+            .get_receipt()
+            .await
+            .map_err(|err| ChainError::TransactionError(err.to_string()))
     }
 
     #[inline]
