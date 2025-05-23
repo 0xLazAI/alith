@@ -111,7 +111,7 @@ mod tests {
     #[tokio::test]
     async fn test_openpgp() -> Result<()> {
         let privacy_data = b"Hello, Privacy Data with PGP!";
-        let password = LocalEthWallet::random()?.sign().await?;
+        let password = LocalEthWallet::random()?.sign_hex().await?;
         let mut rng = rand_08::thread_rng();
         let priv_key = RsaPrivateKey::new(&mut rng, 3072)?;
         let pub_key = RsaPublicKey::from(&priv_key);

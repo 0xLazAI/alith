@@ -23,7 +23,7 @@ sol! {
     error FileAlreadyRewarded();
     error NoPermission();
     error InvalidUrl();
-    error InvalidAttestator();
+    error InvalidAttestator(bytes32 messageHash, bytes signature, address signer);
 
     struct ProofData {
         uint256 id;
@@ -107,11 +107,11 @@ sol! {
     event JobSubmitted(uint256 indexed jobId, uint256 indexed fileId, address nodeAddress, uint256 bidAmount);
     event JobCanceled(uint256 indexed jobId);
 
+    event JobComplete(address indexed attestator, uint256 indexed jobId, uint256 indexed fileId);
     event Claimed(address indexed nodeAddress, uint256 amount);
 
     error NodeAlreadyAdded();
     error NodeNotActive();
-    error JobCompleted();
     error InvalidJobStatus();
     error InvalidJobNode();
     error NothingToClaim();
@@ -180,12 +180,12 @@ sol! {
         function claim() external;
 
         function requestProof(uint256 fileId) external payable;
-        function addProof(uint256 fileId) external;
 
         function pause() external;
         function unpause() external;
 
         function submitJob(uint256 fileId) external payable;
+        function completeJob(uint256 jobId) external;
         function fileJobIds(uint256 fileId) external view returns (uint256[] memory);
         function jobsCount() external view returns (uint256);
         function getJob(uint256 jobId) external view returns (Job memory);
@@ -229,16 +229,18 @@ sol! {
 
     #[sol(rpc)]
     contract DataAnchorToken is IERC1155 {
-        function mint(address to, uint256 amount, string memory tokenURI_) public;
+        function mint(address to, uint256 amount, string memory tokenURI_, bool verified_) public;
         function uri(uint256 tokenId) public view override returns (string memory);
+        function verified(uint256 tokenId) public view returns (bool);
+        function setTokenVerified(uint256 tokenId, bool verified_);
         function batchMint(address to, uint256[] memory ids, uint256[] memory amounts, string[] memory tokenURIs) public external;
     }
 }
 
 pub const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS: Address =
-    address!("0x4141410000000000000000000000000000000000");
+    address!("0x969A0e040a9719a8FAd033a03dCA38542a0ef7DC");
 pub const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS: Address =
-    address!("0x4242420000000000000000000000000000000000");
+    address!("0xEA30BA91F4DB33Ef0360Fc04d8E201954474dbD1");
 
 #[derive(Debug, Clone)]
 pub struct ContractConfig {
