@@ -151,7 +151,7 @@ dependencies = [
  "unicode-properties",
  "unicode-segmentation",
  "url",
- "uuid 1.16.0",
+ "uuid 1.17.0",
 ]
 
 [[package]]
@@ -176,7 +176,7 @@ dependencies = [
  "thiserror 2.0.12",
  "tokio",
  "url",
- "uuid 1.16.0",
+ "uuid 1.17.0",
 ]
 
 [[package]]
@@ -375,7 +375,7 @@ dependencies = [
  "serde_json",
  "sqlx",
  "tokio",
- "uuid 1.16.0",
+ "uuid 1.17.0",
 ]
 
 [[package]]
@@ -5290,7 +5290,7 @@ dependencies = [
  "tqdm",
  "tracing",
  "tracing-subscriber",
- "uuid 1.16.0",
+ "uuid 1.17.0",
  "variantly",
  "vob",
 ]
@@ -7674,7 +7674,7 @@ checksum = "015e5fc3d023418b9db98ca9a7f3e90b305872eeafe5ca45c5c32b5eb335c1e8"
 dependencies = [
  "anyhow",
  "argon2",
- "base64 0.21.7",
+ "base64 0.22.1",
  "buffered-reader",
  "bzip2",
  "chrono",
@@ -8147,7 +8147,7 @@ dependencies = [
  "tokio-stream",
  "tracing",
  "url",
- "uuid 1.16.0",
+ "uuid 1.17.0",
 ]
 
 [[package]]
@@ -8227,7 +8227,7 @@ dependencies = [
  "stringprep",
  "thiserror 2.0.12",
  "tracing",
- "uuid 1.16.0",
+ "uuid 1.17.0",
  "whoami",
 ]
 
@@ -8265,7 +8265,7 @@ dependencies = [
  "stringprep",
  "thiserror 2.0.12",
  "tracing",
- "uuid 1.16.0",
+ "uuid 1.17.0",
  "whoami",
 ]
 
@@ -8291,7 +8291,7 @@ dependencies = [
  "thiserror 2.0.12",
  "tracing",
  "url",
- "uuid 1.16.0",
+ "uuid 1.17.0",
 ]
 
 [[package]]
@@ -9506,12 +9506,14 @@ dependencies = [
 
 [[package]]
 name = "uuid"
-version = "1.16.0"
+version = "1.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "458f7a779bf54acc9f347480ac654f68407d3aab21269a6e3c9f922acd9e2da9"
+checksum = "3cf4199d1e5d15ddd86a694e4d0dffa9c323ce759fea589f00fef9d81cc1931d"
 dependencies = [
  "getrandom 0.3.3",
+ "js-sys",
  "serde",
+ "wasm-bindgen",
 ]
 
 [[package]]
