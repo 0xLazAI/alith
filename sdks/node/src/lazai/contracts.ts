@@ -1,0 +1,499 @@
+export const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS = '0xEAd077726dC83ecF385e3763ed4A0A50E8Ac5AA0'
+export const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS = '0x815da22D880E3560bCEcc85b6e4938b30c8202C4'
+export const DATA_REGISTRY_CONTRACT_ABI = [
+  {
+    constant: true,
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', type: 'string' }],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'version',
+    outputs: [{ name: '', type: 'uint256' }],
+    payable: false,
+    stateMutability: 'pure',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'token',
+    outputs: [{ name: '', type: 'address' }],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'verifiedComputing',
+    outputs: [{ name: '', type: 'address' }],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'newVerifiedComputing', type: 'address' }],
+    name: 'updateVerifiedComputing',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'publicKey',
+    outputs: [{ name: '', type: 'string' }],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'newPublicKey', type: 'string' }],
+    name: 'updatePublicKey',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'url', type: 'string' }],
+    name: 'addFile',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'url', type: 'string' },
+      { name: 'ownerAddress', type: 'address' },
+      {
+        components: [
+          { name: 'account', type: 'address' },
+          { name: 'key', type: 'string' },
+        ],
+        name: 'permissions',
+        type: 'tuple[]',
+      },
+    ],
+    name: 'addFileWithPermissions',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'fileId', type: 'uint256' },
+      { name: 'account', type: 'address' },
+      { name: 'key', type: 'string' },
+    ],
+    name: 'addPermissionForFile',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'fileId', type: 'uint256' }],
+    name: 'getFile',
+    outputs: [
+      {
+        components: [
+          { name: 'id', type: 'uint256' },
+          { name: 'url', type: 'string' },
+          { name: 'owner', type: 'address' },
+          { name: 'createdAt', type: 'uint256' },
+        ],
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'url', type: 'string' }],
+    name: 'getFileIdByUrl',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [
+      { name: 'fileId', type: 'uint256' },
+      { name: 'account', type: 'address' },
+    ],
+    name: 'getFilePermission',
+    outputs: [{ name: '', type: 'string' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [
+      { name: 'fileId', type: 'uint256' },
+      { name: 'index', type: 'uint256' },
+    ],
+    name: 'getFileProof',
+    outputs: [
+      {
+        components: [
+          { name: 'timestamp', type: 'uint256' },
+          { name: 'hash', type: 'bytes32' },
+          { name: 'signature', type: 'bytes' },
+        ],
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'filesCount',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'uint256', name: 'fileId', type: 'uint256' },
+      {
+        components: [
+          { internalType: 'bytes', name: 'signature', type: 'bytes' },
+          {
+            components: [
+              {
+                internalType: 'uint256',
+                name: 'id',
+                type: 'uint256',
+              },
+              {
+                internalType: 'string',
+                name: 'fileUrl',
+                type: 'string',
+              },
+              {
+                internalType: 'string',
+                name: 'proofUrl',
+                type: 'string',
+              },
+            ],
+            internalType: 'struct ProofData',
+            name: 'data',
+            type: 'tuple',
+          },
+        ],
+        internalType: 'struct Proof',
+        name: 'proof',
+        type: 'tuple',
+      },
+    ],
+    name: 'addProof',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'fileId', type: 'uint256' },
+      { name: 'proofIndex', type: 'uint256' },
+    ],
+    name: 'requestReward',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+export const VERIFIED_COMPUTING_CONTRACT_ABI = [
+  {
+    type: 'enum',
+    name: 'NodeStatus',
+    inputs: [
+      { name: 'None', type: 'uint8' },
+      { name: 'Active', type: 'uint8' },
+      { name: 'Removed', type: 'uint8' },
+    ],
+  },
+  {
+    type: 'enum',
+    name: 'JobStatus',
+    inputs: [
+      { name: 'None', type: 'uint8' },
+      { name: 'Submitted', type: 'uint8' },
+      { name: 'Completed', type: 'uint8' },
+      { name: 'Canceled', type: 'uint8' },
+    ],
+  },
+  {
+    type: 'struct',
+    name: 'Job',
+    components: [
+      { name: 'fileId', type: 'uint256' },
+      { name: 'bidAmount', type: 'uint256' },
+      { name: 'status', type: 'uint8' },
+      { name: 'addedTimestamp', type: 'uint256' },
+      { name: 'ownerAddress', type: 'address' },
+      { name: 'nodeAddress', type: 'address' },
+    ],
+  },
+  {
+    type: 'struct',
+    name: 'NodeInfo',
+    components: [
+      { name: 'nodeAddress', type: 'address' },
+      { name: 'url', type: 'string' },
+      { name: 'status', type: 'uint8' },
+      { name: 'amount', type: 'uint256' },
+      { name: 'jobsCount', type: 'uint256' },
+      { name: 'publicKey', type: 'string' },
+    ],
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'version',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'pure',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'pause',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'unpause',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'nodeFee',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'newNodeFee', type: 'uint256' }],
+    name: 'updateNodeFee',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'nodeList',
+    outputs: [{ name: '', type: 'address[]' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'index', type: 'uint256' }],
+    name: 'nodeListAt',
+    outputs: [
+      {
+        components: [
+          { name: 'nodeAddress', type: 'address' },
+          { name: 'url', type: 'string' },
+          { name: 'status', type: 'uint8' },
+          { name: 'amount', type: 'uint256' },
+          { name: 'jobsCount', type: 'uint256' },
+          { name: 'publicKey', type: 'string' },
+        ],
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'nodesCount',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'activeNodesCount',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'activeNodeList',
+    outputs: [{ name: '', type: 'address[]' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'index', type: 'uint256' }],
+    name: 'activeNodeListAt',
+    outputs: [
+      {
+        components: [
+          { name: 'nodeAddress', type: 'address' },
+          { name: 'url', type: 'string' },
+          { name: 'status', type: 'uint8' },
+          { name: 'amount', type: 'uint256' },
+          { name: 'jobsCount', type: 'uint256' },
+          { name: 'publicKey', type: 'string' },
+        ],
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'nodeAddress', type: 'address' }],
+    name: 'getNode',
+    outputs: [
+      {
+        components: [
+          { name: 'nodeAddress', type: 'address' },
+          { name: 'url', type: 'string' },
+          { name: 'status', type: 'uint8' },
+          { name: 'amount', type: 'uint256' },
+          { name: 'jobsCount', type: 'uint256' },
+          { name: 'publicKey', type: 'string' },
+        ],
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'nodeAddress', type: 'address' },
+      { name: 'url', type: 'string' },
+      { name: 'publicKey', type: 'string' },
+    ],
+    name: 'addNode',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'nodeAddress', type: 'address' }],
+    name: 'removeNode',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'nodeAddress', type: 'address' }],
+    name: 'isNode',
+    outputs: [{ name: '', type: 'bool' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'fileId', type: 'uint256' }],
+    name: 'requestProof',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'jobId', type: 'uint256' }],
+    name: 'completeJob',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'jobId', type: 'uint256' }],
+    name: 'addProof',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'fileId', type: 'uint256' }],
+    name: 'submitJob',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'fileId', type: 'uint256' }],
+    name: 'fileJobIds',
+    outputs: [{ name: '', type: 'uint256[]' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'jobsCount',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
+    inputs: [{ name: 'jobId', type: 'uint256' }],
+    name: 'getJob',
+    outputs: [
+      {
+        components: [
+          { name: 'fileId', type: 'uint256' },
+          { name: 'bidAmount', type: 'uint256' },
+          { name: 'status', type: 'uint8' },
+          { name: 'addedTimestamp', type: 'uint256' },
+          { name: 'ownerAddress', type: 'address' },
+          { name: 'nodeAddress', type: 'address' },
+        ],
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'claim',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
+export class ContractConfig {
+  dataRegistryAddress: string
+  verifiedComputingAddress: string
+
+  constructor(
+    dataRegistryAddress: string = DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
+    verifiedComputingAddress: string = DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
+  ) {
+    this.dataRegistryAddress = dataRegistryAddress
+    this.verifiedComputingAddress = verifiedComputingAddress
+  }
+}
