@@ -15,7 +15,7 @@ use crate::{
     chain::AlloyProvider,
     contracts::{
         ContractConfig, FileResponse as File, IDataRegistry::IDataRegistryInstance,
-        IVerifiedComputing::IVerifiedComputingInstance, NodeInfo, Permission,
+        IVerifiedComputing::IVerifiedComputingInstance, Job, NodeInfo, Permission,
     },
 };
 
@@ -177,22 +177,6 @@ impl Client {
         Ok(count)
     }
 
-    pub async fn add_proof(&self, file_id: U256, data: ProofData) -> Result<(), ClientError> {
-        let packed_data = keccak256(data.abi_encode());
-        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
-        let proof = Proof {
-            signature: hex::decode(signature)
-                .map_err(|err| ClientError::SigningError(err.to_string()))?
-                .into(),
-            data,
-        };
-        let contract = self.data_registry_contract();
-        self.send_transaction(contract.addProof(file_id, proof), None)
-            .await?;
-
-        Ok(())
-    }
-
     pub async fn add_node(
         &self,
         address: Address,
@@ -248,6 +232,93 @@ impl Client {
             .await
             .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
         Ok(list)
+    }
+
+    pub async fn update_node_fee(&self, fee: U256) -> Result<(), ClientError> {
+        let contract = self.verified_computing_contract();
+        self.send_transaction(contract.updateNodeFee(fee), None)
+            .await?;
+
+        Ok(())
+    }
+
+    /// Request a job to compute the proof with the given file id and value.
+    /// Note that this function is a payable function, so you need to provide a value.
+    pub async fn request_proof(&self, file_id: U256, value: U256) -> Result<(), ClientError> {
+        let contract = self.verified_computing_contract();
+        self.send_transaction(contract.requestProof(file_id), Some(value))
+            .await?;
+
+        Ok(())
+    }
+
+    pub async fn add_proof(&self, file_id: U256, data: ProofData) -> Result<(), ClientError> {
+        let packed_data = keccak256(data.abi_encode());
+        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
+        let proof = Proof {
+            signature: hex::decode(signature)
+                .map_err(|err| ClientError::SigningError(err.to_string()))?
+                .into(),
+            data,
+        };
+        let contract = self.data_registry_contract();
+        self.send_transaction(contract.addProof(file_id, proof), None)
+            .await?;
+
+        Ok(())
+    }
+
+    pub async fn complete_job(&self, job_id: U256) -> Result<(), ClientError> {
+        let contract = self.verified_computing_contract();
+        self.send_transaction(contract.completeJob(job_id), None)
+            .await?;
+
+        Ok(())
+    }
+
+    pub async fn get_job(&self, job_id: U256) -> Result<Job, ClientError> {
+        let contract = self.verified_computing_contract();
+        let builder = self
+            .call_builder(
+                contract.getJob(job_id),
+                self.config.verified_computing_address,
+                None,
+            )
+            .await?;
+        let job = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(job)
+    }
+
+    pub async fn file_job_ids(&self, file_id: U256) -> Result<Vec<U256>, ClientError> {
+        let contract = self.verified_computing_contract();
+        let builder = self
+            .call_builder(
+                contract.fileJobIds(file_id),
+                self.config.verified_computing_address,
+                None,
+            )
+            .await?;
+        let ids = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(ids)
+    }
+
+    pub async fn request_reward(
+        &self,
+        file_id: U256,
+        proof_index: Option<U256>,
+    ) -> Result<(), ClientError> {
+        let contract = self.data_registry_contract();
+        // Get the first proof index if not provided.
+        let proof_index = proof_index.unwrap_or(U256::from(1));
+        self.send_transaction(contract.requestReward(file_id, proof_index), None)
+            .await?;
+        Ok(())
     }
 
     /// Claim any rewards for node validators
