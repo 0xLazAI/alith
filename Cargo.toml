@@ -90,7 +90,7 @@ sqlx = { version = "0.8.6", features = [
 ] }
 
 # Alloy Deps
-alloy = { version = "1.0.6", default-features = false, features = [
+alloy = { version = "1.0.7", default-features = false, features = [
     "signers",
     "signer-local",
     "reqwest-rustls-tls",
