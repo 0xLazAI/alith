@@ -16,6 +16,10 @@ license = { text = "Apache-2.0" }
 dependencies = [
     "pydantic",
     "requests",
+    "web3",
+    "eth-account",
+    "eth-abi",
+    "hexbytes",
 ]
 
 [tool.maturin]

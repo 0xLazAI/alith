@@ -208,6 +208,7 @@ impl ChainManager {
                 from: Some(self.wallet.address),
                 to: Some(TxKind::Call(to)),
                 value: Some(value),
+                nonce: Some(self.get_nonce().await?),
                 input: TransactionInput::maybe_input(data.map(|d| d.into())),
                 ..Default::default()
             })

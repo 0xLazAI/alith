@@ -197,6 +197,14 @@ impl Client {
         Ok(())
     }
 
+    pub async fn remove_node(&self, address: Address) -> Result<(), ClientError> {
+        let contract = self.verified_computing_contract();
+        self.send_transaction(contract.removeNode(address), None)
+            .await?;
+
+        Ok(())
+    }
+
     pub async fn get_node(&self, address: Address) -> Result<Option<NodeInfo>, ClientError> {
         let contract = self.verified_computing_contract();
         let builder = self

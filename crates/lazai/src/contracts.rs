@@ -238,9 +238,9 @@ sol! {
 }
 
 pub const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS: Address =
-    address!("0x969A0e040a9719a8FAd033a03dCA38542a0ef7DC");
+    address!("0xEAd077726dC83ecF385e3763ed4A0A50E8Ac5AA0");
 pub const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS: Address =
-    address!("0xEA30BA91F4DB33Ef0360Fc04d8E201954474dbD1");
+    address!("0x815da22D880E3560bCEcc85b6e4938b30c8202C4");
 
 #[derive(Debug, Clone)]
 pub struct ContractConfig {
