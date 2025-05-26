@@ -1,8 +1,10 @@
 use alloy::{
     contract::{CallBuilder, CallDecoder},
+    hex,
     network::{Ethereum, EthereumWallet, TransactionBuilder, TransactionBuilderError},
     primitives::{Address, U256, keccak256},
     providers::Provider,
+    rpc::types::TransactionReceipt,
     sol_types::SolValue,
 };
 use std::ops::Deref;
@@ -48,12 +50,8 @@ impl Client {
     /// Add privacy data url and encrypted key base64 format into the data registry on LazAI.
     pub async fn add_file(&self, url: impl AsRef<str>) -> Result<U256, ClientError> {
         let contract = self.data_registry_contract();
-        self.send_transaction(
-            contract.addFile(url.as_ref().to_string()),
-            self.config.data_registry_address,
-            None,
-        )
-        .await?;
+        self.send_transaction(contract.addFile(url.as_ref().to_string()), None)
+            .await?;
 
         self.get_file_id_by_url(url).await
     }
@@ -68,7 +66,6 @@ impl Client {
         let contract = self.data_registry_contract();
         self.send_transaction(
             contract.addFileWithPermissions(url.as_ref().to_string(), owner, permissions),
-            self.config.data_registry_address,
             None,
         )
         .await?;
@@ -85,7 +82,6 @@ impl Client {
         let contract = self.data_registry_contract();
         self.send_transaction(
             contract.addPermissionForFile(file_id, permission.account, permission.key),
-            self.config.data_registry_address,
             None,
         )
         .await?;
@@ -185,16 +181,14 @@ impl Client {
         let packed_data = keccak256(data.abi_encode());
         let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
         let proof = Proof {
-            signature: signature.as_bytes().to_vec().into(),
+            signature: hex::decode(signature)
+                .map_err(|err| ClientError::SigningError(err.to_string()))?
+                .into(),
             data,
         };
         let contract = self.data_registry_contract();
-        self.send_transaction(
-            contract.addProof(file_id, proof),
-            self.config.data_registry_address,
-            None,
-        )
-        .await?;
+        self.send_transaction(contract.addProof(file_id, proof), None)
+            .await?;
 
         Ok(())
     }
@@ -212,7 +206,6 @@ impl Client {
                 url.as_ref().to_string(),
                 public_key.as_ref().to_string(),
             ),
-            self.config.verified_computing_address,
             None,
         )
         .await?;
@@ -260,12 +253,7 @@ impl Client {
     /// Claim any rewards for node validators
     pub async fn claim(&self) -> Result<(), ClientError> {
         let contract = self.verified_computing_contract();
-        self.send_transaction(
-            contract.claim(),
-            self.config.verified_computing_address,
-            None,
-        )
-        .await?;
+        self.send_transaction(contract.claim(), None).await?;
 
         Ok(())
     }
@@ -288,12 +276,10 @@ impl Client {
     async fn send_transaction<'a, D: CallDecoder>(
         &'a self,
         call_builder: CallBuilder<&'a &'a AlloyProvider, D>,
-        to: Address,
         value: Option<U256>,
-    ) -> Result<(), ClientError> {
+    ) -> Result<TransactionReceipt, ClientError> {
         let builder = call_builder
             .from(self.wallet.address)
-            .to(to)
             .chain_id(self.manager.config.chain_id)
             .value(value.unwrap_or_default())
             .nonce(self.get_nonce().await?);
@@ -312,12 +298,13 @@ impl Client {
             .await
             .map_err(|err| ChainError::SigningError(err.to_string()))?;
 
-        let _ = self
-            .provider
+        self.provider
             .send_tx_envelope(tx_envelope)
             .await
-            .map_err(Into::<ChainError>::into)?;
-        Ok(())
+            .map_err(Into::<ChainError>::into)?
+            .get_receipt()
+            .await
+            .map_err(|err| ClientError::TransactionError(err.to_string()))
     }
 
     #[inline]
@@ -364,4 +351,8 @@ pub enum ClientError {
     WalletError(#[from] WalletError),
     #[error("Contract call error: {0}")]
     ContractCallError(String),
+    #[error("Signing error: {0}")]
+    SigningError(String),
+    #[error("Transaction error: {0}")]
+    TransactionError(String),
 }

@@ -67,9 +67,25 @@ impl LocalEthWallet {
     /// * `message` - Raw string message to sign
     ///
     /// # Returns
+    /// Signature byte.
+    #[inline]
+    pub async fn sign_message(&self, message: &[u8]) -> Result<Vec<u8>, WalletError> {
+        self.signer
+            .sign_message(message)
+            .await
+            .map(|sig| sig.as_bytes().to_vec())
+            .map_err(|e| WalletError::SigningError(e.to_string()))
+    }
+
+    /// Signs an arbitrary message
+    ///
+    /// # Arguments
+    /// * `message` - Raw string message to sign
+    ///
+    /// # Returns
     /// Hex-encoded signature string
     #[inline]
-    pub async fn sign_message(&self, message: &[u8]) -> Result<String, WalletError> {
+    pub async fn sign_message_hex(&self, message: &[u8]) -> Result<String, WalletError> {
         self.signer
             .sign_message(message)
             .await
@@ -81,7 +97,15 @@ impl LocalEthWallet {
     ///
     /// See [`DEFAULT_SIGN_MESSAGE`] for default message content
     #[inline]
-    pub async fn sign(&self) -> Result<String, WalletError> {
+    pub async fn sign_hex(&self) -> Result<String, WalletError> {
+        self.sign_message_hex(DEFAULT_SIGN_MESSAGE.as_bytes()).await
+    }
+
+    /// Signs the default message
+    ///
+    /// See [`DEFAULT_SIGN_MESSAGE`] for default message content
+    #[inline]
+    pub async fn sign(&self) -> Result<Vec<u8>, WalletError> {
         self.sign_message(DEFAULT_SIGN_MESSAGE.as_bytes()).await
     }
 }
