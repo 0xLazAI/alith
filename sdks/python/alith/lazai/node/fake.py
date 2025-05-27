@@ -4,12 +4,20 @@ python3 -m alith.lazai.node.fake
 """
 
 from flask import Flask, request, jsonify
-from alith.lazai.node.types import ProofRequest
-from alith.lazai.client import Client, ProofData
+from alith.lazai import (
+    Client,
+    ProofData,
+    ChainConfig,
+    ProofRequest,
+    TESTNET_CHAINID,
+    TESTNET_NETWORK,
+)
 import os
 import json
 import logging
 import base64
+
+# Logging configuration
 
 logging.basicConfig(
     filename="node.log",
@@ -17,12 +25,18 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
-app = Flask(__name__)
-client = Client()
+
+# Environment variables
+
 rsa_private_key_base64 = os.getenv("RSA_PRIVATE_KEY_BASE64", "")
 rsa_private_key = (
     base64.b64decode(rsa_private_key_base64).decode() if rsa_private_key_base64 else ""
 )
+
+# Flask app and LazAI client initialization
+
+app = Flask(__name__)
+client = Client()
 
 
 @app.route("/proof", methods=["POST"])
@@ -46,4 +60,4 @@ def proof():
 
 if __name__ == "__main__":
     logger.info("Starting node server...")
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=8000, debug=True)
