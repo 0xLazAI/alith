@@ -250,6 +250,22 @@ impl Client {
         Ok(())
     }
 
+    pub async fn node_fee(&self) -> Result<U256, ClientError> {
+        let contract = self.verified_computing_contract();
+        let builder = self
+            .call_builder(
+                contract.nodeFee(),
+                self.config.verified_computing_address,
+                None,
+            )
+            .await?;
+        let fee = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(fee)
+    }
+
     /// Request a job to compute the proof with the given file id and value.
     /// Note that this function is a payable function, so you need to provide a value.
     pub async fn request_proof(&self, file_id: U256, value: U256) -> Result<(), ClientError> {
