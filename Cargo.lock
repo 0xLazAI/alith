@@ -276,6 +276,7 @@ dependencies = [
  "alloy",
  "anyhow",
  "async-trait",
+ "bon",
  "reqwest 0.12.15",
  "serde",
  "thiserror 2.0.12",

@@ -23,6 +23,7 @@ dependencies = [
     "rsa",
     "python-gnupg",
     "aiohttp",
+    "flask",
 ]
 
 [tool.maturin]
