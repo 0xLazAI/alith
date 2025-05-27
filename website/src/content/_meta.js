@@ -5,7 +5,7 @@ export default {
   advanced: "",
   integrations: "",
   tutorials: "",
-  developing: "",
   scripts: "",
+  developing: "",
   roadmap: "",
 };
