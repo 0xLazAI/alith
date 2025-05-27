@@ -75,6 +75,9 @@ class Client(ChainManager):
             self.verified_computing_contract.functions.updateNodeFee(fee)
         )
 
+    def node_fee(self) -> int:
+        return self.verified_computing_contract.functions.nodeFee.call()
+
     def request_proof(self, file_id: int, value: int = 0):
         return self.send_transaction(
             self.verified_computing_contract.functions.requestProof(file_id),

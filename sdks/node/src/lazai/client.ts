@@ -134,6 +134,10 @@ export class Client extends ChainManager {
     await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
+  async nodeFee(): Promise<number> {
+    return this.verifiedComputingContract().methods.nodeFee().call()
+  }
+
   async requestProof(fileId: number, value: number = 0): Promise<void> {
     const method = this.verifiedComputingContract().methods.requestProof(fileId)
     await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value)
