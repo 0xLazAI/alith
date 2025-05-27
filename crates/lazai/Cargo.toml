@@ -27,5 +27,6 @@ alloy = { workspace = true, features = [
     "contract",
 ] }
 serde.workspace = true
+bon.workspace = true
 
 [features]

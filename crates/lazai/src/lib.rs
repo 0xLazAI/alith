@@ -2,6 +2,7 @@ pub mod chain;
 pub mod client;
 pub mod contracts;
 pub mod inference;
+pub mod node;
 pub mod proof;
 pub use alith_data::wallet;
 
