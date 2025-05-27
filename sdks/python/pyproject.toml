@@ -20,6 +20,9 @@ dependencies = [
     "eth-account",
     "eth-abi",
     "hexbytes",
+    "rsa",
+    "python-gnupg",
+    "aiohttp",
 ]
 
 [tool.maturin]
