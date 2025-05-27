@@ -10,7 +10,7 @@ import time
 DEVNET_NETWORK = "LazAI Devnet"
 TESTNET_NETWORK = "LazAI Testnet"
 LOCAL_CHAIN_ENDPOINT = "http://localhost:8545"
-TESTNET_ENDPOINT = "https://lazi-testnet.metisdevops.link"
+TESTNET_ENDPOINT = "https://lazai-testnet.metisdevops.link"
 TESTNET_CHAINID: int = 133718
 
 
@@ -43,7 +43,7 @@ class ChainConfig:
 class ChainManager:
     def __init__(
         self,
-        config: ChainConfig = ChainConfig.local(),
+        config: ChainConfig = ChainConfig.testnet(),
         private_key: str = getenv("PRIVATE_KEY", ""),
     ):
         self.config = config
