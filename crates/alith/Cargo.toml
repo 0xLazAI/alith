@@ -190,6 +190,10 @@ name = "agent_with_lazai"
 required-features = ["lazai"]
 
 [[example]]
+name = "agent_with_lazai_dat"
+required-features = ["lazai"]
+
+[[example]]
 name = "agent_with_lazai_privacy_data"
 required-features = ["lazai", "crypto"]
 

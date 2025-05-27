@@ -485,16 +485,89 @@ export const VERIFIED_COMPUTING_CONTRACT_ABI = [
     type: 'function',
   },
 ]
+export const DATA_ANCHOR_TOKEN_CONTRACT = [
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'to', type: 'address' },
+      { indexed: true, internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      { indexed: false, internalType: 'string', name: 'tokenURI', type: 'string' },
+    ],
+    name: 'TokenMinted',
+    type: 'event',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'to', type: 'address' },
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
+      { internalType: 'string', name: 'tokenURI_', type: 'string' },
+      { internalType: 'bool', name: 'verified_', type: 'bool' },
+    ],
+    name: 'mint',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
+    name: 'uri',
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
+    name: 'verified',
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      { internalType: 'bool', name: 'verified_', type: 'bool' },
+    ],
+    name: 'setTokenVerified',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'account', type: 'address' },
+      { internalType: 'uint256', name: 'id', type: 'uint256' },
+    ],
+    name: 'balanceOf',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'to', type: 'address' },
+      { internalType: 'uint256[]', name: 'ids', type: 'uint256[]' },
+      { internalType: 'uint256[]', name: 'amounts', type: 'uint256[]' },
+      { internalType: 'string[]', name: 'tokenURIs', type: 'string[]' },
+    ],
+    name: 'batchMint',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
 
 export class ContractConfig {
   dataRegistryAddress: string
   verifiedComputingAddress: string
+  dataAnchorTokenAddress: string
 
   constructor(
     dataRegistryAddress: string = DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
     verifiedComputingAddress: string = DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
+    dataAnchorTokenAddress: string = DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS,
   ) {
     this.dataRegistryAddress = dataRegistryAddress
     this.verifiedComputingAddress = verifiedComputingAddress
+    this.dataAnchorTokenAddress = dataAnchorTokenAddress
   }
 }
