@@ -7,11 +7,6 @@ supports uploading privacy data to DA for sharing after encryption. Different en
 for encryption, which facilitates privacy collaboration and supports verifying the integrity 
 of privacy data in TEE.
 
-<Tabs items={['Rust', 'Python', 'Node.js']}>
-  <Tabs.Tab>
-
-## Privacy Data Encryption and Decryption
-
 In Alith, we use OpenPGP to encrypt and decrypt the privacy data. OpenPGP encryption process: 
 Randomly generate a Key and use it to encrypt data using a symmetric encryption algorithm. 
 Finally, use an asymmetric encryption algorithm (RSA) to encrypt the recipient's Key using 
@@ -26,6 +21,11 @@ can decrypt the encrypted key using the private key and download the private dat
 through the URL. The decryption process is placed in TEE to ensure data security. Will not be 
 tampered with, and then decrypted data and TEE generates proof and uploads it to LazAI contract 
 for verification.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+## Privacy Data Encryption and Decryption
 
 > Note: we need to enable the `wallet`, `marlin` and `crypto` features in the `alith` crate to use this example.
 
@@ -169,13 +169,123 @@ async fn main() -> Result<(), anyhow::Error> {
 
   <Tabs.Tab>
 
-Comming Soon
+## Privacy Data Encryption and Decryption
+
+```python
+import os
+import rsa
+from alith.data import encrypt, decrypt
+
+
+def main():
+    privacy_data = b"Hello, Privacy Data with PGP!"
+    password = os.urandom(32).hex()
+    (pub_key, priv_key) = rsa.newkeys(3072)
+    encrypted_key = rsa.encrypt(password.encode(), pub_key)
+    encrypted_data = encrypt(privacy_data, password)
+    try:
+        decrypted_password = rsa.decrypt(encrypted_key, priv_key).decode()
+    except rsa.DecryptionError:
+        raise ValueError("RSA Failed")
+    assert decrypted_password == password
+    decrypted_data = decrypt(encrypted_data, decrypted_password)
+    assert decrypted_data == privacy_data
+    print("Crypto test successfully!")
+
+
+main()
+```
+
+## Data Storage
+
+### IPFS
+
+```python
+from alith.data.storage import (
+    PinataIPFS,
+    UploadOptions,
+    GetShareLinkOptions,
+    StorageError,
+)
+from os import getenv
+import asyncio
+
+
+async def main():
+    ipfs = PinataIPFS()
+    try:
+        data = "Your data"
+        name = "your_file.txt"
+        token = getenv("IPFS_JWT", "")
+
+        file_meta = await ipfs.upload(
+            UploadOptions(name=name, data=data.encode(), token=token)
+        )
+        print(f"Upload file to the Pinata IPFS: {file_meta}")
+        print(
+            f"Share link: {await ipfs.get_share_link(GetShareLinkOptions(token=token, id=file_meta.id))}"
+        )
+    except StorageError as e:
+        print(f"Error: {e}")
+    finally:
+        await ipfs.close()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
 
   </Tabs.Tab>
 
   <Tabs.Tab>
 
-Comming Soon
+## Privacy Data Encryption and Decryption
+
+```typescript
+import { encrypt, decrypt } from 'alith/data/crypto'
+import NodeRSA from 'node-rsa'
+
+async function main() {
+  const privacyData = 'Hello, Privacy Data with PGP!'
+  const encoder = new TextEncoder()
+  const dataUint8Array = encoder.encode(privacyData)
+  const password = 'securepassword123456789'
+  const rsa = new NodeRSA({ b: 3072 })
+  const encryptedKey = rsa.encrypt(password)
+  console.log('Encrypted Key:', encryptedKey.toString('base64'))
+  const encryptedData = await encrypt(dataUint8Array, password)
+  console.log('Encrypted Data:', encryptedData.toString())
+  const decryptedPassword = rsa.decrypt(encryptedKey)
+  console.log('Decrypted Password:', decryptedPassword.toString())
+  const decryptedData = await decrypt(encryptedData, decryptedPassword.toString())
+  console.log('Decrypted Data:', decryptedData.toString())
+}
+
+await main()
+```
+
+## Data Storage
+
+### IPFS
+
+```typescript
+import { PinataIPFS } from 'alith/data/storage'
+
+async function main() {
+  const ipfs = new PinataIPFS()
+  const data = 'Your privacy data'
+  const name = 'your_privacy_file.txt'
+  const fileMeta = await ipfs.upload({
+    name: name,
+    data: Buffer.from(data, 'utf-8'),
+    token: process.env.IPFS_JWT || '',
+  })
+  console.log(`Upload file to the Pinata IPFS: ${fileMeta}`)
+  console.log(`Share link: ${await ipfs.getShareLink({ token: process.env.IPFS_JWT || '', id: fileMeta.id })}`)
+}
+
+await main()
+```
 
 </Tabs.Tab>
 </Tabs>
