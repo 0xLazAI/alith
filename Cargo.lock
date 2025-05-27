@@ -74,7 +74,7 @@ checksum = "4aa90d7ce82d4be67b64039a3d588d38dbcc6736577de4a847025ce5b0c468d1"
 
 [[package]]
 name = "alith"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-client",
  "alith-core",
@@ -104,7 +104,7 @@ dependencies = [
 
 [[package]]
 name = "alith-client"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-devices",
  "alith-interface",
@@ -126,7 +126,7 @@ dependencies = [
 
 [[package]]
 name = "alith-core"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-client",
  "alith-interface",
@@ -156,7 +156,7 @@ dependencies = [
 
 [[package]]
 name = "alith-data"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-core",
  "alloy",
@@ -181,7 +181,7 @@ dependencies = [
 
 [[package]]
 name = "alith-devices"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "anyhow",
  "colorful",
@@ -198,7 +198,7 @@ dependencies = [
 
 [[package]]
 name = "alith-inference"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-core",
  "alith-models",
@@ -232,7 +232,7 @@ dependencies = [
 
 [[package]]
 name = "alith-interface"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-devices",
  "alith-models",
@@ -257,7 +257,7 @@ dependencies = [
 
 [[package]]
 name = "alith-knowledge"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-client",
  "alith-core",
@@ -270,7 +270,7 @@ dependencies = [
 
 [[package]]
 name = "alith-lazai"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-data",
  "alloy",
@@ -284,7 +284,7 @@ dependencies = [
 
 [[package]]
 name = "alith-models"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-prompt",
  "anyhow",
@@ -307,7 +307,7 @@ dependencies = [
 
 [[package]]
 name = "alith-node-sdk"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith",
  "async-trait",
@@ -324,7 +324,7 @@ dependencies = [
 
 [[package]]
 name = "alith-prompt"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-models",
  "anyhow",
@@ -337,7 +337,7 @@ dependencies = [
 
 [[package]]
 name = "alith-python-sdk"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith",
  "async-trait",
@@ -350,7 +350,7 @@ dependencies = [
 
 [[package]]
 name = "alith-rust-sdk"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith",
  "async-trait",
@@ -361,7 +361,7 @@ dependencies = [
 
 [[package]]
 name = "alith-store"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-core",
  "anyhow",
@@ -380,7 +380,7 @@ dependencies = [
 
 [[package]]
 name = "alith-tee"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-core",
  "anyhow",
@@ -403,7 +403,7 @@ dependencies = [
 
 [[package]]
 name = "alith-tools"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "alith-core",
  "async-trait",
