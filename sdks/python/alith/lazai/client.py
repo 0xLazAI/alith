@@ -2,6 +2,7 @@ from .contracts import (
     ContractConfig,
     DATA_REGISTRY_CONTRACT_ABI,
     VERIFIED_COMPUTING_CONTRACT_ABI,
+    DATA_ANCHOR_TOKEN_CONTRACT_ABI,
 )
 from .chain import ChainConfig, ChainManager
 from .proof import ProofData
@@ -36,6 +37,10 @@ class Client(ChainManager):
         self.verified_computing_contract = self.w3.eth.contract(
             address=contract_config.verified_computing_address,
             abi=VERIFIED_COMPUTING_CONTRACT_ABI,
+        )
+        self.data_anchor_token_contract = self.w3.eth.contract(
+            address=contract_config.data_anchor_token_address,
+            abi=DATA_ANCHOR_TOKEN_CONTRACT_ABI,
         )
 
     def add_file(self, url: str) -> int:
@@ -122,3 +127,19 @@ class Client(ChainManager):
         return self.send_transaction(
             self.data_registry_contract.functions.requestReward(file_id, proof_index)
         )
+
+    def mint_dat(self, to: str, amount: int, token_uri: str, verified: bool):
+        """Mint a new Data Anchor Token (DAT) with the specified parameters."""
+        return self.send_transaction(
+            self.data_anchor_token_contract.functions.mint(
+                to, amount, token_uri, verified
+            )
+        )
+
+    def get_dat_balance(self, account: str, id: int):
+        """Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID."""
+        return self.data_anchor_token_contract.functions.balanceOf(account, id).call()
+
+    def data_uri(self, token_id: int):
+        """Returns the Uri for a specific Data Anchor Token (DAT) by its token ID."""
+        return self.data_anchor_token_contract.functions.uri(token_id).call()

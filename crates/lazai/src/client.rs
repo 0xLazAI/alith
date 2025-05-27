@@ -14,8 +14,9 @@ use crate::{
     ChainConfig, ChainError, ChainManager, Proof, ProofData, Wallet, WalletError,
     chain::AlloyProvider,
     contracts::{
-        ContractConfig, FileResponse as File, IDataRegistry::IDataRegistryInstance,
-        IVerifiedComputing::IVerifiedComputingInstance, Job, NodeInfo, Permission,
+        ContractConfig, DataAnchorToken::DataAnchorTokenInstance, FileResponse as File,
+        IDataRegistry::IDataRegistryInstance, IVerifiedComputing::IVerifiedComputingInstance, Job,
+        NodeInfo, Permission,
     },
 };
 
@@ -353,6 +354,54 @@ impl Client {
         Ok(())
     }
 
+    /// Mint a new Data Anchor Token (DAT) with the specified parameters.
+    pub async fn mint_dat(
+        &self,
+        to: Address,
+        amount: U256,
+        token_uri: String,
+        verified: bool,
+    ) -> Result<(), ClientError> {
+        let contract = self.data_anchor_token_contract();
+        self.send_transaction(contract.mint(to, amount, token_uri, verified), None)
+            .await?;
+        Ok(())
+    }
+
+    /// Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID.
+    pub async fn get_dat_balance(&self, account: Address, id: U256) -> Result<U256, ClientError> {
+        let contract = self.data_anchor_token_contract();
+        let builder = self
+            .call_builder(
+                contract.balanceOf(account, id),
+                self.config.data_anchor_token_address,
+                None,
+            )
+            .await?;
+        let balance = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(balance)
+    }
+
+    /// Returns the Uri for a specific Data Anchor Token (DAT) by its token ID.
+    pub async fn dat_uri(&self, token_id: U256) -> Result<String, ClientError> {
+        let contract = self.data_anchor_token_contract();
+        let builder = self
+            .call_builder(
+                contract.uri(token_id),
+                self.config.data_anchor_token_address,
+                None,
+            )
+            .await?;
+        let uri = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(uri)
+    }
+
     #[inline]
     async fn call_builder<'a, D: CallDecoder>(
         &'a self,
@@ -411,6 +460,14 @@ impl Client {
     fn verified_computing_contract(&self) -> IVerifiedComputingInstance<&AlloyProvider> {
         IVerifiedComputingInstance::new(
             self.config.verified_computing_address,
+            &self.manager.provider,
+        )
+    }
+
+    #[inline]
+    fn data_anchor_token_contract(&self) -> DataAnchorTokenInstance<&AlloyProvider> {
+        DataAnchorTokenInstance::new(
+            self.config.data_anchor_token_address,
             &self.manager.provider,
         )
     }

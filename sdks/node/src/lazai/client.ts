@@ -24,6 +24,10 @@ export class Client extends ChainManager {
     return new this.web3.eth.Contract(VERIFIED_COMPUTING_CONTRACT_ABI, this.contractConfig.verifiedComputingAddress)
   }
 
+  dataAnchorTokenContract() {
+    return new this.web3.eth.Contract(VERIFIED_COMPUTING_CONTRACT_ABI, this.contractConfig.dataAnchorTokenAddress)
+  }
+
   getWallet() {
     return this.account
   }
@@ -213,5 +217,27 @@ export class Client extends ChainManager {
   async claim(): Promise<void> {
     const method = this.verifiedComputingContract().methods.claim()
     await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
+  }
+
+  /**
+   * Mint a new Data Anchor Token (DAT) with the specified parameters.
+   */
+  async mintDAT(): Promise<void> {
+    const method = this.dataAnchorTokenContract().methods.mint
+    await this.sendTransaction(method, this.contractConfig.dataAnchorTokenAddress)
+  }
+
+  /**
+   * Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID.
+   */
+  async getDATBalance(account: string, id: number): Promise<number> {
+    return this.dataAnchorTokenContract().methods.balanceOf(account, id).call()
+  }
+
+  /**
+   * Returns the Uri for a specific Data Anchor Token (DAT) by its token ID.
+   */
+  async dataUri(tokenId: number): Promise<string> {
+    return this.dataAnchorTokenContract().methods.uri(tokenId).call()
   }
 }

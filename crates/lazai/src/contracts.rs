@@ -206,18 +206,13 @@ sol! {
         event URI(string value, uint256 indexed id);
 
         function balanceOf(address account, uint256 id) external view returns (uint256);
-
         function balanceOfBatch(
             address[] calldata accounts,
             uint256[] calldata ids
         ) external view returns (uint256[] memory);
-
         function setApprovalForAll(address operator, bool approved) external;
-
         function isApprovedForAll(address account, address operator) external view returns (bool);
-
         function safeTransferFrom(address from, address to, uint256 id, uint256 value, bytes calldata data) external;
-
         function safeBatchTransferFrom(
             address from,
             address to,
@@ -229,10 +224,13 @@ sol! {
 
     #[sol(rpc)]
     contract DataAnchorToken is IERC1155 {
+        event TokenMinted(address indexed to, uint256 indexed tokenId, string tokenURI);
+
         function mint(address to, uint256 amount, string memory tokenURI_, bool verified_) public;
         function uri(uint256 tokenId) public view override returns (string memory);
         function verified(uint256 tokenId) public view returns (bool);
         function setTokenVerified(uint256 tokenId, bool verified_);
+        function balanceOf(address account, uint256 id) external view returns (uint256);
         function batchMint(address to, uint256[] memory ids, uint256[] memory amounts, string[] memory tokenURIs) public external;
     }
 }
@@ -248,6 +246,7 @@ pub const DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS: Address =
 pub struct ContractConfig {
     pub data_registry_address: Address,
     pub verified_computing_address: Address,
+    pub data_anchor_token_address: Address,
 }
 
 impl Default for ContractConfig {
@@ -255,6 +254,7 @@ impl Default for ContractConfig {
         Self {
             data_registry_address: DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
             verified_computing_address: DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
+            data_anchor_token_address: DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS,
         }
     }
 }
