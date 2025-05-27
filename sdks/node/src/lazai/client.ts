@@ -8,7 +8,7 @@ export class Client extends ChainManager {
   contractConfig: ContractConfig
 
   constructor(
-    chainConfig: ChainConfig = ChainConfig.local(),
+    chainConfig: ChainConfig = ChainConfig.testnet(),
     contractConfig: ContractConfig = new ContractConfig(),
     privateKey: string = process.env.PRIVATE_KEY || '',
   ) {

@@ -21,7 +21,7 @@ class Client(ChainManager):
 
     def __init__(
         self,
-        chain_config: ChainConfig = ChainConfig.local(),
+        chain_config: ChainConfig = ChainConfig.testnet(),
         contract_config: ContractConfig = ContractConfig(),
         private_key: str = getenv("PRIVATE_KEY", ""),
     ):

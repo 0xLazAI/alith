@@ -5,7 +5,7 @@ import { Mutex } from 'async-mutex'
 export const DEVNET_NETWORK = 'LazAI Devnet'
 export const TESTNET_NETWORK = 'LazAI Testnet'
 export const LOCAL_CHAIN_ENDPOINT = 'http://localhost:8545'
-export const TESTNET_ENDPOINT = 'https://lazi-testnet.metisdevops.link'
+export const TESTNET_ENDPOINT = 'https://lazai-testnet.metisdevops.link'
 export const TESTNET_CHAINID = 133718
 
 export class ChainConfig {
@@ -38,7 +38,7 @@ export class ChainManager {
   account: Web3Account
   nonceMutex: Mutex = new Mutex()
 
-  constructor(config: ChainConfig = ChainConfig.local(), privateKey: string = process.env.PRIVATE_KEY || '') {
+  constructor(config: ChainConfig = ChainConfig.testnet(), privateKey: string = process.env.PRIVATE_KEY || '') {
     this.config = config
     this.web3 = new Web3(config.endpoint)
     this.account = this.web3.eth.accounts.privateKeyToAccount(privateKey)
