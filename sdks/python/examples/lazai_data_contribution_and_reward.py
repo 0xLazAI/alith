@@ -65,10 +65,6 @@ async def main():
         # 5. Request DAT reward
         client.request_reward(file_id)
         print("Reward requested for file id", file_id)
-        print(
-            "The balance of DAT is",
-            client.get_dat_balance(client.wallet.address, file_id),
-        )
     except StorageError as e:
         print(f"Error: {e}")
     except Exception as e:
