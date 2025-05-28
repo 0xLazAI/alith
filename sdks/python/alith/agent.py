@@ -3,7 +3,6 @@ from typing import List, Union, Callable, Optional
 from .tool import Tool, create_delegate_tool
 from .store import Store
 from .memory import Memory
-from ._alith import DelegateAgent as _DelegateAgent
 
 
 @dataclass
@@ -19,6 +18,8 @@ class Agent:
     memory: Optional[Memory] = None
 
     def prompt(self, prompt: str) -> str:
+        from ._alith import DelegateAgent as _DelegateAgent
+
         tools = [
             (
                 create_delegate_tool(tool)

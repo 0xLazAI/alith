@@ -2,30 +2,39 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import json
 from typing import List, Optional, Union, Dict
-from ._alith import Message
 
 
 # Define the Message class
 @dataclass
 class MessageBuilder:
     @staticmethod
-    def new_human_message(content: str) -> Message:
+    def new_human_message(content: str):
+        from ._alith import Message
+
         return Message(role="user", content=content)
 
     @staticmethod
-    def new_system_message(content: str) -> Message:
+    def new_system_message(content: str):
+        from ._alith import Message
+
         return Message(role="system", content=content)
 
     @staticmethod
-    def new_tool_message(content: str) -> Message:
+    def new_tool_message(content: str):
+        from ._alith import Message
+
         return Message(role="tool", content=content)
 
     @staticmethod
-    def new_ai_message(content: str) -> Message:
+    def new_ai_message(content: str):
+        from ._alith import Message
+
         return Message(role="assistant", content=content)
 
     @staticmethod
-    def messages_from_value(value: Union[str, Dict, List]) -> List[Message]:
+    def messages_from_value(value: Union[str, Dict, List]):
+        from ._alith import Message
+
         if isinstance(value, str):
             value = json.loads(value)
         if isinstance(value, dict):
@@ -33,14 +42,14 @@ class MessageBuilder:
         return [Message(**item) for item in value]
 
     @staticmethod
-    def messages_to_string(messages: List[Message]) -> str:
+    def messages_to_string(messages) -> str:
         return "\n".join(f"{msg.role}: {msg.content}" for msg in messages)
 
 
 # Define the Memory abstract class
 class Memory(ABC):
     @abstractmethod
-    def messages(self) -> List[Message]:
+    def messages(self):
         pass
 
     def add_user_message(self, message: str):
@@ -50,7 +59,7 @@ class Memory(ABC):
         self.add_message(MessageBuilder.new_ai_message(message))
 
     @abstractmethod
-    def add_message(self, message: Message):
+    def add_message(self, message):
         pass
 
     @abstractmethod
@@ -65,12 +74,12 @@ class Memory(ABC):
 class WindowBufferMemory(Memory):
     def __init__(self, window_size: int = 10):
         self.window_size = window_size
-        self._messages: List[Message] = []
+        self._messages = []
 
-    def messages(self) -> List[Message]:
+    def messages(self):
         return self._messages.copy()
 
-    def add_message(self, message: Message):
+    def add_message(self, message):
         if len(self._messages) >= self.window_size:
             self._messages.pop(0)
         self._messages.append(message)
