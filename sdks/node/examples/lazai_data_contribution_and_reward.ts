@@ -55,8 +55,6 @@ async function main() {
   // 5. Request DAT reward
   await client.requestReward(fileId)
   console.log('Reward requested for file id', fileId)
-  const balance = await client.getDATBalance(client.getWallet().address, fileId)
-  console.log('The balance of DAT is', balance)
 }
 
 await main()

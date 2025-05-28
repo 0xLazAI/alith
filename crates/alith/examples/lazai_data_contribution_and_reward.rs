@@ -65,11 +65,5 @@ async fn main() -> Result<(), anyhow::Error> {
     // 5. Request DAT reward
     client.request_reward(file_id, None).await?;
     println!("Reward requested for file id {}", file_id);
-    println!(
-        "The balance of DAT is {}",
-        client
-            .get_dat_balance(client.wallet.address, file_id)
-            .await?,
-    );
     Ok(())
 }

@@ -38,6 +38,7 @@ Specifically:
 - Upon successful verification, users can submit a request via LazAI to receive Data Anchor Tokens (DAT) as rewards.
 
 Next, we will demonstrate how to use Alith to interact with LazAI and complete the end-to-end process of contributing privacy data and claiming rewards.
+After this process is completed, you can view all your DATs in the block browser.
 
 <Tabs items={['Rust', 'Python', 'Node.js']}>
   <Tabs.Tab>
@@ -127,12 +128,6 @@ async fn main() -> Result<(), anyhow::Error> {
     // 5. Request DAT reward
     client.request_reward(file_id, None).await?;
     println!("Reward requested for file id {}", file_id);
-    println!(
-        "The balance of DAT is {}",
-        client
-            .get_dat_balance(client.wallet.address, file_id)
-            .await?,
-    );
     Ok(())
 }
 ```
@@ -224,10 +219,6 @@ async def main():
         # 5. Request DAT reward
         client.request_reward(file_id)
         print("Reward requested for file id", file_id)
-        print(
-            "The balance of DAT is",
-            client.get_dat_balance(client.wallet.address, file_id),
-        )
     except StorageError as e:
         print(f"Error: {e}")
     except Exception as e:
@@ -320,8 +311,6 @@ async function main() {
   // 5. Request DAT reward
   await client.requestReward(fileId)
   console.log('Reward requested for file id', fileId)
-  const balance = await client.getDATBalance(client.getWallet().address, fileId)
-  console.log('The balance of DAT is', balance)
 }
 
 await main()
