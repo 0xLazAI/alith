@@ -7,10 +7,7 @@ from flask import Flask, request, jsonify
 from alith.lazai import (
     Client,
     ProofData,
-    ChainConfig,
     ProofRequest,
-    TESTNET_CHAINID,
-    TESTNET_NETWORK,
 )
 import os
 import json
@@ -55,6 +52,9 @@ def proof():
         logger.info(f"Successfully processed request for file_id: {req.file_id}")
         return jsonify({"success": True}), 200
     except Exception as e:
+        logger.error(
+            f"Error processed request for file_id: {req.file_id} and error {str(e)}"
+        )
         return jsonify({"error": str(e)}), 400
 
 
