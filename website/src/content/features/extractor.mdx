@@ -63,19 +63,19 @@ print(
 ## Simple Structure
 
 ```typescript
-import { Agent, Extractor } from 'alith'
-import { z } from 'zod'
+import { Agent, Extractor } from "alith";
+import { z } from "zod";
 
 export const personSchema = z
   .object({
     name: z.string(),
     age: z.number(),
   })
-  .strip()
+  .strip();
 
-const agent = new Agent({ model: 'gpt-4' })
-const extractor = new Extractor(agent, personSchema)
-console.log(extractor.extract('Alice is 18 years old!'))
+const agent = new Agent({ model: "gpt-4" });
+const extractor = new Extractor(agent, personSchema);
+console.log(extractor.extract("Alice is 18 years old!"));
 ```
 
 </Tabs.Tab>

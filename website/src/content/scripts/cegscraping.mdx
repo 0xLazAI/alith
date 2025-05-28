@@ -58,14 +58,14 @@ driver = webdriver.Chrome(service=service, options=options)
 def fetch_proposals():
     driver.get(MAIN_URL)
     proposals = []
-    
+
     # Locate proposal entries on the main page
     rows = driver.find_elements(By.CSS_SELECTOR, "tr[data-topic-id]")
     for row in rows:
         try:
             if len(proposals) >= MAX_PROPOSALS:  # Stop if max proposals reached
                 break
-            
+
             # Extract proposal data
             topic_id = row.get_attribute("data-topic-id")
             title_element = row.find_element(By.CSS_SELECTOR, "a.title")
@@ -73,26 +73,26 @@ def fetch_proposals():
             url = title_element.get_attribute("href")
             views = row.find_element(By.CSS_SELECTOR, "td.num.views .number").text.strip()
             comments = row.find_element(By.CSS_SELECTOR, "td.num.posts-map .number").text.strip()
-            
+
             # Extract creation and latest activity dates
             activity_cell = row.find_element(By.CSS_SELECTOR, "td.activity")
             date_title = activity_cell.get_attribute("title")
-            
+
             # Extract dates using regex
             created_date = None
             latest_activity = None
-            
+
             created_match = re.search(r"Created: (.*?)(?:\n|$)", date_title)
             if created_match:
                 created_date = created_match.group(1).strip()
-                
+
             latest_match = re.search(r"Latest: (.*?)(?:\n|$)", date_title)
             if latest_match:
                 latest_activity = latest_match.group(1).strip()
-            
+
             # Generate unique ID
             unique_id = generate_date_hash_id(url)
-            
+
             # Append to proposals list
             proposals.append({
                 "id": unique_id,
@@ -115,14 +115,14 @@ def fetch_proposals():
 def fetch_proposal_details(proposal):
     try:
         driver.get(proposal["url"])
-        
+
         # Wait and scrape main content
         content_element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, "cooked"))
         )
         content = content_element.text.strip()
         proposal["content"] = content
-        
+
         # Collect comments if enabled
         if COLLECT_COMMENTS:
             comments_elements = driver.find_elements(By.CSS_SELECTOR, "div.topic-post")
@@ -173,28 +173,28 @@ The CEG forum scraper produces a JSON file with the following structure:
 
 ```json
 [
-    {
-        "id": "1a2b3c4d5e6f7890",
-        "topic_id": "12345",
-        "title": "Proposal: Add New Feature X to Platform",
-        "url": "https://forum.ceg.vote/t/proposal-add-new-feature-x-to-platform/12345",
-        "views": "123",
-        "comments": "45",
-        "created_date": "Jan 15, 2025",
-        "latest_activity": "Mar 10, 2025",
-        "content": "This is the main proposal content discussing Feature X...",
-        "comments_details": [
-            {
-                "author": "User1",
-                "comment": "I support this proposal because..."
-            },
-            {
-                "author": "User2",
-                "comment": "Have we considered the implications for..."
-            }
-        ]
-    },
-    // Additional proposals...
+  {
+    "id": "1a2b3c4d5e6f7890",
+    "topic_id": "12345",
+    "title": "Proposal: Add New Feature X to Platform",
+    "url": "https://forum.ceg.vote/t/proposal-add-new-feature-x-to-platform/12345",
+    "views": "123",
+    "comments": "45",
+    "created_date": "Jan 15, 2025",
+    "latest_activity": "Mar 10, 2025",
+    "content": "This is the main proposal content discussing Feature X...",
+    "comments_details": [
+      {
+        "author": "User1",
+        "comment": "I support this proposal because..."
+      },
+      {
+        "author": "User2",
+        "comment": "Have we considered the implications for..."
+      }
+    ]
+  }
+  // Additional proposals...
 ]
 ```
 
@@ -218,11 +218,11 @@ The CEG forum scraper is automated through a GitHub Actions workflow that:
 5. Commits and pushes any changes to the repository
 
 ```yaml
-name: "Knowledge Scraping - ceg" 
+name: "Knowledge Scraping - ceg"
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC 
+    - cron: "0 0 * * *" # Runs daily at midnight UTC
 
 jobs:
   scrape-ceg:
@@ -230,30 +230,30 @@ jobs:
     permissions:
       contents: write
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
 
-    - name: Install all necessary packages
-      run: |
-        sudo apt-get install -y chromium-browser chromium-chromedriver python3-selenium
-        pip install bs4 selenium webdriver_manager
+      - name: Install all necessary packages
+        run: |
+          sudo apt-get install -y chromium-browser chromium-chromedriver python3-selenium
+          pip install bs4 selenium webdriver_manager
 
-    - name: Run the scraping script
-      run: python scripts/addknowledge_CEG.py
+      - name: Run the scraping script
+        run: python scripts/addknowledge_CEG.py
 
-    - name: Commit and push if content changed
-      run: |
-        git config user.name "Automated"
-        git config user.email "actions@users.noreply.github.com"
-        git add -A
-        timestamp=$(date -u)
-        git commit -m "Latest data: ${timestamp}" || exit 0
-        git push
+      - name: Commit and push if content changed
+        run: |
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
 ```
 
 ## Implementation Considerations
@@ -306,14 +306,17 @@ For forums running on different platforms:
 Common issues and their solutions:
 
 1. **ChromeDriver Version Mismatch**:
+
    - The `webdriver_manager` library should handle this automatically
    - If issues persist, manually specify a compatible ChromeDriver version
 
 2. **Element Not Found Exceptions**:
+
    - Check if the forum structure has changed
    - Inspect the page source to identify updated CSS selectors
 
 3. **Rate Limiting**:
+
    - Add delays between requests: `time.sleep(2)` between proposal fetches
    - Reduce `MAX_PROPOSALS` to stay within limits
 

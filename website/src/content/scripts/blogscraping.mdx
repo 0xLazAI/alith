@@ -116,19 +116,19 @@ The blog scraper produces a JSON file with the following structure:
 
 ```json
 {
-    "latest_id": "12032025abcd1234",
-    "blogs": [
-        {
-            "id": "12032025abcd1234",
-            "url": "https://metis.io/blog-post-url",
-            "date": "Mar 12, 2025",
-            "author": "Author Name",
-            "title": "Blog Post Title",
-            "summary": "A brief summary of the blog post...",
-            "content": "The full text content of the blog post..."
-        },
-        // Additional blog posts...
-    ]
+  "latest_id": "12032025abcd1234",
+  "blogs": [
+    {
+      "id": "12032025abcd1234",
+      "url": "https://metis.io/blog-post-url",
+      "date": "Mar 12, 2025",
+      "author": "Author Name",
+      "title": "Blog Post Title",
+      "summary": "A brief summary of the blog post...",
+      "content": "The full text content of the blog post..."
+    }
+    // Additional blog posts...
+  ]
 }
 ```
 
@@ -152,39 +152,39 @@ The blog scraper is automated through a GitHub Actions workflow that:
 5. Commits and pushes any changes to the repository
 
 ```yaml
-name: "Knowledge Scraping - blogs" 
+name: "Knowledge Scraping - blogs"
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC 
+    - cron: "0 0 * * *" # Runs daily at midnight UTC
 jobs:
   scrape-blogs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests beautifulsoup4
-    - name: Run Your Script
-      run: |
-        echo "Running the scraping task"
-        python scripts/addknowledge_blog.py
-    - name: Commit and push if content changed
-      run: |
-        git config user.name "Automated"
-        git config user.email "actions@users.noreply.github.com"
-        git add -A
-        timestamp=$(date -u)
-        git commit -m "Latest data: ${timestamp}" || exit 0
-        git push
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+      - name: Run Your Script
+        run: |
+          echo "Running the scraping task"
+          python scripts/addknowledge_blog.py
+      - name: Commit and push if content changed
+        run: |
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
 ```
 
 ## Performance Considerations

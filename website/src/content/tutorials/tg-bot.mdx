@@ -70,7 +70,7 @@ async fn main() -> Result<(), Error> {
 
     let handler = Update::filter_message().endpoint(|bot: Bot, msg: Message, mut client: Client| async move {
         if let Some(text) = msg.text() {
-             let result = client.completion(Request::new(text.to_string(), r#"You are a spam detector here to assist the user in identifying spam messages. 
+             let result = client.completion(Request::new(text.to_string(), r#"You are a spam detector here to assist the user in identifying spam messages.
                  Respond with a clear yes/no and a brief explanation why."#.to_string())).await.unwrap();
              let response_text = result.content;
              bot.send_message(msg.chat.id, response_text).await?;
@@ -79,14 +79,14 @@ async fn main() -> Result<(), Error> {
          }
          respond(())
      });
- 
+
      Dispatcher::builder(telegram_bot, handler)
          .dependencies(dptree::deps![client])
          .enable_ctrlc_handler()
          .build()
          .dispatch()
          .await;
-    
+
     Ok(())
 }
 ```
@@ -98,6 +98,7 @@ Run your Rust script to start the bot:
 ```shell
 cargo run --release
 ```
+
 </Steps>
   </Tabs.Tab>
   <Tabs.Tab>
@@ -180,6 +181,7 @@ Run your Python script to start the bot:
 ```shell
 python3 tg-bot.py
 ```
+
 </Steps>
   </Tabs.Tab>
 </Tabs>
@@ -205,7 +207,6 @@ Here are some ideas to improve your bot:
 2. Error Handling: Add error handling for API failures or invalid inputs.
 3. Custom Commands: Allow users to trigger specific actions (e.g., `/ask` for questions).
 4. Rate Limiting: Prevent abuse by limiting the number of requests per user.
-
 
 ## References
 

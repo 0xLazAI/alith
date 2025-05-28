@@ -225,12 +225,16 @@ ChromaDBStore().save_docs(["doc1", "doc2", "doc3"])
 ## Qdrant Vector Database
 
 ```typescript
-import { Store, QdrantStore, Embeddings, RemoteModelEmbeddings } from '../src'
+import { Store, QdrantStore, Embeddings, RemoteModelEmbeddings } from "../src";
 
-let embeddings: Embeddings = new RemoteModelEmbeddings('your embeddings model name', 'your API key', 'base url')
-const store: Store = new QdrantStore(embeddings)
-store.save('Hello, World')
-console.log(store.search('Hello, World'))
+let embeddings: Embeddings = new RemoteModelEmbeddings(
+  "your embeddings model name",
+  "your API key",
+  "base url",
+);
+const store: Store = new QdrantStore(embeddings);
+store.save("Hello, World");
+console.log(store.search("Hello, World"));
 ```
 
 </Tabs.Tab>
