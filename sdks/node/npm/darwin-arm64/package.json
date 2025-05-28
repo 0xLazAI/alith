@@ -1,7 +1,7 @@
 {
   "name": "@lazai-labs/alith-darwin-arm64",
   "repository": "https://github.com/0xLazAI/alith",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "os": [
     "darwin"
   ],
