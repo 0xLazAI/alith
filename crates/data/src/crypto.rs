@@ -16,6 +16,7 @@ use openpgp::{
 };
 pub use rsa::{
     Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey,
+    pkcs1::{DecodeRsaPrivateKey, DecodeRsaPublicKey, EncodeRsaPrivateKey, EncodeRsaPublicKey},
     pkcs8::{DecodePrivateKey, DecodePublicKey, EncodePrivateKey, EncodePublicKey, LineEnding},
 };
 pub use sequoia_openpgp as openpgp;

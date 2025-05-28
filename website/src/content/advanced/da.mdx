@@ -2,25 +2,10 @@ import { Tabs } from "nextra/components";
 
 # Data Availability (DA)
 
-Alith supports users to interact with various Data Availability (DA) layers, and natively 
-supports uploading privacy data to DA for sharing after encryption. Different ends use RSA 
-for encryption, which facilitates privacy collaboration and supports verifying the integrity 
+Alith supports users to interact with various Data Availability (DA) layers, and natively
+supports uploading privacy data to DA for sharing after encryption. Different ends use RSA
+for encryption, which facilitates privacy collaboration and supports verifying the integrity
 of privacy data in TEE.
-
-In Alith, we use OpenPGP to encrypt and decrypt the privacy data. OpenPGP encryption process: 
-Randomly generate a Key and use it to encrypt data using a symmetric encryption algorithm. 
-Finally, use an asymmetric encryption algorithm (RSA) to encrypt the recipient's Key using 
-the receiver's public key to obtain encrypted data.
-
-Specifically, we obtain a random key from the user's Web3 wallet, such as Metamask, and use 
-this random key to encrypt the user's private data. This process verifies the sender's identity, 
-and then uses the asymmetric encryption algorithm (RSA) to encrypt the recipient's key to obtain 
-the encrypted data. We then upload the encrypted data to DA (such as IPFS, Google Drive, or Dropbox), 
-and register the encrypted data URL and Encrypt key to the LazAI contract. The test data verifier 
-can decrypt the encrypted key using the private key and download the private data for decryption 
-through the URL. The decryption process is placed in TEE to ensure data security. Will not be 
-tampered with, and then decrypted data and TEE generates proof and uploads it to LazAI contract 
-for verification.
 
 <Tabs items={['Rust', 'Python', 'Node.js']}>
   <Tabs.Tab>
@@ -242,26 +227,29 @@ if __name__ == "__main__":
 ## Privacy Data Encryption and Decryption
 
 ```typescript
-import { encrypt, decrypt } from 'alith/data/crypto'
-import NodeRSA from 'node-rsa'
+import { encrypt, decrypt } from "alith/data/crypto";
+import NodeRSA from "node-rsa";
 
 async function main() {
-  const privacyData = 'Hello, Privacy Data with PGP!'
-  const encoder = new TextEncoder()
-  const dataUint8Array = encoder.encode(privacyData)
-  const password = 'securepassword123456789'
-  const rsa = new NodeRSA({ b: 3072 })
-  const encryptedKey = rsa.encrypt(password)
-  console.log('Encrypted Key:', encryptedKey.toString('base64'))
-  const encryptedData = await encrypt(dataUint8Array, password)
-  console.log('Encrypted Data:', encryptedData.toString())
-  const decryptedPassword = rsa.decrypt(encryptedKey)
-  console.log('Decrypted Password:', decryptedPassword.toString())
-  const decryptedData = await decrypt(encryptedData, decryptedPassword.toString())
-  console.log('Decrypted Data:', decryptedData.toString())
+  const privacyData = "Hello, Privacy Data with PGP!";
+  const encoder = new TextEncoder();
+  const dataUint8Array = encoder.encode(privacyData);
+  const password = "securepassword123456789";
+  const rsa = new NodeRSA({ b: 3072 });
+  const encryptedKey = rsa.encrypt(password);
+  console.log("Encrypted Key:", encryptedKey.toString("base64"));
+  const encryptedData = await encrypt(dataUint8Array, password);
+  console.log("Encrypted Data:", encryptedData.toString());
+  const decryptedPassword = rsa.decrypt(encryptedKey);
+  console.log("Decrypted Password:", decryptedPassword.toString());
+  const decryptedData = await decrypt(
+    encryptedData,
+    decryptedPassword.toString(),
+  );
+  console.log("Decrypted Data:", decryptedData.toString());
 }
 
-await main()
+await main();
 ```
 
 ## Data Storage
@@ -269,22 +257,24 @@ await main()
 ### IPFS
 
 ```typescript
-import { PinataIPFS } from 'alith/data/storage'
+import { PinataIPFS } from "alith/data/storage";
 
 async function main() {
-  const ipfs = new PinataIPFS()
-  const data = 'Your privacy data'
-  const name = 'your_privacy_file.txt'
+  const ipfs = new PinataIPFS();
+  const data = "Your privacy data";
+  const name = "your_privacy_file.txt";
   const fileMeta = await ipfs.upload({
     name: name,
-    data: Buffer.from(data, 'utf-8'),
-    token: process.env.IPFS_JWT || '',
-  })
-  console.log(`Upload file to the Pinata IPFS: ${fileMeta}`)
-  console.log(`Share link: ${await ipfs.getShareLink({ token: process.env.IPFS_JWT || '', id: fileMeta.id })}`)
+    data: Buffer.from(data, "utf-8"),
+    token: process.env.IPFS_JWT || "",
+  });
+  console.log(`Upload file to the Pinata IPFS: ${fileMeta}`);
+  console.log(
+    `Share link: ${await ipfs.getShareLink({ token: process.env.IPFS_JWT || "", id: fileMeta.id })}`,
+  );
 }
 
-await main()
+await main();
 ```
 
 </Tabs.Tab>

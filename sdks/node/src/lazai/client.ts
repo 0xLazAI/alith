@@ -32,13 +32,13 @@ export class Client extends ChainManager {
     return this.account
   }
 
-  async addFile(url: string): Promise<number> {
+  async addFile(url: string): Promise<BigInt> {
     const method = this.dataRegistryContract().methods.addFile(url)
     await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
     return this.getFileIdByUrl(url)
   }
 
-  async getFileIdByUrl(url: string): Promise<number> {
+  async getFileIdByUrl(url: string): Promise<BigInt> {
     return this.dataRegistryContract().methods.getFileIdByUrl(url).call()
   }
 
@@ -47,7 +47,7 @@ export class Client extends ChainManager {
     await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
-  async addProof(fileId: number, data: ProofData): Promise<void> {
+  async addProof(fileId: BigInt, data: ProofData): Promise<void> {
     const packedData = data.abiEncode()
     const messageHash = Web3.utils.keccak256(packedData)
     const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
@@ -69,46 +69,46 @@ export class Client extends ChainManager {
     url: string,
     ownerAddress: string,
     permissions: { account: string; key: string }[],
-  ): Promise<number> {
+  ): Promise<BigInt> {
     const method = this.dataRegistryContract().methods.addFileWithPermissions(url, ownerAddress, permissions)
     await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
     return this.getFileIdByUrl(url)
   }
 
-  async addPermissionForFile(fileId: number, account: string, key: string): Promise<void> {
+  async addPermissionForFile(fileId: BigInt, account: string, key: string): Promise<void> {
     const method = this.dataRegistryContract().methods.addPermissionForFile(fileId, account, key)
     await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
   }
 
-  async getFile(fileId: number): Promise<{
-    id: number
+  async getFile(fileId: BigInt): Promise<{
+    id: BigInt
     url: string
     owner: string
-    createdAt: number
+    createdAt: BigInt
   }> {
     return this.dataRegistryContract().methods.getFile(fileId).call()
   }
 
-  async getFilePermission(fileId: number, account: string): Promise<string> {
+  async getFilePermission(fileId: BigInt, account: string): Promise<string> {
     return this.dataRegistryContract().methods.getFilePermission(fileId, account).call()
   }
 
   async getFileProof(
-    fileId: number,
-    index: number,
+    fileId: BigInt,
+    index: BigInt,
   ): Promise<{
-    timestamp: number
+    timestamp: BigInt
     hash: string
     signature: string
   }> {
     return this.dataRegistryContract().methods.getFileProof(fileId, index).call()
   }
 
-  async filesCount(): Promise<number> {
+  async filesCount(): Promise<BigInt> {
     return this.dataRegistryContract().methods.filesCount().call()
   }
 
-  async requestReward(fileId: number, proofIndex: number = 1): Promise<void> {
+  async requestReward(fileId: BigInt, proofIndex: BigInt = BigInt(1)): Promise<void> {
     const method = this.dataRegistryContract().methods.requestReward(fileId, proofIndex)
     await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
   }
@@ -127,56 +127,56 @@ export class Client extends ChainManager {
     url: string
     status: number
     amount: string
-    jobsCount: number
+    jobsCount: BigInt
     publicKey: string
   }> {
     return this.verifiedComputingContract().methods.getNode(address).call()
   }
 
-  async updateNodeFee(fee: number): Promise<void> {
+  async updateNodeFee(fee: BigInt): Promise<void> {
     const method = this.verifiedComputingContract().methods.updateNodeFee(fee)
     await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
-  async nodeFee(): Promise<number> {
+  async nodeFee(): Promise<BigInt> {
     return this.verifiedComputingContract().methods.nodeFee().call()
   }
 
-  async requestProof(fileId: number, value: number = 0): Promise<void> {
+  async requestProof(fileId: BigInt, value: BigInt = BigInt(0)): Promise<void> {
     const method = this.verifiedComputingContract().methods.requestProof(fileId)
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value)
+    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value.toString())
   }
 
-  async completeJob(jobId: number): Promise<void> {
+  async completeJob(jobId: BigInt): Promise<void> {
     const method = this.verifiedComputingContract().methods.completeJob(jobId)
     await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
-  async getJob(jobId: number): Promise<{
-    fileId: number
+  async getJob(jobId: BigInt): Promise<{
+    fileId: BigInt
     bidAmount: string
     status: number
-    addedTimestamp: number
+    addedTimestamp: BigInt
     ownerAddress: string
     nodeAddress: string
   }> {
     return this.verifiedComputingContract().methods.getJob(jobId).call()
   }
 
-  async fileJobIds(fileId: number): Promise<number[]> {
+  async fileJobIds(fileId: BigInt): Promise<BigInt[]> {
     return this.verifiedComputingContract().methods.fileJobIds(fileId).call()
   }
 
-  async jobsCount(): Promise<number> {
+  async jobsCount(): Promise<BigInt> {
     return this.verifiedComputingContract().methods.jobsCount().call()
   }
 
-  async nodeListAt(index: number): Promise<{
+  async nodeListAt(index: BigInt): Promise<{
     nodeAddress: string
     url: string
     status: number
     amount: string
-    jobsCount: number
+    jobsCount: BigInt
     publicKey: string
   }> {
     return this.verifiedComputingContract().methods.nodeListAt(index).call()
@@ -186,22 +186,22 @@ export class Client extends ChainManager {
     return this.verifiedComputingContract().methods.activeNodeList().call()
   }
 
-  async activeNodeListAt(index: number): Promise<{
+  async activeNodeListAt(index: BigInt): Promise<{
     nodeAddress: string
     url: string
     status: number
     amount: string
-    jobsCount: number
+    jobsCount: BigInt
     publicKey: string
   }> {
     return this.verifiedComputingContract().methods.activeNodeListAt(index).call()
   }
 
-  async nodesCount(): Promise<number> {
+  async nodesCount(): Promise<BigInt> {
     return this.verifiedComputingContract().methods.nodesCount().call()
   }
 
-  async activeNodesCount(): Promise<number> {
+  async activeNodesCount(): Promise<BigInt> {
     return this.verifiedComputingContract().methods.activeNodesCount().call()
   }
 
@@ -209,9 +209,9 @@ export class Client extends ChainManager {
     return this.verifiedComputingContract().methods.isNode(address).call()
   }
 
-  async submitJob(fileId: number, value: number): Promise<void> {
+  async submitJob(fileId: BigInt, value: BigInt): Promise<void> {
     const method = this.verifiedComputingContract().methods.submitJob(fileId)
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value)
+    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value.toString())
   }
 
   async claim(): Promise<void> {
@@ -230,14 +230,14 @@ export class Client extends ChainManager {
   /**
    * Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID.
    */
-  async getDATBalance(account: string, id: number): Promise<number> {
+  async getDATBalance(account: string, id: BigInt): Promise<BigInt> {
     return this.dataAnchorTokenContract().methods.balanceOf(account, id).call()
   }
 
   /**
    * Returns the Uri for a specific Data Anchor Token (DAT) by its token ID.
    */
-  async dataUri(tokenId: number): Promise<string> {
+  async dataUri(tokenId: BigInt): Promise<string> {
     return this.dataAnchorTokenContract().methods.uri(tokenId).call()
   }
 }

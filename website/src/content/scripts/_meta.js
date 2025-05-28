@@ -1,7 +1,6 @@
 export default {
-    intro: "",
-    agentknowledge: "",
-    blogscraping: "",
-    cegscraping: "",
-  };
-  
+  intro: "",
+  agentknowledge: "",
+  blogscraping: "",
+  cegscraping: "",
+};

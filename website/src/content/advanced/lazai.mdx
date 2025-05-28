@@ -1,0 +1,334 @@
+import { Tabs } from "nextra/components";
+
+# LazAI
+
+Alith is not only an agent framework, but also serves as a gateway to access the LazAI ecosystem.
+
+Developers can directly connect to LazAI infrastructure using Alith Rust, Python or Node.js SDKs.
+It provides access to models and on chain artificial intelligence, while enabling contributors to
+securely share privacy data, computation and request reward on LazAI.
+
+## Network Information
+
+[LazAI](https://lazai.network/) is a decentralized AI blockchain that leverages the power of [Metis SDK](https://metis-sdk.vercel.app/)
+to create an open, transparent, and high-performance AI ecosystem to solve data alignment and value capture issues.
+
+The information of the network is here
+
+|                 | **LazAI (Pre Testnet)**                                                                            |
+| --------------- | -------------------------------------------------------------------------------------------------- |
+| Chain ID        | 133718                                                                                             |
+| Currency Symbol | LAZAI                                                                                              |
+| RPC             | [https://lazai-testnet.metisdevops.link](https://lazai-testnet.metisdevops.link)                   |
+| Block Explorer  | [https://lazai-testnet-explorer.metisdevops.link](https://lazai-testnet-explorer.metisdevops.link) |
+
+## For Data Contributors
+
+Data contributors are the cornerstone of the LazAI and Alith ecosystems. They can contribute privacy-sensitive data to earn rewards while retaining full control over how their data is used (e.g., for on-chain training, inference, or evaluation) and exercising governance rights.
+
+In LazAI, we leverage OpenPGP encryption to secure privacy data. The encryption workflow is as follows:
+
+- A random symmetric key is generated to encrypt the data using a symmetric encryption algorithm (e.g., AES).
+- This symmetric key is then encrypted with the recipient’s public key via an asymmetric encryption algorithm (RSA), producing the final encrypted payload.
+
+Specifically:
+
+- A random key is derived from the user’s Web3 wallet (e.g., MetaMask) and used as a password to encrypt the user’s private data. This step authenticates the sender’s identity.
+- The encrypted symmetric key (via RSA) and the encrypted data are uploaded to a decentralized archive (DA) (e.g., IPFS, Google Drive, or Dropbox).
+- The encrypted data's URL and the encrypted key are registered on the LazAI smart contract.
+- A test data verifier decrypts the symmetric key using their private key, downloads the encrypted data via the URL, and decrypts it within a trusted execution environment (TEE) to ensure security.
+- The decrypted data and a TEE-generated proof are uploaded to the LazAI contract for validation.
+- Upon successful verification, users can submit a request via LazAI to receive Data Anchor Tokens (DAT) as rewards.
+
+Next, we will demonstrate how to use Alith to interact with LazAI and complete the end-to-end process of contributing privacy data and claiming rewards.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+## Install Alith
+
+```shell
+cargo add alith --git https://github.com/0xLazAI/alith --features "lazai,wallet,crypto,ipfs"
+```
+
+> Note: we need to enable the `lazai`, `wallet`, `crypto` and `ipfs` features in the `alith` crate to use this example.
+
+## Set Environment Variables
+
+```shell
+export PRIVATE_KEY=<your wallet private key>
+export IPFS_JWT=<your pinata ipfs jwt>
+```
+
+## Privacy Data Contribution and Reward on LazAI
+
+```rust
+use alith::data::crypto::{DecodeRsaPublicKey, Pkcs1v15Encrypt, RsaPublicKey, encrypt};
+use alith::data::storage::{DataStorage, PinataIPFS, UploadOptions};
+use alith::lazai::{Client, ProofRequest, U256};
+use reqwest;
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let client = Client::new_default()?;
+    let ipfs = PinataIPFS::default();
+    // 1. Prepare your privacy data and encrypt it
+    let data_file_name = "your_encrypted_data.txt";
+    let privacy_data = "Your Privacy Data";
+    let encryption_seed = "Sign to retrieve your encryption key";
+    let password = client
+        .wallet
+        .sign_message_hex(encryption_seed.as_bytes())
+        .await?;
+    let encrypted_data = encrypt(privacy_data, password.clone())?;
+    // 2. Upload the privacy data to IPFS and get the shared url
+    let token = std::env::var("IPFS_JWT")?;
+    let file_meta = ipfs
+        .upload(
+            UploadOptions::builder()
+                .data(encrypted_data)
+                .name(data_file_name.to_string())
+                .token(token.clone())
+                .build(),
+        )
+        .await?;
+    let url = ipfs.get_share_link(token, file_meta.id).await?;
+    // 3. Upload the privacy url to LazAI
+    let mut file_id = client.get_file_id_by_url(url.as_str()).await?;
+    if file_id.is_zero() {
+        file_id = client.add_file(url.as_str()).await?;
+    }
+    // 4. Request proof in the verified computing node
+    client.request_proof(file_id, U256::from(100)).await?;
+    let job_id = client.file_job_ids(file_id).await?.last().cloned().unwrap();
+    let job = client.get_job(job_id).await?;
+    let node_info = client.get_node(job.nodeAddress).await?.unwrap();
+    let node_url = node_info.url;
+    let pub_key = node_info.publicKey;
+    let pub_key = RsaPublicKey::from_pkcs1_pem(&pub_key)?;
+    let mut rng = rand_08::thread_rng();
+    let encryption_key = pub_key.encrypt(&mut rng, Pkcs1v15Encrypt, password.as_bytes())?;
+    let encryption_key = hex::encode(encryption_key);
+    let response = reqwest::Client::new()
+        .post(format!("{node_url}/proof"))
+        .json(
+            &ProofRequest::builder()
+                .job_id(job_id.to())
+                .file_id(file_id.to())
+                .file_url(url)
+                .encryption_key(encryption_key)
+                .encryption_seed(encryption_seed.to_string())
+                .build(),
+        )
+        .send()
+        .await?;
+    if response.status().is_success() {
+        println!("Proof request sent successfully")
+    } else {
+        println!("Failed to send proof request: {:?}", response)
+    }
+    // 5. Request DAT reward
+    client.request_reward(file_id, None).await?;
+    println!("Reward requested for file id {}", file_id);
+    println!(
+        "The balance of DAT is {}",
+        client
+            .get_dat_balance(client.wallet.address, file_id)
+            .await?,
+    );
+    Ok(())
+}
+```
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+## Install Alith
+
+```shell
+python3 -m pip install alith -U
+```
+
+## Set Environment Variables
+
+```shell
+export PRIVATE_KEY=<your wallet private key>
+export IPFS_JWT=<your pinata ipfs jwt>
+```
+
+## Privacy Data Contribution and Reward on LazAI
+
+```python
+from alith.lazai import Client, ProofRequest
+from alith.data import encrypt
+from alith.data.storage import (
+    PinataIPFS,
+    UploadOptions,
+    GetShareLinkOptions,
+    StorageError,
+)
+from eth_account.messages import encode_defunct
+from os import getenv
+import asyncio
+import requests
+import rsa
+
+
+async def main():
+    client = Client()
+    ipfs = PinataIPFS()
+    try:
+        # 1. Prepare your privacy data and encrypt it
+        data_file_name = "your_encrypted_data.txt"
+        privacy_data = "Your Privacy Data"
+        encryption_seed = "Sign to retrieve your encryption key"
+        message = encode_defunct(text=encryption_seed)
+        password = client.wallet.sign_message(message).signature.hex()
+        encrypted_data = encrypt(privacy_data.encode(), password)
+        # 2. Upload the privacy data to IPFS and get the shared url
+        token = getenv("IPFS_JWT", "")
+        file_meta = await ipfs.upload(
+            UploadOptions(name=data_file_name, data=encrypted_data, token=token)
+        )
+        url = await ipfs.get_share_link(
+            GetShareLinkOptions(token=token, id=file_meta.id)
+        )
+        # 3. Upload the privacy url to LazAI
+        file_id = client.get_file_id_by_url(url)
+        if file_id == 0:
+            file_id = client.add_file(url)
+        # 4. Request proof in the verified computing node
+        client.request_proof(file_id, 100)
+        job_id = client.file_job_ids(file_id)[-1]
+        job = client.get_job(job_id)
+        node_info = client.get_node(job[-1])
+        node_url: str = node_info[1]
+        pub_key = node_info[-1]
+        encryption_key = rsa.encrypt(
+            password.encode(),
+            rsa.PublicKey.load_pkcs1(pub_key.strip().encode(), format="PEM"),
+        ).hex()
+        response = requests.post(
+            f"{node_url}/proof",
+            json=ProofRequest(
+                job_id=job_id,
+                file_id=file_id,
+                file_url=url,
+                encryption_key=encryption_key,
+                encryption_seed=encryption_seed,
+                proof_url=None,
+            ).model_dump_json(),
+        )
+        if response.status_code == 200:
+            print("Proof request sent successfully")
+        else:
+            print("Failed to send proof request:", response.json())
+        # 5. Request DAT reward
+        client.request_reward(file_id)
+        print("Reward requested for file id", file_id)
+        print(
+            "The balance of DAT is",
+            client.get_dat_balance(client.wallet.address, file_id),
+        )
+    except StorageError as e:
+        print(f"Error: {e}")
+    except Exception as e:
+        raise e
+    finally:
+        await ipfs.close()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+## Install Alith
+
+```shell
+npm install alith
+# Or use pnpm `pnpm install alith`
+# Or use yarn `yarn install alith`
+# Or use bun `bun install alith`
+```
+
+## Set Environment Variables
+
+```shell
+export PRIVATE_KEY=<your wallet private key>
+export IPFS_JWT=<your pinata ipfs jwt>
+```
+
+## Privacy Data Contribution and Reward on LazAI
+
+```typescript
+import { Client } from 'alith/lazai'
+import { PinataIPFS } from 'alith/data/storage'
+import { encrypt } from 'alith/data/crypto'
+import NodeRSA from 'node-rsa'
+import axios, { AxiosResponse } from 'axios'
+
+async function main() {
+  const client = new Client()
+  const ipfs = new PinataIPFS()
+  // 1. Prepare your privacy data and encrypt it
+  const dataFileName = 'your_encrypted_data.txt'
+  const privacyData = 'Your Privacy Data'
+  const encryptionSeed = 'Sign to retrieve your encryption key'
+  const password = client.getWallet().sign(encryptionSeed).signature
+  const encryptedData = await encrypt(Uint8Array.from(privacyData), password)
+  // 2. Upload the privacy data to IPFS and get the shared url
+  const token = process.env.IPFS_JWT || ''
+  const fileMeta = await ipfs.upload({
+    name: dataFileName,
+    data: Buffer.from(encryptedData),
+    token: token,
+  })
+  const url = await ipfs.getShareLink({ token: token, id: fileMeta.id })
+  // 3. Upload the privacy url to LazAI
+  let fileId = await client.getFileIdByUrl(url)
+  if (fileId == BigInt(0)) {
+    fileId = await client.addFile(url)
+  }
+  // 4. Request proof in the verified computing node
+  await client.requestProof(fileId, BigInt(100))
+  const jobIds = await client.fileJobIds(fileId)
+  const jobId = jobIds[jobIds.length - 1]
+  const job = await client.getJob(jobId)
+  const nodeInfo = await client.getNode(job.nodeAddress)
+  const nodeUrl = nodeInfo.url
+  const pubKey = nodeInfo.publicKey
+  const rsa = new NodeRSA(pubKey, 'pkcs1-public-pem')
+  const encryptedKey = rsa.encrypt(password, 'hex')
+  const proofRequest = {
+    job_id: Number(jobId),
+    file_id: Number(fileId),
+    file_url: url,
+    encryption_key: encryptedKey,
+    encryption_seed: encryptionSeed,
+  }
+  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, proofRequest, {
+    headers: { 'Content-Type': 'application/json' },
+  })
+
+  if (response.status === 200) {
+    console.log('Proof request sent successfully')
+  } else {
+    console.log('Failed to send proof request:', response.data)
+  }
+  // 5. Request DAT reward
+  await client.requestReward(fileId)
+  console.log('Reward requested for file id', fileId)
+  const balance = await client.getDATBalance(client.getWallet().address, fileId)
+  console.log('The balance of DAT is', balance)
+}
+
+await main()
+```
+
+</Tabs.Tab>
+</Tabs>
