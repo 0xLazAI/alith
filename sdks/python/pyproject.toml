@@ -16,10 +16,7 @@ license = { text = "Apache-2.0" }
 dependencies = [
     "pydantic",
     "requests",
-    "web3",
-    "eth-account",
-    "eth-abi",
-    "hexbytes",
+    "web3<7.0.0,>=6.18.0",
     "rsa",
     "python-gnupg",
     "aiohttp",
