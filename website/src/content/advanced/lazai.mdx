@@ -210,7 +210,7 @@ async def main():
                 encryption_key=encryption_key,
                 encryption_seed=encryption_seed,
                 proof_url=None,
-            ).model_dump_json(),
+            ).model_dump(),
         )
         if response.status_code == 200:
             print("Proof request sent successfully")
@@ -298,8 +298,10 @@ async function main() {
     file_url: url,
     encryption_key: encryptedKey,
     encryption_seed: encryptionSeed,
+    nonce: null,
+    proof_url: null,
   }
-  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, JSON.stringify(proofRequest), {
+  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, proofRequest, {
     headers: { 'Content-Type': 'application/json' },
   })
 

@@ -31,7 +31,7 @@ proof_request = ProofRequest(
 )
 response = requests.post(
     f"http://{node_url}/proof",
-    json=proof_request.model_dump_json(),
+    json=proof_request.model_dump(),
 )
 if response.status_code == 200:
     print("Proof request sent successfully")
