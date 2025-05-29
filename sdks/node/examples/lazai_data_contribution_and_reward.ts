@@ -43,7 +43,7 @@ async function main() {
     encryption_key: encryptedKey,
     encryption_seed: encryptionSeed,
   }
-  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, proofRequest, {
+  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, JSON.stringify(proofRequest), {
     headers: { 'Content-Type': 'application/json' },
   })
 
