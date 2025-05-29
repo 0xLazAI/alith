@@ -42,8 +42,10 @@ async function main() {
     file_url: url,
     encryption_key: encryptedKey,
     encryption_seed: encryptionSeed,
+    nonce: null,
+    proof_url: null,
   }
-  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, JSON.stringify(proofRequest), {
+  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, proofRequest, {
     headers: { 'Content-Type': 'application/json' },
   })
 

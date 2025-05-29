@@ -40,7 +40,7 @@ client = Client()
 def proof():
     try:
         data = request.get_json()
-        req = ProofRequest(**json.loads(data))
+        req = ProofRequest(**data)
         # We do not check the encryption key and file in the fake node just for simplicity.
         client.complete_job(req.job_id)
         client.add_proof(

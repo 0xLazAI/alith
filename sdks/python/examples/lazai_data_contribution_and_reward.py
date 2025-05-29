@@ -56,7 +56,7 @@ async def main():
                 encryption_key=encryption_key,
                 encryption_seed=encryption_seed,
                 proof_url=None,
-            ).model_dump_json(),
+            ).model_dump(),
         )
         if response.status_code == 200:
             print("Proof request sent successfully")
