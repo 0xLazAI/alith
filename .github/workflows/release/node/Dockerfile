@@ -22,4 +22,4 @@ ENV PYTHONPATH=/
 # Expose the server port
 EXPOSE 8000
 # Run the node server
-CMD ["python3", "-m", "alith.lazai.node.fake"]
+CMD ["python3", "-m", "alith.lazai.node.validator"]

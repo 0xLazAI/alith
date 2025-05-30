@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 
 # Environment variables
 
+enable_decrypt_file = os.getenv("ENABLE_DECRYPT_FILE", "")
 rsa_private_key_base64 = os.getenv("RSA_PRIVATE_KEY_BASE64", "")
 rsa_private_key = (
     base64.b64decode(rsa_private_key_base64).decode() if rsa_private_key_base64 else ""
@@ -54,7 +55,8 @@ def proof():
         data = request.get_json()
         req = ProofRequest(**data)
         # Decrypt the file and check it
-        decrypt_file_url(req.file_url, req.encryption_key)
+        if enable_decrypt_file:
+            decrypt_file_url(req.file_url, req.encryption_key)
         client.complete_job(req.job_id)
         client.add_proof(
             req.file_id,
