@@ -4,7 +4,7 @@
     "strict": true,
     "declaration": true,
     "moduleResolution": "node",
-    "module": "esnext",
+    "module": "CommonJS",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
