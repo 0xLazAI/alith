@@ -1,0 +1,423 @@
+---
+title: "Building on LazAI"
+description: "How to build on LazAI, deploy smart contracts, and use SDKs."
+icon: "Rocket"
+---
+
+## Building on LazAI
+
+LazAI provides a robust environment for deploying and testing smart contracts. This guide will help you choose the right development framework and get started with your first smart contract deployment.
+
+## Network Information
+
+|                     | LazAI (Pre Testnet)                                   |
+|---------------------|------------------------------------------------------|
+| **Chain ID**        | 133718                                               |
+| **Currency Symbol** | LAZAI                                                |
+| **RPC**             | [https://lazai-testnet.metisdevops.link](https://lazai-testnet.metisdevops.link) |
+| **Block Explorer**  | [https://lazai-testnet-explorer.metisdevops.link](https://lazai-testnet-explorer.metisdevops.link) |
+| **Faucet**          | [LazAI Testnet Faucet (Telegram)](https://t.me/lazai_testnet_bot) |
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Node.js (v14+)
+- npm or yarn
+- Git
+
+### Choose Your Development Framework
+
+<div style={{ display: 'flex', gap: '24px', margin: '32px 0', flexWrap: 'wrap', justifyContent: 'center' }}>
+  <a href="#hardhat" style={{ flex: '1 1 340px', background: '#18181b', borderRadius: '16px', padding: '32px', minWidth: '320px', boxShadow: '0 1px 2px rgba(0,0,0,0.08)', border: '1px solid #27272a', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '16px' }}>
+    <div style={{ background: '#232326', borderRadius: '8px', padding: '10px', marginBottom: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg width="24" height="24" fill="none" stroke="#a1a1aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    </div>
+    <div style={{ fontWeight: 700, fontSize: '1.18rem', marginBottom: '8px' }}>Hardhat Development</div>
+    <div style={{ color: '#a1a1aa', fontSize: '1.05rem', fontWeight: 400 }}>
+      JavaScript-based development environment with extensive plugin ecosystem
+    </div>
+  </a>
+  <a href="#foundry" style={{ flex: '1 1 340px', background: '#18181b', borderRadius: '16px', padding: '32px', minWidth: '320px', boxShadow: '0 1px 2px rgba(0,0,0,0.08)', border: '1px solid #27272a', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '16px' }}>
+    <div style={{ background: '#232326', borderRadius: '8px', padding: '10px', marginBottom: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg width="24" height="24" fill="none" stroke="#a1a1aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+    </div>
+    <div style={{ fontWeight: 700, fontSize: '1.18rem', marginBottom: '8px' }}>Foundry Development</div>
+    <div style={{ color: '#a1a1aa', fontSize: '1.05rem', fontWeight: 400 }}>
+      Rust-based toolkit with fast compilation and testing capabilities
+    </div>
+  </a>
+</div>
+
+### Framework Comparison
+
+#### Hardhat
+- **JavaScript/TypeScript Support**: Native support for JavaScript and TypeScript development
+- **Rich Plugin Ecosystem**: Extensive collection of plugins for various development needs
+- **Built-in Testing Framework**: Comprehensive testing capabilities with Chai and Mocha
+- **Developer Experience**: Great for beginners with excellent debugging tools
+
+#### Foundry
+- **Solidity-Native Testing**: Write tests in Solidity for better integration
+- **Fast Compilation**: Optimized compilation process for quick development cycles
+- **Built-in Fuzzing**: Advanced testing capabilities with fuzzing support
+- **Advanced Debugging**: Comprehensive debugging tools for smart contracts
+
+---
+
+<a id="hardhat"></a>
+## Hardhat
+
+### Deploying a Counter Contract with Hardhat
+
+This guide will walk you through deploying a counter contract using Hardhat, a popular JavaScript-based development environment for Ethereum.
+
+#### 1. Prerequisites
+
+Before you begin, ensure you have:
+
+- Node.js installed (v12 or later)
+- npm (comes with Node.js)
+- A code editor (e.g., VS Code)
+- (Optional) MetaMask wallet and testnet tokens for deployment
+
+#### 2. Install Hardhat
+
+Open your terminal and create a new project directory:
+
+```bash
+mkdir counter-project
+cd counter-project
+```
+
+Initialize a new npm project:
+
+```bash
+npm init -y
+```
+
+Install Hardhat and required dependencies:
+
+```bash
+npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox dotenv
+```
+
+```bash
+npm install --save-dev @nomicfoundation/hardhat-ignition
+```
+
+#### 3. Create a New Hardhat Project
+
+Run the Hardhat setup wizard:
+
+```bash
+npx hardhat
+```
+
+Choose "Create a JavaScript project" when prompted.
+
+This will create a project structure like:
+
+- `contracts/` - for Solidity contracts
+- `igntion/` - for deployment scripts
+- `test/` - for tests
+- `hardhat.config.js` - configuration file
+
+#### 4. Write Your Smart Contract
+
+Create a new file in the contracts directory, `Counter.sol`:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Counter {
+    uint256 private count;
+
+    function increment() public {
+        count += 1;
+    }
+
+    function decrement() public {
+        count -= 1;
+    }
+
+    function getCount() public view returns (uint256) {
+        return count;
+    }
+}
+```
+
+#### 5. Compile the Smart Contract
+
+Compile your contracts with:
+
+```bash
+npx hardhat compile
+```
+
+You should see a success message if there are no errors.
+
+#### 6. Write a Deployment Script
+
+Create a new file in the ignition directory, `Counter.js`:
+
+```javascript
+const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
+
+module.exports = buildModule("CounterModule", (m) => {
+  const counter = m.contract("Counter");
+
+  return { counter };
+});
+```
+
+#### 7. Configure Network Settings
+
+Create a `.env` file in your project root:
+
+```bash
+PRIVATE_KEY=your_private_key_here
+```
+
+Edit `hardhat.config.js`:
+
+```javascript
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
+
+module.exports = {
+  solidity: "0.8.28",
+  networks: {
+    hardhat: {
+      chainId: 31337,
+    },
+    lazai: {
+      url: "https://lazai-testnet.metisdevops.link",
+      chainId: 133718,
+      accounts: [process.env.PRIVATE_KEY],
+    },
+  },
+};
+```
+
+For LazAI testnet, use these details:
+
+| Parameter | Value |
+|-----------|-------|
+| Chain ID | 133718 |
+| Currency Symbol | LAZAI |
+| RPC URL | https://lazai-testnet.metisdevops.link |
+| Block Explorer | https://lazai-testnet-explorer.metisdevops.link |
+| Faucet | [Telegram Bot](https://t.me/lazai_testnet_bot) |
+
+#### 8. Deploy Your Contract
+
+##### Local Deployment (Optional)
+
+Start the Hardhat local node in a separate terminal:
+
+```bash
+npx hardhat node
+```
+
+Deploy to local network:
+
+```bash
+npx hardhat ignition deploy ignition/modules/Counter.js --network  localhost
+```
+
+##### Deploy to LazAI Testnet
+
+Make sure to:
+
+1. Get testnet tokens from the faucet
+2. Add your private key to the `.env` file
+3. Never share your private key
+
+Deploy to LazAI:
+
+```bash
+npx hardhat ignition deploy ignition/modules/Counter.js --network lazai
+```
+
+#### Testing
+
+##### Test Setup
+
+Create `test/Counter.js`:
+
+```javascript
+const { expect } = require("chai");
+
+describe("Counter", function () {
+  it("Should increment the counter", async function () {
+    const Counter = await ethers.getContractFactory("Counter");
+    const counter = await Counter.deploy();
+    await counter.deployed();
+
+    await counter.increment();
+    expect(await counter.getCount()).to.equal(1);
+  });
+});
+```
+
+##### Running Tests
+
+```bash
+npx hardhat test
+```
+
+#### Next Steps
+
+- Add more complex functionality to your counter contract
+- Implement events for better tracking
+- Add access control mechanisms
+- Set up continuous integration
+- Add more comprehensive tests
+
+---
+
+<a id="foundry"></a>
+## Foundry
+
+### Deploying a Counter Contract with Foundry
+
+This guide will walk you through deploying a counter contract using Foundry, a fast and portable toolkit for Ethereum application development.
+
+#### 1. Prerequisites
+
+Before you begin, make sure you have:
+
+- A code editor (e.g., VS Code)
+- Git installed
+- (Optional) MetaMask wallet for deploying to testnets
+- (Optional) RPC endpoint for deploying to a network
+
+#### 2. Install Foundry
+
+Open your terminal and run:
+
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+```
+
+This installs foundryup, the Foundry installer.
+
+Next, run:
+
+```bash
+foundryup
+```
+
+This will install the Foundry toolchain (forge, cast, anvil, chisel).
+
+Check the installation:
+
+```bash
+forge --version
+```
+
+#### 3. Initialize a New Project
+
+Create a new directory for your project and initialize Foundry:
+
+```bash
+forge init Counter
+cd Counter
+```
+
+This creates a project with the following structure:
+
+- `src/` - for your smart contracts
+- `test/` - for Solidity tests
+- `script/` - for deployment scripts
+- `lib/` - for dependencies
+- `foundry.toml` - project configuration file
+
+#### 4. Explore the Counter Contract
+
+Foundry initializes your project with a Counter contract in `src/Counter.sol`:
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+contract Counter {
+    uint256 public number;
+
+    function setNumber(uint256 newNumber) public {
+        number = newNumber;
+    }
+
+    function increment() public {
+        number++;
+    }
+}
+```
+
+This contract stores a number and allows you to set or increment it.
+
+#### 5. Compile the Contract
+
+Compile your smart contracts with:
+
+```bash
+forge build
+```
+
+This command compiles all contracts in `src/` and outputs artifacts to the `out/` directory.
+
+#### 6. Run Tests
+
+Foundry supports writing tests in Solidity (in the `test/` directory). To run all tests:
+
+```bash
+forge test
+```
+
+You'll see output indicating which tests passed or failed. The default project includes a sample test for the Counter contract.
+
+#### 7. Deploying Your Contract
+
+To deploy your contract to the LazAI testnet, you'll need:
+
+- An RPC URL
+- A private key with testnet LAZAI
+
+For LazAI testnet, use these details:
+| Parameter | Value |
+|-----------|-------|
+| Chain ID | 133718 |
+| Currency Symbol | LAZAI |
+| RPC URL | https://lazai-testnet.metisdevops.link |
+| Block Explorer | https://lazai-testnet-explorer.metisdevops.link |
+| Faucet | [Telegram Bot](https://t.me/lazai_testnet_bot) |
+
+Example deployment command for LazAI testnet:
+
+```bash
+forge create --rpc-url https://lazai-testnet.metisdevops.link \
+  --private-key <YOUR_PRIVATE_KEY> \
+  src/Counter.sol:Counter \
+  --broadcast
+```
+
+Replace `<YOUR_PRIVATE_KEY>` with your actual private key. Never share your private key.
+
+#### 8. Interacting with Contracts
+
+You can use cast to interact with deployed contracts, send transactions, or query data. For example, to read the number variable on LazAI testnet:
+
+```bash
+cast call <CONTRACT_ADDRESS> "number()(uint256)" --rpc-url https://lazai-testnet.metisdevops.link
+```
+
+#### Next Steps
+
+- Add more complex functionality to your counter contract
+- Implement events for better tracking
+- Add access control mechanisms
+- Set up continuous integration
+- Add more comprehensive tests
+

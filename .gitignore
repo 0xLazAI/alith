@@ -13,6 +13,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# Next.js
+next-env.d.ts
+# TypeScript
+tsconfig.json
+
+
 # DEV
 scripts/dev_*
 # Node log
