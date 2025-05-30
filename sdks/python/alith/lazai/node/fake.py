@@ -1,5 +1,5 @@
 """
-Start the node with the PRIVATE_KEY and PRIVATE_KEY_BASE64 environment variable set to the base64 encoded RSA private key.
+Start the node with the PRIVATE_KEY and RSA_PRIVATE_KEY_BASE64 environment variable set to the base64 encoded RSA private key.
 python3 -m alith.lazai.node.fake
 """
 
@@ -10,7 +10,6 @@ from alith.lazai import (
     ProofRequest,
 )
 import os
-import json
 import logging
 import base64
 
@@ -49,6 +48,7 @@ def proof():
                 id=req.file_id, file_url=req.file_url, proof_url=req.proof_url or ""
             ),
         )
+        client.claim()
         logger.info(f"Successfully processed request for file_id: {req.file_id}")
         return jsonify({"success": True}), 200
     except Exception as e:
