@@ -7,6 +7,7 @@ from .contracts import (
 from .chain import ChainConfig, ChainManager
 from .proof import ProofData
 from os import getenv
+from typing import List
 from web3 import Web3
 from eth_account import Account
 from hexbytes import HexBytes
@@ -122,6 +123,35 @@ class Client(ChainManager):
 
     def file_job_ids(self, file_id: int):
         return self.verified_computing_contract.functions.fileJobIds(file_id).call()
+
+    def jobs_count(self) -> int:
+        return self.verified_computing_contract.functions.jobsCount().call()
+
+    def node_list_at(self, index: int):
+        return self.verified_computing_contract.functions.nodeListAt(index).call()
+
+    def active_node_list(self) -> List[str]:
+        return self.verified_computing_contract.functions.activeNodeList().call()
+
+    def active_node_list_at(self, index: int):
+        return self.verified_computing_contract.functions.activeNodeListAt(index).call()
+
+    def nodes_count(self) -> int:
+        return self.verified_computing_contract.functions.nodesCount().call()
+
+    def active_nodes_count(self) -> int:
+        return self.verified_computing_contract.functions.activeNodesCount().call()
+
+    def is_node(self, address: str) -> bool:
+        return self.verified_computing_contract.functions.isNode(address).call()
+
+    def submit_job(self, file_id: int, value: int):
+        return self.send_transaction(
+            self.verified_computing_contract.functions.submitJob(file_id), value=value
+        )
+
+    def claim(self):
+        return self.send_transaction(self.verified_computing_contract.functions.claim())
 
     def request_reward(self, file_id: int, proof_index: int = 1):
         return self.send_transaction(
