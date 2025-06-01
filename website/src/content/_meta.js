@@ -1,10 +1,9 @@
 export default {
   index: "",
-  "quick-start": "",
-
   "get-started": "",
   features: "",
   advanced: "",
+  lazai: "LazAI",
   integrations: "",
   tutorials: "",
   scripts: "",

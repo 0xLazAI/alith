@@ -6,5 +6,4 @@ export default {
   da: "",
   decision: "",
   inference: "",
-  lazai: "",
 };
