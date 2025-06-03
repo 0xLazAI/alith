@@ -94,7 +94,7 @@ dependencies = [
  "hex",
  "rand 0.8.5",
  "rand 0.9.1",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "schemars",
  "serde",
  "sqlx",
@@ -168,7 +168,7 @@ dependencies = [
  "rand 0.8.5",
  "rand 0.9.1",
  "rand_core 0.9.3",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "rsa",
  "sequoia-openpgp",
  "serde",
@@ -220,7 +220,7 @@ dependencies = [
  "ort 2.0.0-rc.10",
  "pythonize",
  "rand 0.9.1",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde",
  "serde_json",
  "thiserror 2.0.12",
@@ -244,7 +244,7 @@ dependencies = [
  "colorful",
  "dotenvy",
  "indenter",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "secrecy",
  "serde",
  "serde_json",
@@ -277,7 +277,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "bon",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde",
  "thiserror 2.0.12",
  "url",
@@ -394,7 +394,7 @@ dependencies = [
  "hyper 1.6.0",
  "hyper-util",
  "hyperlocal",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde",
  "serde_json",
  "sha2",
@@ -408,7 +408,7 @@ version = "0.8.0"
 dependencies = [
  "alith-core",
  "async-trait",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "scraper",
  "serde",
  "serde_json",
@@ -719,7 +719,7 @@ dependencies = [
  "lru",
  "parking_lot",
  "pin-project",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde",
  "serde_json",
  "thiserror 2.0.12",
@@ -764,7 +764,7 @@ dependencies = [
  "async-stream",
  "futures",
  "pin-project",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde",
  "serde_json",
  "tokio",
@@ -966,7 +966,7 @@ checksum = "1ca577cff7579e39d3b4312dcd68809bd1ca693445cfdcf53f4f466a9b6b3df3"
 dependencies = [
  "alloy-json-rpc",
  "alloy-transport",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde_json",
  "tower 0.5.2",
  "tracing",
@@ -3727,7 +3727,7 @@ dependencies = [
  "log",
  "num_cpus",
  "rand 0.8.5",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde",
  "serde_json",
  "thiserror 2.0.12",
@@ -5263,7 +5263,7 @@ dependencies = [
  "indexmap 2.9.0",
  "mistralrs-core",
  "rand 0.9.1",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "serde",
  "serde_json",
  "tokio",
@@ -5314,7 +5314,7 @@ dependencies = [
  "rayon",
  "regex",
  "regex-automata 0.4.9",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "rustc-hash 2.1.1",
  "safetensors",
  "schemars",
@@ -6651,7 +6651,7 @@ dependencies = [
  "futures-util",
  "prost 0.13.5",
  "prost-types 0.13.5",
- "reqwest 0.12.18",
+ "reqwest 0.12.19",
  "semver 1.0.26",
  "serde",
  "serde_json",
@@ -7096,9 +7096,9 @@ dependencies = [
 
 [[package]]
 name = "reqwest"
-version = "0.12.18"
+version = "0.12.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e98ff6b0dbbe4d5a37318f433d4fc82babd21631f194d370409ceb2e40b2f0b5"
+checksum = "a2f8e5513d63f2e5b386eb5106dc67eaf3f84e95258e210489136b8b92ad6119"
 dependencies = [
  "base64 0.22.1",
  "bytes",
@@ -7725,7 +7725,7 @@ checksum = "015e5fc3d023418b9db98ca9a7f3e90b305872eeafe5ca45c5c32b5eb335c1e8"
 dependencies = [
  "anyhow",
  "argon2",
- "base64 0.21.7",
+ "base64 0.22.1",
  "buffered-reader",
  "bzip2",
  "chrono",
@@ -9245,9 +9245,9 @@ dependencies = [
 
 [[package]]
 name = "tower-http"
-version = "0.6.4"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0fdb0c213ca27a9f57ab69ddb290fd80d970922355b83ae380b395d3986b8a2e"
+checksum = "5cc2d9e086a412a451384326f521c8123a99a466b329941a9403696bff9b0da2"
 dependencies = [
  "bitflags 2.9.1",
  "bytes",
