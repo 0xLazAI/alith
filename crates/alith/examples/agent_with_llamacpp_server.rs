@@ -11,7 +11,7 @@ async fn main() -> Result<(), anyhow::Error> {
     .await?;
     // Run the server and run the following command to test the server
     /*
-    curl http://localhost:8080/v1/chat/completions \
+    curl http://localhost:8000/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
       "model": "your-model-name",

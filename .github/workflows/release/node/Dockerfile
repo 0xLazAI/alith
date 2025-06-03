@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     git
-RUN python3 -m pip install pydantic requests web3==6.20.4 rsa python-gnupg aiohttp flask
+RUN python3 -m pip install pydantic requests web3==6.20.4 rsa python-gnupg aiohttp flask uvicorn
 # Copy README and LICENSE files
 COPY README.md /app/
 COPY LICENSE /app/

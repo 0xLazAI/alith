@@ -35,6 +35,5 @@ __all__ = [
     "Extractor",
     "Memory",
     "WindowBufferMemory",
-    "Message",
     "MessageBuilder",
 ]
