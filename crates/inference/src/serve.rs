@@ -24,7 +24,7 @@ use tokio::{
 };
 use tokio_graceful::Shutdown;
 
-pub const DEFAULT_ADDR: &str = "127.0.0.1:8080";
+pub const DEFAULT_ADDR: &str = "127.0.0.1:8000";
 pub const V1_CHAT_COMPLETIONS: &str = "/v1/chat/completions";
 
 /// Run an inference server with the given model and address.
