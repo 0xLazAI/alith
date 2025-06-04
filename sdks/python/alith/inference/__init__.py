@@ -1,5 +1,5 @@
 from .engines import LlamaEngine, LLAMA_CPP_AVAILABLE
-from .serve import run
+from .server import run
 
 __all__ = [
     "LlamaEngine",

@@ -56,9 +56,11 @@ def get_training_status_from_dir(path: str) -> TrainingStatus:
                 remaining_time=latest_log["remaining_time"],
                 total_tokens=latest_log["total_tokens"],
                 epoch=latest_log["epoch"],
-                log=None,
+                log=get_running_log_from_dir(path),
             )
-    raise TrainingStatusNotFound()
+    return TrainingStatus(
+        log=get_running_log_from_dir(path),
+    )
 
 
 def get_running_log_from_dir(path: str, max: int = 20) -> Optional[str]:

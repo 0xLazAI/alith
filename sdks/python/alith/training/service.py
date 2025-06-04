@@ -18,12 +18,11 @@ async def training(params: TrainingParams, tasks: BackgroundTasks) -> TrainingRe
     job_id = generate_job_id()
     tasks.add_task(
         start_trainer,
+        params=params,
         job_id=job_id,
-        model=params.model,
     )
     return TrainingResult(
         job_id=job_id,
-        status="started",
         message=f"Training job {job_id} started",
     )
 
