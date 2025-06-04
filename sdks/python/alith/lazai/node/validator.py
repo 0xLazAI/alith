@@ -3,7 +3,7 @@ Start the node with the PRIVATE_KEY and RSA_PRIVATE_KEY_BASE64 environment varia
 python3 -m alith.lazai.node.validator
 """
 
-from flask import Flask, request, jsonify
+from fastapi import FastAPI, HTTPException
 from alith.lazai import (
     Client,
     ProofData,
@@ -34,9 +34,9 @@ rsa_private_key = (
     base64.b64decode(rsa_private_key_base64).decode() if rsa_private_key_base64 else ""
 )
 
-# Flask app and LazAI client initialization
+# FastAPI app and LazAI client initialization
 
-app = Flask(__name__)
+app = FastAPI(title="Alith Validator Node", version="1.0.0")
 client = Client()
 
 
@@ -50,10 +50,8 @@ def decrypt_file_url(url: str, encryption_key: str) -> bytes:
 
 
 @app.route("/proof", methods=["POST"])
-def proof():
+async def process_proof(req: ProofRequest):
     try:
-        data = request.get_json()
-        req = ProofRequest(**data)
         # Decrypt the file and check it
         if enable_decrypt_file:
             decrypt_file_url(req.file_url, req.encryption_key)
@@ -66,14 +64,16 @@ def proof():
         )
         client.claim()
         logger.info(f"Successfully processed request for file_id: {req.file_id}")
-        return jsonify({"success": True}), 200
+        return {"success": True}
     except Exception as e:
         logger.error(
-            f"Error processed request for file_id: {req.file_id} and error {str(e)}"
+            f"Error processing request for file_id: {req.file_id}. Error: {str(e)}"
         )
-        return jsonify({"error": str(e)}), 400
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 if __name__ == "__main__":
+    import uvicorn
+
     logger.info("Starting node server...")
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
