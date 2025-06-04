@@ -22,6 +22,7 @@ dependencies = [
     "aiohttp",
     "flask",
     "uvicorn",
+    "fastapi",
 ]
 
 [tool.maturin]
