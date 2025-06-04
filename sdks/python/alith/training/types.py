@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class LoraParams(BaseModel):
@@ -34,11 +35,13 @@ class TrainingParams(BaseModel):
         model_name (str): The name or path of the pre-trained model. Defaults to
                           "Qwen/Qwen2-0.5B".
         training_type (str): The type of training task (e.g., "sft" for Supervised
-                            Fine-Tuning, "ppo" for Proximal Policy Optimization).
-                            Defaults to "sft".
+                            Fine-Tuning, "ppo" for Proximal Policy Optimization,
+                            "rm" for reward model). Defaults to "sft".
+                            Optional for {"pt","sft","rm","ppo","dpo","kto"}
         finetuning_type (str): The type of fine-tuning method. Supports "lora"
                                and other strategies e.g., "full" or "freeze".
                                Defaults to "lora".
+                               Optional for {"lora","freeze","full"}
         lr_scheduler_type (str): The learning rate scheduler type (e.g., "cosine",
                                  "linear"). Defaults to "cosine".
         learning_rate (float): The initial learning rate for optimizer. Controls
@@ -57,13 +60,13 @@ class TrainingParams(BaseModel):
                            faster attention computation. Defaults to False.
         save_steps (int): The interval (in steps) to save model checkpoints.
                           Defaults to 100.
-        template (str): The template type for input/output formatting. Defaults
-                        to "default".
+        template (str): Which template to use for constructing prompts in.
+                        Defaults to "default".
         lora_params (LoraParams): An instance of LoraParams class with default
                                  configurations.
     """
 
-    model_name: str = "Qwen/Qwen2-0.5B"
+    model: str = "Qwen/Qwen2-0.5B"
     training_type: str = "sft"
     finetuning_type: str = "lora"
     lr_scheduler_type: str = "cosine"
@@ -75,5 +78,23 @@ class TrainingParams(BaseModel):
     cutoff_len: int = 2048
     flash_attn: bool = False
     save_steps: int = 100
-    template: str = "default"
+    template: str = "qwen"
     lora_params: LoraParams = LoraParams()
+
+
+class TrainingResult(BaseModel):
+    job_id: str
+    status: str
+    message: str
+
+
+class TrainingStatus(BaseModel):
+    percentage: float
+    current_step: int
+    total_steps: int
+    epoch: float
+    loss: float
+    elapsed_time: str
+    remaining_time: str
+    total_tokens: int
+    log: Optional[str]
