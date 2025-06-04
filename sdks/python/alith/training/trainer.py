@@ -7,6 +7,7 @@ def start_trainer(params: TrainingParams, job_id: str):
     """Here we use the llamafactory to train the model"""
     run_exp(
         {
+            "do_train": True,
             "model_name_or_path": params.model,
             "stage": params.training_type,
             "finetuning_type": params.finetuning_type,
@@ -24,9 +25,25 @@ def start_trainer(params: TrainingParams, job_id: str):
             "lora_alpha": params.lora_params.alpha,
             "lora_dropout": params.lora_params.dropout,
             "lora_target": params.lora_params.target,
+            "preprocessing_num_workers": 16,
             # TODO: data set preprocess deal
             "dataset": "glaive_toolcall_zh_demo",
             "dataset_dir": "data",
             "output_dir": get_output_dir(job_id),
+            "include_num_input_tokens_seen": True,
+            "ddp_timeout": 180000000,
+            "trust_remote_code": True,
+            "plot_loss": True,
+            "report_to": "none",
+            "packing": False,
+            "warmup_steps": 0,
+            "per_device_train_batch_size": 2,
+            "gradient_accumulation_steps": 8,
+            "max_grad_norm": 1.0,
+            "logging_steps": 5,
         }
     )
+
+
+if __name__ == "__main__":
+    start_trainer(params=TrainingParams(), job_id="0xFFFF")

@@ -32,7 +32,7 @@ class TrainingParams(BaseModel):
     selection, optimization strategy, and training schedule.
 
     Attributes:
-        model_name (str): The name or path of the pre-trained model. Defaults to
+        model (str): The name or path of the pre-trained model. Defaults to
                           "Qwen/Qwen2-0.5B".
         training_type (str): The type of training task (e.g., "sft" for Supervised
                             Fine-Tuning, "ppo" for Proximal Policy Optimization,
@@ -76,7 +76,7 @@ class TrainingParams(BaseModel):
     bf16: bool = True
     optim: str = "adamw_torch"
     cutoff_len: int = 2048
-    flash_attn: bool = False
+    flash_attn: str = "auto"
     save_steps: int = 100
     template: str = "qwen"
     lora_params: LoraParams = LoraParams()
@@ -84,17 +84,16 @@ class TrainingParams(BaseModel):
 
 class TrainingResult(BaseModel):
     job_id: str
-    status: str
     message: str
 
 
 class TrainingStatus(BaseModel):
-    percentage: float
-    current_step: int
-    total_steps: int
-    epoch: float
-    loss: float
-    elapsed_time: str
-    remaining_time: str
-    total_tokens: int
-    log: Optional[str]
+    percentage: float = 0
+    current_step: int = 0
+    total_steps: int = 0
+    epoch: float = 0.0
+    loss: float = 0.0
+    elapsed_time: str = "0"
+    remaining_time: str = "0"
+    total_tokens: int = 0
+    log: Optional[str] = None
