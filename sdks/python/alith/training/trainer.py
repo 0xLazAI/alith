@@ -1,6 +1,38 @@
 from llamafactory.train.tuner import run_exp
 from .types import TrainingParams
-from .common import get_output_dir
+from .common import add_dataset, get_output_dir, DEFAULT_DATASET_DIR, DEFAULT_DATASET
+from ..data import download_file, decrypt
+from pathlib import Path
+import rsa
+import os
+import base64
+
+rsa_private_key_base64 = os.getenv("RSA_PRIVATE_KEY_BASE64", "")
+rsa_private_key = (
+    base64.b64decode(rsa_private_key_base64).decode() if rsa_private_key_base64 else ""
+)
+
+
+def preprocess_data(params: TrainingParams) -> str:
+    """Preprocess the data return the trained dataset name"""
+    dataset = DEFAULT_DATASET
+    # If file url is provided, download the file and decrpt it
+    if params.data_params:
+        file = download_file(params.data_params.data_url)
+        file_path = Path(file)
+        dataset = file_path.name
+        # If the file is encrypted and provided the encryption key, decrypt it
+        if params.data_params.encryption_key and rsa_private_key_base64:
+            encryption_key = params.data_params.encryption_key
+            content = file_path.read_bytes()
+            priv_key = rsa.PrivateKey.load_pkcs1(rsa_private_key.strip().encode())
+            password = rsa.decrypt(
+                bytes.fromhex(encryption_key.removeprefix("0x")), priv_key
+            )
+            decrypted_data_bytes = decrypt(content, password=password.decode())
+            file_path.write_bytes(decrypted_data_bytes)
+        add_dataset(dataset, file)
+    return dataset
 
 
 def start_trainer(params: TrainingParams, job_id: str):
@@ -26,9 +58,8 @@ def start_trainer(params: TrainingParams, job_id: str):
             "lora_dropout": params.lora_params.dropout,
             "lora_target": params.lora_params.target,
             "preprocessing_num_workers": 16,
-            # TODO: data set preprocess deal
-            "dataset": "glaive_toolcall_zh_demo",
-            "dataset_dir": "data",
+            "dataset": preprocess_data(params),
+            "dataset_dir": str(DEFAULT_DATASET_DIR),
             "output_dir": get_output_dir(job_id),
             "include_num_input_tokens_seen": True,
             "ddp_timeout": 180000000,
