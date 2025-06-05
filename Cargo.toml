@@ -105,7 +105,7 @@ tokio-stream = { version = "0.1.15", default-features = false, features = [
 ] }
 hyper = { version = "1.6.0", features = ["full"] }
 hyperlocal = "0.9.1"
-hyper-util = { version = "0.1.13", features = ["server-auto", "client-legacy"] }
+hyper-util = { version = "0.1.14", features = ["server-auto", "client-legacy"] }
 futures = { version = "0.3", features = ["alloc", "std", "async-await"] }
 futures-util = "0.3.29"
 http = "1.1.0"
