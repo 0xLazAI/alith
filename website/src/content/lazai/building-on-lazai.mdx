@@ -10,13 +10,23 @@ LazAI provides a robust environment for deploying and testing smart contracts. T
 
 ## Network Information
 
-|                     | LazAI (Pre Testnet)                                   |
-|---------------------|------------------------------------------------------|
-| **Chain ID**        | 133718                                               |
-| **Currency Symbol** | LAZAI                                                |
-| **RPC**             | [https://lazai-testnet.metisdevops.link](https://lazai-testnet.metisdevops.link) |
+|                     | **LazAI (Pre Testnet)**                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| **Chain ID**        | 133718                                                                                             |
+| **Currency Symbol** | LAZAI                                                                                              |
+| **RPC**             | [https://lazai-testnet.metisdevops.link](https://lazai-testnet.metisdevops.link)                   |
 | **Block Explorer**  | [https://lazai-testnet-explorer.metisdevops.link](https://lazai-testnet-explorer.metisdevops.link) |
-| **Faucet**          | [LazAI Testnet Faucet (Telegram)](https://t.me/lazai_testnet_bot) |
+| **Faucet**          | [LazAI Testnet Faucet (Telegram)](https://t.me/lazai_testnet_bot)                                  |
+
+## Contract Addresses
+
+| **Contract**                   | **Address (LazAI Pre Testnet)**              |
+| ------------------------------ | -------------------------------------------- |
+| **Data Registry**              | `0xEAd077726dC83ecF385e3763ed4A0A50E8Ac5AA0` |
+| **Verified Computing**         | `0x815da22D880E3560bCEcc85b6e4938b30c8202C4` |
+| **Data Anchoring Token (DAT)** | `0x2eD344c586303C98FC3c6D5B42C5616ED42f9D9d` |
+
+> Note: The contract address might change during the pre testnet phase, so please check this page regularly for updates.
 
 ### Prerequisites
 
@@ -28,22 +38,108 @@ Before you begin, ensure you have the following installed:
 
 ### Choose Your Development Framework
 
-<div style={{ display: 'flex', gap: '24px', margin: '32px 0', flexWrap: 'wrap', justifyContent: 'center' }}>
-  <a href="#hardhat" style={{ flex: '1 1 340px', background: '#18181b', borderRadius: '16px', padding: '32px', minWidth: '320px', boxShadow: '0 1px 2px rgba(0,0,0,0.08)', border: '1px solid #27272a', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '16px' }}>
-    <div style={{ background: '#232326', borderRadius: '8px', padding: '10px', marginBottom: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <svg width="24" height="24" fill="none" stroke="#a1a1aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+<div
+  style={{
+    display: "flex",
+    gap: "24px",
+    margin: "32px 0",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  }}
+>
+  <a
+    href="#hardhat"
+    style={{
+      flex: "1 1 340px",
+      background: "#18181b",
+      borderRadius: "16px",
+      padding: "32px",
+      minWidth: "320px",
+      boxShadow: "0 1px 2px rgba(0,0,0,0.08)",
+      border: "1px solid #27272a",
+      color: "#fff",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      marginBottom: "16px",
+    }}
+  >
+    <div
+      style={{
+        background: "#232326",
+        borderRadius: "8px",
+        padding: "10px",
+        marginBottom: "18px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="#a1a1aa"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
     </div>
-    <div style={{ fontWeight: 700, fontSize: '1.18rem', marginBottom: '8px' }}>Hardhat Development</div>
-    <div style={{ color: '#a1a1aa', fontSize: '1.05rem', fontWeight: 400 }}>
+    <div style={{ fontWeight: 700, fontSize: "1.18rem", marginBottom: "8px" }}>
+      Hardhat Development
+    </div>
+    <div style={{ color: "#a1a1aa", fontSize: "1.05rem", fontWeight: 400 }}>
       JavaScript-based development environment with extensive plugin ecosystem
     </div>
   </a>
-  <a href="#foundry" style={{ flex: '1 1 340px', background: '#18181b', borderRadius: '16px', padding: '32px', minWidth: '320px', boxShadow: '0 1px 2px rgba(0,0,0,0.08)', border: '1px solid #27272a', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '16px' }}>
-    <div style={{ background: '#232326', borderRadius: '8px', padding: '10px', marginBottom: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <svg width="24" height="24" fill="none" stroke="#a1a1aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+  <a
+    href="#foundry"
+    style={{
+      flex: "1 1 340px",
+      background: "#18181b",
+      borderRadius: "16px",
+      padding: "32px",
+      minWidth: "320px",
+      boxShadow: "0 1px 2px rgba(0,0,0,0.08)",
+      border: "1px solid #27272a",
+      color: "#fff",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      marginBottom: "16px",
+    }}
+  >
+    <div
+      style={{
+        background: "#232326",
+        borderRadius: "8px",
+        padding: "10px",
+        marginBottom: "18px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="#a1a1aa"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+      </svg>
     </div>
-    <div style={{ fontWeight: 700, fontSize: '1.18rem', marginBottom: '8px' }}>Foundry Development</div>
-    <div style={{ color: '#a1a1aa', fontSize: '1.05rem', fontWeight: 400 }}>
+    <div style={{ fontWeight: 700, fontSize: "1.18rem", marginBottom: "8px" }}>
+      Foundry Development
+    </div>
+    <div style={{ color: "#a1a1aa", fontSize: "1.05rem", fontWeight: 400 }}>
       Rust-based toolkit with fast compilation and testing capabilities
     </div>
   </a>
@@ -52,12 +148,14 @@ Before you begin, ensure you have the following installed:
 ### Framework Comparison
 
 #### Hardhat
+
 - **JavaScript/TypeScript Support**: Native support for JavaScript and TypeScript development
 - **Rich Plugin Ecosystem**: Extensive collection of plugins for various development needs
 - **Built-in Testing Framework**: Comprehensive testing capabilities with Chai and Mocha
 - **Developer Experience**: Great for beginners with excellent debugging tools
 
 #### Foundry
+
 - **Solidity-Native Testing**: Write tests in Solidity for better integration
 - **Fast Compilation**: Optimized compilation process for quick development cycles
 - **Built-in Fuzzing**: Advanced testing capabilities with fuzzing support
@@ -401,4 +499,3 @@ cast call <CONTRACT_ADDRESS> "number()(uint256)" --rpc-url https://lazai-testnet
 - Add access control mechanisms
 - Set up continuous integration
 - Add more comprehensive tests
-
