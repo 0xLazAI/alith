@@ -232,7 +232,7 @@ if __name__ == "__main__":
 
 ### Node.js
 
-#### 1. Project Setup
+#### Project Setup
 
 ```bash
 mkdir LazAI-contribution
@@ -240,14 +240,14 @@ cd LazAI-contribution
 npm init -y
 ```
 
-#### 2. Install Alith and Dependencies
+#### Install Alith and Dependencies
 
 ```bash
 npm install alith
 npm install --save-dev @types/node-rsa
 ```
 
-#### 3. Create `index.ts`
+#### Create `index.ts`
 
 Create a file named `index.ts` and paste the following script:
 
@@ -316,7 +316,7 @@ async function main() {
 await main()
 ```
 
-#### 4. Update `package.json` Scripts
+#### Update `package.json` Scripts
 
 Add the following to your `package.json`:
 
@@ -326,7 +326,7 @@ Add the following to your `package.json`:
 }
 ```
 
-#### 5. Add `tsconfig.json`
+#### Add `tsconfig.json`
 
 Create a file named `tsconfig.json` with the following content:
 
@@ -353,7 +353,7 @@ Create a file named `tsconfig.json` with the following content:
 }
 ```
 
-#### 6. Set Environment Variables
+#### Set Environment Variables
 
 Create a `.env` file or export the following in your shell:
 
@@ -364,7 +364,7 @@ export IPFS_JWT=<your pinata ipfs jwt>
 
 > **Note:** Your `PRIVATE_KEY` should start with `0x`.
 
-#### 7. Run the Script
+#### Run the Script
 
 ```bash
 npm run start
