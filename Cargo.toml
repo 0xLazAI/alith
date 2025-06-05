@@ -19,7 +19,7 @@ alith-interface = { path = "crates/interface" }
 alith-tee = { path = "crates/tee" }
 alith-lazai = { path = "crates/lazai" }
 
-fastembed = { version = "4.9.0", default-features = false, features = [
+fastembed = { version = "4.9.1", default-features = false, features = [
     "ort-download-binaries",
     "hf-hub-rustls-tls",
 ] }
