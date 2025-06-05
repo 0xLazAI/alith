@@ -6,7 +6,6 @@ icon: "Rocket"
 
 import { Tabs } from "nextra/components";
 
-
 # Data Contribution
 
 LazAI enables data contributors to securely share privacy-sensitive data, computation, and resources, earning rewards while retaining full control over their data. This section will guide you through the process of contributing data and claiming rewards on LazAI.
@@ -145,7 +144,7 @@ export PRIVATE_KEY=<your wallet private key>
 export IPFS_JWT=<your pinata ipfs jwt>
 ```
 
-#### Privacy Data Contribution and Reward on LazAI
+#### Data Contribution and DAT Reward on LazAI
 
 ```python
 from alith.lazai import Client, ProofRequest
@@ -252,44 +251,44 @@ npm install --save-dev @types/node-rsa
 Create a file named `index.ts` and paste the following script:
 
 ```typescript
-import { Client } from 'alith/lazai'
-import { PinataIPFS } from 'alith/data/storage'
-import { encrypt } from 'alith/data/crypto'
-import NodeRSA from 'node-rsa'
-import axios, { AxiosResponse } from 'axios'
+import { Client } from "alith/lazai";
+import { PinataIPFS } from "alith/data/storage";
+import { encrypt } from "alith/data/crypto";
+import NodeRSA from "node-rsa";
+import axios, { AxiosResponse } from "axios";
 
 async function main() {
-  const client = new Client()
-  const ipfs = new PinataIPFS()
+  const client = new Client();
+  const ipfs = new PinataIPFS();
   // 1. Prepare your privacy data and encrypt it
-  const dataFileName = 'your_encrypted_data.txt'
-  const privacyData = 'Your Privacy Data'
-  const encryptionSeed = 'Sign to retrieve your encryption key'
-  const password = client.getWallet().sign(encryptionSeed).signature
-  const encryptedData = await encrypt(Uint8Array.from(privacyData), password)
+  const dataFileName = "your_encrypted_data.txt";
+  const privacyData = "Your Privacy Data";
+  const encryptionSeed = "Sign to retrieve your encryption key";
+  const password = client.getWallet().sign(encryptionSeed).signature;
+  const encryptedData = await encrypt(Uint8Array.from(privacyData), password);
   // 2. Upload the privacy data to IPFS and get the shared url
-  const token = process.env.IPFS_JWT || ''
+  const token = process.env.IPFS_JWT || "";
   const fileMeta = await ipfs.upload({
     name: dataFileName,
     data: Buffer.from(encryptedData),
     token: token,
-  })
-  const url = await ipfs.getShareLink({ token: token, id: fileMeta.id })
+  });
+  const url = await ipfs.getShareLink({ token: token, id: fileMeta.id });
   // 3. Upload the privacy url to LazAI
-  let fileId = await client.getFileIdByUrl(url)
+  let fileId = await client.getFileIdByUrl(url);
   if (fileId == BigInt(0)) {
-    fileId = await client.addFile(url)
+    fileId = await client.addFile(url);
   }
   // 4. Request proof in the verified computing node
-  await client.requestProof(fileId, BigInt(100))
-  const jobIds = await client.fileJobIds(fileId)
-  const jobId = jobIds[jobIds.length - 1]
-  const job = await client.getJob(jobId)
-  const nodeInfo = await client.getNode(job.nodeAddress)
-  const nodeUrl = nodeInfo.url
-  const pubKey = nodeInfo.publicKey
-  const rsa = new NodeRSA(pubKey, 'pkcs1-public-pem')
-  const encryptedKey = rsa.encrypt(password, 'hex')
+  await client.requestProof(fileId, BigInt(100));
+  const jobIds = await client.fileJobIds(fileId);
+  const jobId = jobIds[jobIds.length - 1];
+  const job = await client.getJob(jobId);
+  const nodeInfo = await client.getNode(job.nodeAddress);
+  const nodeUrl = nodeInfo.url;
+  const pubKey = nodeInfo.publicKey;
+  const rsa = new NodeRSA(pubKey, "pkcs1-public-pem");
+  const encryptedKey = rsa.encrypt(password, "hex");
   const proofRequest = {
     job_id: Number(jobId),
     file_id: Number(fileId),
@@ -298,22 +297,26 @@ async function main() {
     encryption_seed: encryptionSeed,
     nonce: null,
     proof_url: null,
-  }
-  const response: AxiosResponse = await axios.post(`${nodeUrl}/proof`, proofRequest, {
-    headers: { 'Content-Type': 'application/json' },
-  })
+  };
+  const response: AxiosResponse = await axios.post(
+    `${nodeUrl}/proof`,
+    proofRequest,
+    {
+      headers: { "Content-Type": "application/json" },
+    },
+  );
 
   if (response.status === 200) {
-    console.log('Proof request sent successfully')
+    console.log("Proof request sent successfully");
   } else {
-    console.log('Failed to send proof request:', response.data)
+    console.log("Failed to send proof request:", response.data);
   }
   // 5. Request DAT reward
-  await client.requestReward(fileId)
-  console.log('Reward requested for file id', fileId)
+  await client.requestReward(fileId);
+  console.log("Reward requested for file id", fileId);
 }
 
-await main()
+await main();
 ```
 
 #### Update `package.json` Scripts
@@ -380,3 +383,6 @@ Reward requested for file id <file_id>
   </Tabs.Tab>
 </Tabs>
 
+## Data Contribution UI Template
+
+A simple data contribution UI template can be found [here](https://github.com/0xLazAI/alith/tree/main/apps/dat).
