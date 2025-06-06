@@ -1,7 +1,6 @@
 use alith::data::crypto::{DecodeRsaPublicKey, Pkcs1v15Encrypt, RsaPublicKey, encrypt};
 use alith::data::storage::{DataStorage, PinataIPFS, UploadOptions};
 use alith::lazai::{Client, ProofRequest, U256};
-use reqwest;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
