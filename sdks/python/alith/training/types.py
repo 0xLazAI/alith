@@ -2,6 +2,11 @@ from pydantic import BaseModel
 from typing import Optional
 
 
+class DataParams(BaseModel):
+    data_url: str
+    encryption_key: Optional[str] = None
+
+
 class LoraParams(BaseModel):
     """Configuration class for LoRA (Low-Rank Adaptation) parameters.
 
@@ -80,6 +85,7 @@ class TrainingParams(BaseModel):
     save_steps: int = 100
     template: str = "qwen"
     lora_params: LoraParams = LoraParams()
+    data_params: Optional[DataParams] = None
 
 
 class TrainingResult(BaseModel):

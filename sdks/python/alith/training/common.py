@@ -1,7 +1,7 @@
 import os
 import json
 from typing import Any, Optional
-from .errors import TrainingStatusNotFound
+from pathlib import Path
 from .types import TrainingStatus
 
 RUNNING_LOG = "running_log.txt"
@@ -15,6 +15,18 @@ TRAINING_TYPES = {
     "KTO": "kto",
     "Pre-Training": "pt",
 }
+DEFAULT_DATASET_DIR: Path = Path(__file__).parent.parent.joinpath("data").absolute()
+DEFAULT_DATASET: str = "identity"
+DATASET_INFO_FILE: str = "dataset_info.json"
+
+
+def add_dataset(dataset: str, path: str):
+    """Add dataset and data file into the dataset info json file."""
+    file = DEFAULT_DATASET_DIR / DATASET_INFO_FILE
+    with open(file) as fp:
+        data = json.load(fp)
+        data[dataset]["file_name"] = path
+    file.write_text(json.dumps(data))
 
 
 def get_output_dir(job_id: str) -> str:
