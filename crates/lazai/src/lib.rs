@@ -11,4 +11,4 @@ pub use chain::{ChainConfig, ChainError, ChainManager, Wallet, WalletError};
 pub use client::Client;
 pub use contracts::{ContractConfig, FileResponse as File, NodeInfo, Permission};
 pub use node::{ProofRequest, ProofRequestBuilder};
-pub use proof::{Proof, ProofAdded, ProofData};
+pub use proof::{Proof, ProofAdded, ProofData, SettlementProof, SettlementProofData};

@@ -151,6 +151,42 @@ sol! {
         address nodeAddress;
     }
 
+    struct Account {
+        address user;
+        address node;
+        uint256 nonce;
+        uint256 balance;
+        uint256 pendingRefund;
+        Refund[] refunds;
+    }
+
+    struct Refund {
+        uint256 index;
+        uint256 amount;
+        uint256 createdAt;
+        bool processed;
+    }
+
+    struct SettlementProofData {
+        uint256 id;
+        address user;
+        uint256 cost;
+        uint256 nonce;
+    }
+
+    struct SettlementProof {
+        bytes signature;
+        SettlementProofData data;
+    }
+
+    struct User {
+        address addr;
+        uint256 availableBalance;
+        uint256 totalBalance;
+        address[] inferenceNodes;
+        address[] trainingNodes;
+    }
+
     // Verified Computing Contract for privacy data and inference in CPU/GPU TEE.
 
     #[sol(rpc)]
@@ -233,20 +269,98 @@ sol! {
         function balanceOf(address account, uint256 id) external view returns (uint256);
         function batchMint(address to, uint256[] memory ids, uint256[] memory amounts, string[] memory tokenURIs) public external;
     }
+
+    #[sol(rpc)]
+    interface IAIProcess {
+        function version() external pure returns (uint256);
+
+        function pause() external;
+        function unpause() external;
+
+        // Node operations
+
+        function nodeList() external view returns (address[] memory);
+        function nodeListAt(uint256 index) external view returns (NodeInfo memory);
+        function nodesCount() external view returns (uint256);
+
+        function activeNodesCount() external view returns (uint256);
+        function activeNodeList() external view returns (address[] memory);
+        function activeNodeListAt(uint256 index) external view returns (NodeInfo memory);
+
+        function getNode(address nodeAddress) external view returns (NodeInfo memory);
+        function addNode(address nodeAddress, string memory url, string memory publicKey) external;
+        function removeNode(address nodeAddress) external;
+        function isNode(address nodeAddress) external view returns (bool);
+
+        // Settlement account and operations
+
+        function settlement() external view returns (ISettlement);
+        function updateSettlement(address newSettlement) external;
+
+        function getAccount(address user, address node) external view returns (Account memory);
+        function getAccountPendingRefund(address user, address node) external view returns (uint256);
+        function getAllAccounts() external view returns (Account[] memory accounts);
+        function accountExists(address user, address node) external view returns (bool);
+        function addAccount(address user, address node) external payable;
+        function deleteAccount(address user, address node) external;
+
+        function deposit(address user, address node, uint256 cancelRetrievingAmount) external payable;
+        function request(address user, address node) external;
+        function process(address user, address node)
+            external
+            returns (uint256 totalAmount, uint256 balance, uint256 pendingRefund);
+
+        function settlementFees(SettlementProof memory proof) external;
+    }
+
+    #[sol(rpc)]
+    interface ISettlement {
+        function version() external pure returns (uint256);
+        function training() external view returns (IAIProcess);
+        function updateTraining(address newTraining) external;
+        function inference() external view returns (IAIProcess);
+        function updateInference(address newInference) external;
+
+        function pause() external;
+        function unpause() external;
+
+        function getUser(address user) external view returns (User memory);
+        function getAllUsers() external view returns (User[] memory users);
+        function addUser() external payable;
+        function deleteUser() external;
+        function deposit() external payable;
+        function withdraw(uint256 amount) external;
+
+        function depositTraining(address node, uint256 amount) external;
+        function depositInference(address node, uint256 amount) external;
+        function retrieveTraining(address[] memory nodes) external;
+        function retrieveInference(address[] memory nodes) external;
+
+        function settlement(address addr, uint256 cost) external;
+    }
 }
 
-pub const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS: Address =
-    address!("0xEAd077726dC83ecF385e3763ed4A0A50E8Ac5AA0");
-pub const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS: Address =
-    address!("0x815da22D880E3560bCEcc85b6e4938b30c8202C4");
 pub const DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS: Address =
     address!("0x2eD344c586303C98FC3c6D5B42C5616ED42f9D9d");
+pub const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS: Address =
+    address!("0x815da22D880E3560bCEcc85b6e4938b30c8202C4");
+pub const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS: Address =
+    address!("0xEAd077726dC83ecF385e3763ed4A0A50E8Ac5AA0");
+pub const DEFAULT_INFERENCE_CONTRACT_ADSDRESS: Address =
+    address!("0xE747fd70269a8a540403ddE802D6906CB18C9F50");
+pub const DEFAULT_TRAINING_CONTRACT_ADSDRESS: Address =
+    address!("0xbb969eaafB3A7124b8dCdf9a6d5Cd5BAa0381361");
+pub const DEFAULT_SETTLEMENT_CONTRACT_ADDRESS: Address =
+    address!("0xb578AB78bb4780D9007Cc836b358468467814B3E");
 
 #[derive(Debug, Clone)]
 pub struct ContractConfig {
     pub data_registry_address: Address,
     pub verified_computing_address: Address,
     pub data_anchor_token_address: Address,
+    pub settlement_address: Address,
+    pub inference_address: Address,
+    pub training_address: Address,
 }
 
 impl Default for ContractConfig {
@@ -255,6 +369,9 @@ impl Default for ContractConfig {
             data_registry_address: DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
             verified_computing_address: DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
             data_anchor_token_address: DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS,
+            settlement_address: DEFAULT_SETTLEMENT_CONTRACT_ADDRESS,
+            inference_address: DEFAULT_INFERENCE_CONTRACT_ADSDRESS,
+            training_address: DEFAULT_TRAINING_CONTRACT_ADSDRESS,
         }
     }
 }

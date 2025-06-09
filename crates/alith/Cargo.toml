@@ -202,6 +202,10 @@ name = "lazai_data_contribution_and_reward"
 required-features = ["lazai", "crypto", "wallet", "ipfs"]
 
 [[example]]
+name = "lazai_settlement"
+required-features = ["lazai", "crypto", "wallet"]
+
+[[example]]
 name = "hf_loader"
 
 [[example]]
