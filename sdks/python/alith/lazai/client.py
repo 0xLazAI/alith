@@ -3,9 +3,11 @@ from .contracts import (
     DATA_REGISTRY_CONTRACT_ABI,
     VERIFIED_COMPUTING_CONTRACT_ABI,
     DATA_ANCHOR_TOKEN_CONTRACT_ABI,
+    AI_PROCESS_CONTRACT_ABI,
+    SETTLEMENT_CONTRACT_ABI,
 )
 from .chain import ChainConfig, ChainManager
-from .proof import ProofData
+from .proof import ProofData, SettlementProofData
 from os import getenv
 from typing import List
 from web3 import Web3
@@ -42,6 +44,18 @@ class Client(ChainManager):
         self.data_anchor_token_contract = self.w3.eth.contract(
             address=contract_config.data_anchor_token_address,
             abi=DATA_ANCHOR_TOKEN_CONTRACT_ABI,
+        )
+        self.inference_contract = self.w3.eth.contract(
+            address=contract_config.inference_address,
+            abi=AI_PROCESS_CONTRACT_ABI,
+        )
+        self.training_contract = self.w3.eth.contract(
+            address=contract_config.training_address,
+            abi=AI_PROCESS_CONTRACT_ABI,
+        )
+        self.settlement_contract = self.w3.eth.contract(
+            address=contract_config.settlement_address,
+            abi=SETTLEMENT_CONTRACT_ABI,
         )
 
     def add_file(self, url: str) -> int:
@@ -173,3 +187,149 @@ class Client(ChainManager):
     def data_uri(self, token_id: int):
         """Returns the Uri for a specific Data Anchor Token (DAT) by its token ID."""
         return self.data_anchor_token_contract.functions.uri(token_id).call()
+
+    def get_user(self, user: str):
+        """Get the user for the settlement."""
+        return self.settlement_contract.functions.getUser(user).call()
+
+    def get_all_users(self):
+        """Get all users registered for the settlement."""
+        return self.settlement_contract.functions.getAllUsers().call()
+
+    def add_user(self, amount: int):
+        return self.send_transaction(
+            self.settlement_contract.functions.addUser(), value=amount
+        )
+
+    def delete_user(self):
+        return self.send_transaction(
+            self.settlement_contract.functions.deleteUser(),
+        )
+
+    def deposit(self, amount: int):
+        return self.send_transaction(
+            self.settlement_contract.functions.deposit(), value=amount
+        )
+
+    def withdraw(self, amount: int):
+        return self.send_transaction(
+            self.settlement_contract.functions.withdraw(amount)
+        )
+
+    def deposit_training(self, node: str, amount: int):
+        return self.send_transaction(
+            self.settlement_contract.functions.depositTraining(node, amount)
+        )
+
+    def deposit_inference(self, node: str, amount: int):
+        return self.send_transaction(
+            self.settlement_contract.functions.depositInference(node, amount)
+        )
+
+    def retrieve_training(self, nodes: List[str]):
+        return self.send_transaction(
+            self.settlement_contract.functions.retrieveTraining(nodes)
+        )
+
+    def retrieve_inference(self, nodes: List[str]):
+        return self.send_transaction(
+            self.settlement_contract.functions.retrieveInference(nodes)
+        )
+
+    def add_inference_node(self, address: str, url: str, public_key: str):
+        return self.send_transaction(
+            self.inference_contract.functions.addNode(address, url, public_key)
+        )
+
+    def remove_inference_node(self, address: str):
+        return self.send_transaction(
+            self.inference_contract.functions.removeNode(address)
+        )
+
+    def get_inference_node(self, address: str):
+        return self.inference_contract.functions.getNode(address).call()
+
+    def inference_node_list(
+        self,
+    ):
+        return self.inference_contract.functions.NodeList().call()
+
+    def get_inference_account(self, node: str):
+        return self.inference_contract.functions.getAccount(
+            self.wallet.address, node
+        ).call()
+
+    def inference_settlement_fees(
+        self,
+        user: str,
+        cost: int,
+    ):
+        data = SettlementProofData(id=0, nonce=0, user=user, cost=cost)
+        packed_data = data.abi_encode()
+        message_hash = Web3.keccak(packed_data)
+        eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)
+        signed_message = Account.signHash(eth_message, self.wallet.key)
+        signature = signed_message.signature
+
+        proof = {
+            "signature": HexBytes(signature).hex(),
+            "data": {
+                "id": data.id,
+                "nonce": data.nonce,
+                "user": data.user,
+                "cost": data.cost,
+            },
+        }
+
+        return self.send_transaction(
+            self.inference_contract.functions.settlementFees(proof)
+        )
+
+    def add_training_node(self, address: str, url: str, public_key: str):
+        return self.send_transaction(
+            self.training_contract.functions.addNode(address, url, public_key)
+        )
+
+    def remove_training_node(self, address: str):
+        return self.send_transaction(
+            self.training_contract.functions.removeNode(address)
+        )
+
+    def get_training_node(self, address: str):
+        return self.training_contract.functions.getNode(address).call()
+
+    def training_node_list(
+        self,
+    ):
+        return self.training_contract.functions.NodeList().call()
+
+    def get_training_account(self, node: str):
+        return self.training_contract.functions.getAccount(
+            self.wallet.address, node
+        ).call()
+
+    def training_settlement_fees(
+        self,
+        user: str,
+        cost: int,
+    ):
+        data = SettlementProofData(id=0, nonce=0, user=user, cost=cost)
+        packed_data = data.abi_encode()
+        message_hash = Web3.keccak(packed_data)
+        eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)
+        signed_message = Account.signHash(eth_message, self.wallet.key)
+        signature = signed_message.signature
+
+        proof = {
+            "signature": HexBytes(signature).hex(),
+            "data": {
+                "id": data.id,
+                "nonce": data.nonce,
+                "user": data.user,
+                "cost": data.cost,
+            },
+        }
+
+        return self.send_transaction(
+            self.training_contract.functions.settlementFees(proof)
+        )
