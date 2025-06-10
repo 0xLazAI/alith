@@ -1,4 +1,4 @@
-import { ProofData } from './proof'
+import { ProofData, SettlementProofData } from './proof'
 import {
   ChainManager,
   ChainConfig,
@@ -13,6 +13,7 @@ import { ContractConfig, DATA_REGISTRY_CONTRACT_ABI, VERIFIED_COMPUTING_CONTRACT
 
 export {
   ProofData,
+  SettlementProofData,
   ChainManager,
   ChainConfig,
   DEVNET_NETWORK,
