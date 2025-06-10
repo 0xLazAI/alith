@@ -1,3 +1,4 @@
+use alith_data::wallet::LocalEthWallet;
 use alloy::{
     contract::{CallBuilder, CallDecoder},
     hex,
@@ -11,12 +12,14 @@ use std::ops::Deref;
 use thiserror::Error;
 
 use crate::{
-    ChainConfig, ChainError, ChainManager, Proof, ProofData, Wallet, WalletError,
+    ChainConfig, ChainError, ChainManager, Proof, ProofData, SettlementProof, SettlementProofData,
+    Wallet, WalletError,
     chain::AlloyProvider,
     contracts::{
-        ContractConfig, DataAnchorToken::DataAnchorTokenInstance, FileResponse as File,
-        IDataRegistry::IDataRegistryInstance, IVerifiedComputing::IVerifiedComputingInstance, Job,
-        NodeInfo, Permission,
+        Account, ContractConfig, DataAnchorToken::DataAnchorTokenInstance, FileResponse as File,
+        IAIProcess::IAIProcessInstance, IDataRegistry::IDataRegistryInstance,
+        ISettlement::ISettlementInstance, IVerifiedComputing::IVerifiedComputingInstance, Job,
+        NodeInfo, Permission, User,
     },
 };
 
@@ -44,6 +47,14 @@ impl Client {
     pub fn new_default() -> Result<Self, ClientError> {
         Ok(Self {
             manager: ChainManager::new_default()?,
+            config: ContractConfig::default(),
+        })
+    }
+
+    /// New the LazAI client for the local devnet.
+    pub fn new_devnet() -> Result<Self, ClientError> {
+        Ok(Self {
+            manager: ChainManager::new(ChainConfig::local(), LocalEthWallet::from_env()?)?,
             config: ContractConfig::default(),
         })
     }
@@ -79,14 +90,13 @@ impl Client {
         &self,
         file_id: U256,
         permission: Permission,
-    ) -> Result<(), ClientError> {
+    ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.data_registry_contract();
         self.send_transaction(
             contract.addPermissionForFile(file_id, permission.account, permission.key),
             None,
         )
-        .await?;
-        Ok(())
+        .await
     }
 
     /// Get the file id by the url.
@@ -183,7 +193,7 @@ impl Client {
         address: Address,
         url: impl AsRef<str>,
         public_key: impl AsRef<str>,
-    ) -> Result<(), ClientError> {
+    ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.verified_computing_contract();
         self.send_transaction(
             contract.addNode(
@@ -193,17 +203,13 @@ impl Client {
             ),
             None,
         )
-        .await?;
-
-        Ok(())
+        .await
     }
 
-    pub async fn remove_node(&self, address: Address) -> Result<(), ClientError> {
+    pub async fn remove_node(&self, address: Address) -> Result<TransactionReceipt, ClientError> {
         let contract = self.verified_computing_contract();
         self.send_transaction(contract.removeNode(address), None)
-            .await?;
-
-        Ok(())
+            .await
     }
 
     pub async fn get_node(&self, address: Address) -> Result<Option<NodeInfo>, ClientError> {
@@ -243,12 +249,10 @@ impl Client {
         Ok(list)
     }
 
-    pub async fn update_node_fee(&self, fee: U256) -> Result<(), ClientError> {
+    pub async fn update_node_fee(&self, fee: U256) -> Result<TransactionReceipt, ClientError> {
         let contract = self.verified_computing_contract();
         self.send_transaction(contract.updateNodeFee(fee), None)
-            .await?;
-
-        Ok(())
+            .await
     }
 
     pub async fn node_fee(&self) -> Result<U256, ClientError> {
@@ -269,15 +273,21 @@ impl Client {
 
     /// Request a job to compute the proof with the given file id and value.
     /// Note that this function is a payable function, so you need to provide a value.
-    pub async fn request_proof(&self, file_id: U256, value: U256) -> Result<(), ClientError> {
+    pub async fn request_proof(
+        &self,
+        file_id: U256,
+        value: U256,
+    ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.verified_computing_contract();
         self.send_transaction(contract.requestProof(file_id), Some(value))
-            .await?;
-
-        Ok(())
+            .await
     }
 
-    pub async fn add_proof(&self, file_id: U256, data: ProofData) -> Result<(), ClientError> {
+    pub async fn add_proof(
+        &self,
+        file_id: U256,
+        data: ProofData,
+    ) -> Result<TransactionReceipt, ClientError> {
         let packed_data = keccak256(data.abi_encode());
         let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
         let proof = Proof {
@@ -288,17 +298,13 @@ impl Client {
         };
         let contract = self.data_registry_contract();
         self.send_transaction(contract.addProof(file_id, proof), None)
-            .await?;
-
-        Ok(())
+            .await
     }
 
-    pub async fn complete_job(&self, job_id: U256) -> Result<(), ClientError> {
+    pub async fn complete_job(&self, job_id: U256) -> Result<TransactionReceipt, ClientError> {
         let contract = self.verified_computing_contract();
         self.send_transaction(contract.completeJob(job_id), None)
-            .await?;
-
-        Ok(())
+            .await
     }
 
     pub async fn get_job(&self, job_id: U256) -> Result<Job, ClientError> {
@@ -337,21 +343,18 @@ impl Client {
         &self,
         file_id: U256,
         proof_index: Option<U256>,
-    ) -> Result<(), ClientError> {
+    ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.data_registry_contract();
         // Get the first proof index if not provided.
         let proof_index = proof_index.unwrap_or(U256::from(1));
         self.send_transaction(contract.requestReward(file_id, proof_index), None)
-            .await?;
-        Ok(())
+            .await
     }
 
     /// Claim any rewards for node validators
-    pub async fn claim(&self) -> Result<(), ClientError> {
+    pub async fn claim(&self) -> Result<TransactionReceipt, ClientError> {
         let contract = self.verified_computing_contract();
-        self.send_transaction(contract.claim(), None).await?;
-
-        Ok(())
+        self.send_transaction(contract.claim(), None).await
     }
 
     /// Mint a new Data Anchor Token (DAT) with the specified parameters.
@@ -361,11 +364,10 @@ impl Client {
         amount: U256,
         token_uri: String,
         verified: bool,
-    ) -> Result<(), ClientError> {
+    ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.data_anchor_token_contract();
         self.send_transaction(contract.mint(to, amount, token_uri, verified), None)
-            .await?;
-        Ok(())
+            .await
     }
 
     /// Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID.
@@ -400,6 +402,284 @@ impl Client {
             .await
             .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
         Ok(uri)
+    }
+
+    /// Get the user for the settlement.
+    pub async fn get_user(&self, user: Address) -> Result<User, ClientError> {
+        let contract = self.settlement_contract();
+        let builder = self
+            .call_builder(contract.getUser(user), self.config.settlement_address, None)
+            .await?;
+        let user = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(user)
+    }
+
+    /// Get all users registered for the settlement.
+    pub async fn get_all_users(&self) -> Result<Vec<User>, ClientError> {
+        let contract = self.settlement_contract();
+        let builder = self
+            .call_builder(contract.getAllUsers(), self.config.settlement_address, None)
+            .await?;
+        let users = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(users)
+    }
+
+    pub async fn add_user(&self, amount: U256) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.addUser(), Some(amount))
+            .await
+    }
+
+    pub async fn delete_user(&self) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.deleteUser(), None).await
+    }
+
+    pub async fn deposit(&self, amount: U256) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.deposit(), Some(amount))
+            .await
+    }
+
+    pub async fn withdraw(&self, amount: U256) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.withdraw(amount), None).await
+    }
+
+    pub async fn deposit_training(
+        &self,
+        node: Address,
+        amount: U256,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.depositTraining(node, amount), None)
+            .await
+    }
+
+    pub async fn deposit_inference(
+        &self,
+        node: Address,
+        amount: U256,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.depositInference(node, amount), None)
+            .await
+    }
+
+    pub async fn retrieve_training(
+        &self,
+        nodes: Vec<Address>,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.retrieveTraining(nodes), None)
+            .await
+    }
+
+    pub async fn retrieve_inference(
+        &self,
+        nodes: Vec<Address>,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.retrieveInference(nodes), None)
+            .await
+    }
+
+    pub async fn add_inference_node(
+        &self,
+        address: Address,
+        url: impl AsRef<str>,
+        public_key: impl AsRef<str>,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.inference_contract();
+        self.send_transaction(
+            contract.addNode(
+                address,
+                url.as_ref().to_string(),
+                public_key.as_ref().to_string(),
+            ),
+            None,
+        )
+        .await
+    }
+
+    pub async fn remove_inference_node(
+        &self,
+        address: Address,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.inference_contract();
+        self.send_transaction(contract.removeNode(address), None)
+            .await
+    }
+
+    pub async fn get_inference_node(
+        &self,
+        address: Address,
+    ) -> Result<Option<NodeInfo>, ClientError> {
+        let contract = self.inference_contract();
+        let builder = self
+            .call_builder(
+                contract.getNode(address),
+                self.config.inference_address,
+                None,
+            )
+            .await?;
+        let info = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        if info.url.is_empty() {
+            Ok(None)
+        } else {
+            Ok(Some(info))
+        }
+    }
+
+    /// Get the inference node address list
+    pub async fn inference_node_list(&self) -> Result<Vec<Address>, ClientError> {
+        let contract = self.inference_contract();
+        let builder = self
+            .call_builder(contract.nodeList(), self.config.inference_address, None)
+            .await?;
+        let list = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(list)
+    }
+
+    pub async fn get_inference_account(&self, node: Address) -> Result<Account, ClientError> {
+        let contract = self.inference_contract();
+        let builder = self
+            .call_builder(
+                contract.getAccount(self.wallet.address, node),
+                self.config.inference_address,
+                None,
+            )
+            .await?;
+        let list = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(list)
+    }
+
+    pub async fn add_training_node(
+        &self,
+        address: Address,
+        url: impl AsRef<str>,
+        public_key: impl AsRef<str>,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.training_contract();
+        self.send_transaction(
+            contract.addNode(
+                address,
+                url.as_ref().to_string(),
+                public_key.as_ref().to_string(),
+            ),
+            None,
+        )
+        .await
+    }
+
+    pub async fn remove_training_node(
+        &self,
+        address: Address,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.training_contract();
+        self.send_transaction(contract.removeNode(address), None)
+            .await
+    }
+
+    pub async fn get_training_node(
+        &self,
+        address: Address,
+    ) -> Result<Option<NodeInfo>, ClientError> {
+        let contract = self.training_contract();
+        let builder = self
+            .call_builder(
+                contract.getNode(address),
+                self.config.training_address,
+                None,
+            )
+            .await?;
+        let info = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        if info.url.is_empty() {
+            Ok(None)
+        } else {
+            Ok(Some(info))
+        }
+    }
+
+    /// Get the training node address list
+    pub async fn training_node_list(&self) -> Result<Vec<Address>, ClientError> {
+        let contract = self.training_contract();
+        let builder = self
+            .call_builder(contract.nodeList(), self.config.training_address, None)
+            .await?;
+        let list = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(list)
+    }
+
+    pub async fn inference_settlement_fees(
+        &self,
+        user: Address,
+        cost: U256,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.inference_contract();
+        let data = SettlementProofData {
+            id: U256::ZERO,
+            nonce: U256::ZERO,
+            user,
+            cost,
+        };
+        let packed_data = keccak256(data.abi_encode());
+        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
+        let proof = SettlementProof {
+            signature: hex::decode(signature)
+                .map_err(|err| ClientError::SigningError(err.to_string()))?
+                .into(),
+            data,
+        };
+
+        self.send_transaction(contract.settlementFees(proof), None)
+            .await
+    }
+
+    pub async fn training_settlement_fees(
+        &self,
+        user: Address,
+        cost: U256,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.training_contract();
+        let data = SettlementProofData {
+            id: U256::ZERO,
+            nonce: U256::ZERO,
+            user,
+            cost,
+        };
+        let packed_data = keccak256(data.abi_encode());
+        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
+        let proof = SettlementProof {
+            signature: hex::decode(signature)
+                .map_err(|err| ClientError::SigningError(err.to_string()))?
+                .into(),
+            data,
+        };
+
+        self.send_transaction(contract.settlementFees(proof), None)
+            .await
     }
 
     #[inline]
@@ -470,6 +750,21 @@ impl Client {
             self.config.data_anchor_token_address,
             &self.manager.provider,
         )
+    }
+
+    #[inline]
+    fn inference_contract(&self) -> IAIProcessInstance<&AlloyProvider> {
+        IAIProcessInstance::new(self.config.inference_address, &self.manager.provider)
+    }
+
+    #[inline]
+    fn training_contract(&self) -> IAIProcessInstance<&AlloyProvider> {
+        IAIProcessInstance::new(self.config.training_address, &self.manager.provider)
+    }
+
+    #[inline]
+    fn settlement_contract(&self) -> ISettlementInstance<&AlloyProvider> {
+        ISettlementInstance::new(self.config.settlement_address, &self.manager.provider)
     }
 }
 
