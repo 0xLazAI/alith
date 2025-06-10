@@ -6,7 +6,7 @@ from .chain import (
     TESTNET_NETWORK,
 )
 from .client import Client
-from .proof import ProofData
+from .proof import ProofData, SettlementProofData
 from .node import ProofRequest
 
 __all__ = [
@@ -14,6 +14,7 @@ __all__ = [
     "ChainManager",
     "Client",
     "ProofData",
+    "SettlementProofData",
     "ProofRequest",
     "TESTNET_CHAINID",
     "TESTNET_ENDPOINT",
