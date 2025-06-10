@@ -1,6 +1,11 @@
 import { ChainManager, ChainConfig } from './chain'
-import { ProofData } from './proof'
-import { ContractConfig, DATA_REGISTRY_CONTRACT_ABI, VERIFIED_COMPUTING_CONTRACT_ABI } from './contracts'
+import { ProofData, SettlementProofData } from './proof'
+import {
+  AI_PROCESS_CONTRACT_ABI,
+  ContractConfig,
+  DATA_REGISTRY_CONTRACT_ABI,
+  VERIFIED_COMPUTING_CONTRACT_ABI,
+} from './contracts'
 
 import Web3 from 'web3'
 
@@ -28,6 +33,18 @@ export class Client extends ChainManager {
     return new this.web3.eth.Contract(VERIFIED_COMPUTING_CONTRACT_ABI, this.contractConfig.dataAnchorTokenAddress)
   }
 
+  inferenceContract() {
+    return new this.web3.eth.Contract(AI_PROCESS_CONTRACT_ABI, this.contractConfig.inferenceAddress)
+  }
+
+  trainingContract() {
+    return new this.web3.eth.Contract(AI_PROCESS_CONTRACT_ABI, this.contractConfig.trainingAddress)
+  }
+
+  settlementContract() {
+    return new this.web3.eth.Contract(AI_PROCESS_CONTRACT_ABI, this.contractConfig.settlementAddress)
+  }
+
   getWallet() {
     return this.account
   }
@@ -42,12 +59,12 @@ export class Client extends ChainManager {
     return this.dataRegistryContract().methods.getFileIdByUrl(url).call()
   }
 
-  async addNode(address: string, url: string, publicKey: string): Promise<void> {
+  async addNode(address: string, url: string, publicKey: string) {
     const method = this.verifiedComputingContract().methods.addNode(address, url, publicKey)
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
+    return await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
-  async addProof(fileId: BigInt, data: ProofData): Promise<void> {
+  async addProof(fileId: BigInt, data: ProofData) {
     const packedData = data.abiEncode()
     const messageHash = Web3.utils.keccak256(packedData)
     const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
@@ -62,7 +79,7 @@ export class Client extends ChainManager {
     }
 
     const method = this.dataRegistryContract().methods.addProof(fileId, proof)
-    await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
+    return await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
   }
 
   async addFileWithPermissions(
@@ -75,9 +92,9 @@ export class Client extends ChainManager {
     return this.getFileIdByUrl(url)
   }
 
-  async addPermissionForFile(fileId: BigInt, account: string, key: string): Promise<void> {
+  async addPermissionForFile(fileId: BigInt, account: string, key: string) {
     const method = this.dataRegistryContract().methods.addPermissionForFile(fileId, account, key)
-    await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
+    return await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
   }
 
   async getFile(fileId: BigInt): Promise<{
@@ -108,14 +125,14 @@ export class Client extends ChainManager {
     return this.dataRegistryContract().methods.filesCount().call()
   }
 
-  async requestReward(fileId: BigInt, proofIndex: BigInt = BigInt(1)): Promise<void> {
+  async requestReward(fileId: BigInt, proofIndex: BigInt = BigInt(1)) {
     const method = this.dataRegistryContract().methods.requestReward(fileId, proofIndex)
-    await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
+    return await this.sendTransaction(method, this.contractConfig.dataRegistryAddress)
   }
 
-  async removeNode(address: string): Promise<void> {
+  async removeNode(address: string) {
     const method = this.verifiedComputingContract().methods.removeNode(address)
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
+    return await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
   async nodeList(): Promise<string[]> {
@@ -133,23 +150,23 @@ export class Client extends ChainManager {
     return this.verifiedComputingContract().methods.getNode(address).call()
   }
 
-  async updateNodeFee(fee: BigInt): Promise<void> {
+  async updateNodeFee(fee: BigInt) {
     const method = this.verifiedComputingContract().methods.updateNodeFee(fee)
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
+    return await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
   async nodeFee(): Promise<BigInt> {
     return this.verifiedComputingContract().methods.nodeFee().call()
   }
 
-  async requestProof(fileId: BigInt, value: BigInt = BigInt(0)): Promise<void> {
+  async requestProof(fileId: BigInt, value: BigInt = BigInt(0)) {
     const method = this.verifiedComputingContract().methods.requestProof(fileId)
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value.toString())
+    return await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value.toString())
   }
 
-  async completeJob(jobId: BigInt): Promise<void> {
+  async completeJob(jobId: BigInt) {
     const method = this.verifiedComputingContract().methods.completeJob(jobId)
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
+    return await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
   async getJob(jobId: BigInt): Promise<{
@@ -214,17 +231,17 @@ export class Client extends ChainManager {
     await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress, value.toString())
   }
 
-  async claim(): Promise<void> {
+  async claim() {
     const method = this.verifiedComputingContract().methods.claim()
-    await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
+    return await this.sendTransaction(method, this.contractConfig.verifiedComputingAddress)
   }
 
   /**
    * Mint a new Data Anchor Token (DAT) with the specified parameters.
    */
-  async mintDAT(): Promise<void> {
+  async mintDAT() {
     const method = this.dataAnchorTokenContract().methods.mint
-    await this.sendTransaction(method, this.contractConfig.dataAnchorTokenAddress)
+    return await this.sendTransaction(method, this.contractConfig.dataAnchorTokenAddress)
   }
 
   /**
@@ -239,5 +256,189 @@ export class Client extends ChainManager {
    */
   async dataUri(tokenId: BigInt): Promise<string> {
     return this.dataAnchorTokenContract().methods.uri(tokenId).call()
+  }
+
+  async getUser(address: string): Promise<{
+    addr: string
+    availableBalance: BigInt
+    totalBalance: BigInt
+    inferenceNodes: string[]
+    trainingNodes: string[]
+  }> {
+    return this.settlementContract().methods.getUser(address).call()
+  }
+
+  async getAllUsers(): Promise<
+    {
+      addr: string
+      availableBalance: BigInt
+      totalBalance: BigInt
+      inferenceNodes: string[]
+      trainingNodes: string[]
+    }[]
+  > {
+    return this.settlementContract().methods.getAllUser().call()
+  }
+
+  async addUser(amount: number | string) {
+    const method = this.settlementContract().methods.addUser()
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress, amount)
+  }
+
+  async deleteUser() {
+    const method = this.settlementContract().methods.deleteUser()
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress)
+  }
+
+  async deposit(amount: number | string) {
+    const method = this.settlementContract().methods.deposit()
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress, amount)
+  }
+
+  async withdraw(amount: number | string) {
+    const method = this.settlementContract().methods.withdraw(amount)
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress)
+  }
+
+  async depositTraining(node: string, amount: number) {
+    const method = this.settlementContract().methods.depositTraining(node, amount)
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress)
+  }
+
+  async depositInference(node: string, amount: number) {
+    const method = this.settlementContract().methods.depositInference(node, amount)
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress)
+  }
+
+  async retrieveTraining(nodes: string[]) {
+    const method = this.settlementContract().methods.retrieveTraining(nodes)
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress)
+  }
+
+  async retrieveInference(nodes: string[]) {
+    const method = this.settlementContract().methods.retrieveInference(nodes)
+    return await this.sendTransaction(method, this.contractConfig.settlementAddress)
+  }
+
+  async addInferenceNode(address: string, url: string, public_key: string) {
+    const method = this.inferenceContract().methods.addNode(address, url, public_key)
+    return await this.sendTransaction(method, this.contractConfig.inferenceAddress)
+  }
+
+  async removeInferenceNode(address: string) {
+    const method = this.inferenceContract().methods.removeNode(address)
+    return await this.sendTransaction(method, this.contractConfig.inferenceAddress)
+  }
+
+  async getInferenceNode(address: string): Promise<{
+    nodeAddress: string
+    url: string
+    status: number
+    amount: string
+    jobsCount: BigInt
+    publicKey: string
+  }> {
+    return this.inferenceContract().methods.getNode(address).call()
+  }
+
+  async inferenceNodeList(): Promise<string[]> {
+    return this.inferenceContract().methods.nodeList().call()
+  }
+
+  async getInferenceAccount(node: string): Promise<{
+    user: string
+    node: string
+    nonce: BigInt
+    balance: BigInt
+    pendingRefund: BigInt
+    refunds: {
+      index: BigInt
+      amount: BigInt
+      createdAt: BigInt
+      processed: boolean
+    }[]
+  }> {
+    return this.inferenceContract().methods.getAccount(this.getWallet().address, node).call()
+  }
+
+  async inferenceSettlementFees(user: string, cost: number) {
+    const data = new SettlementProofData(0, user, cost, 0)
+    const packedData = data.abiEncode()
+    const messageHash = Web3.utils.keccak256(packedData)
+    const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
+
+    const proof = {
+      signature: signature.signature,
+      data: {
+        id: data.id,
+        user: data.user,
+        cost: data.cost,
+        nonce: data.nonce,
+      },
+    }
+
+    const method = this.inferenceContract().methods.settlementFees(proof)
+    return await this.sendTransaction(method, this.contractConfig.inferenceAddress)
+  }
+
+  async addTrainingNode(address: string, url: string, public_key: string) {
+    const method = this.trainingContract().methods.addNode(address, url, public_key)
+    return await this.sendTransaction(method, this.contractConfig.trainingAddress)
+  }
+
+  async removeTrainingNode(address: string) {
+    const method = this.trainingContract().methods.removeNode(address)
+    return await this.sendTransaction(method, this.contractConfig.trainingAddress)
+  }
+
+  async getTrainingNode(address: string): Promise<{
+    nodeAddress: string
+    url: string
+    status: number
+    amount: string
+    jobsCount: BigInt
+    publicKey: string
+  }> {
+    return this.trainingContract().methods.getNode(address).call()
+  }
+
+  async trainingNodeList(): Promise<string[]> {
+    return this.trainingContract().methods.nodeList().call()
+  }
+
+  async getTrainingAccount(node: string): Promise<{
+    user: string
+    node: string
+    nonce: BigInt
+    balance: BigInt
+    pendingRefund: BigInt
+    refunds: {
+      index: BigInt
+      amount: BigInt
+      createdAt: BigInt
+      processed: boolean
+    }[]
+  }> {
+    return this.trainingContract().methods.getAccount(this.getWallet().address, node).call()
+  }
+
+  async trainingSettlementFees(user: string, cost: number) {
+    const data = new SettlementProofData(0, user, cost, 0)
+    const packedData = data.abiEncode()
+    const messageHash = Web3.utils.keccak256(packedData)
+    const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
+
+    const proof = {
+      signature: signature.signature,
+      data: {
+        id: data.id,
+        user: data.user,
+        cost: data.cost,
+        nonce: data.nonce,
+      },
+    }
+
+    const method = this.trainingContract().methods.settlementFees(proof)
+    return await this.sendTransaction(method, this.contractConfig.trainingAddress)
   }
 }
