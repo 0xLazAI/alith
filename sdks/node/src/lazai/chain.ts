@@ -1,5 +1,4 @@
-import Web3 from 'web3'
-import { Web3Account } from 'web3-eth-accounts'
+import { Web3, Web3Account } from 'web3'
 import { Mutex } from 'async-mutex'
 
 export const DEVNET_NETWORK = 'LazAI Devnet'
