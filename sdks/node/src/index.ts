@@ -4,7 +4,7 @@ import { chunkText } from './internal'
 import { Embeddings, RemoteModelEmbeddings } from './embeddings'
 import { Memory, Message, MessageBuilder, WindowBufferMemory } from './memory'
 import { Store, QdrantStore, QdrantClient, QdrantClientParams } from './store'
-import { Extractor, parseArgs } from './extrator'
+import { Extractor, parseArgs } from './extractor'
 
 export {
   Agent,
