@@ -162,7 +162,7 @@ class MilvusStore(Store):
         if not MILVUS_AVAILABLE:
             raise ImportError(
                 "pymilvus is not installed. Please install it with: "
-                "python3 -m pip install pymilvus"
+                "python3 -m pip install pymilvus pymilvus[model]"
             )
         self.uri = uri
         self.dimension = dimension
