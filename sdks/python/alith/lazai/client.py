@@ -264,8 +264,10 @@ class Client(ChainManager):
         self,
         user: str,
         cost: int,
+        id: str,
+        nonce: int,
     ):
-        data = SettlementProofData(id=0, nonce=0, user=user, cost=cost)
+        data = SettlementProofData(id=id, nonce=nonce, user=user, cost=cost)
         packed_data = data.abi_encode()
         message_hash = Web3.keccak(packed_data)
         eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)
@@ -311,8 +313,10 @@ class Client(ChainManager):
         self,
         user: str,
         cost: int,
+        id: str,
+        nonce: int,
     ):
-        data = SettlementProofData(id=0, nonce=0, user=user, cost=cost)
+        data = SettlementProofData(id=id, nonce=nonce, user=user, cost=cost)
         packed_data = data.abi_encode()
         message_hash = Web3.keccak(packed_data)
         eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)

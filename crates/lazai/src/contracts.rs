@@ -168,7 +168,7 @@ sol! {
     }
 
     struct SettlementProofData {
-        uint256 id;
+        string id;
         address user;
         uint256 cost;
         uint256 nonce;

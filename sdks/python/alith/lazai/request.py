@@ -1,5 +1,4 @@
 from fastapi import Request
-from .client import Client
 from web3 import Web3
 from eth_account.messages import encode_defunct
 import json
@@ -12,9 +11,7 @@ TRAINING_TYPE = 1
 INFERENCE_TYPE = 2
 
 
-def validate_request(
-    request: Request, type: int = TRAINING_TYPE, client: Client | None = None
-):
+def validate_request(request: Request, type: int = TRAINING_TYPE, client=None):
     """Validate the request user and signature in the request headers"""
     user = request.headers[USER_HEADER]
     nonce = request.headers[NONCE_HEADER]
@@ -27,9 +24,11 @@ def validate_account_and_signature(
     nonce: int,
     signature: str,
     type: int = TRAINING_TYPE,
-    client: Client | None = None,
+    client=None,
 ):
     """Validate the request user and signature with the user address, nonce and signature"""
+    from .client import Client
+
     client = client or Client()
     account = (
         client.get_training_account(user, client.wallet.address)

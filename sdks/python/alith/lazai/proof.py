@@ -14,13 +14,13 @@ class ProofData(BaseModel):
 
 
 class SettlementProofData(BaseModel):
-    id: int
+    id: str
     user: str
     cost: int
     nonce: int
 
     def abi_encode(self) -> bytes:
         return encode(
-            ["(uint256,address,uint256,uint256)"],
+            ["(string,address,uint256,uint256)"],
             [(self.id, self.user, self.cost, self.nonce)],
         )

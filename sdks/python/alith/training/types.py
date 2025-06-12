@@ -117,3 +117,4 @@ class TrainingTask(BaseModel):
 
 class Config(SettingsModel):
     max_training_task_queue_size: int = 2
+    price_per_token: int = 100
