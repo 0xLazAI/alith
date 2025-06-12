@@ -9,10 +9,13 @@ from .contracts import (
 from .chain import ChainConfig, ChainManager
 from .proof import ProofData, SettlementProofData
 from os import getenv
-from typing import List
+from typing import List, Dict
 from web3 import Web3
 from eth_account import Account
 from hexbytes import HexBytes
+from .settlement import SettlementRequest
+import time
+import random
 
 
 class Client(ChainManager):
@@ -332,4 +335,23 @@ class Client(ChainManager):
 
         return self.send_transaction(
             self.training_contract.functions.settlementFees(proof)
+        )
+
+    def get_request_headers(
+        self, node: str, nonce: int | None = None
+    ) -> Dict[str, str]:
+        """Get the billing-related headers for the request for the AI node"""
+
+        def _secure_nonce():
+            current_time = int(time.time() * 1000)
+            random_part = random.randint(0, 99999)
+            nonce = current_time * 100000 + random_part
+            return nonce
+
+        return (
+            SettlementRequest(
+                nonce=nonce or _secure_nonce(), user=self.wallet.address, node=node
+            )
+            .generate_signature(self.wallet.key)
+            .to_request_headers()
         )

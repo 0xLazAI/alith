@@ -8,6 +8,7 @@ from .chain import (
 from .client import Client
 from .proof import ProofData, SettlementProofData
 from .node import ProofRequest
+from .settlement import SettlementRequest, SettlementSignature
 
 __all__ = [
     "ChainConfig",
@@ -19,4 +20,6 @@ __all__ = [
     "TESTNET_CHAINID",
     "TESTNET_ENDPOINT",
     "TESTNET_NETWORK",
+    "SettlementRequest",
+    "SettlementSignature",
 ]
