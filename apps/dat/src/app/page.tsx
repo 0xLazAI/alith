@@ -18,7 +18,7 @@ import {
 import { faEthereum } from '@fortawesome/free-brands-svg-icons'
 import { BrowserProvider, ethers, EventLog } from 'ethers'
 import { DATA_REGISTRY_CONTRACT_ABI, VERIFIED_COMPUTING_CONTRACT_ABI, ContractConfig } from 'alith/lazai'
-import { encrypt } from 'alith/data/crypto'
+import { encrypt } from 'alith/data'
 import NodeRSA from 'node-rsa'
 
 const ENCRYPTION_SEED = 'Sign to retrieve your encryption key'

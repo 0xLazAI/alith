@@ -1,6 +1,6 @@
 {
   "name": "alith",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0xLazAI/alith.git"
@@ -10,29 +10,29 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "dist/index.js",
-      "require": "dist/index.js",
-      "types": "dist/index.d.ts"
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
     "./data": {
-      "import": "dist/data/index.js",
-      "require": "dist/data/index.js",
-      "types": "dist/data/index.d.ts"
+      "import": "./dist/data/index.js",
+      "require": "./dist/data/index.js",
+      "types": "./dist/data/index.d.ts"
     },
     "./data/storage": {
-      "import": "dist/data/storage/index.js",
-      "require": "dist/data/storage/index.js",
-      "types": "dist/data/storage/index.d.ts"
+      "import": "./dist/data/storage/index.js",
+      "require": "./dist/data/storage/index.js",
+      "types": "./dist/data/storage/index.d.ts"
     },
     "./lazai": {
-      "import": "dist/lazai/index.js",
-      "require": "dist/lazai/index.js",
-      "types": "dist/lazai/index.d.ts"
+      "import": "./dist/lazai/index.js",
+      "require": "./dist/lazai/index.js",
+      "types": "./dist/lazai/index.d.ts"
     },
     "./lazai/node": {
-      "import": "dist/lazai/node/index.js",
-      "require": "dist/lazai/node/index.js",
-      "types": "dist/lazai/node/index.d.ts"
+      "import": "./dist/lazai/node/index.js",
+      "require": "./dist/lazai/node/index.js",
+      "types": "./dist/lazai/node/index.d.ts"
     }
   },
   "napi": {
