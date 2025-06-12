@@ -1,5 +1,7 @@
+use std::collections::HashMap;
 use std::ops::Deref;
 use std::ops::DerefMut;
+use std::str::FromStr;
 use std::sync::Arc;
 
 use crate::chat::CallFunction;
@@ -17,11 +19,29 @@ use anyhow::Result;
 
 pub use alith_client as client;
 pub use alith_client::LLMClient;
-pub use alith_client::basic_completion::BasicCompletion;
+pub use alith_client::completion::{BasicCompletion, ChatCompletion};
 pub use alith_client::embeddings::Embeddings;
 pub use alith_client::prelude::*;
 pub use alith_interface::requests::completion::{CompletionRequest, CompletionResponse};
 pub use alith_models::api_model::ApiLLMModel;
+use reqwest::header::HeaderName;
+
+macro_rules! build_llm_client {
+    ($model:expr, $prefix:expr, $builder_fn:path, $model_fn:path, $config:ident) => {{
+        if $model.starts_with($prefix) {
+            let mut builder = $builder_fn();
+            builder.model = $model_fn($model);
+            for (k, v) in $config.extra_headers.clone() {
+                builder
+                    .config
+                    .extra_headers
+                    .insert(HeaderName::from_str(k.as_str())?, v.parse()?);
+            }
+            let client = builder.init()?;
+            return Ok(Client { client });
+        }
+    }};
+}
 
 pub struct Client {
     pub(crate) client: LLMClient,
@@ -50,37 +70,65 @@ impl Clone for Client {
 }
 
 impl Client {
-    pub fn from_model_name(model: &str) -> Result<Client> {
-        if model.starts_with("gpt") {
-            let mut builder = LLMClient::openai();
-            builder.model = ApiLLMModel::openai_model_from_model_id(model);
-            let client = builder.init()?;
-            Ok(Client { client })
-        } else if model.starts_with("claude") {
-            let mut builder = LLMClient::anthropic();
-            builder.model = ApiLLMModel::anthropic_model_from_model_id(model);
-            let client = builder.init()?;
-            Ok(Client { client })
-        } else if model.starts_with("llama") || model.starts_with("sonar") {
-            let mut builder = LLMClient::perplexity();
-            builder.model = ApiLLMModel::perplexity_model_from_model_id(model);
-            let client = builder.init()?;
-            Ok(Client { client })
-        } else {
-            Err(anyhow::anyhow!("unknown model {model}"))
-        }
+    pub fn from_model_name(model: &str, config: ClientConfig) -> Result<Client> {
+        build_llm_client!(
+            model,
+            "gpt",
+            LLMClient::openai,
+            ApiLLMModel::openai_model_from_model_id,
+            config
+        );
+        build_llm_client!(
+            model,
+            "claude",
+            LLMClient::anthropic,
+            ApiLLMModel::anthropic_model_from_model_id,
+            config
+        );
+        build_llm_client!(
+            model,
+            "llama",
+            LLMClient::perplexity,
+            ApiLLMModel::perplexity_model_from_model_id,
+            config
+        );
+        build_llm_client!(
+            model,
+            "sonar",
+            LLMClient::perplexity,
+            ApiLLMModel::perplexity_model_from_model_id,
+            config
+        );
+
+        Err(anyhow::anyhow!("unknown model {model}"))
     }
 
-    pub fn openai_compatible_client(api_key: &str, base_url: &str, model: &str) -> Result<Client> {
+    pub fn openai_compatible_client(
+        api_key: &str,
+        base_url: &str,
+        model: &str,
+        config: ClientConfig,
+    ) -> Result<Client> {
         let mut builder = LLMClient::openai();
         builder.model = ApiLLMModel::gpt_4();
         builder.model.model_base.model_id = model.to_string();
         builder.config.api_config.api_key = Some(api_key.to_string().into());
         builder.config.api_config.host = base_url.to_string();
         builder.config.logging_config.logger_name = "generic".to_string();
+        for (k, v) in config.extra_headers {
+            builder
+                .config
+                .extra_headers
+                .insert(HeaderName::from_str(k.as_str())?, v.parse()?);
+        }
         let client = builder.init()?;
         Ok(Client { client })
     }
+}
+
+#[derive(Debug, Default, bon::Builder)]
+pub struct ClientConfig {
+    pub extra_headers: HashMap<String, String>,
 }
 
 impl ResponseContent for CompletionResponse {
@@ -124,7 +172,7 @@ impl Completion for Client {
 
     async fn completion(&mut self, request: Request) -> Result<Self::Response, CompletionError> {
         // New the complation request
-        let mut completion = self.client.basic_completion();
+        let mut completion = self.client.chat_completion();
         if let Some(temperature) = request.temperature {
             completion.temperature(temperature);
         }

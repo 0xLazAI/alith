@@ -1,6 +1,7 @@
-use alith::{Agent, Chat, LLM, TaskError, Tool};
+use alith::{Agent, Chat, ClientConfig, LLM, TaskError, Tool};
 use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
+use std::collections::HashMap;
 
 mod tool;
 
@@ -16,6 +17,7 @@ pub struct DelegateAgent {
 #[pymethods]
 impl DelegateAgent {
     #[new]
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         name: String,
         model: String,
@@ -23,19 +25,21 @@ impl DelegateAgent {
         base_url: String,
         preamble: String,
         tools: Vec<DelegateTool>,
+        extra_headers: HashMap<String, String>,
         mcp_config_path: String,
     ) -> PyResult<Self> {
         let tools = tools
             .iter()
             .map(|t| Box::new(t.clone()) as Box<dyn Tool>)
             .collect::<Vec<_>>();
+        let config = ClientConfig::builder().extra_headers(extra_headers).build();
         let agent = Agent::new_with_tools(
             name,
             if base_url.is_empty() {
-                LLM::from_model_name(&model)
+                LLM::from_model_name_and_config(&model, config)
                     .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
             } else {
-                LLM::openai_compatible_model(&api_key, &base_url, &model)
+                LLM::openai_compatible_model_with_config(&api_key, &base_url, &model, config)
                     .map_err(|e| PyErr::new::<PyException, _>(e.to_string()))?
             },
             tools,

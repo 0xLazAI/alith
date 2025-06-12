@@ -1,5 +1,5 @@
 pub mod backend_builders;
-pub mod basic_completion;
+pub mod completion;
 pub mod components;
 pub mod embeddings;
 pub mod prelude;
@@ -20,7 +20,7 @@ pub use alith_interface::llms::LLMBackend;
 use backend_builders::anthropic::AnthropicBackendBuilder;
 use backend_builders::openai::OpenAIBackendBuilder;
 use backend_builders::perplexity::PerplexityBackendBuilder;
-use basic_completion::BasicCompletion;
+use completion::{BasicCompletion, ChatCompletion};
 use embeddings::Embeddings;
 use std::sync::Arc;
 use workflows::basic_primitive::BasicPrimitiveWorkflowBuilder;
@@ -62,8 +62,14 @@ impl LLMClient {
     }
 
     #[inline]
+    #[deprecated = "Use LLMClient::chat_completion instead"]
     pub fn basic_completion(&self) -> BasicCompletion {
         BasicCompletion::new(self.backend.clone())
+    }
+
+    #[inline]
+    pub fn chat_completion(&self) -> ChatCompletion {
+        ChatCompletion::new(self.backend.clone())
     }
 
     #[inline]

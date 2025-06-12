@@ -75,6 +75,7 @@ pub struct GenericApiConfig {
     pub api_config: ApiConfig,
     pub logging_config: LoggingConfig,
     pub completion_path: String,
+    pub extra_headers: HeaderMap,
 }
 
 impl Default for GenericApiConfig {
@@ -91,6 +92,7 @@ impl Default for GenericApiConfig {
                 ..Default::default()
             },
             completion_path: "/chat/completions".to_string(),
+            extra_headers: Default::default(),
         }
     }
 }
@@ -117,6 +119,10 @@ impl ApiConfigTrait for GenericApiConfig {
             } else {
                 crate::error!("Failed to create header value from authorization value");
             }
+        }
+
+        for (k, v) in &self.extra_headers {
+            headers.insert(k.clone(), v.clone());
         }
 
         headers

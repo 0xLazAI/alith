@@ -56,6 +56,7 @@ pub struct AnthropicConfig {
     pub logging_config: LoggingConfig,
     pub anthropic_version: String,
     pub anthropic_beta: Option<String>,
+    pub extra_headers: HeaderMap,
 }
 
 impl Default for AnthropicConfig {
@@ -73,6 +74,7 @@ impl Default for AnthropicConfig {
             },
             anthropic_version: "2023-06-01".to_string(),
             anthropic_beta: None,
+            extra_headers: Default::default(),
         }
     }
 }
@@ -89,6 +91,11 @@ impl AnthropicConfig {
 
     pub fn with_anthropic_beta<S: Into<String>>(mut self, beta: S) -> Self {
         self.anthropic_beta = Some(beta.into());
+        self
+    }
+
+    pub fn with_extra_headers(mut self, headers: HeaderMap) -> Self {
+        self.extra_headers = headers;
         self
     }
 }
@@ -113,6 +120,10 @@ impl ApiConfigTrait for AnthropicConfig {
                 reqwest::header::HeaderName::from_static("x-api-key"),
                 reqwest::header::HeaderValue::from_str(api_key.expose_secret()).unwrap(),
             );
+        }
+
+        for (k, v) in &self.extra_headers {
+            headers.insert(k.clone(), v.clone());
         }
 
         headers

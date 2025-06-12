@@ -81,6 +81,7 @@ pub struct OpenAIConfig {
     pub logging_config: LoggingConfig,
     pub org_id: String,
     pub project_id: String,
+    pub extra_headers: HeaderMap,
 }
 
 impl Default for OpenAIConfig {
@@ -98,6 +99,7 @@ impl Default for OpenAIConfig {
             },
             org_id: Default::default(),
             project_id: Default::default(),
+            extra_headers: Default::default(),
         }
     }
 }
@@ -146,6 +148,10 @@ impl ApiConfigTrait for OpenAIConfig {
             } else {
                 crate::error!("Failed to create header value from authorization value");
             }
+        }
+
+        for (k, v) in &self.extra_headers {
+            headers.insert(k.clone(), v.clone());
         }
 
         headers

@@ -5,7 +5,7 @@ use alith::{LLM, client::prelude::*};
 async fn main() -> Result<(), anyhow::Error> {
     let model = LLM::from_model_name("gpt-4")?;
     let client = model.client();
-    client.basic_completion().max_tokens(90);
+    client.chat_completion().max_tokens(90);
     // A boolean reason request
     let response = client
         .reason()
