@@ -35,9 +35,7 @@ LazAI leverages OpenPGP encryption to secure privacy data. The encryption workfl
 <Tabs items={['Rust', 'Python', 'Node.js']}>
   <Tabs.Tab>
 
-### Rust
-
-#### Install Alith
+### Install Alith
 
 ```shell
 cargo add alith --git https://github.com/0xLazAI/alith --features "lazai,wallet,crypto,ipfs"
@@ -45,14 +43,14 @@ cargo add alith --git https://github.com/0xLazAI/alith --features "lazai,wallet,
 
 > Note: Enable the `lazai`, `wallet`, `crypto` and `ipfs` features in the `alith` crate to use this example.
 
-#### Set Environment Variables
+### Set Environment Variables
 
 ```shell
 export PRIVATE_KEY=<your wallet private key>
 export IPFS_JWT=<your pinata ipfs jwt>
 ```
 
-#### Privacy Data Contribution and Reward on LazAI
+### Privacy Data Contribution and Reward on LazAI
 
 ```rust
 use alith::data::crypto::{DecodeRsaPublicKey, Pkcs1v15Encrypt, RsaPublicKey, encrypt};
@@ -129,22 +127,20 @@ async fn main() -> Result<(), anyhow::Error> {
   </Tabs.Tab>
   <Tabs.Tab>
 
-### Python
-
-#### Install Alith
+### Install Alith
 
 ```shell
 python3 -m pip install alith -U
 ```
 
-#### Set Environment Variables
+### Set Environment Variables
 
 ```shell
 export PRIVATE_KEY=<your wallet private key>
 export IPFS_JWT=<your pinata ipfs jwt>
 ```
 
-#### Data Contribution and DAT Reward on LazAI
+### Data Contribution and DAT Reward on LazAI
 
 ```python
 from alith.lazai import Client, ProofRequest
@@ -229,9 +225,7 @@ if __name__ == "__main__":
   </Tabs.Tab>
   <Tabs.Tab>
 
-### Node.js
-
-#### Project Setup
+### Project Setup
 
 ```bash
 mkdir LazAI-contribution
@@ -239,14 +233,14 @@ cd LazAI-contribution
 npm init -y
 ```
 
-#### Install Alith and Dependencies
+### Install Alith and Dependencies
 
 ```bash
 npm install alith
 npm install --save-dev @types/node-rsa
 ```
 
-#### Create `index.ts`
+### Create `index.ts`
 
 Create a file named `index.ts` and paste the following script:
 
@@ -319,7 +313,7 @@ async function main() {
 await main();
 ```
 
-#### Update `package.json` Scripts
+### Update `package.json` Scripts
 
 Add the following to your `package.json`:
 
@@ -329,7 +323,7 @@ Add the following to your `package.json`:
 }
 ```
 
-#### Add `tsconfig.json`
+### Add `tsconfig.json`
 
 Create a file named `tsconfig.json` with the following content:
 
@@ -356,7 +350,7 @@ Create a file named `tsconfig.json` with the following content:
 }
 ```
 
-#### Set Environment Variables
+### Set Environment Variables
 
 Create a `.env` file or export the following in your shell:
 
@@ -367,7 +361,7 @@ export IPFS_JWT=<your pinata ipfs jwt>
 
 > **Note:** Your `PRIVATE_KEY` should start with `0x`.
 
-#### Run the Script
+### Run the Script
 
 ```bash
 npm run start
