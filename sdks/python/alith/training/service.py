@@ -1,11 +1,14 @@
-from fastapi import APIRouter, BackgroundTasks, status
+from fastapi import APIRouter, BackgroundTasks, Request, status
 from .types import TrainingParams, TrainingResult, TrainingStatus
 from .trainer import start_trainer
 from .common import generate_job_id, get_training_status as _get_training_status
+from ..lazai.request import validate_request, TRAINING_TYPE
 import logging
+from asyncio import Lock
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
+training_lock = Lock()
 
 
 @router.post(
@@ -14,13 +17,20 @@ router = APIRouter()
     status_code=status.HTTP_202_ACCEPTED,
     name="training",
 )
-async def training(params: TrainingParams, tasks: BackgroundTasks) -> TrainingResult:
+async def training(
+    request: Request, params: TrainingParams, tasks: BackgroundTasks
+) -> TrainingResult:
+    validate_request(request, TRAINING_TYPE)
     job_id = generate_job_id()
-    tasks.add_task(
-        start_trainer,
-        params=params,
-        job_id=job_id,
-    )
+    # We use asynchronous locks to add tasks here because training
+    # tasks are resource consuming and cannot be added without restrictions,
+    # and it is limited to `config.max_training_task_queue_size`
+    async with training_lock:
+        tasks.add_task(
+            start_trainer,
+            params=params,
+            job_id=job_id,
+        )
     return TrainingResult(
         job_id=job_id,
         message=f"Training job {job_id} started",

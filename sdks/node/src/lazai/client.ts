@@ -345,7 +345,10 @@ export class Client extends ChainManager {
     return this.inferenceContract().methods.nodeList().call()
   }
 
-  async getInferenceAccount(node: string): Promise<{
+  async getInferenceAccount(
+    user: string,
+    node: string,
+  ): Promise<{
     user: string
     node: string
     nonce: BigInt
@@ -358,7 +361,7 @@ export class Client extends ChainManager {
       processed: boolean
     }[]
   }> {
-    return this.inferenceContract().methods.getAccount(this.getWallet().address, node).call()
+    return this.inferenceContract().methods.getAccount(user, node).call()
   }
 
   async inferenceSettlementFees(user: string, cost: number) {
@@ -406,7 +409,10 @@ export class Client extends ChainManager {
     return this.trainingContract().methods.nodeList().call()
   }
 
-  async getTrainingAccount(node: string): Promise<{
+  async getTrainingAccount(
+    user: string,
+    node: string,
+  ): Promise<{
     user: string
     node: string
     nonce: BigInt
@@ -419,7 +425,7 @@ export class Client extends ChainManager {
       processed: boolean
     }[]
   }> {
-    return this.trainingContract().methods.getAccount(this.getWallet().address, node).call()
+    return this.trainingContract().methods.getAccount(user, node).call()
   }
 
   async trainingSettlementFees(user: string, cost: number) {

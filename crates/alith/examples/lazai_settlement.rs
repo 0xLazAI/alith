@@ -22,7 +22,10 @@ async fn main() -> Result<(), anyhow::Error> {
     client.deposit_inference(node, U256::from(100_000)).await?;
     println!(
         "The inference account of user is {:?}",
-        client.get_inference_account(node).await?.user
+        client
+            .get_inference_account(client.wallet.address, node)
+            .await?
+            .user
     );
     Ok(())
 }

@@ -257,10 +257,8 @@ class Client(ChainManager):
     ):
         return self.inference_contract.functions.NodeList().call()
 
-    def get_inference_account(self, node: str):
-        return self.inference_contract.functions.getAccount(
-            self.wallet.address, node
-        ).call()
+    def get_inference_account(self, user: str, node: str):
+        return self.inference_contract.functions.getAccount(user, node).call()
 
     def inference_settlement_fees(
         self,
@@ -306,10 +304,8 @@ class Client(ChainManager):
     ):
         return self.training_contract.functions.NodeList().call()
 
-    def get_training_account(self, node: str):
-        return self.training_contract.functions.getAccount(
-            self.wallet.address, node
-        ).call()
+    def get_training_account(self, user: str, node: str):
+        return self.training_contract.functions.getAccount(user, node).call()
 
     def training_settlement_fees(
         self,

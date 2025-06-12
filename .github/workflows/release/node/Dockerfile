@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     git
-RUN python3 -m pip install pydantic requests web3==6.20.4 rsa python-gnupg aiohttp uvicorn fastapi
+# DO NOT build the Rust core through the pyproject.toml and install the deps
+RUN python3 -m pip install pydantic pydantic_config requests web3==6.20.4 rsa python-gnupg aiohttp uvicorn fastapi
 # Copy README and LICENSE files
 COPY README.md /app/
 COPY LICENSE /app/
