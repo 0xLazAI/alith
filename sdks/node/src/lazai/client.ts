@@ -364,8 +364,8 @@ export class Client extends ChainManager {
     return this.inferenceContract().methods.getAccount(user, node).call()
   }
 
-  async inferenceSettlementFees(user: string, cost: number) {
-    const data = new SettlementProofData(0, user, cost, 0)
+  async inferenceSettlementFees(user: string, cost: number, id: string, nonce: number) {
+    const data = new SettlementProofData(id, user, cost, nonce)
     const packedData = data.abiEncode()
     const messageHash = Web3.utils.keccak256(packedData)
     const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
@@ -428,8 +428,8 @@ export class Client extends ChainManager {
     return this.trainingContract().methods.getAccount(user, node).call()
   }
 
-  async trainingSettlementFees(user: string, cost: number) {
-    const data = new SettlementProofData(0, user, cost, 0)
+  async trainingSettlementFees(user: string, cost: number, id: string, nonce: number) {
+    const data = new SettlementProofData(id, user, cost, nonce)
     const packedData = data.abiEncode()
     const messageHash = Web3.utils.keccak256(packedData)
     const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)

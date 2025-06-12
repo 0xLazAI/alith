@@ -38,11 +38,9 @@ impl<C: ApiConfigTrait> ApiClient<C> {
             let request_builder = self
                 .http_client
                 .post(self.config.url(path))
-                // .query(&self.config.query())
                 .headers(self.config.headers())
                 .header(reqwest::header::CONTENT_TYPE, "application/json")
                 .body(serialized_request);
-            // crate::trace!("Serialized post request: {:?}", request_builder); // This will log API keys!
             Ok(request_builder.build()?)
         };
         self.execute(request_maker).await

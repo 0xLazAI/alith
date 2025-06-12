@@ -25,14 +25,14 @@ export class ProofData {
 }
 
 export class SettlementProofData {
-  constructor(public id: number, public user: string, public cost: number, public nonce: number) {}
+  constructor(public id: string, public user: string, public cost: number, public nonce: number) {}
 
   abiEncode(): string {
     const web3 = new Web3()
     return web3.eth.abi.encodeParameter(
       {
         components: [
-          { name: 'id', type: 'uint256' },
+          { name: 'id', type: 'string' },
           { name: 'user', type: 'adress' },
           { name: 'cost', type: 'address' },
           { name: 'nonce', type: 'uint256' },

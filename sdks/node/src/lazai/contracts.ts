@@ -860,7 +860,7 @@ export const AI_PROCESS_CONTRACT_ABI = [
             type: 'tuple',
             name: 'data',
             components: [
-              { type: 'uint256', name: 'id' },
+              { type: 'string', name: 'id' },
               { type: 'address', name: 'user' },
               { type: 'uint256', name: 'cost' },
               { type: 'uint256', name: 'nonce' },

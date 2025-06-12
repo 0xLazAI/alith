@@ -660,11 +660,13 @@ impl Client {
         &self,
         user: Address,
         cost: U256,
+        id: String,
+        nonce: U256,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.inference_contract();
         let data = SettlementProofData {
-            id: U256::ZERO,
-            nonce: U256::ZERO,
+            id,
+            nonce,
             user,
             cost,
         };
@@ -685,11 +687,13 @@ impl Client {
         &self,
         user: Address,
         cost: U256,
+        id: String,
+        nonce: U256,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.training_contract();
         let data = SettlementProofData {
-            id: U256::ZERO,
-            nonce: U256::ZERO,
+            id,
+            nonce,
             user,
             cost,
         };
