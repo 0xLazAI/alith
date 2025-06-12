@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from pydantic_config import SettingsModel
 from typing import Optional
 
 
@@ -103,3 +104,16 @@ class TrainingStatus(BaseModel):
     remaining_time: str = "0"
     total_tokens: int = 0
     log: Optional[str] = None
+
+
+class TrainingTask(BaseModel):
+    id: str
+    created_at: str
+    nonce: int
+    user: str
+    node: str
+    status: TrainingStatus
+
+
+class Config(SettingsModel):
+    max_training_task_queue_size: int = 2

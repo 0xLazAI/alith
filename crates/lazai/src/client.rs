@@ -553,11 +553,15 @@ impl Client {
         Ok(list)
     }
 
-    pub async fn get_inference_account(&self, node: Address) -> Result<Account, ClientError> {
+    pub async fn get_inference_account(
+        &self,
+        user: Address,
+        node: Address,
+    ) -> Result<Account, ClientError> {
         let contract = self.inference_contract();
         let builder = self
             .call_builder(
-                contract.getAccount(self.wallet.address, node),
+                contract.getAccount(user, node),
                 self.config.inference_address,
                 None,
             )
@@ -624,6 +628,26 @@ impl Client {
         let contract = self.training_contract();
         let builder = self
             .call_builder(contract.nodeList(), self.config.training_address, None)
+            .await?;
+        let list = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(list)
+    }
+
+    pub async fn get_training_account(
+        &self,
+        user: Address,
+        node: Address,
+    ) -> Result<Account, ClientError> {
+        let contract = self.training_contract();
+        let builder = self
+            .call_builder(
+                contract.getAccount(user, node),
+                self.config.training_address,
+                None,
+            )
             .await?;
         let list = builder
             .call()

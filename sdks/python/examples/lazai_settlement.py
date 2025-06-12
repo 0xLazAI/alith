@@ -11,4 +11,7 @@ except Exception:
     client.add_user(100000)
 client.deposit(1000000)
 client.deposit_inference(node, 10)
-print("The inference account of user is", client.get_inference_account(node)[0])
+print(
+    "The inference account of user is",
+    client.get_inference_account(client.wallet.address, node)[0],
+)

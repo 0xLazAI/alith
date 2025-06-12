@@ -3,6 +3,7 @@ from web3 import Web3
 from typing import Dict
 from eth_account.messages import encode_defunct
 import json
+from .request import USER_HEADER, NONCE_HEADER, SIGNATURE_HEADER
 
 
 class SettlementSignature(BaseModel):
@@ -15,9 +16,9 @@ class SettlementSignature(BaseModel):
 
     def to_request_headers(self) -> Dict[str, str]:
         return {
-            "User": self.user,
-            "Nonce": str(self.nonce),
-            "X-Wallet-Signature": self.signature,
+            USER_HEADER: self.user,
+            NONCE_HEADER: str(self.nonce),
+            SIGNATURE_HEADER: self.signature,
         }
 
 
