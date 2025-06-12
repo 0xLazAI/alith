@@ -2,6 +2,7 @@ pub mod client;
 
 use crate::chat::{Completion, CompletionError};
 use crate::embeddings::{Embeddings, EmbeddingsData, EmbeddingsError};
+pub use crate::llm::client::ClientConfig;
 use anyhow::Result;
 use async_trait::async_trait;
 use client::{Client, CompletionResponse};
@@ -71,17 +72,32 @@ pub struct LLM {
 }
 
 impl LLM {
+    #[inline]
     pub fn from_model_name(model: &str) -> Result<Self> {
+        Self::from_model_name_and_config(model, Default::default())
+    }
+
+    pub fn from_model_name_and_config(model: &str, config: ClientConfig) -> Result<Self> {
         Ok(Self {
             model: model.to_string(),
-            client: Client::from_model_name(model)?,
+            client: Client::from_model_name(model, config)?,
         })
     }
 
+    #[inline]
     pub fn openai_compatible_model(api_key: &str, base_url: &str, model: &str) -> Result<Self> {
+        Self::openai_compatible_model_with_config(api_key, base_url, model, Default::default())
+    }
+
+    pub fn openai_compatible_model_with_config(
+        api_key: &str,
+        base_url: &str,
+        model: &str,
+        config: ClientConfig,
+    ) -> Result<Self> {
         Ok(Self {
             model: model.to_string(),
-            client: Client::openai_compatible_client(api_key, base_url, model)?,
+            client: Client::openai_compatible_client(api_key, base_url, model, config)?,
         })
     }
 
@@ -111,8 +127,8 @@ impl Completion for LLM {
 
 #[derive(Clone)]
 pub struct EmbeddingsModel {
-    pub client: Client,
     pub model: String,
+    client: Client,
 }
 
 #[async_trait]

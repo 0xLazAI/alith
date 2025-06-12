@@ -17,6 +17,7 @@ from .store import (
 from .memory import Memory, MessageBuilder, WindowBufferMemory
 from .chunking import chunk_text
 from .extractor import Extractor
+from .types import Headers
 
 __all__ = [
     "Agent",
@@ -36,4 +37,5 @@ __all__ = [
     "Memory",
     "WindowBufferMemory",
     "MessageBuilder",
+    "Headers",
 ]

@@ -9,6 +9,8 @@ use alith_interface::{
 use alith_prompt::LLMPrompt;
 use std::sync::Arc;
 
+pub type ChatCompletion = BasicCompletion;
+
 #[derive(Clone)]
 pub struct BasicCompletion {
     pub base_req: CompletionRequest,

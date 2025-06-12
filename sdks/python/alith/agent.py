@@ -3,6 +3,7 @@ from typing import List, Union, Callable, Optional
 from .tool import Tool, create_delegate_tool
 from .store import Store
 from .memory import Memory
+from .types import Headers
 
 
 @dataclass
@@ -16,6 +17,7 @@ class Agent:
     mcp_config_path: Optional[str] = field(default_factory=str)
     store: Optional[Store] = None
     memory: Optional[Memory] = None
+    extra_headers: Optional[Headers] = None
 
     def prompt(self, prompt: str) -> str:
         from ._alith import DelegateAgent as _DelegateAgent
@@ -35,6 +37,7 @@ class Agent:
             self.base_url,
             self.preamble,
             tools,
+            self.extra_headers or dict(),
             self.mcp_config_path,
         )
         if self.store:

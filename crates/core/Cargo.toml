@@ -33,6 +33,8 @@ unicode-properties.workspace = true
 unicode-segmentation.workspace = true
 url.workspace = true
 text-splitter.workspace = true
+bon.workspace = true
+reqwest.workspace = true
 
 # Fastembed
 fastembed = { workspace = true, optional = true }

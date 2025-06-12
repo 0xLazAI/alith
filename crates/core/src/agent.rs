@@ -36,12 +36,6 @@ pub struct Agent<M: Completion> {
     pub temperature: Option<f32>,
     /// Maximum number of tokens for the completion.
     pub max_tokens: Option<usize>,
-    /// Maximum execution time for the agent to complete a task.
-    pub max_execution_time: Option<usize>,
-    /// Whether to respect the context window.
-    pub respect_context_window: bool,
-    /// Whether code execution is allowed.
-    pub allow_code_execution: bool,
     /// The MCP client used to communicate with the MCP server
     mcp_clients: Ref<Vec<MCPClient>>,
 }
@@ -61,12 +55,9 @@ where
             preamble: String::new(),
             temperature: None,
             max_tokens: None,
-            max_execution_time: None,
             knowledges: Arc::new(Vec::new()),
             memory: None,
             mcp_clients: make_ref(vec![]),
-            respect_context_window: false,
-            allow_code_execution: false,
         }
     }
 
@@ -84,12 +75,9 @@ where
             preamble: String::new(),
             temperature: None,
             max_tokens: None,
-            max_execution_time: None,
             knowledges: Arc::new(Vec::new()),
             memory: None,
             mcp_clients: make_ref(vec![]),
-            respect_context_window: false,
-            allow_code_execution: false,
         }
     }
 
