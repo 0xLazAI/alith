@@ -65,8 +65,7 @@ export class Client extends ChainManager {
   }
 
   async addProof(fileId: BigInt, data: ProofData) {
-    const packedData = data.abiEncode()
-    const messageHash = Web3.utils.keccak256(packedData)
+    const messageHash = Web3.utils.keccak256(data.abiEncode())
     const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
 
     const proof = {
@@ -364,10 +363,8 @@ export class Client extends ChainManager {
     return this.inferenceContract().methods.getAccount(user, node).call()
   }
 
-  async inferenceSettlementFees(user: string, cost: number, id: string, nonce: number) {
-    const data = new SettlementProofData(id, user, cost, nonce)
-    const packedData = data.abiEncode()
-    const messageHash = Web3.utils.keccak256(packedData)
+  async inferenceSettlementFees(data: SettlementProofData) {
+    const messageHash = Web3.utils.keccak256(data.abiEncode())
     const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
 
     const proof = {
@@ -377,6 +374,7 @@ export class Client extends ChainManager {
         user: data.user,
         cost: data.cost,
         nonce: data.nonce,
+        userSignature: data.userSignature,
       },
     }
 
@@ -428,10 +426,8 @@ export class Client extends ChainManager {
     return this.trainingContract().methods.getAccount(user, node).call()
   }
 
-  async trainingSettlementFees(user: string, cost: number, id: string, nonce: number) {
-    const data = new SettlementProofData(id, user, cost, nonce)
-    const packedData = data.abiEncode()
-    const messageHash = Web3.utils.keccak256(packedData)
+  async trainingSettlementFees(data: SettlementProofData) {
+    const messageHash = Web3.utils.keccak256(data.abiEncode())
     const signature = this.web3.eth.accounts.sign(messageHash, this.account.privateKey)
 
     const proof = {

@@ -1,7 +1,6 @@
 use alith_data::wallet::LocalEthWallet;
 use alloy::{
     contract::{CallBuilder, CallDecoder},
-    hex,
     network::{Ethereum, EthereumWallet, TransactionBuilder, TransactionBuilderError},
     primitives::{Address, U256, keccak256},
     providers::Provider,
@@ -288,12 +287,15 @@ impl Client {
         file_id: U256,
         data: ProofData,
     ) -> Result<TransactionReceipt, ClientError> {
-        let packed_data = keccak256(data.abi_encode());
-        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
+        let message_hash = keccak256(data.abi_encode());
+        let signature = format!(
+            "0x{}",
+            self.wallet
+                .sign_message_hex(message_hash.as_slice())
+                .await?
+        );
         let proof = Proof {
-            signature: hex::decode(signature)
-                .map_err(|err| ClientError::SigningError(err.to_string()))?
-                .into(),
+            signature: signature.as_bytes().to_vec().into(),
             data,
         };
         let contract = self.data_registry_contract();
@@ -658,24 +660,18 @@ impl Client {
 
     pub async fn inference_settlement_fees(
         &self,
-        user: Address,
-        cost: U256,
-        id: String,
-        nonce: U256,
+        data: SettlementProofData,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.inference_contract();
-        let data = SettlementProofData {
-            id,
-            nonce,
-            user,
-            cost,
-        };
-        let packed_data = keccak256(data.abi_encode());
-        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
+        let message_hash = keccak256(data.abi_encode());
+        let signature = format!(
+            "0x{}",
+            self.wallet
+                .sign_message_hex(message_hash.as_slice())
+                .await?
+        );
         let proof = SettlementProof {
-            signature: hex::decode(signature)
-                .map_err(|err| ClientError::SigningError(err.to_string()))?
-                .into(),
+            signature: signature.as_bytes().to_vec().into(),
             data,
         };
 
@@ -685,24 +681,18 @@ impl Client {
 
     pub async fn training_settlement_fees(
         &self,
-        user: Address,
-        cost: U256,
-        id: String,
-        nonce: U256,
+        data: SettlementProofData,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.training_contract();
-        let data = SettlementProofData {
-            id,
-            nonce,
-            user,
-            cost,
-        };
-        let packed_data = keccak256(data.abi_encode());
-        let signature = self.wallet.sign_message(packed_data.as_slice()).await?;
+        let message_hash = keccak256(data.abi_encode());
+        let signature = format!(
+            "0x{}",
+            self.wallet
+                .sign_message_hex(message_hash.as_slice())
+                .await?
+        );
         let proof = SettlementProof {
-            signature: hex::decode(signature)
-                .map_err(|err| ClientError::SigningError(err.to_string()))?
-                .into(),
+            signature: signature.as_bytes().to_vec().into(),
             data,
         };
 

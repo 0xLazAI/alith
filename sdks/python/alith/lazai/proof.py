@@ -18,9 +18,10 @@ class SettlementProofData(BaseModel):
     user: str
     cost: int
     nonce: int
+    user_signature: str
 
     def abi_encode(self) -> bytes:
         return encode(
-            ["(string,address,uint256,uint256)"],
-            [(self.id, self.user, self.cost, self.nonce)],
+            ["(string,address,uint256,uint256,bytes)"],
+            [(self.id, self.user, self.cost, self.nonce, self.user_signature)],
         )

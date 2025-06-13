@@ -864,6 +864,7 @@ export const AI_PROCESS_CONTRACT_ABI = [
               { type: 'address', name: 'user' },
               { type: 'uint256', name: 'cost' },
               { type: 'uint256', name: 'nonce' },
+              { type: 'bytes', name: 'userSignature' },
             ],
           },
         ],

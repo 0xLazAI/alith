@@ -262,14 +262,9 @@ class Client(ChainManager):
 
     def inference_settlement_fees(
         self,
-        user: str,
-        cost: int,
-        id: str,
-        nonce: int,
+        data: SettlementProofData,
     ):
-        data = SettlementProofData(id=id, nonce=nonce, user=user, cost=cost)
-        packed_data = data.abi_encode()
-        message_hash = Web3.keccak(packed_data)
+        message_hash = Web3.keccak(data.abi_encode())
         eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)
         signed_message = Account.signHash(eth_message, self.wallet.key)
         signature = signed_message.signature
@@ -309,16 +304,8 @@ class Client(ChainManager):
     def get_training_account(self, user: str, node: str):
         return self.training_contract.functions.getAccount(user, node).call()
 
-    def training_settlement_fees(
-        self,
-        user: str,
-        cost: int,
-        id: str,
-        nonce: int,
-    ):
-        data = SettlementProofData(id=id, nonce=nonce, user=user, cost=cost)
-        packed_data = data.abi_encode()
-        message_hash = Web3.keccak(packed_data)
+    def training_settlement_fees(self, data: SettlementProofData):
+        message_hash = Web3.keccak(data.abi_encode())
         eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)
         signed_message = Account.signHash(eth_message, self.wallet.key)
         signature = signed_message.signature
