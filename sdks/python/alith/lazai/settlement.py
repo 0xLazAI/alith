@@ -2,7 +2,9 @@ from pydantic import BaseModel
 from web3 import Web3
 from typing import Dict
 from eth_account.messages import encode_defunct
-import json
+from eth_abi import encode
+from eth_account import Account
+from hexbytes import HexBytes
 from .request import USER_HEADER, NONCE_HEADER, SIGNATURE_HEADER
 
 
@@ -31,6 +33,9 @@ class SettlementRequest(BaseModel):
     user: str
     node: str
 
+    def abi_encode(self) -> bytes:
+        return encode(["(uint256,address,address)"], [(self.nonce, self.user, self.node)])
+
     def generate_signature(
         self,
         private_key: str,
@@ -44,20 +49,12 @@ class SettlementRequest(BaseModel):
         Returns:
             A SettlementSignature object containing signature information.
         """
-        # 1. Convert the request object to a dictionary
-        message_dict = self.model_dump()
-        # 2. Sort dictionary keys for consistent message serialization
-        sorted_dict = dict(sorted(message_dict.items()))
-        # 3. Convert to JSON string (ensure_ascii=False preserves Chinese characters)
-        # The message string should be the JSON format e.g., {"node":"0xABCDE02F9bB4E4C8836e38DF4320D4a79106F194","nonce":1234567,"user":"0xBCDEE02F9bB4E4C8836e38DF4320D4a79106F194"}
-        message_str = json.dumps(sorted_dict, separators=(",", ":"), ensure_ascii=False)
-        # 4. Initialize Web3 instance
-        w3 = Web3()
-        # 5. Sign the message with the private key.
-        signature = w3.eth.account.sign_message(
-            encode_defunct(text=message_str),
-            private_key=private_key,
-        ).signature.hex()
+        packed_data = self.abi_encode()
+        message_hash = Web3.keccak(packed_data)
+        eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)
+        signed_message = Account.signHash(eth_message, private_key)
+        signature = signed_message.signature
+        signature = HexBytes(signature).hex()
 
         return SettlementSignature(
             user=self.user,

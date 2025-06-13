@@ -9,6 +9,7 @@ from .client import Client
 from .proof import ProofData, SettlementProofData
 from .node import ProofRequest
 from .settlement import SettlementRequest, SettlementSignature
+from .request import validate_account_and_signature, validate_request, recover_address
 
 __all__ = [
     "ChainConfig",
@@ -22,4 +23,7 @@ __all__ = [
     "TESTNET_NETWORK",
     "SettlementRequest",
     "SettlementSignature",
+    "validate_account_and_signature",
+    "validate_request",
+    "recover_address",
 ]

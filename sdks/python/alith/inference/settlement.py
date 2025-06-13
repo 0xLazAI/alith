@@ -31,12 +31,14 @@ class ValidationMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             return Response(
                 status_code=401,
-                content=json.dumps({
-                    "error": {
-                        "message": "Validate the request header failed: " + str(e),
-                        "type": "authentication_error",
+                content=json.dumps(
+                    {
+                        "error": {
+                            "message": "Validate the request header failed: " + str(e),
+                            "type": "authentication_error",
+                        }
                     }
-                }),
+                ),
             )
 
 
@@ -80,23 +82,27 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
                 logger.warning("Failed to parse response for token billing")
                 return Response(
                     status_code=400,
-                    content=json.dumps({
-                        "error": {
-                            "message": "Failed to parse response for token billing",
-                            "type": "invalid_request_error",
+                    content=json.dumps(
+                        {
+                            "error": {
+                                "message": "Failed to parse response for token billing",
+                                "type": "invalid_request_error",
+                            }
                         }
-                    }),
+                    ),
                 )
             except Exception as e:
                 logger.error(f"Error in token billing process: {str(e)}")
                 return Response(
                     status_code=400,
-                    content=json.dumps({
-                        "error": {
-                            "message": f"Error in token billing process: {str(e)}",
-                            "type": "invalid_request_error",
+                    content=json.dumps(
+                        {
+                            "error": {
+                                "message": f"Error in token billing process: {str(e)}",
+                                "type": "invalid_request_error",
+                            }
                         }
-                    }),
+                    ),
                 )
 
         return response
