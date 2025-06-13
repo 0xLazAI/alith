@@ -1,5 +1,4 @@
 from alith import Agent, WindowBufferMemory
-import os
 
 agent = Agent(
     model="gpt-4",

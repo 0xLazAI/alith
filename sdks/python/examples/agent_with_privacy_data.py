@@ -1,6 +1,8 @@
 import os
+
 import rsa
-from alith.data import encrypt, decrypt
+
+from alith.data import decrypt, encrypt
 
 
 def main():

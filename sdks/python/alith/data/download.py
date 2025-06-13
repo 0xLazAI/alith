@@ -1,5 +1,6 @@
-import requests
 import tempfile
+
+import requests
 
 
 def download_file(url: str) -> str:
@@ -14,5 +15,5 @@ def download_file(url: str) -> str:
                 f.write(chunk)
 
         return temp_file.name
-    except Exception as e:
+    except Exception:
         raise

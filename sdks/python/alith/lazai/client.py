@@ -1,21 +1,23 @@
-from .contracts import (
-    ContractConfig,
-    DATA_REGISTRY_CONTRACT_ABI,
-    VERIFIED_COMPUTING_CONTRACT_ABI,
-    DATA_ANCHOR_TOKEN_CONTRACT_ABI,
-    AI_PROCESS_CONTRACT_ABI,
-    SETTLEMENT_CONTRACT_ABI,
-)
-from .settlement import SettlementRequest
-from .chain import ChainConfig, ChainManager
-from .proof import ProofData, SettlementProofData
+import random
+import time
 from os import getenv
-from typing import List, Dict
-from web3 import Web3
+from typing import Dict, List
+
 from eth_account.messages import encode_defunct
 from hexbytes import HexBytes
-import time
-import random
+from web3 import Web3
+
+from .chain import ChainConfig, ChainManager
+from .contracts import (
+    AI_PROCESS_CONTRACT_ABI,
+    DATA_ANCHOR_TOKEN_CONTRACT_ABI,
+    DATA_REGISTRY_CONTRACT_ABI,
+    SETTLEMENT_CONTRACT_ABI,
+    VERIFIED_COMPUTING_CONTRACT_ABI,
+    ContractConfig,
+)
+from .proof import ProofData, SettlementProofData
+from .settlement import SettlementRequest
 
 
 class Client(ChainManager):
@@ -134,9 +136,6 @@ class Client(ChainManager):
 
     def get_job(self, job_id: int):
         return self.verified_computing_contract.functions.getJob(job_id).call()
-
-    def get_node(self, addr: str):
-        return self.verified_computing_contract.functions.getNode(addr).call()
 
     def file_job_ids(self, file_id: int):
         return self.verified_computing_contract.functions.fileJobIds(file_id).call()

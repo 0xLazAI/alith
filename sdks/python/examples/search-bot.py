@@ -1,5 +1,6 @@
-from alith import Agent
 from duckduckgo_search import DDGS
+
+from alith import Agent
 
 
 def search(query: str) -> str:

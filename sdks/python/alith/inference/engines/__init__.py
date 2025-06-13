@@ -1,4 +1,4 @@
-from .llamacpp import LlamaEngine, LLAMA_CPP_AVAILABLE
+from .llamacpp import LLAMA_CPP_AVAILABLE, LlamaEngine
 
 __all__ = [
     "LlamaEngine",

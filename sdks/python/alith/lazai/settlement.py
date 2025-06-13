@@ -1,9 +1,11 @@
+from typing import Dict
+
+from eth_abi import encode
+from eth_account.messages import encode_defunct
 from pydantic import BaseModel
 from web3 import Web3
-from typing import Dict
-from eth_account.messages import encode_defunct
-from eth_abi import encode
-from .request import USER_HEADER, NONCE_HEADER, SIGNATURE_HEADER
+
+from .request import NONCE_HEADER, SIGNATURE_HEADER, USER_HEADER
 
 
 class SettlementSignature(BaseModel):

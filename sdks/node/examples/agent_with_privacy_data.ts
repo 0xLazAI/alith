@@ -1,4 +1,4 @@
-import { encrypt, decrypt } from 'alith/data/crypto'
+import { encrypt, decrypt } from 'alith/data'
 import NodeRSA from 'node-rsa'
 
 async function main() {

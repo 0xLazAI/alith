@@ -1,11 +1,12 @@
-from eth_account.signers.local import LocalAccount
+import time
+from os import getenv
 from threading import Lock
+from typing import Any, Tuple
+
+from eth_account.signers.local import LocalAccount
 from web3 import Web3
 from web3.exceptions import ContractLogicError
-from web3.types import TxReceipt, HexBytes
-from typing import Tuple, Any
-from os import getenv
-import time
+from web3.types import HexBytes, TxReceipt
 
 DEVNET_NETWORK = "LazAI Devnet"
 TESTNET_NETWORK = "LazAI Testnet"
@@ -88,9 +89,7 @@ class ChainManager:
         tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
         return tx_hash.hex()
 
-    def estimated_gas(self, to: str, value: int, data) -> int:
-        if gas_price is None:
-            gas_price = self.get_gas_price()
+    def estimated_gas(self, to: str, value: int, data, gas_price=None) -> int:
         tx = {
             "chainId": self.config.chain_id,
             "from": self.wallet.address,
@@ -166,7 +165,7 @@ class ChainManager:
 
                     time.sleep(5)  # Check every 5 seconds
 
-        except Exception as e:
+        except Exception:
             pass
 
     def send_transaction(

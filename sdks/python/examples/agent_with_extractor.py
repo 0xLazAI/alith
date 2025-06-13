@@ -1,5 +1,6 @@
-from alith import Agent, Extractor
 from pydantic import BaseModel
+
+from alith import Agent, Extractor
 
 
 class Person(BaseModel):

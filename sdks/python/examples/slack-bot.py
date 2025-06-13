@@ -1,7 +1,9 @@
 import os
-from alith import Agent
+
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
+
+from alith import Agent
 
 # Initialize Slack Bolt app with the bot token
 slack_app = App(token=os.getenv("SLACK_BOT_TOKEN"))

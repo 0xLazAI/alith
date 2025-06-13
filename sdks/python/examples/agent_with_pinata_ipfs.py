@@ -1,11 +1,12 @@
-from alith.data.storage import (
-    PinataIPFS,
-    UploadOptions,
-    GetShareLinkOptions,
-    StorageError,
-)
-from os import getenv
 import asyncio
+from os import getenv
+
+from alith.data.storage import (
+    GetShareLinkOptions,
+    PinataIPFS,
+    StorageError,
+    UploadOptions,
+)
 
 
 async def main():

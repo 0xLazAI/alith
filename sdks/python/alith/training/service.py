@@ -1,10 +1,13 @@
-from fastapi import APIRouter, BackgroundTasks, Request, status
-from .types import TrainingParams, TrainingResult, TrainingStatus
-from .trainer import start_trainer
-from .common import generate_job_id, get_training_status as _get_training_status
-from ..lazai.request import validate_request, TRAINING_TYPE
 import logging
 from asyncio import Lock
+
+from fastapi import APIRouter, BackgroundTasks, Request, status
+
+from ..lazai.request import TRAINING_TYPE, validate_request
+from .common import generate_job_id
+from .common import get_training_status as _get_training_status
+from .trainer import start_trainer
+from .types import TrainingParams, TrainingResult, TrainingStatus
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

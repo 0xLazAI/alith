@@ -1,12 +1,13 @@
-from fastapi import Request, Response
-from starlette.middleware.base import BaseHTTPMiddleware
-from typing import Callable, Awaitable
-from ..lazai.request import validate_request, USER_HEADER, NONCE_HEADER
-from ..lazai.client import Client
-from .config import Config
 import json
 import logging
+from typing import Awaitable, Callable
 
+from fastapi import Request, Response
+from starlette.middleware.base import BaseHTTPMiddleware
+
+from ..lazai.client import Client
+from ..lazai.request import NONCE_HEADER, USER_HEADER, validate_request
+from .config import Config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)

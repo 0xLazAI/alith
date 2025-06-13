@@ -5,15 +5,11 @@ try:
 except ImportError:
     LLAMA_CPP_AVAILABLE = False
 
-try:
-    import huggingface_hub as _huggingface_hub
-
-    HUGGINGFACE_HUB_AVAILABLE = True
-except ImportError:
-    HUGGINGFACE_HUB_AVAILABLE = False
-
-from pathlib import Path
+from importlib.util import find_spec
 from io import StringIO
+from pathlib import Path
+
+HUGGINGFACE_HUB_AVAILABLE = find_spec("huggingface_hub") is not None
 
 
 class LlamaEngine:

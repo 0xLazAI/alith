@@ -1,8 +1,9 @@
-from abc import ABC, abstractmethod
-from typing import List, Optional, Union
-from pathlib import Path
-import requests
 import json
+from abc import ABC, abstractmethod
+from pathlib import Path
+from typing import List, Optional, Union
+
+import requests
 
 
 class Embeddings(ABC):

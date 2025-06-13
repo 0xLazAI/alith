@@ -1,6 +1,6 @@
 import { Client } from 'alith/lazai'
 import { PinataIPFS } from 'alith/data/storage'
-import { encrypt } from 'alith/data/crypto'
+import { encrypt } from 'alith/data'
 import NodeRSA from 'node-rsa'
 import axios, { AxiosResponse } from 'axios'
 
