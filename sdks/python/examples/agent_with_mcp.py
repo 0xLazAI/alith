@@ -1,5 +1,4 @@
 from alith import Agent
-import os
 
 agent = Agent(
     model="gpt-4-mini",

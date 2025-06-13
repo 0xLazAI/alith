@@ -1,6 +1,4 @@
-from .types import (
-    ProofRequest,
-)
+from .types import ProofRequest
 
 __all__ = [
     "ProofRequest",

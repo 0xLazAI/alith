@@ -1,11 +1,8 @@
 import os
+
 from telegram import Update
-from telegram.ext import (
-    Application,
-    MessageHandler,
-    filters,
-    CallbackContext,
-)
+from telegram.ext import Application, CallbackContext, MessageHandler, filters
+
 from alith import Agent
 
 # Initialize Alith Agent

@@ -1,4 +1,4 @@
-from alith.lazai import Client, ChainConfig
+from alith.lazai import ChainConfig, Client
 
 node = "0x1122330000000000000000000000000000000000"
 client = Client(chain_config=ChainConfig.local())

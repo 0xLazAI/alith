@@ -1,5 +1,5 @@
-from pydantic import BaseModel
 from eth_abi import encode
+from pydantic import BaseModel
 
 
 class ProofData(BaseModel):

@@ -1,5 +1,6 @@
-from alith import Agent
 from os import environ
+
+from alith import Agent
 
 agent = Agent(
     model="grok-3",

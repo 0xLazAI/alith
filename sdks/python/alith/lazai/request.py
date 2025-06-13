@@ -1,7 +1,7 @@
+from eth_abi import encode
+from eth_account.messages import encode_defunct
 from fastapi import Request
 from web3 import Web3
-from eth_account.messages import encode_defunct
-from eth_abi import encode
 
 USER_HEADER = "X-LazAI-User"
 NONCE_HEADER = "X-LazAI-Nonce"

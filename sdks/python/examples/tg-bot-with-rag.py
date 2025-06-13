@@ -1,15 +1,10 @@
 import os
 import re
 
-from telegram import Update
-from telegram.ext import (
-    Application,
-    MessageHandler,
-    filters,
-    CallbackContext,
-)
-
 from langchain_community.document_loaders.github import GithubFileLoader
+from telegram import Update
+from telegram.ext import Application, CallbackContext, MessageHandler, filters
+
 from alith import Agent, MilvusStore, chunk_text
 
 # --------------------------------------------

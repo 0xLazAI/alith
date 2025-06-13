@@ -1,15 +1,15 @@
 from .chain import (
-    ChainConfig,
-    ChainManager,
     TESTNET_CHAINID,
     TESTNET_ENDPOINT,
     TESTNET_NETWORK,
+    ChainConfig,
+    ChainManager,
 )
 from .client import Client
-from .proof import ProofData, SettlementProofData
 from .node import ProofRequest
+from .proof import ProofData, SettlementProofData
+from .request import recover_address, validate_account_and_signature, validate_request
 from .settlement import SettlementRequest, SettlementSignature
-from .request import validate_account_and_signature, validate_request, recover_address
 
 __all__ = [
     "ChainConfig",

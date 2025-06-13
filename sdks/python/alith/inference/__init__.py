@@ -1,4 +1,4 @@
-from .engines import LlamaEngine, LLAMA_CPP_AVAILABLE
+from .engines import LLAMA_CPP_AVAILABLE, LlamaEngine
 from .server import run
 
 __all__ = [

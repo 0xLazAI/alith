@@ -1,6 +1,7 @@
+import requests
+
 from alith.lazai import Client
 from alith.lazai.node import ProofRequest
-import requests
 
 contributor = Client()
 print("wallet address", contributor.wallet.address)

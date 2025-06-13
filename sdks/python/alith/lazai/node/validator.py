@@ -3,19 +3,17 @@ Start the node with the PRIVATE_KEY and RSA_PRIVATE_KEY_BASE64 environment varia
 python3 -m alith.lazai.node.validator
 """
 
-from fastapi import FastAPI, HTTPException
-from alith.lazai import (
-    Client,
-    ProofData,
-    ProofRequest,
-)
-from alith.data import download_file, decrypt
+import base64
+import logging
 import os
 import pathlib
-import logging
 import sys
-import base64
+
 import rsa
+from fastapi import FastAPI, HTTPException
+
+from alith.data import decrypt, download_file
+from alith.lazai import Client, ProofData, ProofRequest
 
 # Logging configuration
 

@@ -1,7 +1,9 @@
-import uvicorn
 import argparse
+
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from .service import router
 
 

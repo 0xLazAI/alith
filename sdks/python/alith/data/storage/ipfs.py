@@ -1,15 +1,17 @@
 import os
-from pydantic import BaseModel
 from typing import Optional
+
+import aiohttp
+from pydantic import BaseModel
+
 from .interfaces import (
     DataStorage,
-    UploadOptions,
-    GetShareLinkOptions,
     FileMetadata,
-    StorageType,
+    GetShareLinkOptions,
     StorageError,
+    StorageType,
+    UploadOptions,
 )
-import aiohttp
 
 IPFS_LINK = "https://ipfs.io"
 IPFS_DWEB_LINK = "https://dweb.link"

@@ -1,5 +1,6 @@
-from alith import Agent, Tool
 from pydantic import BaseModel
+
+from alith import Agent, Tool
 
 
 class SubToolModel(BaseModel):

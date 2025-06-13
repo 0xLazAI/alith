@@ -1,4 +1,5 @@
 import requests
+
 from alith.lazai import ProofRequest
 
 proofRequest = ProofRequest(

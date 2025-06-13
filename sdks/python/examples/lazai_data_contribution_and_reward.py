@@ -1,16 +1,18 @@
-from alith.lazai import Client, ProofRequest
-from alith.data import encrypt
-from alith.data.storage import (
-    PinataIPFS,
-    UploadOptions,
-    GetShareLinkOptions,
-    StorageError,
-)
-from eth_account.messages import encode_defunct
-from os import getenv
 import asyncio
+from os import getenv
+
 import requests
 import rsa
+from eth_account.messages import encode_defunct
+
+from alith.data import encrypt
+from alith.data.storage import (
+    GetShareLinkOptions,
+    PinataIPFS,
+    StorageError,
+    UploadOptions,
+)
+from alith.lazai import Client, ProofRequest
 
 
 async def main():

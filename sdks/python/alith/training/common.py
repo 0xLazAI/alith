@@ -1,7 +1,8 @@
-import os
 import json
-from typing import Any, Optional
+import os
 from pathlib import Path
+from typing import Any, Optional
+
 from .types import TrainingStatus
 
 RUNNING_LOG = "running_log.txt"

@@ -1,6 +1,6 @@
 from alith.training import run
 
-"""Run the server and run the following command to test the server
+"""Run the server and use the following command to test the server
 
 curl -X 'POST' \
   'http://localhost:8000/v1/training' \

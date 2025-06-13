@@ -1,5 +1,6 @@
-from alith import Agent
 import os
+
+from alith import Agent
 
 agent = Agent(
     base_url="api.siliconflow.cn/v1",

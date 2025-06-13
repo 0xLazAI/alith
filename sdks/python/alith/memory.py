@@ -1,7 +1,7 @@
+import json
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-import json
-from typing import List, Union, Dict
+from typing import Dict, List, Union
 
 
 # Define the Message class
