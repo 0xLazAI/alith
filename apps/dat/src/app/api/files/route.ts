@@ -1,6 +1,6 @@
 // api/files/route.ts
 import { NextResponse, type NextRequest } from 'next/server'
-import { PinataIPFS } from 'alith/dist/data/storage'
+import { PinataIPFS } from 'alith/data/storage'
 import { Buffer } from 'buffer'
 
 export async function POST(request: NextRequest) {
