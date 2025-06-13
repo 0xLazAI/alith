@@ -1,7 +1,7 @@
 from fastapi import Request
 from web3 import Web3
 from eth_account.messages import encode_defunct
-import json
+from eth_abi import encode
 
 USER_HEADER = "X-LazAI-User"
 NONCE_HEADER = "X-LazAI-Nonce"
@@ -30,10 +30,11 @@ def validate_account_and_signature(
     from .client import Client
 
     client = client or Client()
+    node = client.wallet.address
     account = (
-        client.get_training_account(user, client.wallet.address)
+        client.get_training_account(user, node)
         if type == TRAINING_TYPE
-        else client.get_inference_account(user, client.wallet.address)
+        else client.get_inference_account(user, node)
     )
     if not account or account[0] != user:
         raise Exception(f"Account {user} does not exist or is unauthorized")
@@ -42,11 +43,26 @@ def validate_account_and_signature(
         raise Exception(
             f"Invalid nonce: {nonce}. Must be greater than last nonce: {last_nonce}"
         )
-    message_dict = {"nonce": nonce, "user": user, "node": client.wallet.address}
-    sorted_dict = dict(sorted(message_dict.items()))
-    message_str = json.dumps(sorted_dict, separators=(",", ":"), ensure_ascii=False)
-    w3 = Web3()
-    message = encode_defunct(text=message_str)
-    recovered_address = w3.eth.account.recover_message(message, signature=signature)
+    recovered_address = recover_address(
+        nonce,
+        user,
+        node,
+        signature,
+    )
     if recovered_address.lower() != user.lower():
         raise Exception("Signature verification failed: address mismatch")
+
+
+def recover_address(
+    nonce: int,
+    user: str,
+    node: str,
+    signature: str,
+) -> str:
+    packed_data = encode(["(uint256,address,address)"], [(nonce, user, node)])
+    message_hash = Web3.keccak(packed_data)
+    eth_message = encode_defunct(primitive=message_hash)
+    recovered_address = Web3().eth.account.recover_message(
+        eth_message, signature=signature
+    )
+    return recovered_address
