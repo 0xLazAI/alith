@@ -1,6 +1,6 @@
 from alith.inference import run
 
-"""Run the server and run the following command to test the server
+"""Run the server and use the following command to test the server
 
 curl http://localhost:8000/v1/chat/completions \
 -H "Content-Type: application/json" \
