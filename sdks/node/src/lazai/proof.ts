@@ -25,7 +25,13 @@ export class ProofData {
 }
 
 export class SettlementProofData {
-  constructor(public id: string, public user: string, public cost: number, public nonce: number) {}
+  constructor(
+    public id: string,
+    public user: string,
+    public cost: number,
+    public nonce: number,
+    public userSignature: string,
+  ) {}
 
   abiEncode(): string {
     const web3 = new Web3()
@@ -36,6 +42,7 @@ export class SettlementProofData {
           { name: 'user', type: 'adress' },
           { name: 'cost', type: 'address' },
           { name: 'nonce', type: 'uint256' },
+          { name: 'userSignature', type: 'bytes' },
         ],
         name: 'data',
         type: 'tuple',
@@ -45,6 +52,7 @@ export class SettlementProofData {
         user: this.user,
         cost: this.cost,
         nonce: this.nonce,
+        userSignature: this.userSignature,
       },
     )
   }

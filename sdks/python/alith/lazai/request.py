@@ -6,6 +6,7 @@ from eth_abi import encode
 USER_HEADER = "X-LazAI-User"
 NONCE_HEADER = "X-LazAI-Nonce"
 SIGNATURE_HEADER = "X-LazAI-Signature"
+TOKEN_ID = "X-LazAI-Token-ID"
 
 TRAINING_TYPE = 1
 INFERENCE_TYPE = 2
@@ -59,8 +60,9 @@ def recover_address(
     node: str,
     signature: str,
 ) -> str:
-    packed_data = encode(["(uint256,address,address)"], [(nonce, user, node)])
-    message_hash = Web3.keccak(packed_data)
+    message_hash = Web3.keccak(
+        encode(["(uint256,address,address)"], [(nonce, user, node)])
+    )
     eth_message = encode_defunct(primitive=message_hash)
     recovered_address = Web3().eth.account.recover_message(
         eth_message, signature=signature

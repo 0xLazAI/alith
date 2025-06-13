@@ -3,8 +3,6 @@ from web3 import Web3
 from typing import Dict
 from eth_account.messages import encode_defunct
 from eth_abi import encode
-from eth_account import Account
-from hexbytes import HexBytes
 from .request import USER_HEADER, NONCE_HEADER, SIGNATURE_HEADER
 
 
@@ -34,7 +32,9 @@ class SettlementRequest(BaseModel):
     node: str
 
     def abi_encode(self) -> bytes:
-        return encode(["(uint256,address,address)"], [(self.nonce, self.user, self.node)])
+        return encode(
+            ["(uint256,address,address)"], [(self.nonce, self.user, self.node)]
+        )
 
     def generate_signature(
         self,
@@ -49,12 +49,11 @@ class SettlementRequest(BaseModel):
         Returns:
             A SettlementSignature object containing signature information.
         """
-        packed_data = self.abi_encode()
-        message_hash = Web3.keccak(packed_data)
-        eth_message = Web3.keccak(b"\x19Ethereum Signed Message:\n32" + message_hash)
-        signed_message = Account.signHash(eth_message, private_key)
-        signature = signed_message.signature
-        signature = HexBytes(signature).hex()
+        message_hash = Web3.keccak(self.abi_encode())
+        eth_message = encode_defunct(primitive=message_hash)
+        signature = (
+            Web3().eth.account.sign_message(eth_message, private_key).signature.hex()
+        )
 
         return SettlementSignature(
             user=self.user,

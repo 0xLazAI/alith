@@ -26,6 +26,13 @@ dependencies = [
     "fastapi",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "black",
+    "isort",
+]
+
 [tool.maturin]
 features = ["pyo3/extension-module"]
 module-name = "alith._alith"
