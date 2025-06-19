@@ -5,6 +5,15 @@ import { Embeddings, RemoteModelEmbeddings } from './embeddings'
 import { Memory, Message, MessageBuilder, WindowBufferMemory } from './memory'
 import { Store, QdrantStore, QdrantClient, QdrantClientParams } from './store'
 import { Extractor, parseArgs } from './extractor'
+import { 
+  TEEClient, 
+  TEEAgent, 
+  TEEConfig, 
+  TEEAttestation, 
+  TEEDerivedKey, 
+  TEEExecutionResult,
+  TappdClient 
+} from './tee'
 
 export {
   Agent,
@@ -23,4 +32,11 @@ export {
   QdrantClientParams,
   Extractor,
   parseArgs,
+  TEEClient,
+  TEEAgent,
+  TEEConfig,
+  TEEAttestation,
+  TEEDerivedKey,
+  TEEExecutionResult,
+  TappdClient,
 }
