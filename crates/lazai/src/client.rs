@@ -58,6 +58,22 @@ impl Client {
         })
     }
 
+    pub async fn get_public_key(&self) -> Result<String, ClientError> {
+        let contract = self.data_registry_contract();
+        let builder = self
+            .call_builder(
+                contract.publicKey(),
+                self.config.data_registry_address,
+                None,
+            )
+            .await?;
+        let public_key = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(public_key)
+    }
+
     /// Add privacy data url and encrypted key base64 format into the data registry on LazAI.
     pub async fn add_file(&self, url: impl AsRef<str>) -> Result<U256, ClientError> {
         let contract = self.data_registry_contract();

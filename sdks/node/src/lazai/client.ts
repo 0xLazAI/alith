@@ -67,6 +67,10 @@ export class Client extends ChainManager {
     return this.account;
   }
 
+  async getPublicKey(): Promise<string> {
+    return this.dataRegistryContract().methods.publicKey().call();
+  }
+
   async addFile(url: string): Promise<bigint> {
     const method = this.dataRegistryContract().methods.addFile(url);
     await this.sendTransaction(method, this.contractConfig.dataRegistryAddress);
