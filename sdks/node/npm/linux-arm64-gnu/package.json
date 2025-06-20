@@ -1,14 +1,22 @@
 {
-	"name": "@lazai-labs/alith-linux-arm64-gnu",
-	"repository": "https://github.com/0xLazAI/alith",
-	"version": "0.8.8",
-	"os": ["linux"],
-	"cpu": ["x64"],
-	"main": "alith.linux-arm64-gnu.node",
-	"files": ["alith.linux-arm64-gnu.node"],
-	"license": "Apache-2.0",
-	"engines": {
-		"node": ">= 10"
-	},
-	"libc": ["glibc"]
+  "name": "@lazai-labs/alith-linux-arm64-gnu",
+  "repository": "https://github.com/0xLazAI/alith",
+  "version": "0.8.8",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "alith.linux-arm64-gnu.node",
+  "files": [
+    "alith.linux-arm64-gnu.node"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 10"
+  },
+  "libc": [
+    "glibc"
+  ]
 }
