@@ -14,11 +14,12 @@ Besides, Alith is a decentralized AI agent framework tailored to harness the cap
 
 ## Features
 
++ **LazAI Gateway**: Support the most basic wallet management, transfer, sending transactions, as well as LazAI's privacy data, iDAO, DAT, verified computing and other core features.
 + **Multiple Model Support**: Support for small models and large language models e.g., Llama, Grok, OpenAI, Anthropic, etc.
 + **Highly Extensible**: From covering internal prompts to accessing low-level APIs. Customize roles, goals, tools, actions and behaviors while maintaining a clean abstraction.
 + **Workflow Support**: Implementing any workflow pattern through processes - from simple sequential and hierarchical processes to complex custom orchestration patterns with conditional branching and parallel execution.
 + **Cross-Language Support**: Provides SDKs for Rust, Python and Node.js, making it easily accessible to different developers.
-+ **High-Performance Inference**: Leverage the performance advantages of Rust and quick model inference technologies including graph optimization, model compression, JIT/AOT compilation with GPU coprocessors, etc.
++ **High-Performance AI Training and Inference**: Leverage the performance advantages of Rust and quick model training and inference technologies including graph optimization, model compression, JIT/AOT compilation with GPU coprocessors, etc.
 + **Web3 Friendly and Secure**: Out-of-the-box Web3 plugin allows developers to easily and securely integrate blockchain capabilities into TEE-based AI agent frameworks and their applications with privacy data.
 
 ## Architecture
