@@ -17,7 +17,7 @@ dependencies = [
     "pydantic",
     "pydantic_config",
     "requests",
-    "web3<7.0.0,>=6.18.0",
+    "web3<8.0.0,>=7.6.0",
     "rsa",
     "python-gnupg",
     "aiohttp",
