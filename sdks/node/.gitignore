@@ -197,6 +197,7 @@ Cargo.lock
 *.node
 pnpm-lock.yaml
 package-lock.json
+bun.lock
 
 examples/*.js
 examples/*.d.ts

@@ -1,17 +1,17 @@
 {
-	"compilerOptions": {
-		"target": "ES2020",
-		"strict": true,
-		"declaration": true,
-		"moduleResolution": "node",
-		"module": "CommonJS",
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"rootDir": "src",
-		"outDir": "dist"
-	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "benchmark", "theme"]
+  "compilerOptions": {
+    "target": "ES2020",
+    "strict": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "benchmark", "theme"]
 }

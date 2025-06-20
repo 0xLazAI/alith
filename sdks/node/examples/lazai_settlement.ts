@@ -7,6 +7,6 @@ await client.addUser(100000);
 await client.deposit(1000000);
 await client.depositInference(node, 10);
 console.log(
-	"The inference account of user is",
-	await client.getInferenceAccount(client.getWallet().address, node),
+  "The inference account of user is",
+  await client.getInferenceAccount(client.getWallet().address, node)
 );

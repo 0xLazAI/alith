@@ -16,41 +16,41 @@ type Parameters = string | z.ZodTypeAny | JSONSchema7;
  * It can be used to define tools in a modular and reusable way.
  */
 type Tool = {
-	/**
-	 * The name of the tool. This should be a unique identifier for the tool.
-	 */
-	name: string;
+  /**
+   * The name of the tool. This should be a unique identifier for the tool.
+   */
+  name: string;
 
-	/**
-	 * A human-readable description of the tool. This is useful for documentation and user interfaces.
-	 */
-	description: string;
+  /**
+   * A human-readable description of the tool. This is useful for documentation and user interfaces.
+   */
+  description: string;
 
-	/**
-	 * The parameter definition of the tool. This can be one of the following:
-	 * - A JSON string representing the parameters.
-	 * - A Zod schema defining the parameters in a type-safe manner.
-	 * - A JSON Schema object defining the parameters.
-	 * This flexibility allows the tool to be defined in different ways, depending on the use case.
-	 */
-	parameters: Parameters;
+  /**
+   * The parameter definition of the tool. This can be one of the following:
+   * - A JSON string representing the parameters.
+   * - A Zod schema defining the parameters in a type-safe manner.
+   * - A JSON Schema object defining the parameters.
+   * This flexibility allows the tool to be defined in different ways, depending on the use case.
+   */
+  parameters: Parameters;
 
-	/**
-	 * The version number of the tool (optional). This can be used to track different versions of the tool.
-	 */
-	version?: string;
+  /**
+   * The version number of the tool (optional). This can be used to track different versions of the tool.
+   */
+  version?: string;
 
-	/**
-	 * The author of the tool (optional). This can be used to credit the creator of the tool.
-	 */
-	author?: string;
+  /**
+   * The author of the tool (optional). This can be used to credit the creator of the tool.
+   */
+  author?: string;
 
-	/**
-	 * The handler function of the tool. This function is called when the tool is executed.
-	 * It accepts any number of arguments and returns any type of result.
-	 * The arguments passed to this function should match the parameters defined in the `parameters` field.
-	 */
-	handler: (...args: unknown[]) => unknown;
+  /**
+   * The handler function of the tool. This function is called when the tool is executed.
+   * It accepts any number of arguments and returns any type of result.
+   * The arguments passed to this function should match the parameters defined in the `parameters` field.
+   */
+  handler: (...args: unknown[]) => unknown;
 };
 
 /**
@@ -60,27 +60,27 @@ type Tool = {
  * @throws If the parameter type is invalid, an error is thrown.
  */
 function convertParametersToJson(parameters: Parameters): string {
-	// If parameters is a string, return it directly
-	if (typeof parameters === "string") {
-		return parameters;
-	}
-	// If parameters is a Zod schema
-	if (parameters instanceof z.ZodSchema) {
-		// Use zodToJsonSchema to convert the Zod schema to JSON Schema
-		// target: 'jsonSchema7' specifies the target format as JSON Schema 7
-		const jsonSchema = zodToJsonSchema(parameters, {
-			target: "jsonSchema7",
-		});
-		// Convert the JSON Schema object to a JSON string
-		return JSON.stringify(jsonSchema);
-	}
-	// If parameters is an object (assumed to be a JSON Schema object)
-	if (typeof parameters === "object") {
-		// Directly convert the object to a JSON string
-		return JSON.stringify(parameters);
-	}
-	// If the type of parameters does not match any of the above, throw an error
-	throw new Error("Invalid parameters type");
+  // If parameters is a string, return it directly
+  if (typeof parameters === "string") {
+    return parameters;
+  }
+  // If parameters is a Zod schema
+  if (parameters instanceof z.ZodSchema) {
+    // Use zodToJsonSchema to convert the Zod schema to JSON Schema
+    // target: 'jsonSchema7' specifies the target format as JSON Schema 7
+    const jsonSchema = zodToJsonSchema(parameters, {
+      target: "jsonSchema7",
+    });
+    // Convert the JSON Schema object to a JSON string
+    return JSON.stringify(jsonSchema);
+  }
+  // If parameters is an object (assumed to be a JSON Schema object)
+  if (typeof parameters === "object") {
+    // Directly convert the object to a JSON string
+    return JSON.stringify(parameters);
+  }
+  // If the type of parameters does not match any of the above, throw an error
+  throw new Error("Invalid parameters type");
 }
 
 // Export the function and types for use in other modules
