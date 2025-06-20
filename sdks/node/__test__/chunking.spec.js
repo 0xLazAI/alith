@@ -1,9 +1,9 @@
-import test from 'ava'
+import test from "ava";
 
-import { chunkText } from '../dist/index.js'
+import { chunkText } from "../dist/index.js";
 
-test('test', (t) => {
-  let text = `
+test("test", (t) => {
+	const text = `
     ## Introduction
     
     Alith is an AI agent framework designed for the Web3 and Crypto, empowering developers to quickly build, deploy, and manage on-chain AI agents. By integrating blockchain technology, AI/ML models, and developer-friendly tools, Alith provides a modular and extensible platform that supports AI bots, multi-chain interactions, smart contract operations, real-time data processing, and high-performance inference. Whether you're building DeFi trading bots, NFT analyzers, or DAO governance tools, Alith offers robust support for your projects. For more indroduction and comparision, see documents [here](https://alith.lazai.network/docs).
@@ -16,8 +16,8 @@ test('test', (t) => {
     + **Cross-Language Support**: Provides SDKs for Rust, Python and Node.js, making it easily accessible to different developers.
     + **High-Performance Inference**: Leverage the performance advantages of Rust and quick model inference technologies including graph optimization, model compression, JIT/AOT compilation with GPU coprocessors, etc.
     + **Web3 Friendly and Secure**: Out-of-the-box Web3 plugin allows developers to easily and securely integrate blockchain capabilities into TEE-based AI agent frameworks and their applications.
-        `
-  t.is(chunkText(text).length, 2)
-  t.is(chunkText(text, 40).length, 9)
-  t.is(chunkText(text, 40, 0.1).length, 10)
-})
+        `;
+	t.is(chunkText(text).length, 2);
+	t.is(chunkText(text, 40).length, 9);
+	t.is(chunkText(text, 40, 0.1).length, 10);
+});
