@@ -86,7 +86,7 @@ class ChainManager:
             "maxPriorityFeePerGas": self.get_max_priority_fee_per_gas(),
         }
         signed_tx = self.w3.eth.account.sign_transaction(tx, self.wallet.key)
-        tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        tx_hash = self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         return tx_hash.hex()
 
     def estimated_gas(self, to: str, value: int, data, gas_price=None) -> int:
@@ -133,7 +133,7 @@ class ChainManager:
                             signed_tx = self.w3.eth.account.sign_transaction(
                                 replacement_tx, self.wallet.key
                             )
-                            self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+                            self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
                             break
                         except Exception as e:
                             if (
@@ -227,7 +227,9 @@ class ChainManager:
                     signed_tx = self.w3.eth.account.sign_transaction(
                         tx, self.wallet.key
                     )
-                    tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+                    tx_hash = self.w3.eth.send_raw_transaction(
+                        signed_tx.raw_transaction
+                    )
                     tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
                     return tx_hash, tx_receipt
 

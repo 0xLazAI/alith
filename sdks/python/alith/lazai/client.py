@@ -63,9 +63,19 @@ class Client(ChainManager):
             abi=SETTLEMENT_CONTRACT_ABI,
         )
 
+    def get_public_key(self) -> str:
+        return self.data_registry_contract.functions.publicKey().call()
+
     def add_file(self, url: str) -> int:
         self.send_transaction(self.data_registry_contract.functions.addFile(url))
         return self.get_file_id_by_url(url)
+
+    def add_permission_for_file(self, file_id: int, account: str, key: str):
+        return self.send_transaction(
+            self.data_registry_contract.functions.addPermissionForFile(
+                file_id, account, key
+            )
+        )
 
     def get_file_id_by_url(self, url: str) -> int:
         """
