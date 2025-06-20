@@ -1,3 +1,3 @@
-import { encrypt, decrypt } from './crypto'
+import { decrypt, encrypt } from "./crypto";
 
-export { encrypt, decrypt }
+export { encrypt, decrypt };

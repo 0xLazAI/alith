@@ -1,3 +1,3 @@
-import { ProofRequest } from './types'
+import { ProofRequest } from "./types";
 
-export { ProofRequest }
+export { ProofRequest };

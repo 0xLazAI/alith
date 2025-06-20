@@ -1,19 +1,13 @@
 {
-  "name": "@lazai-labs/alith-win32-x64-msvc",
-  "repository": "https://github.com/0xLazAI/alith",
-  "version": "0.8.2",
-  "os": [
-    "win32"
-  ],
-  "cpu": [
-    "x64"
-  ],
-  "main": "alith.win32-x64-msvc.node",
-  "files": [
-    "alith.win32-x64-msvc.node"
-  ],
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">= 10"
-  }
+	"name": "@lazai-labs/alith-win32-x64-msvc",
+	"repository": "https://github.com/0xLazAI/alith",
+	"version": "0.8.2",
+	"os": ["win32"],
+	"cpu": ["x64"],
+	"main": "alith.win32-x64-msvc.node",
+	"files": ["alith.win32-x64-msvc.node"],
+	"license": "Apache-2.0",
+	"engines": {
+		"node": ">= 10"
+	}
 }
