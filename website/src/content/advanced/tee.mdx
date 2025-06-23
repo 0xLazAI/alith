@@ -106,7 +106,96 @@ async fn main() -> Result<(), anyhow::Error> {
 
   <Tabs.Tab>
 
-Comming Soon
+### Phala Cloud
+
+For the deplopment environment, set the environment variable `DSTACK_SIMULATOR_ENDPOINT` with the
+simulator: https://github.com/Leechael/tappd-simulator/releases
+
+In production environments, mount the socket file in your docker container:
+
+```yaml
+volumes:
+  - /var/run/tappd.sock:/var/run/tappd.sock
+```
+
+```python
+from alith.tee.phala import TappdClient, AsyncTappdClient
+
+# Synchronous client
+client = TappdClient()
+async_client = AsyncTappdClient()
+
+# Get the information of the Base Image.
+info = client.info()  # or await async_client.info()
+print(info.app_id)  # Application ID
+print(info.tcb_info.mrtd)  # Access TCB info directly
+print(info.tcb_info.event_log[0].event)  # Access event log entries
+
+# Derive a key with optional path and subject
+key_result = client.derive_key(
+    "<unique-id>"
+)  # or await async_client.derive_key('<unique-id>')
+print(key_result.key)  # X.509 private key in PEM format
+print(key_result.certificate_chain)  # Certificate chain
+key_bytes = key_result.toBytes()  # Get key as bytes
+
+# Generate TDX quote
+quote_result = client.tdx_quote(
+    report_data="some-data"
+)  # or await async_client.tdx_quote(report_data='some-data')
+print(quote_result.quote)  # TDX quote in hex format
+print(quote_result.event_log)  # Event log
+rtmrs = quote_result.replay_rtmrs()  # Replay RTMRs
+```
+
+### Marlin
+
+Alith Marlin TEE Integration & SDK. This SDK provides a Rust client for communicating with the attestation server.
+
+For local development and testing without TDX devices, you can use the simulator available for download here:
+https://github.com/marlinprotocol/oyster-monorepo/tree/master/attestation/server-custom-mock and then set the
+environment variable `MARLIN_ATTESTATION_ENDPOINT` (Optional, default is http://127.0.0.1:1350)
+
+- From Source
+
+```shell
+git clone https://github.com/marlinprotocol/oyster-monorepo
+cd oyster-monorepo/attestation/server-custom-mock
+
+# Listens on 127.0.0.1:1350 by default
+cargo run -r
+
+# To customize listening interface and port
+cargo run -r --ip-addr <ip>:<port>
+```
+
+- From Docker
+
+```shell
+# The server runs on 1350 inside Docker, can remap to any interface and port
+docker run --init -p 127.0.0.1:1350:1350 marlinorg/attestation-server-custom-mock
+```
+
+```python
+from alith.tee.marlin import MarlinClient, AttestationRequest, MarlinError
+
+# Initialize default client
+client = MarlinClient.default()
+
+# Create attestation request with sample data
+request = AttestationRequest(
+    public_key=b"test_public_key_bytes",
+    user_data=b"test_user_data_bytes",
+    nonce=b"test_nonce_bytes",
+)
+
+# Fetch attestation result
+try:
+    result = client.attestation_hex(request)
+    print(f"Attestation result: {result[:64]}...")  # Truncate for readability
+except MarlinError as e:
+    print(f"Operation failed: {str(e)}")
+```
 
   </Tabs.Tab>
 
