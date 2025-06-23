@@ -33,6 +33,21 @@
       "import": "./dist/lazai/node/index.js",
       "require": "./dist/lazai/node/index.js",
       "types": "./dist/lazai/node/index.d.ts"
+    },
+    "./tee": {
+      "import": "./dist/tee/index.js",
+      "require": "./dist/tee/index.js",
+      "types": "./dist/tee/index.d.ts"
+    },
+    "./tee/phala": {
+      "import": "./dist/tee/phala.js",
+      "require": "./dist/tee/phala.js",
+      "types": "./dist/tee/phala.d.ts"
+    },
+    "./tee/marlin": {
+      "import": "./dist/tee/marlin.js",
+      "require": "./dist/tee/marlin.js",
+      "types": "./dist/tee/marlin.d.ts"
     }
   },
   "napi": {
