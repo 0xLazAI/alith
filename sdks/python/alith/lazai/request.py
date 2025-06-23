@@ -7,6 +7,7 @@ USER_HEADER = "X-LazAI-User"
 NONCE_HEADER = "X-LazAI-Nonce"
 SIGNATURE_HEADER = "X-LazAI-Signature"
 TOKEN_ID = "X-LazAI-Token-ID"
+FILE_ID = "X-LazAI-File-ID"
 
 TRAINING_TYPE = 1
 INFERENCE_TYPE = 2
