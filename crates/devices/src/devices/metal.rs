@@ -1,4 +1,3 @@
-use objc2::rc::Retained;
 use objc2_metal::{MTLCopyAllDevices, MTLDevice};
 
 use super::gpu::GpuDevice;
@@ -62,20 +61,10 @@ impl MetalConfig {
     }
 
     fn initialize_metal_device(&mut self) -> crate::Result<()> {
-        let devices = unsafe {
-            match Retained::from_raw(MTLCopyAllDevices().as_ptr()) {
-                Some(devices) => devices,
-                None => {
-                    crate::bail!("No Metal devices found");
-                }
-            }
-        };
-
-        let device = match devices.first() {
-            Some(device) => device,
-            None => {
-                crate::bail!("No Metal devices found");
-            }
+        let devices = MTLCopyAllDevices();
+        let device = match devices.count() {
+            0 => crate::bail!("No Metal devices found"),
+            _ => devices.objectAtIndex(0),
         };
         let has_unified_memory = device.hasUnifiedMemory();
         match has_unified_memory {
