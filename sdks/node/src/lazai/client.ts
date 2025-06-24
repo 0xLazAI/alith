@@ -42,6 +42,13 @@ export class Client extends ChainManager {
     );
   }
 
+  queryContract() {
+    return new this.web3.eth.Contract(
+      AI_PROCESS_CONTRACT_ABI,
+      this.contractConfig.queryAddress
+    );
+  }
+
   inferenceContract() {
     return new this.web3.eth.Contract(
       AI_PROCESS_CONTRACT_ABI,
@@ -343,6 +350,7 @@ export class Client extends ChainManager {
     addr: string;
     availableBalance: bigint;
     totalBalance: bigint;
+    queryNodes: string[];
     inferenceNodes: string[];
     trainingNodes: string[];
   }> {
@@ -395,11 +403,8 @@ export class Client extends ChainManager {
     );
   }
 
-  async depositTraining(node: string, amount: number) {
-    const method = this.settlementContract().methods.depositTraining(
-      node,
-      amount
-    );
+  async depositQuery(node: string, amount: number) {
+    const method = this.settlementContract().methods.depositQuery(node, amount);
     return await this.sendTransaction(
       method,
       this.contractConfig.settlementAddress
@@ -417,8 +422,19 @@ export class Client extends ChainManager {
     );
   }
 
-  async retrieveTraining(nodes: string[]) {
-    const method = this.settlementContract().methods.retrieveTraining(nodes);
+  async depositTraining(node: string, amount: number) {
+    const method = this.settlementContract().methods.depositTraining(
+      node,
+      amount
+    );
+    return await this.sendTransaction(
+      method,
+      this.contractConfig.settlementAddress
+    );
+  }
+
+  async retrieveQuery(nodes: string[]) {
+    const method = this.settlementContract().methods.retrieveQuery(nodes);
     return await this.sendTransaction(
       method,
       this.contractConfig.settlementAddress
@@ -431,6 +447,84 @@ export class Client extends ChainManager {
       method,
       this.contractConfig.settlementAddress
     );
+  }
+
+  async retrieveTraining(nodes: string[]) {
+    const method = this.settlementContract().methods.retrieveTraining(nodes);
+    return await this.sendTransaction(
+      method,
+      this.contractConfig.settlementAddress
+    );
+  }
+
+  async addQueryNode(address: string, url: string, public_key: string) {
+    const method = this.queryContract().methods.addNode(
+      address,
+      url,
+      public_key
+    );
+    return await this.sendTransaction(method, this.contractConfig.queryAddress);
+  }
+
+  async removeQueryNode(address: string) {
+    const method = this.queryContract().methods.removeNode(address);
+    return await this.sendTransaction(method, this.contractConfig.queryAddress);
+  }
+
+  async getQueryNode(address: string): Promise<{
+    nodeAddress: string;
+    url: string;
+    status: number;
+    amount: string;
+    jobsCount: bigint;
+    publicKey: string;
+  }> {
+    return this.queryContract().methods.getNode(address).call();
+  }
+
+  async queryNodeList(): Promise<string[]> {
+    return this.queryContract().methods.nodeList().call();
+  }
+
+  async getQueryAccount(
+    user: string,
+    node: string
+  ): Promise<{
+    user: string;
+    node: string;
+    nonce: bigint;
+    balance: bigint;
+    pendingRefund: bigint;
+    refunds: {
+      index: bigint;
+      amount: bigint;
+      createdAt: bigint;
+      processed: boolean;
+    }[];
+  }> {
+    return this.queryContract().methods.getAccount(user, node).call();
+  }
+
+  async querySettlementFees(data: SettlementProofData) {
+    const messageHash = Web3.utils.keccak256(data.abiEncode());
+    const signature = this.web3.eth.accounts.sign(
+      messageHash,
+      this.account.privateKey
+    );
+
+    const proof = {
+      signature: signature.signature,
+      data: {
+        id: data.id,
+        user: data.user,
+        cost: data.cost,
+        nonce: data.nonce,
+        userSignature: data.userSignature,
+      },
+    };
+
+    const method = this.queryContract().methods.settlementFees(proof);
+    return await this.sendTransaction(method, this.contractConfig.queryAddress);
   }
 
   async addInferenceNode(address: string, url: string, public_key: string) {

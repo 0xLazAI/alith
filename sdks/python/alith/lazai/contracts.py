@@ -5,9 +5,10 @@ DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS = (
 DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS = (
     "0x2eD344c586303C98FC3c6D5B42C5616ED42f9D9d"
 )
-DEFAULT_INFERENCE_CONTRACT_ADSDRESS = "0xE747fd70269a8a540403ddE802D6906CB18C9F50"
-DEFAULT_TRAINING_CONTRACT_ADSDRESS = "0xbb969eaafB3A7124b8dCdf9a6d5Cd5BAa0381361"
-DEFAULT_SETTLEMENT_CONTRACT_ADDRESS = "0xb578AB78bb4780D9007Cc836b358468467814B3E"
+DEFAULT_QUERY_CONTRACT_ADDRESS = "0xE747fd70269a8a540403ddE802D6906CB18C9F50"
+DEFAULT_INFERENCE_CONTRACT_ADDRESS = "0xbb969eaafB3A7124b8dCdf9a6d5Cd5BAa0381361"
+DEFAULT_TRAINING_CONTRACT_ADDRESS = "0xb578AB78bb4780D9007Cc836b358468467814B3E"
+DEFAULT_SETTLEMENT_CONTRACT_ADDRESS = "0xBE94646A0C6C1032c289Eea47169798e09dB5299"
 DATA_REGISTRY_CONTRACT_ABI = [
     {
         "constant": True,
@@ -917,6 +918,20 @@ SETTLEMENT_CONTRACT_ABI = [
     },
     {
         "type": "function",
+        "name": "query",
+        "inputs": [],
+        "outputs": [{"type": "address"}],
+        "stateMutability": "view",
+    },
+    {
+        "type": "function",
+        "name": "updateQuery",
+        "inputs": [{"type": "address", "name": "newQuery"}],
+        "outputs": [],
+        "stateMutability": "nonpayable",
+    },
+    {
+        "type": "function",
         "name": "inference",
         "inputs": [],
         "outputs": [{"type": "address"}],
@@ -954,6 +969,7 @@ SETTLEMENT_CONTRACT_ABI = [
                     {"type": "address", "name": "addr"},
                     {"type": "uint256", "name": "availableBalance"},
                     {"type": "uint256", "name": "totalBalance"},
+                    {"type": "address[]", "name": "queryNodes"},
                     {"type": "address[]", "name": "inferenceNodes"},
                     {"type": "address[]", "name": "trainingNodes"},
                 ],
@@ -1060,9 +1076,10 @@ class ContractConfig:
         data_registry_address: str = None,
         verified_computing_address: str = None,
         data_anchor_token_address: str = None,
-        settlement_address: str = None,
+        query_address: str = None,
         inference_address: str = None,
         training_address: str = None,
+        settlement_address: str = None,
     ):
         self.data_registry_address = (
             data_registry_address or DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS
@@ -1077,7 +1094,6 @@ class ContractConfig:
         self.settlement_address = (
             settlement_address or DEFAULT_SETTLEMENT_CONTRACT_ADDRESS
         )
-        self.inference_address = (
-            inference_address or DEFAULT_INFERENCE_CONTRACT_ADSDRESS
-        )
-        self.training_address = training_address or DEFAULT_TRAINING_CONTRACT_ADSDRESS
+        self.query_address = query_address or DEFAULT_QUERY_CONTRACT_ADDRESS
+        self.inference_address = inference_address or DEFAULT_INFERENCE_CONTRACT_ADDRESS
+        self.training_address = training_address or DEFAULT_TRAINING_CONTRACT_ADDRESS

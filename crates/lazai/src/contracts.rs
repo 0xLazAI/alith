@@ -185,11 +185,12 @@ sol! {
         address addr;
         uint256 availableBalance;
         uint256 totalBalance;
+        address[] queryNodes;
         address[] inferenceNodes;
         address[] trainingNodes;
     }
 
-    // Verified Computing Contract for privacy data and inference in CPU/GPU TEE.
+    // Verified Computing Contract for privacy data proof, query, inference and training in CPU/GPU TEE.
 
     #[sol(rpc)]
     interface IVerifiedComputing {
@@ -318,10 +319,12 @@ sol! {
     #[sol(rpc)]
     interface ISettlement {
         function version() external pure returns (uint256);
-        function training() external view returns (IAIProcess);
-        function updateTraining(address newTraining) external;
+        function query() external view returns (IAIProcess);
+        function updateQuery(address newTraining) external;
         function inference() external view returns (IAIProcess);
         function updateInference(address newInference) external;
+        function training() external view returns (IAIProcess);
+        function updateTraining(address newTraining) external;
 
         function pause() external;
         function unpause() external;
@@ -333,10 +336,13 @@ sol! {
         function deposit() external payable;
         function withdraw(uint256 amount) external;
 
-        function depositTraining(address node, uint256 amount) external;
+        function depositQuery(address node, uint256 amount) external;
         function depositInference(address node, uint256 amount) external;
-        function retrieveTraining(address[] memory nodes) external;
+        function depositTraining(address node, uint256 amount) external;
+
+        function retrieveQuery(address[] memory nodes) external;
         function retrieveInference(address[] memory nodes) external;
+        function retrieveTraining(address[] memory nodes) external;
 
         function settlement(address addr, uint256 cost) external;
     }
@@ -348,21 +354,24 @@ pub const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS: Address =
     address!("0x815da22D880E3560bCEcc85b6e4938b30c8202C4");
 pub const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS: Address =
     address!("0xEAd077726dC83ecF385e3763ed4A0A50E8Ac5AA0");
-pub const DEFAULT_INFERENCE_CONTRACT_ADSDRESS: Address =
+pub const DEFAULT_QUERY_CONTRACT_ADDRESS: Address =
     address!("0xE747fd70269a8a540403ddE802D6906CB18C9F50");
-pub const DEFAULT_TRAINING_CONTRACT_ADSDRESS: Address =
+pub const DEFAULT_INFERENCE_CONTRACT_ADDRESS: Address =
     address!("0xbb969eaafB3A7124b8dCdf9a6d5Cd5BAa0381361");
-pub const DEFAULT_SETTLEMENT_CONTRACT_ADDRESS: Address =
+pub const DEFAULT_TRAINING_CONTRACT_ADDRESS: Address =
     address!("0xb578AB78bb4780D9007Cc836b358468467814B3E");
+pub const DEFAULT_SETTLEMENT_CONTRACT_ADDRESS: Address =
+    address!("0xBE94646A0C6C1032c289Eea47169798e09dB5299");
 
 #[derive(Debug, Clone)]
 pub struct ContractConfig {
     pub data_registry_address: Address,
     pub verified_computing_address: Address,
     pub data_anchor_token_address: Address,
-    pub settlement_address: Address,
+    pub query_address: Address,
     pub inference_address: Address,
     pub training_address: Address,
+    pub settlement_address: Address,
 }
 
 impl Default for ContractConfig {
@@ -371,9 +380,10 @@ impl Default for ContractConfig {
             data_registry_address: DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
             verified_computing_address: DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
             data_anchor_token_address: DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS,
+            query_address: DEFAULT_QUERY_CONTRACT_ADDRESS,
+            inference_address: DEFAULT_INFERENCE_CONTRACT_ADDRESS,
+            training_address: DEFAULT_TRAINING_CONTRACT_ADDRESS,
             settlement_address: DEFAULT_SETTLEMENT_CONTRACT_ADDRESS,
-            inference_address: DEFAULT_INFERENCE_CONTRACT_ADSDRESS,
-            training_address: DEFAULT_TRAINING_CONTRACT_ADSDRESS,
         }
     }
 }

@@ -470,13 +470,13 @@ impl Client {
         self.send_transaction(contract.withdraw(amount), None).await
     }
 
-    pub async fn deposit_training(
+    pub async fn deposit_query(
         &self,
         node: Address,
         amount: U256,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.settlement_contract();
-        self.send_transaction(contract.depositTraining(node, amount), None)
+        self.send_transaction(contract.depositQuery(node, amount), None)
             .await
     }
 
@@ -490,12 +490,22 @@ impl Client {
             .await
     }
 
-    pub async fn retrieve_training(
+    pub async fn deposit_training(
+        &self,
+        node: Address,
+        amount: U256,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.depositTraining(node, amount), None)
+            .await
+    }
+
+    pub async fn retrieve_query(
         &self,
         nodes: Vec<Address>,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.settlement_contract();
-        self.send_transaction(contract.retrieveTraining(nodes), None)
+        self.send_transaction(contract.retrieveQuery(nodes), None)
             .await
     }
 
@@ -506,6 +516,33 @@ impl Client {
         let contract = self.settlement_contract();
         self.send_transaction(contract.retrieveInference(nodes), None)
             .await
+    }
+
+    pub async fn retrieve_training(
+        &self,
+        nodes: Vec<Address>,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.settlement_contract();
+        self.send_transaction(contract.retrieveTraining(nodes), None)
+            .await
+    }
+
+    pub async fn add_query_node(
+        &self,
+        address: Address,
+        url: impl AsRef<str>,
+        public_key: impl AsRef<str>,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.query_contract();
+        self.send_transaction(
+            contract.addNode(
+                address,
+                url.as_ref().to_string(),
+                public_key.as_ref().to_string(),
+            ),
+            None,
+        )
+        .await
     }
 
     pub async fn add_inference_node(
@@ -524,6 +561,64 @@ impl Client {
             None,
         )
         .await
+    }
+
+    pub async fn remove_query_node(
+        &self,
+        address: Address,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.query_contract();
+        self.send_transaction(contract.removeNode(address), None)
+            .await
+    }
+
+    pub async fn get_query_node(&self, address: Address) -> Result<Option<NodeInfo>, ClientError> {
+        let contract = self.query_contract();
+        let builder = self
+            .call_builder(contract.getNode(address), self.config.query_address, None)
+            .await?;
+        let info = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        if info.url.is_empty() {
+            Ok(None)
+        } else {
+            Ok(Some(info))
+        }
+    }
+
+    /// Get the query node address list
+    pub async fn query_node_list(&self) -> Result<Vec<Address>, ClientError> {
+        let contract = self.query_contract();
+        let builder = self
+            .call_builder(contract.nodeList(), self.config.query_address, None)
+            .await?;
+        let list = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(list)
+    }
+
+    pub async fn get_query_account(
+        &self,
+        user: Address,
+        node: Address,
+    ) -> Result<Account, ClientError> {
+        let contract = self.query_contract();
+        let builder = self
+            .call_builder(
+                contract.getAccount(user, node),
+                self.config.query_address,
+                None,
+            )
+            .await?;
+        let list = builder
+            .call()
+            .await
+            .map_err(|err| ClientError::ContractCallError(err.to_string()))?;
+        Ok(list)
     }
 
     pub async fn remove_inference_node(
@@ -674,6 +769,27 @@ impl Client {
         Ok(list)
     }
 
+    pub async fn query_settlement_fees(
+        &self,
+        data: SettlementProofData,
+    ) -> Result<TransactionReceipt, ClientError> {
+        let contract = self.query_contract();
+        let message_hash = keccak256(data.abi_encode());
+        let signature = format!(
+            "0x{}",
+            self.wallet
+                .sign_message_hex(message_hash.as_slice())
+                .await?
+        );
+        let proof = SettlementProof {
+            signature: signature.as_bytes().to_vec().into(),
+            data,
+        };
+
+        self.send_transaction(contract.settlementFees(proof), None)
+            .await
+    }
+
     pub async fn inference_settlement_fees(
         &self,
         data: SettlementProofData,
@@ -784,6 +900,11 @@ impl Client {
             self.config.data_anchor_token_address,
             &self.manager.provider,
         )
+    }
+
+    #[inline]
+    fn query_contract(&self) -> IAIProcessInstance<&AlloyProvider> {
+        IAIProcessInstance::new(self.config.query_address, &self.manager.provider)
     }
 
     #[inline]
