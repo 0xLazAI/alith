@@ -131,7 +131,7 @@ impl Client {
         Ok(file_id)
     }
 
-    /// Get the file information according to the file id on LazAI.
+    /// Get the file information according to the file id.
     pub async fn get_file(&self, file_id: U256) -> Result<File, ClientError> {
         let contract = self.data_registry_contract();
         let builder = self
@@ -148,7 +148,7 @@ impl Client {
         Ok(file)
     }
 
-    /// Get the encryption key for the account on LazAI.
+    /// Get the encryption key for the account.
     pub async fn get_file_permission(
         &self,
         file_id: U256,
@@ -169,7 +169,7 @@ impl Client {
         Ok(key)
     }
 
-    /// Get the file proof on LazAI.
+    /// Get the file proof.
     pub async fn get_file_proof(&self, file_id: U256, index: U256) -> Result<Proof, ClientError> {
         let contract = self.data_registry_contract();
         let builder = self
