@@ -871,7 +871,7 @@ export const AI_PROCESS_CONTRACT_ABI = [
     inputs: [
       {
         type: "tuple",
-        name: "proof",
+        name: "settlement",
         components: [
           { type: "bytes", name: "signature" },
           {

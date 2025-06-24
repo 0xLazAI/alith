@@ -16,7 +16,7 @@ from .contracts import (
     VERIFIED_COMPUTING_CONTRACT_ABI,
     ContractConfig,
 )
-from .proof import ProofData, SettlementProofData
+from .proof import ProofData, SettlementData
 from .settlement import SettlementRequest
 
 
@@ -328,7 +328,7 @@ class Client(ChainManager):
 
     def inference_settlement_fees(
         self,
-        data: SettlementProofData,
+        data: SettlementData,
     ):
         message_hash = Web3.keccak(data.abi_encode())
         eth_message = encode_defunct(primitive=message_hash)
@@ -336,7 +336,7 @@ class Client(ChainManager):
             eth_message, self.wallet.key
         ).signature.hex()
 
-        proof = {
+        settlement = {
             "signature": HexBytes(signature).hex(),
             "data": {
                 "id": data.id,
@@ -347,7 +347,7 @@ class Client(ChainManager):
         }
 
         return self.send_transaction(
-            self.inference_contract.functions.settlementFees(proof)
+            self.inference_contract.functions.settlementFees(settlement)
         )
 
     def add_training_node(self, address: str, url: str, public_key: str):
@@ -371,14 +371,14 @@ class Client(ChainManager):
     def get_training_account(self, user: str, node: str):
         return self.training_contract.functions.getAccount(user, node).call()
 
-    def training_settlement_fees(self, data: SettlementProofData):
+    def training_settlement_fees(self, data: SettlementData):
         message_hash = Web3.keccak(data.abi_encode())
         eth_message = encode_defunct(primitive=message_hash)
         signature = self.w3.eth.account.sign_message(
             eth_message, self.wallet.key
         ).signature.hex()
 
-        proof = {
+        settlement = {
             "signature": HexBytes(signature).hex(),
             "data": {
                 "id": data.id,
@@ -389,7 +389,7 @@ class Client(ChainManager):
         }
 
         return self.send_transaction(
-            self.training_contract.functions.settlementFees(proof)
+            self.training_contract.functions.settlementFees(settlement)
         )
 
     def get_request_headers(

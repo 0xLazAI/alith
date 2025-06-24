@@ -13,11 +13,11 @@ import {
   DATA_REGISTRY_CONTRACT_ABI,
   VERIFIED_COMPUTING_CONTRACT_ABI,
 } from "./contracts";
-import { ProofData, SettlementProofData } from "./proof";
+import { ProofData, SettlementData } from "./proof";
 
 export {
   ProofData,
-  SettlementProofData,
+  SettlementData,
   ChainManager,
   ChainConfig,
   DEVNET_NETWORK,

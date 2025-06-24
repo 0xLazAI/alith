@@ -167,7 +167,7 @@ sol! {
         bool processed;
     }
 
-    struct SettlementProofData {
+    struct SettlementData {
         // Use string here and sync with the chat/training id.
         string id;
         address user;
@@ -176,9 +176,9 @@ sol! {
         bytes userSignature;
     }
 
-    struct SettlementProof {
+    struct Settlement {
         bytes signature;
-        SettlementProofData data;
+        SettlementData data;
     }
 
     struct User {
@@ -313,7 +313,7 @@ sol! {
             external
             returns (uint256 totalAmount, uint256 balance, uint256 pendingRefund);
 
-        function settlementFees(SettlementProof memory proof) external;
+        function settlementFees(Settlement memory settlement) external;
     }
 
     #[sol(rpc)]

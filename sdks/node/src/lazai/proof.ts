@@ -28,7 +28,7 @@ export class ProofData {
   }
 }
 
-export class SettlementProofData {
+export class SettlementData {
   constructor(
     public id: string,
     public user: string,
