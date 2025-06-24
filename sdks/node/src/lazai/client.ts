@@ -35,10 +35,10 @@ export class Client extends ChainManager {
     );
   }
 
-  dataAnchorTokenContract() {
+  dataAnchoringTokenContract() {
     return new this.web3.eth.Contract(
       VERIFIED_COMPUTING_CONTRACT_ABI,
-      this.contractConfig.dataAnchorTokenAddress
+      this.contractConfig.dataAnchoringTokenAddress
     );
   }
 
@@ -325,10 +325,10 @@ export class Client extends ChainManager {
    * Mint a new Data Anchor Token (DAT) with the specified parameters.
    */
   async mintDAT() {
-    const method = this.dataAnchorTokenContract().methods.mint;
+    const method = this.dataAnchoringTokenContract().methods.mint;
     return await this.sendTransaction(
       method,
-      this.contractConfig.dataAnchorTokenAddress
+      this.contractConfig.dataAnchoringTokenAddress
     );
   }
 
@@ -336,14 +336,14 @@ export class Client extends ChainManager {
    * Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID.
    */
   async getDATBalance(account: string, id: bigint): Promise<bigint> {
-    return this.dataAnchorTokenContract().methods.balanceOf(account, id).call();
+    return this.dataAnchoringTokenContract().methods.balanceOf(account, id).call();
   }
 
   /**
    * Returns the Uri for a specific Data Anchor Token (DAT) by its token ID.
    */
   async dataUri(tokenId: bigint): Promise<string> {
-    return this.dataAnchorTokenContract().methods.uri(tokenId).call();
+    return this.dataAnchoringTokenContract().methods.uri(tokenId).call();
   }
 
   async getUser(address: string): Promise<{

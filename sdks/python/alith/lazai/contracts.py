@@ -2,7 +2,7 @@ DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS = "0xEAd077726dC83ecF385e3763ed4A0A50E8Ac
 DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS = (
     "0x815da22D880E3560bCEcc85b6e4938b30c8202C4"
 )
-DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS = (
+DEFAULT_DATA_ANCHORING_TOKEN_CONTRACT_ADDRESS = (
     "0x2eD344c586303C98FC3c6D5B42C5616ED42f9D9d"
 )
 DEFAULT_QUERY_CONTRACT_ADDRESS = "0xE747fd70269a8a540403ddE802D6906CB18C9F50"
@@ -493,7 +493,7 @@ VERIFIED_COMPUTING_CONTRACT_ABI = [
         "type": "function",
     },
 ]
-DATA_ANCHOR_TOKEN_CONTRACT_ABI = [
+DATA_ANCHORING_TOKEN_CONTRACT_ABI = [
     {
         "anonymous": False,
         "inputs": [
@@ -1075,7 +1075,7 @@ class ContractConfig:
         self,
         data_registry_address: str = None,
         verified_computing_address: str = None,
-        data_anchor_token_address: str = None,
+        data_anchoring_token_address: str = None,
         query_address: str = None,
         inference_address: str = None,
         training_address: str = None,
@@ -1088,8 +1088,8 @@ class ContractConfig:
             verified_computing_address
             or DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS
         )
-        self.data_anchor_token_address = (
-            data_anchor_token_address or DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS
+        self.data_anchoring_token_address = (
+            data_anchoring_token_address or DEFAULT_DATA_ANCHORING_TOKEN_CONTRACT_ADDRESS
         )
         self.settlement_address = (
             settlement_address or DEFAULT_SETTLEMENT_CONTRACT_ADDRESS

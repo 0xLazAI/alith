@@ -2,7 +2,7 @@ export const DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS =
   "0xEAd077726dC83ecF385e3763ed4A0A50E8Ac5AA0";
 export const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS =
   "0x815da22D880E3560bCEcc85b6e4938b30c8202C4";
-export const DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS =
+export const DEFAULT_DATA_ANCHORING_TOKEN_CONTRACT_ADDRESS =
   "0x2eD344c586303C98FC3c6D5B42C5616ED42f9D9d";
 export const DEFAULT_QUERY_CONTRACT_ADDRESS =
   "0xE747fd70269a8a540403ddE802D6906CB18C9F50";
@@ -496,7 +496,7 @@ export const VERIFIED_COMPUTING_CONTRACT_ABI = [
     type: "function",
   },
 ];
-export const DATA_ANCHOR_TOKEN_CONTRACT = [
+export const DATA_ANCHORING_TOKEN_CONTRACT = [
   {
     anonymous: false,
     inputs: [
@@ -1070,7 +1070,7 @@ export const SETTLEMENT_CONTRACT_ABI = [
 export class ContractConfig {
   dataRegistryAddress: string;
   verifiedComputingAddress: string;
-  dataAnchorTokenAddress: string;
+  dataAnchoringTokenAddress: string;
   queryAddress: string;
   inferenceAddress: string;
   trainingAddress: string;
@@ -1079,7 +1079,7 @@ export class ContractConfig {
   constructor(
     dataRegistryAddress: string = DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
     verifiedComputingAddress: string = DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
-    dataAnchorTokenAddress: string = DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS,
+    dataAnchoringTokenAddress: string = DEFAULT_DATA_ANCHORING_TOKEN_CONTRACT_ADDRESS,
     queryAddress: string = DEFAULT_QUERY_CONTRACT_ADDRESS,
     inferenceAddress: string = DEFAULT_INFERENCE_CONTRACT_ADDRESS,
     trainingAddress: string = DEFAULT_TRAINING_CONTRACT_ADDRESS,
@@ -1087,7 +1087,7 @@ export class ContractConfig {
   ) {
     this.dataRegistryAddress = dataRegistryAddress;
     this.verifiedComputingAddress = verifiedComputingAddress;
-    this.dataAnchorTokenAddress = dataAnchorTokenAddress;
+    this.dataAnchoringTokenAddress = dataAnchoringTokenAddress;
     this.queryAddress = queryAddress;
     this.inferenceAddress = inferenceAddress;
     this.trainingAddress = trainingAddress;
