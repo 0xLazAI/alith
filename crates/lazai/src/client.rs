@@ -771,7 +771,7 @@ impl Client {
 
     pub async fn query_settlement_fees(
         &self,
-        data: SettlementProofData,
+        data: SettlementData,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.query_contract();
         let message_hash = keccak256(data.abi_encode());
@@ -781,12 +781,12 @@ impl Client {
                 .sign_message_hex(message_hash.as_slice())
                 .await?
         );
-        let proof = SettlementProof {
+        let settlement = Settlement {
             signature: signature.as_bytes().to_vec().into(),
             data,
         };
 
-        self.send_transaction(contract.settlementFees(proof), None)
+        self.send_transaction(contract.settlementFees(settlement), None)
             .await
     }
 

@@ -508,14 +508,14 @@ export class Client extends ChainManager {
     return this.queryContract().methods.getAccount(user, node).call();
   }
 
-  async querySettlementFees(data: SettlementProofData) {
+  async querySettlementFees(data: SettlementData) {
     const messageHash = Web3.utils.keccak256(data.abiEncode());
     const signature = this.web3.eth.accounts.sign(
       messageHash,
       this.account.privateKey
     );
 
-    const proof = {
+    const settlement = {
       signature: signature.signature,
       data: {
         id: data.id,
@@ -526,7 +526,7 @@ export class Client extends ChainManager {
       },
     };
 
-    const method = this.queryContract().methods.settlementFees(proof);
+    const method = this.queryContract().methods.settlementFees(settlement);
     return await this.sendTransaction(method, this.contractConfig.queryAddress);
   }
 
