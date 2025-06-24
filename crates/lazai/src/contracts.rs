@@ -68,7 +68,7 @@ sol! {
     interface IDataRegistry {
         function name() external view returns (string memory);
         function version() external pure returns (uint256);
-        function token() external view returns (DataAnchorToken);
+        function token() external view returns (DataAnchoringToken);
         function verifiedComputing() external view returns (IVerifiedComputing);
         function updateVerifiedComputing(address newVerifiedComputing) external;
 
@@ -262,7 +262,7 @@ sol! {
     }
 
     #[sol(rpc)]
-    contract DataAnchorToken is IERC1155 {
+    contract DataAnchoringToken is IERC1155 {
         event TokenMinted(address indexed to, uint256 indexed tokenId, string tokenURI);
 
         function mint(address to, uint256 amount, string memory tokenURI_, bool verified_) public;
@@ -348,7 +348,7 @@ sol! {
     }
 }
 
-pub const DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS: Address =
+pub const DEFAULT_DATA_ANCHORING_TOKEN_CONTRACT_ADDRESS: Address =
     address!("0x2eD344c586303C98FC3c6D5B42C5616ED42f9D9d");
 pub const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS: Address =
     address!("0x815da22D880E3560bCEcc85b6e4938b30c8202C4");
@@ -367,7 +367,7 @@ pub const DEFAULT_SETTLEMENT_CONTRACT_ADDRESS: Address =
 pub struct ContractConfig {
     pub data_registry_address: Address,
     pub verified_computing_address: Address,
-    pub data_anchor_token_address: Address,
+    pub data_anchoring_token_address: Address,
     pub query_address: Address,
     pub inference_address: Address,
     pub training_address: Address,
@@ -379,7 +379,7 @@ impl Default for ContractConfig {
         Self {
             data_registry_address: DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
             verified_computing_address: DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
-            data_anchor_token_address: DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS,
+            data_anchoring_token_address: DEFAULT_DATA_ANCHORING_TOKEN_CONTRACT_ADDRESS,
             query_address: DEFAULT_QUERY_CONTRACT_ADDRESS,
             inference_address: DEFAULT_INFERENCE_CONTRACT_ADDRESS,
             training_address: DEFAULT_TRAINING_CONTRACT_ADDRESS,

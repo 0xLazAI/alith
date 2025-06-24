@@ -10,7 +10,7 @@ from web3 import Web3
 from .chain import ChainConfig, ChainManager
 from .contracts import (
     AI_PROCESS_CONTRACT_ABI,
-    DATA_ANCHOR_TOKEN_CONTRACT_ABI,
+    DATA_ANCHORING_TOKEN_CONTRACT_ABI,
     DATA_REGISTRY_CONTRACT_ABI,
     SETTLEMENT_CONTRACT_ABI,
     VERIFIED_COMPUTING_CONTRACT_ABI,
@@ -46,9 +46,9 @@ class Client(ChainManager):
             address=contract_config.verified_computing_address,
             abi=VERIFIED_COMPUTING_CONTRACT_ABI,
         )
-        self.data_anchor_token_contract = self.w3.eth.contract(
-            address=contract_config.data_anchor_token_address,
-            abi=DATA_ANCHOR_TOKEN_CONTRACT_ABI,
+        self.data_anchoring_token_contract = self.w3.eth.contract(
+            address=contract_config.data_anchoring_token_address,
+            abi=DATA_ANCHORING_TOKEN_CONTRACT_ABI,
         )
         self.query_contract = self.w3.eth.contract(
             address=contract_config.query_address,
@@ -191,18 +191,18 @@ class Client(ChainManager):
     def mint_dat(self, to: str, amount: int, token_uri: str, verified: bool):
         """Mint a new Data Anchor Token (DAT) with the specified parameters."""
         return self.send_transaction(
-            self.data_anchor_token_contract.functions.mint(
+            self.data_anchoring_token_contract.functions.mint(
                 to, amount, token_uri, verified
             )
         )
 
     def get_dat_balance(self, account: str, id: int):
         """Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID."""
-        return self.data_anchor_token_contract.functions.balanceOf(account, id).call()
+        return self.data_anchoring_token_contract.functions.balanceOf(account, id).call()
 
     def data_uri(self, token_id: int):
         """Returns the Uri for a specific Data Anchor Token (DAT) by its token ID."""
-        return self.data_anchor_token_contract.functions.uri(token_id).call()
+        return self.data_anchoring_token_contract.functions.uri(token_id).call()
 
     def get_user(self, user: str):
         """Get the user for the settlement."""

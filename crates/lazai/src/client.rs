@@ -15,8 +15,8 @@ use crate::{
     Wallet, WalletError,
     chain::AlloyProvider,
     contracts::{
-        Account, ContractConfig, DataAnchorToken::DataAnchorTokenInstance, FileResponse as File,
-        IAIProcess::IAIProcessInstance, IDataRegistry::IDataRegistryInstance,
+        Account, ContractConfig, DataAnchoringToken::DataAnchoringTokenInstance,
+        FileResponse as File, IAIProcess::IAIProcessInstance, IDataRegistry::IDataRegistryInstance,
         ISettlement::ISettlementInstance, IVerifiedComputing::IVerifiedComputingInstance, Job,
         NodeInfo, Permission, User,
     },
@@ -383,18 +383,18 @@ impl Client {
         token_uri: String,
         verified: bool,
     ) -> Result<TransactionReceipt, ClientError> {
-        let contract = self.data_anchor_token_contract();
+        let contract = self.data_anchoring_token_contract();
         self.send_transaction(contract.mint(to, amount, token_uri, verified), None)
             .await
     }
 
     /// Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID.
     pub async fn get_dat_balance(&self, account: Address, id: U256) -> Result<U256, ClientError> {
-        let contract = self.data_anchor_token_contract();
+        let contract = self.data_anchoring_token_contract();
         let builder = self
             .call_builder(
                 contract.balanceOf(account, id),
-                self.config.data_anchor_token_address,
+                self.config.data_anchoring_token_address,
                 None,
             )
             .await?;
@@ -407,11 +407,11 @@ impl Client {
 
     /// Returns the Uri for a specific Data Anchor Token (DAT) by its token ID.
     pub async fn dat_uri(&self, token_id: U256) -> Result<String, ClientError> {
-        let contract = self.data_anchor_token_contract();
+        let contract = self.data_anchoring_token_contract();
         let builder = self
             .call_builder(
                 contract.uri(token_id),
-                self.config.data_anchor_token_address,
+                self.config.data_anchoring_token_address,
                 None,
             )
             .await?;
@@ -895,9 +895,9 @@ impl Client {
     }
 
     #[inline]
-    fn data_anchor_token_contract(&self) -> DataAnchorTokenInstance<&AlloyProvider> {
-        DataAnchorTokenInstance::new(
-            self.config.data_anchor_token_address,
+    fn data_anchoring_token_contract(&self) -> DataAnchoringTokenInstance<&AlloyProvider> {
+        DataAnchoringTokenInstance::new(
+            self.config.data_anchoring_token_address,
             &self.manager.provider,
         )
     }
