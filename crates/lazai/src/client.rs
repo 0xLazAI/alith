@@ -11,8 +11,8 @@ use std::ops::Deref;
 use thiserror::Error;
 
 use crate::{
-    ChainConfig, ChainError, ChainManager, Proof, ProofData, SettlementProof, SettlementProofData,
-    Wallet, WalletError,
+    ChainConfig, ChainError, ChainManager, Proof, ProofData, Settlement, SettlementData, Wallet,
+    WalletError,
     chain::AlloyProvider,
     contracts::{
         Account, ContractConfig, DataAnchorToken::DataAnchorTokenInstance, FileResponse as File,
@@ -676,7 +676,7 @@ impl Client {
 
     pub async fn inference_settlement_fees(
         &self,
-        data: SettlementProofData,
+        data: SettlementData,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.inference_contract();
         let message_hash = keccak256(data.abi_encode());
@@ -686,7 +686,7 @@ impl Client {
                 .sign_message_hex(message_hash.as_slice())
                 .await?
         );
-        let proof = SettlementProof {
+        let proof = Settlement {
             signature: signature.as_bytes().to_vec().into(),
             data,
         };
@@ -697,7 +697,7 @@ impl Client {
 
     pub async fn training_settlement_fees(
         &self,
-        data: SettlementProofData,
+        data: SettlementData,
     ) -> Result<TransactionReceipt, ClientError> {
         let contract = self.training_contract();
         let message_hash = keccak256(data.abi_encode());
@@ -707,7 +707,7 @@ impl Client {
                 .sign_message_hex(message_hash.as_slice())
                 .await?
         );
-        let proof = SettlementProof {
+        let proof = Settlement {
             signature: signature.as_bytes().to_vec().into(),
             data,
         };

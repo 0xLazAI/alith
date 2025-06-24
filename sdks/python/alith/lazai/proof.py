@@ -13,7 +13,7 @@ class ProofData(BaseModel):
         )
 
 
-class SettlementProofData(BaseModel):
+class SettlementData(BaseModel):
     id: str
     user: str
     cost: int

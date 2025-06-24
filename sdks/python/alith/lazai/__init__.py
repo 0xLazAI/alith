@@ -7,7 +7,7 @@ from .chain import (
 )
 from .client import Client
 from .node import ProofRequest
-from .proof import ProofData, SettlementProofData
+from .proof import ProofData, SettlementData
 from .request import recover_address, validate_account_and_signature, validate_request
 from .settlement import SettlementRequest, SettlementSignature
 
@@ -16,7 +16,7 @@ __all__ = [
     "ChainManager",
     "Client",
     "ProofData",
-    "SettlementProofData",
+    "SettlementData",
     "ProofRequest",
     "TESTNET_CHAINID",
     "TESTNET_ENDPOINT",

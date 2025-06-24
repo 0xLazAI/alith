@@ -5,7 +5,7 @@ import {
   DATA_REGISTRY_CONTRACT_ABI,
   VERIFIED_COMPUTING_CONTRACT_ABI,
 } from "./contracts";
-import type { ProofData, SettlementProofData } from "./proof";
+import type { ProofData, SettlementData } from "./proof";
 
 import Web3 from "web3";
 
@@ -487,14 +487,14 @@ export class Client extends ChainManager {
     return this.inferenceContract().methods.getAccount(user, node).call();
   }
 
-  async inferenceSettlementFees(data: SettlementProofData) {
+  async inferenceSettlementFees(data: SettlementData) {
     const messageHash = Web3.utils.keccak256(data.abiEncode());
     const signature = this.web3.eth.accounts.sign(
       messageHash,
       this.account.privateKey
     );
 
-    const proof = {
+    const settlement = {
       signature: signature.signature,
       data: {
         id: data.id,
@@ -505,7 +505,7 @@ export class Client extends ChainManager {
       },
     };
 
-    const method = this.inferenceContract().methods.settlementFees(proof);
+    const method = this.inferenceContract().methods.settlementFees(settlement);
     return await this.sendTransaction(
       method,
       this.contractConfig.inferenceAddress
@@ -566,14 +566,14 @@ export class Client extends ChainManager {
     return this.trainingContract().methods.getAccount(user, node).call();
   }
 
-  async trainingSettlementFees(data: SettlementProofData) {
+  async trainingSettlementFees(data: SettlementData) {
     const messageHash = Web3.utils.keccak256(data.abiEncode());
     const signature = this.web3.eth.accounts.sign(
       messageHash,
       this.account.privateKey
     );
 
-    const proof = {
+    const settlement = {
       signature: signature.signature,
       data: {
         id: data.id,
@@ -583,7 +583,7 @@ export class Client extends ChainManager {
       },
     };
 
-    const method = this.trainingContract().methods.settlementFees(proof);
+    const method = this.trainingContract().methods.settlementFees(settlement);
     return await this.sendTransaction(
       method,
       this.contractConfig.trainingAddress
