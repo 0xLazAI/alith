@@ -4,12 +4,14 @@ export const DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS =
   "0x815da22D880E3560bCEcc85b6e4938b30c8202C4";
 export const DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS =
   "0x2eD344c586303C98FC3c6D5B42C5616ED42f9D9d";
-export const DEFAULT_INFERENCE_CONTRACT_ADSDRESS =
+export const DEFAULT_QUERY_CONTRACT_ADDRESS =
   "0xE747fd70269a8a540403ddE802D6906CB18C9F50";
-export const DEFAULT_TRAINING_CONTRACT_ADSDRESS =
+export const DEFAULT_INFERENCE_CONTRACT_ADDRESS =
   "0xbb969eaafB3A7124b8dCdf9a6d5Cd5BAa0381361";
-export const DEFAULT_SETTLEMENT_CONTRACT_ADDRESS =
+export const DEFAULT_TRAINING_CONTRACT_ADDRESS =
   "0xb578AB78bb4780D9007Cc836b358468467814B3E";
+export const DEFAULT_SETTLEMENT_CONTRACT_ADDRESS =
+  "0xBE94646A0C6C1032c289Eea47169798e09dB5299";
 export const DATA_REGISTRY_CONTRACT_ABI = [
   {
     constant: true,
@@ -914,6 +916,20 @@ export const SETTLEMENT_CONTRACT_ABI = [
   },
   {
     type: "function",
+    name: "query",
+    inputs: [],
+    outputs: [{ type: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "updateQuery",
+    inputs: [{ type: "address", name: "newQuery" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "inference",
     inputs: [],
     outputs: [{ type: "address" }],
@@ -951,6 +967,7 @@ export const SETTLEMENT_CONTRACT_ABI = [
           { type: "address", name: "addr" },
           { type: "uint256", name: "availableBalance" },
           { type: "uint256", name: "totalBalance" },
+          { type: "address[]", name: "queryNodes" },
           { type: "address[]", name: "inferenceNodes" },
           { type: "address[]", name: "trainingNodes" },
         ],
@@ -1054,23 +1071,26 @@ export class ContractConfig {
   dataRegistryAddress: string;
   verifiedComputingAddress: string;
   dataAnchorTokenAddress: string;
-  settlementAddress: string;
+  queryAddress: string;
   inferenceAddress: string;
   trainingAddress: string;
+  settlementAddress: string;
 
   constructor(
     dataRegistryAddress: string = DEFAULT_DATA_REGISTRY_CONTRACT_ADDRESS,
     verifiedComputingAddress: string = DEFAULT_DATA_VERIFIED_COMPUTING_CONTRACT_ADDRESS,
     dataAnchorTokenAddress: string = DEFAULT_DATA_ANCHOR_TOKEN_CONTRACT_ADDRESS,
-    settlementAddress: string = DEFAULT_SETTLEMENT_CONTRACT_ADDRESS,
-    inferenceAddress: string = DEFAULT_INFERENCE_CONTRACT_ADSDRESS,
-    trainingAddress: string = DEFAULT_TRAINING_CONTRACT_ADSDRESS
+    queryAddress: string = DEFAULT_QUERY_CONTRACT_ADDRESS,
+    inferenceAddress: string = DEFAULT_INFERENCE_CONTRACT_ADDRESS,
+    trainingAddress: string = DEFAULT_TRAINING_CONTRACT_ADDRESS,
+    settlementAddress: string = DEFAULT_SETTLEMENT_CONTRACT_ADDRESS
   ) {
     this.dataRegistryAddress = dataRegistryAddress;
     this.verifiedComputingAddress = verifiedComputingAddress;
     this.dataAnchorTokenAddress = dataAnchorTokenAddress;
-    this.settlementAddress = settlementAddress;
+    this.queryAddress = queryAddress;
     this.inferenceAddress = inferenceAddress;
     this.trainingAddress = trainingAddress;
+    this.settlementAddress = settlementAddress;
   }
 }

@@ -50,6 +50,10 @@ class Client(ChainManager):
             address=contract_config.data_anchor_token_address,
             abi=DATA_ANCHOR_TOKEN_CONTRACT_ABI,
         )
+        self.query_contract = self.w3.eth.contract(
+            address=contract_config.query_address,
+            abi=AI_PROCESS_CONTRACT_ABI,
+        )
         self.inference_contract = self.w3.eth.contract(
             address=contract_config.inference_address,
             abi=AI_PROCESS_CONTRACT_ABI,
@@ -228,9 +232,9 @@ class Client(ChainManager):
             self.settlement_contract.functions.withdraw(amount)
         )
 
-    def deposit_training(self, node: str, amount: int):
+    def deposit_query(self, node: str, amount: int):
         return self.send_transaction(
-            self.settlement_contract.functions.depositTraining(node, amount)
+            self.settlement_contract.functions.depositQuery(node, amount)
         )
 
     def deposit_inference(self, node: str, amount: int):
@@ -238,14 +242,67 @@ class Client(ChainManager):
             self.settlement_contract.functions.depositInference(node, amount)
         )
 
-    def retrieve_training(self, nodes: List[str]):
+    def deposit_training(self, node: str, amount: int):
         return self.send_transaction(
-            self.settlement_contract.functions.retrieveTraining(nodes)
+            self.settlement_contract.functions.depositTraining(node, amount)
+        )
+
+    def retrieve_query(self, nodes: List[str]):
+        return self.send_transaction(
+            self.settlement_contract.functions.retrieveQuery(nodes)
         )
 
     def retrieve_inference(self, nodes: List[str]):
         return self.send_transaction(
             self.settlement_contract.functions.retrieveInference(nodes)
+        )
+
+    def retrieve_training(self, nodes: List[str]):
+        return self.send_transaction(
+            self.settlement_contract.functions.retrieveTraining(nodes)
+        )
+
+    def add_query_node(self, address: str, url: str, public_key: str):
+        return self.send_transaction(
+            self.query_contract.functions.addNode(address, url, public_key)
+        )
+
+    def remove_query_node(self, address: str):
+        return self.send_transaction(self.query_contract.functions.removeNode(address))
+
+    def get_query_node(self, address: str):
+        return self.query_contract.functions.getNode(address).call()
+
+    def query_node_list(
+        self,
+    ):
+        return self.query_contract.functions.NodeList().call()
+
+    def get_query_account(self, user: str, node: str):
+        return self.query_contract.functions.getAccount(user, node).call()
+
+    def query_settlement_fees(
+        self,
+        data: SettlementProofData,
+    ):
+        message_hash = Web3.keccak(data.abi_encode())
+        eth_message = encode_defunct(primitive=message_hash)
+        signature = self.w3.eth.account.sign_message(
+            eth_message, self.wallet.key
+        ).signature.hex()
+
+        proof = {
+            "signature": HexBytes(signature).hex(),
+            "data": {
+                "id": data.id,
+                "nonce": data.nonce,
+                "user": data.user,
+                "cost": data.cost,
+            },
+        }
+
+        return self.send_transaction(
+            self.query_contract.functions.settlementFees(proof)
         )
 
     def add_inference_node(self, address: str, url: str, public_key: str):
