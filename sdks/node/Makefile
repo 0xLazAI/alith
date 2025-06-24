@@ -3,3 +3,6 @@ build:
 
 fmt:
 	pnpm format
+
+check:
+	pnpm tsc

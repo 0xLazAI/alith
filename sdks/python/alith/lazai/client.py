@@ -299,7 +299,7 @@ class Client(ChainManager):
 
     def query_settlement_fees(
         self,
-        data: SettlementProofData,
+        data: SettlementData,
     ):
         message_hash = Web3.keccak(data.abi_encode())
         eth_message = encode_defunct(primitive=message_hash)
@@ -307,7 +307,7 @@ class Client(ChainManager):
             eth_message, self.wallet.key
         ).signature.hex()
 
-        proof = {
+        settlement = {
             "signature": HexBytes(signature).hex(),
             "data": {
                 "id": data.id,
@@ -318,7 +318,7 @@ class Client(ChainManager):
         }
 
         return self.send_transaction(
-            self.query_contract.functions.settlementFees(proof)
+            self.query_contract.functions.settlementFees(settlement)
         )
 
     def add_inference_node(self, address: str, url: str, public_key: str):
