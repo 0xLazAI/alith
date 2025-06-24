@@ -168,16 +168,19 @@ export class Client extends ChainManager {
     fileId: bigint,
     index: bigint
   ): Promise<{
-    timestamp: bigint;
-    hash: string;
     signature: string;
+    data: {
+      id: bigint;
+      fileUrl: string;
+      proofUrl: string;
+    };
   }> {
     return this.dataRegistryContract()
       .methods.getFileProof(fileId, index)
       .call();
   }
 
-  async filesCount(): Promise<bigint> {
+  async getFilesCount(): Promise<bigint> {
     return this.dataRegistryContract().methods.filesCount().call();
   }
 

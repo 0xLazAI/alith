@@ -93,6 +93,22 @@ class Client(ChainManager):
         """
         return self.data_registry_contract.functions.getFileIdByUrl(url).call()
 
+    def get_file(self, file_id: int):
+        """Get the file information according to the file id."""
+        return self.data_registry_contract.functions.getFile(file_id).call()
+
+    def get_file_permission(self, file_id: int, account: str):
+        """Get the encryption key for the account."""
+        return self.data_registry_contract.function.getFilePermission(file_id, account).call()
+
+    def get_file_proof(self, file_id: int, index: int):
+        """Get the file proof."""
+        return self.data_registry_contract.function.getFileProof(file_id, index).call()
+
+    def get_files_count(self):
+        """Get the file total count."""
+        return self.data_registry_contract.function.filesCount().call()
+
     def add_node(self, address: str, url: str, public_key: str):
         return self.send_transaction(
             self.verified_computing_contract.functions.addNode(address, url, public_key)
