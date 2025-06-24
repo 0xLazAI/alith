@@ -339,7 +339,9 @@ export class Client extends ChainManager {
    * Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID.
    */
   async getDATBalance(account: string, id: bigint): Promise<bigint> {
-    return this.dataAnchoringTokenContract().methods.balanceOf(account, id).call();
+    return this.dataAnchoringTokenContract()
+      .methods.balanceOf(account, id)
+      .call();
   }
 
   /**
