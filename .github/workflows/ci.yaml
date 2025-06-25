@@ -28,6 +28,10 @@ jobs:
           toolchain: ${{ env.RUST_VERSION }}
           override: true
           components: clippy, rustfmt
+      - uses: taiki-e/install-action@nextest
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Cargo fmt
         run: cargo fmt --all -- --check
@@ -62,6 +66,10 @@ jobs:
           toolchain: ${{ env.RUST_VERSION }}
           override: true
           components: clippy, rustfmt
+      - uses: taiki-e/install-action@nextest
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Run tests
-        run: cargo test -r --workspace
+        run: cargo nextest run
