@@ -71,7 +71,10 @@ class Client(ChainManager):
         return self.data_registry_contract.functions.publicKey().call()
 
     def add_file(self, url: str) -> int:
-        self.send_transaction(self.data_registry_contract.functions.addFile(url))
+        return self.add_file_with_hash(url, "")
+
+    def add_file_with_hash(self, url: str, hash: str) -> int:
+        self.send_transaction(self.data_registry_contract.functions.addFile(url, hash))
         return self.get_file_id_by_url(url)
 
     def add_permission_for_file(self, file_id: int, account: str, key: str):
