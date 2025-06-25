@@ -127,7 +127,7 @@ sentencepiece = "0.11.3"
 [workspace.package]
 version = "0.10.0"
 edition = "2024"
-rust-version = "1.86"
+rust-version = "1.87"
 exclude = [".github/"]
 homepage = "https://alith.lazai.network"
 license = "Apache-2.0"
