@@ -4,10 +4,10 @@ build:
 check:
 	cargo check -r --all
 
-test:
+test-all:
 	cargo test -r --workspace --all-features
 
-test-all:
+test:
 	cargo test -r --workspace
 
 accept:

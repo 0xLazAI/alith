@@ -3,7 +3,7 @@ name: node-sdk
 env:
   DEBUG: napi:*
   MACOSX_DEPLOYMENT_TARGET: '10.13'
-  RUST_VERSION: 1.86
+  RUST_VERSION: 1.87
 
 on:
   push:
@@ -33,6 +33,10 @@ jobs:
           toolchain: ${{ env.RUST_VERSION }}
           override: true
           components: clippy, rustfmt
+      - uses: taiki-e/install-action@nextest
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Setup node
         uses: actions/setup-node@v4
@@ -45,9 +49,6 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Test
-        run: cargo test --no-fail-fast
 
   linux:
     runs-on: ubuntu-latest

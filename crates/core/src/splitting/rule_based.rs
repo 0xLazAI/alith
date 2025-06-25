@@ -176,11 +176,11 @@ fn repair_sentences(sentences: Vec<String>) -> Vec<String> {
                         .replace_all(
                             &acc,
                             match regex as *const Regex {
-                                x if x == &QUOTE_REPAIR_REGEXES[0] as *const Regex => r#"'$p""#,
-                                x if x == &QUOTE_REPAIR_REGEXES[1] as *const Regex => r#"'$p""#,
-                                x if x == &QUOTE_REPAIR_REGEXES[2] as *const Regex => r#"$p""#,
-                                x if x == &QUOTE_REPAIR_REGEXES[3] as *const Regex => r#"$p""#,
-                                x if x == &QUOTE_REPAIR_REGEXES[4] as *const Regex => r#"$p'"#,
+                                x if std::ptr::eq(x, &QUOTE_REPAIR_REGEXES[0]) => r#"'$p""#,
+                                x if std::ptr::eq(x, &QUOTE_REPAIR_REGEXES[1]) => r#"'$p""#,
+                                x if std::ptr::eq(x, &QUOTE_REPAIR_REGEXES[2]) => r#"$p""#,
+                                x if std::ptr::eq(x, &QUOTE_REPAIR_REGEXES[3]) => r#"$p""#,
+                                x if std::ptr::eq(x, &QUOTE_REPAIR_REGEXES[4]) => r#"$p'"#,
                                 _ => r#"$p""#,
                             },
                         )
