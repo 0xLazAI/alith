@@ -78,5 +78,13 @@ maturin develop
 Test
 
 ```shell
+python3 -m pip install pytest
 python3 -m pytest
+```
+
+Lint
+
+```shell
+python3 -m pip install ruff
+python3 -m ruff check
 ```
