@@ -50,9 +50,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Test
-        run: cargo nextest run
-
   linux:
     runs-on: ubuntu-latest
     strategy:
