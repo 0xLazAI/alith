@@ -79,7 +79,11 @@ export class Client extends ChainManager {
   }
 
   async addFile(url: string): Promise<bigint> {
-    const method = this.dataRegistryContract().methods.addFile(url);
+    return this.addFileWithHash(url, "")
+  }
+
+  async addFileWithHash(url: string, hash: string): Promise<bigint> {
+    const method = this.dataRegistryContract().methods.addFile(url, hash);
     await this.sendTransaction(method, this.contractConfig.dataRegistryAddress);
     return this.getFileIdByUrl(url);
   }

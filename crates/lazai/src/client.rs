@@ -74,11 +74,24 @@ impl Client {
         Ok(public_key)
     }
 
-    /// Add privacy data url and encrypted key base64 format into the data registry on LazAI.
+    /// Add privacy data url into the data registry on LazAI.
+    #[inline]
     pub async fn add_file(&self, url: impl AsRef<str>) -> Result<U256, ClientError> {
+        self.add_file_with_hash(url, "").await
+    }
+
+    /// Add privacy data url and sha256 hash into the data registry on LazAI.
+    pub async fn add_file_with_hash(
+        &self,
+        url: impl AsRef<str>,
+        hash: impl AsRef<str>,
+    ) -> Result<U256, ClientError> {
         let contract = self.data_registry_contract();
-        self.send_transaction(contract.addFile(url.as_ref().to_string()), None)
-            .await?;
+        self.send_transaction(
+            contract.addFile(url.as_ref().to_string(), hash.as_ref().to_string()),
+            None,
+        )
+        .await?;
 
         self.get_file_id_by_url(url).await
     }
@@ -87,12 +100,18 @@ impl Client {
     pub async fn add_file_with_permissions(
         &self,
         url: impl AsRef<str>,
+        hash: impl AsRef<str>,
         owner: Address,
         permissions: Vec<Permission>,
     ) -> Result<U256, ClientError> {
         let contract = self.data_registry_contract();
         self.send_transaction(
-            contract.addFileWithPermissions(url.as_ref().to_string(), owner, permissions),
+            contract.addFileWithPermissions(
+                url.as_ref().to_string(),
+                hash.as_ref().to_string(),
+                owner,
+                permissions,
+            ),
             None,
         )
         .await?;

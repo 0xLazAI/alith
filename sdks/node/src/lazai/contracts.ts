@@ -93,7 +93,10 @@ export const DATA_REGISTRY_CONTRACT_ABI = [
     type: "function",
   },
   {
-    inputs: [{ name: "url", type: "string" }],
+    inputs: [
+      { name: "url", type: "string" },
+      { name: "hash", type: "string" },
+    ],
     name: "addFile",
     outputs: [{ name: "", type: "uint256" }],
     stateMutability: "nonpayable",
@@ -102,6 +105,7 @@ export const DATA_REGISTRY_CONTRACT_ABI = [
   {
     inputs: [
       { name: "url", type: "string" },
+      { name: "hash", type: "string" },
       { name: "ownerAddress", type: "address" },
       {
         components: [
@@ -136,9 +140,11 @@ export const DATA_REGISTRY_CONTRACT_ABI = [
       {
         components: [
           { name: "id", type: "uint256" },
+          { name: "ownerAddress", type: "address" },
           { name: "url", type: "string" },
-          { name: "owner", type: "address" },
-          { name: "createdAt", type: "uint256" },
+          { name: "hash", type: "string" },
+          { name: "proofIndex", type: "uint256" },
+          { name: "rewardAmount", type: "uint256" },
         ],
         name: "",
         type: "tuple",
