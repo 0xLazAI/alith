@@ -25,6 +25,7 @@ async fn main() -> Result<(), anyhow::Error> {
     );
     client.transfer(to, value, 21000, None).await?;
     println!("Transfer value {} to {}", to, value);
+    // Note: just for demo, we don't upload the file content hash here.
     let file_id = client.add_file(url).await?;
     client
         .add_permission_for_file(

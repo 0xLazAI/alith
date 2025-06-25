@@ -16,6 +16,7 @@ async def main():
         # 3. Upload the privacy url to LazAI
         file_id = client.get_file_id_by_url(file_url)
         if file_id == 0:
+            # Note: just for demo, we don't upload the file content hash here.
             file_id = client.add_file(file_url)
         pub_key = r"""\
 -----BEGIN RSA PUBLIC KEY-----

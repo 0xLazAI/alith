@@ -1,6 +1,19 @@
 use alith::data::crypto::{DecodeRsaPublicKey, Pkcs1v15Encrypt, RsaPublicKey, encrypt};
 use alith::data::storage::{DataStorage, PinataIPFS, UploadOptions};
 use alith::lazai::{Client, ProofRequest, U256};
+use sha2::{Digest, Sha256};
+
+fn calculate_sha256(text: &str) -> String {
+    let mut hasher = Sha256::new();
+    let chunk_size = 8192; // Chunk for large file.
+    for i in 0..(text.len() / chunk_size + 1) {
+        let start = i * chunk_size;
+        let end = std::cmp::min(start + chunk_size, text.len());
+        hasher.update(&text[start..end].as_bytes());
+    }
+
+    hex::encode(hasher.finalize())
+}
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -9,6 +22,7 @@ async fn main() -> Result<(), anyhow::Error> {
     // 1. Prepare your privacy data and encrypt it
     let data_file_name = "your_encrypted_data.txt";
     let privacy_data = "Your Privacy Data";
+    let privacy_data_sha256 = calculate_sha256(privacy_data);
     let encryption_seed = "Sign to retrieve your encryption key";
     let password = client
         .wallet
@@ -30,7 +44,9 @@ async fn main() -> Result<(), anyhow::Error> {
     // 3. Upload the privacy url to LazAI
     let mut file_id = client.get_file_id_by_url(url.as_str()).await?;
     if file_id.is_zero() {
-        file_id = client.add_file(url.as_str()).await?;
+        file_id = client
+            .add_file_with_hash(url.as_str(), privacy_data_sha256)
+            .await?;
     }
     // 4. Request proof in the verified computing node
     client.request_proof(file_id, U256::from(100)).await?;

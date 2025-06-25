@@ -7,6 +7,7 @@ url = "https://example.com/okyes.txt"
 file_id = contributor.get_file_id_by_url(url)
 # File not found, add it
 if file_id == 0:
+    # Note: just for demo, we don't upload the file content hash here.
     file_id = contributor.add_file(url)
 print("file id", file_id)
 node_url = node.get_node(node.wallet.address)[1]
