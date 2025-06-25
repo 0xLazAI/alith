@@ -72,4 +72,4 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Run tests
-        run: cargo nextest run
+        run: cargo nextest run --workspace --exclude alith-python-sdk --exclude alith-node-sdk
