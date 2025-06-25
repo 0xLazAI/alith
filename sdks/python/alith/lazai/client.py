@@ -99,7 +99,9 @@ class Client(ChainManager):
 
     def get_file_permission(self, file_id: int, account: str):
         """Get the encryption key for the account."""
-        return self.data_registry_contract.function.getFilePermission(file_id, account).call()
+        return self.data_registry_contract.function.getFilePermission(
+            file_id, account
+        ).call()
 
     def get_file_proof(self, file_id: int, index: int):
         """Get the file proof."""
@@ -214,7 +216,9 @@ class Client(ChainManager):
 
     def get_dat_balance(self, account: str, id: int):
         """Returns the balance of a specific Data Anchor Token (DAT) for a given account and token ID."""
-        return self.data_anchoring_token_contract.functions.balanceOf(account, id).call()
+        return self.data_anchoring_token_contract.functions.balanceOf(
+            account, id
+        ).call()
 
     def data_uri(self, token_id: int):
         """Returns the Uri for a specific Data Anchor Token (DAT) by its token ID."""
