@@ -101,6 +101,7 @@ dependencies = [
  "reqwest 0.12.20",
  "schemars",
  "serde",
+ "sha2",
  "sqlx",
  "tokio",
  "url",

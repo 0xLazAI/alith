@@ -34,6 +34,7 @@ url.workspace = true
 rand.workspace = true
 rand_08.workspace = true
 hex.workspace = true
+sha2.workspace = true
 
 sqlx = { workspace = true, optional = true }
 

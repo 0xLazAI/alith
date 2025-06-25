@@ -79,7 +79,7 @@ export class Client extends ChainManager {
   }
 
   async addFile(url: string): Promise<bigint> {
-    return this.addFileWithHash(url, "")
+    return this.addFileWithHash(url, "");
   }
 
   async addFileWithHash(url: string, hash: string): Promise<bigint> {

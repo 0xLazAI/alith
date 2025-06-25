@@ -157,7 +157,7 @@ export default function Home() {
       const url = ipfsUrl
       let fileId = await registryContract.getFileIdByUrl(url)
       if (fileId == BigInt(0)) {
-        const tx = await registryContract.addFile(url)
+        const tx = await registryContract.addFileWithHash(url)
         const receipt = await tx.wait()
         fileId = await registryContract.getFileIdByUrl(url)
       }

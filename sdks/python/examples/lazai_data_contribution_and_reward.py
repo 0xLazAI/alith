@@ -3,6 +3,7 @@ from os import getenv
 
 import requests
 import rsa
+import hashlib
 from eth_account.messages import encode_defunct
 
 from alith.data import encrypt
@@ -22,6 +23,7 @@ async def main():
         # 1. Prepare your privacy data and encrypt it
         data_file_name = "your_encrypted_data.txt"
         privacy_data = "Your Privacy Data"
+        privacy_data_sha256 = hashlib.sha256(privacy_data.encode()).hexdigest()
         encryption_seed = "Sign to retrieve your encryption key"
         message = encode_defunct(text=encryption_seed)
         password = client.wallet.sign_message(message).signature.hex()
@@ -37,7 +39,7 @@ async def main():
         # 3. Upload the privacy url to LazAI
         file_id = client.get_file_id_by_url(url)
         if file_id == 0:
-            file_id = client.add_file(url)
+            file_id = client.add_file_with_hash(url, privacy_data_sha256)
         # 4. Request proof in the verified computing node
         client.request_proof(file_id, 100)
         job_id = client.file_job_ids(file_id)[-1]

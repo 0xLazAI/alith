@@ -3,6 +3,11 @@ import { PinataIPFS } from "alith/data/storage";
 import { Client } from "alith/lazai";
 import axios, { type AxiosResponse } from "axios";
 import NodeRSA from "node-rsa";
+import * as crypto from "crypto";
+
+function calculateSHA256(text: string): string {
+  return crypto.createHash("sha256").update(text, "utf-8").digest("hex");
+}
 
 async function main() {
   const client = new Client();
@@ -10,6 +15,7 @@ async function main() {
   // 1. Prepare your privacy data and encrypt it
   const dataFileName = "your_encrypted_data.txt";
   const privacyData = "Your Privacy Data";
+  const privacyDataSha256 = calculateSHA256(privacyData);
   const encryptionSeed = "Sign to retrieve your encryption key";
   const password = client.getWallet().sign(encryptionSeed).signature;
   const encryptedData = await encrypt(Uint8Array.from(privacyData), password);
@@ -24,7 +30,7 @@ async function main() {
   // 3. Upload the privacy url to LazAI
   let fileId = await client.getFileIdByUrl(url);
   if (fileId === BigInt(0)) {
-    fileId = await client.addFile(url);
+    fileId = await client.addFileWithHash(url, privacyDataSha256);
   }
   // 4. Request proof in the verified computing node
   await client.requestProof(fileId, BigInt(100));
