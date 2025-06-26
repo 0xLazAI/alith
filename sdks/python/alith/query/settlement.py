@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Awaitable, Callable
+from typing import Awaitable, Callable, List
 
 from fastapi import Request, Response, status
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -38,7 +38,7 @@ class QueryBillingMiddleware(BaseHTTPMiddleware):
                     response_body += chunk
                 # Parse response to extract token usage
                 response_data = json.loads(response_body.decode("utf-8"))
-                data = response_data.get("data", "")
+                data: List[str] = response_data.get("data", [])
                 user, cost = calculate_billing(
                     request, data, self.config.price_per_token, self.client
                 )
@@ -87,14 +87,14 @@ class QueryBillingMiddleware(BaseHTTPMiddleware):
 
 def calculate_billing(
     request: Request,
-    data: str,
+    data: List[str],
     price_per_token: int,
     client: Client = Client(),
 ) -> tuple[int, int]:
     user = request.headers[USER_HEADER]
     nonce = request.headers[NONCE_HEADER]
     signature = request.headers[SIGNATURE_HEADER]
-    cost = 1000 + len(data) * price_per_token
+    cost = 1000 + sum(len(item) * price_per_token for item in data)
     client.query_settlement_fees(
         SettlementData(
             id="", user=user, cost=cost, nonce=int(nonce), user_signature=signature

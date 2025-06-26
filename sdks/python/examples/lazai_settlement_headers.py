@@ -4,7 +4,7 @@ client = Client()
 user = client.wallet.address
 node = client.wallet.address
 nonce = 1
-headers = client.get_request_headers(node, 1)
+headers = client.get_request_headers(node, nonce=1)
 print(
     "The signed request headers is",
     headers,
