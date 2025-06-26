@@ -9,7 +9,7 @@ from .types import Headers
 
 @dataclass
 class Agent:
-    model: str
+    model: Optional[str] = field(default_factory=str)
     name: Optional[str] = field(default_factory=str)
     preamble: Optional[str] = field(default_factory=str)
     api_key: Optional[str] = field(default_factory=str)
@@ -33,7 +33,7 @@ class Agent:
         ]
         agent = _DelegateAgent(
             self.name or "",
-            self.model,
+            self.model or "",
             self.api_key,
             self.base_url,
             self.preamble,

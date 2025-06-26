@@ -419,7 +419,7 @@ class Client(ChainManager):
         )
 
     def get_request_headers(
-        self, node: str, nonce: int | None = None
+        self, node: str, file_id: int | None = None, nonce: int | None = None
     ) -> Dict[str, str]:
         """Get the billing-related headers for the request for the AI node"""
 
@@ -431,7 +431,10 @@ class Client(ChainManager):
 
         return (
             SettlementRequest(
-                nonce=nonce or _secure_nonce(), user=self.wallet.address, node=node
+                nonce=nonce or _secure_nonce(),
+                user=self.wallet.address,
+                node=node,
+                file_id=file_id,
             )
             .generate_signature(self.wallet.key)
             .to_request_headers()
