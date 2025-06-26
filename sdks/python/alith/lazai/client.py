@@ -322,8 +322,8 @@ class Client(ChainManager):
         second_param = (
             data.id,
             data.user,
-            int(data.cost),
-            int(data.nonce),
+            data.cost,
+            data.nonce,
             Web3.to_bytes(hexstr=data.user_signature),
         )
         contract_params = (first_param, second_param)
@@ -366,8 +366,8 @@ class Client(ChainManager):
         second_param = (
             data.id,
             data.user,
-            int(data.cost),
-            int(data.nonce),
+            data.cost,
+            data.nonce,
             Web3.to_bytes(hexstr=data.user_signature),
         )
         contract_params = (first_param, second_param)
@@ -408,8 +408,8 @@ class Client(ChainManager):
         second_param = (
             data.id,
             data.user,
-            int(data.cost),
-            int(data.nonce),
+            data.cost,
+            data.nonce,
             Web3.to_bytes(hexstr=data.user_signature),
         )
         contract_params = (first_param, second_param)

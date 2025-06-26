@@ -1,7 +1,7 @@
 import json
 from typing import Awaitable, Callable
 
-from fastapi import Request, Response
+from fastapi import Request, Response, status
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from ..client import Client
@@ -23,7 +23,7 @@ class HeaderValidationMiddleware(BaseHTTPMiddleware):
             return response
         except Exception as e:
             return Response(
-                status_code=401,
+                status_code=status.HTTP_401_UNAUTHORIZED,
                 content=json.dumps(
                     {
                         "error": {

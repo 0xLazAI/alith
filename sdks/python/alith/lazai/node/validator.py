@@ -8,9 +8,10 @@ import logging
 import os
 import pathlib
 import sys
+import json
 
 import rsa
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Response, status
 
 from alith.data import decrypt, download_file
 from alith.lazai import Client, ProofData, ProofRequest
@@ -69,7 +70,17 @@ async def process_proof(req: ProofRequest):
         logger.error(
             f"Error processing request for file_id: {req.file_id}. Error: {str(e)}"
         )
-        raise HTTPException(status_code=400, detail=str(e))
+        return Response(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content=json.dumps(
+                {
+                    "error": {
+                        "message": f"Error processing request for req: {req}. Error: {str(e)}",
+                        "type": "internal_error",
+                    }
+                }
+            ),
+        )
 
 
 if __name__ == "__main__":

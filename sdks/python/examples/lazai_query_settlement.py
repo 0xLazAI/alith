@@ -26,5 +26,5 @@ print(
             "file_id": "1",
             "query": "What is Alith?",
         },
-    ).json()
+    ).json(),
 )

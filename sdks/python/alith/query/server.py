@@ -19,13 +19,12 @@ import json
 import uvicorn
 import argparse
 
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from alith.lazai import Client
 from alith.lazai.node.middleware import HeaderValidationMiddleware
 from alith.lazai.node.validator import decrypt_file_url
-from alith.store import MilvusStore
 from .types import QueryRequest
 from .settlement import QueryBillingMiddleware
 
@@ -51,7 +50,7 @@ async def process_proof(req: QueryRequest):
             file = client.get_file(file_id)
         else:
             return Response(
-                status_code=400,
+                status_code=status.HTTP_400_BAD_REQUEST,
                 content=json.dumps(
                     {
                         "error": {
@@ -76,7 +75,7 @@ async def process_proof(req: QueryRequest):
         }
     except Exception as e:
         return Response(
-            status_code=400,
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content=json.dumps(
                 {
                     "error": {

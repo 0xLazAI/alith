@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Awaitable, Callable
 
-from fastapi import Request, Response
+from fastapi import Request, Response, status
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from ..lazai.client import Client, SettlementData
@@ -54,7 +54,7 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
                     content=response_body,
                     status_code=response.status_code,
                     headers=dict(response.headers),
-                    media_type=response.media_type
+                    media_type=response.media_type,
                 )
                 new_response.headers["content-length"] = str(len(response_body))
                 return new_response
@@ -62,7 +62,7 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
             except json.JSONDecodeError:
                 logger.warning("Failed to parse response for token billing")
                 return Response(
-                    status_code=400,
+                    status_code=status.HTTP_400_BAD_REQUEST,
                     content=json.dumps(
                         {
                             "error": {
@@ -75,7 +75,7 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
             except Exception as e:
                 logger.error(f"Error in token billing process: {str(e)}")
                 return Response(
-                    status_code=400,
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                     content=json.dumps(
                         {
                             "error": {
