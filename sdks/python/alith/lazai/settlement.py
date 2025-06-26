@@ -2,6 +2,7 @@ from typing import Dict
 
 from eth_abi import encode
 from eth_account.messages import encode_defunct
+from hexbytes import HexBytes
 from pydantic import BaseModel
 from web3 import Web3
 
@@ -35,7 +36,7 @@ class SettlementRequest(BaseModel):
 
     def abi_encode(self) -> bytes:
         return encode(
-            ["(uint256,address,address)"], [(self.nonce, self.user, self.node)]
+            ["uint256", "address", "address"], [self.nonce, self.user, self.node]
         )
 
     def generate_signature(
@@ -60,5 +61,5 @@ class SettlementRequest(BaseModel):
         return SettlementSignature(
             user=self.user,
             nonce=self.nonce,
-            signature=signature,
+            signature=HexBytes(signature).hex(),
         )

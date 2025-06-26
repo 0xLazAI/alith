@@ -8,6 +8,6 @@ class ProofRequest(BaseModel):
     file_id: int
     file_url: str
     encryption_key: str
-    proof_url: Optional[str]
+    proof_url: Optional[str] = None
     encryption_seed: Optional[str] = None
     nonce: Optional[int] = None

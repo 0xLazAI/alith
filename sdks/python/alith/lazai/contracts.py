@@ -1069,6 +1069,16 @@ SETTLEMENT_CONTRACT_ABI = [
     },
     {
         "type": "function",
+        "name": "depositQuery",
+        "inputs": [
+            {"type": "address", "name": "node"},
+            {"type": "uint256", "name": "amount"},
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable",
+    },
+    {
+        "type": "function",
         "name": "retrieveTraining",
         "inputs": [{"type": "address[]", "name": "nodes"}],
         "outputs": [],
@@ -1077,6 +1087,13 @@ SETTLEMENT_CONTRACT_ABI = [
     {
         "type": "function",
         "name": "retrieveInference",
+        "inputs": [{"type": "address[]", "name": "nodes"}],
+        "outputs": [],
+        "stateMutability": "nonpayable",
+    },
+    {
+        "type": "function",
+        "name": "retrieveQuery",
         "inputs": [{"type": "address[]", "name": "nodes"}],
         "outputs": [],
         "stateMutability": "nonpayable",
