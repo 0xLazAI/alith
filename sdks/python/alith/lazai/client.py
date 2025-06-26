@@ -30,7 +30,11 @@ class Client(ChainManager):
 
     def __init__(
         self,
-        chain_config: ChainConfig = ChainConfig.testnet(),
+        chain_config: ChainConfig = (
+            ChainConfig.local()
+            if getenv("LAZAI_LOCAL_CHAIN")
+            else ChainConfig.testnet()
+        ),
         contract_config: ContractConfig = ContractConfig(),
         private_key: str = getenv("PRIVATE_KEY", ""),
     ):
@@ -102,17 +106,17 @@ class Client(ChainManager):
 
     def get_file_permission(self, file_id: int, account: str):
         """Get the encryption key for the account."""
-        return self.data_registry_contract.function.getFilePermission(
+        return self.data_registry_contract.functions.getFilePermission(
             file_id, account
         ).call()
 
     def get_file_proof(self, file_id: int, index: int):
         """Get the file proof."""
-        return self.data_registry_contract.function.getFileProof(file_id, index).call()
+        return self.data_registry_contract.functions.getFileProof(file_id, index).call()
 
     def get_files_count(self):
         """Get the file total count."""
-        return self.data_registry_contract.function.filesCount().call()
+        return self.data_registry_contract.functions.filesCount().call()
 
     def add_node(self, address: str, url: str, public_key: str):
         return self.send_transaction(
@@ -314,18 +318,17 @@ class Client(ChainManager):
             eth_message, self.wallet.key
         ).signature.hex()
 
-        settlement = {
-            "signature": HexBytes(signature).hex(),
-            "data": {
-                "id": data.id,
-                "nonce": data.nonce,
-                "user": data.user,
-                "cost": data.cost,
-            },
-        }
-
+        first_param = Web3.to_bytes(hexstr=signature)
+        second_param = (
+            data.id,
+            data.user,
+            int(data.cost),
+            int(data.nonce),
+            Web3.to_bytes(hexstr=data.user_signature),
+        )
+        contract_params = (first_param, second_param)
         return self.send_transaction(
-            self.query_contract.functions.settlementFees(settlement)
+            self.query_contract.functions.settlementFees(contract_params)
         )
 
     def add_inference_node(self, address: str, url: str, public_key: str):
@@ -359,18 +362,18 @@ class Client(ChainManager):
             eth_message, self.wallet.key
         ).signature.hex()
 
-        settlement = {
-            "signature": HexBytes(signature).hex(),
-            "data": {
-                "id": data.id,
-                "nonce": data.nonce,
-                "user": data.user,
-                "cost": data.cost,
-            },
-        }
+        first_param = Web3.to_bytes(hexstr=signature)
+        second_param = (
+            data.id,
+            data.user,
+            int(data.cost),
+            int(data.nonce),
+            Web3.to_bytes(hexstr=data.user_signature),
+        )
+        contract_params = (first_param, second_param)
 
         return self.send_transaction(
-            self.inference_contract.functions.settlementFees(settlement)
+            self.inference_contract.functions.settlementFees(contract_params)
         )
 
     def add_training_node(self, address: str, url: str, public_key: str):
@@ -401,18 +404,18 @@ class Client(ChainManager):
             eth_message, self.wallet.key
         ).signature.hex()
 
-        settlement = {
-            "signature": HexBytes(signature).hex(),
-            "data": {
-                "id": data.id,
-                "nonce": data.nonce,
-                "user": data.user,
-                "cost": data.cost,
-            },
-        }
+        first_param = Web3.to_bytes(hexstr=signature)
+        second_param = (
+            data.id,
+            data.user,
+            int(data.cost),
+            int(data.nonce),
+            Web3.to_bytes(hexstr=data.user_signature),
+        )
+        contract_params = (first_param, second_param)
 
         return self.send_transaction(
-            self.training_contract.functions.settlementFees(settlement)
+            self.training_contract.functions.settlementFees(contract_params)
         )
 
     def get_request_headers(

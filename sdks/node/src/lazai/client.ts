@@ -683,6 +683,7 @@ export class Client extends ChainManager {
         user: data.user,
         cost: data.cost,
         nonce: data.nonce,
+        userSignature: data.userSignature,
       },
     };
 

@@ -5,8 +5,8 @@ from typing import Awaitable, Callable
 from fastapi import Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from ..lazai.client import Client
-from ..lazai.request import NONCE_HEADER, USER_HEADER, validate_request
+from ..lazai.client import Client, SettlementData
+from ..lazai.request import NONCE_HEADER, USER_HEADER, SIGNATURE_HEADER
 from .config import Config
 
 logger = logging.getLogger(__name__)
@@ -15,32 +15,6 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
-
-
-class ValidationMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, client: Client = Client()):
-        super().__init__(app)
-        self.client: Client = client
-
-    async def dispatch(
-        self, request: Request, call_next: Callable[[Request], Awaitable]
-    ) -> Response:
-        try:
-            validate_request(request, client=self.client)
-            response = await call_next(request)
-            return response
-        except Exception as e:
-            return Response(
-                status_code=401,
-                content=json.dumps(
-                    {
-                        "error": {
-                            "message": "Validate the request header failed: " + str(e),
-                            "type": "authentication_error",
-                        }
-                    }
-                ),
-            )
 
 
 class TokenBillingMiddleware(BaseHTTPMiddleware):
@@ -75,9 +49,15 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
                 logger.info(
                     f"User {user} consumed {total_tokens} tokens on /v1/chat/completions, billing: {cost}"
                 )
-                # Reconstruct the response body to maintain original data
-                response.body = response_body
-                response.init_content()
+
+                new_response = Response(
+                    content=response_body,
+                    status_code=response.status_code,
+                    headers=dict(response.headers),
+                    media_type=response.media_type
+                )
+                new_response.headers["content-length"] = str(len(response_body))
+                return new_response
 
             except json.JSONDecodeError:
                 logger.warning("Failed to parse response for token billing")
@@ -100,7 +80,7 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
                         {
                             "error": {
                                 "message": f"Error in token billing process: {str(e)}",
-                                "type": "invalid_request_error",
+                                "type": "internal_error",
                             }
                         }
                     ),
@@ -118,6 +98,11 @@ def calculate_billing(
 ) -> tuple[int, int]:
     user = request.headers[USER_HEADER]
     nonce = request.headers[NONCE_HEADER]
+    signature = request.headers[SIGNATURE_HEADER]
     cost = total_tokens * price_per_token
-    client.inference_settlement_fees(user, cost, id, nonce)
+    client.inference_settlement_fees(
+        SettlementData(
+            id=id, user=user, cost=cost, nonce=int(nonce), user_signature=signature
+        )
+    )
     return user, cost

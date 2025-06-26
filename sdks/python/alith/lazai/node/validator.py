@@ -29,7 +29,9 @@ logger = logging.getLogger(__name__)
 enable_decrypt_file = os.getenv("ENABLE_DECRYPT_FILE", "")
 rsa_private_key_base64 = os.getenv("RSA_PRIVATE_KEY_BASE64", "")
 rsa_private_key = (
-    base64.b64decode(rsa_private_key_base64).decode() if rsa_private_key_base64 else ""
+    base64.b64decode(rsa_private_key_base64).decode()
+    if rsa_private_key_base64
+    else os.getenv("RSA_PRIVATE_KEY", "")
 )
 
 # FastAPI app and LazAI client initialization
@@ -47,7 +49,7 @@ def decrypt_file_url(url: str, encryption_key: str) -> bytes:
     return decrypt(content, password=password.decode())
 
 
-@app.route("/proof", methods=["POST"])
+@app.post("/proof")
 async def process_proof(req: ProofRequest):
     try:
         # Decrypt the file and check it
