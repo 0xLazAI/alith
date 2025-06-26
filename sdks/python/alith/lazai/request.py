@@ -6,8 +6,8 @@ from web3 import Web3
 USER_HEADER = "X-LazAI-User"
 NONCE_HEADER = "X-LazAI-Nonce"
 SIGNATURE_HEADER = "X-LazAI-Signature"
-TOKEN_ID = "X-LazAI-Token-ID"
-FILE_ID = "X-LazAI-File-ID"
+TOKEN_ID_HEADER = "X-LazAI-Token-ID"
+FILE_ID_HEADER = "X-LazAI-File-ID"
 
 QUERY_TYPE = 0
 INFERENCE_TYPE = 1

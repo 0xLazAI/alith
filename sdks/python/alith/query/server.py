@@ -44,7 +44,7 @@ collection_prefix = "query_"
 
 
 @app.post("/query/rag")
-async def process_proof(req: QueryRequest):
+async def query_rag(req: QueryRequest):
     try:
         file_id = req.file_id
         if req.file_url:
@@ -73,7 +73,9 @@ async def process_proof(req: QueryRequest):
             data = decrypt_file_url(file_url, encryption_key).decode("utf-8")
             store.create_collection(collection_name=collection_name)
             store.save_docs(chunk_text(data), collection_name=collection_name)
-        data = store.search_in(req.query, limit=req.limit, collection_name=collection_name)
+        data = store.search_in(
+            req.query, limit=req.limit, collection_name=collection_name
+        )
         logger.info(f"Successfully processed request for file: {file}")
         return {
             "data": data,

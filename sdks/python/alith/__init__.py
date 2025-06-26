@@ -18,6 +18,7 @@ from .store import (
 )
 from .tool import Tool
 from .types import Headers
+from .lazai import Client as LazAIClient, ChainManager, ChainConfig
 
 __all__ = [
     "Agent",
@@ -38,4 +39,7 @@ __all__ = [
     "WindowBufferMemory",
     "MessageBuilder",
     "Headers",
+    "LazAIClient",
+    "ChainManager",
+    "ChainConfig",
 ]
