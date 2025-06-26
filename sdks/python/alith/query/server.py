@@ -2,7 +2,7 @@
 Start the node with the PRIVATE_KEY and RSA_PRIVATE_KEY_BASE64 environment variable set to the base64 encoded RSA private key.
 python3 -m alith.query.server
 
-curl http://localhost:8000/query \
+curl http://localhost:8000/query/rag \
 -H "Content-Type: application/json" \
 -H "X-LazAI-User: 0x34d9E02F9bB4E4C8836e38DF4320D4a79106F194" \
 -H "X-LazAI-Nonce: 123456" \
@@ -25,6 +25,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from alith.lazai import Client
 from alith.lazai.node.middleware import HeaderValidationMiddleware
 from alith.lazai.node.validator import decrypt_file_url
+from alith import MilvusStore, chunk_text
 from .types import QueryRequest
 from .settlement import QueryBillingMiddleware
 
@@ -38,6 +39,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 client = Client()
 app = FastAPI(title="Alith LazAI Privacy Data Query Node", version="1.0.0")
+store = MilvusStore()
+collection_prefix = "query_"
 
 
 @app.post("/query/rag")
@@ -61,13 +64,19 @@ async def process_proof(req: QueryRequest):
                 ),
             )
         owner, file_url, file_hash = file[1], file[2], file[3]
-        encryption_key = client.get_file_permission(
-            file_id, client.contract_config.data_registry_address
-        )
-        data = decrypt_file_url(file_url, encryption_key)
+        collection_name = collection_prefix + file_hash
+        # Cache data in the vector database
+        if not store.has_collection(collection_name):
+            encryption_key = client.get_file_permission(
+                file_id, client.contract_config.data_registry_address
+            )
+            data = decrypt_file_url(file_url, encryption_key).decode("utf-8")
+            store.create_collection(collection_name=collection_name)
+            store.save_docs(chunk_text(data), collection_name=collection_name)
+        data = store.search_in(req.query, limit=req.limit, collection_name=collection_name)
         logger.info(f"Successfully processed request for file: {file}")
         return {
-            "data": data.decode("utf-8") if req.query else data.decode("utf-8"),
+            "data": data,
             "owner": owner,
             "file_id": file_id,
             "file_url": file_url,

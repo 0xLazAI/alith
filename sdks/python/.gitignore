@@ -17,3 +17,5 @@ alith/_alith*
 llm_logs
 uv.lock
 node.log
+alith.db
+.alith.db.lock

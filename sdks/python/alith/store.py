@@ -139,7 +139,7 @@ class ChromaDBStore(Store):
 
 
 try:
-    from pymilvus import MilvusClient, model
+    from pymilvus import MilvusClient, MilvusException, model
 
     MILVUS_AVAILABLE = True
 except ImportError:
@@ -200,14 +200,50 @@ class MilvusStore(Store):
     def save(self, value: str):
         self.save_docs([value])
 
-    def save_docs(self, docs: List[str]) -> "MilvusStore":
+    def save_docs(
+        self, docs: List[str], collection_name: Optional[str] = None
+    ) -> "MilvusStore":
         vectors = self.embedding_fn.encode_documents(docs)
         data = [
             {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
             for i in range(len(vectors))
         ]
-        self.client.insert(collection_name=self.collection_name, data=data)
+        self.client.insert(
+            collection_name=collection_name or self.collection_name, data=data
+        )
         return self
 
     def reset(self):
         self.client.drop_collection(self.collection_name)
+
+    def search_in(
+        self,
+        query: str,
+        limit: int = 3,
+        score_threshold: float = 0.4,
+        collection_name: Optional[str] = None,
+    ) -> List[str]:
+        query_vectors = self.embedding_fn.encode_documents([query])
+        results = self.client.search(
+            collection_name=collection_name or self.collection_name,
+            data=query_vectors,
+            limit=limit,
+            output_fields=["text"],
+        )
+        docs = [d["entity"]["text"] for r in results for d in r]
+        return docs
+
+    def has_collection(self, collection_name: str) -> bool:
+        """Check if the collection exists."""
+        try:
+            return self.client.has_collection(collection_name)
+        except MilvusException:
+            return False
+
+    def create_collection(self, collection_name: str) -> "MilvusStore":
+        """Create a new collection."""
+        self.client.create_collection(
+            collection_name=collection_name,
+            dimension=self.dimension,
+        )
+        return self
