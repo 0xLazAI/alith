@@ -1,5 +1,3 @@
-import base64
-import os
 from pathlib import Path
 
 import rsa
@@ -8,11 +6,7 @@ from llamafactory.train.tuner import run_exp
 from ..data import decrypt, download_file
 from .common import DEFAULT_DATASET, DEFAULT_DATASET_DIR, add_dataset, get_output_dir
 from .types import TrainingParams
-
-rsa_private_key_base64 = os.getenv("RSA_PRIVATE_KEY_BASE64", "")
-rsa_private_key = (
-    base64.b64decode(rsa_private_key_base64).decode() if rsa_private_key_base64 else ""
-)
+from ..lazai.node.validator import rsa_private_key
 
 
 def preprocess_data(params: TrainingParams) -> str:
@@ -24,7 +18,7 @@ def preprocess_data(params: TrainingParams) -> str:
         file_path = Path(file)
         dataset = file_path.name
         # If the file is encrypted and provided the encryption key, decrypt it
-        if params.data_params.encryption_key and rsa_private_key_base64:
+        if params.data_params.encryption_key and rsa_private_key:
             encryption_key = params.data_params.encryption_key
             content = file_path.read_bytes()
             priv_key = rsa.PrivateKey.load_pkcs1(rsa_private_key.strip().encode())
