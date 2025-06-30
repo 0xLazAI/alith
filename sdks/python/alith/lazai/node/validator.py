@@ -60,7 +60,10 @@ async def process_proof(req: ProofRequest):
         client.add_proof(
             req.file_id,
             ProofData(
-                id=req.file_id, file_url=req.file_url, proof_url=req.proof_url or ""
+                id=req.file_id,
+                score=1,
+                file_url=req.file_url,
+                proof_url=req.proof_url or "",
             ),
         )
         client.claim()

@@ -5,12 +5,14 @@ from web3 import Web3
 
 class ProofData(BaseModel):
     id: int
+    score: int
     file_url: str
     proof_url: str
 
     def abi_encode(self) -> bytes:
         return encode(
-            ["(uint256,string,string)"], [(self.id, self.file_url, self.proof_url)]
+            ["(uint256,uint256,string,string)"],
+            [(self.id, self.score, self.file_url, self.proof_url)],
         )
 
 

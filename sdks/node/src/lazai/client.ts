@@ -116,6 +116,7 @@ export class Client extends ChainManager {
       signature: signature.signature,
       data: {
         id: data.id,
+        score: data.score,
         fileUrl: data.fileUrl,
         proofUrl: data.proofUrl,
       },

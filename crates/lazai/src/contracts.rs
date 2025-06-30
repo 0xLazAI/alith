@@ -27,6 +27,7 @@ sol! {
 
     struct ProofData {
         uint256 id;
+        uint256 score;
         string fileUrl;
         string proofUrl;
     }

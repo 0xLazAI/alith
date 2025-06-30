@@ -215,6 +215,11 @@ export const DATA_REGISTRY_CONTRACT_ABI = [
                 type: "uint256",
               },
               {
+                internalType: "uint256",
+                name: "score",
+                type: "uint256",
+              },
+              {
                 internalType: "string",
                 name: "fileUrl",
                 type: "string",

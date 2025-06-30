@@ -161,9 +161,10 @@ class Client(ChainManager):
         ).signature.hex()
 
         proof = {
-            "signature": HexBytes(signature).hex(),
+            "signature": Web3.to_bytes(hexstr=HexBytes(signature).hex()),
             "data": {
                 "id": data.id,
+                "score": data.score,
                 "fileUrl": data.file_url,
                 "proofUrl": data.proof_url,
             },

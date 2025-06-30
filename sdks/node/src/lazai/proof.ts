@@ -3,6 +3,7 @@ import { Web3 } from "web3";
 export class ProofData {
   constructor(
     public id: number,
+    public score: number,
     public fileUrl: string,
     public proofUrl: string
   ) {}
@@ -13,6 +14,7 @@ export class ProofData {
       {
         components: [
           { name: "id", type: "uint256" },
+          { name: "score", type: "uint256" },
           { name: "fileUrl", type: "string" },
           { name: "proofUrl", type: "string" },
         ],
@@ -21,6 +23,7 @@ export class ProofData {
       },
       {
         id: this.id,
+        score: this.score,
         fileUrl: this.fileUrl,
         proofUrl: this.proofUrl,
       }
