@@ -5,9 +5,9 @@
         "title": "Request DEX Test Tokens Here",
         "url": "https://forum.ceg.vote/t/request-dex-test-tokens-here/5206",
         "views": "",
-        "comments": "12",
+        "comments": "13",
         "created_date": "Jun 3, 2025 6:32 pm",
-        "latest_activity": "Jun 28, 2025 10:31 pm",
+        "latest_activity": "Jun 29, 2025 10:11 pm",
         "content": "Hi Everyone, we launched the Hype Test DEX. If you need test tokens, please drop your wallet and I\u2019ll send some to you.\nhype-test-dex.metis.io\nHype Test DEX\nHype Test DEX\nMore information about dev resources, including the subgraph for this DEX can be found here:\nMetis Docs\nTest DEX | Metis Docs\nLearn how to use the Test DEX and its subgraph\nI will send Test USDT (0x3c099E287eC71b4AA61A7110287D715389329237) to your address",
         "comments_details": [
             {
@@ -56,7 +56,506 @@
             },
             {
                 "author": "JustineDevs",
+                "comment": "0x44604bb3A940E93E644ae03A96b876dF1417F750"
+            },
+            {
+                "author": "xav1er",
                 "comment": "This post was flagged by the community and is temporarily hidden."
+            }
+        ]
+    },
+    {
+        "id": "7d2ad9171c5a0384",
+        "topic_id": "5984",
+        "title": "What Makes a Wallet \u201cReal\u201d?",
+        "url": "https://forum.ceg.vote/t/what-makes-a-wallet-real/5984",
+        "views": "",
+        "comments": "3",
+        "created_date": "Jun 26, 2025 11:19 am",
+        "latest_activity": "Jun 29, 2025 9:58 pm",
+        "content": "Hello Metisians!\nMany of us have participated in airdrops and retrodrops, some received rewards, some didn\u2019t. Projects often base their final selections on metrics like user onchain balance, address age, bridge volume into L2s, some txid like activity in dapps, and activity across multiple networks. But an increasingly tough challenge is: how do we distinguish real users from bots or farmed addresses? Especially when some farms operate manually, mimicking real user behavior.\nIn your opinion, what criteria separate a real wallet from a bot/farm account?\nWhat attributes do you consider most important?\nHow would you filter out these artificial addresses?\nLooking forward to your thoughts!",
+        "comments_details": [
+            {
+                "author": "Vladimir",
+                "comment": "Hello Metisians!\nMany of us have participated in airdrops and retrodrops, some received rewards, some didn\u2019t. Projects often base their final selections on metrics like user onchain balance, address age, bridge volume into L2s, some txid like activity in dapps, and activity across multiple networks. But an increasingly tough challenge is: how do we distinguish real users from bots or farmed addresses? Especially when some farms operate manually, mimicking real user behavior.\nIn your opinion, what criteria separate a real wallet from a bot/farm account?\nWhat attributes do you consider most important?\nHow would you filter out these artificial addresses?\nLooking forward to your thoughts!"
+            },
+            {
+                "author": "han",
+                "comment": "Great question and one that\u2019s only getting more relevant as networks grow.\nAs someone who was once dubbed \u201cMetisian of the Year\u201d , I\u2019ve spent a fair share of time thinking about this.\nFor me, key signals of a real user include:\nConsistency over time: Not just a burst of activity during campaign windows. Real users tend to have a natural, spread-out rhythm.\nDiversity of interaction: Engaging with multiple dApps, bridging assets, staking, governance participation not just farming one protocol.\nOffchain-onchain overlap: Social verifications (e.g., Lens, Gitcoin Passport), ENS usage, or wallets tied to active social profiles add credibility.\nNon-repetitive patterns: Bots often follow strict templates. Minor variations, timing randomness, and exploratory behavior are human giveaways.\nFiltering this out might take a mix of onchain metrics, anomaly detection, and maybe even ZK reputation proofs in the future.\nCurious what others are seeing in the data!"
+            },
+            {
+                "author": "irinaina",
+                "comment": "This is a really tricky question, and realistically in my opinion, it\u2019s not possible to track and separate every single address especially when AI agents are able to closely mimic real user behavior.\nHowever, certain criteria can help reduce bot and farm activity. For example:\n\u2022 Diverse, natural activity over time\n\u2022 Organic social ties, such as interactions with multiple protocols, communities, or social verifications\n\u2022 Reasonable timing patterns that don\u2019t show large bursts of coordinated claims\n\u2022 Holding different tokens and NFTs, which often indicates a real user.\nI would prioritize wallets that engage with the protocol beyond rewards (e.g., governance participation, content creation), provide liquidity or sustained contributions and show longer-term, varied on-chain histories.\nIn some cases, optional identity or social verification can be considered, provided it doesn\u2019t compromise decentralization principles.\nWith all said, it\u2019s very difficult to prevent farming completely, but by applying these filters and monitoring behavioral patterns, we can at least avoid massive bot attacks and reduce the scale of fake account farming."
+            },
+            {
+                "author": "Vladimir",
+                "comment": "About AI agents for farming: for every gangster there is a policeman, and as soon as AIs appear that create such activity, a special police AI will appear that will see traces of the use of AI or simply find out such bot in public database of AI agents"
+            }
+        ]
+    },
+    {
+        "id": "a588ef262157116c",
+        "topic_id": "5966",
+        "title": "HyperHack Spotlight Campaign is Live",
+        "url": "https://forum.ceg.vote/t/hyperhack-spotlight-campaign-is-live/5966",
+        "views": "",
+        "comments": "16",
+        "created_date": "Jun 25, 2025 2:10 pm",
+        "latest_activity": "Jun 29, 2025 8:15 pm",
+        "content": "Gm Metisians, the Spotlight Campaign is here to supercharge your HyperHack journey!\nWe are giving selected project teams a chance at the $7500 bonus prize pool, $500 in marketing credit, access to guild talent, and the chance to earn tiered ecosystem rewards. The goal is to boost your visibility and help you grow real users.\nApply here\nCampaign Objective\nTo empower HyperHack teams to market their projects using a real budget. This is about helping builders grow their audience, activate users, and showcase their dApps across the Metis ecosystem.\nHow It Works\n$500 marketing credit for each project, 50 projects at maximum\n$7500 extra prize pool for top projects\nEach selected project will receive $500 in marketing credit, split into:\n$300 upfront to start your campaign\n$200 unlocked later if performance goals are met by August 1\n$500 Marketing Credit\nEach project must create a dedicated X account for their HyperHack product and have at least one marketer (internal or from the Forum Marketing Guild) who will:\nLead the project\u2019s marketing strategy\nUse the $500 to drive short-term traffic\nJoin a Vibe Session to introduce the dapp\nShare referral links via X posts to their forum showcase\nApproved Marketing Tactics:\nQuest Campaigns (TaskOn, Zealy, Magic Square): e.g. \u201cFollow + Retweet + Test dapp + Join Forum\u201d\nAMA Airdrops: Host AMAs on X and airdrop to the Metis community\nTwitter Ads: Use paid ads to boost visibility (marketer must help set this up)\nCustom Strategies: Teams are also encouraged to try any other creative ideas tailored to their product and audience\nNote: Marketer\u2019s name and focus must be listed in the application (e.g., Marketing Lead: @Handle \u2013 Focus: Memes & Spaces).\nHow We Track Performance\nProjects will be scored across three categories during July 15 to August 1:\n75% X account growth and quality (verified via TwitterAudit)\n20% user activity on your dApp (measured onchain)\n5% users driven to your Forum thread using referral links\nRewards for Top Projects\nTotal Prize Pool: $7500\nTier 1: HyperHack Spotlight Champion\n$3000 bonus for the top project\nForum pin for 14 days\nPriority DevRel support for 6 months\nNewsletter spotlight\n25 bonus points for the final judging phase\nTier 2: Growth Catalysts\n$3000 prize pool\nForum pin for 7 days\nDevRel support for 3 months\nNewsletter spotlight\n15 bonus points\nTier 3: Community Stars\n$1500 prize pool\nDevRel support for 1 month\nNewsletter spotlight\n10 bonus points\nKey Dates\nApplication period: June 25-July 8\nApplication review: July 9- 15\nCampaign period: July 15- August 1\nRules\nFunds must be used for approved marketing activities only\nBot traffic is not allowed and will be checked\nYour marketing strategy must be made public in your Forum thread\nThe Spotlight Campaign is designed to help real builders grow real audiences.\nApply here\nFor questions, reply below.\nGL to all!",
+        "comments_details": [
+            {
+                "author": "Liametis",
+                "comment": "Gm Metisians, the Spotlight Campaign is here to supercharge your HyperHack journey!\nWe are giving selected project teams a chance at the $7500 bonus prize pool, $500 in marketing credit, access to guild talent, and the chance to earn tiered ecosystem rewards. The goal is to boost your visibility and help you grow real users.\nApply here\nCampaign Objective\nTo empower HyperHack teams to market their projects using a real budget. This is about helping builders grow their audience, activate users, and showcase their dApps across the Metis ecosystem.\nHow It Works\n$500 marketing credit for each project, 50 projects at maximum\n$7500 extra prize pool for top projects\nEach selected project will receive $500 in marketing credit, split into:\n$300 upfront to start your campaign\n$200 unlocked later if performance goals are met by August 1\n$500 Marketing Credit\nEach project must create a dedicated X account for their HyperHack product and have at least one marketer (internal or from the Forum Marketing Guild) who will:\nLead the project\u2019s marketing strategy\nUse the $500 to drive short-term traffic\nJoin a Vibe Session to introduce the dapp\nShare referral links via X posts to their forum showcase\nApproved Marketing Tactics:\nQuest Campaigns (TaskOn, Zealy, Magic Square): e.g. \u201cFollow + Retweet + Test dapp + Join Forum\u201d\nAMA Airdrops: Host AMAs on X and airdrop to the Metis community\nTwitter Ads: Use paid ads to boost visibility (marketer must help set this up)\nCustom Strategies: Teams are also encouraged to try any other creative ideas tailored to their product and audience\nNote: Marketer\u2019s name and focus must be listed in the application (e.g., Marketing Lead: @Handle \u2013 Focus: Memes & Spaces).\nHow We Track Performance\nProjects will be scored across three categories during July 15 to August 1:\n75% X account growth and quality (verified via TwitterAudit)\n20% user activity on your dApp (measured onchain)\n5% users driven to your Forum thread using referral links\nRewards for Top Projects\nTotal Prize Pool: $7500\nTier 1: HyperHack Spotlight Champion\n$3000 bonus for the top project\nForum pin for 14 days\nPriority DevRel support for 6 months\nNewsletter spotlight\n25 bonus points for the final judging phase\nTier 2: Growth Catalysts\n$3000 prize pool\nForum pin for 7 days\nDevRel support for 3 months\nNewsletter spotlight\n15 bonus points\nTier 3: Community Stars\n$1500 prize pool\nDevRel support for 1 month\nNewsletter spotlight\n10 bonus points\nKey Dates\nApplication period: June 25-July 8\nApplication review: July 9- 15\nCampaign period: July 15- August 1\nRules\nFunds must be used for approved marketing activities only\nBot traffic is not allowed and will be checked\nYour marketing strategy must be made public in your Forum thread\nThe Spotlight Campaign is designed to help real builders grow real audiences.\nApply here\nFor questions, reply below.\nGL to all!"
+            },
+            {
+                "author": "4ngel",
+                "comment": "This is huge !!! Good luck to every participant, let\u2019s get it"
+            },
+            {
+                "author": "Elenaisplaying",
+                "comment": "Such a great news. Good luck everyone"
+            },
+            {
+                "author": "i_am_supaman_lj",
+                "comment": "I got a hiccup in the marketers forum ID and the Project owner forum ID. I don\u2019t really know how to find that, any form of assistance would be greatly appreciated."
+            },
+            {
+                "author": "Ghostt",
+                "comment": "You will see that on your profile, and your own forum id is\n@i_am_supaman_lj\n. If you click the @ sign you will get it."
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Thats wonderful, this is the golden chance for developers to build and polish with your project with marketing as well.."
+            },
+            {
+                "author": "i_am_supaman_lj",
+                "comment": "Thanks a lot, I was actually hoping I would work with you. Since you are one of the first that saw the potential of Fracturepoint as a solution to the recent web3 gaming failure trends."
+            },
+            {
+                "author": "i_am_supaman_lj",
+                "comment": "Thanks for the help, we can go on with the plan already now right ?"
+            },
+            {
+                "author": "Sheyda",
+                "comment": "Fantastic, do you have a list of Marketers?"
+            },
+            {
+                "author": "i_am_supaman_lj",
+                "comment": "List?\nI thought only one ."
+            },
+            {
+                "author": "i_am_supaman_lj",
+                "comment": "Specified one marketer on the form Thats why I sort for one"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Hey everyone!\nI\u2019m looking for a marketing partner to join me on an exciting crypto project and help drive this campaign forward.\nIf you\u2019re passionate about Web3 marketing, community building, or growth hacking \u2014 let\u2019s talk!\nFeel free to DM me. Would love to connect!"
+            },
+            {
+                "author": "Ghostt",
+                "comment": "I have teamed up with him and applied to the campaign. Looking forward to the result."
+            },
+            {
+                "author": "0xdellwatson",
+                "comment": "is it possible to also co-join with other campaign ?\nDM for more exposure with our team!"
+            },
+            {
+                "author": "arbilearn",
+                "comment": "This is great opportunity"
+            },
+            {
+                "author": "Invnex",
+                "comment": "Excited, and we\u2019ve applied for Invnex."
+            }
+        ]
+    },
+    {
+        "id": "22bd34bebc67443e",
+        "topic_id": "4356",
+        "title": "FESTIFY: AI-Powered Festival Greetings as Interactive NFTs",
+        "url": "https://forum.ceg.vote/t/festify-ai-powered-festival-greetings-as-interactive-nfts/4356",
+        "views": "",
+        "comments": "5",
+        "created_date": "May 20, 2025 8:55 am",
+        "latest_activity": "Jun 29, 2025 7:07 pm",
+        "content": "Project Overview\nFestify revolutionizes digital celebrations by combining NFT technology with personalized AI agents to create interactive, meaningful festival greetings. Built on Celo and Optimism networks, Festify transforms traditional greeting cards into dynamic, AI-powered experiences.\nThe Problem\nIn today\u2019s digital age, festival greetings lack:\nPersonalization and emotional connection\nPermanence and true ownership\nInteractive and engaging elements\nCultural relevance across distances\nOur Solution\nFestify enables users to:\nCreate Personalized AI Agents\nDesign custom AI personalities for greeting cards\nTrain agents with recipient\u2019s preferences and memories\nCreate interactive, engaging experiences\nMint as NFTs\nTransform AI agents into unique, collectible NFTs\nEnsure permanence and ownership\nEnable trading and collection\nSend Interactive Greetings\nShare AI-powered cards that respond to recipients\nMaintain cultural connections across distances\nCreate lasting digital mementos\nKey Features\nAI Agent Customization\nPersonality traits\nCultural knowledge\nInteractive capabilities\nMemory of shared experiences\nNFT Integration\nERC721 standard implementation\nIPFS metadata storage\nCross-chain compatibility\nRoyalty mechanisms for artists\nCommunity Engagement\nPoints system for participation\nArtist collaboration opportunities\nSocial sharing features\nCommunity events and discussions\nRevenue Model\nNFT minting fees\nMarketplace commissions\nPremium AI features\nBrand collaborations\nGetting Started\nConnect your Web3 wallet\nDesign your AI agent\nCustomize greeting content\nMint as NFT\nSend to loved ones\nJoin Our Community\nUsers: Create and send AI-powered greetings\nArtists: Design AI personalities and card templates\nDevelopers: Contribute to the open-source project\nPartners: Collaborate on special collections\nFuture Vision\nAR/VR integration\nAdvanced AI interactions\nCross-chain expansion\nCommunity governance\nJoin us in revolutionizing digital celebrations with AI-powered, interactive festival greetings that create lasting connections and memories.",
+        "comments_details": [
+            {
+                "author": "arbilearn",
+                "comment": "Project Overview\nFestify revolutionizes digital celebrations by combining NFT technology with personalized AI agents to create interactive, meaningful festival greetings. Built on Celo and Optimism networks, Festify transforms traditional greeting cards into dynamic, AI-powered experiences.\nThe Problem\nIn today\u2019s digital age, festival greetings lack:\nPersonalization and emotional connection\nPermanence and true ownership\nInteractive and engaging elements\nCultural relevance across distances\nOur Solution\nFestify enables users to:\nCreate Personalized AI Agents\nDesign custom AI personalities for greeting cards\nTrain agents with recipient\u2019s preferences and memories\nCreate interactive, engaging experiences\nMint as NFTs\nTransform AI agents into unique, collectible NFTs\nEnsure permanence and ownership\nEnable trading and collection\nSend Interactive Greetings\nShare AI-powered cards that respond to recipients\nMaintain cultural connections across distances\nCreate lasting digital mementos\nKey Features\nAI Agent Customization\nPersonality traits\nCultural knowledge\nInteractive capabilities\nMemory of shared experiences\nNFT Integration\nERC721 standard implementation\nIPFS metadata storage\nCross-chain compatibility\nRoyalty mechanisms for artists\nCommunity Engagement\nPoints system for participation\nArtist collaboration opportunities\nSocial sharing features\nCommunity events and discussions\nRevenue Model\nNFT minting fees\nMarketplace commissions\nPremium AI features\nBrand collaborations\nGetting Started\nConnect your Web3 wallet\nDesign your AI agent\nCustomize greeting content\nMint as NFT\nSend to loved ones\nJoin Our Community\nUsers: Create and send AI-powered greetings\nArtists: Design AI personalities and card templates\nDevelopers: Contribute to the open-source project\nPartners: Collaborate on special collections\nFuture Vision\nAR/VR integration\nAdvanced AI interactions\nCross-chain expansion\nCommunity governance\nJoin us in revolutionizing digital celebrations with AI-powered, interactive festival greetings that create lasting connections and memories."
+            },
+            {
+                "author": "ThalaZikol",
+                "comment": "Festify is a really creative idea! Combining AI and NFTs to create interactive, personalized greetings truly brings emotion and connection in the digital age. Looking forward to trying it out!"
+            },
+            {
+                "author": "amardeep",
+                "comment": "This idea is incredible for making memories and having it on chain! All the best"
+            },
+            {
+                "author": "arbilearn",
+                "comment": "thank you for your words of encouragement"
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Hello\n@arbilearn\n, How do you train an AI agent on personal memories or recipient preferences , does it require user input every time?\nand Will there be seasonal or limited-edition templates that make certain NFT greetings more rare or collectible?"
+            },
+            {
+                "author": "mrcool_web3",
+                "comment": "This is really amazing"
+            }
+        ]
+    },
+    {
+        "id": "aeb3d57b0922e7d4",
+        "topic_id": "5533",
+        "title": "Haithe - Decentralized Protocol for Verifiable AI",
+        "url": "https://forum.ceg.vote/t/haithe-decentralized-protocol-for-verifiable-ai/5533",
+        "views": "",
+        "comments": "13",
+        "created_date": "Jun 12, 2025 8:06 pm",
+        "latest_activity": "Jun 29, 2025 5:41 pm",
+        "content": "Haithe\nA Decentralized Protocol for Verifiable AI.\nThe Problem\nThe core challenge for AI in Web3 isn\u2019t just proving that data hasn\u2019t been tampered with; it\u2019s proving the data\u2019s substance. A cryptographic hash can guarantee a dataset\u2019s integrity, but it cannot verify its origin, quality, or content. A creator could claim their AI is trained on financial data when it was actually trained on irrelevant information, and the hash would still be valid.\nThis \u201csemantic gap\u201d creates a trust vacuum, preventing developers from confidently building high-stakes applications that rely on third-party AI agents.\nThe Solution\nHaithe is a trust protocol that solves this problem by creating a transparent, verifiable ecosystem for AI. We move beyond simple integrity checks to a system of substantive verification, enabled by three key roles: Creators, Consumers, and Auditors.\nInstead of just registering a data hash, creators submit a detailed Claim Manifest about their dataset. Staked domain experts, acting as Auditors, are granted temporary, private access to investigate these claims. Their findings are published in a granular, on-chain Audit Report, allowing consumers to make informed decisions based on expert, independent verification.\nHow It Works: A Three-Part Ecosystem\nHaithe\u2019s workflow ensures checks and balances between all participants, with smart contracts on Hyperion orchestrating the process.\n1. The Creator: Defining the Claims\nBuild & Register: Developers use the Alith framework to build high-performance AI agents and register them on the Haithe marketplace.\nSubmit the Claim Manifest: Alongside the agent, the Creator submits a structured manifest containing specific, falsifiable claims about the training data. For example:\nSource: \u201cAPI data from Uniswap v3 on Polygon.\u201d\nDate Range: \u201cAll swaps from June 1, 2023, to December 31, 2023.\u201d\nContent: \u201cDataset contains no personally identifiable information (PII).\u201d\nSchema: \u201cIncludes columns for token_pair, amount_in, amount_out, and gas_price.\u201d\n2. The Auditor: Investigating the Substance\nStake & Qualify: Domain experts (in finance, NLP, security, etc.) stake tokens to become eligible Auditors.\nAccept the Task: An Auditor accepts an audit request, which can be funded by the Creator or a Consumer.\nInvestigate Claims: The Auditor is granted secure, time-limited, off-chain access to the private dataset. Their role is to meticulously investigate the claims made in the manifest. This requires genuine domain expertise.\nPublish the Audit Report: The Auditor submits a detailed report to IPFS, with its hash recorded on-chain. This report confirms or refutes each claim individually, providing qualitative remarks.\n3. The Consumer: Making Informed Decisions\nDiscover & Filter: Developers browse the Haithe marketplace for AI agents. They can filter for agents based on their audit status.\nReview Reports: Before subscribing, a Consumer can review the detailed Audit Report for any agent. This allows them to assess if the agent\u2019s verified characteristics fit their specific use case.\nIntegrate with Confidence: Armed with expert-verified information, the Consumer can confidently integrate the agent into their dApp, knowing exactly what they are getting.\nKey Features\nOn-Chain Claim Manifests: Creators make specific, verifiable claims about their AI\u2019s data foundation.\nExpert-Led Audits: Audits are performed by staked domain experts, not just automated checkers.\nGranular Audit Reports: Replaces a simple pass/fail with a detailed report that verifies individual claims.\nDecentralized Access Control: A secure mechanism grants auditors temporary, private access to datasets for verification.\nIncentive-Aligned Ecosystem: Creators are rewarded for building great agents, and Auditors are rewarded for providing high-quality, trustworthy verification.\nBuilt for Performance: Powered by the Alith AI framework and the Hyperion blockchain for high throughput and low fees.\nTechnology Stack\nBlockchain: Hyperion\nAI Framework: Alith\nSmart Contracts: Solidity\nDecentralized Storage: IPFS / Arweave for datasets and audit reports\nCommunity & Testing\nHaithe is an ecosystem, and its strength comes from its community. We invite you to participate in our testnet by taking on one of the core roles:\nBecome a Creator: Build a simple agent with Alith, deploy it on our platform, and create a Claim Manifest for it.\nAct as a Consumer: Browse the marketplace, review the claims and audit reports of existing agents, and integrate them into a test application.\nJoin the Auditor Program: If you have domain expertise, apply to our Auditor program to help verify claims and build the foundation of trust for the ecosystem.",
+        "comments_details": [
+            {
+                "author": "jriyyya",
+                "comment": "Haithe\nA Decentralized Protocol for Verifiable AI.\nThe Problem\nThe core challenge for AI in Web3 isn\u2019t just proving that data hasn\u2019t been tampered with; it\u2019s proving the data\u2019s substance. A cryptographic hash can guarantee a dataset\u2019s integrity, but it cannot verify its origin, quality, or content. A creator could claim their AI is trained on financial data when it was actually trained on irrelevant information, and the hash would still be valid.\nThis \u201csemantic gap\u201d creates a trust vacuum, preventing developers from confidently building high-stakes applications that rely on third-party AI agents.\nThe Solution\nHaithe is a trust protocol that solves this problem by creating a transparent, verifiable ecosystem for AI. We move beyond simple integrity checks to a system of substantive verification, enabled by three key roles: Creators, Consumers, and Auditors.\nInstead of just registering a data hash, creators submit a detailed Claim Manifest about their dataset. Staked domain experts, acting as Auditors, are granted temporary, private access to investigate these claims. Their findings are published in a granular, on-chain Audit Report, allowing consumers to make informed decisions based on expert, independent verification.\nHow It Works: A Three-Part Ecosystem\nHaithe\u2019s workflow ensures checks and balances between all participants, with smart contracts on Hyperion orchestrating the process.\n1. The Creator: Defining the Claims\nBuild & Register: Developers use the Alith framework to build high-performance AI agents and register them on the Haithe marketplace.\nSubmit the Claim Manifest: Alongside the agent, the Creator submits a structured manifest containing specific, falsifiable claims about the training data. For example:\nSource: \u201cAPI data from Uniswap v3 on Polygon.\u201d\nDate Range: \u201cAll swaps from June 1, 2023, to December 31, 2023.\u201d\nContent: \u201cDataset contains no personally identifiable information (PII).\u201d\nSchema: \u201cIncludes columns for token_pair, amount_in, amount_out, and gas_price.\u201d\n2. The Auditor: Investigating the Substance\nStake & Qualify: Domain experts (in finance, NLP, security, etc.) stake tokens to become eligible Auditors.\nAccept the Task: An Auditor accepts an audit request, which can be funded by the Creator or a Consumer.\nInvestigate Claims: The Auditor is granted secure, time-limited, off-chain access to the private dataset. Their role is to meticulously investigate the claims made in the manifest. This requires genuine domain expertise.\nPublish the Audit Report: The Auditor submits a detailed report to IPFS, with its hash recorded on-chain. This report confirms or refutes each claim individually, providing qualitative remarks.\n3. The Consumer: Making Informed Decisions\nDiscover & Filter: Developers browse the Haithe marketplace for AI agents. They can filter for agents based on their audit status.\nReview Reports: Before subscribing, a Consumer can review the detailed Audit Report for any agent. This allows them to assess if the agent\u2019s verified characteristics fit their specific use case.\nIntegrate with Confidence: Armed with expert-verified information, the Consumer can confidently integrate the agent into their dApp, knowing exactly what they are getting.\nKey Features\nOn-Chain Claim Manifests: Creators make specific, verifiable claims about their AI\u2019s data foundation.\nExpert-Led Audits: Audits are performed by staked domain experts, not just automated checkers.\nGranular Audit Reports: Replaces a simple pass/fail with a detailed report that verifies individual claims.\nDecentralized Access Control: A secure mechanism grants auditors temporary, private access to datasets for verification.\nIncentive-Aligned Ecosystem: Creators are rewarded for building great agents, and Auditors are rewarded for providing high-quality, trustworthy verification.\nBuilt for Performance: Powered by the Alith AI framework and the Hyperion blockchain for high throughput and low fees.\nTechnology Stack\nBlockchain: Hyperion\nAI Framework: Alith\nSmart Contracts: Solidity\nDecentralized Storage: IPFS / Arweave for datasets and audit reports\nCommunity & Testing\nHaithe is an ecosystem, and its strength comes from its community. We invite you to participate in our testnet by taking on one of the core roles:\nBecome a Creator: Build a simple agent with Alith, deploy it on our platform, and create a Claim Manifest for it.\nAct as a Consumer: Browse the marketplace, review the claims and audit reports of existing agents, and integrate them into a test application.\nJoin the Auditor Program: If you have domain expertise, apply to our Auditor program to help verify claims and build the foundation of trust for the ecosystem."
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Hello\n@jriyyya\n,\nI have few Questions to ask :\nIf the dataset is private, how do you ensure Auditors don\u2019t misuse or leak it?\nAre Creators allowed to challenge an audit report if they think it\u2019s unfair or inaccurate?\nWhat kinds of use cases are you targeting first \u2013 trading bots, oracles, LLMs?"
+            },
+            {
+                "author": "han",
+                "comment": "Thanks for sharing this deep and original approach-Haithe sounds truly exciting! As a consumer, how can I be sure that an AI agent\u2019s data truly comes from the sources claimed? Do the audit reports go into technical detail, and does relying on them require multiple auditors\u2019 perspectives for confidence?"
+            },
+            {
+                "author": "jriyyya",
+                "comment": "GM GM, Apologies for the delayed response , I was in the middle of relocating and just got everything settled. Thanks again for your interest in our project and for the thoughtful questions. Let me address each of them below\n1) If the dataset is private, how do you ensure Auditors don\u2019t misuse or leak it?\nGreat question. In our current model, auditors must undergo two layers of validation before they\u2019re granted access:\nFirst, they are verified by us (the platform) based on identity and domain expertise.\nSecond, they are validated by the DAO, ensuring community-level accountability.\nWhile trust in auditors is still required to some extent, just like in real-world auditing , we are actively exploring ways to make this process more trustless.\n2) Are Creators allowed to challenge an audit report if they think it\u2019s unfair or inaccurate?\nYes, it\u2019s a crucial safeguard.\nWe agree that auditors shouldn\u2019t have unchecked authority. Creators will have the ability to challenge audit reports, either by:\nRequesting a re-audit (potentially by a different auditor or group of auditors), or\nSubmitting a formal rebuttal that gets appended to the audit report for transparency.\n3) What kinds of use cases are you targeting first \u2013 trading bots, oracles, LLMs?\nOur initial focus is on trading bots and LLMs. These use cases have both high impact and urgent need for trust and verifiability."
+            },
+            {
+                "author": "jriyyya",
+                "comment": "Helloo, Apologies for the delayed response, I really appreciate your thoughtful question!\nAs a consumer, audits are exactly what enable trust that an AI agent\u2019s data truly comes from the sources claimed. Each audit report goes into technical detail, verifying every claim made in the agent\u2019s Claim Manifest \u2014 like the data source, date range, schema, and more.\nAnd yes, confidence naturally increases when multiple auditors review the same dataset. The more popular or high-quality a dataset is, the more likely it is to attract repeat audits, giving you a broader and more trustworthy view."
+            },
+            {
+                "author": "han",
+                "comment": "Thanks for the clear explanation! Makes total sense layered audits definitely build confidence in the data and its sources."
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Thanks for the detailed response, and hope the move went smoothly!\nI really like the dual-layer validation approach and the transparency mechanisms for audit disputes.\nWill be following the updates closely!"
+            },
+            {
+                "author": "CrisMetis",
+                "comment": "Haithe seems to tackle a real pain point, transparency in AI data verification. Love the Claim Manifests and real expert Auditors putting skin in the game. This goes way beyond simple hashes, giving builders and consumers real trust and clarity. Excited to see how it grows!"
+            },
+            {
+                "author": "jriyyya",
+                "comment": "Yes, We are in the building phase as of now, We will surely share the upcoming updates"
+            },
+            {
+                "author": "jriyyya",
+                "comment": "Thank you for showing interest in our project! We will share some updates soon, So stay tuned"
+            },
+            {
+                "author": "jriyyya",
+                "comment": "Hey Everyone, We\u2019re doing a community research to understand how developers, data scientists, auditors, and Web3 builders think about trust, verification, and integrating third-party AI.\nPlease take 3\u20135 minutes to fill out this quick questionnaire\nYour input will directly shape Haithe\u2019s early design and testnet launch.\nBasic Info\nWhat\u2019s your background? (Select all that apply)\nAI/ML Developer\nWeb3 Developer\nData Engineer / Analyst\nSecurity Researcher\nDomain Expert (finance, law, etc)\nFounder / Builder\nStudent / learner\nOther technical background\nOther non-technical background\n3\nvoters\nChoose up to 6 options.\nVote now!\nResults\nHow familiar are you with verifiable data or trust protocols?\nNot familiar\nSomewhat familiar\nVery familiar / already using similar tools\n3\nvoters\nResults\nHave you ever used an LLM created by someone else (e.g., from HuggingFace, GitHub, or some DAO)?\nYes, Frequently\nOccasionally\nRarely\nNever\nNot sure\n3\nvoters\nResults\nWhat are your biggest concerns when using external AI models? (Select up to 3)\nNot knowing the source of training data\nPotential misuse of personal or sensitive data\nLegal or ethical issues\nPoor model performance\nIncompatibility with my stack\nLack of transparency in how the model was built\nNo concerns\n3\nvoters\nChoose up to 3 options.\nVote now!\nResults\nWhat would most increase your trust in using someone else\u2019s AI model? (Select up to 3)\nTransparent training data claims\nIndependent third-party audits\nVerifiable source data (e.g., on-chain or timestamped)\nReputation of the creator\nCommunity reviews or ratings\nOpen-source code and training pipeline\nNothing \u2014 I already trust most open models\nNothing \u2014 I don\u2019t trust external AI models\n3\nvoters\nChoose up to 3 options.\nVote now!\nResults\nHow valuable do you think it is to have expert audits of AI models\u2019 data claims?\nNot valuable\nSlightly useful\nUseful\nVery valuable\nAbsolutely essential for critical applications\n3\nvoters\nResults\nIf you had to choose a role in the Haithe ecosystem, which would you most likely want to try?\nCreator (build and publish AI agents)\nAuditor (verify dataset claims)\nConsumer (use verified agents in dApps)\nNone right now \u2014 just observing\n3\nvoters\nResults\nWould you stake tokens or reputation to act as an Auditor in return for rewards?\nYes\nMaybe, depending on how the system works\nNo\nI\u2019m not interested in being an Auditor\n3\nvoters\nResults"
+            },
+            {
+                "author": "jriyyya",
+                "comment": "Ping\n@priyankg3\n@han\n@CrisMetis\n@Geographer\n@4ngel\n@ravisharma\n@deadman_xbt\n@Cryptopotato\nWould really appreciate if you all could fill out the above quick questionnaire"
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Thanks For sharing, I just checked and filled the entries"
+            },
+            {
+                "author": "Geographer",
+                "comment": "jriyyya:\nWould really appreciate if you all could fill out the above quick questionnaire\nSure, happy to help! Just filled it out"
+            }
+        ]
+    },
+    {
+        "id": "a415cc78b90fb81b",
+        "topic_id": "5901",
+        "title": "Building Brand Trust in an Era of Deepfakes and AI Content",
+        "url": "https://forum.ceg.vote/t/building-brand-trust-in-an-era-of-deepfakes-and-ai-content/5901",
+        "views": "",
+        "comments": "5",
+        "created_date": "Jun 23, 2025 9:20 am",
+        "latest_activity": "Jun 29, 2025 5:22 pm",
+        "content": "\u201cAs AI-generated content advances, deepfakes have become a critical challenge for brand integrity. Recent incidents\u2014from fake celebrity endorsements to fabricated executive statements\u2014highlight urgent risks. I\u2018ve summarized some available methods. I\u2019d welcome your experiences and critiques on what actually works.\u201d\n1. The Trust Erosion Challenge\nCurrent Realities:\nSynthetic Media Proliferation:\nDeepfakes now mimic voices, mannerisms, and contexts with alarming accuracy (e.g., fake \u201cCEO announcement\u201d videos).\nConsumer Distrust:\n68% question brand authenticity if AI use isn\u2019t disclosed (Edelman 2025).\nRegulatory Momentum:\nItaly\u2019s fines for inadequate AI labeling signal global compliance demands.\n2. Observed Defense Frameworks\nA. Proactive Authentication\nStrategy Implementation Example\nTamper-Proof Watermarking Cryptographic signatures in official media\nContent Provenance Tracking Public timestamping for edit history\nBehavior-Based Threat Tools Anti-Sybil systems to detect bot networks\nB. Transparency Protocols\nExplicit AI Labeling:\nStandardized icons (e.g., AI-Assisted) on all synthetic/semi-synthetic content.\nPublic Creation Logs:\nShare toolchains and editing steps (e.g., \u201cGenerated via [Tool], edited in [Software]\u201d).\nLive Human Verification:\nHost AMAs with real-time gestures/codes to counter impersonation.\n3. Community-Driven Trust Models\nEmerging Practices:\nCrowdsourced Vigilance Programs:\nReward users for reporting fakes (e.g., non-monetary recognition programs).\nDecentralized Content Moderation:\nAllow authenticated communities to flag disputed media.\nClear UGC Guidelines:\nDefine ownership/revenue splits for user-generated content upfront.\n4. Trust Metrics Worth Tracking\nKPI Measurement Approach\nDeepfake response time Internal incident dashboards\nAI disclosure engagement Click-through on provenance links\nSentiment recovery post-crisis Social listening tools\nNo brand is immune to synthetic media risks, but proactive transparency turns trust into a competitive edge. What\u2019s one step you will take?",
+        "comments_details": [
+            {
+                "author": "Claire",
+                "comment": "\u201cAs AI-generated content advances, deepfakes have become a critical challenge for brand integrity. Recent incidents\u2014from fake celebrity endorsements to fabricated executive statements\u2014highlight urgent risks. I\u2018ve summarized some available methods. I\u2019d welcome your experiences and critiques on what actually works.\u201d\n1. The Trust Erosion Challenge\nCurrent Realities:\nSynthetic Media Proliferation:\nDeepfakes now mimic voices, mannerisms, and contexts with alarming accuracy (e.g., fake \u201cCEO announcement\u201d videos).\nConsumer Distrust:\n68% question brand authenticity if AI use isn\u2019t disclosed (Edelman 2025).\nRegulatory Momentum:\nItaly\u2019s fines for inadequate AI labeling signal global compliance demands.\n2. Observed Defense Frameworks\nA. Proactive Authentication\nStrategy Implementation Example\nTamper-Proof Watermarking Cryptographic signatures in official media\nContent Provenance Tracking Public timestamping for edit history\nBehavior-Based Threat Tools Anti-Sybil systems to detect bot networks\nB. Transparency Protocols\nExplicit AI Labeling:\nStandardized icons (e.g., AI-Assisted) on all synthetic/semi-synthetic content.\nPublic Creation Logs:\nShare toolchains and editing steps (e.g., \u201cGenerated via [Tool], edited in [Software]\u201d).\nLive Human Verification:\nHost AMAs with real-time gestures/codes to counter impersonation.\n3. Community-Driven Trust Models\nEmerging Practices:\nCrowdsourced Vigilance Programs:\nReward users for reporting fakes (e.g., non-monetary recognition programs).\nDecentralized Content Moderation:\nAllow authenticated communities to flag disputed media.\nClear UGC Guidelines:\nDefine ownership/revenue splits for user-generated content upfront.\n4. Trust Metrics Worth Tracking\nKPI Measurement Approach\nDeepfake response time Internal incident dashboards\nAI disclosure engagement Click-through on provenance links\nSentiment recovery post-crisis Social listening tools\nNo brand is immune to synthetic media risks, but proactive transparency turns trust into a competitive edge. What\u2019s one step you will take?"
+            },
+            {
+                "author": "han",
+                "comment": "Insightful breakdown combining tech safeguards with transparency and community oversight seems key to rebuilding trust in AI-driven media. How do you see blockchain enhancing these trust protocols?"
+            },
+            {
+                "author": "Norbert",
+                "comment": "How do you approach balancing transparency with brand control when disclosing AI-generated content? Have any of these methods actually worked for teams in real-world scenarios?"
+            },
+            {
+                "author": "Claire",
+                "comment": "Great question! Here\u2019re what I think:\nImmutable proof \u2192 Hash metadata (creator, edits) on-chain. Any tampering breaks the hash.\nCross-entity bridges \u2192 e.g., Media uses chain-proofs to negotiate with AI firms over data rights.\nCommunity power \u2192 Users scan blockchain fingerprints (like Adobe\u2019s) to verify content."
+            },
+            {
+                "author": "Claire",
+                "comment": "Spot on \u2014 balancing transparency is tough!\nRisk-tiered labels:\nHigh-risk (e.g., health news): + hidden watermarks\nLow-risk (ads): Tool names only (e.g., \u201cMidjourney V6\u201d), keep prompts private.\nAutomated Safeguards:\nembeds watermarks during AI content generation.\nProve authenticity without leaking IP."
+            },
+            {
+                "author": "crypto4ell",
+                "comment": "I think that a \u201cwatermark\u201d should be present in any content generation. Otherwise, I already notice that many people share different videos in chats and personal messages without realizing that these videos were created using AI."
+            }
+        ]
+    },
+    {
+        "id": "238db74d834e05f1",
+        "topic_id": "6003",
+        "title": "How AI is Transforming Day-to-Day Operation (And Making Operators Life Easier)",
+        "url": "https://forum.ceg.vote/t/how-ai-is-transforming-day-to-day-operation-and-making-operators-life-easier/6003",
+        "views": "",
+        "comments": "1",
+        "created_date": "Jun 27, 2025 9:09 am",
+        "latest_activity": "Jun 29, 2025 4:59 pm",
+        "content": "AI isn\u2019t just a cool word anymore or some kind of robots that we saw in cool old movies like Matrix, Terminator and so on, it\u2019s right now truly changing how we work and coming into our daily work not only on the MKT side but also and especially for people in operations.\nThink about all those repetitive and tedious tasks, like entering specific data, scheduling calls, or keeping track of your backlog and many others. More and more companies are turning to AI tools to automate these jobs and free up precious time to some guy in the company.\nI\u2019m talking about you, the operators. You\u2019re the people who keep projects on track, make sure everyone knows what they\u2019re doing, and help teams actually get things done. You\u2019re the ones holding it all together behind the scenes. And in Web3, that\u2019s no small task.\nThink about your day-to-day. You\u2019re juggling timelines, coordinating devs and designers, checking community sentiment, keeping stakeholders updated, chasing people for approvals, monitoring governance proposals, handling compliance checks, and making sure a dozen moving parts don\u2019t crash into each other.\nIt\u2019s a LOT. And let\u2019s be realistic, some of it\u2019s very annoying, and you might be thinking why me ???\nLike manually updating dashboards with the latest on-chain data, tracking smart contract deployments across multiple chains, prepping endless reports, or combing through Discord for community feedback.\nHere\u2019s where AI comes in to make life easier:\nImagine AI tools that auto-summarize long governance threads so you\u2019re not reading walls of text. Or AI agents that pull real-time blockchain analytics straight into your dashboards without you lifting a finger. Or bots that sift through Discord and Telegram to highlight emerging issues or common user questions before they blow up.\nAI is also stepping up in risk and security ops. Tools out there are ready for scanning chains for suspicious activity 24/7, flagging potential exploits before they become PR nightmares. For operators, that\u2019s huge peace of mind, and fewer fires to fight at 2 a.m.\nEven the boring parts of scheduling and planning are getting smoother. AI can help coordinate multi-sig signers in different time zones, manage task boards, or generate project updates for stakeholders. Less copy-pasting, more time spent on real problem-solving.\nAnd here\u2019s the thing that must be mentioned: AI\u2019s not replacing operator. it\u2019s freeing them up. It handles the repetitive grind so we can focus on strategic decisions, creative solutions, and keeping our projects moving forward.\nSo if you\u2019re in Web3 ops, the question isn\u2019t whether AI will affect your work, it\u2019s how you\u2019ll harness it to make your job easier and your projects even more successful.\nSo fellas, how do you see AI helping you stay on top of your operations game?",
+        "comments_details": [
+            {
+                "author": "CrisMetis",
+                "comment": "AI isn\u2019t just a cool word anymore or some kind of robots that we saw in cool old movies like Matrix, Terminator and so on, it\u2019s right now truly changing how we work and coming into our daily work not only on the MKT side but also and especially for people in operations.\nThink about all those repetitive and tedious tasks, like entering specific data, scheduling calls, or keeping track of your backlog and many others. More and more companies are turning to AI tools to automate these jobs and free up precious time to some guy in the company.\nI\u2019m talking about you, the operators. You\u2019re the people who keep projects on track, make sure everyone knows what they\u2019re doing, and help teams actually get things done. You\u2019re the ones holding it all together behind the scenes. And in Web3, that\u2019s no small task.\nThink about your day-to-day. You\u2019re juggling timelines, coordinating devs and designers, checking community sentiment, keeping stakeholders updated, chasing people for approvals, monitoring governance proposals, handling compliance checks, and making sure a dozen moving parts don\u2019t crash into each other.\nIt\u2019s a LOT. And let\u2019s be realistic, some of it\u2019s very annoying, and you might be thinking why me ???\nLike manually updating dashboards with the latest on-chain data, tracking smart contract deployments across multiple chains, prepping endless reports, or combing through Discord for community feedback.\nHere\u2019s where AI comes in to make life easier:\nImagine AI tools that auto-summarize long governance threads so you\u2019re not reading walls of text. Or AI agents that pull real-time blockchain analytics straight into your dashboards without you lifting a finger. Or bots that sift through Discord and Telegram to highlight emerging issues or common user questions before they blow up.\nAI is also stepping up in risk and security ops. Tools out there are ready for scanning chains for suspicious activity 24/7, flagging potential exploits before they become PR nightmares. For operators, that\u2019s huge peace of mind, and fewer fires to fight at 2 a.m.\nEven the boring parts of scheduling and planning are getting smoother. AI can help coordinate multi-sig signers in different time zones, manage task boards, or generate project updates for stakeholders. Less copy-pasting, more time spent on real problem-solving.\nAnd here\u2019s the thing that must be mentioned: AI\u2019s not replacing operator. it\u2019s freeing them up. It handles the repetitive grind so we can focus on strategic decisions, creative solutions, and keeping our projects moving forward.\nSo if you\u2019re in Web3 ops, the question isn\u2019t whether AI will affect your work, it\u2019s how you\u2019ll harness it to make your job easier and your projects even more successful.\nSo fellas, how do you see AI helping you stay on top of your operations game?"
+            },
+            {
+                "author": "irinaina",
+                "comment": "Awesome summary of how AI is transforming operations, and a great question.\nI believe nothing will ever replace genuine, authentic human judgment when it comes to organizing a project\u2019s work. But AI is an incredibly powerful tool that makes our work more efficient, faster, and easier. For me, it\u2019s a huge time-saver and an always-available assistant, even when a crazy idea pops into my head in the middle of the night, I can instantly ask AI whether it\u2019s feasible.\nNothing can replace human-to-human interaction, with all the empathy and nuance it brings. But embracing AI as a tool to support your work can make your job smoother and a lot more enjoyable.\nAs I mentioned, one of the ways I use AI in my workflow is by sharing all possible information about the project and regularly discussing new features, updates, and any issues that arise. Over time, as it learns this context, AI becomes an even better and more effective assistant. In a way, we learn from each other."
+            }
+        ]
+    },
+    {
+        "id": "8a226a011b02abc3",
+        "topic_id": "6015",
+        "title": "StreamNFT- The Full Stack Platform for Asset Ownership & Utilities",
+        "url": "https://forum.ceg.vote/t/streamnft-the-full-stack-platform-for-asset-ownership-utilities/6015",
+        "views": "",
+        "comments": "1",
+        "created_date": "Jun 28, 2025 7:16 am",
+        "latest_activity": "Jun 29, 2025 2:18 pm",
+        "content": "Project Name\nStreamNFT\nProblem Statement\nBuilding asset-driven economies in Web3 games is overly complex and inefficient, developers must stitch together multiple tools just to enable core functionalities like trading, rentals, loans or utilities. Current asset standards also restrict cross-protocol usage, limiting the full potential of in-game assets. Meanwhile, players face high entry barriers and fragmented utility experiences, making it difficult to engage meaningfully with their gaming assets.\nSolution Overview\nStreamNFT is a full-stack platform that unifies trading, rentals, loans, and utility into a single plug-and-play hub for game developers. It simplifies the launch and scaling of in-game asset economies. Our asset standard supports cross-protocol usage, unlocking 2x more value and enabling composable utility. For players, StreamNFT offers a seamless interface to discover and interact with their in-game assets, lowering the barriers to Web3 gaming.\nProject Description\nStreamNFT is a full-stack, chain-agnostic platform designed to unlock the full potential of in-game assets and collectibles. At its core, StreamNFT offers plug-and-play modules for trading, rentals, loans, consumables, and real-time utility, all accessible through a unified interface for both developers and players.\nGame developers can launch, manage, and monetize digital asset economies without juggling multiple third-party tools. This includes setting up in-game marketplaces, enabling time-bound rentals, offering real-time perks (e.g., XP boosts, early access), creating consumable assets (like one-time power-ups or tickets), and facilitating asset-based lending, all in just a few clicks.\nWe\u2019re building on EVM-compatible infrastructure, using modular smart contracts, dynamic metadata, and real-time indexing to ensure seamless asset tracking and interaction. The system is fully composable and supports cross-protocol utility, allowing assets to be used across protocols without being locked into one platform.\nPlayers benefit from a clean, chain-abstracted interface where they can easily explore, use, or monetize their owned assets through rentals, consumables, perks, and more, removing the usual friction of Web3 onboarding.\nWhat excites us most is the opportunity to bridge the usability gap between Web2 and Web3 games. By turning static NFTs into dynamic, interactive assets, StreamNFT empowers both developers and gamers to participate in richer, more valuable digital economies, without the technical overhead typically involved.\nCommunity Engagement Features\nUsers will be able to test and engage with a range of features on StreamNFT as part of our gamified onboarding campaign:\nTestable Features/Tasks:\nConnect Wallet \u2013 50 points\nExplore In-Game Asset Listings \u2013 25 points\nTrade an Asset (Buy/Sell) \u2013 100 points\nRent an Asset (Lend or Borrow) \u2013 100 points\nUse a Consumable Asset (e.g., XP boost) \u2013 75 points\nClaim a Perk via Utility Protocol \u2013 50 points\nList Your Own Asset \u2013 75 points\nComplete a Quest (Set of 3 tasks) \u2013 Bonus 150 points\nRefer a Friend \u2013 100 points\nPoints System & Gamification:\nEach completed action earns points that unlock badges, exclusive NFTs, and early access perks. Tasks are framed like RPG-style quests (e.g., \u201cRental Rogue\u201d for first rental or \u201cPerk Hunter\u201d for claiming a utility), tapping into players\u2019 intrinsic motivation. Real-time leaderboards drive friendly competition, while referral rewards create viral growth loops.\nHow This Drives Onboarding:\nBy turning platform exploration into a game-like experience, users are drawn into a journey of discovery. The instant gratification of earning points and rewards, combined with tangible incentives (NFTs, perks, recognition), reduces onboarding friction. This approach helps users understand and experience the full value of their digital assets, while making it fun and social.\nGetting Involved\nJoin our Discord community (DAN ( Ed3, StreamNFT )) where game developers, gamers, collectors collaborate.",
+        "comments_details": [
+            {
+                "author": "piyush-chittara",
+                "comment": "Project Name\nStreamNFT\nProblem Statement\nBuilding asset-driven economies in Web3 games is overly complex and inefficient, developers must stitch together multiple tools just to enable core functionalities like trading, rentals, loans or utilities. Current asset standards also restrict cross-protocol usage, limiting the full potential of in-game assets. Meanwhile, players face high entry barriers and fragmented utility experiences, making it difficult to engage meaningfully with their gaming assets.\nSolution Overview\nStreamNFT is a full-stack platform that unifies trading, rentals, loans, and utility into a single plug-and-play hub for game developers. It simplifies the launch and scaling of in-game asset economies. Our asset standard supports cross-protocol usage, unlocking 2x more value and enabling composable utility. For players, StreamNFT offers a seamless interface to discover and interact with their in-game assets, lowering the barriers to Web3 gaming.\nProject Description\nStreamNFT is a full-stack, chain-agnostic platform designed to unlock the full potential of in-game assets and collectibles. At its core, StreamNFT offers plug-and-play modules for trading, rentals, loans, consumables, and real-time utility, all accessible through a unified interface for both developers and players.\nGame developers can launch, manage, and monetize digital asset economies without juggling multiple third-party tools. This includes setting up in-game marketplaces, enabling time-bound rentals, offering real-time perks (e.g., XP boosts, early access), creating consumable assets (like one-time power-ups or tickets), and facilitating asset-based lending, all in just a few clicks.\nWe\u2019re building on EVM-compatible infrastructure, using modular smart contracts, dynamic metadata, and real-time indexing to ensure seamless asset tracking and interaction. The system is fully composable and supports cross-protocol utility, allowing assets to be used across protocols without being locked into one platform.\nPlayers benefit from a clean, chain-abstracted interface where they can easily explore, use, or monetize their owned assets through rentals, consumables, perks, and more, removing the usual friction of Web3 onboarding.\nWhat excites us most is the opportunity to bridge the usability gap between Web2 and Web3 games. By turning static NFTs into dynamic, interactive assets, StreamNFT empowers both developers and gamers to participate in richer, more valuable digital economies, without the technical overhead typically involved.\nCommunity Engagement Features\nUsers will be able to test and engage with a range of features on StreamNFT as part of our gamified onboarding campaign:\nTestable Features/Tasks:\nConnect Wallet \u2013 50 points\nExplore In-Game Asset Listings \u2013 25 points\nTrade an Asset (Buy/Sell) \u2013 100 points\nRent an Asset (Lend or Borrow) \u2013 100 points\nUse a Consumable Asset (e.g., XP boost) \u2013 75 points\nClaim a Perk via Utility Protocol \u2013 50 points\nList Your Own Asset \u2013 75 points\nComplete a Quest (Set of 3 tasks) \u2013 Bonus 150 points\nRefer a Friend \u2013 100 points\nPoints System & Gamification:\nEach completed action earns points that unlock badges, exclusive NFTs, and early access perks. Tasks are framed like RPG-style quests (e.g., \u201cRental Rogue\u201d for first rental or \u201cPerk Hunter\u201d for claiming a utility), tapping into players\u2019 intrinsic motivation. Real-time leaderboards drive friendly competition, while referral rewards create viral growth loops.\nHow This Drives Onboarding:\nBy turning platform exploration into a game-like experience, users are drawn into a journey of discovery. The instant gratification of earning points and rewards, combined with tangible incentives (NFTs, perks, recognition), reduces onboarding friction. This approach helps users understand and experience the full value of their digital assets, while making it fun and social.\nGetting Involved\nJoin our Discord community (DAN ( Ed3, StreamNFT )) where game developers, gamers, collectors collaborate."
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Hello\n@piyush-chittara\n, Can you explain more about the \u201ccross-protocol utility\u201d does that mean an asset from one game could be usable in another via StreamNFT? How is that enforced?"
+            }
+        ]
+    },
+    {
+        "id": "03df884f7ef57e01",
+        "topic_id": "5649",
+        "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
+        "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
+        "views": "",
+        "comments": "19",
+        "created_date": "Jun 14, 2025 6:42 pm",
+        "latest_activity": "Jun 29, 2025 12:17 pm",
+        "content": "Project Name\nDogex: Simplified Decentralized Perpetuals DEX on Hyperion\nProblem Statement\nMost decentralized perpetual exchanges are complicated and overwhelming, with dense interfaces and confusing features that deter new and retail traders. This complexity blocks broader adoption of perpetual trading in DeFi.\nSolution Overview\nDogex is a minimalist, easy-to-use perpetual DEX built on Hyperion\u2019s cutting-edge blockchain platform. Leveraging Hyperion\u2019s parallel transaction execution and onchain AI capabilities, Dogex offers ultra-fast, reliable trade processing and intelligent risk management. The platform\u2019s simple UI and AI-driven alerts make perpetual trading accessible and straightforward for everyone.\nProject Description\nDogex delivers a decentralized perpetual futures exchange optimized for simplicity, speed, and scalability by building on Hyperion\u2019s next-gen infrastructure. Hyperion\u2019s parallelized transactions enable ultra-low latency order execution and state synchronization 10x faster than traditional chains. Integrated onchain AI powers real-time risk assessment and liquidation alerts, helping users manage positions confidently without complexity. Dogex\u2019s clean, intuitive interface focuses on essential features like one-click position entry/exit, clear margin info, and fast updates. Mobile-friendly and designed for all user levels, Dogex breaks down barriers to perpetual trading by combining powerful Hyperion tech with a smooth, easy experience.\nCommunity Engagement Features\nFair Launch Token Model:\nUsers can buy Dogex tokens only by spending fees accrued on the platform\nToken issuance follows an infinite curve model similar to GMX and Solana projects, ensuring fair and gradual distribution\nThis model aligns incentives and rewards active traders who contribute to platform liquidity and usage\nTestable Features:\nOpening and closing positions\nMargin adjustments\nAI-powered risk alerts\nReward claiming\nPoints System:\nTrades: 10 points\nAI alert interaction: 5 points\nMargin changes: 7 points\nReferrals: 15 points\nGamification:\nPoints unlock badges, leaderboard rankings, and token rewards\nEncourages active use and onboarding\nUser Onboarding:\nStepwise tutorials and gradual feature unlocking\nHelps new traders quickly gain confidence",
+        "comments_details": [
+            {
+                "author": "mrwagmicto",
+                "comment": "Project Name\nDogex: Simplified Decentralized Perpetuals DEX on Hyperion\nProblem Statement\nMost decentralized perpetual exchanges are complicated and overwhelming, with dense interfaces and confusing features that deter new and retail traders. This complexity blocks broader adoption of perpetual trading in DeFi.\nSolution Overview\nDogex is a minimalist, easy-to-use perpetual DEX built on Hyperion\u2019s cutting-edge blockchain platform. Leveraging Hyperion\u2019s parallel transaction execution and onchain AI capabilities, Dogex offers ultra-fast, reliable trade processing and intelligent risk management. The platform\u2019s simple UI and AI-driven alerts make perpetual trading accessible and straightforward for everyone.\nProject Description\nDogex delivers a decentralized perpetual futures exchange optimized for simplicity, speed, and scalability by building on Hyperion\u2019s next-gen infrastructure. Hyperion\u2019s parallelized transactions enable ultra-low latency order execution and state synchronization 10x faster than traditional chains. Integrated onchain AI powers real-time risk assessment and liquidation alerts, helping users manage positions confidently without complexity. Dogex\u2019s clean, intuitive interface focuses on essential features like one-click position entry/exit, clear margin info, and fast updates. Mobile-friendly and designed for all user levels, Dogex breaks down barriers to perpetual trading by combining powerful Hyperion tech with a smooth, easy experience.\nCommunity Engagement Features\nFair Launch Token Model:\nUsers can buy Dogex tokens only by spending fees accrued on the platform\nToken issuance follows an infinite curve model similar to GMX and Solana projects, ensuring fair and gradual distribution\nThis model aligns incentives and rewards active traders who contribute to platform liquidity and usage\nTestable Features:\nOpening and closing positions\nMargin adjustments\nAI-powered risk alerts\nReward claiming\nPoints System:\nTrades: 10 points\nAI alert interaction: 5 points\nMargin changes: 7 points\nReferrals: 15 points\nGamification:\nPoints unlock badges, leaderboard rankings, and token rewards\nEncourages active use and onboarding\nUser Onboarding:\nStepwise tutorials and gradual feature unlocking\nHelps new traders quickly gain confidence"
+            },
+            {
+                "author": "han",
+                "comment": "This is a very exciting initiative and looks incredibly user-friendly!\nAs a potential user, my question is:\nDogex\u2019s simplicity is a huge plus, especially for newcomers. But with perpetuals, managing risk is key. How does the AI-powered alert system work in real-time during volatile market conditions?\nCan users customize these alerts based on their risk appetite (e.g., liquidation thresholds or price movements), and are there safeguards in place to avoid spammy or overly sensitive notifications?"
+            },
+            {
+                "author": "priyankg3",
+                "comment": "hello\n@mrwagmicto\n, What specific UI/UX decisions did you take to make Dogex more beginner-friendly compared to existing perpetual DEXs?\nHow does Dogex handle liquidation risk in volatile market conditions\u2014especially during sharp spikes or network congestion?"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Real-Time AI Alerts: Dogex monitors market volatility and your positions 24/7, sending smart alerts for risks like liquidation, big price swings, or funding changes. Like monitor it once per second or smth, I tihnk it couldn\u2019t be super real time\nFully Customizable & Spam-Free: Users set their own alert rules (e.g. price % moves, margin levels), with built-in safeguards to avoid spammy or repetitive notifications."
+            },
+            {
+                "author": "han",
+                "comment": "Sounds useful if tuned well real-time is ambitious, but even near real-time with smart filters could make a big difference. Curious to see how accurate and non-spammy it stays in practice."
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "1. Beginner-Friendly UI/UX Decisions:\n1-click Trading Mode: Simplified interface with no clutter \u2014 just set size and direction.\nVisual Risk Meter: Real-time margin health bar with color-coded alerts makes liquidation risk easy to understand.\n2. Liquidation Risk Management During Volatility:\nAI-Powered Risk Alerts: Real-time monitoring of price + position risk, with early warnings before liquidation zones.\nAuto-Deleveraging Logic: If network congestion hits, Dogex can auto-partially close risky positions to protect users."
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Yeah, in theory it all sounds great, but we need some real, practical results to see how it actually works with live positions"
+            },
+            {
+                "author": "han",
+                "comment": "Exactly, theory\u2019s solid, but live stress tests will show if it holds up. Let\u2019s see how it performs under real market pressure."
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Appreciate the detailed breakdown! The 1-click trading and visual risk meter definitely feel like a huge win for onboarding.\nKeen to try it out in a live market soon!"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "update: we create a prototype with components structure. Now it\u2019s a base point of our project:\nmiro.com\nSprint Planning\nworing on details rn"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "miro.com\nSprint Planning\nupdated wireframe with details, it\u2019s time to start a vibe codding!"
+            },
+            {
+                "author": "CrisMetis",
+                "comment": "Cool idea, and a DEX that uses the speed of Hyperion to build something better is obviously a great move. Why should trading be complicated when tech like AI and Hyperion can make it smooth, right???"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "yeah it can be much easier then we used to see"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Today I dove into the perpetual DEX market.\nIt\u2019s my first time building a perp DEX \u2014 but with 10 years in dev, I was able to make a few important decisions.\nThe foundation of my project will be based on GMX, a battle-tested perp protocol with open-source MIT-licensed contracts.\nWhy?\nReliable\nOpen\nProven\nFlexible\nI\u2019m not affiliated with GMX. I\u2019m simply leveraging their codebase as a solid technical base \u2014 and improving it with a much better interface + product vision.\nThis is the power of open source.\nI also sketched the first simple mockup of the UI \u2014 just a few blocks for now. The MVP will be laser-focused on clarity and simplicity."
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Will wait for the first look for UI of DEX"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Today, I focused on the technical side of the project. I think over the next few days (or even weeks), I\u2019ll mostly be coding \u2014 and also trying to learn how to clearly communicate what I\u2019ve been working on.\nI launched the frontend of GMX and played with it, sketched out its future architecture, explored what I\u2019ll need to implement it, and created an implementation plan."
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Today I focused on technical research:\nRevisited GMX contracts\nStudied the basics of perpetual futures trading to better understand the market side\nExperimented with opening positions\nI also launched the first mini-marketing effort to start building the initial community:\nCreated a Twitter for Dogex, and started looking for marketers to help grow the first community."
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "project\u2019s twitter: https://x.com/DogexPerps\nceo: https://x.com/mr_wagmi_cto\nfeel free to subsribe and mention that you\u2019re from Hyperion some way I wanna subscribe all projects and ceos"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Today I\u2019m diving deep into GMX v1 vs v2 to decide what\u2019s better for my MVP.\nMy key criteria (in order of priority):\nReliability\nEase of dev & fast iteration\nFlexibility for custom logic\nFull understanding of the codebase\nThis first version must be simple, fast & clear. Let\u2019s go"
+            },
+            {
+                "author": "mrwagmicto",
+                "comment": "Crypto Startup MVP in 30 Days \u2013 1st WEEK\n1st week down. Here\u2019s everything I did in 7 days building from scratch:\n1. Shifted my mindset\nFrom \u201cquick cash grab\u201d \u2192 to building a startup that creates long-term sustainable value & income.\n2. Launched my Twitter + started building in public\nShowed up every day. Shared progress.\nThis is my first step into real startup marketing.\n3. Explored tons of ideas \u2192 picked one that clicks\nThe one that excites me. The one I want to wake up for.\n4. Designed first UI mockups\nGot the visual side of the product moving. First screen = first step to real product.\n5. Understood the tech architecture\nHow everything connects: smart contracts, data flows, frontend logic.\n6. Learned by walking in the user\u2019s shoes\nI tried trading perps.\nI tried providing liquidity.\nNow I feel what my user needs. That\u2019s gold.\n7. Made big tech decisions\nAfter deep research, I chose GMX V1 as the base. It\u2019s stable, simple, well-documented. Perfect for MVP.\n8. Realized the scale of the journey\nIt\u2019s long.\nIt\u2019s exciting.\nAnd I\u2019m all in.\nWhat went well:\nI made decisions with clarity\nI worked on my mindset\nI found a vision that gives me fire in the eyes\nMistakes I made:\nDived too deep into tech too early\nShould\u2019ve explored UX flows & user journey before obsessing over smart contracts.\nPlan for next week (week 2):\nFocus hard on the technical build:\n\u2013 Build a simple frontend to open positions\n\u2013 Dive deep into smart contract structure\n\u2013 Connect frontend + contracts on Arbitrum testnet\nIdeal outcome = MVP skeleton working.\nThanks to everyone who\u2019s followed this journey so far.\nNow it\u2019s time to breathe, reset, and get ready for WEEK 2.\nLet\u2019s keep building"
+            }
+        ]
+    },
+    {
+        "id": "685f71a5f7ae19d8",
+        "topic_id": "6000",
+        "title": "Spotlight Campaign? Your Next Marketing Role Might Be in This Hackathon",
+        "url": "https://forum.ceg.vote/t/spotlight-campaign-your-next-marketing-role-might-be-in-this-hackathon/6000",
+        "views": "",
+        "comments": "6",
+        "created_date": "Jun 27, 2025 7:47 am",
+        "latest_activity": "Jun 29, 2025 10:52 am",
+        "content": "Many projects from the hackathon are still in early stages of visibility and traction. The Spotlight Campaign gives them access to a $500 marketing credit, a $7500 prize pool, and ecosystem-wide exposure.\nThis is a chance for these teams to collaborate with marketers from this guild.\nIf you\u2019re a marketer looking to contribute, now\u2019s the time to reach out to hackathon projects directly (Many found in the Ideathon Category). You can lead their socials strategy, run campaigns, and help them qualify for the second half of their marketing credit by August 1.\nYou\u2019re also encouraged to make a short post about your experience and what kind of project you\u2019d like to work with. Teams are actively browsing this forum looking for help.\nThe marketing credit is split into $300 upfront and $200 unlocked on performance. You\u2019ll be expected to run real campaigns using TaskOn, Zealy, Magic Square, Twitter AMAs, ads, and other creative tactics.\nPerformance is judged by X account growth and quality, onchain user activity, and traffic to the team\u2019s forum thread. Top projects win from a $7500 bonus pool and get extended DevRel and forum support.\nIf you\u2019re available, go make a post or start reaching out. Let\u2019s get some teams to the top.\nStart here: \ud83d\udea8 HyperHack Spotlight Campaign is Live \ud83d\udea8",
+        "comments_details": [
+            {
+                "author": "Norbert",
+                "comment": "Many projects from the hackathon are still in early stages of visibility and traction. The Spotlight Campaign gives them access to a $500 marketing credit, a $7500 prize pool, and ecosystem-wide exposure.\nThis is a chance for these teams to collaborate with marketers from this guild.\nIf you\u2019re a marketer looking to contribute, now\u2019s the time to reach out to hackathon projects directly (Many found in the Ideathon Category). You can lead their socials strategy, run campaigns, and help them qualify for the second half of their marketing credit by August 1.\nYou\u2019re also encouraged to make a short post about your experience and what kind of project you\u2019d like to work with. Teams are actively browsing this forum looking for help.\nThe marketing credit is split into $300 upfront and $200 unlocked on performance. You\u2019ll be expected to run real campaigns using TaskOn, Zealy, Magic Square, Twitter AMAs, ads, and other creative tactics.\nPerformance is judged by X account growth and quality, onchain user activity, and traffic to the team\u2019s forum thread. Top projects win from a $7500 bonus pool and get extended DevRel and forum support.\nIf you\u2019re available, go make a post or start reaching out. Let\u2019s get some teams to the top.\nStart here: \ud83d\udea8 HyperHack Spotlight Campaign is Live \ud83d\udea8"
+            },
+            {
+                "author": "han",
+                "comment": "how can I help them gain visibility?"
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Hello, Would it be possible to connect with the right person from TaskOn, Zealy, or Magic Square so that marketers can reach out directly and get proper guidance on how to set up campaigns for their projects?"
+            },
+            {
+                "author": "Norbert",
+                "comment": "Good opp for you to join the marketing team, just reach out."
+            },
+            {
+                "author": "Norbert",
+                "comment": "That\u2019s a good idea, Taskon is our hackathon partner, and we can have a tutorial for using these tools"
+            },
+            {
+                "author": "priyankg3",
+                "comment": "Great, Will wait for that tutorial, it will be give me a idea, how to design the task ."
+            },
+            {
+                "author": "Norbert",
+                "comment": "Sure, will ping the team."
+            }
+        ]
+    },
+    {
+        "id": "c42b7a5a3f95cfc2",
+        "topic_id": "5975",
+        "title": "Are We Talking to People or Bots? Finding the Balance with AI in Community Management",
+        "url": "https://forum.ceg.vote/t/are-we-talking-to-people-or-bots-finding-the-balance-with-ai-in-community-management/5975",
+        "views": "",
+        "comments": "4",
+        "created_date": "Jun 26, 2025 4:37 am",
+        "latest_activity": "Jun 29, 2025 10:27 am",
+        "content": "Are We Talking to People or Bots? Finding the Balance with AI in Community Management\nAs AI tools continue to get sharper, faster, and more integrated into workflows, one area that\u2019s seeing heavy adoption is community management. From Discord bots handling roles to Telegram assistants catching spam and answering FAQs, automation has made communities more scalable\u2014but also a bit more\u2026 robotic.\nAnd that\u2019s where the tension sits.\nOn one hand, AI improves efficiency. Response times drop. Repetitive questions are handled without stress. Moderators aren\u2019t stretched thin chasing every notification. You can run lean and still look active. Tools like custom GPTs, auto-tagging bots, and AI-powered sentiment trackers offer real value.\nBut here\u2019s the question. Are users still feeling heard? Or are we building community experiences that feel like talking into a wall of scripts and auto-replies?\nIn fast-moving ecosystems like crypto, this balance matters more than ever. We want scale, but we also want soul. We want speed, but we also want warmth. A community can have hundreds of messages a day, but if none of it feels human, people leave.\nSo what does a healthy mix look like?\nAI bots that provide answers should be trained with community tone, not just facts\nMods can use AI to surface important messages, but still follow up with real replies\nWelcome messages can be automated, but should lead to live community pathways\nAutomated responses should trigger human handoffs when needed\u2014not loop forever\nUse AI to enable human interaction, not replace it\nIn some cases, AI can even improve how humans show up. Imagine a tool that identifies overlooked questions or recommends which mods should handle what. AI can boost presence\u2014it shouldn\u2019t eliminate it.\nBut we also have to be real. Some users prefer the speed of a quick automated answer. Not everyone wants a conversation. And for global communities, AI helps cover time zones, filter spam, and make sure nothing gets lost. That\u2019s useful.\nSo let\u2019s have the conversation\nHave you ever felt like a community was too AI and bot-heavy? What made it feel that way?",
+        "comments_details": [
+            {
+                "author": "Norbert",
+                "comment": "Are We Talking to People or Bots? Finding the Balance with AI in Community Management\nAs AI tools continue to get sharper, faster, and more integrated into workflows, one area that\u2019s seeing heavy adoption is community management. From Discord bots handling roles to Telegram assistants catching spam and answering FAQs, automation has made communities more scalable\u2014but also a bit more\u2026 robotic.\nAnd that\u2019s where the tension sits.\nOn one hand, AI improves efficiency. Response times drop. Repetitive questions are handled without stress. Moderators aren\u2019t stretched thin chasing every notification. You can run lean and still look active. Tools like custom GPTs, auto-tagging bots, and AI-powered sentiment trackers offer real value.\nBut here\u2019s the question. Are users still feeling heard? Or are we building community experiences that feel like talking into a wall of scripts and auto-replies?\nIn fast-moving ecosystems like crypto, this balance matters more than ever. We want scale, but we also want soul. We want speed, but we also want warmth. A community can have hundreds of messages a day, but if none of it feels human, people leave.\nSo what does a healthy mix look like?\nAI bots that provide answers should be trained with community tone, not just facts\nMods can use AI to surface important messages, but still follow up with real replies\nWelcome messages can be automated, but should lead to live community pathways\nAutomated responses should trigger human handoffs when needed\u2014not loop forever\nUse AI to enable human interaction, not replace it\nIn some cases, AI can even improve how humans show up. Imagine a tool that identifies overlooked questions or recommends which mods should handle what. AI can boost presence\u2014it shouldn\u2019t eliminate it.\nBut we also have to be real. Some users prefer the speed of a quick automated answer. Not everyone wants a conversation. And for global communities, AI helps cover time zones, filter spam, and make sure nothing gets lost. That\u2019s useful.\nSo let\u2019s have the conversation\nHave you ever felt like a community was too AI and bot-heavy? What made it feel that way?"
+            },
+            {
+                "author": "han",
+                "comment": "Absolutely some communities feel too artificial. Template replies, generic welcome messages, and lack of real interaction make it obvious.\nAI is helpful, but it should stay in a supporting role. Use bots for scale, people for connection.\nA great question to ask the community:\nHave you ever felt like you were only talking to bots in a community? When did that happen?"
+            },
+            {
+                "author": "Norbert",
+                "comment": "I agree with this, AI is here to help not takeover"
+            },
+            {
+                "author": "CrisMetis",
+                "comment": "Great topic Norbert, and it feels to me that too many new communities in web3, but also in web2 are becoming more often some kind of talking to a wall, where not really meaningful interaction is created, but more kind of a bullet point/list answer is given.\nSo the healthy mix is definetely helpful, and I totally agree on most of them, underlining the importance of * Use AI to enable human interaction, not replace it. Well said."
+            },
+            {
+                "author": "Norbert",
+                "comment": "In as much as these AI tools are improving efficiency, i still have this odd feeling when customer service of any web 2 company, and even in web3, pops up with an AI chat bot. Maybe i need time to find the balance, i still prefer human interactions."
+            }
+        ]
+    },
+    {
+        "id": "3c3bc58abb409b37",
+        "topic_id": "5974",
+        "title": "More Push on Product and Marketing Alignment",
+        "url": "https://forum.ceg.vote/t/more-push-on-product-and-marketing-alignment/5974",
+        "views": "",
+        "comments": "5",
+        "created_date": "Jun 26, 2025 4:26 am",
+        "latest_activity": "Jun 29, 2025 10:24 am",
+        "content": "Cross-Functional Collaboration: Powering Marketing and Product Success\nAlignment between product, marketing, and BD is one of those things everyone agrees is important\u2014but rarely prioritised with structure. In crypto especially, it\u2019s common to see teams building great products while struggling to translate that into clear narratives, onboarding flows, or even usable content for growth.\nAs Daniel put it, \u201cThe silos usually happen because each team is chasing slightly different definitions of traction.\u201d And he\u2019s right. Product is chasing usage. Marketing is measuring engagement. BD is tracking conversions. But in most cases, they\u2019re all operating from the same source of truth\u2014the user journey\u2014without ever mapping it together.\nWhere this breaks most often is in feedback. Updates don\u2019t circulate fast enough. Content is scattered. Sales decks, tweets, docs, and demos all tell slightly different versions of what the protocol actually does. The fix isn\u2019t more meetings. It\u2019s rhythm, shared context, and mutual accountability.\nIn crypto, the speed of iteration makes this even more crucial. You don\u2019t have months to align messaging. A product launch that doesn\u2019t get integrated into your marketing content and BD pitch by day two is already missed opportunity. The loop has to be built in.\nWhat helps in practice\nAnchor all teams around one user journey. Let each team contribute to and act on it. Not as a handoff, but a loop\nLet product updates drive marketing storytelling. Not the other way around\nGive BD the same visibility marketing has when feedback rolls in\nCreate rituals for demoing work, updating narratives, and syncing timelines\nAs Daniel noted, \u201cTreat content like connective tissue.\u201d Co-create it. Share it. Let it live in the open\nAlignment doesn\u2019t come from culture decks. It comes from shared wins, shared tools, and shared pace. Not just collaboration\u2014but co-ownership.\nSo how is your team aligning product with marketing today?",
+        "comments_details": [
+            {
+                "author": "Norbert",
+                "comment": "Cross-Functional Collaboration: Powering Marketing and Product Success\nAlignment between product, marketing, and BD is one of those things everyone agrees is important\u2014but rarely prioritised with structure. In crypto especially, it\u2019s common to see teams building great products while struggling to translate that into clear narratives, onboarding flows, or even usable content for growth.\nAs Daniel put it, \u201cThe silos usually happen because each team is chasing slightly different definitions of traction.\u201d And he\u2019s right. Product is chasing usage. Marketing is measuring engagement. BD is tracking conversions. But in most cases, they\u2019re all operating from the same source of truth\u2014the user journey\u2014without ever mapping it together.\nWhere this breaks most often is in feedback. Updates don\u2019t circulate fast enough. Content is scattered. Sales decks, tweets, docs, and demos all tell slightly different versions of what the protocol actually does. The fix isn\u2019t more meetings. It\u2019s rhythm, shared context, and mutual accountability.\nIn crypto, the speed of iteration makes this even more crucial. You don\u2019t have months to align messaging. A product launch that doesn\u2019t get integrated into your marketing content and BD pitch by day two is already missed opportunity. The loop has to be built in.\nWhat helps in practice\nAnchor all teams around one user journey. Let each team contribute to and act on it. Not as a handoff, but a loop\nLet product updates drive marketing storytelling. Not the other way around\nGive BD the same visibility marketing has when feedback rolls in\nCreate rituals for demoing work, updating narratives, and syncing timelines\nAs Daniel noted, \u201cTreat content like connective tissue.\u201d Co-create it. Share it. Let it live in the open\nAlignment doesn\u2019t come from culture decks. It comes from shared wins, shared tools, and shared pace. Not just collaboration\u2014but co-ownership.\nSo how is your team aligning product with marketing today?"
+            },
+            {
+                "author": "han",
+                "comment": "Product, marketing, and BD often chase different goals but all follow the same user journey. In crypto, if your messaging isn\u2019t synced by day two, it\u2019s already late.\nThe answer isn\u2019t more meetings. It\u2019s shared context, fast feedback loops, and co-ownership.\nHow\u2019s your team keeping product and growth in sync?"
+            },
+            {
+                "author": "Norbert",
+                "comment": "Did you say day two?? I say synced from day one!"
+            },
+            {
+                "author": "han",
+                "comment": "Touch\u00e9! Day one sync is the dream because in this space, even day two can feel too late."
+            },
+            {
+                "author": "CrisMetis",
+                "comment": "Great read and intersting video mate, always align and make sure that the product updates and drive the marketing story telling. This should always be the best practice in all companies, not only in web3."
+            },
+            {
+                "author": "Norbert",
+                "comment": "You definitely get it, speed is key"
             }
         ]
     },
@@ -167,95 +666,6 @@
             {
                 "author": "Rosita",
                 "comment": "love the idea of content as connective tissue. Co-creating assets like case studies or demo scripts helps build real alignment, not just better materials."
-            }
-        ]
-    },
-    {
-        "id": "03df884f7ef57e01",
-        "topic_id": "5649",
-        "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
-        "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
-        "views": "",
-        "comments": "18",
-        "created_date": "Jun 14, 2025 6:42 pm",
-        "latest_activity": "Jun 28, 2025 9:51 am",
-        "content": "Project Name\nDogex: Simplified Decentralized Perpetuals DEX on Hyperion\nProblem Statement\nMost decentralized perpetual exchanges are complicated and overwhelming, with dense interfaces and confusing features that deter new and retail traders. This complexity blocks broader adoption of perpetual trading in DeFi.\nSolution Overview\nDogex is a minimalist, easy-to-use perpetual DEX built on Hyperion\u2019s cutting-edge blockchain platform. Leveraging Hyperion\u2019s parallel transaction execution and onchain AI capabilities, Dogex offers ultra-fast, reliable trade processing and intelligent risk management. The platform\u2019s simple UI and AI-driven alerts make perpetual trading accessible and straightforward for everyone.\nProject Description\nDogex delivers a decentralized perpetual futures exchange optimized for simplicity, speed, and scalability by building on Hyperion\u2019s next-gen infrastructure. Hyperion\u2019s parallelized transactions enable ultra-low latency order execution and state synchronization 10x faster than traditional chains. Integrated onchain AI powers real-time risk assessment and liquidation alerts, helping users manage positions confidently without complexity. Dogex\u2019s clean, intuitive interface focuses on essential features like one-click position entry/exit, clear margin info, and fast updates. Mobile-friendly and designed for all user levels, Dogex breaks down barriers to perpetual trading by combining powerful Hyperion tech with a smooth, easy experience.\nCommunity Engagement Features\nFair Launch Token Model:\nUsers can buy Dogex tokens only by spending fees accrued on the platform\nToken issuance follows an infinite curve model similar to GMX and Solana projects, ensuring fair and gradual distribution\nThis model aligns incentives and rewards active traders who contribute to platform liquidity and usage\nTestable Features:\nOpening and closing positions\nMargin adjustments\nAI-powered risk alerts\nReward claiming\nPoints System:\nTrades: 10 points\nAI alert interaction: 5 points\nMargin changes: 7 points\nReferrals: 15 points\nGamification:\nPoints unlock badges, leaderboard rankings, and token rewards\nEncourages active use and onboarding\nUser Onboarding:\nStepwise tutorials and gradual feature unlocking\nHelps new traders quickly gain confidence",
-        "comments_details": [
-            {
-                "author": "mrwagmicto",
-                "comment": "Project Name\nDogex: Simplified Decentralized Perpetuals DEX on Hyperion\nProblem Statement\nMost decentralized perpetual exchanges are complicated and overwhelming, with dense interfaces and confusing features that deter new and retail traders. This complexity blocks broader adoption of perpetual trading in DeFi.\nSolution Overview\nDogex is a minimalist, easy-to-use perpetual DEX built on Hyperion\u2019s cutting-edge blockchain platform. Leveraging Hyperion\u2019s parallel transaction execution and onchain AI capabilities, Dogex offers ultra-fast, reliable trade processing and intelligent risk management. The platform\u2019s simple UI and AI-driven alerts make perpetual trading accessible and straightforward for everyone.\nProject Description\nDogex delivers a decentralized perpetual futures exchange optimized for simplicity, speed, and scalability by building on Hyperion\u2019s next-gen infrastructure. Hyperion\u2019s parallelized transactions enable ultra-low latency order execution and state synchronization 10x faster than traditional chains. Integrated onchain AI powers real-time risk assessment and liquidation alerts, helping users manage positions confidently without complexity. Dogex\u2019s clean, intuitive interface focuses on essential features like one-click position entry/exit, clear margin info, and fast updates. Mobile-friendly and designed for all user levels, Dogex breaks down barriers to perpetual trading by combining powerful Hyperion tech with a smooth, easy experience.\nCommunity Engagement Features\nFair Launch Token Model:\nUsers can buy Dogex tokens only by spending fees accrued on the platform\nToken issuance follows an infinite curve model similar to GMX and Solana projects, ensuring fair and gradual distribution\nThis model aligns incentives and rewards active traders who contribute to platform liquidity and usage\nTestable Features:\nOpening and closing positions\nMargin adjustments\nAI-powered risk alerts\nReward claiming\nPoints System:\nTrades: 10 points\nAI alert interaction: 5 points\nMargin changes: 7 points\nReferrals: 15 points\nGamification:\nPoints unlock badges, leaderboard rankings, and token rewards\nEncourages active use and onboarding\nUser Onboarding:\nStepwise tutorials and gradual feature unlocking\nHelps new traders quickly gain confidence"
-            },
-            {
-                "author": "han",
-                "comment": "This is a very exciting initiative and looks incredibly user-friendly!\nAs a potential user, my question is:\nDogex\u2019s simplicity is a huge plus, especially for newcomers. But with perpetuals, managing risk is key. How does the AI-powered alert system work in real-time during volatile market conditions?\nCan users customize these alerts based on their risk appetite (e.g., liquidation thresholds or price movements), and are there safeguards in place to avoid spammy or overly sensitive notifications?"
-            },
-            {
-                "author": "priyankg3",
-                "comment": "hello\n@mrwagmicto\n, What specific UI/UX decisions did you take to make Dogex more beginner-friendly compared to existing perpetual DEXs?\nHow does Dogex handle liquidation risk in volatile market conditions\u2014especially during sharp spikes or network congestion?"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "Real-Time AI Alerts: Dogex monitors market volatility and your positions 24/7, sending smart alerts for risks like liquidation, big price swings, or funding changes. Like monitor it once per second or smth, I tihnk it couldn\u2019t be super real time\nFully Customizable & Spam-Free: Users set their own alert rules (e.g. price % moves, margin levels), with built-in safeguards to avoid spammy or repetitive notifications."
-            },
-            {
-                "author": "han",
-                "comment": "Sounds useful if tuned well real-time is ambitious, but even near real-time with smart filters could make a big difference. Curious to see how accurate and non-spammy it stays in practice."
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "1. Beginner-Friendly UI/UX Decisions:\n1-click Trading Mode: Simplified interface with no clutter \u2014 just set size and direction.\nVisual Risk Meter: Real-time margin health bar with color-coded alerts makes liquidation risk easy to understand.\n2. Liquidation Risk Management During Volatility:\nAI-Powered Risk Alerts: Real-time monitoring of price + position risk, with early warnings before liquidation zones.\nAuto-Deleveraging Logic: If network congestion hits, Dogex can auto-partially close risky positions to protect users."
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "Yeah, in theory it all sounds great, but we need some real, practical results to see how it actually works with live positions"
-            },
-            {
-                "author": "han",
-                "comment": "Exactly, theory\u2019s solid, but live stress tests will show if it holds up. Let\u2019s see how it performs under real market pressure."
-            },
-            {
-                "author": "priyankg3",
-                "comment": "Appreciate the detailed breakdown! The 1-click trading and visual risk meter definitely feel like a huge win for onboarding.\nKeen to try it out in a live market soon!"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "update: we create a prototype with components structure. Now it\u2019s a base point of our project:\nmiro.com\nSprint Planning\nworing on details rn"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "miro.com\nSprint Planning\nupdated wireframe with details, it\u2019s time to start a vibe codding!"
-            },
-            {
-                "author": "CrisMetis",
-                "comment": "Cool idea, and a DEX that uses the speed of Hyperion to build something better is obviously a great move. Why should trading be complicated when tech like AI and Hyperion can make it smooth, right???"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "yeah it can be much easier then we used to see"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "Today I dove into the perpetual DEX market.\nIt\u2019s my first time building a perp DEX \u2014 but with 10 years in dev, I was able to make a few important decisions.\nThe foundation of my project will be based on GMX, a battle-tested perp protocol with open-source MIT-licensed contracts.\nWhy?\nReliable\nOpen\nProven\nFlexible\nI\u2019m not affiliated with GMX. I\u2019m simply leveraging their codebase as a solid technical base \u2014 and improving it with a much better interface + product vision.\nThis is the power of open source.\nI also sketched the first simple mockup of the UI \u2014 just a few blocks for now. The MVP will be laser-focused on clarity and simplicity."
-            },
-            {
-                "author": "priyankg3",
-                "comment": "Will wait for the first look for UI of DEX"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "Today, I focused on the technical side of the project. I think over the next few days (or even weeks), I\u2019ll mostly be coding \u2014 and also trying to learn how to clearly communicate what I\u2019ve been working on.\nI launched the frontend of GMX and played with it, sketched out its future architecture, explored what I\u2019ll need to implement it, and created an implementation plan."
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "Today I focused on technical research:\nRevisited GMX contracts\nStudied the basics of perpetual futures trading to better understand the market side\nExperimented with opening positions\nI also launched the first mini-marketing effort to start building the initial community:\nCreated a Twitter for Dogex, and started looking for marketers to help grow the first community."
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "project\u2019s twitter: https://x.com/DogexPerps\nceo: https://x.com/mr_wagmi_cto\nfeel free to subsribe and mention that you\u2019re from Hyperion some way I wanna subscribe all projects and ceos"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "Today I\u2019m diving deep into GMX v1 vs v2 to decide what\u2019s better for my MVP.\nMy key criteria (in order of priority):\nReliability\nEase of dev & fast iteration\nFlexibility for custom logic\nFull understanding of the codebase\nThis first version must be simple, fast & clear. Let\u2019s go"
             }
         ]
     },
@@ -424,23 +834,6 @@
         ]
     },
     {
-        "id": "8a226a011b02abc3",
-        "topic_id": "6015",
-        "title": "StreamNFT- The Full Stack Platform for Asset Ownership & Utilities",
-        "url": "https://forum.ceg.vote/t/streamnft-the-full-stack-platform-for-asset-ownership-utilities/6015",
-        "views": "",
-        "comments": "0",
-        "created_date": "Jun 28, 2025 7:16 am",
-        "latest_activity": null,
-        "content": "Project Name\nStreamNFT\nProblem Statement\nBuilding asset-driven economies in Web3 games is overly complex and inefficient, developers must stitch together multiple tools just to enable core functionalities like trading, rentals, loans or utilities. Current asset standards also restrict cross-protocol usage, limiting the full potential of in-game assets. Meanwhile, players face high entry barriers and fragmented utility experiences, making it difficult to engage meaningfully with their gaming assets.\nSolution Overview\nStreamNFT is a full-stack platform that unifies trading, rentals, loans, and utility into a single plug-and-play hub for game developers. It simplifies the launch and scaling of in-game asset economies. Our asset standard supports cross-protocol usage, unlocking 2x more value and enabling composable utility. For players, StreamNFT offers a seamless interface to discover and interact with their in-game assets, lowering the barriers to Web3 gaming.\nProject Description\nStreamNFT is a full-stack, chain-agnostic platform designed to unlock the full potential of in-game assets and collectibles. At its core, StreamNFT offers plug-and-play modules for trading, rentals, loans, consumables, and real-time utility, all accessible through a unified interface for both developers and players.\nGame developers can launch, manage, and monetize digital asset economies without juggling multiple third-party tools. This includes setting up in-game marketplaces, enabling time-bound rentals, offering real-time perks (e.g., XP boosts, early access), creating consumable assets (like one-time power-ups or tickets), and facilitating asset-based lending, all in just a few clicks.\nWe\u2019re building on EVM-compatible infrastructure, using modular smart contracts, dynamic metadata, and real-time indexing to ensure seamless asset tracking and interaction. The system is fully composable and supports cross-protocol utility, allowing assets to be used across protocols without being locked into one platform.\nPlayers benefit from a clean, chain-abstracted interface where they can easily explore, use, or monetize their owned assets through rentals, consumables, perks, and more, removing the usual friction of Web3 onboarding.\nWhat excites us most is the opportunity to bridge the usability gap between Web2 and Web3 games. By turning static NFTs into dynamic, interactive assets, StreamNFT empowers both developers and gamers to participate in richer, more valuable digital economies, without the technical overhead typically involved.\nCommunity Engagement Features\nUsers will be able to test and engage with a range of features on StreamNFT as part of our gamified onboarding campaign:\nTestable Features/Tasks:\nConnect Wallet \u2013 50 points\nExplore In-Game Asset Listings \u2013 25 points\nTrade an Asset (Buy/Sell) \u2013 100 points\nRent an Asset (Lend or Borrow) \u2013 100 points\nUse a Consumable Asset (e.g., XP boost) \u2013 75 points\nClaim a Perk via Utility Protocol \u2013 50 points\nList Your Own Asset \u2013 75 points\nComplete a Quest (Set of 3 tasks) \u2013 Bonus 150 points\nRefer a Friend \u2013 100 points\nPoints System & Gamification:\nEach completed action earns points that unlock badges, exclusive NFTs, and early access perks. Tasks are framed like RPG-style quests (e.g., \u201cRental Rogue\u201d for first rental or \u201cPerk Hunter\u201d for claiming a utility), tapping into players\u2019 intrinsic motivation. Real-time leaderboards drive friendly competition, while referral rewards create viral growth loops.\nHow This Drives Onboarding:\nBy turning platform exploration into a game-like experience, users are drawn into a journey of discovery. The instant gratification of earning points and rewards, combined with tangible incentives (NFTs, perks, recognition), reduces onboarding friction. This approach helps users understand and experience the full value of their digital assets, while making it fun and social.\nGetting Involved\nJoin our Discord community (DAN ( Ed3, StreamNFT )) where game developers, gamers, collectors collaborate.",
-        "comments_details": [
-            {
-                "author": "piyush-chittara",
-                "comment": "Project Name\nStreamNFT\nProblem Statement\nBuilding asset-driven economies in Web3 games is overly complex and inefficient, developers must stitch together multiple tools just to enable core functionalities like trading, rentals, loans or utilities. Current asset standards also restrict cross-protocol usage, limiting the full potential of in-game assets. Meanwhile, players face high entry barriers and fragmented utility experiences, making it difficult to engage meaningfully with their gaming assets.\nSolution Overview\nStreamNFT is a full-stack platform that unifies trading, rentals, loans, and utility into a single plug-and-play hub for game developers. It simplifies the launch and scaling of in-game asset economies. Our asset standard supports cross-protocol usage, unlocking 2x more value and enabling composable utility. For players, StreamNFT offers a seamless interface to discover and interact with their in-game assets, lowering the barriers to Web3 gaming.\nProject Description\nStreamNFT is a full-stack, chain-agnostic platform designed to unlock the full potential of in-game assets and collectibles. At its core, StreamNFT offers plug-and-play modules for trading, rentals, loans, consumables, and real-time utility, all accessible through a unified interface for both developers and players.\nGame developers can launch, manage, and monetize digital asset economies without juggling multiple third-party tools. This includes setting up in-game marketplaces, enabling time-bound rentals, offering real-time perks (e.g., XP boosts, early access), creating consumable assets (like one-time power-ups or tickets), and facilitating asset-based lending, all in just a few clicks.\nWe\u2019re building on EVM-compatible infrastructure, using modular smart contracts, dynamic metadata, and real-time indexing to ensure seamless asset tracking and interaction. The system is fully composable and supports cross-protocol utility, allowing assets to be used across protocols without being locked into one platform.\nPlayers benefit from a clean, chain-abstracted interface where they can easily explore, use, or monetize their owned assets through rentals, consumables, perks, and more, removing the usual friction of Web3 onboarding.\nWhat excites us most is the opportunity to bridge the usability gap between Web2 and Web3 games. By turning static NFTs into dynamic, interactive assets, StreamNFT empowers both developers and gamers to participate in richer, more valuable digital economies, without the technical overhead typically involved.\nCommunity Engagement Features\nUsers will be able to test and engage with a range of features on StreamNFT as part of our gamified onboarding campaign:\nTestable Features/Tasks:\nConnect Wallet \u2013 50 points\nExplore In-Game Asset Listings \u2013 25 points\nTrade an Asset (Buy/Sell) \u2013 100 points\nRent an Asset (Lend or Borrow) \u2013 100 points\nUse a Consumable Asset (e.g., XP boost) \u2013 75 points\nClaim a Perk via Utility Protocol \u2013 50 points\nList Your Own Asset \u2013 75 points\nComplete a Quest (Set of 3 tasks) \u2013 Bonus 150 points\nRefer a Friend \u2013 100 points\nPoints System & Gamification:\nEach completed action earns points that unlock badges, exclusive NFTs, and early access perks. Tasks are framed like RPG-style quests (e.g., \u201cRental Rogue\u201d for first rental or \u201cPerk Hunter\u201d for claiming a utility), tapping into players\u2019 intrinsic motivation. Real-time leaderboards drive friendly competition, while referral rewards create viral growth loops.\nHow This Drives Onboarding:\nBy turning platform exploration into a game-like experience, users are drawn into a journey of discovery. The instant gratification of earning points and rewards, combined with tangible incentives (NFTs, perks, recognition), reduces onboarding friction. This approach helps users understand and experience the full value of their digital assets, while making it fun and social.\nGetting Involved\nJoin our Discord community (DAN ( Ed3, StreamNFT )) where game developers, gamers, collectors collaborate."
-            }
-        ]
-    },
-    {
         "id": "fecace41f38e10f8",
         "topic_id": "5913",
         "title": "Building a Web3 Brand from Zero : What\u2019s your approach when launching a new Web3 brand?",
@@ -482,71 +875,6 @@
             {
                 "author": "Ghostt",
                 "comment": "Absolutely agree defining the target audience is the foundation of any solid marketing strategy. The \u201cWho\u201d always comes first: knowing exactly who you\u2019re speaking to is what gives every other element direction.\nThen comes the \u201cWhere\u201d \u2014 understanding where this audience exists in the Web3 ecosystem and what communities or platforms they engage with is key to meeting them on their terms.\nThe \u201cWhen\u201d ties into timing the message to match their online behavior and engagement patterns, especially in a space as fast-paced as Web3.\nAnd finally, the \u201cWhy\u201d \u2014 clarifying why this product or solution matters to this demographic \u2014 anchors the narrative in relevance and value.\nWith these four \u201cWH\u201d pillars clearly defined, I honestly believe it\u2019s hard to go wrong."
-            }
-        ]
-    },
-    {
-        "id": "a588ef262157116c",
-        "topic_id": "5966",
-        "title": "HyperHack Spotlight Campaign is Live",
-        "url": "https://forum.ceg.vote/t/hyperhack-spotlight-campaign-is-live/5966",
-        "views": "",
-        "comments": "13",
-        "created_date": "Jun 25, 2025 2:10 pm",
-        "latest_activity": "Jun 28, 2025 6:40 am",
-        "content": "Gm Metisians, the Spotlight Campaign is here to supercharge your HyperHack journey!\nWe are giving selected project teams a chance at the $7500 bonus prize pool, $500 in marketing credit, access to guild talent, and the chance to earn tiered ecosystem rewards. The goal is to boost your visibility and help you grow real users.\nApply here\nCampaign Objective\nTo empower HyperHack teams to market their projects using a real budget. This is about helping builders grow their audience, activate users, and showcase their dApps across the Metis ecosystem.\nHow It Works\n$500 marketing credit for each project, 50 projects at maximum\n$7500 extra prize pool for top projects\nEach selected project will receive $500 in marketing credit, split into:\n$300 upfront to start your campaign\n$200 unlocked later if performance goals are met by August 1\n$500 Marketing Credit\nEach project must create a dedicated X account for their HyperHack product and have at least one marketer (internal or from the Forum Marketing Guild) who will:\nLead the project\u2019s marketing strategy\nUse the $500 to drive short-term traffic\nJoin a Vibe Session to introduce the dapp\nShare referral links via X posts to their forum showcase\nApproved Marketing Tactics:\nQuest Campaigns (TaskOn, Zealy, Magic Square): e.g. \u201cFollow + Retweet + Test dapp + Join Forum\u201d\nAMA Airdrops: Host AMAs on X and airdrop to the Metis community\nTwitter Ads: Use paid ads to boost visibility (marketer must help set this up)\nCustom Strategies: Teams are also encouraged to try any other creative ideas tailored to their product and audience\nNote: Marketer\u2019s name and focus must be listed in the application (e.g., Marketing Lead: @Handle \u2013 Focus: Memes & Spaces).\nHow We Track Performance\nProjects will be scored across three categories during July 15 to August 1:\n75% X account growth and quality (verified via TwitterAudit)\n20% user activity on your dApp (measured onchain)\n5% users driven to your Forum thread using referral links\nRewards for Top Projects\nTotal Prize Pool: $7500\nTier 1: HyperHack Spotlight Champion\n$3000 bonus for the top project\nForum pin for 14 days\nPriority DevRel support for 6 months\nNewsletter spotlight\n25 bonus points for the final judging phase\nTier 2: Growth Catalysts\n$3000 prize pool\nForum pin for 7 days\nDevRel support for 3 months\nNewsletter spotlight\n15 bonus points\nTier 3: Community Stars\n$1500 prize pool\nDevRel support for 1 month\nNewsletter spotlight\n10 bonus points\nKey Dates\nApplication period: June 25-July 8\nApplication review: July 9- 15\nCampaign period: July 15- August 1\nRules\nFunds must be used for approved marketing activities only\nBot traffic is not allowed and will be checked\nYour marketing strategy must be made public in your Forum thread\nThe Spotlight Campaign is designed to help real builders grow real audiences.\nApply here\nFor questions, reply below.\nGL to all!",
-        "comments_details": [
-            {
-                "author": "Liametis",
-                "comment": "Gm Metisians, the Spotlight Campaign is here to supercharge your HyperHack journey!\nWe are giving selected project teams a chance at the $7500 bonus prize pool, $500 in marketing credit, access to guild talent, and the chance to earn tiered ecosystem rewards. The goal is to boost your visibility and help you grow real users.\nApply here\nCampaign Objective\nTo empower HyperHack teams to market their projects using a real budget. This is about helping builders grow their audience, activate users, and showcase their dApps across the Metis ecosystem.\nHow It Works\n$500 marketing credit for each project, 50 projects at maximum\n$7500 extra prize pool for top projects\nEach selected project will receive $500 in marketing credit, split into:\n$300 upfront to start your campaign\n$200 unlocked later if performance goals are met by August 1\n$500 Marketing Credit\nEach project must create a dedicated X account for their HyperHack product and have at least one marketer (internal or from the Forum Marketing Guild) who will:\nLead the project\u2019s marketing strategy\nUse the $500 to drive short-term traffic\nJoin a Vibe Session to introduce the dapp\nShare referral links via X posts to their forum showcase\nApproved Marketing Tactics:\nQuest Campaigns (TaskOn, Zealy, Magic Square): e.g. \u201cFollow + Retweet + Test dapp + Join Forum\u201d\nAMA Airdrops: Host AMAs on X and airdrop to the Metis community\nTwitter Ads: Use paid ads to boost visibility (marketer must help set this up)\nCustom Strategies: Teams are also encouraged to try any other creative ideas tailored to their product and audience\nNote: Marketer\u2019s name and focus must be listed in the application (e.g., Marketing Lead: @Handle \u2013 Focus: Memes & Spaces).\nHow We Track Performance\nProjects will be scored across three categories during July 15 to August 1:\n75% X account growth and quality (verified via TwitterAudit)\n20% user activity on your dApp (measured onchain)\n5% users driven to your Forum thread using referral links\nRewards for Top Projects\nTotal Prize Pool: $7500\nTier 1: HyperHack Spotlight Champion\n$3000 bonus for the top project\nForum pin for 14 days\nPriority DevRel support for 6 months\nNewsletter spotlight\n25 bonus points for the final judging phase\nTier 2: Growth Catalysts\n$3000 prize pool\nForum pin for 7 days\nDevRel support for 3 months\nNewsletter spotlight\n15 bonus points\nTier 3: Community Stars\n$1500 prize pool\nDevRel support for 1 month\nNewsletter spotlight\n10 bonus points\nKey Dates\nApplication period: June 25-July 8\nApplication review: July 9- 15\nCampaign period: July 15- August 1\nRules\nFunds must be used for approved marketing activities only\nBot traffic is not allowed and will be checked\nYour marketing strategy must be made public in your Forum thread\nThe Spotlight Campaign is designed to help real builders grow real audiences.\nApply here\nFor questions, reply below.\nGL to all!"
-            },
-            {
-                "author": "4ngel",
-                "comment": "This is huge !!! Good luck to every participant, let\u2019s get it"
-            },
-            {
-                "author": "Elenaisplaying",
-                "comment": "Such a great news. Good luck everyone"
-            },
-            {
-                "author": "i_am_supaman_lj",
-                "comment": "I got a hiccup in the marketers forum ID and the Project owner forum ID. I don\u2019t really know how to find that, any form of assistance would be greatly appreciated."
-            },
-            {
-                "author": "Ghostt",
-                "comment": "You will see that on your profile, and your own forum id is\n@i_am_supaman_lj\n. If you click the @ sign you will get it."
-            },
-            {
-                "author": "priyankg3",
-                "comment": "Thats wonderful, this is the golden chance for developers to build and polish with your project with marketing as well.."
-            },
-            {
-                "author": "i_am_supaman_lj",
-                "comment": "Thanks a lot, I was actually hoping I would work with you. Since you are one of the first that saw the potential of Fracturepoint as a solution to the recent web3 gaming failure trends."
-            },
-            {
-                "author": "i_am_supaman_lj",
-                "comment": "Thanks for the help, we can go on with the plan already now right ?"
-            },
-            {
-                "author": "Sheyda",
-                "comment": "Fantastic, do you have a list of Marketers?"
-            },
-            {
-                "author": "i_am_supaman_lj",
-                "comment": "List?\nI thought only one ."
-            },
-            {
-                "author": "i_am_supaman_lj",
-                "comment": "Specified one marketer on the form Thats why I sort for one"
-            },
-            {
-                "author": "mrwagmicto",
-                "comment": "Hey everyone!\nI\u2019m looking for a marketing partner to join me on an exciting crypto project and help drive this campaign forward.\nIf you\u2019re passionate about Web3 marketing, community building, or growth hacking \u2014 let\u2019s talk!\nFeel free to DM me. Would love to connect!"
-            },
-            {
-                "author": "Ghostt",
-                "comment": "I have teamed up with him and applied to the campaign. Looking forward to the result."
             }
         ]
     },
@@ -628,302 +956,6 @@
             {
                 "author": "FROSKA",
                 "comment": "We keep rewards balanced through capped payouts and fixed token supply. The Degen Wheel is high-risk, but most rewards come from a community pool funded by spin fees. No inflation, no constant minting. Long-term engagement comes from light incentives, social interaction, and meme culture not oversized rewards."
-            }
-        ]
-    },
-    {
-        "id": "d1275896a84084e1",
-        "topic_id": "6012",
-        "title": "Fracture Point Progress Report \u2013 Proof of Play Architecture Live",
-        "url": "https://forum.ceg.vote/t/fracture-point-progress-report-proof-of-play-architecture-live/6012",
-        "views": "",
-        "comments": "0",
-        "created_date": "Jun 27, 2025 8:53 pm",
-        "latest_activity": null,
-        "content": "Hey everyone,\nWe\u2019re excited to share a full status update on Fracture Point, our on-chain shooter project powered by verifiable Proof of Play now live on the Hyperion Testnet.\nCore Milestones Completed:\n\u2022 Smart Contracts Deployed\nOur foundational contracts (FPToken, RankBadge, and ClaimManager) are deployed and functional on Hyperion. These power token distribution and player rank progression, all based on verified activity.\n\u2022 Alith AI Integration Implemented\nWe\u2019ve aligned our ClaimManager with the latest structure of Alith\u2019s verifiable computing flow, enabling zk-backed claim validation for real player actions. Interactions with IDataRegistry, IVerifiedComputing, and related contracts are now wired into our claim submission logic.\n\u2022 Architecture Demonstration\nWe\u2019ve adapted the structure and logic from the official Alith reference repo to clearly show how Fracture Point leverages AI inference within its Proof of Play system.\nhttps://github.com/SUPAMAN-dev/fracture-point-hyperhack\nPrototype UI Progress\n\u2022 We\u2019ve started developing a web-based prototype lobby, which helps us simulate early game flow including variant display, basic player submission, and contract interaction.\nWhile not fully wired for end-to-end user flows yet, it demonstrates the core experience we\u2019re building.\nfracturepoint.netlify.app\nFracture Point - Unleash Your Variant. Dominate the Fractured Rifts.\nFracture Point is a next-gen Web3 battle royale game with unique Variants, fast-paced combat, and blockchain rewards ($GHC). Join the fight!\n\u2022 We\u2019ve also begun introducing our Variants, showcasing early character visuals as a way to build the world and reward identity within the ecosystem.\nCurrent Gaps\n\u2022 Unity Developers Needed: We\u2019re currently short on dedicated Unity talent and actively seeking 2 developers to push forward actual gameplay builds.\n\u2022 UI/UX Scope: Due to resource limits, our current frontend is a self-built mockup. It lays the groundwork for future polish once we expand the team or secure support.\nSpotlight Campaign\nWe\u2019ve officially applied for the HyperHack Spotlight Campaign to begin telling our story and engaging the broader community. We\u2019re focused on growing visibility, onboarding talent, and completing the final pieces of this vision.\nFeel free to reach out if you want to test our contracts, contribute, or explore how Alith is being used in a live project. More updates and tutorials coming soon!",
-        "comments_details": [
-            {
-                "author": "i_am_supaman_lj",
-                "comment": "Hey everyone,\nWe\u2019re excited to share a full status update on Fracture Point, our on-chain shooter project powered by verifiable Proof of Play now live on the Hyperion Testnet.\nCore Milestones Completed:\n\u2022 Smart Contracts Deployed\nOur foundational contracts (FPToken, RankBadge, and ClaimManager) are deployed and functional on Hyperion. These power token distribution and player rank progression, all based on verified activity.\n\u2022 Alith AI Integration Implemented\nWe\u2019ve aligned our ClaimManager with the latest structure of Alith\u2019s verifiable computing flow, enabling zk-backed claim validation for real player actions. Interactions with IDataRegistry, IVerifiedComputing, and related contracts are now wired into our claim submission logic.\n\u2022 Architecture Demonstration\nWe\u2019ve adapted the structure and logic from the official Alith reference repo to clearly show how Fracture Point leverages AI inference within its Proof of Play system.\nhttps://github.com/SUPAMAN-dev/fracture-point-hyperhack\nPrototype UI Progress\n\u2022 We\u2019ve started developing a web-based prototype lobby, which helps us simulate early game flow including variant display, basic player submission, and contract interaction.\nWhile not fully wired for end-to-end user flows yet, it demonstrates the core experience we\u2019re building.\nfracturepoint.netlify.app\nFracture Point - Unleash Your Variant. Dominate the Fractured Rifts.\nFracture Point is a next-gen Web3 battle royale game with unique Variants, fast-paced combat, and blockchain rewards ($GHC). Join the fight!\n\u2022 We\u2019ve also begun introducing our Variants, showcasing early character visuals as a way to build the world and reward identity within the ecosystem.\nCurrent Gaps\n\u2022 Unity Developers Needed: We\u2019re currently short on dedicated Unity talent and actively seeking 2 developers to push forward actual gameplay builds.\n\u2022 UI/UX Scope: Due to resource limits, our current frontend is a self-built mockup. It lays the groundwork for future polish once we expand the team or secure support.\nSpotlight Campaign\nWe\u2019ve officially applied for the HyperHack Spotlight Campaign to begin telling our story and engaging the broader community. We\u2019re focused on growing visibility, onboarding talent, and completing the final pieces of this vision.\nFeel free to reach out if you want to test our contracts, contribute, or explore how Alith is being used in a live project. More updates and tutorials coming soon!"
-            }
-        ]
-    },
-    {
-        "id": "2c152acc5e844c78",
-        "topic_id": "4420",
-        "title": "EduVerse: AI-Powered Personalized Education Platform",
-        "url": "https://forum.ceg.vote/t/eduverse-ai-powered-personalized-education-platform/4420",
-        "views": "",
-        "comments": "21",
-        "created_date": "May 20, 2025 5:45 pm",
-        "latest_activity": "Jun 27, 2025 5:36 pm",
-        "content": "EduVerse: AI-Powered Personalized Education Platform\nProblem Statement\nStandardized education overlooks individual learning styles and paces, leading to disengagement and hindering student potential. Students and educators face the challenge of a rigid system that doesn\u2019t adapt to diverse needs, impacting learning outcomes.\nSolution Overview\nOur AI-Powered Personalized Education Platform offers a dynamic solution by employing a multi-agent system built on the Alith Agentic Framework. Specialized AI agents collaboratively analyze individual learning styles, curate tailored content, provide adaptive tutoring, and track progress in real time. This creates a uniquely personalized learning journey that adjusts to each student\u2019s needs and pace. By integrating diverse educational resources, the platform aims to enhance engagement, improve learning outcomes, and empower both students and educators.\nProject Description\nThis platform is designed to benefit a wide range of users across the educational landscape. Students of all ages, from kindergarten through higher education, can experience a more engaging and effective learning journey tailored to their specific needs. Educators can utilize the platform to enhance their teaching capabilities, gain deeper insights into student progress, and free up time for more individualized support.\nOn-Chain Components: A First-Class Implementation and Core Requirement for Blockchain Deployment\nOur AI-powered personalized education platform is not merely \u201cblockchain-enhanced\u201d \u2014 its core functionality and unique value proposition depend fundamentally on blockchain deployment via Hyperion. The decentralized, trustless, and immutable nature of blockchain\u2014particularly Hyperion\u2019s AI-optimized environment\u2014is essential to realizing our vision.\nVerifiable and Immutable Learning Profiles (On-Chain Data Storage)\nWhat\u2019s On-Chain:\nStudent learning profiles\u2014containing hashed learning milestones, verified skills, and personalized path progress\u2014are recorded on Hyperion\u2019s MetisDB. Each profile includes:\nA unique student identifier\nImmutable logs of achievements\nReferences to off-chain AI agent interactions and curated learning content\nWhy It Needs Blockchain:\nTrustless Verification:\nCentralized educational records are prone to tampering and lack transparency. On-chain profiles offer tamper-proof, auditable records of a learner\u2019s journey\u2014verifiable by students, employers, and academic institutions alike.\nData Sovereignty:\nStudents retain full control of their learning data. On-chain metadata ensures ownership and transparency, unlike siloed centralized platforms.\nFoundation for AI Credentialing:\nImmutable learning progress forms the backbone for future AI-driven credentialing systems. AI-generated content, assessments, and learning paths can be reliably tied to a verifiable blockchain record.\nDecentralized Agent Coordination and Trust (Smart Contract Architecture)\nWhat\u2019s On-Chain:\nAgent Registry & Capabilities:\nAll core agents (e.g., Learning Style Analyst, Content Curator, Personalized Tutor) are registered via smart contracts, with:\nUnique IDs\nDefined roles and permissions\nClear scope of data access and processing\nService Agreements & Orchestration Logic:\nSmart contracts manage agent workflows. For example:\nCompletion of a module may trigger the Progress Tracker\nUpon validation, the Personalized Tutor recommends next steps\nIncentive Mechanisms:\nToken-based rewards for learning milestones, community engagement, and future decentralized agent marketplaces.\nWhy It Needs Blockchain:\nTrustless Agent Interaction:\nIn a multi-agent system, blockchain ensures agent behaviors and interactions are transparent, verifiable, and not reliant on a centralized authority.\nGuaranteed Execution:\nSmart contracts enforce the deterministic execution of workflows, ensuring learning paths adapt in real time based on defined rules.\nImmutable Rules:\nEducational logic, access rights, and reward systems are hard-coded and transparent, fostering trust and accountability.\nAI Enablement via the Alith Agentic Framework\nWhat is Alith:\nAlith is a modular, multi-agent framework designed to power personalized learning by simulating human-like reasoning, memory, and collaboration among AI agents. It forms the intelligence layer of our platform, with deep interoperability with blockchain systems like Hyperion.\nKey Features of Alith:\nAgent Management:\nModular deployment of specialized AI agents:\nLearning Style Analyst\nContent Curator\nPersonalized Tutor\nProgress Tracker\nCollaboration Facilitator\nPersistent Memory:\nAgents maintain long-term memory and context across sessions, enhancing personalization.\nInter-Agent Communication:\nSecure and structured communication between agents, enabling dynamic, cooperative behavior.\nToolchain Access:\nSeamless access to external APIs, knowledge bases, and assessments.\nBlockchain Integration with Alith:\nOn-Chain Agent Registry:\nAll Alith agents are registered on-chain, with roles and capabilities enforced via smart contracts.\nCoordinated Workflow Execution:\nAlith agent interactions are triggered and validated by smart contracts, enabling a trustless education logic layer.\nToken-Driven Incentives:\nAgents\u2019 performance and student outcomes can be linked to on-chain reward systems to drive engagement and adaptive learning.\nPlanned Enhancements for Alith\nTo further improve the personalization, decentralization, and performance of the Alith framework, we are planning several critical upgrades:\n1. Decentralized Agent Marketplace\nAllow community developers to contribute new agents (e.g., specialized tutors or regional content curators)\nAgents will be published and authenticated on-chain with verifiable capabilities\nToken-based reputation and staking mechanisms will prevent misuse or malicious behavior\n2. Agent Fine-Tuning via Federated Learning\nSupport for secure, privacy-preserving personalization of agent behavior based on user feedback\nFine-tuning AI agents locally or within federated clusters, without compromising sensitive student data\n3. ZK-Verifiable Inference\nIntegrate zkML (zero-knowledge machine learning) to enable cryptographic verification of off-chain AI outputs\nThis allows validators and institutions to confirm an agent\u2019s decision (e.g., a test score) without exposing the underlying model or input\n4. Composable Agent Workflows\nEnable developers and educators to compose reusable learning workflows by chaining agents together via simple declarative schemas\nBacked by on-chain validation to ensure logical and pedagogical soundness\n5. Multilingual & Accessibility Agents\nCreate plug-and-play AI agents specialized in localization, translation, and neurodiverse learning strategies\nThese agents will leverage both on-chain registries and external toolchains for broader inclusion\nSecure, Real-Time AI Inference (Leveraging Hyperion\u2019s AI-Native Infrastructure)\nWhat\u2019s On-Chain (or Hyperion-enabled):\nWhile most heavy AI workloads (e.g., model training, long-form inference) run off-chain via the Alith framework, Hyperion enables:\nLightweight on-chain AI inferences for rapid adaptation and scoring\nSmart contract\u2013verified AI outputs to ensure compliance with educational standards\nReal-time coordination between on-chain logic and off-chain AI services\nWhy It Needs Blockchain:\nVerifiable AI Outputs:\nAI-driven assessments and tutor recommendations can be validated on-chain, ensuring educational integrity and transparency\u2014unlike opaque, centralized AI systems.\nLow Latency, High Throughput:\nHyperion\u2019s parallel execution environment supports responsive, adaptive AI interactions critical to keeping learners engaged.\nScalable AI Coordination:\nIntegrating real-time AI decision-making into a decentralized, tamper-proof environment offers performance benefits without compromising trust or cost-efficiency.\nConclusion: Blockchain as the Foundation, Not a Feature\nDeploying on Hyperion transforms the platform from an advanced AI education app into a decentralized, verifiable, trust-minimized learning ecosystem. The blockchain is not an add-on \u2014 it is the bedrock of:\nTrust in student progress\nTransparency in agent interaction\nRobust, real-time AI performance\nData Sovereignty, Incentives, and Trust in Our Education Platform\nOur AI-Powered Personalized Education Platform leverages Hyperion\u2019s blockchain to give students true control over their learning data and foster a trusted educational environment.\nData Sovereignty\nWe achieve data sovereignty by giving students self-sovereign identities (SSIs) on Hyperion. Critical learning milestones and verified skills are recorded as immutable hashes on-chain (MetisDB), tied to the student\u2019s SSI. While detailed content stays off-chain, access is cryptographically linked to and controlled by the student. This means students decide who sees what data, creating a tamper-proof and verifiable record that\u2019s genuinely theirs, free from central control.\nToken Incentives\nWe use a utility token, LearnPoints ($LP), to drive engagement:\nLearn-to-Earn (L2E): Students earn $LP for completing modules, mastering skills, and consistent engagement.\nContribution Rewards: Educators and community members earn $LP for creating content, providing feedback, or participating in forums.\nStaking & Governance: $LP can be staked for premium features or used to vote on platform decisions, aligning community interests.\nThese tokens incentivize participation, build a strong community, and add tangible value to learning achievements.\nImportance of Trust and Transparency\nIn education, trust and transparency are paramount:\nLearner Trust: Students need to trust that their achievements are real and that AI decisions (like tutoring paths) are fair and unbiased. On-chain verifiable credentials and transparent AI orchestration build this crucial trust.\nEmpowering Educators: Transparent data provides educators with reliable insights into student progress and curriculum effectiveness, reducing administrative burdens and fostering accountability.\nEquity & Accessibility: Blockchain prevents fraud and offers a universal, trusted way for students to showcase skills, democratizing opportunities regardless of background. Auditable AI decisions also help mitigate bias.\nSummary\nDeploying on Hyperion transforms our platform into a decentralized, verifiable, and trust-minimized educational ecosystem. Blockchain is the bedrock enabling trust in student progress, transparency in AI agent interactions, and robust real-time AI capabilities that define our personalized learning experience.\nCommunity Engagement Features\nPeer Study Groups: Connect with others for collaborative discussions and support.\nQ&A Forums: Ask and answer subject-related questions to deepen understanding.\nSimulated Collaboration: Practice teamwork in virtual, project-based learning scenarios.\nOptional Mentorship: Receive guidance from experienced peers and educators.\nProgress Sharing (Privacy-Controlled): Share milestones to motivate peers while maintaining control over visibility.\nCommunity Challenges: Participate in gamified group activities to promote engagement and friendly competition.\nTeam Members\n@amardeep\n@priyankg3",
-        "comments_details": [
-            {
-                "author": "amardeep",
-                "comment": "EduVerse: AI-Powered Personalized Education Platform\nProblem Statement\nStandardized education overlooks individual learning styles and paces, leading to disengagement and hindering student potential. Students and educators face the challenge of a rigid system that doesn\u2019t adapt to diverse needs, impacting learning outcomes.\nSolution Overview\nOur AI-Powered Personalized Education Platform offers a dynamic solution by employing a multi-agent system built on the Alith Agentic Framework. Specialized AI agents collaboratively analyze individual learning styles, curate tailored content, provide adaptive tutoring, and track progress in real time. This creates a uniquely personalized learning journey that adjusts to each student\u2019s needs and pace. By integrating diverse educational resources, the platform aims to enhance engagement, improve learning outcomes, and empower both students and educators.\nProject Description\nThis platform is designed to benefit a wide range of users across the educational landscape. Students of all ages, from kindergarten through higher education, can experience a more engaging and effective learning journey tailored to their specific needs. Educators can utilize the platform to enhance their teaching capabilities, gain deeper insights into student progress, and free up time for more individualized support.\nOn-Chain Components: A First-Class Implementation and Core Requirement for Blockchain Deployment\nOur AI-powered personalized education platform is not merely \u201cblockchain-enhanced\u201d \u2014 its core functionality and unique value proposition depend fundamentally on blockchain deployment via Hyperion. The decentralized, trustless, and immutable nature of blockchain\u2014particularly Hyperion\u2019s AI-optimized environment\u2014is essential to realizing our vision.\nVerifiable and Immutable Learning Profiles (On-Chain Data Storage)\nWhat\u2019s On-Chain:\nStudent learning profiles\u2014containing hashed learning milestones, verified skills, and personalized path progress\u2014are recorded on Hyperion\u2019s MetisDB. Each profile includes:\nA unique student identifier\nImmutable logs of achievements\nReferences to off-chain AI agent interactions and curated learning content\nWhy It Needs Blockchain:\nTrustless Verification:\nCentralized educational records are prone to tampering and lack transparency. On-chain profiles offer tamper-proof, auditable records of a learner\u2019s journey\u2014verifiable by students, employers, and academic institutions alike.\nData Sovereignty:\nStudents retain full control of their learning data. On-chain metadata ensures ownership and transparency, unlike siloed centralized platforms.\nFoundation for AI Credentialing:\nImmutable learning progress forms the backbone for future AI-driven credentialing systems. AI-generated content, assessments, and learning paths can be reliably tied to a verifiable blockchain record.\nDecentralized Agent Coordination and Trust (Smart Contract Architecture)\nWhat\u2019s On-Chain:\nAgent Registry & Capabilities:\nAll core agents (e.g., Learning Style Analyst, Content Curator, Personalized Tutor) are registered via smart contracts, with:\nUnique IDs\nDefined roles and permissions\nClear scope of data access and processing\nService Agreements & Orchestration Logic:\nSmart contracts manage agent workflows. For example:\nCompletion of a module may trigger the Progress Tracker\nUpon validation, the Personalized Tutor recommends next steps\nIncentive Mechanisms:\nToken-based rewards for learning milestones, community engagement, and future decentralized agent marketplaces.\nWhy It Needs Blockchain:\nTrustless Agent Interaction:\nIn a multi-agent system, blockchain ensures agent behaviors and interactions are transparent, verifiable, and not reliant on a centralized authority.\nGuaranteed Execution:\nSmart contracts enforce the deterministic execution of workflows, ensuring learning paths adapt in real time based on defined rules.\nImmutable Rules:\nEducational logic, access rights, and reward systems are hard-coded and transparent, fostering trust and accountability.\nAI Enablement via the Alith Agentic Framework\nWhat is Alith:\nAlith is a modular, multi-agent framework designed to power personalized learning by simulating human-like reasoning, memory, and collaboration among AI agents. It forms the intelligence layer of our platform, with deep interoperability with blockchain systems like Hyperion.\nKey Features of Alith:\nAgent Management:\nModular deployment of specialized AI agents:\nLearning Style Analyst\nContent Curator\nPersonalized Tutor\nProgress Tracker\nCollaboration Facilitator\nPersistent Memory:\nAgents maintain long-term memory and context across sessions, enhancing personalization.\nInter-Agent Communication:\nSecure and structured communication between agents, enabling dynamic, cooperative behavior.\nToolchain Access:\nSeamless access to external APIs, knowledge bases, and assessments.\nBlockchain Integration with Alith:\nOn-Chain Agent Registry:\nAll Alith agents are registered on-chain, with roles and capabilities enforced via smart contracts.\nCoordinated Workflow Execution:\nAlith agent interactions are triggered and validated by smart contracts, enabling a trustless education logic layer.\nToken-Driven Incentives:\nAgents\u2019 performance and student outcomes can be linked to on-chain reward systems to drive engagement and adaptive learning.\nPlanned Enhancements for Alith\nTo further improve the personalization, decentralization, and performance of the Alith framework, we are planning several critical upgrades:\n1. Decentralized Agent Marketplace\nAllow community developers to contribute new agents (e.g., specialized tutors or regional content curators)\nAgents will be published and authenticated on-chain with verifiable capabilities\nToken-based reputation and staking mechanisms will prevent misuse or malicious behavior\n2. Agent Fine-Tuning via Federated Learning\nSupport for secure, privacy-preserving personalization of agent behavior based on user feedback\nFine-tuning AI agents locally or within federated clusters, without compromising sensitive student data\n3. ZK-Verifiable Inference\nIntegrate zkML (zero-knowledge machine learning) to enable cryptographic verification of off-chain AI outputs\nThis allows validators and institutions to confirm an agent\u2019s decision (e.g., a test score) without exposing the underlying model or input\n4. Composable Agent Workflows\nEnable developers and educators to compose reusable learning workflows by chaining agents together via simple declarative schemas\nBacked by on-chain validation to ensure logical and pedagogical soundness\n5. Multilingual & Accessibility Agents\nCreate plug-and-play AI agents specialized in localization, translation, and neurodiverse learning strategies\nThese agents will leverage both on-chain registries and external toolchains for broader inclusion\nSecure, Real-Time AI Inference (Leveraging Hyperion\u2019s AI-Native Infrastructure)\nWhat\u2019s On-Chain (or Hyperion-enabled):\nWhile most heavy AI workloads (e.g., model training, long-form inference) run off-chain via the Alith framework, Hyperion enables:\nLightweight on-chain AI inferences for rapid adaptation and scoring\nSmart contract\u2013verified AI outputs to ensure compliance with educational standards\nReal-time coordination between on-chain logic and off-chain AI services\nWhy It Needs Blockchain:\nVerifiable AI Outputs:\nAI-driven assessments and tutor recommendations can be validated on-chain, ensuring educational integrity and transparency\u2014unlike opaque, centralized AI systems.\nLow Latency, High Throughput:\nHyperion\u2019s parallel execution environment supports responsive, adaptive AI interactions critical to keeping learners engaged.\nScalable AI Coordination:\nIntegrating real-time AI decision-making into a decentralized, tamper-proof environment offers performance benefits without compromising trust or cost-efficiency.\nConclusion: Blockchain as the Foundation, Not a Feature\nDeploying on Hyperion transforms the platform from an advanced AI education app into a decentralized, verifiable, trust-minimized learning ecosystem. The blockchain is not an add-on \u2014 it is the bedrock of:\nTrust in student progress\nTransparency in agent interaction\nRobust, real-time AI performance\nData Sovereignty, Incentives, and Trust in Our Education Platform\nOur AI-Powered Personalized Education Platform leverages Hyperion\u2019s blockchain to give students true control over their learning data and foster a trusted educational environment.\nData Sovereignty\nWe achieve data sovereignty by giving students self-sovereign identities (SSIs) on Hyperion. Critical learning milestones and verified skills are recorded as immutable hashes on-chain (MetisDB), tied to the student\u2019s SSI. While detailed content stays off-chain, access is cryptographically linked to and controlled by the student. This means students decide who sees what data, creating a tamper-proof and verifiable record that\u2019s genuinely theirs, free from central control.\nToken Incentives\nWe use a utility token, LearnPoints ($LP), to drive engagement:\nLearn-to-Earn (L2E): Students earn $LP for completing modules, mastering skills, and consistent engagement.\nContribution Rewards: Educators and community members earn $LP for creating content, providing feedback, or participating in forums.\nStaking & Governance: $LP can be staked for premium features or used to vote on platform decisions, aligning community interests.\nThese tokens incentivize participation, build a strong community, and add tangible value to learning achievements.\nImportance of Trust and Transparency\nIn education, trust and transparency are paramount:\nLearner Trust: Students need to trust that their achievements are real and that AI decisions (like tutoring paths) are fair and unbiased. On-chain verifiable credentials and transparent AI orchestration build this crucial trust.\nEmpowering Educators: Transparent data provides educators with reliable insights into student progress and curriculum effectiveness, reducing administrative burdens and fostering accountability.\nEquity & Accessibility: Blockchain prevents fraud and offers a universal, trusted way for students to showcase skills, democratizing opportunities regardless of background. Auditable AI decisions also help mitigate bias.\nSummary\nDeploying on Hyperion transforms our platform into a decentralized, verifiable, and trust-minimized educational ecosystem. Blockchain is the bedrock enabling trust in student progress, transparency in AI agent interactions, and robust real-time AI capabilities that define our personalized learning experience.\nCommunity Engagement Features\nPeer Study Groups: Connect with others for collaborative discussions and support.\nQ&A Forums: Ask and answer subject-related questions to deepen understanding.\nSimulated Collaboration: Practice teamwork in virtual, project-based learning scenarios.\nOptional Mentorship: Receive guidance from experienced peers and educators.\nProgress Sharing (Privacy-Controlled): Share milestones to motivate peers while maintaining control over visibility.\nCommunity Challenges: Participate in gamified group activities to promote engagement and friendly competition.\nTeam Members\n@amardeep\n@priyankg3"
-            },
-            {
-                "author": "arbilearn",
-                "comment": "This is surely a great concept, waiting to see it come to live"
-            },
-            {
-                "author": "ThalaZikol",
-                "comment": "Impressive project! The combination of multi-agent AI and Hyperion blockchain creates a personalized, transparent, and trustworthy education platform. Features like SSI, Learn-to-Earn, and zkML show long-term vision and innovation. Looking forward to seeing EduVerse grow!"
-            },
-            {
-                "author": "Keir",
-                "comment": "bu \u00f6zel bilgiler \u0131c\u0131n te\u015fekk\u00fcrlerrr"
-            },
-            {
-                "author": "ravisharma",
-                "comment": "Really like the detailed proposal..\nHope your project select for build.\nBest wishes."
-            },
-            {
-                "author": "Shruti",
-                "comment": "education is a very important part of our life, glad you touch the real problem and trying to solve this with the help of AI"
-            },
-            {
-                "author": "arbilearn",
-                "comment": "Great idea, Happy Hacking"
-            },
-            {
-                "author": "deadman_xbt",
-                "comment": "This is by far the best proposal of hyperhack , right now.\nimpressed by the usage of alith and AI in education category.\nhope it turned out to be a super product and solve the problems.\ngood luck"
-            },
-            {
-                "author": "heromatters",
-                "comment": "Hello\n@amardeep\n,\nFirst of all, thank you for presenting the proposal on such an important narrative \u2014 education.\nI have few questions :-\nHow does EduVerse plan to balance AI personalization with curriculum standardization, especially for formal education systems that require fixed syllabi and assessments?\nHow does EduVerse ensure a smooth experience for users who are new to both AI and blockchain (students, teachers, or even schools)?"
-            },
-            {
-                "author": "amardeep",
-                "comment": "heromatters:\nHello\n@amardeep\n,\nFirst of all, thank you for presenting the proposal on such an important narrative \u2014 education.\nThank you so much for your kind words and for taking the time to go through the proposal.\nI would like to answer your both questions\nBalancing Personalization & Standardization:\nEduVerse\u2019s AI works within the set curriculum, not outside it. It helps students learn at their own pace and style while making sure they cover everything required. For teachers, it highlights exactly where students need help, so they can focus their efforts more effectively\u2014without losing control of the classroom.\nHelping New Users Feel at Home:\nWe keep things simple. Instead of talking tech, we show the benefits\u2014like personalized learning and instant feedback. The platform is easy to use, with gamified learning for students and clear dashboards for teachers. Blockchain runs quietly in the background\u2014users just see that their records are secure and portable. Plus, we offer helpful guides and real human support.\nFeel free to ask further.\nThank you."
-            },
-            {
-                "author": "Cryptopotato",
-                "comment": "Hello\n@amardeep\nWhy did you choose Hyperion specifically for EduVerse instead of other chains like NEAR or Avalanche that also offer AI integrations and scalability?\nWhat strategies are used to detect and correct AI biases in agent decision-making (e.g., tutoring paths, performance assessments)?"
-            },
-            {
-                "author": "amardeep",
-                "comment": "Thanks for your questions.\nWhy Hyperion for EduVerse?\nWe chose Hyperion over other chains like NEAR or Avalanche because it\u2019s built for AI-native Web3 applications, perfectly fitting EduVerse\u2019s needs:\nNative AI Optimization: Hyperion\u2019s MetisVM and AI co-processor are designed to efficiently run and verify AI workloads directly on-chain. This means more trustworthy and cost-effective AI decisions compared to other chains that simply \u201csupport\u201d AI.\nDirect Alith Integration: Hyperion has a direct, announced integration with the Alith Agentic Framework, which is the core of our multi-agent system. This makes developing and deploying our AI agents much smoother.\nReal-Time Performance: Its parallel execution and high throughput (with MetisDB for data) ensure a super responsive and scalable learning experience, crucial for instant AI feedback and interactions.\nCost-Efficiency: As a Layer 2, Hyperion offers lower transaction costs, making expensive AI operations more viable for a large educational platform.\nHow We Detect & Correct AI Biases?\nDiverse Training Data: We\u2019ll use very diverse datasets to train our AI, making sure it learns from a wide range of students and backgrounds. We\u2019ll also use techniques like data balancing to prevent underrepresentation.\nFairness-Aware Algorithms: We\u2019ll build our AI models using algorithms specifically designed to reduce performance disparities across different groups, constantly monitoring with fairness metrics.\nHuman Oversight: Educators and experts will review AI-suggested paths and assessments. Their feedback will directly help refine the AI.\nThank you"
-            },
-            {
-                "author": "amardeep",
-                "comment": "Project update:\nGithub : GitHub - amardeepio/Eduverse\nproject update:\nHey everyone,\nWhen you click that \u201cComplete Module\u201d button, something really cool happens behind the scenes. Think of it like getting a digital diploma notarized on the blockchain.\nHere\u2019s the simple 3-step process:\nYou Sign the Diploma: Your MetaMask wallet pops up and asks you to \u201csign\u201d a message. This is like putting your unique, unforgeable signature on the diploma, proving you completed the work. It\u2019s completely free and doesn\u2019t cost any gas.\nA Secure Courier Delivers It: Our server acts as a secure courier. It takes your signed diploma and delivers it to the blockchain to be officially recorded.\nThe Blockchain Notarizes It: The smart contract acts as a public notary. It mathematically verifies that your signature is authentic. Once verified, it permanently stamps your achievement into its public ledger.\nThat\u2019s it! The \u201cAchievement Unlocked\u201d message means your accomplishment is now a permanent, verifiable part of your learning history that you, and only you, control with your wallet.\nThanks\n@pavel\n@t0mcr8se\n@daryl"
-            },
-            {
-                "author": "daryl",
-                "comment": "Great update\n@amardeep\n!"
-            },
-            {
-                "author": "CrisMetis",
-                "comment": "Really cool idea! I believe putting together multi-agent AI with the Hyperion blockchain makes EduVerse feel both smart and trustworthy. Love the direction with features like Learn-to-Earn. Really exited to see where it goes!"
-            },
-            {
-                "author": "amardeep",
-                "comment": "Thanks a lot for the appreciation."
-            },
-            {
-                "author": "sumankr",
-                "comment": "Very Nice Idea!\n@amardeep"
-            },
-            {
-                "author": "amardeep",
-                "comment": "EduVerse Progress Update\nHey everyone,\nWe\u2019ve made progress on the EduVerse platform, and we\u2019re excited to share what\u2019s now fully functional! We\u2019ve built and integrated the core components of our vision for a personalized, on-chain educational experience.\nFull User Login & Session Management\nUsers can securely Sign-In with Ethereum via MetaMask.\nCreates a verifiable session to track progress \u2014 no email/password required!\nDynamic Course & Quiz System\nClean, tile-based layout for all available courses.\nUsers can browse topics, pick a course, and take a multi-question quiz.\nOn-Chain Achievements\nUpon quiz completion, users sign a message via wallet.\nThe ProgressTrackerAgent sends this to our smart contract.\nA verifiable credential (your on-chain diploma) is minted on the Hyperion Testnet.\nUsers receive a transaction link to view their credential instantly!\nMulti-Agent AI Backend (Alith Framework)\nWe\u2019ve evolved into a true multi-agent system, including:\nAPI Gateway \u2013 Handles all user requests.\nAgent Service \u2013 Coordinates our AI agents.\nTutorChatAgent \u2013 Powered by Alith + DeepSeek + Gemini, provides smart, conversational, context-aware help for any course.\nQuizHintAgent \u2013 Offers conceptual hints during quizzes (no spoilers!).\nEnhanced User Experience\nAdded typewriter animation to AI responses for a more human-like feel.\nLoading animations enhance responsiveness and polish.\nWe\u2019re proud of how far we\u2019ve come \u2014 but this is just the beginning. EduVerse is becoming a living, breathing learning companion for the decentralized world!\nLet us know your thoughts, feedback, or ideas!\nScreen capture of progress till now\nThank you"
-            },
-            {
-                "author": "amardeep",
-                "comment": "Screen capture video link in good quality Eduverse screen capture"
-            },
-            {
-                "author": "heromatters",
-                "comment": "This is truly amazing amar and thanks for sharing the update.\nThe UI looks so cool."
-            }
-        ]
-    },
-    {
-        "id": "a415cc78b90fb81b",
-        "topic_id": "5901",
-        "title": "Building Brand Trust in an Era of Deepfakes and AI Content",
-        "url": "https://forum.ceg.vote/t/building-brand-trust-in-an-era-of-deepfakes-and-ai-content/5901",
-        "views": "",
-        "comments": "4",
-        "created_date": "Jun 23, 2025 9:20 am",
-        "latest_activity": "Jun 27, 2025 5:30 pm",
-        "content": "\u201cAs AI-generated content advances, deepfakes have become a critical challenge for brand integrity. Recent incidents\u2014from fake celebrity endorsements to fabricated executive statements\u2014highlight urgent risks. I\u2018ve summarized some available methods. I\u2019d welcome your experiences and critiques on what actually works.\u201d\n1. The Trust Erosion Challenge\nCurrent Realities:\nSynthetic Media Proliferation:\nDeepfakes now mimic voices, mannerisms, and contexts with alarming accuracy (e.g., fake \u201cCEO announcement\u201d videos).\nConsumer Distrust:\n68% question brand authenticity if AI use isn\u2019t disclosed (Edelman 2025).\nRegulatory Momentum:\nItaly\u2019s fines for inadequate AI labeling signal global compliance demands.\n2. Observed Defense Frameworks\nA. Proactive Authentication\nStrategy Implementation Example\nTamper-Proof Watermarking Cryptographic signatures in official media\nContent Provenance Tracking Public timestamping for edit history\nBehavior-Based Threat Tools Anti-Sybil systems to detect bot networks\nB. Transparency Protocols\nExplicit AI Labeling:\nStandardized icons (e.g., AI-Assisted) on all synthetic/semi-synthetic content.\nPublic Creation Logs:\nShare toolchains and editing steps (e.g., \u201cGenerated via [Tool], edited in [Software]\u201d).\nLive Human Verification:\nHost AMAs with real-time gestures/codes to counter impersonation.\n3. Community-Driven Trust Models\nEmerging Practices:\nCrowdsourced Vigilance Programs:\nReward users for reporting fakes (e.g., non-monetary recognition programs).\nDecentralized Content Moderation:\nAllow authenticated communities to flag disputed media.\nClear UGC Guidelines:\nDefine ownership/revenue splits for user-generated content upfront.\n4. Trust Metrics Worth Tracking\nKPI Measurement Approach\nDeepfake response time Internal incident dashboards\nAI disclosure engagement Click-through on provenance links\nSentiment recovery post-crisis Social listening tools\nNo brand is immune to synthetic media risks, but proactive transparency turns trust into a competitive edge. What\u2019s one step you will take?",
-        "comments_details": [
-            {
-                "author": "Claire",
-                "comment": "\u201cAs AI-generated content advances, deepfakes have become a critical challenge for brand integrity. Recent incidents\u2014from fake celebrity endorsements to fabricated executive statements\u2014highlight urgent risks. I\u2018ve summarized some available methods. I\u2019d welcome your experiences and critiques on what actually works.\u201d\n1. The Trust Erosion Challenge\nCurrent Realities:\nSynthetic Media Proliferation:\nDeepfakes now mimic voices, mannerisms, and contexts with alarming accuracy (e.g., fake \u201cCEO announcement\u201d videos).\nConsumer Distrust:\n68% question brand authenticity if AI use isn\u2019t disclosed (Edelman 2025).\nRegulatory Momentum:\nItaly\u2019s fines for inadequate AI labeling signal global compliance demands.\n2. Observed Defense Frameworks\nA. Proactive Authentication\nStrategy Implementation Example\nTamper-Proof Watermarking Cryptographic signatures in official media\nContent Provenance Tracking Public timestamping for edit history\nBehavior-Based Threat Tools Anti-Sybil systems to detect bot networks\nB. Transparency Protocols\nExplicit AI Labeling:\nStandardized icons (e.g., AI-Assisted) on all synthetic/semi-synthetic content.\nPublic Creation Logs:\nShare toolchains and editing steps (e.g., \u201cGenerated via [Tool], edited in [Software]\u201d).\nLive Human Verification:\nHost AMAs with real-time gestures/codes to counter impersonation.\n3. Community-Driven Trust Models\nEmerging Practices:\nCrowdsourced Vigilance Programs:\nReward users for reporting fakes (e.g., non-monetary recognition programs).\nDecentralized Content Moderation:\nAllow authenticated communities to flag disputed media.\nClear UGC Guidelines:\nDefine ownership/revenue splits for user-generated content upfront.\n4. Trust Metrics Worth Tracking\nKPI Measurement Approach\nDeepfake response time Internal incident dashboards\nAI disclosure engagement Click-through on provenance links\nSentiment recovery post-crisis Social listening tools\nNo brand is immune to synthetic media risks, but proactive transparency turns trust into a competitive edge. What\u2019s one step you will take?"
-            },
-            {
-                "author": "han",
-                "comment": "Insightful breakdown combining tech safeguards with transparency and community oversight seems key to rebuilding trust in AI-driven media. How do you see blockchain enhancing these trust protocols?"
-            },
-            {
-                "author": "Norbert",
-                "comment": "How do you approach balancing transparency with brand control when disclosing AI-generated content? Have any of these methods actually worked for teams in real-world scenarios?"
-            },
-            {
-                "author": "Claire",
-                "comment": "Great question! Here\u2019re what I think:\nImmutable proof \u2192 Hash metadata (creator, edits) on-chain. Any tampering breaks the hash.\nCross-entity bridges \u2192 e.g., Media uses chain-proofs to negotiate with AI firms over data rights.\nCommunity power \u2192 Users scan blockchain fingerprints (like Adobe\u2019s) to verify content."
-            },
-            {
-                "author": "Claire",
-                "comment": "Spot on \u2014 balancing transparency is tough!\nRisk-tiered labels:\nHigh-risk (e.g., health news): + hidden watermarks\nLow-risk (ads): Tool names only (e.g., \u201cMidjourney V6\u201d), keep prompts private.\nAutomated Safeguards:\nembeds watermarks during AI content generation.\nProve authenticity without leaking IP."
-            }
-        ]
-    },
-    {
-        "id": "78136bfca8553d30",
-        "topic_id": "5820",
-        "title": "KOLs/Influencer Marketing in Web3: Hype vs. Long-Term Value",
-        "url": "https://forum.ceg.vote/t/kols-influencer-marketing-in-web3-hype-vs-long-term-value/5820",
-        "views": "",
-        "comments": "6",
-        "created_date": "Jun 18, 2025 11:14 am",
-        "latest_activity": "Jun 27, 2025 3:01 pm",
-        "content": "I think is important to have a post talking about KOLs/Influencer influence in web3.\nInfluencers have become super important in many fields, but in the last 4-5 years, especially in Web3, we can say that they popped-up, and right now each crypto enthusiast might be your best KOL, and the one who influences your decisions.\nHowever the way they act and create contents to drive their community and attract new users it could differentiate a lot.\nRecently many are chasing that hype, but it\u2019s key to remember that hype doesn\u2019t always equal long-term value.\nIn this evolving landscape that is Web 3 (it really changes every day, and you always have to be up to date ), Key Opinion Leaders (KOLs) play a pivotal role in shaping perceptions and driving engagement. However, not all KOLs are the same. The industry faces a challenge where some influencers prioritize short-term gains over sustainable growth, leading to a proliferation of hype-driven content that lacks depth.\nTo distinguish between hype and long-term value, I believe is important to consider the following:\nEngagement Over Vanity Metrics: Focus on KOLs who foster genuine interactions within their communities, replies to DMs, post valuable guides to their communities, or even go live showing themselves out there with educational contents, rather than those who boast inflated follower counts. High engagement often correlates with a more dedicated and informed audience.\nEducational Content infact: Influencers who provide insightful analyses, tutorials, and discussions about blockchain technology, tokenomics, and more, contribute to the overall knowledge base of the community.\nTransparent Partnerships: Trustworthy KOLs disclose their affiliations and partnerships, ensuring that their endorsements are based on genuine belief in the project\u2019s value rather than financial incentives.\nConsistent Track Record: Evaluate the influencer\u2019s history of promoting projects. A consistent pattern of supporting successful and ethical projects indicates a commitment to long-term value creation.\nBy aligning with KOLs who embody these principles, whoever, an investor, a newbie or a new Web3 project, can build strong foundations, loyal and informed communities, setting the stage for more quality content and projects out there, and remember always DYOR.",
-        "comments_details": [
-            {
-                "author": "CrisMetis",
-                "comment": "I think is important to have a post talking about KOLs/Influencer influence in web3.\nInfluencers have become super important in many fields, but in the last 4-5 years, especially in Web3, we can say that they popped-up, and right now each crypto enthusiast might be your best KOL, and the one who influences your decisions.\nHowever the way they act and create contents to drive their community and attract new users it could differentiate a lot.\nRecently many are chasing that hype, but it\u2019s key to remember that hype doesn\u2019t always equal long-term value.\nIn this evolving landscape that is Web 3 (it really changes every day, and you always have to be up to date ), Key Opinion Leaders (KOLs) play a pivotal role in shaping perceptions and driving engagement. However, not all KOLs are the same. The industry faces a challenge where some influencers prioritize short-term gains over sustainable growth, leading to a proliferation of hype-driven content that lacks depth.\nTo distinguish between hype and long-term value, I believe is important to consider the following:\nEngagement Over Vanity Metrics: Focus on KOLs who foster genuine interactions within their communities, replies to DMs, post valuable guides to their communities, or even go live showing themselves out there with educational contents, rather than those who boast inflated follower counts. High engagement often correlates with a more dedicated and informed audience.\nEducational Content infact: Influencers who provide insightful analyses, tutorials, and discussions about blockchain technology, tokenomics, and more, contribute to the overall knowledge base of the community.\nTransparent Partnerships: Trustworthy KOLs disclose their affiliations and partnerships, ensuring that their endorsements are based on genuine belief in the project\u2019s value rather than financial incentives.\nConsistent Track Record: Evaluate the influencer\u2019s history of promoting projects. A consistent pattern of supporting successful and ethical projects indicates a commitment to long-term value creation.\nBy aligning with KOLs who embody these principles, whoever, an investor, a newbie or a new Web3 project, can build strong foundations, loyal and informed communities, setting the stage for more quality content and projects out there, and remember always DYOR."
-            },
-            {
-                "author": "han",
-                "comment": "Great insights on the real impact of KOLs in Web3! But with so many influencers chasing hype, how can newcomers effectively spot the authentic voices from the noise-especially when engagement metrics can sometimes be misleading or artificially inflated?"
-            },
-            {
-                "author": "Daniel_K",
-                "comment": "That hopium though\u2026 Can\u2019t go without it, but so very volatile"
-            },
-            {
-                "author": "CrisMetis",
-                "comment": "Thanks for the question Han\nCheck meaningful engagement \u2013 For example, a KOL who gets 1,000 likes and 250 comments, but they all sound botted (e.g., \u201clfgggg\u201d, \u201cI think the same\u201d, \u201cnice call\u201d), is a red flag. Also, spending some time checking some of the blue checkmark accounts engaging with that post can help. That way, you can better understand whether these are real accounts posting meaningful content and genuinely engaging with the KOL, or if they\u2019re likely botted or bought accounts.\nConsistent track record \u2013 Evaluate the influencer\u2019s history in promoting projects. A KOL/influencer who is known for long-term support of a project, consistently shows up, and puts their face/voice out there is another good sign.\nCheck the consistency of their voice \u2013 A KOL who frequently changes opinions or jumps between projects might just be chasing the best payouts rather than aiming to bring value. Changing one\u2019s mind occasionally isn\u2019t always a bad sign, but if it happens often, it\u2019s definitely a red flag.\nAdditionals thing are out there, I believe also very important to use some of the tools out there also to check followers, and so on, and especially disconnect and be far from the idea that \u201cA lot of followers, likes= high quality\u201d"
-            },
-            {
-                "author": "han",
-                "comment": "Thanks for the detailed breakdown all very sharp points.\nI especially agree on the \u201cvoice consistency\u201d angle. It\u2019s underrated. A KOL constantly shifting tone or hopping between hype cycles usually signals a payout-driven motive rather than real conviction.\nAlso, checking comments for signal vs. noise has saved me more than once. Real engagement has texture generic hype rarely does.\nAppreciate the insights!"
-            },
-            {
-                "author": "Julie0xnana",
-                "comment": "CrisMetis:\nI think is important to have a post talking about KOLs/Influencer influence in web3.\nInfluencers have become super important in many fields, but in the last 4-5 years, especially in Web3, we can say that they popped-up, and right now each crypto enthusiast might be your best KOL, and the one who influences your decisions.\nHowever the way they act and create contents to drive their community and attract new users it could differentiate a lot.\nRecently many are chasing that hype, but it\u2019s key to remember that hype doesn\u2019t always equal long-term value.\nIn this evolving landscape that is Web 3 (it really changes every day, and you always have to be up to date ), Key Opinion Leaders (KOLs) play a pivotal role in shaping perceptions and driving engagement. However, not all KOLs are the same. The industry faces a challenge where some influencers prioritize short-term gains over sustainable growth, leading to a proliferation of hype-driven content that lacks depth.\nTo distinguish between hype and long-term value, I believe is important to consider the following:\nEngagement Over Vanity Metrics: Focus on KOLs who foster genuine interactions within their communities, replies to DMs, post valuable guides to their communities, or even go live showing themselves out there with educational contents, rather than those who boast inflated follower counts. High engagement often correlates with a more dedicated and informed audience.\nEducational Content infact: Influencers who provide insightful analyses, tutorials, and discussions about blockchain technology, tokenomics, and more, contribute to the overall knowledge base of the community.\nTransparent Partnerships: Trustworthy KOLs disclose their affiliations and partnerships, ensuring that their endorsements are based on genuine belief in the project\u2019s value rather than financial incentives.\nConsistent Track Record: Evaluate the influencer\u2019s history of promoting projects. A consistent pattern of supporting successful and ethical projects indicates a commitment to long-term value creation.\nBy aligning with KOLs who embody these principles, whoever, an investor, a newbie or a new Web3 project, can build strong foundations, loyal and informed communities, setting the stage for more quality content and projects out there, and remember always DYOR.\nPrioritize KOLs who educate & engage authentically over hype-chasers\u2014sustainable Web3 growth hinges on transparency and real community value."
-            },
-            {
-                "author": "priyankg3",
-                "comment": "I think it\u2019s time we shift the focus from follower count to community impact. A KOL with 10k highly engaged followers who trust their word is way more powerful than someone with 500k bots and no real dialogue."
-            }
-        ]
-    },
-    {
-        "id": "d13920dd66fd1564",
-        "topic_id": "5830",
-        "title": "A/B Testing in the Age of AI-Personalized Content: Still Relevant or Kinda Old School?",
-        "url": "https://forum.ceg.vote/t/a-b-testing-in-the-age-of-ai-personalized-content-still-relevant-or-kinda-old-school/5830",
-        "views": "",
-        "comments": "4",
-        "created_date": "Jun 18, 2025 7:42 pm",
-        "latest_activity": "Jun 27, 2025 2:39 pm",
-        "content": "A/B Testing in the Age of AI-Personalized Content: Still Relevant or Kinda Old School?\nLet\u2019s be honest, A/B testing has been the go-to trick in every digital marketer\u2019s playbook for years. Want to know if a red button works better than a blue one? Test it. Wondering whether your audience prefers \u201cSign Up\u201d or \u201cJoin Now\u201d? Test that too. We\u2019ve A/B tested everything from headlines and thumbnails to entire landing pages.\nBut now that we\u2019re in the age of AI-generated and AI-personalized content: Is A/B testing still practical to optimize content? Or has it quietly been replaced by real-time personalization that shifts content based on the user\u2019s behaviour before they even see version A or B?\nLet\u2019s break it down.\nWhat\u2019s Changed?\nHere\u2019s the thing, AI doesn\u2019t just spit out random variations. It learns, adapts, and personalizes content based on hundreds of factors. From user location and past interactions to the time of day and device being used, AI tailors the experience before you even hit \u201cpublish.\u201d\nAccording to a 2025 report by Statista, over 63% of digital marketing teams are now using AI-driven personalization tools to serve dynamic content on their websites and email campaigns [source]. That\u2019s up from just 42% in 2023.\nSo yeah, the shift is real.\nIs A/B Testing Dead?\nNot quite. But it\u2019s evolving.\nTraditional A/B testing is manual and limited. You run a test, collect data, wait days (or weeks), then analyze and adjust. AI doesn\u2019t wait. It optimizes in real time. But here\u2019s where A/B testing still shines: baseline validation.\nEven with AI, you need to know what works before the system learns what works best for whom. It\u2019s like giving your AI a strong foundation to build on.\nFor example, if you\u2019re launching a new feature, testing two core landing page messages can provide the directional clarity you need. Once you know which one resonates overall, AI can step in and personalize the rest, like changing the CTA based on device or the imagery based on user history.\nAI + A/B = Power Couple\nHow about thinking of A/B testing and AI personalization as collaborators, rather than competitors?\nYou can:\nUse A/B testing to validate the best core message.\nThen use AI to personalize the delivery of that message to different segments.\nFinally, let machine learning track micro-interactions and refine future content based on actual user behaviour, not just guesswork.\nThat\u2019s how you move from \u201cDid red or blue work better?\u201d to \u201cWhy not both, depending on who\u2019s looking?\u201d\nTL;DR (Because You\u2019re Busy)\nA/B testing isn\u2019t dead, it\u2019s just not working alone anymore.\nIn 2025, AI personalization is driving the majority of real-time optimizations.\nUse A/B testing for foundational decisions, then let AI tailor and scale.\nSo yeah, keep testing. But let your AI do the heavy lifting on the personalization front. That way, you\u2019re not just choosing a better version of your content; you\u2019re delivering the right one to the right person, at the right time.",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "A/B Testing in the Age of AI-Personalized Content: Still Relevant or Kinda Old School?\nLet\u2019s be honest, A/B testing has been the go-to trick in every digital marketer\u2019s playbook for years. Want to know if a red button works better than a blue one? Test it. Wondering whether your audience prefers \u201cSign Up\u201d or \u201cJoin Now\u201d? Test that too. We\u2019ve A/B tested everything from headlines and thumbnails to entire landing pages.\nBut now that we\u2019re in the age of AI-generated and AI-personalized content: Is A/B testing still practical to optimize content? Or has it quietly been replaced by real-time personalization that shifts content based on the user\u2019s behaviour before they even see version A or B?\nLet\u2019s break it down.\nWhat\u2019s Changed?\nHere\u2019s the thing, AI doesn\u2019t just spit out random variations. It learns, adapts, and personalizes content based on hundreds of factors. From user location and past interactions to the time of day and device being used, AI tailors the experience before you even hit \u201cpublish.\u201d\nAccording to a 2025 report by Statista, over 63% of digital marketing teams are now using AI-driven personalization tools to serve dynamic content on their websites and email campaigns [source]. That\u2019s up from just 42% in 2023.\nSo yeah, the shift is real.\nIs A/B Testing Dead?\nNot quite. But it\u2019s evolving.\nTraditional A/B testing is manual and limited. You run a test, collect data, wait days (or weeks), then analyze and adjust. AI doesn\u2019t wait. It optimizes in real time. But here\u2019s where A/B testing still shines: baseline validation.\nEven with AI, you need to know what works before the system learns what works best for whom. It\u2019s like giving your AI a strong foundation to build on.\nFor example, if you\u2019re launching a new feature, testing two core landing page messages can provide the directional clarity you need. Once you know which one resonates overall, AI can step in and personalize the rest, like changing the CTA based on device or the imagery based on user history.\nAI + A/B = Power Couple\nHow about thinking of A/B testing and AI personalization as collaborators, rather than competitors?\nYou can:\nUse A/B testing to validate the best core message.\nThen use AI to personalize the delivery of that message to different segments.\nFinally, let machine learning track micro-interactions and refine future content based on actual user behaviour, not just guesswork.\nThat\u2019s how you move from \u201cDid red or blue work better?\u201d to \u201cWhy not both, depending on who\u2019s looking?\u201d\nTL;DR (Because You\u2019re Busy)\nA/B testing isn\u2019t dead, it\u2019s just not working alone anymore.\nIn 2025, AI personalization is driving the majority of real-time optimizations.\nUse A/B testing for foundational decisions, then let AI tailor and scale.\nSo yeah, keep testing. But let your AI do the heavy lifting on the personalization front. That way, you\u2019re not just choosing a better version of your content; you\u2019re delivering the right one to the right person, at the right time."
-            },
-            {
-                "author": "han",
-                "comment": "Interesting points about AI personalization complementing A/B testing \u2014 but do you think there\u2019s a risk that relying too much on AI-driven real-time optimization might make marketers complacent? Could we lose the discipline of rigorous testing and critical thinking if we just let AI \u2018figure it out\u2019 for us?"
-            },
-            {
-                "author": "Daniel_K",
-                "comment": "Completely agree that it\u2019s a part of any good marketing plan.\nNo time to test because you\u2019re a 1-person marketing team? Even if you\u2019re a 1-person company, A/B testing should be part of your marketing plan. Can even get AI to set one up"
-            },
-            {
-                "author": "Sheyda",
-                "comment": "Agreed! This can improve your campaign efficiency and avoid budget waisting on inefficient channels and media."
-            },
-            {
-                "author": "priyankg3",
-                "comment": "wow, that will be a game changer if AI can help and build the marketing strategy, because might be Ai can detect what will work or what will not work ?"
-            }
-        ]
-    },
-    {
-        "id": "685f71a5f7ae19d8",
-        "topic_id": "6000",
-        "title": "Spotlight Campaign? Your Next Marketing Role Might Be in This Hackathon",
-        "url": "https://forum.ceg.vote/t/spotlight-campaign-your-next-marketing-role-might-be-in-this-hackathon/6000",
-        "views": "",
-        "comments": "2",
-        "created_date": "Jun 27, 2025 7:47 am",
-        "latest_activity": "Jun 27, 2025 2:37 pm",
-        "content": "Many projects from the hackathon are still in early stages of visibility and traction. The Spotlight Campaign gives them access to a $500 marketing credit, a $7500 prize pool, and ecosystem-wide exposure.\nThis is a chance for these teams to collaborate with marketers from this guild.\nIf you\u2019re a marketer looking to contribute, now\u2019s the time to reach out to hackathon projects directly (Many found in the Ideathon Category). You can lead their socials strategy, run campaigns, and help them qualify for the second half of their marketing credit by August 1.\nYou\u2019re also encouraged to make a short post about your experience and what kind of project you\u2019d like to work with. Teams are actively browsing this forum looking for help.\nThe marketing credit is split into $300 upfront and $200 unlocked on performance. You\u2019ll be expected to run real campaigns using TaskOn, Zealy, Magic Square, Twitter AMAs, ads, and other creative tactics.\nPerformance is judged by X account growth and quality, onchain user activity, and traffic to the team\u2019s forum thread. Top projects win from a $7500 bonus pool and get extended DevRel and forum support.\nIf you\u2019re available, go make a post or start reaching out. Let\u2019s get some teams to the top.\nStart here: \ud83d\udea8 HyperHack Spotlight Campaign is Live \ud83d\udea8",
-        "comments_details": [
-            {
-                "author": "Norbert",
-                "comment": "Many projects from the hackathon are still in early stages of visibility and traction. The Spotlight Campaign gives them access to a $500 marketing credit, a $7500 prize pool, and ecosystem-wide exposure.\nThis is a chance for these teams to collaborate with marketers from this guild.\nIf you\u2019re a marketer looking to contribute, now\u2019s the time to reach out to hackathon projects directly (Many found in the Ideathon Category). You can lead their socials strategy, run campaigns, and help them qualify for the second half of their marketing credit by August 1.\nYou\u2019re also encouraged to make a short post about your experience and what kind of project you\u2019d like to work with. Teams are actively browsing this forum looking for help.\nThe marketing credit is split into $300 upfront and $200 unlocked on performance. You\u2019ll be expected to run real campaigns using TaskOn, Zealy, Magic Square, Twitter AMAs, ads, and other creative tactics.\nPerformance is judged by X account growth and quality, onchain user activity, and traffic to the team\u2019s forum thread. Top projects win from a $7500 bonus pool and get extended DevRel and forum support.\nIf you\u2019re available, go make a post or start reaching out. Let\u2019s get some teams to the top.\nStart here: \ud83d\udea8 HyperHack Spotlight Campaign is Live \ud83d\udea8"
-            },
-            {
-                "author": "han",
-                "comment": "how can I help them gain visibility?"
-            },
-            {
-                "author": "priyankg3",
-                "comment": "Hello, Would it be possible to connect with the right person from TaskOn, Zealy, or Magic Square so that marketers can reach out directly and get proper guidance on how to set up campaigns for their projects?"
-            }
-        ]
-    },
-    {
-        "id": "3cb9d6a94078316c",
-        "topic_id": "5998",
-        "title": "A step-by-step Quest Campaign template for HyperHack projects to guide users in Spotlight Campaign",
-        "url": "https://forum.ceg.vote/t/a-step-by-step-quest-campaign-template-for-hyperhack-projects-to-guide-users-in-spotlight-campaign/5998",
-        "views": "",
-        "comments": "2",
-        "created_date": "Jun 27, 2025 6:24 am",
-        "latest_activity": "Jun 27, 2025 2:34 pm",
-        "content": "Here\u2019s a step-by-step Quest Campaign template for HyperHack projects to guide users.\nHyperHack Quest: Join Our Journey & Earn Rewards!\nFollow these simple steps to explore our project, earn rewards, and join our community:\nStep 1: Follow & Retweet\nGo to our dedicated X account: Insert your projects\u2019 X handles\nFOLLOW our account\nRETWEET our pinned HyperHack announcement tweet\nStep 2: Test Our dApp\nVisit our dApp:\nPerform ONE key action (e.g., connect wallet, make test transaction)\nTake a screenshot of your action as proof\nStep 3: Join Forum Discussion\nGo to our Metis Forum thread: Insert your Forum Showcase Link\nCLICK the referral link to register:Insert your Forum Referral Link\nClaim Your Rewards\nFirst 100 completers get exclusive NFT/role + token rewards\nWhy This Works\nClear CTAs\nReferral Tracking\nGamified Incentives\nMarketers! Feel free to share your templates in the Forum.",
-        "comments_details": [
-            {
-                "author": "Julie0xnana",
-                "comment": "Here\u2019s a step-by-step Quest Campaign template for HyperHack projects to guide users.\nHyperHack Quest: Join Our Journey & Earn Rewards!\nFollow these simple steps to explore our project, earn rewards, and join our community:\nStep 1: Follow & Retweet\nGo to our dedicated X account: Insert your projects\u2019 X handles\nFOLLOW our account\nRETWEET our pinned HyperHack announcement tweet\nStep 2: Test Our dApp\nVisit our dApp:\nPerform ONE key action (e.g., connect wallet, make test transaction)\nTake a screenshot of your action as proof\nStep 3: Join Forum Discussion\nGo to our Metis Forum thread: Insert your Forum Showcase Link\nCLICK the referral link to register:Insert your Forum Referral Link\nClaim Your Rewards\nFirst 100 completers get exclusive NFT/role + token rewards\nWhy This Works\nClear CTAs\nReferral Tracking\nGamified Incentives\nMarketers! Feel free to share your templates in the Forum."
-            },
-            {
-                "author": "han",
-                "comment": "Are you ready to apply this Quest Campaign template to your project?"
-            },
-            {
-                "author": "priyankg3",
-                "comment": "Okay, i am currently exploring and working on this.. soon i will share the template"
-            }
-        ]
-    },
-    {
-        "id": "2ec18d7c12e2582b",
-        "topic_id": "5997",
-        "title": "Calling Metis Marketers: Shape HyperHack Winners!",
-        "url": "https://forum.ceg.vote/t/calling-metis-marketers-shape-hyperhack-winners/5997",
-        "views": "",
-        "comments": "3",
-        "created_date": "Jun 27, 2025 6:08 am",
-        "latest_activity": "Jun 27, 2025 2:32 pm",
-        "content": "Gm Guild members! HyperHack teams need YOUR creativity to dominate the Spotlight Campaign:\n\ud83d\udc49 Reach out NOW to HyperHack projects and pitch bold marketing strategies!\nYour Playground:\n\u2022 $500 Budget/Project\n\u2022 Full Creative Freedom with Quest campaigns, AMA airdrops, Twitter ads & custom tactics\n\u2022 Ecosystem-Wide Exposure across Metis channels\nCheck details in this annoucement:\nHyperHack Spotlight Campaign is Live\nHyperHack\n[Spotlight GIF (2).mp4 [video-to-gif output image]] Gm Metisians, the Spotlight Campaign is here to supercharge your HyperHack journey! We are giving selected project teams a chance at the $7500 bonus prize pool, $500 in marketing credit, access to guild talent, and the chance to earn tiered ecosystem rewards. The goal is to boost your visibility and help you grow real users. Apply here Campaign Objective To empower HyperHack teams to market their projects using a real budget. This is about\u2026",
-        "comments_details": [
-            {
-                "author": "Julie0xnana",
-                "comment": "Gm Guild members! HyperHack teams need YOUR creativity to dominate the Spotlight Campaign:\n\ud83d\udc49 Reach out NOW to HyperHack projects and pitch bold marketing strategies!\nYour Playground:\n\u2022 $500 Budget/Project\n\u2022 Full Creative Freedom with Quest campaigns, AMA airdrops, Twitter ads & custom tactics\n\u2022 Ecosystem-Wide Exposure across Metis channels\nCheck details in this annoucement:\nHyperHack Spotlight Campaign is Live\nHyperHack\n[Spotlight GIF (2).mp4 [video-to-gif output image]] Gm Metisians, the Spotlight Campaign is here to supercharge your HyperHack journey! We are giving selected project teams a chance at the $7500 bonus prize pool, $500 in marketing credit, access to guild talent, and the chance to earn tiered ecosystem rewards. The goal is to boost your visibility and help you grow real users. Apply here Campaign Objective To empower HyperHack teams to market their projects using a real budget. This is about\u2026"
-            },
-            {
-                "author": "han",
-                "comment": "GM! Ready to connect with teams and share bold ideas for the Spotlight Campaign right away!"
-            },
-            {
-                "author": "Julie0xnana",
-                "comment": "Awesome!Glad to know it!"
-            },
-            {
-                "author": "priyankg3",
-                "comment": "Thanks for sharing this opportunity to showcase the skills"
             }
         ]
     }
