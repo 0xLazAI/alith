@@ -6,7 +6,7 @@ import { type Tool, convertParametersToJson } from "./tool";
 // Define the configuration structure for an Agent
 type AgentOptions = {
   name?: string; // Optional agent name.
-  model: string; // The model used by the agent.
+  model?: string; // The model used by the agent.
   preamble?: string; // Introductory text or context for the agent.
   baseUrl?: string; // Optional base URL for API requests.
   apiKey?: string; // Optional API key for authentication.
@@ -14,6 +14,7 @@ type AgentOptions = {
   mcpConfigPath?: string; // Optional mcp config path.
   store?: Store; // Optional store for the knowledge index.
   memory?: Memory; // Optional memory for the agent conversation context.
+  extraHeaders?: Record<string, string>; // Optional headers for remote LLM request.
 };
 
 // Represents an agent that can process prompts using tools
@@ -42,11 +43,12 @@ class Agent {
 
     this._agent = new DelegateAgent(
       opts.name ?? "",
-      opts.model,
+      opts.model ?? "",
       opts.apiKey ?? "",
       opts.baseUrl ?? "",
       opts.preamble ?? "",
-      opts.mcpConfigPath ?? ""
+      opts.mcpConfigPath ?? "",
+      opts.extraHeaders ?? {}
     );
   }
 
@@ -101,7 +103,6 @@ class Agent {
       return this._agent.promptWithTools(prompt, [], delegateTools);
     };
 
-    // Standard execution without TEE
     return processPrompt();
   }
 
@@ -118,7 +119,7 @@ class Agent {
    * @returns {string} - The model used by the agent.
    */
   model(): string {
-    return this._opts.model;
+    return this._opts.model ?? "";
   }
 
   /**

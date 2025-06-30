@@ -1,4 +1,6 @@
-use alith::{Agent, Chat, LLM, Tool};
+use std::collections::HashMap;
+
+use alith::{Agent, Chat, ClientConfig, LLM, Tool};
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
 
@@ -23,6 +25,7 @@ pub struct DelegateAgent {
     pub base_url: String,
     pub preamble: String,
     pub mcp_config_path: String,
+    pub extra_headers: HashMap<String, String>,
 }
 
 /// Runs the text chunker on the incoming text and returns the chunks as a vector of strings.
@@ -48,6 +51,7 @@ pub fn chunk_text(
 #[napi]
 impl DelegateAgent {
     #[napi(constructor)]
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         name: String,
         model: String,
@@ -55,6 +59,7 @@ impl DelegateAgent {
         base_url: String,
         preamble: String,
         mcp_config_path: String,
+        extra_headers: HashMap<String, String>,
     ) -> Self {
         DelegateAgent {
             model,
@@ -63,6 +68,7 @@ impl DelegateAgent {
             base_url,
             preamble,
             mcp_config_path,
+            extra_headers,
         }
     }
 
@@ -77,14 +83,22 @@ impl DelegateAgent {
         for tool in delegate_tools {
             tools.push(Box::new(tool) as Box<dyn Tool>);
         }
+        let config = ClientConfig::builder()
+            .extra_headers(self.extra_headers.clone())
+            .build();
         let mut agent = Agent::new_with_tools(
             self.name.to_string(),
             if self.base_url.is_empty() {
-                LLM::from_model_name(&self.model)
+                LLM::from_model_name_and_config(&self.model, config)
                     .map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))?
             } else {
-                LLM::openai_compatible_model(&self.api_key, &self.base_url, &self.model)
-                    .map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))?
+                LLM::openai_compatible_model_with_config(
+                    &self.api_key,
+                    &self.base_url,
+                    &self.model,
+                    config,
+                )
+                .map_err(|e| napi::bindgen_prelude::Error::from_reason(e.to_string()))?
             },
             tools,
         );

@@ -35,13 +35,15 @@ export declare class DelegateAgent {
   baseUrl: string;
   preamble: string;
   mcpConfigPath: string;
+  extraHeaders: Record<string, string>;
   constructor(
     name: string,
     model: string,
     apiKey: string,
     baseUrl: string,
     preamble: string,
-    mcpConfigPath: string
+    mcpConfigPath: string,
+    extraHeaders: Record<string, string>
   );
   promptWithTools(
     prompt: string,

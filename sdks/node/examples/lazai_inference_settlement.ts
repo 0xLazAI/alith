@@ -3,9 +3,8 @@ import { Agent } from "alith";
 
 const node = "0x34d9E02F9bB4E4C8836e38DF4320D4a79106F194";
 const client = new Client(ChainConfig.local());
-await client.addUser(100000000);
-await client.deposit(10000000);
-await client.depositInference(node, 10);
+await client.addUser(100_000_000);
+await client.depositInference(node, 50_000_000);
 console.log(
   "The inference account of user is",
   await client.getInferenceAccount(client.getWallet().address, node)
@@ -13,4 +12,10 @@ console.log(
 const fileId = 1;
 const nodeInfo = await client.getInferenceNode(node);
 const url = nodeInfo.url;
-const headers = await client.getRequestHeaders(node, BigInt(fileId));
+const agent = new Agent({
+  // OpenAI-compatible inference server URL
+  baseUrl: `${url}/v1`,
+  // Extra headers for settlement and DAT file anchoring
+  extraHeaders: await client.getRequestHeaders(node, BigInt(fileId)),
+});
+console.log(await agent.prompt("What is Alith?"));
