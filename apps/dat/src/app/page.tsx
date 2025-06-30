@@ -20,6 +20,7 @@ import { BrowserProvider, ethers } from 'ethers'
 import { DATA_REGISTRY_CONTRACT_ABI, VERIFIED_COMPUTING_CONTRACT_ABI, ContractConfig } from 'alith/lazai'
 import { encrypt } from 'alith/data'
 import NodeRSA from 'node-rsa'
+import * as crypto from 'crypto'
 
 const ENCRYPTION_SEED = 'Sign to retrieve your encryption key'
 
@@ -63,6 +64,10 @@ export default function Home() {
     const signer = await provider.getSigner(address)
     const signature = await signer.signMessage(message)
     return signature
+  }
+
+  const calculateSHA256 = (text: string): string => {
+    return crypto.createHash('sha256').update(text, 'utf-8').digest('hex')
   }
 
   const uint8ArrayToBase64 = (array: Uint8Array): string => {
@@ -157,12 +162,18 @@ export default function Home() {
       const url = ipfsUrl
       let fileId = await registryContract.getFileIdByUrl(url)
       if (fileId == BigInt(0)) {
-        const tx = await registryContract.addFileWithHash(url)
+        const privacyDataSha256 = calculateSHA256(privacyData)
+        const tx = await registryContract.addFileWithHash(url, privacyDataSha256)
         const receipt = await tx.wait()
         fileId = await registryContract.getFileIdByUrl(url)
       }
       console.log('file id:', fileId)
       setFileId(fileId)
+
+      let pubKey = await registryContract.getPublicKey()
+      let rsa = new NodeRSA(pubKey, 'pkcs1-public-pem')
+      let encryptedKey = rsa.encrypt(password, 'hex')
+      await registryContract.addPermissionForFile(fileId, config.dataRegistryAddress, encryptedKey)
 
       updateProgress(40, 'Requesting verification proof...')
       const tx = await vcContract.requestProof(fileId, { value: 100 })
@@ -176,10 +187,10 @@ export default function Home() {
       updateProgress(60, 'Processing verification...')
       const nodeInfo = await vcContract.getNode(job.nodeAddress)
       const nodeUrl = nodeInfo.url
-      const pubKey = nodeInfo.publicKey
+      pubKey = nodeInfo.publicKey
       setNodeAddress(job.nodeAddress)
-      const rsa = new NodeRSA(pubKey, 'pkcs1-public-pem')
-      const encryptedKey = rsa.encrypt(password, 'hex')
+      rsa = new NodeRSA(pubKey, 'pkcs1-public-pem')
+      encryptedKey = rsa.encrypt(password, 'hex')
       const proofRequest = {
         job_id: Number(jobId),
         file_id: Number(fileId),
@@ -553,9 +564,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="font-medium">DAT Generated Successfully!</h3>
-                      <p className="text-sm text-gray-400">
-                        Your DAT has been created and recorded on the blockchain.
-                      </p>
+                      <p className="text-sm text-gray-400">Your DAT has been created and recorded on the blockchain.</p>
                     </div>
                   </div>
 
