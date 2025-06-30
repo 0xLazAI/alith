@@ -7,7 +7,7 @@ async function main() {
   const url = "https://example.com/okyes.txt";
   let fileId = await contributor.getFileIdByUrl(url);
   // File not found, add it
-  if (fileId === 0) {
+  if (fileId === BigInt(0)) {
     fileId = await contributor.addFile(url);
   }
   console.log("file id:", fileId);
@@ -18,7 +18,7 @@ async function main() {
     "https://example.com/node",
     "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
   );
-  const nodeFee = 10;
+  const nodeFee = BigInt(10);
   await node.updateNodeFee(nodeFee);
   await contributor.requestProof(fileId, nodeFee);
   const ids = await contributor.fileJobIds(fileId);
@@ -31,7 +31,7 @@ async function main() {
   console.log("node info:", nodeInfo);
   await node.completeJob(job_id);
   console.log("completed job", job_id);
-  await node.addProof(fileId, new ProofData(fileId, "", ""));
+  await node.addProof(fileId, new ProofData(Number(fileId), "", ""));
   console.log("proof added for file", fileId);
   await contributor.requestReward(fileId);
   console.log("reward requested for file", fileId);
