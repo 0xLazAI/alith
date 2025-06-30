@@ -2028,9 +2028,9 @@ dependencies = [
 
 [[package]]
 name = "chromadb"
-version = "2.2.2"
+version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac28cac4b28301e43a7aeedafeed6cd50b48d2c7640e902e09e4df6ae59f95d0"
+checksum = "f6a1f527377f3d6e7c775ab985417e207a027663e15fd8555a8eb58ec8a62b53"
 dependencies = [
  "anyhow",
  "async-trait",
