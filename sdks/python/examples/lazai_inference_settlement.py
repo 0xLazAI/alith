@@ -3,11 +3,13 @@ from alith import Agent, LazAIClient
 # 1. Join the iDAO, register user wallet on LazAI and deposit fees (Only Once)
 LAZAI_IDAO_ADDRESS = "0x34d9E02F9bB4E4C8836e38DF4320D4a79106F194"
 client = LazAIClient()
+# Add by the inference node admin
+# client.add_inference_node(LAZAI_IDAO_ADDRESS, "http://127.0.0.1:8000", "pub key")
 try:
     client.get_user(client.wallet.address)
 except Exception:
     client.add_user(10000000)
-    client.deposit_inference(LAZAI_IDAO_ADDRESS, 1000000)
+    client.deposit_inference(LAZAI_IDAO_ADDRESS, 5000000)
 
 # 2. Request the inference server with the settlement headers and DAT file id
 file_id = 1

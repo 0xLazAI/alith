@@ -89,7 +89,7 @@ class DataQueryMiddleware(BaseHTTPMiddleware):
                 content=json.dumps(
                     {
                         "error": {
-                            "message": "Validate the request header failed: " + str(e),
+                            "message": "Data query failed: " + str(e),
                             "type": "bad_request_error",
                         }
                     }

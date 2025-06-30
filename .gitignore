@@ -15,9 +15,6 @@ venv.bak/
 
 # Next.js
 next-env.d.ts
-# TypeScript
-tsconfig.json
-
 
 # DEV
 scripts/dev_*

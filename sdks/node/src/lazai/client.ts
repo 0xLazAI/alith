@@ -3,6 +3,7 @@ import {
   AI_PROCESS_CONTRACT_ABI,
   ContractConfig,
   DATA_REGISTRY_CONTRACT_ABI,
+  SETTLEMENT_CONTRACT_ABI,
   VERIFIED_COMPUTING_CONTRACT_ABI,
 } from "./contracts";
 import type { ProofData, SettlementData } from "./proof";
@@ -66,7 +67,7 @@ export class Client extends ChainManager {
 
   settlementContract() {
     return new this.web3.eth.Contract(
-      AI_PROCESS_CONTRACT_ABI,
+      SETTLEMENT_CONTRACT_ABI,
       this.contractConfig.settlementAddress
     );
   }
