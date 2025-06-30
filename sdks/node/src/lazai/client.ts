@@ -6,8 +6,9 @@ import {
   VERIFIED_COMPUTING_CONTRACT_ABI,
 } from "./contracts";
 import type { ProofData, SettlementData } from "./proof";
-
+import { randomBytes } from "crypto";
 import Web3 from "web3";
+import { SettlementRequest } from "./settlement";
 
 export class Client extends ChainManager {
   contractConfig: ContractConfig;
@@ -692,5 +693,31 @@ export class Client extends ChainManager {
       method,
       this.contractConfig.trainingAddress
     );
+  }
+
+  public async getRequestHeaders(
+    node: string,
+    fileId?: BigInt,
+    nonce?: number
+  ): Promise<{ [key: string]: string }> {
+    const generatedNonce = nonce ?? this.secureNonce();
+    const request = new SettlementRequest(
+      generatedNonce,
+      this.getWallet().address,
+      node,
+      fileId
+    );
+    const signature = await request.generateSignature(
+      this.getWallet().privateKey
+    );
+    return signature.toRequestHeaders();
+  }
+
+  private secureNonce(): number {
+    const timestampMs = Date.now();
+    const randomBytesBuffer = randomBytes(4);
+    const randomInt = randomBytesBuffer.readUInt32BE(0);
+    const randomPart = randomInt % 100000;
+    return timestampMs * 100000 + randomPart;
   }
 }
