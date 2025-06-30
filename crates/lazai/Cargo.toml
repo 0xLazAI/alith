@@ -28,5 +28,7 @@ alloy = { workspace = true, features = [
 ] }
 serde.workspace = true
 bon.workspace = true
+chrono.workspace = true
+rand.workspace = true
 
 [features]
