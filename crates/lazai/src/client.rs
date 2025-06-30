@@ -7,7 +7,9 @@ use alloy::{
     rpc::types::TransactionReceipt,
     sol_types::SolValue,
 };
-use std::ops::Deref;
+use chrono::Utc;
+use rand::Rng;
+use std::{collections::HashMap, ops::Deref};
 use thiserror::Error;
 
 use crate::{
@@ -20,6 +22,7 @@ use crate::{
         ISettlement::ISettlementInstance, IVerifiedComputing::IVerifiedComputingInstance, Job,
         NodeInfo, Permission, User,
     },
+    settlement::SettlementRequest,
 };
 
 #[derive(Debug, Clone)]
@@ -851,6 +854,36 @@ impl Client {
             .await
     }
 
+    pub async fn get_request_headers(
+        &self,
+        node: Address,
+        file_id: Option<U256>,
+        nonce: Option<u64>,
+    ) -> Result<HashMap<String, String>, ClientError> {
+        let generated_nonce = nonce.unwrap_or(self.secure_nonce());
+
+        let request = SettlementRequest {
+            nonce: generated_nonce,
+            user: self.wallet.address,
+            node,
+            file_id,
+        };
+
+        let signature = request.generate_signature(&self.wallet).await?;
+
+        Ok(signature.to_request_headers())
+    }
+
+    fn secure_nonce(&self) -> u64 {
+        let now = Utc::now();
+        let timestamp_ms = now.timestamp_millis();
+
+        let mut rng = rand::rng();
+        let random_part = rng.random_range(0..100000);
+
+        timestamp_ms as u64 * 100000 + random_part as u64
+    }
+
     #[inline]
     async fn call_builder<'a, D: CallDecoder>(
         &'a self,
@@ -976,4 +1009,6 @@ pub enum ClientError {
     SigningError(String),
     #[error("Transaction error: {0}")]
     TransactionError(String),
+    #[error("Validation error: {0}")]
+    ValidationError(String),
 }

@@ -283,6 +283,8 @@ dependencies = [
  "anyhow",
  "async-trait",
  "bon",
+ "chrono",
+ "rand 0.9.1",
  "reqwest 0.12.20",
  "serde",
  "thiserror 2.0.12",

@@ -199,11 +199,15 @@ name = "agent_with_lazai_privacy_data"
 required-features = ["lazai", "crypto"]
 
 [[example]]
-name = "lazai_data_contribution_and_reward"
+name = "lazai_data_contribution_with_reward"
 required-features = ["lazai", "crypto", "wallet", "ipfs"]
 
 [[example]]
-name = "lazai_settlement"
+name = "lazai_data_contribution_without_reward"
+required-features = ["lazai", "crypto", "wallet", "ipfs"]
+
+[[example]]
+name = "lazai_inference_settlement"
 required-features = ["lazai", "crypto", "wallet"]
 
 [[example]]
