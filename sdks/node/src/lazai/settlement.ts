@@ -15,7 +15,7 @@ export class SettlementSignature {
     public file_id?: BigInt | null
   ) {}
 
-  toRequestHeaders(): { [key: string]: string } {
+  toRequestHeaders(): Record<string, string> {
     return {
       [USER_HEADER]: this.user,
       [NONCE_HEADER]: this.nonce.toString(),

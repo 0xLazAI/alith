@@ -699,7 +699,7 @@ export class Client extends ChainManager {
     node: string,
     fileId?: BigInt,
     nonce?: number
-  ): Promise<{ [key: string]: string }> {
+  ): Promise<Record<string, string>> {
     const generatedNonce = nonce ?? this.secureNonce();
     const request = new SettlementRequest(
       generatedNonce,

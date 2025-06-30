@@ -13,7 +13,7 @@ export const TRAINING_TYPE = 2;
 import { Client } from "./client";
 
 export async function validateRequest(
-  headers: { [key: string]: string },
+  headers: Record<string, string>,
   type: number = QUERY_TYPE,
   client?: Client
 ) {
