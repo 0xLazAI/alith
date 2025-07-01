@@ -169,7 +169,7 @@ async def main():
     ipfs = PinataIPFS()
     try:
         # 1. Prepare your privacy data and encrypt it
-        data_file_name = "your_encrypted_data.txt"
+        data_file_name = "your_encrypted_data1.txt"
         privacy_data_sha256 = hashlib.sha256(privacy_data.encode()).hexdigest()
         encryption_seed = "Sign to retrieve your encryption key"
         message = encode_defunct(text=encryption_seed)
@@ -219,11 +219,11 @@ async def main():
         )
         if response.status_code == 200:
             print("Proof request sent successfully")
+            # 5. Request DAT reward
+            client.request_reward(file_id)
+            print("Reward requested for file id", file_id)
         else:
             print("Failed to send proof request:", response.json())
-        # 5. Request DAT reward
-        client.request_reward(file_id)
-        print("Reward requested for file id", file_id)
     except StorageError as e:
         print(f"Error: {e}")
     except Exception as e:

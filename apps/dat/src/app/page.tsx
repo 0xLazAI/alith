@@ -155,7 +155,7 @@ export default function Home() {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum)
       const signer = await provider.getSigner()
-      const config = new ContractConfig()
+      const config = ContractConfig.testnet()
       const registryContract = new ethers.Contract(config.dataRegistryAddress, DATA_REGISTRY_CONTRACT_ABI, signer)
       const vcContract = new ethers.Contract(config.verifiedComputingAddress, VERIFIED_COMPUTING_CONTRACT_ABI, signer)
       updateProgress(20, 'Registering file on blockchain...')

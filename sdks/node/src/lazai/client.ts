@@ -16,7 +16,7 @@ export class Client extends ChainManager {
 
   constructor(
     chainConfig: ChainConfig = ChainConfig.testnet(),
-    contractConfig: ContractConfig = new ContractConfig(),
+    contractConfig: ContractConfig = ContractConfig.testnet(),
     privateKey: string = process.env.PRIVATE_KEY || ""
   ) {
     super(chainConfig, privateKey);
