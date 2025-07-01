@@ -7,7 +7,7 @@ if node_url:
     node.remove_node(node.wallet.address)
 node.add_node(
     node.wallet.address,
-    "https://f29d4e7ec6d010ff0aff401e21a3768ee9051935-8000.dstack-prod7.phala.network",
+    "https://ef67062b9c273c721d0f8fb45c7b8a947667e1e7-8000.dstack-prod8.phala.network",
     """-----BEGIN RSA PUBLIC KEY-----
 MIIBigKCAYEAjxlRv0gBLnzEly7X3pxkcdYhY6++ybWpQYoFkpjdGmUpoK6ULKgl
 AOpwuWkek1Cnc/LWMNL1hj7qCeplK0xbwhEWHRExHiCsHpWv/pnYU2YY4ZN+1Scg

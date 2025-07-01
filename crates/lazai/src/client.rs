@@ -57,7 +57,15 @@ impl Client {
     pub fn new_devnet() -> Result<Self, ClientError> {
         Ok(Self {
             manager: ChainManager::new(ChainConfig::local(), LocalEthWallet::from_env()?)?,
-            config: ContractConfig::default(),
+            config: ContractConfig::local(),
+        })
+    }
+
+    /// New the LazAI client for the testnet.
+    pub fn new_testnet() -> Result<Self, ClientError> {
+        Ok(Self {
+            manager: ChainManager::new(ChainConfig::testnet(), LocalEthWallet::from_env()?)?,
+            config: ContractConfig::testnet(),
         })
     }
 

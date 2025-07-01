@@ -35,7 +35,11 @@ class Client(ChainManager):
             if getenv("LAZAI_LOCAL_CHAIN")
             else ChainConfig.testnet()
         ),
-        contract_config: ContractConfig = ContractConfig(),
+        contract_config: ContractConfig = (
+            ContractConfig.local()
+            if getenv("LAZAI_LOCAL_CHAIN")
+            else ContractConfig.testnet()
+        ),
         private_key: str = getenv("PRIVATE_KEY", ""),
     ):
         super().__init__(chain_config, private_key)
