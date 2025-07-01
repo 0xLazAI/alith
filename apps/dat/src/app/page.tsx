@@ -163,14 +163,14 @@ export default function Home() {
       let fileId = await registryContract.getFileIdByUrl(url)
       if (fileId == BigInt(0)) {
         const privacyDataSha256 = calculateSHA256(privacyData)
-        const tx = await registryContract.addFileWithHash(url, privacyDataSha256)
+        const tx = await registryContract.addFile(url, privacyDataSha256)
         const receipt = await tx.wait()
         fileId = await registryContract.getFileIdByUrl(url)
       }
       console.log('file id:', fileId)
       setFileId(fileId)
 
-      let pubKey = await registryContract.getPublicKey()
+      let pubKey = await registryContract.publicKey()
       let rsa = new NodeRSA(pubKey, 'pkcs1-public-pem')
       let encryptedKey = rsa.encrypt(password, 'hex')
       await registryContract.addPermissionForFile(fileId, config.dataRegistryAddress, encryptedKey)
