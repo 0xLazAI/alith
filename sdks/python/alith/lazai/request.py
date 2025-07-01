@@ -26,7 +26,7 @@ def validate_account_and_signature(
     user: str,
     nonce: int,
     signature: str,
-    type: int = TRAINING_TYPE,
+    type: int = QUERY_TYPE,
     client=None,
 ):
     """Validate the request user and signature with the user address, nonce and signature"""

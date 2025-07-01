@@ -9,6 +9,12 @@ RUN apt-get update && apt-get install -y \
     git
 # DO NOT build the Rust core through the pyproject.toml and install the deps
 RUN python3 -m pip install pydantic pydantic_config requests web3==7.12.0 rsa python-gnupg aiohttp uvicorn fastapi
+# Query and Vector database Dependencies
+RUN python3 -m pip install pymilvus pymilvus.model
+# Inference Dependencies
+RUN python3 -m pip install llama_cpp_python openai
+# Training Dependencies
+RUN python3 -m pip install llamafactory
 # Copy README and LICENSE files
 COPY README.md /app/
 COPY LICENSE /app/
