@@ -18,6 +18,8 @@ async function main() {
   const nodeInfo = await client.getInferenceNode(node)
   const url = nodeInfo.url
   const agent = new Agent({
+    // Note: replace with your model here
+    model: "Qwen-2.5",
     // OpenAI-compatible inference server URL
     baseUrl: `${url}/v1`,
     // Extra headers for settlement and DAT file anchoring

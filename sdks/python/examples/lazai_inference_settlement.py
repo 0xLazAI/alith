@@ -15,6 +15,8 @@ except Exception:
 file_id = 1
 url = client.get_inference_node(LAZAI_IDAO_ADDRESS)[1]
 agent = Agent(
+    # Note: replace with your model here
+    model="Qwen-2.5",
     # OpenAI-compatible inference server URL
     base_url=f"{url}/v1",
     # Extra headers for settlement and DAT file anchoring
