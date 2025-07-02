@@ -68,7 +68,7 @@ class DataQueryMiddleware(BaseHTTPMiddleware):
                 docs = resp.get("data", [])
                 if not isinstance(docs, list):
                     docs = [docs]
-
+                logger.info(f"Data queried with the file id: {file_id}")
                 updated_prompt = "{}\n\n<attachments>\n{}</attachments>\n".format(
                     prompt, "".join(docs)
                 )
