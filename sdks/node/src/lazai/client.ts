@@ -700,7 +700,7 @@ export class Client extends ChainManager {
   public async getRequestHeaders(
     node: string,
     fileId?: BigInt,
-    nonce?: number
+    nonce?: BigInt
   ): Promise<Record<string, string>> {
     const generatedNonce = nonce ?? this.secureNonce();
     const request = new SettlementRequest(
@@ -709,17 +709,15 @@ export class Client extends ChainManager {
       node,
       fileId
     );
-    const signature = await request.generateSignature(
-      this.getWallet().privateKey
-    );
+    const signature = request.generateSignature(this.getWallet().privateKey);
     return signature.toRequestHeaders();
   }
 
-  private secureNonce(): number {
+  private secureNonce(): BigInt {
     const timestampMs = Date.now();
     const randomBytesBuffer = randomBytes(4);
     const randomInt = randomBytesBuffer.readUInt32BE(0);
     const randomPart = randomInt % 100000;
-    return timestampMs * 100000 + randomPart;
+    return BigInt(timestampMs) * BigInt(100000) + BigInt(randomPart);
   }
 }
