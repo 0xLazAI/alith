@@ -10,7 +10,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "alith": "link:../../sdks/node"
+    "alith": "^0.10.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
