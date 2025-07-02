@@ -57,7 +57,9 @@ def validate_account_and_signature(
         signature,
     )
     if recovered_address.lower() != user.lower():
-        raise Exception("Signature verification failed: address mismatch")
+        raise Exception(
+            f"Signature verification failed: address mismatch, expect {user} got {recovered_address}",
+        )
 
 
 def recover_address(

@@ -10,7 +10,7 @@ import {
 export class SettlementSignature {
   constructor(
     public user: string,
-    public nonce: number,
+    public nonce: BigInt,
     public signature: string,
     public file_id?: BigInt | null
   ) {}
@@ -30,7 +30,7 @@ export class SettlementSignature {
 
 export class SettlementRequest {
   constructor(
-    public nonce: number,
+    public nonce: BigInt,
     public user: string,
     public node: string,
     public file_id?: BigInt | null
@@ -38,11 +38,10 @@ export class SettlementRequest {
 
   abiEncode() {
     const web3 = new Web3();
-    return web3.eth.abi.encodeParameter("(uint256, address, address)", [
-      this.nonce,
-      this.user,
-      this.node,
-    ]);
+    return web3.eth.abi.encodeParameters(
+      ["uint256", "address", "address"],
+      [this.nonce, this.user, this.node]
+    );
   }
 
   generateSignature(privateKey: string): SettlementSignature {
