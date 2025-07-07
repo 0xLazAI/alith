@@ -17,7 +17,7 @@ export default function AddLazaiNetworkButton() {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x14836e", // 133718 in hex
+            chainId: "0x20A56", // 133718 in hex
             chainName: "LazAI (Pre Testnet)",
             nativeCurrency: {
               name: "LAZAI",
