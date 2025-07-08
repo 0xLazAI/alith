@@ -1,5 +1,5 @@
 ---
-title: "Private Data Inference"
+title: "LazAI Computing API"
 description: "How to run AI inference on your contributed private data using LazAI."
 icon: "Cpu"
 ---
@@ -7,9 +7,9 @@ icon: "Cpu"
 import { Tabs } from "nextra/components";
 
 
-# Private Data Inference
+# LazAI Computing API
 
-After contributing your private data and minting a DAT (Data Anchor Token), you can run AI inference on your data in a privacy-preserving way using LazAI. This workflow ensures your sensitive data remains secure and under your control, while still enabling powerful AI capabilities.
+One-step access to private data AI process, user can utilize privacy data on the LazAI for context engineering/inference/training/evaluation to build value-aligned agents. After contributing your private data and minting a DAT (Data Anchor Token), you can run AI inference on your data in a privacy-preserving way using LazAI. This workflow ensures your sensitive data remains secure and under your control, while still enabling powerful AI capabilities.
 
 > **Why Private Data Inference?**
 >
@@ -49,13 +49,26 @@ python3 -m pip install alith -U
 
 ### Set Environment Variables
 
+For OpenAI/ChatGPT API:
 ```shell
 export PRIVATE_KEY=<your wallet private key>
 export OPENAI_API_KEY=<your openai api key>
 ```
 
+For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
+```shell
+export PRIVATE_KEY=<your wallet private key>
+export LLM_API_KEY=<your api key>
+export LLM_BASE_URL=<your api base url>
+```
+
 ### Step 1: Run the Inference Server
 
+> **Note:** The public address of the private key you expose to the inference server is the `LAZAI_IDAO_ADDRESS`. Once the inference server is running, the URL must be registered using the `add_inference_node` function in Alith. This can only be done by LazAI admins.
+
+#### Local Development
+
+For OpenAI/ChatGPT API:
 ```python
 from alith.inference import run
 
@@ -80,13 +93,25 @@ curl http://localhost:8000/v1/chat/completions \
 server = run(model="gpt-3.5-turbo", settlement=True, engine_type="openai")
 ```
 
+For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
+```python
+from alith.inference import run
+
+# Example: Using DeepSeek model from OpenRouter
+server = run(settlement=True, engine_type="openai", model="deepseek/deepseek-r1-0528")
+```
+
+#### Production Deployment on Phala TEE Cloud
+
+For production-ready applications, deploy your inference server on [Phala TEE Cloud](https://docs.phala.network/phala-cloud/references/tee-cloud-cli) for enhanced security and privacy. Once deployed, you will receive an inference URL that needs to be registered using the `add_inference_node` function by LazAI admins.
+
 ### Step 2: Request Inference via LazAI Client
 
 ```python
 from alith import Agent, LazAIClient
 
 # 1. Join the iDAO, register user wallet on LazAI and deposit fees (Only Once)
-LAZAI_IDAO_ADDRESS = "0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49"
+LAZAI_IDAO_ADDRESS = "0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49" # Replace with your own address
 client = LazAIClient()
 # Add by the inference node admin
 
@@ -162,9 +187,17 @@ Create a file named `tsconfig.json` with the following content:
 
 ### Set Environment Variables
 
+For OpenAI/ChatGPT API:
 ```bash
 export PRIVATE_KEY=<your wallet private key>
 export OPENAI_API_KEY=<your openai api key>
+```
+
+For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
+```bash
+export PRIVATE_KEY=<your wallet private key>
+export LLM_API_KEY=<your api key>
+export LLM_BASE_URL=<your api base url>
 ```
 
 ### Step 1: Request Inference via LazAI Client
@@ -178,19 +211,11 @@ import { Agent } from "alith";
 // Set up the private key for authentication
 process.env.PRIVATE_KEY = "<your wallet private key>";
 
-const node = "0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49";
+const node = "0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49"; // Replace with your own inference node address
 const client = new Client(ChainConfig.testnet());
 
 await client.getUser(client.getWallet().address);
-console.log("got user");
 
-// Add by the inference node admin
-// await client.addInferenceNode(node, "http://127.0.0.1:8000", "pub key")
-// await client.addUser(1000000);
-
-// console.log("added user");
-// await client.depositInference(node, 1000000);
-console.log("deposited inference");
 console.log(
   "The inference account of user is",
   await client.getInferenceAccount(client.getWallet().address, node)
