@@ -55,7 +55,7 @@ export default function Home() {
   }, [])
 
   // Sign the message use the user address and message
-  const signMessage = async (address: string, message: string): Promise<string> => {
+  async function signMessage(address: string, message: string): Promise<string> {
     if (!window.ethereum) {
       throw new Error('MetaMask not found')
     }
@@ -66,11 +66,11 @@ export default function Home() {
     return signature
   }
 
-  const calculateSHA256 = (text: string): string => {
+  function calculateSHA256(text: string): string {
     return crypto.createHash('sha256').update(text, 'utf-8').digest('hex')
   }
 
-  const uint8ArrayToBase64 = (array: Uint8Array): string => {
+  function uint8ArrayToBase64(array: Uint8Array): string {
     let result = ''
     const chunkSize = 1024
     for (let i = 0; i < array.length; i += chunkSize) {
@@ -81,7 +81,7 @@ export default function Home() {
   }
 
   // Connect wallet
-  const connectWallet = async () => {
+  async function connectWallet() {
     try {
       if (!window.ethereum) {
         showNotification('error', 'Please install Metamask to continue.')
@@ -104,7 +104,7 @@ export default function Home() {
     }
   }
 
-  const encryptAndUploadData = async () => {
+  async function encryptAndUploadData() {
     if (!dataName || !privacyData) {
       showNotification('error', 'Please enter both file name and privacy data.')
       return
@@ -148,7 +148,7 @@ export default function Home() {
     }
   }
 
-  const generateDAT = async () => {
+  async function generateDAT() {
     setLoading(true)
     setCurrentStep(4)
 
@@ -233,7 +233,7 @@ export default function Home() {
     }
   }
 
-  const resetApp = () => {
+  function resetApp() {
     setCurrentStep(1)
     setDataName('')
     setPrivacyData('')
@@ -246,20 +246,22 @@ export default function Home() {
     setError('')
   }
 
-  const updateProgress = (percent, message) => {
+  function updateProgress(percent: number, message: string) {
     setUploadProgress(percent)
   }
 
-  const simulateDelay = (ms) => {
+  console.log(uploadProgress)
+
+  function simulateDelay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms))
   }
 
-  const shortenAddress = (address) => {
+  function shortenAddress(address: string) {
     if (!address) return ''
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`
   }
 
-  const showNotification = (type, message) => {
+  function showNotification(type: string, message: string) {
     setNotification({
       show: true,
       type,
@@ -421,7 +423,7 @@ export default function Home() {
                   </label>
                   <textarea
                     id="privacy-data"
-                    rows="8"
+                    rows={8}
                     placeholder="Enter your privacy data here..."
                     value={privacyData}
                     onChange={(e) => setPrivacyData(e.target.value)}
@@ -492,7 +494,7 @@ export default function Home() {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-medium">{dataName}</h3>
-                        <p className="text-sm text-gray-400 truncate">{ipfsUrl}</p>
+                        {/* <p className="text-sm text-gray-400 truncate">{ipfsUrl}</p> */}
                         <a
                           href={ipfsUrl}
                           target="_blank"
