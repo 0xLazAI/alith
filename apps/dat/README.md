@@ -15,6 +15,8 @@ pnpm i
 # Copy .env.example to .env
 cp .env.example .env
 
+# Add required env variable PINATA_JWT -> Can be obtained here (https://app.pinata.cloud/developers/api-keys)
+
 # Run the development server
 pnpm dev
 ```
