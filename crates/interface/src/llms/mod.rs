@@ -11,11 +11,13 @@ pub mod api;
 pub mod local;
 use api::anthropic::AnthropicBackend;
 use api::generic_openai::GenericApiBackend;
+use api::google::GoogleBackend;
 use api::openai::OpenAIBackend;
 use std::sync::Arc;
 
 pub enum LLMBackend {
     OpenAI(OpenAIBackend),
+    Google(GoogleBackend),
     Anthropic(AnthropicBackend),
     GenericApi(GenericApiBackend),
 }
@@ -29,6 +31,7 @@ impl LLMBackend {
             LLMBackend::OpenAI(b) => b.completion_request(request).await,
             LLMBackend::Anthropic(b) => b.completion_request(request).await,
             LLMBackend::GenericApi(b) => b.completion_request(request).await,
+            LLMBackend::Google(b) => b.completion_request(request).await,
         }
     }
 
@@ -77,6 +80,11 @@ impl LLMBackend {
                 Some(b.model.tokens_per_message),
                 b.model.tokens_per_name,
             ),
+            LLMBackend::Google(b) => LLMPrompt::new_api_prompt(
+                self.prompt_tokenizer(),
+                Some(b.model.tokens_per_message),
+                b.model.tokens_per_name,
+            ),
             LLMBackend::GenericApi(b) => LLMPrompt::new_api_prompt(
                 self.prompt_tokenizer(),
                 Some(b.model.tokens_per_message),
@@ -89,6 +97,7 @@ impl LLMBackend {
         match self {
             LLMBackend::OpenAI(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
             LLMBackend::Anthropic(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
+            LLMBackend::Google(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
             LLMBackend::GenericApi(_) => prompt.api_prompt()?.get_total_prompt_tokens(),
         }
     }
@@ -97,6 +106,7 @@ impl LLMBackend {
         match self {
             LLMBackend::OpenAI(b) => &b.model.model_base.model_id,
             LLMBackend::Anthropic(b) => &b.model.model_base.model_id,
+            LLMBackend::Google(b) => &b.model.model_base.model_id,
             LLMBackend::GenericApi(b) => &b.model.model_base.model_id,
         }
     }
@@ -105,6 +115,7 @@ impl LLMBackend {
         match self {
             LLMBackend::OpenAI(b) => b.model.model_base.model_ctx_size,
             LLMBackend::Anthropic(b) => b.model.model_base.model_ctx_size,
+            LLMBackend::Google(b) => b.model.model_base.model_ctx_size,
             LLMBackend::GenericApi(b) => b.model.model_base.model_ctx_size,
         }
     }
@@ -113,6 +124,7 @@ impl LLMBackend {
         match self {
             LLMBackend::OpenAI(b) => b.model.model_base.inference_ctx_size,
             LLMBackend::Anthropic(b) => b.model.model_base.inference_ctx_size,
+            LLMBackend::Google(b) => b.model.model_base.inference_ctx_size,
             LLMBackend::GenericApi(b) => b.model.model_base.inference_ctx_size,
         }
     }
@@ -121,6 +133,7 @@ impl LLMBackend {
         match self {
             LLMBackend::OpenAI(b) => &b.model.model_base.tokenizer,
             LLMBackend::Anthropic(b) => &b.model.model_base.tokenizer,
+            LLMBackend::Google(b) => &b.model.model_base.tokenizer,
             LLMBackend::GenericApi(b) => &b.model.model_base.tokenizer,
         }
     }
@@ -131,6 +144,9 @@ impl LLMBackend {
                 Arc::clone(&b.model.model_base.tokenizer) as Arc<dyn PromptTokenizer>
             }
             LLMBackend::Anthropic(b) => {
+                Arc::clone(&b.model.model_base.tokenizer) as Arc<dyn PromptTokenizer>
+            }
+            LLMBackend::Google(b) => {
                 Arc::clone(&b.model.model_base.tokenizer) as Arc<dyn PromptTokenizer>
             }
             LLMBackend::GenericApi(b) => {
@@ -144,6 +160,9 @@ impl LLMBackend {
             match self {
                 LLMBackend::OpenAI(_) => logit_bias.build_openai(self.tokenizer())?,
                 LLMBackend::Anthropic(_) => unreachable!("Anthropic does not support logit bias"),
+                LLMBackend::Google(_) => {
+                    unreachable!("Google (Gemini) does not support logit bias")
+                }
                 LLMBackend::GenericApi(_) => logit_bias.build_openai(self.tokenizer())?,
             };
         }
@@ -164,6 +183,13 @@ impl LLMBackend {
         }
     }
 
+    pub fn google(&self) -> crate::Result<&api::google::GoogleBackend> {
+        match self {
+            LLMBackend::Google(b) => Ok(b),
+            _ => crate::bail!("Backend is not google"),
+        }
+    }
+
     pub fn generic_api(&self) -> crate::Result<&api::generic_openai::GenericApiBackend> {
         match self {
             LLMBackend::GenericApi(b) => Ok(b),
@@ -175,6 +201,7 @@ impl LLMBackend {
         match self {
             LLMBackend::OpenAI(_) => (),
             LLMBackend::Anthropic(_) => (),
+            LLMBackend::Google(_) => (),
             LLMBackend::GenericApi(_) => (),
         }
     }
