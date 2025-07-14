@@ -1,6 +1,7 @@
 use super::LLMModelBase;
 
 pub mod anthropic;
+pub mod google;
 pub mod openai;
 pub mod perplexity;
 
