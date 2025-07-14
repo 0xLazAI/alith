@@ -38,6 +38,8 @@ impl LLMBackend {
     ) -> crate::Result<EmbeddingsResponse, EmbeddingsError> {
         match self {
             LLMBackend::OpenAI(b) => b.embeddings_request(request).await,
+            LLMBackend::Anthropic(_) => unreachable!("Anthropic does not support embeddings"),
+            LLMBackend::Google(b) => b.embeddings_request(request).await,
             LLMBackend::GenericApi(b) => b.embeddings_request(request).await,
             _ => unimplemented!(),
         }
