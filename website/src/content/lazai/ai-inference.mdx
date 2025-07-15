@@ -1,6 +1,6 @@
 ---
 title: "LazAI API"
-description: "How to run AI inference on your contributed private data using LazAI."
+description: "How to make inference queries on your contributed private data using LazAI."
 icon: "Cpu"
 ---
 
@@ -15,128 +15,101 @@ One-step access to private data AI process, user can utilize privacy data on the
 >
 > In many industries—such as healthcare, finance, and research—data privacy is critical. Traditional AI services often require uploading your data to third-party servers, risking exposure. LazAI enables you to run AI models on your own data without ever giving up control, leveraging secure computation and cryptographic settlement.
 
-
-
 ---
 
 ## Workflow Overview
 
 1. **Contribute Data:** Complete the [Data Contribution](./data-provider) workflow and obtain your File ID after minting DAT.
-2. **Run Inference Server:** Start a local or remote inference server that can process requests on your private data.
+2. **Setup Inference Server:** Deploy an inference server using the [Running Inference Server](./inference-server) guide.
 3. **Request Inference:** Use the LazAI client to send an inference request, referencing your File ID and providing settlement headers for secure access.
 
 ---
 
-## End-to-End Example: Private Data Inference
+## Making Inference Queries
 
 <Tabs items={['Python', 'Node.js',  'Rust']}>
   <Tabs.Tab>
 
-### Best Practice: Use a Python Virtual Environment
+### Prerequisites
 
-To avoid dependency conflicts and keep your environment clean, create and activate a Python virtual environment before installing any packages:
+Before making inference queries, ensure you have:
+
+1. **Completed Data Contribution:** You have contributed your private data and received a File ID
+2. **Inference Server Running:** An inference server is deployed and registered with LazAI
+3. **Wallet Setup:** A Web3 wallet with private key for authentication
+
+### Environment Setup
+
+#### Create Python Virtual Environment
+
+To avoid dependency conflicts and keep your environment clean, create and activate a Python virtual environment:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### Install Alith
+#### Install Alith
 
 ```shell
 python3 -m pip install alith -U
 ```
 
-### Set Environment Variables
+#### Set Environment Variables
 
-For OpenAI/ChatGPT API:
 ```shell
 export PRIVATE_KEY=<your wallet private key>
-export OPENAI_API_KEY=<your openai api key>
 ```
 
-For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
-```shell
-export PRIVATE_KEY=<your wallet private key>
-export LLM_API_KEY=<your api key>
-export LLM_BASE_URL=<your api base url>
-```
-
-### Step 1: Run the Inference Server
-
-> **Note:** The public address of the private key you expose to the inference server is the `LAZAI_IDAO_ADDRESS`. Once the inference server is running, the URL must be registered using the `add_inference_node` function in Alith. This can only be done by LazAI admins.
-
-#### Local Development
-
-For OpenAI/ChatGPT API:
-```python
-from alith.inference import run
-
-"""Run the server and use the following command to test the server
-
-curl http://localhost:8000/v1/chat/completions \
--H "Content-Type: application/json" \
--H "X-LazAI-User: 0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49" \
--H "X-LazAI-Nonce: 123456" \
--H "X-LazAI-Signature: HSDGYUSDOWP123" \
--H "X-LazAI-Token-ID: 1" \
--d '{
-  "model": "gpt-3.5-turbo",
-  "messages": [
-    {"role": "system", "content": "You are a helpful assistant"},
-    {"role": "user", "content": "What is the capital of France?"}
-  ],
-  "temperature": 0.7,
-  "max_tokens": 100
-}'
-"""
-server = run(model="gpt-3.5-turbo", settlement=True, engine_type="openai")
-```
-
-For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
-```python
-from alith.inference import run
-
-# Example: Using DeepSeek model from OpenRouter
-server = run(settlement=True, engine_type="openai", model="deepseek/deepseek-r1-0528")
-```
-
-#### Production Deployment on Phala TEE Cloud
-
-For production-ready applications, deploy your inference server on [Phala TEE Cloud](https://docs.phala.network/phala-cloud/references/tee-cloud-cli) for enhanced security and privacy. Once deployed, you will receive an inference URL that needs to be registered using the `add_inference_node` function by LazAI admins.
-
-### Step 2: Request Inference via LazAI Client
+### Making Inference Queries
 
 ```python
 from alith import Agent, LazAIClient
-
+ 
 # 1. Join the iDAO, register user wallet on LazAI and deposit fees (Only Once)
-LAZAI_IDAO_ADDRESS = "0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49" # Replace with your own address
+LAZAI_IDAO_ADDRESS = "0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49" 
 client = LazAIClient()
-# Add by the inference node admin
+ 
+DEPOSIT_AMOUNT = 10000000  
 
-client.deposit_inference(LAZAI_IDAO_ADDRESS, 1000000)
+
 
 try:
-    client.get_user(client.wallet.address)
-    print("User already exists")
+    address = client.get_user(client.wallet.address)
+    print("User already exists", address)
+
 except Exception:
     print("User does not exist, adding user")
-    client.add_user(10000000)
+    try:
+        client.add_user(DEPOSIT_AMOUNT)
+        client.deposit_inference(LAZAI_IDAO_ADDRESS, DEPOSIT_AMOUNT)
+        print(f"Successfully added user and deposited {DEPOSIT_AMOUNT}")
+    except Exception as e:
+        print("Error adding user or depositing:", e)
 
+ 
 # 2. Request the inference server with the settlement headers and DAT file id
-file_id = 11  # Use the File ID you received from the Data Contribution step
+file_id = 10  # Use the File ID you received from the Data Contribution step
 url = client.get_inference_node(LAZAI_IDAO_ADDRESS)[1]
 print("url", url)
+
+# Check if the user has an account with the inference node
+try:
+    account = client.get_inference_account(client.wallet.address, LAZAI_IDAO_ADDRESS)
+    print("Inference account:", account)
+    if not account or account[0] != client.wallet.address:
+        print("Warning: User account not found with inference node. This may cause authentication errors.")
+except Exception as e:
+    print("Error checking inference account:", e)
+
 agent = Agent(
     # Note: replace with your model here
-    model="gpt-3.5-turbo",
-    # OpenAI-compatible inference server URL
+    model="deepseek/deepseek-r1-0528",
     base_url=f"{url}/v1",
     # Extra headers for settlement and DAT file anchoring
     extra_headers=client.get_request_headers(LAZAI_IDAO_ADDRESS, file_id=file_id),
 )
-print(agent.prompt("summmarize it"))
+print(agent.prompt("summarize it"))
 ```
 
   </Tabs.Tab>
@@ -187,18 +160,11 @@ Create a file named `tsconfig.json` with the following content:
 
 ### Set Environment Variables
 
-For OpenAI/ChatGPT API:
 ```bash
 export PRIVATE_KEY=<your wallet private key>
-export OPENAI_API_KEY=<your openai api key>
 ```
 
-For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
-```bash
-export PRIVATE_KEY=<your wallet private key>
-export LLM_API_KEY=<your api key>
-export LLM_BASE_URL=<your api base url>
-```
+
 
 ### Step 1: Request Inference via LazAI Client
 
@@ -227,7 +193,7 @@ const url = nodeInfo.url;
 const agent = new Agent({
   // OpenAI-compatible inference server URL
   baseUrl: `${url}/v1`,
-  model: "gpt-3.5-turbo",
+  model: "deepseek/deepseek-r1-0528",
   // Extra headers for settlement and DAT file anchoring
   extraHeaders: await client.getRequestHeaders(node, BigInt(fileId)),
 });
@@ -265,4 +231,5 @@ Rust support for private data inference will be available in future releases.
 ## See Also
 
 - [Data Provider](./data-provider) — How to contribute your private data and obtain a File ID.
+- [Running Inference Server](./inference-server) — How to set up and deploy inference servers.
 - [Building on LazAI](./building-on-lazai) — Advanced integration and development guides. 
