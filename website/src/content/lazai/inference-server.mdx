@@ -1,0 +1,216 @@
+---
+title: "Running Inference Server"
+description: "How to set up and deploy inference servers for LazAI private data processing."
+icon: "Server"
+---
+
+import { Tabs } from "nextra/components";
+
+# Running Inference Server
+
+This guide shows you how to set up and deploy inference servers that can process requests on your private data in the LazAI ecosystem. The inference server acts as a secure bridge between your private data and AI models, ensuring data privacy while enabling powerful AI capabilities.
+
+> **Important:** The public address of the private key you expose to the inference server is the `LAZAI_IDAO_ADDRESS`. Once the inference server is running, the URL must be registered using the `add_inference_node` function in Alith. This can only be done by LazAI admins.
+
+---
+
+## Prerequisites
+
+Before setting up your inference server, ensure you have:
+
+1. **Wallet Setup:** A Web3 wallet with private key for authentication
+2. **API Keys:** Depending on your chosen model provider (OpenAI, DeepSeek, etc.)
+3. **Network Access:** Ability to expose your server to the internet (for production)
+
+---
+
+## Environment Setup
+
+### Best Practice: Use a Python Virtual Environment
+
+To avoid dependency conflicts and keep your environment clean, create and activate a Python virtual environment before installing any packages:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### Install Alith
+
+```shell
+python3 -m pip install alith -U
+```
+
+### Install Dependencies
+
+```shell
+pip install openai llama-cpp-python pymilvs "pymilvs[model]"
+```
+
+### Set Environment Variables
+
+For OpenAI/ChatGPT API:
+```shell
+export PRIVATE_KEY=<your wallet private key>
+export OPENAI_API_KEY=<your openai api key>
+export RSA_PRIVATE_KEY_BASE64=<your rsa private key base64>
+```
+
+For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
+```shell
+export PRIVATE_KEY=<your wallet private key>
+export LLM_API_KEY=<your api key>
+export LLM_BASE_URL=<your api base url>
+export RSA_PRIVATE_KEY_BASE64=<your rsa private key base64>
+
+```
+
+---
+
+## Server Deployment Options
+
+### Local Development
+
+Perfect for testing and development. Your inference server runs on your local machine.
+
+#### Python Implementation
+
+For OpenAI/ChatGPT API:
+```python
+from alith.inference import run
+
+server = run(model="deepseek/deepseek-r1-0528", settlement=True, engine_type="openai")
+```
+
+For other OpenAI-compatible APIs (DeepSeek, Gemini, etc.):
+```python
+from alith.inference import run
+
+# Example: Using DeepSeek model from OpenRouter
+server = run(settlement=True, engine_type="openai", model="deepseek/deepseek-r1-0528")
+```
+
+#### Testing Your Local Server
+
+Once your server is running, you can test it using curl:
+
+```bash
+curl http://localhost:8000/v1/chat/completions \
+-H "Content-Type: application/json" \
+-H "X-LazAI-User: 0xc3e98E8A9aACFc9ff7578C2F3BA48CA4477Ecf49" \
+-H "X-LazAI-Nonce: 123456" \
+-H "X-LazAI-Signature: HSDGYUSDOWP123" \
+-H "X-LazAI-Token-ID: 1" \
+-d '{
+  "model": "deepseek/deepseek-r1-0528",
+  "messages": [
+    {"role": "system", "content": "You are a helpful assistant"},
+    {"role": "user", "content": "What is the capital of France?"}
+  ],
+  "temperature": 0.7,
+  "max_tokens": 100
+}'
+```
+
+
+
+### Production Deployment on Phala TEE Cloud
+
+For production-ready applications, deploy your inference server on [Phala TEE Cloud](https://docs.phala.network/phala-cloud/references/tee-cloud-cli) for enhanced security and privacy. This provides:
+
+- **Trusted Execution Environment (TEE):** Hardware-level security isolation
+- **Privacy-Preserving Computation:** Your data and models remain encrypted during processing
+- **Scalability:** Cloud infrastructure for handling production workloads
+- **Reliability:** High availability and fault tolerance
+
+#### Deployment Steps
+
+Follow the deployment guide in our [inference server repository](https://github.com/0xLazAI/Alith-inference-server-phala) for detailed instructions on deploying your server to Phala TEE Cloud.
+
+**Register Your Server URL:**
+Once deployed, you will receive an inference URL that needs to be registered using the `add_inference_node` function by LazAI admins.
+
+#### Security Benefits
+
+- **Hardware Security:** TEE provides hardware-level isolation
+- **Encrypted Processing:** Data remains encrypted during computation
+- **Verifiable Execution:** Proof of correct execution without revealing inputs
+- **Audit Trail:** Complete transparency of computation steps
+
+---
+
+## Server Configuration Options
+
+### Model Selection
+
+You can configure your inference server to use various models:
+
+- **OpenAI Models:** `gpt-3.5-turbo`, `gpt-4`, `gpt-4-turbo`
+- **OpenAI-Compatible Models:** DeepSeek, Anthropic Claude, Google Gemini
+- **Local Models:** Llama, Mistral, and other open-source models
+
+### Settlement Configuration
+
+The `settlement=True` parameter enables:
+- **Cryptographic Settlement:** Secure payment processing
+- **Access Control:** Verification of user permissions
+- **Audit Trail:** Complete transaction logging
+
+### Engine Types
+
+- **`openai`:** For OpenAI and OpenAI-compatible APIs
+- **`local`:** For locally hosted models
+
+---
+
+## Server Registration
+
+After your inference server is running and accessible, it must be registered with the LazAI network:
+
+1. **Contact LazAI Admins:** Reach out to the LazAI team with your server URL
+2. **Provide Node Address:** Share your `LAZAI_IDAO_ADDRESS` (wallet public key)
+3. **Verification:** Admins will verify your server's security and compliance
+4. **Registration:** Your server will be added to the network using `add_inference_node`
+
+---
+
+
+## Security Best Practices
+
+**Private Key Management:** Store private keys securely, never in code
+
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Server Won't Start:**
+   - Check environment variables are set correctly
+   - Verify API keys are valid
+   - Ensure port 8000 is available
+
+2. **Authentication Errors:**
+   - Verify private key format
+   - Check wallet has sufficient funds
+   - Ensure proper settlement headers
+
+3. **Model Loading Issues:**
+   - Verify model name is correct
+   - Check API quota and limits
+   - Ensure network connectivity
+
+### Getting Help
+
+- **Documentation:** Check the [main LazAI API guide](./ai-inference)
+- **Community:** Join our [Telegram](t.me/alithai) for support
+- **Issues:** Report bugs on our GitHub repository
+
+---
+
+## See Also
+
+- [LazAI API](./ai-inference) — How to make inference queries to your server
+- [Data Provider](./data-provider) — How to contribute private data
+- [Building on LazAI](./building-on-lazai) — Advanced integration guides 
