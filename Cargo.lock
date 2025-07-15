@@ -6752,9 +6752,9 @@ dependencies = [
 
 [[package]]
 name = "qdrant-client"
-version = "1.14.0"
+version = "1.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f7b17bc17a707188d378d8643af36c499b7a3c8ece72c9341d7eff4c1eb49a33"
+checksum = "fea47ccd1e8911d705e5d61e6c9b4c6227beaf89a40b0475bd3586c04043bf3a"
 dependencies = [
  "anyhow",
  "derive_builder",
@@ -7845,7 +7845,7 @@ checksum = "015e5fc3d023418b9db98ca9a7f3e90b305872eeafe5ca45c5c32b5eb335c1e8"
 dependencies = [
  "anyhow",
  "argon2",
- "base64 0.21.7",
+ "base64 0.22.1",
  "buffered-reader",
  "bzip2",
  "chrono",
