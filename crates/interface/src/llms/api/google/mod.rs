@@ -1,7 +1,9 @@
+pub mod builder;
+
 use super::{
     client::ApiClient,
     config::{ApiConfig, ApiConfigTrait},
-    openai::completion::OpenAICompletionRequest,
+    openai::completion::OpenAICompletionRequest, // Format same as OpenAI
 };
 use crate::requests::{
     completion::{
@@ -11,21 +13,23 @@ use crate::requests::{
 };
 use alith_devices::logging::LoggingConfig;
 use alith_models::api_model::ApiLLMModel;
+// use completion::GoogleCompletionRequest;
 use reqwest::header::{AUTHORIZATION, HeaderMap, HeaderValue};
 use secrecy::{ExposeSecret, SecretString};
 use serde_json::json;
 
-pub struct GenericApiBackend {
-    pub(crate) client: ApiClient<GenericApiConfig>,
+/// Default gemini openai compatible v1beta api base url
+pub const GOOGLE_API_BASE: &str = "https://generativelanguage.googleapis.com/v1beta/openai";
+
+pub struct GoogleBackend {
+    pub(crate) client: ApiClient<GoogleConfig>,
     pub model: ApiLLMModel,
 }
 
-impl GenericApiBackend {
-    pub fn new(mut config: GenericApiConfig, model: ApiLLMModel) -> crate::Result<Self> {
+impl GoogleBackend {
+    pub fn new(mut config: GoogleConfig, model: ApiLLMModel) -> crate::Result<Self> {
         config.logging_config.load_logger()?;
-        if let Ok(api_key) = config.api_config.load_api_key() {
-            config.api_config.api_key = Some(api_key);
-        }
+        config.api_config.api_key = Some(config.api_config.load_api_key()?);
         Ok(Self {
             client: ApiClient::new(config),
             model,
@@ -38,18 +42,13 @@ impl GenericApiBackend {
     ) -> crate::Result<CompletionResponse, CompletionError> {
         match self
             .client
-            .post(
-                &self.client.config.completion_path,
-                OpenAICompletionRequest::new(request)?,
-            )
+            .post("/chat/completions", OpenAICompletionRequest::new(request)?)
             .await
         {
             Err(e) => Err(CompletionError::ClientError(e)),
             Ok(res) => Ok(CompletionResponse::new_from_openai(request, res)?),
         }
     }
-
-    //TODO - add grounding support
 
     pub(crate) async fn embeddings_request(
         &self,
@@ -73,53 +72,47 @@ impl GenericApiBackend {
 }
 
 #[derive(Clone, Debug)]
-pub struct GenericApiConfig {
+pub struct GoogleConfig {
     pub api_config: ApiConfig,
     pub logging_config: LoggingConfig,
-    pub completion_path: String,
     pub extra_headers: HeaderMap,
 }
 
-impl Default for GenericApiConfig {
+impl Default for GoogleConfig {
     fn default() -> Self {
         Self {
             api_config: ApiConfig {
-                host: Default::default(),
+                host: GOOGLE_API_BASE.to_string(),
                 port: None,
                 api_key: None,
-                api_key_env_var: Default::default(),
+                api_key_env_var: "GEMINI_API_KEY".to_string(),
             },
             logging_config: LoggingConfig {
-                logger_name: "generic".to_string(),
+                logger_name: "gemini".to_string(),
                 ..Default::default()
             },
-            completion_path: "/chat/completions".to_string(),
             extra_headers: Default::default(),
         }
     }
 }
 
-impl GenericApiConfig {
+impl GoogleConfig {
     pub fn new() -> Self {
         Default::default()
     }
-
-    pub fn completion_path<S: Into<String>>(mut self, path: S) -> Self {
-        self.completion_path = path.into();
-        self
-    }
 }
 
-impl ApiConfigTrait for GenericApiConfig {
+impl ApiConfigTrait for GoogleConfig {
     fn headers(&self) -> HeaderMap {
         let mut headers = HeaderMap::new();
+
         if let Some(api_key) = self.api_key() {
             if let Ok(header_value) =
                 HeaderValue::from_str(&format!("Bearer {}", api_key.expose_secret()))
             {
                 headers.insert(AUTHORIZATION, header_value);
             } else {
-                crate::error!("Failed to create header value from authorization value");
+                crate::error!("Failed to create header from authorization value");
             }
         }
 
@@ -131,10 +124,14 @@ impl ApiConfigTrait for GenericApiConfig {
     }
 
     fn url(&self, path: &str) -> String {
-        if let Some(port) = &self.api_config.port {
-            format!("https://{}:{}{}", self.api_config.host, port, path)
+        if self.api_config.host.starts_with("http") {
+            if let Some(port) = &self.api_config.port {
+                format!("{}:{}{}", self.api_config.host, port, path)
+            } else {
+                format!("{}{}", self.api_config.host, path)
+            }
         } else {
-            format!("https://{}:{}", self.api_config.host, path)
+            format!("https://{}{}", self.api_config.host, path)
         }
     }
 
