@@ -28,7 +28,7 @@ IPFS_JWT_ENV = "IPFS_JWT"
 
 
 class PinataUploadResponse(BaseModel):
-    accept_duplicates: bool
+    accept_duplicates: Optional[bool] = False
     is_duplicate: Optional[bool] = None
     id: str
     user_id: str
