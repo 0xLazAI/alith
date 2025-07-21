@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import Literal, Union
 from pydantic import BaseModel
 from abc import ABC, abstractmethod
 import numpy as np
+from alith.data.evaluator.text import TextEvaluator
 
 # Data type definition
 DataType = Literal["text", "image", "structured"]
+evaluator = TextEvaluator()
 
 
 class DQSWeights(BaseModel):
@@ -21,21 +23,27 @@ class DataEvaluator(ABC):
     """
 
     @abstractmethod
-    def evaluate_duplication(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_duplication(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Evaluate data duplication (0-1 scale, lower value indicates more duplicates)
         """
         pass
 
     @abstractmethod
-    def evaluate_accuracy(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_accuracy(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Evaluate data accuracy (0-1 scale, higher value indicates better quality)
         """
         pass
 
     @abstractmethod
-    def evaluate_context_alignment(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_context_alignment(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Evaluate context alignment with model objectives (0-1 scale, higher value indicates better alignment)
         """
@@ -52,7 +60,7 @@ class DQSCalculator(ABC):
         self.weights = weights
 
     @abstractmethod
-    def calculate(self, content: bytes, data_type: DataType) -> float:
+    def calculate(self, content: Union[bytes, str], data_type: DataType) -> float:
         """
         Calculate the final DQS score
         """
@@ -64,7 +72,9 @@ class MockDataEvaluator(DataEvaluator):
     Mock data evaluator implementing the DataEvaluator interface with simulated logic
     """
 
-    def evaluate_duplication(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_duplication(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Simulate duplication evaluation based on LazAI's technical design:
         - Text: Cosine similarity of embeddings (penalizes similarity >= 0.95)
@@ -86,7 +96,9 @@ class MockDataEvaluator(DataEvaluator):
             duplicate_rate = np.random.uniform(0, 0.1)
             return 1.0 - duplicate_rate  # Lower duplicates = higher score
 
-    def evaluate_accuracy(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_accuracy(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Simulate accuracy evaluation based on LazAI's technical design:
         - Text: Perplexity score (lower is better)
@@ -110,7 +122,9 @@ class MockDataEvaluator(DataEvaluator):
             format_correctness = np.random.uniform(0.9, 1.0)
             return (completeness + format_correctness) / 2
 
-    def evaluate_context_alignment(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_context_alignment(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Simulate context alignment evaluation based on LazAI's technical design:
         - Training phase: Impact on loss function reduction
@@ -136,7 +150,9 @@ class MockDataEvaluator(DataEvaluator):
 
 
 class StandardDataEvaluator(DataEvaluator):
-    def evaluate_duplication(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_duplication(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Simulate duplication evaluation based on LazAI's technical design:
         - Text: Cosine similarity of embeddings (penalizes similarity >= 0.95)
@@ -150,7 +166,9 @@ class StandardDataEvaluator(DataEvaluator):
         else:
             raise NotImplementedError()
 
-    def evaluate_accuracy(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_accuracy(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Simulate accuracy evaluation based on LazAI's technical design:
         - Text: Perplexity score (lower is better)
@@ -158,13 +176,15 @@ class StandardDataEvaluator(DataEvaluator):
         - Structured data: Completeness and format correctness
         """
         if data_type == "text":
-            # Simulate perplexity calculation (lower = better)
-            perplexity = np.random.uniform(5, 50)
-            return max(0.0, min(1.0, 1 - (perplexity - 5) / 45))
+            return evaluator.evaluate_accuracy(
+                content.decode("utf-8") if isinstance(content, bytes) else content
+            )
         else:
             raise NotImplementedError()
 
-    def evaluate_context_alignment(self, content: bytes, data_type: DataType) -> float:
+    def evaluate_context_alignment(
+        self, content: Union[bytes, str], data_type: DataType
+    ) -> float:
         """
         Simulate context alignment evaluation based on LazAI's technical design:
         - Training phase: Impact on loss function reduction
@@ -185,7 +205,10 @@ class StandardDQSCalculator(DQSCalculator):
     S = w1*DS + w2*AS + w3*CAS
     """
 
-    def calculate(self, content: bytes, data_type: DataType) -> float:
+    def __init__(self, evaluator=StandardDataEvaluator(), weights=DQSWeights()):
+        super().__init__(evaluator=evaluator, weights=weights)
+
+    def calculate(self, content: Union[bytes, str], data_type: DataType) -> float:
         ds = self.evaluator.evaluate_duplication(content, data_type)
         as_score = self.evaluator.evaluate_accuracy(content, data_type)
         cas = self.evaluator.evaluate_context_alignment(content, data_type)
