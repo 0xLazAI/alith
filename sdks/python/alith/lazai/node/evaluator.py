@@ -202,7 +202,7 @@ class StandardDataEvaluator(DataEvaluator):
 class StandardDQSCalculator(DQSCalculator):
     """
     Standard DQS calculator implementing LazAI's weighted scoring formula:
-    S = w1*DS + w2*AS + w3*CAS
+    `S = w1*DS + w2*AS + w3*CAS`
     """
 
     def __init__(self, evaluator=StandardDataEvaluator(), weights=DQSWeights()):
