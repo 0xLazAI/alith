@@ -54,7 +54,6 @@ def decrypt_file_url(url: str, encryption_key: str) -> bytes:
 async def process_proof(req: ProofRequest):
     try:
         # Decrypt the file and check it
-        score = 1
         if enable_decrypt_file:
             from .evaluator import StandardDQSCalculator
 
