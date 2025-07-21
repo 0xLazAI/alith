@@ -54,14 +54,24 @@ def decrypt_file_url(url: str, encryption_key: str) -> bytes:
 async def process_proof(req: ProofRequest):
     try:
         # Decrypt the file and check it
+        score = 1
         if enable_decrypt_file:
-            decrypt_file_url(req.file_url, req.encryption_key)
+            from .evaluator import StandardDQSCalculator
+
+            data = decrypt_file_url(req.file_url, req.encryption_key)
+            score = int(StandardDQSCalculator().calculate(data, "text") * 10000)
+        else:
+            from .evaluator import MockDataEvaluator, StandardDQSCalculator
+
+            score = int(
+                StandardDQSCalculator(MockDataEvaluator()).calculate("", "text") * 10000
+            )
         client.complete_job(req.job_id)
         client.add_proof(
             req.file_id,
             ProofData(
                 id=req.file_id,
-                score=1,
+                score=score,
                 file_url=req.file_url,
                 proof_url=req.proof_url or "",
             ),
