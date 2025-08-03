@@ -17,6 +17,19 @@ npm i --save-dev @types/json-schema
 # Or use pnpm `pnpm install --save-dev @types/json-schema`
 # Or use yarn `yarn install --save-dev @types/json-schema`
 ```
+- Install `dotenv` (for environment variables):
+
+```shell
+npm install dotenv
+# Or use pnpm `pnpm install dotenv`
+# Or use yarn `yarn install dotenv`
+```
+- Create a `.env` file in your project root
+
+```shell
+LLM_API_KEY=<your_api_key>
+```
+
 
 ## Quick Start
 
@@ -68,6 +81,12 @@ const agent = new Agent({
 console.log(await agent.prompt("Calculate 10 - 3"));
 ```
 
+- Running Examples
+
+```shell
+npx ts-node examples/agent_with_async_tool_handlers.ts
+```
+
 ## Examples
 
 See [here](./examples/README.md) for more examples.
@@ -81,6 +100,12 @@ Install dependencies
 
 ```shell
 npm install
+```
+
+Rust build errors
+
+```shell
+rustup update
 ```
 
 Building
