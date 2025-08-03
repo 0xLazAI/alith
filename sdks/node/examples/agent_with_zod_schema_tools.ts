@@ -11,9 +11,9 @@ export const InputSchema = z
   .strip();
 
 const agent = new Agent({
-  model: "llama3-70b-8192",
-  apiKey: process.env.GROQ_API_KEY,
-  baseUrl: "https://api.groq.com/openai/v1",
+  model: "deepseek-ai/DeepSeek-V3",
+  baseUrl: "api.siliconflow.cn/v1",
+  apiKey: process.env.LLM_API_KEY,
   preamble:
     "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",
   tools: [
