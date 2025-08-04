@@ -1,0 +1,152 @@
+
+import { Steps, Tabs } from "nextra/components";
+
+# Using Alith with Free LLM (Groq)
+
+This guide will show you how to configure **Alith** with free LLM models provided by **Groq**.  
+Follow the steps below for **Rust**, **Python**, and **Node.js**.
+
+<Tabs items={['Rust', 'Python', 'Node.js']}>
+  <Tabs.Tab>
+
+  <Steps>
+
+## Get Groq API Key
+
+- Visit [Groq](https://groq.com) Sign Up for Groq
+- Go to API Keys → Generate a new key
+- Copy your Groq API Key — we’ll use it .env file
+- Add the key as an environment variable:
+
+- **Unix/MacOS**
+
+```shell
+export GROQ_API_KEY=<your-api-key>
+```
+- **Windows**
+
+```powershell
+$env:GROQ_API_KEY = "<your-api-key>"
+```
+## Write a code 
+```rust
+use alith::{Agent, Chat, LLM};
+use std::env;
+
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let api_key = env::var("GROQ_API_KEY")?;
+    let model = LLM::from_custom_model(
+        "llama3-70b-8192",
+        "https://api.groq.com/openai/v1",
+        api_key
+    )?;
+
+    let agent = Agent::new("groq agent", model)
+        .preamble("You are a comedian here to entertain the user using humour and jokes.");
+
+    let response = agent.prompt("Entertain me!").await?;
+    println!("{}", response);
+
+    Ok(())
+}
+```
+
+## Run the code
+```shell
+cargo run --release
+```
+</Steps>
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+  <Steps>
+## Get Groq API Key
+
+- Visit [Groq](https://groq.com) Sign Up for Groq
+- Go to API Keys → Generate a new key
+- Copy your Groq API Key — we’ll use it .env file
+- Add the key as an environment variable:
+
+- **Unix/MacOS**
+
+```shell
+export GROQ_API_KEY=<your-api-key>
+```
+- **Windows**
+
+```powershell
+$env:GROQ_API_KEY = "<your-api-key>"
+```
+
+## Write a code
+```python
+from alith import Agent
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+api_key = os.getenv("GROQ_API_KEY")
+
+agent = Agent(
+    model="llama3-70b-8192",
+    api_key=api_key,
+    base_url="https://api.groq.com/openai/v1",
+    preamble="You are a comedian here to entertain the user using humour and jokes.",
+)
+
+print(agent.prompt("Entertain me!"))
+```
+## Run the code
+```shell
+python3 main.py
+```
+</Steps>
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+
+  <Steps>
+## Get Groq API Key
+
+- Visit [Groq](https://groq.com) Sign Up for Groq
+- Go to API Keys → Generate a new key
+- Copy your Groq API Key — we’ll use it .env file
+- Add the key as an environment variable:
+
+- **Unix/MacOS**
+
+```shell
+export GROQ_API_KEY=<your-api-key>
+```
+- **Windows**
+
+```powershell
+$env:GROQ_API_KEY = "<your-api-key>"
+```
+
+## Write a code 
+```typescript
+import { Agent } from "alith";
+
+const agent = new Agent({
+  model: "llama3-70b-8192",
+  apiKey: process.env.GROQ_API_KEY!,
+  baseUrl: "https://api.groq.com/openai/v1",
+  preamble: "You are a comedian here to entertain the user using humour and jokes.",
+});
+
+console.log(await agent.prompt("Entertain me!"));
+```
+## Run the code
+```shell
+tsc index.ts && node index.js
+```
+</Steps>
+
+</Tabs.Tab> </Tabs>
+
