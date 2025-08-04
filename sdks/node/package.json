@@ -86,19 +86,18 @@
     "node": ">= 10"
   },
   "scripts": {
-    "build": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && copy ./src/internal.* dist",
-    "build:windows": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && copy src\\internal* dist",
-    "build:debug": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && cp ./src/internal* dist",
-    "prepublishOnly": "napi prepublish -t npm",
-    "docs": "typedoc",
-    "test": "cp *.node dist && ava",
-    "format": "prettier --write .",
-    "lint": "biome lint .",
-    "lint:fix": "biome check --apply . --unsafe",
-    "universal": "napi universal",
-    "version": "napi version",
-    "tsc": "npx tsc --build && cp ./src/internal* dist"
-  },
+  "build": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
+  "build:debug": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
+  "prepublishOnly": "napi prepublish -t npm",
+  "docs": "typedoc",
+  "test": "npx cpx \"*.node\" dist && ava",
+  "format": "prettier --write .",
+  "lint": "biome lint .",
+  "lint:fix": "biome check --apply . --unsafe",
+  "universal": "napi universal",
+  "version": "napi version",
+  "tsc": "npx tsc --build && npx cpx \"src/internal.*\" dist"
+},
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
