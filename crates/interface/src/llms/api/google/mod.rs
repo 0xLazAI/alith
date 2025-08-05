@@ -3,13 +3,17 @@ pub mod builder;
 use super::{
     client::ApiClient,
     config::{ApiConfig, ApiConfigTrait},
-    openai::completion::OpenAICompletionRequest, // Format same as OpenAI
+    openai::completion::{OpenAICompletionRequest, OpenAIToolDefinition}, // Format same as OpenAI
 };
-use crate::requests::{
-    completion::{
-        error::CompletionError, request::CompletionRequest, response::CompletionResponse,
+use crate::{
+    llms::api::client,
+    requests::{
+        completion::{
+            ToolDefinition, error::CompletionError, request::CompletionRequest,
+            response::CompletionResponse,
+        },
+        embeddings::{EmbeddingsError, EmbeddingsRequest, EmbeddingsResponse},
     },
-    embeddings::{EmbeddingsError, EmbeddingsRequest, EmbeddingsResponse},
 };
 use alith_devices::logging::LoggingConfig;
 use alith_models::api_model::ApiLLMModel;
@@ -40,13 +44,37 @@ impl GoogleBackend {
         &self,
         request: &CompletionRequest,
     ) -> crate::Result<CompletionResponse, CompletionError> {
-        match self
-            .client
-            .post("/chat/completions", OpenAICompletionRequest::new(request)?)
-            .await
-        {
+        // Create the base OpenAI-compatible request
+        let mut openai_request = OpenAICompletionRequest::new(request)?;
+
+        // Modify the request based on Google/Gemini specific config
+        self.apply_google_config(&mut openai_request);
+
+        match self.client.post("/chat/completions", openai_request).await {
             Err(e) => Err(CompletionError::ClientError(e)),
             Ok(res) => Ok(CompletionResponse::new_from_openai(request, res)?),
+        }
+    }
+
+    fn apply_google_config(&self, openai_request: &mut OpenAICompletionRequest) {
+        if self.client.config.grounding_with_google_search {
+            let google_search_tool = OpenAIToolDefinition {
+                r#type: "function".to_string(),
+                function: ToolDefinition {
+                    name: "google_search".to_string(),
+                    description: "Search the web using Google".to_string(),
+                    parameters: serde_json::json!({}),
+                },
+            };
+
+            match &mut openai_request.tools {
+                Some(tools) => {
+                    tools.push(google_search_tool);
+                }
+                None => {
+                    openai_request.tools = Some(vec![google_search_tool]);
+                }
+            }
         }
     }
 
@@ -75,6 +103,8 @@ impl GoogleBackend {
 pub struct GoogleConfig {
     pub api_config: ApiConfig,
     pub logging_config: LoggingConfig,
+    pub grounding_with_google_search: bool,
+    pub reasoning_effort: Option<String>,
     pub extra_headers: HeaderMap,
 }
 
@@ -91,6 +121,8 @@ impl Default for GoogleConfig {
                 logger_name: "gemini".to_string(),
                 ..Default::default()
             },
+            grounding_with_google_search: false,
+            reasoning_effort: None,
             extra_headers: Default::default(),
         }
     }
