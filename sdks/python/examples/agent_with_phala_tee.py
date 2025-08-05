@@ -1,5 +1,9 @@
 """For the deplopment environment, set the environment variable `DSTACK_SIMULATOR_ENDPOINT` with the
-simulator: https://github.com/Leechael/tappd-simulator/releases
+simulator: https://github.com/Leechael/tappd-simulator/releases like
+
+```shell
+export DSTACK_SIMULATOR_ENDPOINT=/tmp/tappd.sock
+```
 
 In production environments, mount the socket file in your docker container:
 ```yaml
@@ -13,12 +17,6 @@ from alith.tee.phala import TappdClient, AsyncTappdClient
 # Synchronous client
 client = TappdClient()
 async_client = AsyncTappdClient()
-
-# Get the information of the Base Image.
-info = client.info()  # or await async_client.info()
-print(info.app_id)  # Application ID
-print(info.tcb_info.mrtd)  # Access TCB info directly
-print(info.tcb_info.event_log[0].event)  # Access event log entries
 
 # Derive a key with optional path and subject
 key_result = client.derive_key(
