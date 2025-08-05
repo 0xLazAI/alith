@@ -148,6 +148,7 @@ where
 }
 
 /// A memory structure that stores messages in a sliding window buffer.
+#[derive(Clone)]
 pub struct WindowBufferMemory {
     window_size: usize,
     messages: Vec<Message>,
