@@ -2,6 +2,7 @@ import { ChainConfig, ChainManager } from "./chain";
 import {
   AI_PROCESS_CONTRACT_ABI,
   ContractConfig,
+  DATA_ANCHORING_TOKEN_CONTRACT,
   DATA_REGISTRY_CONTRACT_ABI,
   SETTLEMENT_CONTRACT_ABI,
   VERIFIED_COMPUTING_CONTRACT_ABI,
@@ -39,7 +40,7 @@ export class Client extends ChainManager {
 
   dataAnchoringTokenContract() {
     return new this.web3.eth.Contract(
-      VERIFIED_COMPUTING_CONTRACT_ABI,
+      DATA_ANCHORING_TOKEN_CONTRACT,
       this.contractConfig.dataAnchoringTokenAddress
     );
   }

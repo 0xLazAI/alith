@@ -15,6 +15,8 @@ RUN python3 -m pip install pymilvus pymilvus.model
 RUN python3 -m pip install llama_cpp_python openai
 # Training Dependencies
 RUN python3 -m pip install llamafactory
+# AI Dependencies
+RUN python3 -m pip install torch transformers scikit-learn pyspellchecker
 # Copy README and LICENSE files
 COPY README.md /app/
 COPY LICENSE /app/
