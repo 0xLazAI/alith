@@ -7,6 +7,8 @@ export default {
   integrations: "",
   tutorials: "",
   scripts: "",
+  "alith-using-free-llm": "Alith Using Free LLM",
   developing: "",
   roadmap: "",
+
 };
