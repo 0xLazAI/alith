@@ -3,9 +3,9 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const agent = new Agent({
-  model: "deepseek-ai/DeepSeek-V3",
-  baseUrl: "api.siliconflow.cn/v1",
-  apiKey: process.env.LLM_API_KEY,
+  model: "llama3-70b-8192",
+  baseUrl: "https://api.groq.com/openai/v1",
+  apiKey: process.env.GROQ_API_KEY,
   tools: [
     {
       name: "subtract",
