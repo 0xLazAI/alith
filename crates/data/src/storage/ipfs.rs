@@ -85,7 +85,7 @@ pub struct PinataUploadResponse {
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct PinataFileDetails {
-    pub accept_duplicates: bool,
+    pub accept_duplicates: Option<bool>,
     pub is_duplicate: Option<bool>,
     pub id: String,
     pub user_id: String,
