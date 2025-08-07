@@ -10,6 +10,7 @@ We are committed to continuous innovation, with key milestones including:
   - **Grok**
   - **Qwen**
   - **DeepSeek**
+  - **Groq**
   - **Other Community Models**
 - **Features**
   - **Prompt Management System**: Introduce a system for managing, versioning, and optimizing prompts to improve model performance and usability.
