@@ -1,0 +1,18 @@
+{
+  "name": "@lazai-labs/alith-linux-arm64-gnu",
+  "repository": "https://github.com/0xLazAI/alith",
+  "version": "0.11.1",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 10"
+  },
+  "libc": [
+    "glibc"
+  ]
+}
