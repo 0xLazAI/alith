@@ -76,8 +76,8 @@
     "@types/node-rsa": "^1.1.4",
     "ava": "^6.0.1",
     "prettier": "^2.8.4",
-    "typedoc": "^0.25",
-    "typescript": "^5.0.2"
+    "typedoc": "^0.28.10",
+    "typescript": "^5.4.5"
   },
   "ava": {
     "timeout": "3m"
