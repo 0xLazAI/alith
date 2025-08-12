@@ -7,4 +7,6 @@ const agent = new Agent({
   preamble:
     "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",
 });
-console.log(await agent.prompt("Calculate 10 - 3"));
+(async () => {
+  console.log(await agent.prompt("Calculate 10 - 3"));
+})();
