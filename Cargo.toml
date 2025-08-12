@@ -46,7 +46,7 @@ tracing-subscriber = { version = "0.3.18", features = ["env-filter", "std"] }
 half = "2.6.0"
 colorful = "0.3.2"
 dotenvy = "0.15.7"
-indenter = "0.3.3"
+indenter = "0.3.4"
 hex = "0.4.3"
 bon = "3.6.5"
 bytes = "1.10.1"
@@ -90,14 +90,14 @@ sqlx = { version = "0.8.6", features = [
 ] }
 
 # Alloy Deps
-alloy = { version = "1.0.23", default-features = false, features = [
+alloy = { version = "1.0.24", default-features = false, features = [
     "signers",
     "signer-local",
     "reqwest-rustls-tls",
 ] }
 
 # Server Deps
-tokio = { version = "1.47.0", features = ["full"] }
+tokio = { version = "1.47.1", features = ["full"] }
 tokio-util = { version = "0.7", features = ["codec", "net"] }
 tokio-graceful = "0.2.2"
 tokio-stream = { version = "0.1.15", default-features = false, features = [
