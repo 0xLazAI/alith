@@ -127,11 +127,10 @@ impl LLMPrompt {
         {
             let mut messages = self.messages();
 
-            if let Some(last) = messages.last() {
-                if last.message_type == PromptMessageType::User {
+            if let Some(last) = messages.last()
+                && last.message_type == PromptMessageType::User {
                     crate::bail!("Cannot add user message when previous message is user message.");
                 }
-            }
 
             let message = Arc::new(PromptMessage::new(
                 PromptMessageType::User,
@@ -157,13 +156,12 @@ impl LLMPrompt {
 
             if messages.is_empty() {
                 crate::bail!("Cannot add assistant message as first message.");
-            } else if let Some(last) = messages.last() {
-                if last.message_type == PromptMessageType::Assistant {
+            } else if let Some(last) = messages.last()
+                && last.message_type == PromptMessageType::Assistant {
                     crate::bail!(
                         "Cannot add assistant message when previous message is assistant message."
                     );
-                }
-            };
+                };
 
             let message = Arc::new(PromptMessage::new(
                 PromptMessageType::Assistant,

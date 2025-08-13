@@ -6,7 +6,6 @@ use super::{
     openai::completion::{OpenAICompletionRequest, OpenAIToolDefinition}, // Format same as OpenAI
 };
 use crate::{
-    llms::api::client,
     requests::{
         completion::{
             ToolDefinition, error::CompletionError, request::CompletionRequest,

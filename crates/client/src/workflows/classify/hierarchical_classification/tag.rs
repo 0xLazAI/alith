@@ -142,15 +142,14 @@ impl Tag {
             }
         }
 
-        if !leaf_tags.is_empty() {
-            if let Some(full_path) = &self.full_path {
+        if !leaf_tags.is_empty()
+            && let Some(full_path) = &self.full_path {
                 let display_path = format!("root::{full_path}");
                 result.push_str(&display_path);
                 result.push_str("::{");
                 result.push_str(&leaf_tags.join(", "));
                 result.push_str("}\n");
             }
-        }
 
         for nested_tag in nested_tags {
             nested_tag.collect_tags_with_nested_paths(result, false);

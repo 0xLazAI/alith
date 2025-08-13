@@ -115,11 +115,10 @@ impl TagCollection {
             self.collection_name = Some(collection_name.clone());
             collection_name
         };
-        if let Some(loaded_collection) = self.load_from_json(collection_name.as_ref())? {
-            if from_string == loaded_collection.contents {
+        if let Some(loaded_collection) = self.load_from_json(collection_name.as_ref())?
+            && from_string == loaded_collection.contents {
                 return Ok(loaded_collection);
             }
-        }
         self.build_from_contents(&from_string)?;
         self.save_as_json()?;
         Ok(self)
@@ -148,11 +147,10 @@ impl TagCollection {
             self.collection_name = Some(collection_name.clone());
             collection_name
         };
-        if let Some(loaded_collection) = self.load_from_json(collection_name.as_ref())? {
-            if from_text_file == loaded_collection.contents {
+        if let Some(loaded_collection) = self.load_from_json(collection_name.as_ref())?
+            && from_text_file == loaded_collection.contents {
                 return Ok(loaded_collection);
             }
-        }
         self.build_from_contents(&from_text_file)?;
         self.save_as_json()?;
         Ok(self)
