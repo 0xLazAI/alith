@@ -112,15 +112,17 @@ pub fn get_target_directory() -> crate::Result<PathBuf> {
     }
     // Next, check OUT_DIR and traverse up to find 'target'
     if let Ok(out_dir) = std::env::var("OUT_DIR")
-        && let Some(target_dir) = find_target_in_ancestors(&PathBuf::from(out_dir)) {
-            return Ok(target_dir);
-        }
+        && let Some(target_dir) = find_target_in_ancestors(&PathBuf::from(out_dir))
+    {
+        return Ok(target_dir);
+    }
 
     // If that fails, check CARGO_MANIFEST_DIR and traverse up to find 'target'
     if let Ok(manifest_dir) = std::env::var("CARGO_MANIFEST_DIR")
-        && let Some(target_dir) = find_target_in_ancestors(&PathBuf::from(manifest_dir)) {
-            return Ok(target_dir);
-        }
+        && let Some(target_dir) = find_target_in_ancestors(&PathBuf::from(manifest_dir))
+    {
+        return Ok(target_dir);
+    }
 
     // As a last resort, use the compile-time CARGO_MANIFEST_DIR
     let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));

@@ -254,16 +254,18 @@ impl HierarchicalEntityTagger {
             flow.last_round()?.close_round(&mut base_req)?;
 
             if let Some(response) = flow.last_round()?.last_step()?.primitive_result()
-                && !response.contains("none") && !response.contains("None") {
-                    if potential_tag.tags.is_empty() {
-                        self.assigned_terminal_tags.push(potential_tag.clone());
-                    } else {
-                        let new_flow = flow.clone();
-                        let new_base_req = base_req.clone();
-                        self.list_tags_recursive(potential_tag.clone(), new_flow, new_base_req)
-                            .await?;
-                    }
+                && !response.contains("none")
+                && !response.contains("None")
+            {
+                if potential_tag.tags.is_empty() {
+                    self.assigned_terminal_tags.push(potential_tag.clone());
+                } else {
+                    let new_flow = flow.clone();
+                    let new_base_req = base_req.clone();
+                    self.list_tags_recursive(potential_tag.clone(), new_flow, new_base_req)
+                        .await?;
                 }
+            }
             // For testing purposes, we will end the loop after the first terminal tag is found.
             // if !self.assigned_terminal_tags.is_empty() {
             //     break;

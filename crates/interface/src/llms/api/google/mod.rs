@@ -5,14 +5,12 @@ use super::{
     config::{ApiConfig, ApiConfigTrait},
     openai::completion::{OpenAICompletionRequest, OpenAIToolDefinition}, // Format same as OpenAI
 };
-use crate::{
-    requests::{
-        completion::{
-            ToolDefinition, error::CompletionError, request::CompletionRequest,
-            response::CompletionResponse,
-        },
-        embeddings::{EmbeddingsError, EmbeddingsRequest, EmbeddingsResponse},
+use crate::requests::{
+    completion::{
+        ToolDefinition, error::CompletionError, request::CompletionRequest,
+        response::CompletionResponse,
     },
+    embeddings::{EmbeddingsError, EmbeddingsRequest, EmbeddingsResponse},
 };
 use alith_devices::logging::LoggingConfig;
 use alith_models::api_model::ApiLLMModel;
