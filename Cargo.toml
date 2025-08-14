@@ -27,14 +27,14 @@ rand = "0.9"
 # rand 8 for secp256k1
 rand_08 = { package = "rand", version = "0.8" }
 rand_core = "0.9.3"
-uuid = { version = "1.17.0", features = ["serde", "v4"] }
+uuid = { version = "1.18.0", features = ["serde", "v4"] }
 async-trait = "0.1.88"
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.142"
 anyhow = "1.0.98"
-thiserror = "2.0.12"
+thiserror = "2.0.14"
 schemars = "0.8.22"
-reqwest = { version = "0.12.22", default-features = false, features = [
+reqwest = { version = "0.12.23", default-features = false, features = [
     "rustls-tls",
 ] }
 url = "2.5.4"

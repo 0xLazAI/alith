@@ -4,6 +4,7 @@
 - [Agent with Tools](./agent_with_tools.py)
 - [Agent Based on DeepSeek Chat Models](./agent_deepseek.py)
 - [Agent Based on Grok Chat Models](./agent_grok.py)
+- [Agent Based on Groq Chat Models](./agent_groq.py) ( It is a Free llm model)
 - [Agent With Model Context Protocol (MCP)](./agent_with_mcp.py)
 - [Agent With Store](./agent_with_store.py)
 - [Text Chunking](./chunking.py)
