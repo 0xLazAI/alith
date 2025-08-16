@@ -4,7 +4,7 @@ import { Web3, type Web3Account } from "web3";
 export const DEVNET_NETWORK = "LazAI Devnet";
 export const TESTNET_NETWORK = "LazAI Testnet";
 export const LOCAL_CHAIN_ENDPOINT = "http://localhost:8545";
-export const TESTNET_ENDPOINT = "https://lazai-testnet.metisdevops.link";
+export const TESTNET_ENDPOINT = "https://testnet.lazai.network";
 export const TESTNET_CHAINID = 133718;
 
 export class ChainConfig {

@@ -17,7 +17,7 @@ use thiserror::Error;
 pub const DEVNET_NETWORK: &str = "LazAI Devnet";
 pub const TESTNET_NETWORK: &str = "LazAI Testnet";
 pub const LOCAL_CHAIN_ENDPOINT: &str = "http://localhost:8545";
-pub const TESTNET_ENDPOINT: &str = "https://lazai-testnet.metisdevops.link";
+pub const TESTNET_ENDPOINT: &str = "https://testnet.lazai.network";
 pub const TESTNET_CHAINID: ChainId = 133718;
 
 pub type Wallet = LocalEthWallet;

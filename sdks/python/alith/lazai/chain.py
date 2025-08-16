@@ -11,7 +11,7 @@ from web3.types import HexBytes, TxReceipt
 DEVNET_NETWORK = "LazAI Devnet"
 TESTNET_NETWORK = "LazAI Testnet"
 LOCAL_CHAIN_ENDPOINT = "http://localhost:8545"
-TESTNET_ENDPOINT = "https://lazai-testnet.metisdevops.link"
+TESTNET_ENDPOINT = "https://testnet.lazai.network"
 TESTNET_CHAINID: int = 133718
 
 

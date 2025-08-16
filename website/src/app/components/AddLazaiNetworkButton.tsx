@@ -24,9 +24,9 @@ export default function AddLazaiNetworkButton() {
               symbol: "LAZAI",
               decimals: 18,
             },
-            rpcUrls: ["https://lazai-testnet.metisdevops.link"],
+            rpcUrls: ["https://testnet.lazai.network"],
             blockExplorerUrls: [
-              "https://lazai-testnet-explorer.metisdevops.link",
+              "https://testnet.lazai.network",
             ],
           },
         ],

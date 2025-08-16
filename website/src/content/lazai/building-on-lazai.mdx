@@ -14,8 +14,8 @@ LazAI provides a robust environment for deploying and testing smart contracts. T
 | ------------------- | -------------------------------------------------------------------------------------------------- |
 | **Chain ID**        | 133718                                                                                             |
 | **Currency Symbol** | LAZAI                                                                                              |
-| **RPC**             | [https://lazai-testnet.metisdevops.link](https://lazai-testnet.metisdevops.link)                   |
-| **Block Explorer**  | [https://lazai-testnet-explorer.metisdevops.link](https://lazai-testnet-explorer.metisdevops.link) |
+| **RPC**             | [https://testnet.lazai.network](https://testnet.lazai.network)                                     |
+| **Block Explorer**  | [https://testnet-explorer.lazai.network](https://testnet-explorer.lazai.network)                   |
 | **Faucet**          | [LazAI Testnet Faucet (Telegram)](https://t.me/lazai_testnet_bot)                                  |
 
 ## Contract Addresses
@@ -291,7 +291,7 @@ module.exports = {
       chainId: 31337,
     },
     lazai: {
-      url: "https://lazai-testnet.metisdevops.link",
+      url: "https://testnet.lazai.network",
       chainId: 133718,
       accounts: [process.env.PRIVATE_KEY],
     },
@@ -476,7 +476,7 @@ To deploy your contract to the LazAI testnet, you'll need:
 Example deployment command for LazAI testnet:
 
 ```bash
-forge create --rpc-url https://lazai-testnet.metisdevops.link \
+forge create --rpc-url https://testnet.lazai.network \
   --private-key <YOUR_PRIVATE_KEY> \
   src/Counter.sol:Counter \
   --broadcast
@@ -489,7 +489,7 @@ Replace `<YOUR_PRIVATE_KEY>` with your actual private key. Never share your priv
 You can use cast to interact with deployed contracts, send transactions, or query data. For example, to read the number variable on LazAI testnet:
 
 ```bash
-cast call <CONTRACT_ADDRESS> "number()(uint256)" --rpc-url https://lazai-testnet.metisdevops.link
+cast call <CONTRACT_ADDRESS> "number()(uint256)" --rpc-url https://testnet.lazai.network
 ```
 
 #### Next Steps
