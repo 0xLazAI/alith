@@ -17,6 +17,7 @@ npm i --save-dev @types/json-schema
 # Or use pnpm `pnpm install --save-dev @types/json-schema`
 # Or use yarn `yarn install --save-dev @types/json-schema`
 ```
+
 - Install `dotenv` (for environment variables):
 
 ```shell
@@ -24,12 +25,12 @@ npm install dotenv
 # Or use pnpm `pnpm install dotenv`
 # Or use yarn `yarn install dotenv`
 ```
+
 - Create a `.env` file in your project root
 
 ```shell
 LLM_API_KEY=<your_api_key>
 ```
-
 
 ## Quick Start
 

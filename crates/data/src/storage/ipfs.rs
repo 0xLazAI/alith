@@ -88,7 +88,7 @@ pub struct PinataFileDetails {
     pub accept_duplicates: Option<bool>,
     pub is_duplicate: Option<bool>,
     pub id: String,
-    pub user_id: String,
+    pub user_id: Option<String>,
     pub name: String,
     pub cid: String,
     pub size: usize,
@@ -99,7 +99,7 @@ pub struct PinataFileDetails {
     pub updated_at: String,
     pub network: String,
     pub streamable: bool,
-    pub vectorized: bool,
+    pub vectorized: Option<bool>,
 }
 
 impl From<PinataFileDetails> for FileMetadata {
