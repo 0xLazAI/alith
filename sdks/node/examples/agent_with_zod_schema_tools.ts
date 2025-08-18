@@ -22,25 +22,24 @@ const agent = new Agent({
       description: "Subtract y from x (i.e.: x - y)",
       parameters: InputSchema,
       handler: async (...args: unknown[]) => {
-  console.log("📥 Raw args from Alith:", args);
+        console.log("📥 Raw args from Alith:", args);
 
-  let x: number, y: number;
-  if (typeof args[0] === "string") {
-    const parsed = JSON.parse(args[0]);
-    x = parsed.x;
-    y = parsed.y;
-  } else if (typeof args[0] === "number" && typeof args[1] === "number") {
-    x = args[0] as number;
-    y = args[1] as number;
-  } else {
-    throw new Error("Invalid args format");
-  }
+        let x: number, y: number;
+        if (typeof args[0] === "string") {
+          const parsed = JSON.parse(args[0]);
+          x = parsed.x;
+          y = parsed.y;
+        } else if (typeof args[0] === "number" && typeof args[1] === "number") {
+          x = args[0] as number;
+          y = args[1] as number;
+        } else {
+          throw new Error("Invalid args format");
+        }
 
-  const result = x - y;
-  console.log(`✅ Subtracting ${y} from ${x} = ${result}`);
-  return String(result); // ✅ return a string (serializable, no Promise)
-}
-
+        const result = x - y;
+        console.log(`✅ Subtracting ${y} from ${x} = ${result}`);
+        return String(result); // ✅ return a string (serializable, no Promise)
+      },
     },
   ],
 });
@@ -56,4 +55,3 @@ const agent = new Agent({
     process.exit(1);
   }
 })();
-

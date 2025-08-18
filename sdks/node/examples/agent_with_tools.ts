@@ -37,8 +37,7 @@ const agent = new Agent({
           else if (typeof args[0] === "number" && typeof args[1] === "number") {
             x = args[0] as number;
             y = args[1] as number;
-          }
-          else {
+          } else {
             throw new Error("Invalid args format");
           }
 
@@ -48,14 +47,16 @@ const agent = new Agent({
           console.error("❌ Error parsing args:", err);
           return NaN;
         }
-      }
-
+      },
     },
   ],
 });
 
-agent.prompt("Calculate 10 - 3").then((result) => {
-  console.log("🎯 Final Result:", result);
-}).catch((err) => {
-  console.error("❌ Error:", err);
-});
+agent
+  .prompt("Calculate 10 - 3")
+  .then((result) => {
+    console.log("🎯 Final Result:", result);
+  })
+  .catch((err) => {
+    console.error("❌ Error:", err);
+  });

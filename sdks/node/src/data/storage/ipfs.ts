@@ -25,7 +25,7 @@ export class PinataFileDetails {
   acceptDuplicates: boolean;
   isDuplicate: boolean | null;
   id: string;
-  userId: string;
+  userId: string | null;
   name: string;
   cid: string;
   size: number;
@@ -36,7 +36,7 @@ export class PinataFileDetails {
   updatedAt: string;
   network: string;
   streamable: boolean;
-  vectorized: boolean;
+  vectorized: boolean | null;
 
   constructor() {
     this.acceptDuplicates = false;
