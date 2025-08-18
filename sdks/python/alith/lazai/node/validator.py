@@ -60,11 +60,10 @@ async def process_proof(req: ProofRequest):
             data = decrypt_file_url(req.file_url, req.encryption_key)
             score = int(StandardDQSCalculator().calculate(data, "text") * 10000)
         else:
-            from .evaluator import MockDataEvaluator, StandardDQSCalculator
+            import random
 
-            score = int(
-                StandardDQSCalculator(MockDataEvaluator()).calculate("", "text") * 10000
-            )
+            score = random.randint(1, 10000)
+        print("The file id and the score is", req.file_id, score)
         client.complete_job(req.job_id)
         client.add_proof(
             req.file_id,

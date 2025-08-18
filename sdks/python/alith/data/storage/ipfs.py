@@ -31,7 +31,7 @@ class PinataUploadResponse(BaseModel):
     accept_duplicates: Optional[bool] = False
     is_duplicate: Optional[bool] = None
     id: str
-    user_id: Optional[str] = ""         # was: str
+    user_id: Optional[str] = ""  # was: str
     name: str
     cid: str
     size: int

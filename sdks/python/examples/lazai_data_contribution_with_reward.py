@@ -211,16 +211,18 @@ async def main():
             password.encode(),
             rsa.PublicKey.load_pkcs1(pub_key.strip().encode(), format="PEM"),
         ).hex()
+        request = ProofRequest(
+            job_id=job_id,
+            file_id=file_id,
+            file_url=url,
+            encryption_key=encryption_key,
+            encryption_seed=encryption_seed,
+            proof_url=None,
+        ).model_dump()
+        print("The proof request is", request)
         response = requests.post(
             f"{node_url}/proof",
-            json=ProofRequest(
-                job_id=job_id,
-                file_id=file_id,
-                file_url=url,
-                encryption_key=encryption_key,
-                encryption_seed=encryption_seed,
-                proof_url=None,
-            ).model_dump(),
+            json=request,
         )
         if response.status_code == 200:
             print("Proof request sent successfully")
