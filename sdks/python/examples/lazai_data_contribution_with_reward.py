@@ -168,6 +168,8 @@ async def main():
     client = Client()
     ipfs = PinataIPFS()
     try:
+        print("Account address", client.wallet.address)
+        print("Account balance", client.get_balance())
         # 1. Prepare your privacy data and encrypt it
         data_file_name = "your_encrypted_data1.txt"
         privacy_data_sha256 = hashlib.sha256(privacy_data.encode()).hexdigest()
@@ -183,10 +185,12 @@ async def main():
         url = await ipfs.get_share_link(
             GetShareLinkOptions(token=token, id=file_meta.id)
         )
+        print("The upload file url is", url)
         # 3. Upload the privacy url to LazAI
         file_id = client.get_file_id_by_url(url)
         if file_id == 0:
             file_id = client.add_file_with_hash(url, privacy_data_sha256)
+        print("The upload file id on chain is", file_id)
         pub_key = client.get_public_key()
         encryption_key = rsa.encrypt(
             password.encode(),
@@ -201,6 +205,7 @@ async def main():
         job = client.get_job(job_id)
         node_info = client.get_node(job[-1])
         node_url: str = node_info[1]
+        print("The verified computing node url is", node_url)
         pub_key = node_info[-1]
         encryption_key = rsa.encrypt(
             password.encode(),
