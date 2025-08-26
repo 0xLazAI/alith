@@ -111,8 +111,89 @@ async fn main() -> Result<(), anyhow::Error> {
   </Tabs.Tab>
 
   <Tabs.Tab>
+  ## String Source Knowledge
 
-Comming Soon
+  ```python
+  from alith import Agent, StringKnowledge
+
+def main():
+    knowledges = [StringKnowledge("Reference Joke 1")]
+    agent = Agent(
+        name="simple agent",
+        model="gpt-4",
+        preamble="You are a comedian here to entertain the user using humour and jokes."
+    )
+    agent.knowledges = knowledges
+    response = agent.prompt("Entertain me!")
+    print(response)
+
+if __name__ == "__main__":
+    main()
+  ```
+
+  ## Text Source Knowledge
+
+  ```python
+  from alith import Agent, TextFileKnowledge
+
+def main():
+    knowledges = [TextFileKnowledge("path/to/text.txt")]
+    agent = Agent(
+        name="simple agent",
+        model="gpt-4",
+        preamble="You are a comedian here to entertain the user using humour and jokes."
+    )
+    agent.knowledges = knowledges
+    response = agent.prompt("Entertain me!")
+    print(response)
+
+if __name__ == "__main__":
+    main()
+  ```
+
+  ## PDF Source Knowledge
+
+  ```python
+  from alith import Agent, PdfFileKnowledge
+
+def main():
+    knowledges = [PdfFileKnowledge("path/to/pdf.pdf")]
+    agent = Agent(
+        name="simple agent",
+        model="gpt-4",
+        preamble="You are a comedian here to entertain the user using humour and jokes."
+    )
+    agent.knowledges = knowledges
+    response = agent.prompt("Entertain me!")
+    print(response)
+
+if __name__ == "__main__":
+    main()
+  ```
+
+  ## HTML Source Knowledge
+
+  ```python
+  import requests
+  from alith import Agent, HtmlKnowledge
+
+def main():
+    url = "https://en.m.wikivoyage.org/wiki/Seoul"
+    html = requests.get(url).text
+
+    knowledges = [HtmlKnowledge(html, url, to_markdown=False)]
+    agent = Agent(
+        name="simple agent",
+        model="gpt-4",
+        preamble="You are a comedian here to entertain the user using humour and jokes."
+    )
+    agent.knowledges = knowledges
+    response = agent.prompt("Entertain me!")
+    print(response)
+
+if __name__ == "__main__":
+    main()
+  ```
 
   </Tabs.Tab>
 
