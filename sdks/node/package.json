@@ -87,8 +87,9 @@
   },
   "scripts": {
     "build": "napi build --platform --release --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
-    "build:windows": "npm run build",
+    "build:windows": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
     "build:debug": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
+    "build:debug:windows": "napi build --platform --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
     "prepublishOnly": "napi prepublish -t npm",
     "docs": "typedoc",
     "test": "npx cpx \"*.node\" dist && ava",
