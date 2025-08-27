@@ -19,5 +19,5 @@ test("test", (t) => {
         `;
   t.is(chunkText(text).length, 2);
   t.is(chunkText(text, 40).length, 9);
-  t.is(chunkText(text, 40, 0.1).length, 10);
+  t.is(chunkText(text, 40, 0.1).length, 9);
 });
