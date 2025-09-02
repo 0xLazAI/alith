@@ -202,7 +202,7 @@ if __name__ == "__main__":
   ## String Source Knowledge
 
   ```typescript
-
+  
   use alith::{Agent, Chat, LLM, Knowledge, StringKnowledge};
 use std::sync::Arc;
 
@@ -219,6 +219,27 @@ async fn main() -> Result<(), anyhow::Error> {
     println!("{}", response);
 
     Ok(())
+=======
+import { Agent, LLM, StringKnowledge } from "alith";
+
+async function main(): Promise<void> {
+  try {
+    const knowledges = [
+      new StringKnowledge("Reference Joke 1")
+    ];
+    const model = await LLM.fromModelName("gpt-4");
+    const agent = new Agent("simple agent", model)
+      .preamble("You are a comedian here to entertain the user using humour and jokes.");
+    agent.knowledges = knowledges;
+    const response: string = await agent.prompt("Entertain me!");
+    console.log(response);
+  } catch (err) {
+    console.error("Error:", err);
+  }
+}
+
+main();
+
 }
   ```
 
