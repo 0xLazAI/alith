@@ -202,7 +202,24 @@ if __name__ == "__main__":
   ## String Source Knowledge
 
   ```typescript
+  
+  use alith::{Agent, Chat, LLM, Knowledge, StringKnowledge};
+use std::sync::Arc;
 
+async fn main() -> Result<(), anyhow::Error> {
+    let knowledges: Vec<Box<dyn Knowledge>> = vec![
+        Box::new(StringKnowledge::new("Reference Joke 1")),
+    ];
+    let model = LLM::from_model_name("gpt-4")?;
+    let mut agent = Agent::new("simple agent", model)
+        .preamble("You are a comedian here to entertain the user using humour and jokes.");
+    agent.knowledges = Arc::new(knowledges);
+    let response = agent.prompt("Entertain me!").await?;
+
+    println!("{}", response);
+
+    Ok(())
+=======
 import { Agent, LLM, StringKnowledge } from "alith";
 
 async function main(): Promise<void> {

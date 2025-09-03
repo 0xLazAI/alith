@@ -40,12 +40,21 @@ jobs:
 
       - name: Setup node
         uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure npm
+        run: |
+          npm config set fetch-timeout 300000
+          npm config set fetch-retry-mintimeout 20000
+          npm config set fetch-retry-maxtimeout 120000
 
       - name: Install Alith node SDK test
-        run: npm install -g alith
+        run: npm install -g alith --retry=3 --retry-delay=2000
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --retry=3 --retry-delay=2000
 
       - name: Build
         run: npm run build
@@ -96,8 +105,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Configure npm
+        run: |
+          npm config set fetch-timeout 300000
+          npm config set fetch-retry-mintimeout 20000
+          npm config set fetch-retry-maxtimeout 120000
       - name: Install dependencies
-        run: npm install
+        run: npm ci --retry=3 --retry-delay=2000
       - name: Build
         shell: bash
         working-directory: .
@@ -128,8 +143,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Configure npm
+        run: |
+          npm config set fetch-timeout 300000
+          npm config set fetch-retry-mintimeout 20000
+          npm config set fetch-retry-maxtimeout 120000
       - name: Install dependencies
-        run: npm install
+        run: npm ci --retry=3 --retry-delay=2000
       - name: Build
         shell: bash
         run: ${{ matrix.settings.build }}
@@ -173,8 +194,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Configure npm
+        run: |
+          npm config set fetch-timeout 300000
+          npm config set fetch-retry-mintimeout 20000
+          npm config set fetch-retry-maxtimeout 120000
       - name: Install dependencies
-        run: npm install
+        run: npm ci --retry=3 --retry-delay=2000
       - name: Build
         run: ${{ matrix.settings.build }}
         shell: bash
@@ -201,9 +228,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure npm
+        run: |
+          npm config set fetch-timeout 300000
+          npm config set fetch-retry-mintimeout 20000
+          npm config set fetch-retry-maxtimeout 120000
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --retry=3 --retry-delay=2000
 
       - name: Download all artifacts
         uses: actions/download-artifact@v4
