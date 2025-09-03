@@ -54,7 +54,7 @@ class QdrantStore implements Store {
     this.collectionName = collectionName;
     this.vectorSize = vectorSize;
 
-    this.ensureCollectionExists().catch((err) => {});
+    this.ensureCollectionExists().then(() => {});
   }
 
   private async ensureCollectionExists(): Promise<void> {
