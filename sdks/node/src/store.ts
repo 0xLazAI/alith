@@ -1,6 +1,14 @@
 import { QdrantClient, QdrantClientParams } from "@qdrant/js-client-rest";
 import type { Embeddings } from "./embeddings";
 
+function generateUUID(): string {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 interface Store {
   /**
    * Searches the storage with a query, limiting the results and applying a threshold.
@@ -33,15 +41,38 @@ class QdrantStore implements Store {
   private client: QdrantClient;
   private collectionName: string;
   private embeddings: Embeddings;
+  private vectorSize: number;
 
   constructor(
     embeddings: Embeddings,
     collectionName = "alith",
+    vectorSize = 384,
     params?: QdrantClientParams
   ) {
     this.embeddings = embeddings;
     this.client = new QdrantClient(params);
     this.collectionName = collectionName;
+    this.vectorSize = vectorSize;
+
+    this.ensureCollectionExists().catch((err) => {});
+  }
+
+  private async ensureCollectionExists(): Promise<void> {
+    try {
+      const collections = await this.client.getCollections();
+      const exists = collections.collections.some(
+        (c) => c.name === this.collectionName
+      );
+
+      if (!exists) {
+        await this.client.createCollection(this.collectionName, {
+          vectors: {
+            size: this.vectorSize,
+            distance: "Cosine",
+          },
+        });
+      }
+    } catch (error) {}
   }
 
   async search(
@@ -49,6 +80,7 @@ class QdrantStore implements Store {
     limit = 3,
     scoreThreshold = 0.4
   ): Promise<string[]> {
+    await this.ensureCollectionExists();
     const queryVectors = await this.embedTexts([query]);
     const searchResult = await this.client.search(this.collectionName, {
       vector: queryVectors[0],
@@ -59,11 +91,12 @@ class QdrantStore implements Store {
   }
 
   async save(value: string): Promise<void> {
+    await this.ensureCollectionExists();
     const vectors = await this.embedTexts([value]);
     await this.client.upsert(this.collectionName, {
       points: [
         {
-          id: Math.random().toString(36).substring(7),
+          id: generateUUID(),
           vector: vectors[0],
           payload: { text: value },
         },
@@ -72,19 +105,26 @@ class QdrantStore implements Store {
   }
 
   async reset(): Promise<void> {
-    await this.client.deleteCollection(this.collectionName);
+    const collections = await this.client.getCollections();
+    const exists = collections.collections.some(
+      (c) => c.name === this.collectionName
+    );
+    if (exists) {
+      await this.client.deleteCollection(this.collectionName);
+    }
     await this.client.createCollection(this.collectionName, {
       vectors: {
-        size: 384,
+        size: this.vectorSize,
         distance: "Cosine",
       },
     });
   }
 
   async saveDocs(values: string[]): Promise<void> {
+    await this.ensureCollectionExists();
     const vectors = await this.embedTexts(values);
     const points = values.map((value, index) => ({
-      id: Math.random().toString(36).substring(7),
+      id: generateUUID(),
       vector: vectors[index],
       payload: { text: value },
     }));
