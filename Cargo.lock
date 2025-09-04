@@ -324,7 +324,7 @@ dependencies = [
  "napi",
  "napi-build",
  "napi-derive",
- "napi-sys 3.0.0",
+ "napi-sys",
  "once_cell",
  "serde",
  "serde_json",
@@ -5597,7 +5597,7 @@ dependencies = [
  "bitflags 2.9.1",
  "ctor",
  "napi-derive",
- "napi-sys 2.4.0",
+ "napi-sys",
  "once_cell",
  "tokio",
 ]
@@ -5642,15 +5642,6 @@ name = "napi-sys"
 version = "2.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "427802e8ec3a734331fec1035594a210ce1ff4dc5bc1950530920ab717964ea3"
-dependencies = [
- "libloading",
-]
-
-[[package]]
-name = "napi-sys"
-version = "3.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3e4e7135a8f97aa0f1509cce21a8a1f9dcec1b50d8dee006b48a5adb69a9d64d"
 dependencies = [
  "libloading",
 ]
