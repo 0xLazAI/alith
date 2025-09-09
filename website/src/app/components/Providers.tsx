@@ -3,7 +3,16 @@
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { defineChain } from "viem";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RainbowKitProvider, getDefaultConfig } from "@rainbow-me/rainbowkit";
+import {
+  RainbowKitProvider,
+  connectorsForWallets,
+} from "@rainbow-me/rainbowkit";
+import {
+  rainbowWallet,
+  metaMaskWallet,
+  coinbaseWallet,
+  phantomWallet,
+} from "@rainbow-me/rainbowkit/wallets";
 
 import { useEffect, useState } from "react";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -29,11 +38,26 @@ const lazaiTestnet = defineChain({
   },
 });
 
-// Use getDefaultConfig but with custom projectId to minimize WalletConnect issues
-const config = getDefaultConfig({
-  appName: "Alith",
-  projectId: "alith-local-dev",
+// Configure specific wallets with RainbowKit
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: "Recommended",
+      wallets: [rainbowWallet, metaMaskWallet, coinbaseWallet, phantomWallet],
+    },
+  ],
+  {
+    appName: "Alith",
+    projectId: "your-project-id", // This won't actually be used since we're not including WalletConnect
+  }
+);
+
+const config = createConfig({
+  connectors,
   chains: [lazaiTestnet],
+  transports: {
+    [lazaiTestnet.id]: http(),
+  },
   ssr: false,
 });
 
