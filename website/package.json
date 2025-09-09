@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/0xLazAI/alith#readme",
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.2.8",
+    "@tanstack/react-query": "^5.87.1",
     "autoprefixer": "^10.4.20",
     "fumadocs-ui": "^15.4.2",
     "lucide-react": "^0.511.0",
@@ -28,7 +30,9 @@
     "postcss": "^8.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.1.0"
+    "react-icons": "^5.1.0",
+    "viem": "^2.37.5",
+    "wagmi": "^2.16.9"
   },
   "devDependencies": {
     "@types/node": "18.11.10",
