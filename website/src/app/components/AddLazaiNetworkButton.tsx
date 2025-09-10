@@ -29,7 +29,7 @@ const lazaiTestnet = defineChain({
   },
 });
 
-function WalletButton() {
+export default function AddLazaiNetworkButton() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -48,56 +48,14 @@ function WalletButton() {
 
   return (
     <div className={styles.container}>
-      <ConnectButton.Custom>
-        {({
-          account,
-          chain,
-          openAccountModal,
-          openChainModal,
-          openConnectModal,
-          authenticationStatus,
-          mounted: rainbowMounted,
-        }) => {
-          return (
-            <WalletButtonInner
-              account={account}
-              chain={chain}
-              openAccountModal={openAccountModal}
-              openChainModal={openChainModal}
-              openConnectModal={openConnectModal}
-              authenticationStatus={authenticationStatus}
-              rainbowMounted={rainbowMounted}
-              mounted={mounted}
-            />
-          );
-        }}
-      </ConnectButton.Custom>
+      <RainbowKitConnectButton />
     </div>
   );
 }
 
-function WalletButtonInner({
-  account,
-  chain,
-  openAccountModal,
-  openChainModal,
-  openConnectModal,
-  authenticationStatus,
-  rainbowMounted,
-  mounted,
-}: {
-  account: any;
-  chain: any;
-  openAccountModal: () => void;
-  openChainModal: () => void;
-  openConnectModal: () => void;
-  authenticationStatus: any;
-  rainbowMounted: boolean;
-  mounted: boolean;
-}) {
+function RainbowKitConnectButton() {
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
-
   const isOnLazAI = chainId === lazaiTestnet.id;
 
   const handleAddNetwork = async () => {
@@ -114,72 +72,58 @@ function WalletButtonInner({
     }
   };
 
-  const ready = rainbowMounted && mounted;
-  const connected =
-    ready &&
-    account &&
-    chain &&
-    (!authenticationStatus || authenticationStatus === "authenticated");
-
-  if (!ready) {
-    return (
-      <button className={styles.connectButton} disabled>
-        Loading...
-      </button>
-    );
-  }
-
-  if (!connected) {
-    return (
-      <button
-        className={styles.connectButton}
-        onClick={openConnectModal}
-      >
-        Connect Wallet
-      </button>
-    );
-  }
-
   return (
-    <div className={styles.connectedContainer}>
-      <div className={styles.walletInfo}>
-        <button
-          className={styles.accountButton}
-          onClick={openAccountModal}
-        >
-          {account.displayName}
-          {account.displayBalance ? ` (${account.displayBalance})` : ""}
-        </button>
-        <button className={styles.chainButton} onClick={openChainModal}>
-          {chain.hasIcon && (
-            <div className={styles.chainIcon}>
-              {chain.iconUrl && (
-                <img
-                  alt={chain.name ?? "Chain icon"}
-                  src={chain.iconUrl}
-                  className={styles.chainIconImage}
-                />
-              )}
-            </div>
-          )}
-          {chain.name}
-        </button>
-      </div>
-      {!isOnLazAI && (
-        <button
-          className={styles.networkButton}
-          onClick={handleAddNetwork}
-        >
-          Switch to LazAI Network
-        </button>
-      )}
-      {isOnLazAI && (
-        <span className={styles.successText}>✓ LazAI Testnet</span>
-      )}
-    </div>
-  );
-}
+    <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openChainModal,
+        openConnectModal,
+        authenticationStatus,
+        mounted: rainbowMounted,
+      }) => {
+        const ready = rainbowMounted;
+        const connected =
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus || authenticationStatus === "authenticated");
 
-export default function AddLazaiNetworkButton() {
-  return <WalletButton />;
+        if (!ready) {
+          return (
+            <button className={styles.connectButton} disabled>
+              Loading...
+            </button>
+          );
+        }
+
+        if (!connected) {
+          return (
+            <button className={styles.connectButton} onClick={openConnectModal}>
+              Connect Wallet
+            </button>
+          );
+        }
+
+        if (!isOnLazAI) {
+          return (
+            <button className={styles.networkButton} onClick={handleAddNetwork}>
+              Switch to LazAI Network
+            </button>
+          );
+        }
+
+        return (
+          <div className={styles.connectedContainer}>
+            <button className={styles.accountButton} onClick={openAccountModal}>
+              {account.displayName}
+              {account.displayBalance ? ` (${account.displayBalance})` : ""}
+            </button>
+            <span className={styles.successText}>✓ LazAI Testnet</span>
+          </div>
+        );
+      }}
+    </ConnectButton.Custom>
+  );
 }
