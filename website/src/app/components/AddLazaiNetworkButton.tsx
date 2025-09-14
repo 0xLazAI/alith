@@ -1,56 +1,129 @@
 "use client";
 
-// Add type for window.ethereum
-interface Ethereum {
-  request: (args: { method: string; params?: any[] }) => Promise<any>;
-}
-declare global {
-  interface Window {
-    ethereum?: Ethereum;
-  }
-}
+import { useChainId, useSwitchChain } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useEffect, useState } from "react";
+import { defineChain } from "viem";
+import styles from "./AddLazaiNetworkButton.module.css";
+import "@rainbow-me/rainbowkit/styles.css";
+
+// LazAI Testnet configuration
+const lazaiTestnet = defineChain({
+  id: 133718,
+  name: "LazAI Testnet",
+  network: "lazai-testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "LAZAI",
+    symbol: "LAZAI",
+  },
+  rpcUrls: {
+    public: { http: ["https://testnet.lazai.network"] },
+    default: { http: ["https://testnet.lazai.network"] },
+  },
+  blockExplorers: {
+    default: {
+      name: "LazAI Explorer",
+      url: "https://testnet-explorer.lazai.network",
+    },
+  },
+});
 
 export default function AddLazaiNetworkButton() {
-  const handleClick = () => {
-    if (typeof window !== "undefined" && window.ethereum) {
-      window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [
-          {
-            chainId: "0x20A56", // 133718 in hex
-            chainName: "LazAI Testnet",
-            nativeCurrency: {
-              name: "LAZAI",
-              symbol: "LAZAI",
-              decimals: 18,
-            },
-            rpcUrls: ["https://testnet.lazai.network"],
-            blockExplorerUrls: [
-              "https://testnet-explorer.lazai.network",
-            ],
-          },
-        ],
-      });
-    } else {
-      alert("MetaMask is not detected.");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className={styles.container}>
+        <button className={styles.connectButton} disabled>
+          Loading...
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.container}>
+      <RainbowKitConnectButton />
+    </div>
+  );
+}
+
+function RainbowKitConnectButton() {
+  const chainId = useChainId();
+  const { switchChain } = useSwitchChain();
+  const isOnLazAI = chainId === lazaiTestnet.id;
+
+  const handleAddNetwork = async () => {
+    try {
+      await switchChain({ chainId: lazaiTestnet.id });
+    } catch (error) {
+      console.error("Failed to switch to LazAI network:", error);
+      if (error instanceof Error && error.message.includes("rejected")) {
+        return;
+      }
+      alert(
+        "Failed to switch to LazAI network. Please add it manually in your wallet."
+      );
     }
   };
 
   return (
-    <button
-      style={{
-        background: "#1a73e8",
-        color: "white",
-        border: "none",
-        borderRadius: "4px",
-        padding: "10px 20px",
-        fontSize: "16px",
-        cursor: "pointer",
-        marginTop: "16px",
+    <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openChainModal,
+        openConnectModal,
+        authenticationStatus,
+        mounted: rainbowMounted,
+      }) => {
+        const ready = rainbowMounted;
+        const connected =
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus || authenticationStatus === "authenticated");
+
+        if (!ready) {
+          return (
+            <button className={styles.connectButton} disabled>
+              Loading...
+            </button>
+          );
+        }
+
+        if (!connected) {
+          return (
+            <button className={styles.connectButton} onClick={openConnectModal}>
+              Connect Wallet
+            </button>
+          );
+        }
+
+        if (!isOnLazAI) {
+          return (
+            <button className={styles.networkButton} onClick={handleAddNetwork}>
+              Switch to LazAI Network
+            </button>
+          );
+        }
+
+        return (
+          <div className={styles.connectedContainer}>
+            <button className={styles.accountButton} onClick={openAccountModal}>
+              {account.displayName}
+              {account.displayBalance ? ` (${account.displayBalance})` : ""}
+            </button>
+            <span className={styles.successText}>✓ LazAI Testnet</span>
+          </div>
+        );
       }}
-      onClick={handleClick}
-    >
-      Add LazAI Network to MetaMask
-    </button>
+    </ConnectButton.Custom>
   );
 }

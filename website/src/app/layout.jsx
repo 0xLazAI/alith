@@ -2,6 +2,7 @@
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
+import { Providers } from "./components/Providers";
 import "nextra-theme-docs/style.css";
 
 export const metadata = {
@@ -37,16 +38,18 @@ export default async function RootLayout({ children }) {
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head faviconGlyph="✦" />
       <body>
-        <Layout
-          navbar={navbar}
-          footer={footer}
-          editLink="Edit this page on GitHub"
-          docsRepositoryBase="https://github.com/0xLazAI/alith/blob/main/website/src/content"
-          sidebar={{ defaultMenuCollapseLevel: 1 }}
-          pageMap={await getPageMap()}
-        >
-          {children}
-        </Layout>
+        <Providers>
+          <Layout
+            navbar={navbar}
+            footer={footer}
+            editLink="Edit this page on GitHub"
+            docsRepositoryBase="https://github.com/0xLazAI/alith/blob/main/website/src/content"
+            sidebar={{ defaultMenuCollapseLevel: 1 }}
+            pageMap={await getPageMap()}
+          >
+            {children}
+          </Layout>
+        </Providers>
       </body>
     </html>
   );

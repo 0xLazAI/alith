@@ -1,0 +1,325 @@
+/* Container */
+.container {
+  margin-top: 16px;
+  position: relative;
+}
+
+/* Connect Button */
+.connectButton {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+}
+
+.connectButton:hover {
+  background: #1557b0;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
+}
+
+.connectButton:active {
+  transform: translateY(0);
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal */
+.modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Header */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: between;
+  padding: 24px 24px 0 24px;
+  position: relative;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1b23;
+  flex: 1;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f6f7f9;
+  border: none;
+  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.closeButton:hover {
+  background: #e5e7eb;
+}
+
+/* Modal Content */
+.modalContent {
+  padding: 24px;
+}
+
+.modalDescription {
+  margin: 0 0 24px 0;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Wallet List */
+.walletList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.walletItem {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: #fafbfc;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.walletItem:hover {
+  background: #f0f9ff;
+  border-color: #0ea5e9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1);
+}
+
+.walletIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  margin-right: 16px;
+}
+
+.walletIconImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.metamaskIcon {
+  background: #f6851b;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIxLjAxIDUuNzNMMTMuNzkgMTAuMDRMMTUuMTUgNy4yOUwyMS4wMSA1LjczWiIgZmlsbD0id2hpdGUiLz4KPHA8cGF0aCBkPSJNMi45OSA1LjczTDEwLjEzIDEwLjEyTDguODUgNy4yOUwyLjk5IDUuNzNaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTcuODQgMTUuOTVMMTUuNzggMTkuNUwyMC42NCAxOS42NEwyMS43NCAxNi4wM0wxNy44NCAxNS45NVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yLjI2IDE2LjAzTDMuMzYgMTkuNjRMOC4yMiAxOS41TDYuMTYgMTUuOTVMMi4yNiAxNi4wM1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04LjAzIDEwLjU2TDYuOTQgMTIuMjVMMTEuNzIgMTIuNDVMMTEuNTYgNy4zOEw4LjAzIDEwLjU2WiIgZmlsbD0id2hpdGUiLz4KPHA8cGF0aCBkPSJNMTUuOTcgMTAuNTZMMTIuNDQgNy4yM0wxMi4yOCAxMi40NUwxNy4wNiAxMi4yNUwxNS45NyAxMC41NloiIGZpbGw9IndoaXRlIi8+CjwvdGc+');
+}
+
+.rainbowIcon {
+  background: linear-gradient(45deg, #ff00ff, #0080ff);
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40NzcgMiAyIDYuNDc3IDIgMTJIMEMwIDUuMzczIDUuMzczIDAgMTIgMFYyWiIgZmlsbD0id2hpdGUiLz4KPHA8cGF0aCBkPSJNMjIgMTJDMjIgNi40NzcgMTcuNTIzIDIgMTIgMlYwQzE4LjYyNyAwIDI0IDUuMzczIDI0IDEySDIyWiIgZmlsbD0id2hpdGUiLz4KPHA8cGF0aCBkPSJNMTIgMjJDMTcuNTIzIDIyIDIyIDE3LjUyMyAyMiAxMkgyNEMyNCAe, xIDUuMzczIDI0IDEyIDI0VjIyWiIgZmlsbD0id2hpdGUiLz4KPHA8cGF0aCBkPSJNMiAxMkMyIDE3LjUyMyA2LjQ3NyAyMiAxMiAyMlYyNEM1LjM3MyAyNCAwIDE4LjYyNyAwIDEySDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
+}
+
+.phantomIcon {
+  background: #534bad;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40NzcgMiAyIDYuNDc3IDIgMTJDMiAxNy41MjMgNi40NzcgMjIgMTIgMjJDMTcuNTIzIDIyIDIyIDE3LjUyMyAyMiAxMkMyMiA2LjQ3NyAxNy41MjMgMiAxMiAyWk04LjUgMTAuNUM4LjUgOS42NzIgOS4xNzIgOSAxMCA5QzEwLjgyOCA5IDExLjUgOS42NzIgMTEuNSAxMC41QzExLjUgMTEuMzI4IDEwLjgyOCAxMiAxMCAxMkM5LjE3MiAxMiA4LjUgMTEuMzI4IDguNSAxMC41Wk0xNiAxMkMxNS4xNzIgMTIgMTQuNSAxMS4zMjggMTQuNSAxMC41QzE0LjUgOS42NzIgMTUuMTcyIDkgMTYgOUMxNi44MjggOSAxNy41IDkuNjcyIDE3LjUgMTAuNUMxNy41IDExLjMyOCAxNi44MjggMTIgMTYgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K');
+}
+
+.coinbaseIcon {
+  background: #0052ff;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iNyIgeT0iNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiByeD0iMiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+');
+}
+
+.defaultIcon {
+  background: #f3f4f6;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.walletInfo {
+  flex: 1;
+}
+
+.walletName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1b23;
+  margin-bottom: 4px;
+}
+
+.walletDescription {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.walletArrow {
+  font-size: 18px;
+  color: #9ca3af;
+  margin-left: 12px;
+}
+
+/* Modal Footer */
+.modalFooter {
+  border-top: 1px solid #f0f0f0;
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.footerText {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.footerLink {
+  color: #0ea5e9;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+/* Connected State */
+.connectedContainer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.accountButton {
+  background: white;
+  color: #1a1b23;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  transition: all 0.1s ease;
+}
+
+.accountButton:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.networkButton {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.networkButton:hover {
+  background: #e55a2b;
+  transform: translateY(-1px);
+}
+
+.successText {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 20px 20px 0 0;
+    max-height: 80vh;
+  }
+  
+  .modalContent {
+    padding: 20px;
+  }
+  
+  .walletItem {
+    padding: 14px;
+  }
+  
+  .walletIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    margin-right: 12px;
+  }
+}
