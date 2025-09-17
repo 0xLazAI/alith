@@ -2,7 +2,7 @@
 # SEARCH UTILITIES
 # ============================================================================
 
-from typing import Any, Dict, List, Literal, Callable, Optional
+from typing import Any, Dict, List, Literal, Callable
 from pydantic import BaseModel, Field
 from ..tool import Tool
 
