@@ -1,29 +1,47 @@
+import os
 from alith import Agent, DuckDuckGoTool
 
 
-def sum(x: int, y: int) -> int:
-    """Add x and y together"""
-    return x + y + 100
+def create_search_agent(api_key: str, base_url: str) -> Agent:
+    ddg_tool = DuckDuckGoTool().to_tool()
+    return Agent(
+        name="Search Assistant",
+        model="llama-3.3-70b-versatile",
+        base_url=base_url,
+        api_key=api_key,
+        preamble="You are a helpful search assistant. Use search tools to find relevant information.",
+        tools=[ddg_tool]
+    )
 
-ddg_tool = DuckDuckGoTool().to_tool()
 
-search_agent = Agent(
-    model="llama-3.3-70b-versatile",
-    base_url="https://api.groq.com/openai/v1",
-    api_key="your key here",
-    tools=[ddg_tool]
-)
-reply_agent = Agent(
-    model="llama-3.3-70b-versatile",
-    base_url="https://api.groq.com/openai/v1",
-    api_key="your key here",
-)
-# print(agent.prompt("sum 10 and 20"))
-response = search_agent.prompt("give me the youtube link to learn python programming")
-prompt_summary = "make the following text more concise and to the point: " + response
-print(prompt_summary)
-summary=reply_agent.prompt(prompt_summary)
-print(summary)
+def create_summary_agent(api_key: str, base_url: str) -> Agent:
+    return Agent(
+        name="Content Summarizer",
+        model="llama-3.3-70b-versatile",
+        base_url=base_url,
+        api_key=api_key,
+    )
 
-# summary=agent.prompt("summarize the following text: " + response)
-# print(summary)
+
+def main():
+    API_KEY = os.getenv("GROQ_API_KEY")
+    BASE_URL = "https://api.groq.com/openai/v1"
+    
+    search_agent = create_search_agent(API_KEY, BASE_URL)
+    summary_agent = create_summary_agent(API_KEY, BASE_URL)
+    
+    query = "learn python programming"
+    search_prompt = f"Find 3 relevant YouTube links for: {query}. Provide links with descriptions."
+    
+    search_results = search_agent.prompt(search_prompt)
+    summary_prompt = f"Make this more concise and professional: {search_results}"
+    summary = summary_agent.prompt(summary_prompt)
+    
+    print("SEARCH RESULTS:")
+    print(search_results)
+    print("\nSUMMARY:")
+    print(summary)
+
+
+if _name_ == "_main_":
+    main()
