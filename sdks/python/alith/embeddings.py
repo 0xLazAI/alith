@@ -124,3 +124,46 @@ class RemoteModelEmbeddings(Embeddings):
             return embeddings
         else:
             response.raise_for_status()
+
+class OllamaEmbeddings(Embeddings):
+    def __init__(
+        self,
+        model: str = "nomic-embed-text",
+        base_url: str = "http://localhost:11434"
+    ):
+        """
+        Initialize the Ollama embedding model.
+
+        Args:
+            model: Name of the embedding model (e.g., "nomic-embed-text").
+            base_url: Base URL of the Ollama server.
+        """
+        self.model = model
+        self.base_url = base_url.rstrip("/")
+
+    def embed_texts(self, texts: List[str]) -> List[List[float]]:
+        """
+        Generate embeddings using Ollama's local API.
+
+        Args:
+            texts: List of texts to embed.
+
+        Returns:
+            List of embedding vectors.
+        """
+        url = f"{self.base_url}/api/embeddings"
+        embeddings = []
+
+        for text in texts:
+            payload = {
+                "model": self.model,
+                "prompt": text
+            }
+            response = requests.post(url, json=payload)
+            if response.status_code == 200:
+                data = response.json()
+                embeddings.append(data["embedding"])
+            else:
+                raise RuntimeError(f"Ollama error {response.status_code}: {response.text}")
+
+        return embeddings
