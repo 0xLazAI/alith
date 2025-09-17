@@ -49,6 +49,8 @@ impl GenericApiBackend {
         }
     }
 
+    //TODO - add grounding support
+
     pub(crate) async fn embeddings_request(
         &self,
         request: &EmbeddingsRequest,
