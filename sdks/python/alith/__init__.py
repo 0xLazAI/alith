@@ -20,6 +20,10 @@ from .tool import Tool
 from .types import Headers
 from .lazai import Client as LazAIClient, ChainManager, ChainConfig
 
+from .utilities import (
+    DuckDuckGoTool,
+)
+
 __all__ = [
     "Agent",
     "Tool",
@@ -42,4 +46,7 @@ __all__ = [
     "LazAIClient",
     "ChainManager",
     "ChainConfig",
+    
+    # Utilities
+    "DuckDuckGoTool",
 ]
