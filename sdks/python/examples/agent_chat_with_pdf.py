@@ -1,6 +1,5 @@
 import os
 from alith import Agent, WindowBufferMemory, ChromaDBStore, chunk_text
-from pathlib import Path
 
 
 def load_pdf_content(pdf_path: str) -> str:
