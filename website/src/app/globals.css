@@ -1,0 +1,13 @@
+/* Global styles for wallet components */
+
+div[data-testid="walletconnect-qr-code"] {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Rainbow Kit modal improvements */
+[data-rk] {
+  font-family: inherit;
+}
