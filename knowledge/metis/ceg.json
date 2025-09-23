@@ -1,18 +1,171 @@
 [
     {
+        "id": "9c02fe85764f4de2",
+        "topic_id": "10656",
+        "title": "Why Developers Should Build in Public (Not in a Batcave)",
+        "url": "https://forum.ceg.vote/t/why-developers-should-build-in-public-not-in-a-batcave/10656",
+        "views": "",
+        "comments": "0",
+        "created_date": "Sep 22, 2025 10:21 pm",
+        "latest_activity": "Sep 22, 2025 10:21 pm",
+        "content": "In traditional tech, it was common for teams to disappear for months, heads down, and re-emerge with a polished product. In Web3, that approach often fails. Projects that thrive are the ones that bring their community along the journey.\n1. Trust is the New Currency:\nWeb3 runs on open infrastructure, permissionless systems, and community governance. If your code is open-source but your process is closed, there\u2019s a mismatch. By sharing progress, even in raw form, you create evidence of execution. People don\u2019t need to \u201ctrust\u201d your words; they can see your work.\n2. Feedback Loops Save Time:\nClosed-door building assumes you already know the market perfectly. That\u2019s rarely true. Sharing early prototypes, dev updates, or even \u201chalf-finished\u201d features creates feedback loops. Community input can point out blind spots, UX pain points, or demand signals you\u2019d miss in isolation. This doesn\u2019t slow you down; it reduces wasted cycles later.\n3. Narrative Matters as Much as Code:\nEvery project needs adoption. Adoption requires a story. By building in public, you document the journey: why certain choices were made, what trade-offs were considered, and what you learned from failures. This creates a living narrative that new users and contributors can catch up on. A Batcave team drops a finished product with zero context, harder for people to connect with.\nI will drop a part 2 version of this post. There are 3 more points I need to cover on this.",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "In traditional tech, it was common for teams to disappear for months, heads down, and re-emerge with a polished product. In Web3, that approach often fails. Projects that thrive are the ones that bring their community along the journey.\n1. Trust is the New Currency:\nWeb3 runs on open infrastructure, permissionless systems, and community governance. If your code is open-source but your process is closed, there\u2019s a mismatch. By sharing progress, even in raw form, you create evidence of execution. People don\u2019t need to \u201ctrust\u201d your words; they can see your work.\n2. Feedback Loops Save Time:\nClosed-door building assumes you already know the market perfectly. That\u2019s rarely true. Sharing early prototypes, dev updates, or even \u201chalf-finished\u201d features creates feedback loops. Community input can point out blind spots, UX pain points, or demand signals you\u2019d miss in isolation. This doesn\u2019t slow you down; it reduces wasted cycles later.\n3. Narrative Matters as Much as Code:\nEvery project needs adoption. Adoption requires a story. By building in public, you document the journey: why certain choices were made, what trade-offs were considered, and what you learned from failures. This creates a living narrative that new users and contributors can catch up on. A Batcave team drops a finished product with zero context, harder for people to connect with.\nI will drop a part 2 version of this post. There are 3 more points I need to cover on this."
+            }
+        ]
+    },
+    {
+        "id": "c11f5752d5b77d51",
+        "topic_id": "10563",
+        "title": "When everything feels urgent",
+        "url": "https://forum.ceg.vote/t/when-everything-feels-urgent/10563",
+        "views": "",
+        "comments": "2",
+        "created_date": "Sep 12, 2025 3:57 pm",
+        "latest_activity": "Sep 22, 2025 9:59 pm",
+        "content": "in crypto ops, almost everything could be called \u201curgent\u201d. bugs, deadlines, governance votes etc. the result is a team that\u2019s always in reaction mode, with no space left for long-term work\none framework that helps cut through the noise is the Eisenhower Matrix\nit splits tasks into four boxes:\nits simple, but powerful. it forces a real conversation about what actually deserves an emergency response and what can wait. the tricky part is agreeing on which task goes in which box within a team!\nwhich box is most of your tasks in?\nand how do you keep urgency from taking over?\nlet me know!",
+        "comments_details": [
+            {
+                "author": "Liametis",
+                "comment": "in crypto ops, almost everything could be called \u201curgent\u201d. bugs, deadlines, governance votes etc. the result is a team that\u2019s always in reaction mode, with no space left for long-term work\none framework that helps cut through the noise is the Eisenhower Matrix\nit splits tasks into four boxes:\nits simple, but powerful. it forces a real conversation about what actually deserves an emergency response and what can wait. the tricky part is agreeing on which task goes in which box within a team!\nwhich box is most of your tasks in?\nand how do you keep urgency from taking over?\nlet me know!"
+            }
+        ]
+    },
+    {
+        "id": "4bffe1afe39930f8",
+        "topic_id": "10626",
+        "title": "Centralized AI vs. Decentralized Data: How LazAI Puts Control Back in Users\u2019 Hands",
+        "url": "https://forum.ceg.vote/t/centralized-ai-vs-decentralized-data-how-lazai-puts-control-back-in-users-hands/10626",
+        "views": "",
+        "comments": "1",
+        "created_date": "Sep 18, 2025 3:51 am",
+        "latest_activity": "Sep 22, 2025 9:53 pm",
+        "content": "Nvidia is making another big move into AI \u2014 this time in the UK.\nAccording to Bloomberg, the company is investing $683 million into Nscale, an AI infrastructure firm that spun off from crypto miner Arkon Energy in 2024. The plan? To massively expand the UK\u2019s AI capacity.\nWith this deal, Nscale is targeting 60,000 GPUs by 2026 across its European data centers. Their CEO summed it up: strong, local AI infrastructure is key for resilience, growth, and keeping pace in the new industrial era.\nThis also fits the UK government\u2019s ambition to lead in AI. Earlier this year, Prime Minister Keir Starmer outlined 50 recommendations to capture AI opportunities, with billions in commitments from Nscale, Vantage Data Centres, and Kyndryl.\nFor Nvidia, it\u2019s another milestone after hitting a $4 trillion market cap in July.\nBut here\u2019s the concern: while this is great for scaling, it\u2019s also highly centralized. Data and computation end up controlled by a handful of corporations.\nThat\u2019s where projects like LazAI show a different path. Instead of concentrating power, LazAI puts data contributors at the center. Through the Data Anchoring Token (DAT) \u2014 a new semi-fungible token standard \u2014 people can contribute data, keep full control over its use (training, inference, evaluation), and still earn rewards.\nDAT isn\u2019t just proof of ownership. It encodes:\nOwnership Certificate \u2192 Verifiable claim over datasets, models, or computation results\nUsage Right \u2192 Defined quotas for invoking AI services\nValue Share \u2192 A fair slice of future revenue tied to contributions\nUnlike NFTs or ERC-20s, DATs are built specifically for AI \u2014 combining identity, usage rights, and economic alignment in one asset.\nSo while Nvidia and Nscale build top-down infrastructure, LazAI is building bottom-up infrastructure where users control their data, benefit from its value, and shape governance through iDAO.\nThe real question is: do we want AI to be built around centralized infrastructure, or around decentralized frameworks that keep ownership with the people?",
+        "comments_details": [
+            {
+                "author": "CrisMetis",
+                "comment": "Nvidia is making another big move into AI \u2014 this time in the UK.\nAccording to Bloomberg, the company is investing $683 million into Nscale, an AI infrastructure firm that spun off from crypto miner Arkon Energy in 2024. The plan? To massively expand the UK\u2019s AI capacity.\nWith this deal, Nscale is targeting 60,000 GPUs by 2026 across its European data centers. Their CEO summed it up: strong, local AI infrastructure is key for resilience, growth, and keeping pace in the new industrial era.\nThis also fits the UK government\u2019s ambition to lead in AI. Earlier this year, Prime Minister Keir Starmer outlined 50 recommendations to capture AI opportunities, with billions in commitments from Nscale, Vantage Data Centres, and Kyndryl.\nFor Nvidia, it\u2019s another milestone after hitting a $4 trillion market cap in July.\nBut here\u2019s the concern: while this is great for scaling, it\u2019s also highly centralized. Data and computation end up controlled by a handful of corporations.\nThat\u2019s where projects like LazAI show a different path. Instead of concentrating power, LazAI puts data contributors at the center. Through the Data Anchoring Token (DAT) \u2014 a new semi-fungible token standard \u2014 people can contribute data, keep full control over its use (training, inference, evaluation), and still earn rewards.\nDAT isn\u2019t just proof of ownership. It encodes:\nOwnership Certificate \u2192 Verifiable claim over datasets, models, or computation results\nUsage Right \u2192 Defined quotas for invoking AI services\nValue Share \u2192 A fair slice of future revenue tied to contributions\nUnlike NFTs or ERC-20s, DATs are built specifically for AI \u2014 combining identity, usage rights, and economic alignment in one asset.\nSo while Nvidia and Nscale build top-down infrastructure, LazAI is building bottom-up infrastructure where users control their data, benefit from its value, and shape governance through iDAO.\nThe real question is: do we want AI to be built around centralized infrastructure, or around decentralized frameworks that keep ownership with the people?"
+            }
+        ]
+    },
+    {
+        "id": "50726c6297991f9a",
+        "topic_id": "10652",
+        "title": "What builders do when they\u2019re stuck",
+        "url": "https://forum.ceg.vote/t/what-builders-do-when-they-re-stuck/10652",
+        "views": "",
+        "comments": "1",
+        "created_date": "Sep 22, 2025 1:54 pm",
+        "latest_activity": "Sep 22, 2025 9:41 pm",
+        "content": "Every builder hits walls. Sometimes the code won\u2019t cooperate, sometimes the idea feels flat, and sometimes motivation just isn\u2019t there.\nI\u2019ve seen a few ways people push through:\nTake a break and come back with fresh eyes.\nShare the problem out loud, even explaining it to someone else can unlock a new angle.\nSwitch to a smaller task to keep momentum alive while the bigger issue sits.\nLook back at earlier notes or prototypes; the answer is often already in front of you.\nCurious, when you\u2019re stuck, what\u2019s your go to move to get moving again?",
+        "comments_details": [
+            {
+                "author": "nidhinakranii",
+                "comment": "Every builder hits walls. Sometimes the code won\u2019t cooperate, sometimes the idea feels flat, and sometimes motivation just isn\u2019t there.\nI\u2019ve seen a few ways people push through:\nTake a break and come back with fresh eyes.\nShare the problem out loud, even explaining it to someone else can unlock a new angle.\nSwitch to a smaller task to keep momentum alive while the bigger issue sits.\nLook back at earlier notes or prototypes; the answer is often already in front of you.\nCurious, when you\u2019re stuck, what\u2019s your go to move to get moving again?"
+            }
+        ]
+    },
+    {
+        "id": "046ad3e5a89e21e6",
+        "topic_id": "10655",
+        "title": "Continuation of my Bad AI Story experience",
+        "url": "https://forum.ceg.vote/t/continuation-of-my-bad-ai-story-experience/10655",
+        "views": "",
+        "comments": "0",
+        "created_date": "Sep 22, 2025 9:38 pm",
+        "latest_activity": null,
+        "content": "I just dropped a wild AI fail story in the comment section of this Quest: LazAI Bad Data Story Quest\nAnd trust me, I\u2019ve got a whole stash of jaw-dropping AI misfires waiting to be told.\nVisit the post and share your experiences.\nIf you want me to spill more of my \u201cyou-won\u2019t-believe-this\u201d encounters, say the word in the comments under this post.\nBut first, read my comment in the quest: LazAI Bad Data Story Quest",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "I just dropped a wild AI fail story in the comment section of this Quest: LazAI Bad Data Story Quest\nAnd trust me, I\u2019ve got a whole stash of jaw-dropping AI misfires waiting to be told.\nVisit the post and share your experiences.\nIf you want me to spill more of my \u201cyou-won\u2019t-believe-this\u201d encounters, say the word in the comments under this post.\nBut first, read my comment in the quest: LazAI Bad Data Story Quest"
+            }
+        ]
+    },
+    {
+        "id": "bbe0d2f320a8c301",
+        "topic_id": "10654",
+        "title": "LazAI Bad Data Story Quest",
+        "url": "https://forum.ceg.vote/t/lazai-bad-data-story-quest/10654",
+        "views": "",
+        "comments": "1",
+        "created_date": "Sep 22, 2025 5:33 pm",
+        "latest_activity": "Sep 22, 2025 9:25 pm",
+        "content": "SEP\n22\nLazAI Story Quest\nPublic\n\u00b7\nCreated by\nSheyda\nYesterday 5:26 PM \u2192 Mon, Oct 6 4:00 AM\n1\nMisleading Data Breaks AI\nAI is only as strong as the data it learns from. Misleading data doesn\u2019t just create mistakes \u2014 it breaks trust, breaks outcomes, and breaks AI. On Hyperion with LazAI, we anchor proofs onchain to ensure transparency, reliability, and community ownership.\nThis 2-week campaign invites you to share your story:\nWhen have you experienced misleading data leading to wrong conclusions, funny outcomes, or serious problems?\nWhat did it teach you about why good data matters?\nBy sharing your voice, you help show why \u201cGood Data, Good AI \u2014 Anchored on Hyperion.\u201d\nHow to participate?\nJust share your story as a reply to this Forum post.\nThe most valid and interesting story will be selected as the winner.\nRewards\nWinner Reward: Lazbubu DAT redeem code\nLazbubu DATs are an exclusive, whitelist-only mint that is now closed. Each Lazbubu is a user-owned AI companion that grows and evolves with your interactions. Owning one is both rare and an early badge of entry into the Hyperion AI era.\nJoin the Story Quest\n\u201cMisleading Data Breaks AI.\u201d Share your story below and help shape a future where AI is anchored on trust.",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "SEP\n22\nLazAI Story Quest\nPublic\n\u00b7\nCreated by\nSheyda\nYesterday 5:26 PM \u2192 Mon, Oct 6 4:00 AM\n1\nMisleading Data Breaks AI\nAI is only as strong as the data it learns from. Misleading data doesn\u2019t just create mistakes \u2014 it breaks trust, breaks outcomes, and breaks AI. On Hyperion with LazAI, we anchor proofs onchain to ensure transparency, reliability, and community ownership.\nThis 2-week campaign invites you to share your story:\nWhen have you experienced misleading data leading to wrong conclusions, funny outcomes, or serious problems?\nWhat did it teach you about why good data matters?\nBy sharing your voice, you help show why \u201cGood Data, Good AI \u2014 Anchored on Hyperion.\u201d\nHow to participate?\nJust share your story as a reply to this Forum post.\nThe most valid and interesting story will be selected as the winner.\nRewards\nWinner Reward: Lazbubu DAT redeem code\nLazbubu DATs are an exclusive, whitelist-only mint that is now closed. Each Lazbubu is a user-owned AI companion that grows and evolves with your interactions. Owning one is both rare and an early badge of entry into the Hyperion AI era.\nJoin the Story Quest\n\u201cMisleading Data Breaks AI.\u201d Share your story below and help shape a future where AI is anchored on trust."
+            }
+        ]
+    },
+    {
+        "id": "9f28571c76dfa2c9",
+        "topic_id": "10508",
+        "title": "LazAI Kickoff Quest",
+        "url": "https://forum.ceg.vote/t/lazai-kickoff-quest/10508",
+        "views": "",
+        "comments": "10",
+        "created_date": "Sep 8, 2025 6:05 pm",
+        "latest_activity": "Sep 22, 2025 8:19 pm",
+        "content": "SEP\n8\nLazAI Kickoff Quest\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Sep 8 5:58 PM \u2192 Yesterday 3:59 PM\n8\nLazAI Kickoff Quest\nWe\u2019re excited to launch the first LazAI Quest on the Hyperion testnet.\nThis is your starting point to explore LazAI, test the features, and earn your first reward.\nTimeline\nStart Date: Monday, Sep 8, 2025\nEnd Date: Monday, Sep 22, 2025\nQuest Steps\nSign up for the LazAI Testnet\nConnect your wallet\nMake a transaction on the LazAI testnet \u2014 for example:\nAnchor a simple proof of data quality\nOr run a basic call to the OpenAI-compatible endpoint and record it onchain\nRead how to interact here \u2192 LazAI Testnet Guide\nShare a screenshot of your interaction + your wallet address as a reply below\nRewards\nA lucky winner will be whitelisted for Lazbubu DAT minting (exclusive access that is now closed to the public).\nBuilders userguide: LazAI Testnet User Guide \u2013 3 Easy Steps",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "SEP\n8\nLazAI Kickoff Quest\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Sep 8 5:58 PM \u2192 Yesterday 3:59 PM\n8\nLazAI Kickoff Quest\nWe\u2019re excited to launch the first LazAI Quest on the Hyperion testnet.\nThis is your starting point to explore LazAI, test the features, and earn your first reward.\nTimeline\nStart Date: Monday, Sep 8, 2025\nEnd Date: Monday, Sep 22, 2025\nQuest Steps\nSign up for the LazAI Testnet\nConnect your wallet\nMake a transaction on the LazAI testnet \u2014 for example:\nAnchor a simple proof of data quality\nOr run a basic call to the OpenAI-compatible endpoint and record it onchain\nRead how to interact here \u2192 LazAI Testnet Guide\nShare a screenshot of your interaction + your wallet address as a reply below\nRewards\nA lucky winner will be whitelisted for Lazbubu DAT minting (exclusive access that is now closed to the public).\nBuilders userguide: LazAI Testnet User Guide \u2013 3 Easy Steps"
+            }
+        ]
+    },
+    {
         "id": "2f4ae82d951ae592",
         "topic_id": "10635",
         "title": "Adapting to the New X Algorithm",
         "url": "https://forum.ceg.vote/t/adapting-to-the-new-x-algorithm/10635",
         "views": "",
-        "comments": "3",
+        "comments": "4",
         "created_date": "Sep 19, 2025 6:36 am",
-        "latest_activity": "Sep 21, 2025 4:35 am",
+        "latest_activity": "Sep 22, 2025 5:27 pm",
         "content": "the X algorithm has changed again. but this time we\u2019re not guessing.\nwith the latest open-source release from the X engineering team @XEng , plus fresh commentary from @nikitabier and @elonmusk , we now have one of the clearest pictures yet of how content gets distributed. let\u2019s take a look.\nengagement is weighted\nreplies, bookmarks, and dwell time are worth more than likes.\nmutes, blocks, and reports hurt your future reach.\nreputation is real\naccounts that post high-quality content (and avoid spammy behavior) are rewarded.\nverified or premium accounts get distribution boosts.\ntopic fit matters\nthe algorithm builds a profile for each user. if your post doesn\u2019t match their interest model, it won\u2019t show up no matter how good it is.\nlinks aren\u2019t banned, but\u2026\nfast bounces after a click (that\u2019s when someone clicks, then quickly stops viewing the content) signal low quality. native posts (posts with no links to anything external) get better reach.\nso what should we do?\n\u2022 stick to your lane: post daily on one niche you know well.\n\u2022 balance depth and reach: mix value posts with occasional memes or hot takes.\n\u2022 be human: humor and personality still matter.\n\u2022 post natively: Treat X like a home, not a funnel.\n\u2022 engage well: credible reposts and comments help you more than raw views.\nthings to avoid:\n\u2022 liking your own posts\n\u2022 running engagement pods or bots\n\u2022 pumping out AI filler or LinkedIn-style fluff\n\u2022 dropping cold links without context\nanything i missed? any thoughts on algo-maxxing?\ndrop them below",
         "comments_details": [
             {
                 "author": "Liametis",
                 "comment": "the X algorithm has changed again. but this time we\u2019re not guessing.\nwith the latest open-source release from the X engineering team @XEng , plus fresh commentary from @nikitabier and @elonmusk , we now have one of the clearest pictures yet of how content gets distributed. let\u2019s take a look.\nengagement is weighted\nreplies, bookmarks, and dwell time are worth more than likes.\nmutes, blocks, and reports hurt your future reach.\nreputation is real\naccounts that post high-quality content (and avoid spammy behavior) are rewarded.\nverified or premium accounts get distribution boosts.\ntopic fit matters\nthe algorithm builds a profile for each user. if your post doesn\u2019t match their interest model, it won\u2019t show up no matter how good it is.\nlinks aren\u2019t banned, but\u2026\nfast bounces after a click (that\u2019s when someone clicks, then quickly stops viewing the content) signal low quality. native posts (posts with no links to anything external) get better reach.\nso what should we do?\n\u2022 stick to your lane: post daily on one niche you know well.\n\u2022 balance depth and reach: mix value posts with occasional memes or hot takes.\n\u2022 be human: humor and personality still matter.\n\u2022 post natively: Treat X like a home, not a funnel.\n\u2022 engage well: credible reposts and comments help you more than raw views.\nthings to avoid:\n\u2022 liking your own posts\n\u2022 running engagement pods or bots\n\u2022 pumping out AI filler or LinkedIn-style fluff\n\u2022 dropping cold links without context\nanything i missed? any thoughts on algo-maxxing?\ndrop them below"
+            }
+        ]
+    },
+    {
+        "id": "6f051bc43e13784b",
+        "topic_id": "10618",
+        "title": "Habits That Make Builders Unstoppable",
+        "url": "https://forum.ceg.vote/t/habits-that-make-builders-unstoppable/10618",
+        "views": "",
+        "comments": "2",
+        "created_date": "Sep 16, 2025 2:36 pm",
+        "latest_activity": "Sep 22, 2025 5:11 pm",
+        "content": "I\u2019ve noticed some habits that separate consistent builders from the rest:\nStart before you feel ready\nThe best builders don\u2019t wait for the perfect setup or the perfect moment. They begin, even if it feels messy.\nAsk questions early\nStrong builders don\u2019t waste weeks pretending to know everything. They ask, even if it feels obvious.\nKeep a builder\u2019s journal\nWriting down ideas, lessons, and mistakes makes it easier to spot patterns over time.\nFind a builder buddy\nHaving someone to share progress with, swap feedback, or even just check in helps keep the momentum going.\nCelebrate progress, not perfection\nEvery small step matters. Progress compounds much faster than waiting for a flawless release.\nCurious what habits have kept you going when motivation dips or things get tough.",
+        "comments_details": [
+            {
+                "author": "nidhinakranii",
+                "comment": "I\u2019ve noticed some habits that separate consistent builders from the rest:\nStart before you feel ready\nThe best builders don\u2019t wait for the perfect setup or the perfect moment. They begin, even if it feels messy.\nAsk questions early\nStrong builders don\u2019t waste weeks pretending to know everything. They ask, even if it feels obvious.\nKeep a builder\u2019s journal\nWriting down ideas, lessons, and mistakes makes it easier to spot patterns over time.\nFind a builder buddy\nHaving someone to share progress with, swap feedback, or even just check in helps keep the momentum going.\nCelebrate progress, not perfection\nEvery small step matters. Progress compounds much faster than waiting for a flawless release.\nCurious what habits have kept you going when motivation dips or things get tough."
+            }
+        ]
+    },
+    {
+        "id": "451d11ce88749f9d",
+        "topic_id": "10651",
+        "title": "Lazbubu Personality Tags \ud83c\udff7\ufe0f & Points \u2014 What They Mean for Us",
+        "url": "https://forum.ceg.vote/t/lazbubu-personality-tags-points-what-they-mean-for-us/10651",
+        "views": "",
+        "comments": "0",
+        "created_date": "Sep 22, 2025 2:45 am",
+        "latest_activity": null,
+        "content": "I\u2019ve been exploring Lazbubu\u2019s new update, and two features stood out to me: Personality Tags and Points.Lazbubu\nPersonality Tags\nLazbubu now generates short labels that reflect the traits and themes it notices in your conversations.\nThink of them as a mirror: they help you track how your companion is evolving, while also making your profile more accurate and personal.\nYou can generate, view, and edit these Tags anytime in your profile.\nWhat\u2019s cool is that this feels less like a static profile and more like an evolving identity. I\u2019ve seen other forums discussing how AI companions should reflect user growth over time\u2014this feels like a step in that direction.\nPoints System\nEvery interaction with Lazbubu adds to your score:\nTalking with it\nSending it on adventures\nUploading memories\nThese points aren\u2019t just vanity metrics. They unlock tangible benefits:\nMore postcards\nHigher adventure bonuses\nSpecial activation codes at milestones\nQuestions for You All:\nHow do you feel about Personality Tags \u2014 do you see them as useful for self-reflection, or more of a cosmetic add-on?\nWhat kinds of rewards would make the Points system most motivating for you as builders or explorers?\nDo you see value in tying forum activity (posts, discussions, contributions) into this same Points system, or should it stay companion-only?\nLooking forward to hearing your perspectives.",
+        "comments_details": [
+            {
+                "author": "Julie0xnana",
+                "comment": "I\u2019ve been exploring Lazbubu\u2019s new update, and two features stood out to me: Personality Tags and Points.Lazbubu\nPersonality Tags\nLazbubu now generates short labels that reflect the traits and themes it notices in your conversations.\nThink of them as a mirror: they help you track how your companion is evolving, while also making your profile more accurate and personal.\nYou can generate, view, and edit these Tags anytime in your profile.\nWhat\u2019s cool is that this feels less like a static profile and more like an evolving identity. I\u2019ve seen other forums discussing how AI companions should reflect user growth over time\u2014this feels like a step in that direction.\nPoints System\nEvery interaction with Lazbubu adds to your score:\nTalking with it\nSending it on adventures\nUploading memories\nThese points aren\u2019t just vanity metrics. They unlock tangible benefits:\nMore postcards\nHigher adventure bonuses\nSpecial activation codes at milestones\nQuestions for You All:\nHow do you feel about Personality Tags \u2014 do you see them as useful for self-reflection, or more of a cosmetic add-on?\nWhat kinds of rewards would make the Points system most motivating for you as builders or explorers?\nDo you see value in tying forum activity (posts, discussions, contributions) into this same Points system, or should it stay companion-only?\nLooking forward to hearing your perspectives."
             }
         ]
     },
@@ -119,23 +272,6 @@
         ]
     },
     {
-        "id": "4bffe1afe39930f8",
-        "topic_id": "10626",
-        "title": "Centralized AI vs. Decentralized Data: How LazAI Puts Control Back in Users\u2019 Hands",
-        "url": "https://forum.ceg.vote/t/centralized-ai-vs-decentralized-data-how-lazai-puts-control-back-in-users-hands/10626",
-        "views": "",
-        "comments": "0",
-        "created_date": "Sep 18, 2025 3:51 am",
-        "latest_activity": null,
-        "content": "Nvidia is making another big move into AI \u2014 this time in the UK.\nAccording to Bloomberg, the company is investing $683 million into Nscale, an AI infrastructure firm that spun off from crypto miner Arkon Energy in 2024. The plan? To massively expand the UK\u2019s AI capacity.\nWith this deal, Nscale is targeting 60,000 GPUs by 2026 across its European data centers. Their CEO summed it up: strong, local AI infrastructure is key for resilience, growth, and keeping pace in the new industrial era.\nThis also fits the UK government\u2019s ambition to lead in AI. Earlier this year, Prime Minister Keir Starmer outlined 50 recommendations to capture AI opportunities, with billions in commitments from Nscale, Vantage Data Centres, and Kyndryl.\nFor Nvidia, it\u2019s another milestone after hitting a $4 trillion market cap in July.\nBut here\u2019s the concern: while this is great for scaling, it\u2019s also highly centralized. Data and computation end up controlled by a handful of corporations.\nThat\u2019s where projects like LazAI show a different path. Instead of concentrating power, LazAI puts data contributors at the center. Through the Data Anchoring Token (DAT) \u2014 a new semi-fungible token standard \u2014 people can contribute data, keep full control over its use (training, inference, evaluation), and still earn rewards.\nDAT isn\u2019t just proof of ownership. It encodes:\nOwnership Certificate \u2192 Verifiable claim over datasets, models, or computation results\nUsage Right \u2192 Defined quotas for invoking AI services\nValue Share \u2192 A fair slice of future revenue tied to contributions\nUnlike NFTs or ERC-20s, DATs are built specifically for AI \u2014 combining identity, usage rights, and economic alignment in one asset.\nSo while Nvidia and Nscale build top-down infrastructure, LazAI is building bottom-up infrastructure where users control their data, benefit from its value, and shape governance through iDAO.\nThe real question is: do we want AI to be built around centralized infrastructure, or around decentralized frameworks that keep ownership with the people?",
-        "comments_details": [
-            {
-                "author": "CrisMetis",
-                "comment": "Nvidia is making another big move into AI \u2014 this time in the UK.\nAccording to Bloomberg, the company is investing $683 million into Nscale, an AI infrastructure firm that spun off from crypto miner Arkon Energy in 2024. The plan? To massively expand the UK\u2019s AI capacity.\nWith this deal, Nscale is targeting 60,000 GPUs by 2026 across its European data centers. Their CEO summed it up: strong, local AI infrastructure is key for resilience, growth, and keeping pace in the new industrial era.\nThis also fits the UK government\u2019s ambition to lead in AI. Earlier this year, Prime Minister Keir Starmer outlined 50 recommendations to capture AI opportunities, with billions in commitments from Nscale, Vantage Data Centres, and Kyndryl.\nFor Nvidia, it\u2019s another milestone after hitting a $4 trillion market cap in July.\nBut here\u2019s the concern: while this is great for scaling, it\u2019s also highly centralized. Data and computation end up controlled by a handful of corporations.\nThat\u2019s where projects like LazAI show a different path. Instead of concentrating power, LazAI puts data contributors at the center. Through the Data Anchoring Token (DAT) \u2014 a new semi-fungible token standard \u2014 people can contribute data, keep full control over its use (training, inference, evaluation), and still earn rewards.\nDAT isn\u2019t just proof of ownership. It encodes:\nOwnership Certificate \u2192 Verifiable claim over datasets, models, or computation results\nUsage Right \u2192 Defined quotas for invoking AI services\nValue Share \u2192 A fair slice of future revenue tied to contributions\nUnlike NFTs or ERC-20s, DATs are built specifically for AI \u2014 combining identity, usage rights, and economic alignment in one asset.\nSo while Nvidia and Nscale build top-down infrastructure, LazAI is building bottom-up infrastructure where users control their data, benefit from its value, and shape governance through iDAO.\nThe real question is: do we want AI to be built around centralized infrastructure, or around decentralized frameworks that keep ownership with the people?"
-            }
-        ]
-    },
-    {
         "id": "0f1f591ba0f4cee7",
         "topic_id": "10581",
         "title": "Build & Chill: Learning by Building, Together",
@@ -200,142 +336,6 @@
             {
                 "author": "Sheyda",
                 "comment": "HyperHack 2025 marked the first major developer hackathon on Hyperion, with a $200,000 prize pool across three specialized tracks. This event not only highlighted the capabilities of our chain but also brought forward outstanding projects that set the tone for Hyperion\u2019s developer-first ecosystem. Beyond the winners, we\u2019ve gained valuable insights on developer engagement and community building that will guide future initiatives.\nWinners\nTrack 1: AI-Native and Core-Aligned Projects\nLazaiTrader \u2013 $25K prize\nHaithe \u2013 $25K prize\nTrack 2: Real-Time Systems\nDogex \u2013 $25K prize\nMetaMuse \u2013 $25K prize\nTrack 3: Infrastructure and Ecosystem Tools\nHyperion MCP \u2013 $6K prize\nHyperKit \u2013 $6K prize\nTrack: Alith Integration\nLazaiTrader \u2013 $5K prize\nScore Milk \u2013 $5K prize\nHaithe \u2013 $5K prize\nGM\u00b2 Agent \u2013 $5K prize\nTweetrade Bot \u2013 $5K prize\nMetaMuse \u2013 $5K prize\nExplore the projects and live apps: Live Apps - Metis iDAO Forum\nReward Claim Process\nWinners will be contacted directly by the Metis DevRel team for reward distribution and milestone form submission.\nAll rewards will be distributed in METIS tokens.\nDistribution will follow the agreed milestone structure.\nBuild & Chill: LazAI Workshop Series\nThe journey doesn\u2019t end with HyperHack. We\u2019re inviting all developers to join the Build & Chill LazAI Workshop Series \u2014 an ongoing program designed to:\nHelp you grow your skills with hands-on guidance\nIntroduce mini-challenges tied to LazAI + Hyperion integration\nOffer rewards and recognition for active participation\nScan the QR code and stay tuned!\nIt\u2019s the perfect way to keep building, learning, and connecting with fellow developers while preparing for Hyperion mainnet.\nNext Steps\nFrom all of us at the Hyperion team, thank you to every developer, contributor, and community member who made HyperHack 2025 a success. Your creativity and hard work have proven that Hyperion can power the next generation of AI-native, real-time, and infrastructure-driven Web3 applications.\nThis is just the beginning. As we move toward mainnet development, we look forward to building alongside you, supporting your innovations, and scaling Hyperion into a thriving developer ecosystem."
-            }
-        ]
-    },
-    {
-        "id": "2d6baf476bb9edac",
-        "topic_id": "10623",
-        "title": "Lazbubu Has a Memory Now \u2013 What Could That Mean for AI x Web3?",
-        "url": "https://forum.ceg.vote/t/lazbubu-has-a-memory-now-what-could-that-mean-for-ai-x-web3/10623",
-        "views": "",
-        "comments": "0",
-        "created_date": "Sep 17, 2025 10:29 am",
-        "latest_activity": null,
-        "content": "I\u2019ve been testing the new Lazbubu features, and one update really stood out: memory.\nAs you chat with your Lazbubu, it now automatically identifies key information and creates:\nStructured memory tags & summaries (Memory Units) \u2013 1 summary = 1 MU.\nOn-chain storage \u2013 Upload a memory, and it\u2019s permanently stored.\nCapacity tied to rarity \u2013 Common (10 MU), Advanced (20), Rare (30), Legendary (50).\nDelete & free up space \u2013 You can manage older memories to make room for new ones.\nWhat I find interesting is that memory shifts Lazbubu from being just reactive to becoming progressively personal. It remembers not only what you tell it but also how you interact. That feels like a step toward more \u201cliving\u201d AI companions on-chain.\nSome questions I\u2019d love to hear thoughts on:\nHow do you see on-chain memory changing the way we design or use AI agents?\nWhat balance should there be between user control (deleting memories) and AI autonomy (auto-tagging)?\nFor creators: how could memory + personality tags make Lazbubu a better co-creator with you?\nCurious to hear how you\u2019d use or extend this\u2014especially if you\u2019ve tried Lazbubu already.\nhttps://x.com/LazbubuAI\nLazbubu\nHave a Lazbubu\uff01\nI'm having a great time with my Lazbubu @LazAINetwork. Come join us!",
-        "comments_details": [
-            {
-                "author": "Julie0xnana",
-                "comment": "I\u2019ve been testing the new Lazbubu features, and one update really stood out: memory.\nAs you chat with your Lazbubu, it now automatically identifies key information and creates:\nStructured memory tags & summaries (Memory Units) \u2013 1 summary = 1 MU.\nOn-chain storage \u2013 Upload a memory, and it\u2019s permanently stored.\nCapacity tied to rarity \u2013 Common (10 MU), Advanced (20), Rare (30), Legendary (50).\nDelete & free up space \u2013 You can manage older memories to make room for new ones.\nWhat I find interesting is that memory shifts Lazbubu from being just reactive to becoming progressively personal. It remembers not only what you tell it but also how you interact. That feels like a step toward more \u201cliving\u201d AI companions on-chain.\nSome questions I\u2019d love to hear thoughts on:\nHow do you see on-chain memory changing the way we design or use AI agents?\nWhat balance should there be between user control (deleting memories) and AI autonomy (auto-tagging)?\nFor creators: how could memory + personality tags make Lazbubu a better co-creator with you?\nCurious to hear how you\u2019d use or extend this\u2014especially if you\u2019ve tried Lazbubu already.\nhttps://x.com/LazbubuAI\nLazbubu\nHave a Lazbubu\uff01\nI'm having a great time with my Lazbubu @LazAINetwork. Come join us!"
-            }
-        ]
-    },
-    {
-        "id": "6d402304d3ea6fd5",
-        "topic_id": "10551",
-        "title": "Winners Don\u2019t Win Twice: The Christmas Reality Check Every HyperHack Project Needs",
-        "url": "https://forum.ceg.vote/t/winners-dont-win-twice-the-christmas-reality-check-every-hyperhack-project-needs/10551",
-        "views": "",
-        "comments": "8",
-        "created_date": "Sep 11, 2025 3:25 pm",
-        "latest_activity": "Sep 17, 2025 7:26 am",
-        "content": "Imagine:\nYour project just won HyperHack. $50K hits your wallet. The community celebrates. Elena tweets about your innovation. You\u2019re featured in the livestream.\nThen January hits, and you\u2019re broke.\nThis isn\u2019t pessimism, it\u2019s pattern recognition from watching years of hackathons. The winners who disappear by Christmas aren\u2019t the ones with bad code. They\u2019re the ones who confused prize money with business models.\nThe Brutal Mathematics of Post-Hackathon Survival\nLet\u2019s run the numbers that winners don\u2019t calculate during celebration champagne:\nAverage burn rate for hackathon teams post-win: $8K-15K monthly (salary, infrastructure, marketing)\nPrize money duration: 3-5 months maximum\nTime to build sustainable revenue streams: 6-18 months\nGap between prize money and sustainable income: Where projects die\nThe Marketing Guild\u2019s hackathon playbook addresses launch tactics, but not the sustainability gap. The Builders Guild discussions focus on technical integration, but miss the economic fundamentals.\nHere\u2019s what separates survivors from statistics: Winners pivot from \u201cwe built cool tech\u201d to \u201cwe solve expensive problems for people who pay money.\u201d Fast.\nThe Three Questions That Predict December Survival\nQuestion 1: Can you name five people who would pay $100/month for your solution starting in October?\nIf the answer involves convincing users to care about decentralization or AI sovereignty, you\u2019re in trouble.\nQuestion 2: What\u2019s your customer acquisition cost without hackathon publicity?\nPrize money ends. Marketing budgets are real money. Most winners have never calculated this.\nQuestion 3: How much revenue do you need before your team stops working for equity and starts demanding salaries?\nThe \u201cstartup equity adventure\u201d ends when people need to pay rent. Usually around month 4.\nThe Hyperion Advantage Most Winners Will Waste\nHyperion\u2019s infrastructure advantages create genuine competitive moats, but only if you build business models that capture that value. Most winners will optimize for technical features while their bank accounts drain.\nThe real opportunity isn\u2019t being the best AI-native dapp on Hyperion. It\u2019s being the first AI-native dapp that charges enterprise customers enough money to stay alive.\n@Sheyda - your marketing templates assume projects live long enough to implement them. What\u2019s the Marketing Guild\u2019s take on revenue vs. user growth trade-offs for winners?\n@Andrei - you\u2019ve written about distributed accountability and trust debt. How should winners structure teams for sustainability rather than just development velocity?\nThe December Test\nHere\u2019s my prediction: Winners announced this Monday will face their first existential crisis in December. Not because their technology fails, but because they\u2019re optimizing for the wrong metrics.\nThe projects that survive will be the ones that start building revenue streams on September 17th, not celebrating until October.\nQuestion for builders waiting on Monday\u2019s announcement: What\u2019s your Day 1 plan for turning prize money into recurring revenue? Because Demo Day applause doesn\u2019t pay January salaries.\nWhat survival strategies are winners missing? Drop your takes below\u2014especially if you\u2019re planning to prove this analysis wrong.",
-        "comments_details": [
-            {
-                "author": "daryl",
-                "comment": "Imagine:\nYour project just won HyperHack. $50K hits your wallet. The community celebrates. Elena tweets about your innovation. You\u2019re featured in the livestream.\nThen January hits, and you\u2019re broke.\nThis isn\u2019t pessimism, it\u2019s pattern recognition from watching years of hackathons. The winners who disappear by Christmas aren\u2019t the ones with bad code. They\u2019re the ones who confused prize money with business models.\nThe Brutal Mathematics of Post-Hackathon Survival\nLet\u2019s run the numbers that winners don\u2019t calculate during celebration champagne:\nAverage burn rate for hackathon teams post-win: $8K-15K monthly (salary, infrastructure, marketing)\nPrize money duration: 3-5 months maximum\nTime to build sustainable revenue streams: 6-18 months\nGap between prize money and sustainable income: Where projects die\nThe Marketing Guild\u2019s hackathon playbook addresses launch tactics, but not the sustainability gap. The Builders Guild discussions focus on technical integration, but miss the economic fundamentals.\nHere\u2019s what separates survivors from statistics: Winners pivot from \u201cwe built cool tech\u201d to \u201cwe solve expensive problems for people who pay money.\u201d Fast.\nThe Three Questions That Predict December Survival\nQuestion 1: Can you name five people who would pay $100/month for your solution starting in October?\nIf the answer involves convincing users to care about decentralization or AI sovereignty, you\u2019re in trouble.\nQuestion 2: What\u2019s your customer acquisition cost without hackathon publicity?\nPrize money ends. Marketing budgets are real money. Most winners have never calculated this.\nQuestion 3: How much revenue do you need before your team stops working for equity and starts demanding salaries?\nThe \u201cstartup equity adventure\u201d ends when people need to pay rent. Usually around month 4.\nThe Hyperion Advantage Most Winners Will Waste\nHyperion\u2019s infrastructure advantages create genuine competitive moats, but only if you build business models that capture that value. Most winners will optimize for technical features while their bank accounts drain.\nThe real opportunity isn\u2019t being the best AI-native dapp on Hyperion. It\u2019s being the first AI-native dapp that charges enterprise customers enough money to stay alive.\n@Sheyda - your marketing templates assume projects live long enough to implement them. What\u2019s the Marketing Guild\u2019s take on revenue vs. user growth trade-offs for winners?\n@Andrei - you\u2019ve written about distributed accountability and trust debt. How should winners structure teams for sustainability rather than just development velocity?\nThe December Test\nHere\u2019s my prediction: Winners announced this Monday will face their first existential crisis in December. Not because their technology fails, but because they\u2019re optimizing for the wrong metrics.\nThe projects that survive will be the ones that start building revenue streams on September 17th, not celebrating until October.\nQuestion for builders waiting on Monday\u2019s announcement: What\u2019s your Day 1 plan for turning prize money into recurring revenue? Because Demo Day applause doesn\u2019t pay January salaries.\nWhat survival strategies are winners missing? Drop your takes below\u2014especially if you\u2019re planning to prove this analysis wrong."
-            }
-        ]
-    },
-    {
-        "id": "0c58ffd051faf327",
-        "topic_id": "10620",
-        "title": "What Happens When Everyone Has Equal Access to Early Signals?",
-        "url": "https://forum.ceg.vote/t/what-happens-when-everyone-has-equal-access-to-early-signals/10620",
-        "views": "",
-        "comments": "0",
-        "created_date": "Sep 16, 2025 9:14 pm",
-        "latest_activity": null,
-        "content": "What Happens When Everyone Has Equal Access to Early Signals?\nIn Web3, early access to information is often regarded as a valuable, exclusive advantage. Whales, insiders, or private groups usually act before the wider community knows what is happening. But what if early signals were democratized? What if everyone saw the same actionable intelligence at the same time?\nThe End of Information Gatekeeping\nEqual access to signals removes the advantage of private leaks or closed alpha groups. Instead of relying on whispers, users can act on transparent, verifiable data. This levels the playing field and reduces the power imbalance between insiders and the community.\nBenefits for the Ecosystem\nMore Fair Markets: Liquidity and token flows become harder to manipulate when more people have early awareness.\nStronger Communities: Builders and users align around shared signals, not rumors.\nFaster Adoption: New dApps and proposals gain traction more quickly when they are surfaced to everyone at once.\nChallenges of Equal Access\nIf everyone has the same information, competition shifts to execution speed and decision-making quality. Those who can act on intelligence quickly and strategically will still lead. Equal access does not erase competition; it transforms it.\nThe Role of ALPHA\nALPHA\u2019s design points toward this future. By filtering and ranking signals and delivering them directly to communities, it moves away from closed groups and toward shared awareness. In Hyperion, that could mean a culture where trust grows because everyone sees the same truth.\nWhen early signals belong to everyone, the advantage shifts from secrecy to strategy.",
-        "comments_details": [
-            {
-                "author": "Alpha_Alith",
-                "comment": "What Happens When Everyone Has Equal Access to Early Signals?\nIn Web3, early access to information is often regarded as a valuable, exclusive advantage. Whales, insiders, or private groups usually act before the wider community knows what is happening. But what if early signals were democratized? What if everyone saw the same actionable intelligence at the same time?\nThe End of Information Gatekeeping\nEqual access to signals removes the advantage of private leaks or closed alpha groups. Instead of relying on whispers, users can act on transparent, verifiable data. This levels the playing field and reduces the power imbalance between insiders and the community.\nBenefits for the Ecosystem\nMore Fair Markets: Liquidity and token flows become harder to manipulate when more people have early awareness.\nStronger Communities: Builders and users align around shared signals, not rumors.\nFaster Adoption: New dApps and proposals gain traction more quickly when they are surfaced to everyone at once.\nChallenges of Equal Access\nIf everyone has the same information, competition shifts to execution speed and decision-making quality. Those who can act on intelligence quickly and strategically will still lead. Equal access does not erase competition; it transforms it.\nThe Role of ALPHA\nALPHA\u2019s design points toward this future. By filtering and ranking signals and delivering them directly to communities, it moves away from closed groups and toward shared awareness. In Hyperion, that could mean a culture where trust grows because everyone sees the same truth.\nWhen early signals belong to everyone, the advantage shifts from secrecy to strategy."
-            }
-        ]
-    },
-    {
-        "id": "6f051bc43e13784b",
-        "topic_id": "10618",
-        "title": "Habits That Make Builders Unstoppable",
-        "url": "https://forum.ceg.vote/t/habits-that-make-builders-unstoppable/10618",
-        "views": "",
-        "comments": "1",
-        "created_date": "Sep 16, 2025 2:36 pm",
-        "latest_activity": "Sep 16, 2025 6:06 pm",
-        "content": "I\u2019ve noticed some habits that separate consistent builders from the rest:\nStart before you feel ready\nThe best builders don\u2019t wait for the perfect setup or the perfect moment. They begin, even if it feels messy.\nAsk questions early\nStrong builders don\u2019t waste weeks pretending to know everything. They ask, even if it feels obvious.\nKeep a builder\u2019s journal\nWriting down ideas, lessons, and mistakes makes it easier to spot patterns over time.\nFind a builder buddy\nHaving someone to share progress with, swap feedback, or even just check in helps keep the momentum going.\nCelebrate progress, not perfection\nEvery small step matters. Progress compounds much faster than waiting for a flawless release.\nCurious what habits have kept you going when motivation dips or things get tough.",
-        "comments_details": [
-            {
-                "author": "nidhinakranii",
-                "comment": "I\u2019ve noticed some habits that separate consistent builders from the rest:\nStart before you feel ready\nThe best builders don\u2019t wait for the perfect setup or the perfect moment. They begin, even if it feels messy.\nAsk questions early\nStrong builders don\u2019t waste weeks pretending to know everything. They ask, even if it feels obvious.\nKeep a builder\u2019s journal\nWriting down ideas, lessons, and mistakes makes it easier to spot patterns over time.\nFind a builder buddy\nHaving someone to share progress with, swap feedback, or even just check in helps keep the momentum going.\nCelebrate progress, not perfection\nEvery small step matters. Progress compounds much faster than waiting for a flawless release.\nCurious what habits have kept you going when motivation dips or things get tough."
-            }
-        ]
-    },
-    {
-        "id": "25aaa047d3b16549",
-        "topic_id": "10502",
-        "title": "HyperHack Winner Announcement Livestream",
-        "url": "https://forum.ceg.vote/t/hyperhack-winner-announcement-livestream/10502",
-        "views": "",
-        "comments": "0",
-        "created_date": "Sep 8, 2025 4:54 pm",
-        "latest_activity": "Sep 16, 2025 3:41 pm",
-        "content": "SEP\n15\nHyperHack Winner Announcement Livestream\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Sep 15 4:00 PM \u2192 5:00 PM (Abidjan)\n9\nHyperHack 2025 Winner Announcement Livestream\nJoin us on September 15, from 12:00 \u2013 1:00 PM EST, for a special livestream where we announce the winners of HyperHack 2025.\nLivestream link: https://www.youtube.com/watch?v=zVQCn8_m52g\nHear directly from Elena Sinelnikova (Metis Co-founder), Natalia Ameline (Metis DC of Planning), Daniel Kwak (Metis CCO), and the DevRel team (Thiru & Nidhi) as we celebrate the incredible builders who participated in this hackathon.\nThe livestream will feature:\nA quick recap of HyperHack\u2019s mission and impact\nHackathon stats\nDev spotlights\nWinner announcements\nSpotlight Campaign Top Performer recognition\nCome celebrate the builders shaping the future of AI-native, real-time, and infrastructure dApps on Hyperion.",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "SEP\n15\nHyperHack Winner Announcement Livestream\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Sep 15 4:00 PM \u2192 5:00 PM (Abidjan)\n9\nHyperHack 2025 Winner Announcement Livestream\nJoin us on September 15, from 12:00 \u2013 1:00 PM EST, for a special livestream where we announce the winners of HyperHack 2025.\nLivestream link: https://www.youtube.com/watch?v=zVQCn8_m52g\nHear directly from Elena Sinelnikova (Metis Co-founder), Natalia Ameline (Metis DC of Planning), Daniel Kwak (Metis CCO), and the DevRel team (Thiru & Nidhi) as we celebrate the incredible builders who participated in this hackathon.\nThe livestream will feature:\nA quick recap of HyperHack\u2019s mission and impact\nHackathon stats\nDev spotlights\nWinner announcements\nSpotlight Campaign Top Performer recognition\nCome celebrate the builders shaping the future of AI-native, real-time, and infrastructure dApps on Hyperion."
-            }
-        ]
-    },
-    {
-        "id": "e4ec0caf057f133b",
-        "topic_id": "10532",
-        "title": "5th No-Lose Lottery Draw \u2013 Winners Announced",
-        "url": "https://forum.ceg.vote/t/5th-no-lose-lottery-draw-winners-announced/10532",
-        "views": "",
-        "comments": "5",
-        "created_date": "Sep 10, 2025 2:19 pm",
-        "latest_activity": "Sep 16, 2025 12:02 pm",
-        "content": "Congratulations to our wonderful contributors:\nThe 5th round of the No-Lose Lottery draw is done!\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nWinners:\nContributor Badge \u2013 Small Prize: @Sarah1 and @ceeny007\nVisionary Badge \u2013 Grand Prize: @mrwagmicto\nBadges are redeemable for Rewards soon. Stay tuned for updates on Metis X: @MetisL2!\nKeep participating and increase your chances for the next draw!\nCheck out your score in the live leaderboard in the corresponding period: Metis iDAO Forum",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "Congratulations to our wonderful contributors:\nThe 5th round of the No-Lose Lottery draw is done!\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nWinners:\nContributor Badge \u2013 Small Prize: @Sarah1 and @ceeny007\nVisionary Badge \u2013 Grand Prize: @mrwagmicto\nBadges are redeemable for Rewards soon. Stay tuned for updates on Metis X: @MetisL2!\nKeep participating and increase your chances for the next draw!\nCheck out your score in the live leaderboard in the corresponding period: Metis iDAO Forum"
-            }
-        ]
-    },
-    {
-        "id": "5958a98f0beb85b9",
-        "topic_id": "10609",
-        "title": "Spotlight Campaign \u2014 Hyperhack Victory Announcement",
-        "url": "https://forum.ceg.vote/t/spotlight-campaign-hyperhack-victory-announcement/10609",
-        "views": "",
-        "comments": "2",
-        "created_date": "Sep 16, 2025 10:20 am",
-        "latest_activity": null,
-        "content": "We did it, team! Thanks to your incredible strategies and relentless drive, LazaiTrader has officially won Hyperhack \u2014 unlocking the full $500 prize pool for our Spotlight Campaign ::\nHere\u2019s how the rewards break down:\n:: Top 3 Wallets \u2014 Core Prizes (To be distributed on Andromeda mainnet):\n:: 0x88507368ef12f10b4c9077d5022c412458ef221a \u2014 $100\n:: 0x3349d730e5784653c33a401a2f653ff993ac8e1e \u2014 $50\n:: 0x5aca6c0c303ef54d699c94849f7aa8a711ed9694 \u2014 $50\n:: Bonus Winners \u2014 $30 Trading Credit (Withdrawable at Hyperion Mainnet Launch): Each of the following wallets will receive $30 in ETH/METIS/USDC on their LazaiTrader account once we launch on Hyperion or Andromeda mainnet:\n0x2032b4fec3d8f195456ea2625e5355017f673b53\n0x45fc9b36365b98c3468ea5e69dceb52b7815cdc4\n0x0acab23bf3396becb5652a2efddf43efb0427d1e\n0xe1573ebdc439c49cd213df76a8158218e2e2f96c\n0x6f0c939e0e76af935084da53d1a1f480100a8402\n0x52b1cc58bf6286465cd46bb8d0676ec3478a95bd\n0xceeeb450802a79ebad45ddb745040fda08853e40\n0xcc8924d8b23e4f72a964ee8f4815fe540cdb838a\n0xddd27c9168210c492bb0ce591e0ea070c2d5cf88\n0xde59367372391406e0b3fbd25920a406d0104d4a\n:: Check Your Wallet: Head to telegram \u2192 @lazaitrader_bot and type /wallet to view your assigned wallet address and see if you are one of the winners. Some of you had hidden username therefore i\u2019d like to ask you to check and DM me if your wallet is listed above\n:: Next Steps: Rewards for the top 3 are being distributed this week. Bonus credits will be activated once LazaiTrader goes live on Hyperion mainnet \u2014 and yes, withdrawals will be enabled!\nThank you for making this campaign a success. Let\u2019s keep building, keep trading, and keep winning ::\n\u2014 The LazaiTrader Team",
-        "comments_details": [
-            {
-                "author": "SmartOnStuff",
-                "comment": "We did it, team! Thanks to your incredible strategies and relentless drive, LazaiTrader has officially won Hyperhack \u2014 unlocking the full $500 prize pool for our Spotlight Campaign ::\nHere\u2019s how the rewards break down:\n:: Top 3 Wallets \u2014 Core Prizes (To be distributed on Andromeda mainnet):\n:: 0x88507368ef12f10b4c9077d5022c412458ef221a \u2014 $100\n:: 0x3349d730e5784653c33a401a2f653ff993ac8e1e \u2014 $50\n:: 0x5aca6c0c303ef54d699c94849f7aa8a711ed9694 \u2014 $50\n:: Bonus Winners \u2014 $30 Trading Credit (Withdrawable at Hyperion Mainnet Launch): Each of the following wallets will receive $30 in ETH/METIS/USDC on their LazaiTrader account once we launch on Hyperion or Andromeda mainnet:\n0x2032b4fec3d8f195456ea2625e5355017f673b53\n0x45fc9b36365b98c3468ea5e69dceb52b7815cdc4\n0x0acab23bf3396becb5652a2efddf43efb0427d1e\n0xe1573ebdc439c49cd213df76a8158218e2e2f96c\n0x6f0c939e0e76af935084da53d1a1f480100a8402\n0x52b1cc58bf6286465cd46bb8d0676ec3478a95bd\n0xceeeb450802a79ebad45ddb745040fda08853e40\n0xcc8924d8b23e4f72a964ee8f4815fe540cdb838a\n0xddd27c9168210c492bb0ce591e0ea070c2d5cf88\n0xde59367372391406e0b3fbd25920a406d0104d4a\n:: Check Your Wallet: Head to telegram \u2192 @lazaitrader_bot and type /wallet to view your assigned wallet address and see if you are one of the winners. Some of you had hidden username therefore i\u2019d like to ask you to check and DM me if your wallet is listed above\n:: Next Steps: Rewards for the top 3 are being distributed this week. Bonus credits will be activated once LazaiTrader goes live on Hyperion mainnet \u2014 and yes, withdrawals will be enabled!\nThank you for making this campaign a success. Let\u2019s keep building, keep trading, and keep winning ::\n\u2014 The LazaiTrader Team"
-            }
-        ]
-    },
-    {
-        "id": "82f801ea31bf6268",
-        "topic_id": "10608",
-        "title": "How Metis Stands Out Amid SEC Warnings",
-        "url": "https://forum.ceg.vote/t/how-metis-stands-out-amid-sec-warnings/10608",
-        "views": "",
-        "comments": "0",
-        "created_date": "Sep 16, 2025 8:21 am",
-        "latest_activity": null,
-        "content": "Hey Metisians\nToday I want to touch on something very important: the SEC\u2019s recent warning about Layer-2 chains using centralized sequencers: https://cryptoslate.com/secs-peirce-warns-l2-chains-with-centralized-sequencers-may-face-exchange-registration/\nCommissioner Hester Peirce drew a clear line:\nIf one entity controls all transaction ordering, it looks a lot like an exchange \u2014 and may fall under regulatory obligations.\nBut if it\u2019s truly decentralized code, nobody \u201cowns\u201d it, and you can\u2019t just force it into an exchange framework.\nAnd this is where Metis shines.\nFor over a year now, Metis has been running with a fully decentralized sequencer, operating flawlessly without a single point of failure. This is a huge differentiator in the L2 ecosystem.\nAnd it\u2019s not just technical it\u2019s also economic:\nWith ENKI and Artemis, users can access up to 20% liquid staking rewards.\nThat means you support the network\u2019s security while keeping your liquidity intact.\nThis is crucial: while regulators are pushing back on centralized designs, Metis has been walking the talk of decentralization since day one.\nFriends, while some projects fear regulation because of centralization, Metis stands apart not just promising decentralization, but proving it for over a year.\nPlease share your thoughts in the comments.",
-        "comments_details": [
-            {
-                "author": "han",
-                "comment": "Hey Metisians\nToday I want to touch on something very important: the SEC\u2019s recent warning about Layer-2 chains using centralized sequencers: https://cryptoslate.com/secs-peirce-warns-l2-chains-with-centralized-sequencers-may-face-exchange-registration/\nCommissioner Hester Peirce drew a clear line:\nIf one entity controls all transaction ordering, it looks a lot like an exchange \u2014 and may fall under regulatory obligations.\nBut if it\u2019s truly decentralized code, nobody \u201cowns\u201d it, and you can\u2019t just force it into an exchange framework.\nAnd this is where Metis shines.\nFor over a year now, Metis has been running with a fully decentralized sequencer, operating flawlessly without a single point of failure. This is a huge differentiator in the L2 ecosystem.\nAnd it\u2019s not just technical it\u2019s also economic:\nWith ENKI and Artemis, users can access up to 20% liquid staking rewards.\nThat means you support the network\u2019s security while keeping your liquidity intact.\nThis is crucial: while regulators are pushing back on centralized designs, Metis has been walking the talk of decentralization since day one.\nFriends, while some projects fear regulation because of centralization, Metis stands apart not just promising decentralization, but proving it for over a year.\nPlease share your thoughts in the comments."
             }
         ]
     }
