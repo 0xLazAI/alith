@@ -246,18 +246,21 @@ main();
   ## Text Source Knowledge
 
   ```typescript
-  const { Agent, TextFileKnowledge } = require('alith');
+const { Agent, TextFileKnowledge } = require("alith");
 
 async function main() {
-    const knowledges = [new TextFileKnowledge("path/to/text.txt")];
-    const agent = new Agent({
-        name: "simple agent",
-        model: "gpt-4",
-        preamble: "You are a comedian here to entertain the user using humour and jokes."
-    });
-    agent.knowledges = knowledges;
-    const response = await agent.prompt("Entertain me!");
-    console.log(response);
+  const knowledges = [new TextFileKnowledge("path/to/text.txt")];
+
+  const agent = new Agent({
+    name: "simple agent",
+    model: "gpt-4",
+    preamble: "You are a comedian here to entertain the user using humour and jokes.",
+  });
+
+  agent.knowledges = knowledges;
+
+  const response = await agent.prompt("Entertain me!");
+  console.log(response.output_text);
 }
 
 main().catch(console.error);
@@ -266,18 +269,21 @@ main().catch(console.error);
   ## PDF Source Knowledge
 
   ```typescript
-  const { Agent, PdfFileKnowledge } = require('alith');
+  const { Agent, PdfFileKnowledge } = require("alith");
 
 async function main() {
-    const knowledges = [new PdfFileKnowledge("path/to/pdf.pdf")];
-    const agent = new Agent({
-        name: "simple agent",
-        model: "gpt-4",
-        preamble: "You are a comedian here to entertain the user using humour and jokes."
-    });
-    agent.knowledges = knowledges;
-    const response = await agent.prompt("Entertain me!");
-    console.log(response);
+  const knowledges = [new PdfFileKnowledge("path/to/pdf.pdf")];
+
+  const agent = new Agent({
+    name: "simple agent",
+    model: "gpt-4",
+    preamble: "You are a comedian here to entertain the user using humour and jokes.",
+  });
+
+  agent.knowledges = knowledges;
+
+  const response = await agent.prompt("Entertain me!");
+  console.log(response.output_text);
 }
 
 main().catch(console.error);
@@ -286,24 +292,29 @@ main().catch(console.error);
   ## HTML Source Knowledge
 
   ```typescript
-  const { Agent, HtmlKnowledge } = require('alith');
-const axios = require('axios');
+  const { Agent, HtmlKnowledge } = require("alith");
+const axios = require("axios");
 
 async function main() {
-    const url = "https://en.m.wikivoyage.org/wiki/Seoul";
-    const html = (await axios.get(url)).data;
-    const knowledges = [new HtmlKnowledge(html, url, false)];
-    const agent = new Agent({
-        name: "simple agent",
-        model: "gpt-4",
-        preamble: "You are a comedian here to entertain the user using humour and jokes."
-    });
-    agent.knowledges = knowledges;
-    const response = await agent.prompt("Entertain me!");
-    console.log(response);
+  const url = "https://en.m.wikivoyage.org/wiki/Seoul";
+  const html = (await axios.get(url)).data;
+
+  const knowledges = [new HtmlKnowledge(html, url, false)];
+
+  const agent = new Agent({
+    name: "simple agent",
+    model: "gpt-4",
+    preamble: "You are a comedian here to entertain the user using humour and jokes.",
+  });
+
+  agent.knowledges = knowledges;
+
+  const response = await agent.prompt("Entertain me!");
+  console.log(response.output_text);
 }
 
 main().catch(console.error);
+
     ```
 </Tabs.Tab>
 </Tabs>
