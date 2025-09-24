@@ -133,34 +133,41 @@ print(agent.prompt("Calculate 10 - 3"))
 ```typescript
 import { Agent } from "../agent";
 
-const agent = new Agent({
-  model: "gpt-4",
-  preamble:
-    "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",
-  tools: [
-    {
-      name: "subtract",
-      description: "Subtract y from x (i.e.: x - y)",
-      parameters: JSON.stringify({
-        type: "object",
-        properties: {
-          x: {
-            type: "number",
-            description: "The number to substract from",
+async function main() {
+  const agent = new Agent({
+    model: "gpt-4",
+    preamble:
+      "You are a calculator here to help the user perform arithmetic operations. Use the tools provided to answer the user question.",
+    tools: [
+      {
+        name: "subtract",
+        description: "Subtract y from x (i.e.: x - y)",
+        parameters: JSON.stringify({
+          type: "object",
+          properties: {
+            x: {
+              type: "number",
+              description: "The number to subtract from",
+            },
+            y: {
+              type: "number",
+              description: "The number to subtract",
+            },
           },
-          y: {
-            type: "number",
-            description: "The number to substract",
-          },
+          required: ["x", "y"],
+        }),
+        handler: async ({ x, y }: { x: number; y: number }) => {
+          return x - y;
         },
-      }),
-      handler: (x: number, y: number) => {
-        return x - y;
       },
-    },
-  ],
-});
-console.log(await agent.prompt("Calculate 10 - 3"));
+    ],
+  });
+
+  const response = await agent.prompt("Calculate 10 - 3");
+  console.log(response.output_text);
+}
+
+main().catch(console.error);
 ```
 
 </Tabs.Tab>
