@@ -85,16 +85,6 @@ class Client(ChainManager):
         self.send_transaction(self.data_registry_contract.functions.addFile(url, hash))
         return self.get_file_id_by_url(url)
 
-    def add_file_with_hash_tx(self, url: str, hash: str):
-        """Add file and return both file id and transaction hash.
-
-        Returns a dict: {"file_id": int, "tx_hash": str, "tx_receipt": TxReceipt}
-        """
-        tx_hash, tx_receipt = self.send_transaction(
-            self.data_registry_contract.functions.addFile(url, hash)
-        )
-        file_id = self.get_file_id_by_url(url)
-        return {"file_id": file_id, "tx_hash": tx_hash.hex(), "tx_receipt": tx_receipt}
 
     def add_file_tx(self, url: str):
         """Add file without hash and return both file id and transaction hash."""
