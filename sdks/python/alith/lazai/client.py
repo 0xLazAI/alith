@@ -79,11 +79,23 @@ class Client(ChainManager):
         return self.data_registry_contract.functions.publicKey().call()
 
     def add_file(self, url: str) -> int:
-        return self.add_file_with_hash(url, "")
-
-    def add_file_with_hash(self, url: str, hash: str) -> int:
-        self.send_transaction(self.data_registry_contract.functions.addFile(url, hash))
+        """Add file without hash and return file id (keeps legacy behavior)."""
+        self.send_transaction(self.data_registry_contract.functions.addFile(url, ""))
         return self.get_file_id_by_url(url)
+
+    def add_file_with_hash(self, url: str, hash: str) -> str:
+        """Add file with provided hash and return transaction hash (hex string)."""
+        tx_hash, _ = self.send_transaction(
+            self.data_registry_contract.functions.addFile(url, hash)
+        )
+        # Normalize to 0x-prefixed hex string
+        try:
+            hex_str = tx_hash.hex()  # works for bytes/HexBytes
+        except Exception:
+            hex_str = str(tx_hash)
+        if not hex_str.startswith("0x"):
+            hex_str = f"0x{hex_str}"
+        return hex_str
 
     def add_permission_for_file(self, file_id: int, account: str, key: str):
         return self.send_transaction(
