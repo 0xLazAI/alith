@@ -25,7 +25,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from alith.lazai import Client
 from alith.lazai.node.middleware import HeaderValidationMiddleware
 from alith.lazai.node.validator import decrypt_file_url
-from alith import MilvusStore, chunk_text
+from alith import chunk_text
+from alith.store import MilvusStore, ChromaDBStore, FAISSStore
 from .types import QueryRequest
 from .settlement import QueryBillingMiddleware
 
@@ -39,8 +40,37 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 client = Client()
 app = FastAPI(title="Alith LazAI Privacy Data Query Node", version="1.0.0")
-store = MilvusStore()
+
+# Configurable store - can be set via environment variable
+import os
+store_type = os.getenv("ALITH_STORE_TYPE", "chromadb").lower()
 collection_prefix = "query_"
+
+def get_store():
+    """Get the configured store based on environment variable."""
+    if store_type == "milvus":
+        try:
+            return MilvusStore()
+        except Exception as e:
+            print(f"Warning: MilvusStore initialization failed: {e}")
+            print("Falling back to ChromaDBStore...")
+            return ChromaDBStore()
+    elif store_type == "faiss":
+        try:
+            return FAISSStore()
+        except Exception as e:
+            print(f"Warning: FAISSStore initialization failed: {e}")
+            print("Falling back to ChromaDBStore...")
+            return ChromaDBStore()
+    else:  # default to chromadb
+        try:
+            return ChromaDBStore()
+        except Exception as e:
+            print(f"Warning: ChromaDBStore initialization failed: {e}")
+            print("No vector store available - RAG functionality disabled")
+            return None
+
+store = get_store()
 
 
 @app.post("/query/rag")
@@ -66,6 +96,16 @@ async def query_rag(req: QueryRequest):
         owner, file_url, file_hash = file[1], file[2], file[3]
         collection_name = collection_prefix + file_hash
         # Cache data in the vector database
+        if store is None:
+            # Fallback when no vector store is available
+            return {
+                "data": ["Vector store not available - RAG functionality disabled"],
+                "owner": owner,
+                "file_id": file_id,
+                "file_url": file_url,
+                "file_hash": file_hash,
+            }
+        
         if not store.has_collection(collection_name):
             encryption_key = client.get_file_permission(
                 file_id, client.contract_config.data_registry_address
