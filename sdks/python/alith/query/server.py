@@ -94,7 +94,9 @@ async def query_rag(req: QueryRequest):
                 ),
             )
         owner, file_url, file_hash = file[1], file[2], file[3]
-        collection_name = collection_prefix + file_hash
+        # Truncate hash to fit ChromaDB's 63 character limit (prefix + hash must be <= 63)
+        # collection_prefix is "query_" (6 chars), so we can use up to 57 chars of the hash
+        collection_name = collection_prefix + file_hash[:57]
         # Cache data in the vector database
         if store is None:
             # Fallback when no vector store is available
@@ -111,7 +113,11 @@ async def query_rag(req: QueryRequest):
                 file_id, client.contract_config.data_registry_address
             )
             data = decrypt_file_url(file_url, encryption_key).decode("utf-8")
-            store.create_collection(collection_name=collection_name)
+            try:
+                store.create_collection(collection_name=collection_name)
+            except Exception as e:
+                # Collection might already exist, continue
+                logger.warning(f"Collection creation failed (might already exist): {e}")
             store.save_docs(chunk_text(data), collection_name=collection_name)
         data = store.search_in(
             req.query, limit=req.limit, collection_name=collection_name
