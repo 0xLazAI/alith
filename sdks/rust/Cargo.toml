@@ -11,6 +11,10 @@ crate-type = ["rlib", "cdylib"]
 name = "agent_groq"
 path = "examples/agent_groq.rs"
 
+[[example]]
+name = "agent_github_debug"
+path = "examples/agent_github_debug.rs"
+
 [dependencies]
 alith.workspace = true
 tokio.workspace = true
