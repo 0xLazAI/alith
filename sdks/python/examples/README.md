@@ -12,3 +12,4 @@
 - [Search Bot](./search-bot.py)
 - [Telegram Bot](./tg-bot.py)
 - [Telegram Bot with RAG](./tg-bot-with-rag.py)
+- [Text Evaluator (Standard - requires 6-8GB RAM)](./text_evaluator.py)

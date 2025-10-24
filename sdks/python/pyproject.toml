@@ -35,6 +35,14 @@ dev = [
     "isort",
 ]
 
+# Optional dependencies for the Data Evaluation feature used by alith.data.evaluator.text
+evaluation = [
+    "torch",
+    "transformers",
+    "scikit-learn",
+    "pyspellchecker",
+]
+
 [tool.maturin]
 features = ["pyo3/extension-module"]
 module-name = "alith._alith"

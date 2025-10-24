@@ -45,6 +45,8 @@ Run examples:
 python examples/agent_groq.py
 ```
 
+Data evaluation (Python): see the "Data Evaluation (Text)" section in `sdks/python/README.md` for installing `alith[evaluation]` and using `TextEvaluator`.
+
 ## Publishing (high level)
 - Node: `npm run prepublishOnly` prepares artifacts; CI builds per‑platform `.node` and runs `npm publish` from `sdks/node`.
 - Python: `maturin build` (or `maturin publish`) builds wheels for the active platform; CI can produce manylinux/macos/windows wheels.
