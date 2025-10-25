@@ -18,6 +18,7 @@ import sys
 import json
 import uvicorn
 import argparse
+import os
 
 from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -31,7 +32,6 @@ from .types import QueryRequest
 from .settlement import QueryBillingMiddleware
 
 # Logging configuration
-
 logging.basicConfig(
     stream=sys.stdout,
     level=logging.INFO,
@@ -42,7 +42,6 @@ client = Client()
 app = FastAPI(title="Alith LazAI Privacy Data Query Node", version="1.0.0")
 
 # Configurable store - can be set via environment variable
-import os
 store_type = os.getenv("ALITH_STORE_TYPE", "chromadb").lower()
 collection_prefix = "query_"
 
