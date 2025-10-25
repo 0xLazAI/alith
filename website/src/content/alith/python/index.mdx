@@ -1,0 +1,235 @@
+import { Steps, Tabs } from "nextra/components";
+
+# **The Problem with Building AI Agents**
+
+When building AI agents, you face a dilemma:
+
+- **Python** is easy and has great AI libraries, but can be slow for complex operations
+- **Rust** is blazingly fast and safe, but has a steeper learning curve
+
+---
+
+![image](https://forum.ceg.vote/uploads/default/original/2X/7/752ec6a5ed3a48744f0c11d1ce322b2dd67e1a47.jpeg)
+
+---
+
+# **What if you could have both?**
+
+### **Alith's Solution: A Hybrid Architecture**
+
+Alith lets you write simple Python code while secretly running high-performance Rust under the hood. Here's how:
+
+```python
+from alith import Agent
+
+# Simple Python API
+agent = Agent(
+    model="gpt-4",
+    tools=[search_web, calculator]
+)
+
+response = agent.prompt("Calculate 15% of 2500")
+print(response)  # "The result is 375"
+```
+
+Behind this simple code, a sophisticated Rust engine is orchestrating everything.
+
+## **The Three-Layer Architecture**
+
+### **Layer 1: Python Interface (What You Write)**
+
+You interact with Alith using pure Python:
+
+```python
+# Define tools as Python functions
+def search_web(query: str) -> str:
+    return f"Search results for {query}"
+
+# Create agent with tools
+agent = Agent(
+    model="gpt-4",
+    tools=[search_web],
+    memory=Memory(),  # Conversation history
+    store=VectorStore()  # RAG support
+)
+```
+
+### **Layer 2: The Bridge (PyO3 Magic)**
+
+**Here's the clever part**: When you install Alith, the Rust code is compiled into a binary file (`_alith.so` on Linux, `_alith.pyd` on Windows) that Python can import.
+
+**PyO3** is a Rust library that:
+
+1. Takes Rust code
+2. Compiles it to C-compatible machine code
+3. Makes it look like a Python module
+
+```rust
+// Rust code (developers write this)
+#[pyclass]
+pub struct DelegateAgent {
+    agent: Agent<LLM>,
+}
+
+#[pymethods]
+impl DelegateAgent {
+    pub fn prompt(&mut self, prompt: &str) -> PyResult<String> {
+        // High-performance Rust code here
+    }
+}
+```
+
+After compilation:
+
+```python
+# Python code (users write this)
+from ._alith import DelegateAgent  # ← Compiled Rust!
+
+agent = DelegateAgent(...)
+result = agent.prompt("Hello")  # ← Python has no idea this is Rust!
+```
+
+**Python thinks it's calling a Python function, but it's actually executing Rust machine code!**
+
+### **Layer 3: Rust Core (The Engine)**
+
+The Rust core handles all the heavy lifting:
+
+- **Agent**: Orchestrates tools, memory, and context
+- **Executor**: Manages the execution flow
+- **LLM Client**: Makes HTTP requests to AI providers (OpenAI, Anthropic, etc.)
+- **Tool System**: Executes tools and handles callbacks
+
+## **The Complete Flow**
+
+Let's trace what happens when you call `agent.prompt("What's the weather in Paris?")`:
+
+1. Python: agent.prompt("Weather?")
+    - Wraps tools, searches vector store (if enabled)
+2. Rust Agent:
+    - Builds request with context, collects available tools
+3. Rust Executor:
+    - Enriches with knowledge, calls LLM Client
+4. LLM API (OpenAI/Anthropic):
+    - Response: "I'll search for weather"
+    - Tool Call: search_web("Paris")
+5. Tool Execution:
+    - Rust finds tool, calls Python func via C FFI callback
+6. Python Tool Function:
+    - search_web(query) → Returns "Paris: Sunny, 25°C"
+7. Rust Collects Results:
+    - Adds to memory, returns final response
+8. Python: print(response)
+    - "Weather in Paris: Sunny, 25°C"
+
+![image](https://forum.ceg.vote/uploads/default/original/2X/f/faa53295b6c12fd02887347120e95109ed9e03ba.png)
+
+---
+
+# **Two Bridges, Two Purposes**
+
+### **Bridge 1: PyO3 (Rust → Python)**
+
+- Compiles Rust to Python-compatible machine code
+- Handles type conversions (Python `str` ↔ Rust `String`)
+- Makes Rust classes/functions available in Python
+
+### **Bridge 2: ctypes/FFI (Python → Rust)**
+
+- Used for tool callbacks only
+- Python function → C-compatible function pointer → Rust calls it
+- Allows Rust to execute your Python tools
+
+```python
+# Your Python tool
+def calculator(operation: str, x: int, y: int) -> int:
+    return eval(f"{x} {operation} {y}")
+
+# When LLM calls this tool:
+# Python → ctypes wrapper → Memory address → Rust calls it → Python executes → Result back to Rust
+```
+
+## **Why This Architecture Rocks**
+
+### **Performance**
+
+- HTTP calls, JSON parsing, async operations → Rust (fast!)
+- Concurrent operations handled efficiently by Tokio runtime
+
+### **Simplicity**
+
+- You write simple Python code
+- No need to learn Rust
+- Familiar Python patterns and types
+
+### **Safety**
+
+- Rust's memory safety prevents crashes
+- No segfaults or memory leaks
+- Production-ready reliability
+
+### **Flexibility**
+
+- Define tools in Python (your domain logic)
+- Add memory for conversations
+- Integrate vector stores for RAG
+- Connect to MCP servers for external capabilities
+
+## **Real-World Example**
+
+```python
+from alith import Agent, Tool, Memory
+
+# Define custom tool
+def get_user_data(user_id: str) -> dict:
+    # Your business logic in Python
+    return {"name": "Alice", "role": "Admin"}
+
+# Create agent
+agent = Agent(
+    model="gpt-4",
+    tools=[get_user_data],
+    memory=Memory(),
+    preamble="You are a helpful assistant with access to user data"
+)
+
+# Use it
+response = agent.prompt("What's the role of user_123?")
+# Agent uses the tool, gets data, responds naturally
+```
+
+**What happens:**
+
+1. Python sends request to Rust
+2. Rust calls OpenAI/Anthropic
+3. LLM decides to use `get_user_data` tool
+4. Rust calls your Python function
+5. Your business logic executes
+6. Result flows back through the stack
+7. You get a natural language response
+
+## **Key Takeaways**
+
+1. **Python doesn't know it's calling Rust** - PyO3 makes compiled Rust look like native Python
+2. **Rust doesn't compile Python** - Python tools stay as Python, called via FFI when needed
+3. **Best of both worlds** - Simple Python API + Rust performance
+4. **Production ready** - Memory safe, concurrent, efficient
+
+## **The Bottom Line**
+
+Alith proves you can have your cake and eat it too. Write simple Python code, get Rust performance, and never worry about the complexity underneath. It's like using NumPy or Pandas - you get C/Fortran speed through a Python interface, but you never see the compiled code.
+
+**Try it out:**
+
+```bash
+pip install alith
+```
+
+```python
+from alith import Agent
+
+agent = Agent(model="gpt-4")
+print(agent.prompt("Hello, world!"))
+```
+
+Simple Python, powered by Rust. That's the Alith way.
