@@ -211,7 +211,6 @@ class ChromaDBStore(Store):
             )
         return self
 
-
 try:
     from pymilvus import MilvusClient, MilvusException, model
 

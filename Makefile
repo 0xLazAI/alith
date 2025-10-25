@@ -24,3 +24,17 @@ clippy:
 
 fix:
 	cargo clippy --workspace --all-features --benches --examples --tests --fix --allow-dirty
+
+# SDK helpers
+.PHONY: sdk-node-build sdk-python-develop sdk-python-build sdks-build-all
+
+sdk-node-build:
+	cd sdks/node && npm install && npm run build
+
+sdk-python-develop:
+	cd sdks/python && python -m venv .venv && . .venv/Scripts/Activate.ps1 && pip install -U pip maturin && maturin develop
+
+sdk-python-build:
+	cd sdks/python && python -m venv .venv && . .venv/Scripts/Activate.ps1 && pip install -U pip maturin && maturin build
+
+sdks-build-all: sdk-node-build sdk-python-build

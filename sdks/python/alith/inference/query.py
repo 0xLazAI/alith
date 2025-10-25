@@ -76,7 +76,6 @@ class DataQueryMiddleware(BaseHTTPMiddleware):
                 if len(context) > max_context_chars:
                     context = context[:max_context_chars] + "... [truncated]"
                     logger.info(f"Context truncated from {len(''.join(docs))} to {max_context_chars} chars")
-                
                 logger.info(f"Data queried with the file id: {file_id}")
                 updated_prompt = "{}\n\n<attachments>\n{}</attachments>\n".format(
                     prompt, context
@@ -97,6 +96,7 @@ class DataQueryMiddleware(BaseHTTPMiddleware):
                 request._body = new_body
                 
                 logger.info(f"Forwarding request with RAG context ({len(new_body)} bytes, {len(context)} chars context) to LLM...")
+
                 return await call_next(request)
 
             return await call_next(request)

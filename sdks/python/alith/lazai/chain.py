@@ -51,6 +51,7 @@ class ChainManager:
             private_key = getenv("PRIVATE_KEY", "Cant find PRIVATE_KEY")
         if not private_key:
             raise ValueError("PRIVATE_KEY is not set, Cant find PRIVATE_KEY in environment variables")
+
         self.config = config
         self.w3: Web3 = Web3(Web3.HTTPProvider(config.chain_endpoint))
         self.wallet: LocalAccount = self.w3.eth.account.from_key(private_key)

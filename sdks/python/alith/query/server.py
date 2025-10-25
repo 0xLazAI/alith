@@ -108,6 +108,7 @@ async def query_rag(req: QueryRequest):
                 "file_hash": file_hash,
             }
         
+
         if not store.has_collection(collection_name):
             encryption_key = client.get_file_permission(
                 file_id, client.contract_config.data_registry_address
@@ -118,6 +119,7 @@ async def query_rag(req: QueryRequest):
             except Exception as e:
                 # Collection might already exist, continue
                 logger.warning(f"Collection creation failed (might already exist): {e}")
+
             store.save_docs(chunk_text(data), collection_name=collection_name)
         data = store.search_in(
             req.query, limit=req.limit, collection_name=collection_name

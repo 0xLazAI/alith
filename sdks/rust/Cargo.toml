@@ -7,6 +7,10 @@ edition.workspace = true
 [lib]
 crate-type = ["rlib", "cdylib"]
 
+[[example]]
+name = "agent_groq"
+path = "examples/agent_groq.rs"
+
 [dependencies]
 alith.workspace = true
 tokio.workspace = true

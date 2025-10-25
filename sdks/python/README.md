@@ -1,5 +1,7 @@
 # Alith Python SDK
 
+Note: See the consolidated SDK overview and Rust binding build guide in `sdks/README.md`.
+
 ## Installation
 
 ```shell

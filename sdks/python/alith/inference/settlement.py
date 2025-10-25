@@ -46,6 +46,7 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
                 total_tokens = usage.get("total_tokens", 0)
                 user, cost = calculate_billing(
                     request, id, total_tokens, self.config.price_per_token, self.client, self.graceful
+
                 )
                 logger.info(
                     f"User {user} consumed {total_tokens} tokens on /v1/chat/completions, billing: {cost}"
@@ -110,15 +111,15 @@ def calculate_billing(
                     id=id, user=user, cost=cost, nonce=int(nonce), user_signature=signature
                 )
             )
-            logger.info(f"✅ Settlement successful: {cost} tokens billed to {user}")
+            logger.info(f"Settlement successful: {cost} tokens billed to {user}")
         except Exception as e:
-            logger.warning(f"⚠️ Settlement failed (continuing anyway): {e}")
+            logger.warning(f"Settlement failed (continuing anyway): {e}")
     else:
         client.inference_settlement_fees(
             SettlementData(
                 id=id, user=user, cost=cost, nonce=int(nonce), user_signature=signature
             )
         )
-        logger.info(f"✅ Settlement successful: {cost} tokens billed to {user}")
+        logger.info(f"Settlement successful: {cost} tokens billed to {user}")
     
     return user, cost

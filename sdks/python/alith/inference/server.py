@@ -81,6 +81,7 @@ def run(
             app.add_middleware(HeaderValidationMiddleware, type=INFERENCE_TYPE)
             app.add_middleware(DataQueryMiddleware)
             app.add_middleware(TokenBillingMiddleware, graceful=graceful_settlement)
+
         return uvicorn.run(
             app,
             host=host,

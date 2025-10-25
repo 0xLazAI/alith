@@ -39,9 +39,6 @@ class QueryBillingMiddleware(BaseHTTPMiddleware):
                 # Parse response to extract token usage
                 response_data = json.loads(response_body.decode("utf-8"))
                 data: List[str] = response_data.get("data", [])
-                print(f"Data: {data}")
-                print(f"Price per token: {self.config.price_per_token}")
-                print(f"Client: {self.client}")
                 user, cost = calculate_billing(
                     request, data, self.config.price_per_token, self.client
                 )
@@ -98,11 +95,6 @@ def calculate_billing(
     nonce = request.headers[NONCE_HEADER]
     signature = request.headers[SIGNATURE_HEADER]
     cost = 1000 + sum(len(item) * price_per_token for item in data)
-    print(f"Cost: {cost}")
-    print(f"User: {user}")
-    print(f"Nonce: {nonce}")
-    print(f"Signature: {signature}")
-    print(f"Client: {client}")
     client.query_settlement_fees(
         SettlementData(
             id="", user=user, cost=cost, nonce=int(nonce), user_signature=signature
