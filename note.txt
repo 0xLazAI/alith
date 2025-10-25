@@ -1,9 +1,0 @@
-in query.py need to get the paarameter from the user for the rag content passing
-
-
-
-
-
-
-so i need the readme for comparision of old code and the new code updated flow.. also i need to the docs for the settlemet how works docs also i need.. each and every thing that the model does.. also how to solve that error.. and write the docs what is DAT and it's work also what's the flow with the tenicall thing with the examples... 
-
