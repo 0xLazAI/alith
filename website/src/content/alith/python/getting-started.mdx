@@ -1,0 +1,334 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Getting Started with Alith Python
+
+This guide will walk you through setting up your first AI agent with Alith Python SDK.
+
+<Steps>
+
+## Installation
+
+First, install the Alith Python SDK:
+
+```bash
+pip install alith
+```
+
+### Optional Dependencies
+
+For enhanced functionality, install optional dependencies:
+
+```bash
+# Vector stores for RAG
+pip install chromadb              # ChromaDB support
+pip install pymilvus              # Milvus support
+pip install faiss-cpu             # FAISS CPU support
+
+# Embeddings
+pip install fastembed             # FastEmbed CPU
+pip install fastembed-gpu         # FastEmbed GPU
+
+# Training
+pip install llamafactory          # LLM training support
+
+# Encryption
+pip install python-gnupg          # GPG encryption support
+```
+
+## Your First Agent
+
+Let's create a simple AI agent that can answer questions:
+
+```python
+from alith import Agent
+
+# Create your first agent
+agent = Agent(
+    name="MyFirstAgent",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    preamble="You are a helpful assistant that provides clear and accurate answers."
+)
+
+# Ask a question
+response = agent.prompt("What is artificial intelligence?")
+print(response)
+```
+
+### Why This Works
+
+- **`Agent`**: The core class that creates AI agents
+- **`model`**: Specifies which LLM to use (Groq's Llama 3.1 70B)
+- **`api_key`**: Your Groq API key for authentication
+- **`base_url`**: The API endpoint for Groq's service
+- **`preamble`**: System prompt that defines the agent's behavior
+- **`prompt()`**: Method to send messages and get responses
+
+## Adding Memory
+
+Make your agent remember previous conversations:
+
+```python
+from alith import Agent, WindowBufferMemory
+
+# Create memory that keeps last 10 messages
+memory = WindowBufferMemory(window_size=10)
+
+agent = Agent(
+    name="MemoryAgent",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+
+# Have a conversation
+agent.prompt("My name is Alice")
+agent.prompt("What's my name?")  # Agent will remember: "Your name is Alice"
+```
+
+### Memory Benefits
+
+- **Context Awareness**: Agents remember previous interactions
+- **Better Responses**: More coherent conversations
+- **Sliding Window**: Keeps memory manageable by limiting history
+- **Flexible**: Customizable window size based on your needs
+
+## Adding Knowledge with RAG
+
+Give your agent access to documents and knowledge bases:
+
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+
+# Setup vector store for knowledge
+embeddings = FastEmbeddings()
+store = ChromaDBStore(path="./knowledge", embeddings=embeddings)
+
+# Add your documents
+documents = [
+    "Alith is an AI agent framework for Web3 applications.",
+    "It supports multiple LLM providers including OpenAI, Groq, and Anthropic.",
+    "The framework includes vector stores, memory management, and blockchain integration."
+]
+
+# Chunk and store documents
+chunks = []
+for doc in documents:
+    chunks.extend(chunk_text(doc, max_chunk_token_size=100))
+store.save_docs(chunks)
+
+# Create agent with knowledge base
+agent = Agent(
+    name="KnowledgeAgent",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    store=store
+)
+
+# Query with context
+response = agent.prompt("What is Alith?")
+print(response)  # Will use the stored knowledge
+```
+
+### RAG Benefits
+
+- **Knowledge Retrieval**: Agents can access relevant information
+- **Semantic Search**: Find information by meaning, not just keywords
+- **Scalable**: Handle large document collections efficiently
+- **Accurate**: Reduces hallucinations by grounding responses in facts
+
+## Adding Custom Tools
+
+Extend your agent's capabilities with custom functions:
+
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+
+# Define tool parameters
+class WeatherParams(BaseModel):
+    city: str = Field(..., description="City name to get weather for")
+
+# Create a weather tool
+def get_weather(city: str) -> dict:
+    """Get current weather for a city"""
+    # Simulated weather data
+    return {
+        "city": city,
+        "temperature": 22,
+        "condition": "sunny",
+        "humidity": 65
+    }
+
+# Create tool
+weather_tool = Tool(
+    name="get_weather",
+    description="Get current weather for any city",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+# Create agent with tools
+agent = Agent(
+    name="WeatherAgent",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[weather_tool]
+)
+
+# Use the tool
+response = agent.prompt("What's the weather in Paris?")
+print(response)  # Agent will use the weather tool
+```
+
+### Tool Benefits
+
+- **Function Calling**: Agents can execute custom code
+- **API Integration**: Connect to external services
+- **Data Processing**: Handle complex calculations
+- **Workflow Automation**: Chain multiple operations
+
+## Environment Setup
+
+For production applications, use environment variables:
+
+```bash
+# Create .env file
+echo "GROQ_API_KEY=your-groq-api-key" > .env
+echo "OPENAI_API_KEY=your-openai-api-key" >> .env
+```
+
+```python
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+agent = Agent(
+    name="ProductionAgent",
+    model="llama-3.3-70b-versatile",
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1"
+)
+```
+
+## Next Steps
+
+Now that you have a basic understanding, explore these advanced topics:
+
+- **[Agent Configuration](./agent.mdx)** - Deep dive into agent settings
+- **[Memory Management](./memory.mdx)** - Advanced memory strategies
+- **[Vector Stores](./store.mdx)** - Building knowledge bases
+- **[Custom Tools](./tools.mdx)** - Creating powerful extensions
+- **[Blockchain Integration](./lazai.mdx)** - Web3 capabilities
+- **[Examples](../examples/)** - Real-world applications
+
+</Steps>
+
+## Common Issues & Solutions
+
+### API Key Problems
+
+**Issue**: Getting authentication errors or "Invalid API key" messages
+
+**Solutions**:
+- **Verify your API key**: Double-check the key is copied correctly (no extra spaces)
+- **Check provider limits**: Ensure you have sufficient credits/quota remaining
+- **Test with curl**: Verify the key works outside of Alith:
+  ```bash
+  curl -H "Authorization: Bearer YOUR_API_KEY" \
+       -H "Content-Type: application/json" \
+       https://api.groq.com/openai/v1/models
+  ```
+- **Environment variables**: Make sure your `.env` file is loaded properly
+- **Provider-specific**: Each provider has different key formats and requirements
+
+### Memory Issues
+
+**Issue**: Agent doesn't remember previous conversations
+
+**Solutions**:
+- **Session-based memory**: Memory resets when you restart your script
+- **Persistent storage**: Use database-backed memory for long-term retention
+  ```python
+  from alith import Agent, DatabaseMemory
+  
+  # Persistent memory that survives restarts
+  memory = DatabaseMemory(connection_string="sqlite:///agent_memory.db")
+  agent = Agent(name="PersistentAgent", memory=memory, ...)
+  ```
+- **Memory size**: Increase `window_size` if conversations are getting cut off
+- **Memory type**: Consider using `SummaryMemory` for very long conversations
+
+### Performance Issues
+
+**Issue**: Slow response times or timeouts
+
+**Solutions**:
+- **Faster models**: Switch to lighter models like `llama3-8b-8192` or `llama3-70b-8192`
+- **Model optimization**: Use faster models for quicker responses
+  ```python
+  agent = Agent(
+      name="FastAgent",
+      model="llama3-8b-8192",  # Faster model
+      api_key="your-groq-api-key",
+      base_url="https://api.groq.com/openai/v1"
+  )
+  ```
+- **Caching**: Implement response caching for repeated queries
+- **Batch processing**: Group multiple requests together
+- **Provider choice**: Some providers are faster than others (Groq vs OpenAI vs Anthropic)
+
+### Vector Store Problems
+
+**Issue**: RAG not working or poor search results
+
+**Solutions**:
+- **Installation**: Ensure vector store dependencies are installed
+  ```bash
+  pip install chromadb fastembed  # For ChromaDB
+  pip install pymilvus           # For Milvus
+  pip install faiss-cpu          # For FAISS
+  ```
+- **Embedding consistency**: Use the same embedding model for indexing and querying
+- **Chunk size**: Optimize document chunking (100-500 tokens work well)
+- **Index rebuilding**: Rebuild your vector index if documents aren't found
+- **Dimension mismatch**: Ensure all embeddings have the same dimensions
+
+### Tool Integration Issues
+
+**Issue**: Custom tools not being called or failing
+
+**Solutions**:
+- **Function signatures**: Ensure your tool functions match the expected parameters
+- **Error handling**: Add try-catch blocks in your tool functions
+- **Tool descriptions**: Make sure tool descriptions are clear and specific
+- **Parameter validation**: Use Pydantic models for robust parameter validation
+- **Debug mode**: Enable debug logging to see tool execution details
+
+### Installation Problems
+
+**Issue**: Import errors or missing dependencies
+
+**Solutions**:
+- **Virtual environment**: Always use a virtual environment
+  ```bash
+  python -m venv alith-env
+  source alith-env/bin/activate  # Linux/Mac
+  alith-env\Scripts\activate     # Windows
+  ```
+- **Dependency conflicts**: Check for version conflicts with other packages
+- **Platform-specific**: Some dependencies have platform-specific requirements
+- **Clean install**: Try `pip uninstall alith && pip install alith` for a fresh start
+
+## Getting Help
+
+- **GitHub Issues**: [Report bugs and feature requests](https://github.com/alith-ai/alith/issues)
+- **Discord Community**: [Get help from the community](https://discord.gg/alith)
+- **Documentation**: [Comprehensive API reference](./api-reference.mdx)
+- **Examples**: [See real-world implementations](../examples/)
