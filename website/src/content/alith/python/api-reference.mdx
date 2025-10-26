@@ -1,0 +1,801 @@
+# API Reference
+
+Complete reference for the Alith Python SDK, including all classes, methods, and parameters.
+
+## Core Classes
+
+### Agent
+
+The main class for creating AI agents.
+
+```python
+from alith import Agent
+
+agent = Agent(
+    model: Optional[str] = "",
+    name: Optional[str] = "",
+    preamble: Optional[str] = "",
+    api_key: Optional[str] = "",
+    base_url: Optional[str] = "",
+    tools: List[Union[Tool, Callable]] = [],
+    mcp_config_path: Optional[str] = "",
+    store: Optional[Store] = None,
+    memory: Optional[Memory] = None,
+    extra_headers: Optional[Headers] = None
+)
+```
+
+#### Methods
+
+##### `prompt(prompt: str) -> str`
+Send a prompt to the agent and get a response.
+
+**Parameters:**
+- `prompt` (str): The message to send to the agent
+
+**Returns:**
+- `str`: The agent's response
+
+**Example:**
+```python
+response = agent.prompt("What is artificial intelligence?")
+print(response)
+```
+
+### Memory Classes
+
+#### WindowBufferMemory
+
+Maintains a sliding window of recent messages.
+
+```python
+from alith import WindowBufferMemory
+
+memory = WindowBufferMemory(window_size=10)
+```
+
+**Parameters:**
+- `window_size` (int): Maximum number of messages to keep (default: 10)
+
+**Methods:**
+- `add_message(message)`: Add a message to memory
+- `add_user_message(message: str)`: Add user message
+- `add_ai_message(message: str)`: Add AI message
+- `messages()`: Get all messages
+- `clear()`: Clear all messages
+
+#### MessageBuilder
+
+Utility class for creating different types of messages.
+
+```python
+from alith import MessageBuilder
+
+# Create messages
+user_msg = MessageBuilder.new_human_message("Hello")
+ai_msg = MessageBuilder.new_ai_message("Hi there!")
+system_msg = MessageBuilder.new_system_message("You are helpful")
+tool_msg = MessageBuilder.new_tool_message("Result: 42")
+
+# Parse messages
+messages = MessageBuilder.messages_from_value(json_data)
+text = MessageBuilder.messages_to_string(messages)
+```
+
+### Store Classes
+
+#### ChromaDBStore
+
+ChromaDB vector store implementation.
+
+```python
+from alith import ChromaDBStore
+
+store = ChromaDBStore(
+    path=".",
+    collection_name=None,
+    embeddings=None
+)
+```
+
+**Methods:**
+- `save(value: str)`: Save a single document
+- `save_docs(docs: List[str], collection_name: Optional[str] = None)`: Save multiple documents
+- `search(query: str, limit: int = 3, score_threshold: float = 0.4)`: Search for similar documents
+- `search_in(query: str, limit: int = 3, score_threshold: float = 0.4, collection_name: Optional[str] = None)`: Search in specific collection
+- `has_collection(collection_name: str)`: Check if collection exists
+- `create_collection(collection_name: str)`: Create new collection
+- `reset()`: Reset the store
+
+#### MilvusStore
+
+Milvus vector store implementation.
+
+```python
+from alith import MilvusStore
+
+store = MilvusStore(
+    uri="alith.db",
+    dimension=768,
+    collection_name="alith",
+    embeddings=None
+)
+```
+
+**Methods:**
+- Same as ChromaDBStore
+
+#### FAISSStore
+
+FAISS vector store implementation.
+
+```python
+from alith import FAISSStore
+
+store = FAISSStore(
+    dimension=768,
+    embeddings=None,
+    index_type="L2"
+)
+```
+
+**Methods:**
+- `search(query: str, limit: int = 3, score_threshold: float = 0.4)`: Regular search
+- `search_batch(queries: List[str], limit: int = 3, score_threshold: float = 0.4)`: Batch search
+- `search_with_scores(query: str, limit: int = 3, score_threshold: float = 0.4)`: Search with scores
+- `search_approximate(query: str, limit: int = 3, score_threshold: float = 0.4, nprobe: int = 10)`: Approximate search
+- `create_ivf_index(nlist: int = 100)`: Create IVF index
+- `save_to_disk(path: str)`: Save index to disk
+- `load_from_disk(path: str)`: Load index from disk
+- `get_stats()`: Get store statistics
+
+### Embedding Classes
+
+#### FastEmbeddings
+
+FastEmbed embeddings implementation.
+
+```python
+from alith import FastEmbeddings
+
+embeddings = FastEmbeddings(
+    model_name="BAAI/bge-small-en-v1.5",
+    cache_dir=None
+)
+```
+
+**Methods:**
+- `embed_texts(texts: List[str]) -> List[List[float]]`: Generate embeddings
+
+#### MilvusEmbeddings
+
+Milvus embeddings implementation.
+
+```python
+from alith import MilvusEmbeddings
+
+embeddings = MilvusEmbeddings()
+```
+
+#### RemoteModelEmbeddings
+
+Remote model embeddings implementation.
+
+```python
+from alith import RemoteModelEmbeddings
+
+embeddings = RemoteModelEmbeddings(
+    model="text-embedding-ada-002",
+    api_key="your-api-key",
+    base_url="https://api.openai.com/v1",
+    port=None
+)
+```
+
+#### OllamaEmbeddings
+
+Ollama embeddings implementation.
+
+```python
+from alith import OllamaEmbeddings
+
+embeddings = OllamaEmbeddings(
+    model="nomic-embed-text",
+    base_url="http://localhost:11434"
+)
+```
+
+### Tool Classes
+
+#### Tool
+
+Tool class for agent capabilities.
+
+```python
+from alith import Tool
+
+tool = Tool(
+    name="my_tool",
+    description="A useful tool",
+    parameters=None,
+    version="1.0.0",
+    author="Unknown",
+    handler=my_function
+)
+```
+
+**Methods:**
+- `to_delegate_tool()`: Convert to DelegateTool
+
+#### DuckDuckGoTool
+
+Built-in search tool.
+
+```python
+from alith.utilities.search import DuckDuckGoTool
+
+search_tool = DuckDuckGoTool()
+
+# Direct usage
+results = search_tool.text("query", max_results=5)
+news = search_tool.news("query", max_results=3)
+images = search_tool.images("query", max_results=5)
+videos = search_tool.videos("query", max_results=3)
+
+# Use with agent
+agent = Agent(tools=[search_tool.to_tool()])
+```
+
+### Utility Functions
+
+#### chunk_text
+
+Chunk text into smaller pieces.
+
+```python
+from alith import chunk_text
+
+chunks = chunk_text(
+    text="Your long text here",
+    max_chunk_token_size=200,
+    overlap_percent=0.0
+)
+```
+
+**Parameters:**
+- `text` (str): Text to chunk
+- `max_chunk_token_size` (int): Maximum token size per chunk
+- `overlap_percent` (float): Overlap percentage between chunks
+
+**Returns:**
+- `List[str]`: List of text chunks
+
+#### create_delegate_tool
+
+Create DelegateTool from function.
+
+```python
+from alith import create_delegate_tool
+
+tool = create_delegate_tool(
+    func=my_function,
+    version="1.0.0",
+    author="Unknown"
+)
+```
+
+## LazAI Integration
+
+### Client
+
+Main client for LazAI blockchain interactions.
+
+```python
+from alith.lazai import Client
+
+client = Client(
+    chain_config=ChainConfig.testnet(),
+    contract_config=ContractConfig.testnet(),
+    private_key=None
+)
+```
+
+#### Data Registry Methods
+
+##### `add_file(url: str) -> int`
+Add file to registry without hash.
+
+**Parameters:**
+- `url` (str): File URL
+
+**Returns:**
+- `int`: File ID
+
+##### `add_file_with_hash(url: str, hash: str) -> str`
+Add file with content hash.
+
+**Parameters:**
+- `url` (str): File URL
+- `hash` (str): Content hash
+
+**Returns:**
+- `str`: Transaction hash
+
+##### `get_file(file_id: int)`
+Get file information.
+
+**Parameters:**
+- `file_id` (int): File ID
+
+**Returns:**
+- Tuple: (id, owner, url, hash, proof_index, reward_amount)
+
+##### `add_permission_for_file(file_id: int, account: str, key: str)`
+Grant access permission to account.
+
+**Parameters:**
+- `file_id` (int): File ID
+- `account` (str): Account address
+- `key` (str): Encryption key
+
+##### `get_file_permission(file_id: int, account: str) -> str`
+Get encryption key for account.
+
+**Parameters:**
+- `file_id` (int): File ID
+- `account` (str): Account address
+
+**Returns:**
+- `str`: Encryption key
+
+#### Node Management Methods
+
+##### `add_node(address: str, url: str, public_key: str)`
+Register compute node.
+
+**Parameters:**
+- `address` (str): Node address
+- `url` (str): Node URL
+- `public_key` (str): RSA public key
+
+##### `remove_node(address: str)`
+Remove compute node.
+
+**Parameters:**
+- `address` (str): Node address
+
+##### `get_node(addr: str)`
+Get node information.
+
+**Parameters:**
+- `addr` (str): Node address
+
+**Returns:**
+- Tuple: (address, url, status, amount, jobs_count, public_key)
+
+##### `node_list() -> List[str]`
+Get list of all node addresses.
+
+**Returns:**
+- `List[str]`: List of node addresses
+
+##### `active_node_list() -> List[str]`
+Get list of active node addresses.
+
+**Returns:**
+- `List[str]`: List of active node addresses
+
+#### Settlement Methods
+
+##### `add_user(amount: int)`
+Register user with initial deposit.
+
+**Parameters:**
+- `amount` (int): Deposit amount in wei
+
+##### `deposit(amount: int)`
+Deposit funds to user account.
+
+**Parameters:**
+- `amount` (int): Deposit amount in wei
+
+##### `withdraw(amount: int)`
+Withdraw funds from user account.
+
+**Parameters:**
+- `amount` (int): Withdrawal amount in wei
+
+##### `deposit_query(node: str, amount: int)`
+Deposit funds for query service.
+
+**Parameters:**
+- `node` (str): Node address
+- `amount` (int): Deposit amount in wei
+
+##### `deposit_inference(node: str, amount: int)`
+Deposit funds for inference service.
+
+**Parameters:**
+- `node` (str): Node address
+- `amount` (int): Deposit amount in wei
+
+##### `deposit_training(node: str, amount: int)`
+Deposit funds for training service.
+
+**Parameters:**
+- `node` (str): Node address
+- `amount` (int): Deposit amount in wei
+
+#### Request Headers
+
+##### `get_request_headers(node: str, file_id: int = None, nonce: int = None) -> Dict[str, str]`
+Generate signed headers for authenticated requests.
+
+**Parameters:**
+- `node` (str): Node address
+- `file_id` (int, optional): File ID
+- `nonce` (int, optional): Nonce value
+
+**Returns:**
+- `Dict[str, str]`: Signed headers
+
+### Chain Configuration
+
+#### ChainConfig
+
+Blockchain network configuration.
+
+```python
+from alith.lazai import ChainConfig
+
+# Testnet configuration
+config = ChainConfig.testnet()
+
+# Local development configuration
+config = ChainConfig.local()
+
+# Custom configuration
+config = ChainConfig(
+    network="mainnet",
+    endpoint="https://mainnet.example.com",
+    chain_id=1
+)
+```
+
+#### ContractConfig
+
+Smart contract configuration.
+
+```python
+from alith.lazai import ContractConfig
+
+# Testnet contracts
+config = ContractConfig.testnet()
+
+# Local contracts
+config = ContractConfig.local()
+
+# Custom contracts
+config = ContractConfig(
+    data_registry_address="0x...",
+    verified_computing_address="0x...",
+    data_anchoring_token_address="0x...",
+    query_address="0x...",
+    inference_address="0x...",
+    training_address="0x...",
+    settlement_address="0x..."
+)
+```
+
+## Training
+
+### Training Types
+
+#### TrainingParams
+
+Training configuration parameters.
+
+```python
+from alith.training.types import TrainingParams
+
+params = TrainingParams(
+    model="llama-3.3-70b-versatile",
+    training_type="sft",  # sft, rm, ppo, dpo, kto, pt
+    finetuning_type="lora",  # lora, freeze, full
+    lr_scheduler_type="cosine",
+    learning_rate=0.0001,
+    num_epochs=3,
+    max_samples=1000,
+    bf16=True,
+    optim="adamw",
+    cutoff_len=2048,
+    flash_attn="auto",
+    save_steps=100,
+    template="alpaca",
+    lora_params=lora_params,
+    data_params=data_params
+)
+```
+
+#### LoraParams
+
+LoRA fine-tuning parameters.
+
+```python
+from alith.training.types import LoraParams
+
+lora_params = LoraParams(
+    rank=8,
+    alpha=16,
+    dropout=0.0,
+    target="all"
+)
+```
+
+#### DataParams
+
+Data configuration parameters.
+
+```python
+from alith.training.types import DataParams
+
+data_params = DataParams(
+    data_url="https://example.com/dataset.json",
+    encryption_key="your-encryption-key"
+)
+```
+
+## TEE Integration
+
+### PhalaTEE
+
+Phala TEE implementation.
+
+```python
+from alith.tee import PhalaTEE
+
+tee = PhalaTEE(
+    cluster_id="your-cluster-id",
+    worker_id="your-worker-id",
+    private_key="your-private-key"
+)
+```
+
+**Methods:**
+- `compute(data, function)`: Execute computation in TEE
+
+### MarlinTEE
+
+Marlin TEE implementation.
+
+```python
+from alith.tee import MarlinTEE
+
+tee = MarlinTEE(
+    endpoint="https://api.marlin.com",
+    api_key="your-api-key",
+    model_id="your-model-id"
+)
+```
+
+**Methods:**
+- `infer(prompt)`: Run inference in TEE
+
+## Data Management
+
+### Encryption Functions
+
+#### encrypt
+
+Encrypt data using GPG.
+
+```python
+from alith.data import encrypt
+
+encrypted = encrypt(
+    data=b"your data here",
+    password="your-password"
+)
+```
+
+#### decrypt
+
+Decrypt data using GPG.
+
+```python
+from alith.data import decrypt
+
+decrypted = decrypt(
+    data=encrypted_data,
+    password="your-password"
+)
+```
+
+#### download_file
+
+Download file from URL.
+
+```python
+from alith.data import download_file
+
+temp_path = download_file(
+    url="https://example.com/file.txt"
+)
+```
+
+## Error Handling
+
+### Custom Exceptions
+
+#### TrainingStatusNotFound
+
+Raised when training status is not found.
+
+```python
+from alith.training.errors import TrainingStatusNotFound
+
+try:
+    status = get_training_status(job_id)
+except TrainingStatusNotFound:
+    print("Training status not found")
+```
+
+## Type Definitions
+
+### Headers
+
+Type alias for HTTP headers.
+
+```python
+from alith.types import Headers
+
+# Headers is a type alias for Mapping[str, str]
+headers: Headers = {"Authorization": "Bearer token"}
+```
+
+## Constants
+
+### Request Headers
+
+HTTP header names for LazAI requests.
+
+```python
+from alith.lazai.request import (
+    USER_HEADER,
+    NONCE_HEADER,
+    SIGNATURE_HEADER,
+    FILE_ID_HEADER
+)
+```
+
+### Request Types
+
+Request type constants.
+
+```python
+from alith.lazai.request import (
+    QUERY_TYPE,
+    INFERENCE_TYPE,
+    TRAINING_TYPE
+)
+```
+
+## Best Practices
+
+### 1. Error Handling
+
+```python
+try:
+    response = agent.prompt("Hello")
+except Exception as e:
+    print(f"Error: {e}")
+    # Handle error appropriately
+```
+
+### 2. Resource Management
+
+```python
+# Use context managers for resources
+with ChromaDBStore(path="./temp") as store:
+    store.save_docs(documents)
+    results = store.search("query")
+```
+
+### 3. Configuration
+
+```python
+import os
+
+# Use environment variables for configuration
+api_key = os.getenv("GROQ_API_KEY")
+if not api_key:
+    raise ValueError("GROQ_API_KEY not set")
+```
+
+### 4. Performance
+
+```python
+# Use batch operations for efficiency
+store.save_docs(documents)  # Better than individual saves
+
+# Use caching for repeated queries
+@lru_cache(maxsize=100)
+def cached_search(query):
+    return store.search(query)
+```
+
+## Examples
+
+### Basic Agent
+
+```python
+from alith import Agent
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+response = agent.prompt("What is AI?")
+```
+
+### Agent with Memory
+
+```python
+from alith import Agent, WindowBufferMemory
+
+memory = WindowBufferMemory(window_size=10)
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+
+agent.prompt("My name is Alice")
+response = agent.prompt("What's my name?")
+```
+
+### Agent with RAG
+
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+
+embeddings = FastEmbeddings()
+store = ChromaDBStore(path="./docs", embeddings=embeddings)
+
+# Add documents
+docs = chunk_text("Your document content...", max_chunk_token_size=200)
+store.save_docs(docs)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    store=store
+)
+
+response = agent.prompt("What does the document say?")
+```
+
+### Blockchain Integration
+
+```python
+from alith.lazai import Client
+import os
+
+os.environ["PRIVATE_KEY"] = "0x..."
+client = Client()
+
+# Register user
+client.add_user(amount=1000000000000000000)
+
+# Add file
+file_id = client.add_file("https://example.com/data.json")
+
+# Generate headers
+headers = client.get_request_headers(node="0xnode...", file_id=file_id)
+```
+
+This API reference provides comprehensive documentation for all Alith Python SDK components. For more examples and advanced usage, see the [Examples](../examples/) section.

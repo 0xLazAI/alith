@@ -1,0 +1,294 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Memory Management
+
+Memory allows AI agents to maintain conversation context and remember previous interactions. Alith provides a simple but effective memory system.
+
+## Why Memory Matters
+
+### Without Memory
+```python
+from alith import Agent
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+# Each interaction is independent
+agent.prompt("My name is Alice")
+agent.prompt("What's my name?")  # Response: "I don't know your name"
+```
+
+### With Memory
+```python
+from alith import Agent, WindowBufferMemory
+
+memory = WindowBufferMemory(window_size=10)
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+
+# Maintains conversation context
+agent.prompt("My name is Alice")
+agent.prompt("What's my name?")  # Response: "Your name is Alice"
+```
+
+## Available Memory Classes
+
+### WindowBufferMemory
+
+The only built-in memory implementation that maintains a sliding window of recent messages:
+
+```python
+from alith import Agent, WindowBufferMemory
+
+# Create memory with 10 message window
+memory = WindowBufferMemory(window_size=10)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+
+# Conversation
+agent.prompt("I'm working on a Python project")
+agent.prompt("What programming language am I using?")  # Remembers: Python
+```
+
+**Features:**
+- Sliding window of messages
+- Automatic cleanup of old messages
+- Configurable window size
+- Simple and efficient
+
+**Methods:**
+- `add_message(message)` - Add a message to memory
+- `messages()` - Get all messages in memory
+- `clear()` - Clear all messages
+- `add_user_message(content)` - Add user message
+- `add_ai_message(content)` - Add AI message
+- `to_string()` - Convert memory to string format
+
+## MessageBuilder Class
+
+The `MessageBuilder` class provides utilities for creating and managing messages:
+
+### Creating Messages
+
+```python
+from alith import MessageBuilder
+
+# User messages
+user_msg = MessageBuilder.new_human_message("Hello, how are you?")
+
+# AI responses  
+ai_msg = MessageBuilder.new_ai_message("I'm doing well, thank you!")
+
+# System messages
+system_msg = MessageBuilder.new_system_message("You are a helpful assistant")
+
+# Tool messages
+tool_msg = MessageBuilder.new_tool_message("Weather: 22°C, sunny")
+```
+
+### Message Parsing
+
+Parse messages from various formats:
+
+```python
+# From JSON string
+json_str = '{"role": "user", "content": "Hello"}'
+messages = MessageBuilder.messages_from_value(json_str)
+
+# From dictionary
+msg_dict = {"role": "assistant", "content": "Hi there!"}
+messages = MessageBuilder.messages_from_value(msg_dict)
+
+# From list
+msg_list = [
+    {"role": "user", "content": "Hello"},
+    {"role": "assistant", "content": "Hi!"}
+]
+messages = MessageBuilder.messages_from_value(msg_list)
+```
+
+### Message Conversion
+
+Convert messages to string format:
+
+```python
+# To string representation
+conversation = MessageBuilder.messages_to_string(messages)
+print(conversation)
+# Output:
+# user: Hello
+# assistant: Hi!
+```
+
+## Custom Memory Implementation
+
+You can create custom memory classes by extending the `Memory` abstract class:
+
+### Simple Custom Memory
+
+```python
+from alith import Memory, MessageBuilder, Agent
+
+class SimpleCustomMemory(Memory):
+    """A simple custom memory implementation"""
+    
+    def __init__(self, max_messages=20):
+        self.max_messages = max_messages
+        self._messages = []
+    
+    def add_message(self, message):
+        self._messages.append(message)
+        
+        # Keep only the most recent messages
+        if len(self._messages) > self.max_messages:
+            self._messages = self._messages[-self.max_messages:]
+    
+    def messages(self):
+        return self._messages.copy()
+    
+    def clear(self):
+        self._messages.clear()
+
+# Usage
+memory = SimpleCustomMemory(max_messages=15)
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+```
+
+### Persistent Memory
+
+Save memory to disk for persistence:
+
+```python
+import json
+import os
+from alith import Memory, MessageBuilder, Agent
+
+class PersistentMemory(Memory):
+    """Memory that saves to disk"""
+    
+    def __init__(self, file_path="memory.json", max_messages=50):
+        self.file_path = file_path
+        self.max_messages = max_messages
+        self._messages = []
+        self.load()
+    
+    def add_message(self, message):
+        self._messages.append(message)
+        
+        # Keep only recent messages
+        if len(self._messages) > self.max_messages:
+            self._messages = self._messages[-self.max_messages:]
+        
+        self.save()
+    
+    def messages(self):
+        return self._messages.copy()
+    
+    def clear(self):
+        self._messages.clear()
+        self.save()
+    
+    def save(self):
+        """Save memory to disk"""
+        data = {
+            "messages": [
+                {"role": msg.role, "content": msg.content}
+                for msg in self._messages
+            ]
+        }
+        with open(self.file_path, 'w') as f:
+            json.dump(data, f)
+    
+    def load(self):
+        """Load memory from disk"""
+        if os.path.exists(self.file_path):
+            try:
+                with open(self.file_path, 'r') as f:
+                    data = json.load(f)
+                    self._messages = MessageBuilder.messages_from_value(
+                        data.get("messages", [])
+                    )
+            except (json.JSONDecodeError, KeyError):
+                self._messages = []
+
+# Usage
+memory = PersistentMemory("chat_history.json")
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+```
+
+## Memory Best Practices
+
+### 1. Window Size Selection
+
+Choose appropriate window sizes for your use case:
+
+```python
+# Short conversations (chatbots)
+memory = WindowBufferMemory(window_size=5)
+
+# Medium conversations (customer service)  
+memory = WindowBufferMemory(window_size=15)
+
+# Long conversations (personal assistants)
+memory = WindowBufferMemory(window_size=30)
+```
+
+### 2. Memory Management
+
+Monitor and manage memory usage:
+
+```python
+# Check memory size
+memory = WindowBufferMemory(window_size=10)
+print(f"Messages in memory: {len(memory.messages())}")
+
+# Clear memory when needed
+if len(memory.messages()) > 50:
+    memory.clear()
+    print("Memory cleared due to size limit")
+```
+
+### 3. Error Handling
+
+Handle memory operations safely:
+
+```python
+try:
+    memory.add_message(MessageBuilder.new_human_message("Hello"))
+    response = agent.prompt("Hello")
+    memory.add_message(MessageBuilder.new_ai_message(response))
+except Exception as e:
+    print(f"Memory error: {e}")
+    memory.clear()  # Reset on error
+```
+
+## Next Steps
+
+Now that you understand memory management, explore:
+
+- **[Vector Stores](./store.mdx)** - Building knowledge bases
+- **[Custom Tools](./tools.mdx)** - Extending agent capabilities  
+- **[Blockchain Integration](./lazai.mdx)** - Web3 features
+- **[Examples](../examples/)** - Real-world implementations

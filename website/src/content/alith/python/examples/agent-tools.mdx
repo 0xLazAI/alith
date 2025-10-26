@@ -1,0 +1,687 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Agent with Tools Example
+
+This example demonstrates how to create an AI agent with custom tools, allowing it to execute functions, interact with APIs, and perform complex operations.
+
+## What are Tools?
+
+Tools extend your AI agents' capabilities by allowing them to execute custom functions:
+
+- **Function Calling**: Agents can execute custom code
+- **API Integration**: Connect to external services
+- **Data Processing**: Handle complex calculations
+- **Workflow Automation**: Chain multiple operations
+
+## Complete Example
+
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+import requests
+import json
+from datetime import datetime
+
+# Define tool parameters
+class WeatherParams(BaseModel):
+    city: str = Field(..., description="City name to get weather for")
+
+class MathParams(BaseModel):
+    operation: str = Field(..., description="Operation: add, subtract, multiply, divide")
+    a: float = Field(..., description="First number")
+    b: float = Field(..., description="Second number")
+
+class NewsParams(BaseModel):
+    query: str = Field(..., description="Search query for news")
+    limit: int = Field(5, description="Number of articles to return")
+
+# Tool implementations
+def get_weather(city: str) -> dict:
+    """Get current weather for a city"""
+    # Simulated weather API
+    weather_data = {
+        "Paris": {"temp": 22, "condition": "sunny", "humidity": 65},
+        "London": {"temp": 18, "condition": "cloudy", "humidity": 80},
+        "Tokyo": {"temp": 25, "condition": "rainy", "humidity": 90},
+        "New York": {"temp": 20, "condition": "clear", "humidity": 55}
+    }
+    
+    if city in weather_data:
+        return {
+            "city": city,
+            "temperature": weather_data[city]["temp"],
+            "condition": weather_data[city]["condition"],
+            "humidity": weather_data[city]["humidity"]
+        }
+    else:
+        return {"error": f"Weather data not available for {city}"}
+
+def calculate(operation: str, a: float, b: float) -> dict:
+    """Perform basic math operations"""
+    operations = {
+        "add": a + b,
+        "subtract": a - b,
+        "multiply": a * b,
+        "divide": a / b if b != 0 else "Error: Division by zero"
+    }
+    
+    return {
+        "operation": operation,
+        "result": operations.get(operation, "Invalid operation"),
+        "inputs": [a, b]
+    }
+
+def get_news(query: str, limit: int = 5) -> dict:
+    """Get news articles (simulated)"""
+    # Simulated news data
+    news_data = {
+        "AI": [
+            {"title": "AI Breakthrough in Healthcare", "url": "https://example.com/ai-healthcare"},
+            {"title": "New AI Model Surpasses Human Performance", "url": "https://example.com/ai-model"},
+            {"title": "AI Ethics in the Workplace", "url": "https://example.com/ai-ethics"}
+        ],
+        "technology": [
+            {"title": "New Smartphone Features Revealed", "url": "https://example.com/smartphone"},
+            {"title": "Quantum Computing Advances", "url": "https://example.com/quantum"},
+            {"title": "5G Network Expansion", "url": "https://example.com/5g"}
+        ]
+    }
+    
+    # Simple keyword matching
+    query_lower = query.lower()
+    if "ai" in query_lower or "artificial intelligence" in query_lower:
+        articles = news_data["AI"]
+    elif "tech" in query_lower or "technology" in query_lower:
+        articles = news_data["technology"]
+    else:
+        articles = news_data["AI"] + news_data["technology"]
+    
+    return {
+        "query": query,
+        "articles": articles[:limit],
+        "total": len(articles[:limit])
+    }
+
+def get_current_time() -> dict:
+    """Get current time"""
+    now = datetime.now()
+    return {
+        "time": now.strftime("%Y-%m-%d %H:%M:%S"),
+        "timezone": "UTC",
+        "timestamp": now.timestamp()
+    }
+
+def main():
+    import os
+    
+    # Get API key
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    # Create tools
+    weather_tool = Tool(
+        name="get_weather",
+        description="Get current weather for any city",
+        parameters=WeatherParams,
+        handler=get_weather
+    )
+    
+    math_tool = Tool(
+        name="calculate",
+        description="Perform basic math operations (add, subtract, multiply, divide)",
+        parameters=MathParams,
+        handler=calculate
+    )
+    
+    news_tool = Tool(
+        name="get_news",
+        description="Get latest news articles on any topic",
+        parameters=NewsParams,
+        handler=get_news
+    )
+    
+    time_tool = Tool(
+        name="get_current_time",
+        description="Get current time and date",
+        parameters=None,
+        handler=get_current_time
+    )
+    
+    # Create agent with tools
+    agent = Agent(
+        name="ToolAgent",
+        model="llama-3.3-70b-versatile",
+        api_key=api_key,
+        base_url="https://api.groq.com/openai/v1",
+        preamble="You are a helpful AI assistant with access to various tools. Use the available tools to help users with their requests. Always explain what you're doing when using tools.",
+        tools=[weather_tool, math_tool, news_tool, time_tool]
+    )
+    
+    print("Tool Agent is ready!")
+    print("Available tools: weather, calculator, news, time")
+    print("Ask me anything (type 'quit' to exit)")
+    print("-" * 60)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Get response from agent
+            response = agent.prompt(user_input)
+            print(f"\nAgent: {response}")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Advanced Tools Example
+
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+import requests
+import json
+import os
+from typing import List, Dict, Any
+
+# Advanced tool parameters
+class EmailParams(BaseModel):
+    to: str = Field(..., description="Recipient email address")
+    subject: str = Field(..., description="Email subject")
+    body: str = Field(..., description="Email body")
+
+class FileParams(BaseModel):
+    filename: str = Field(..., description="Name of the file to create")
+    content: str = Field(..., description="Content to write to the file")
+
+class APIParams(BaseModel):
+    url: str = Field(..., description="API endpoint URL")
+    method: str = Field("GET", description="HTTP method")
+    data: str = Field("", description="Request data (for POST/PUT)")
+
+class DatabaseParams(BaseModel):
+    query: str = Field(..., description="SQL query to execute")
+    database: str = Field("main", description="Database name")
+
+# Advanced tool implementations
+def send_email(to: str, subject: str, body: str) -> dict:
+    """Send email (simulated)"""
+    # In a real implementation, you'd use an email service
+    return {
+        "status": "sent",
+        "to": to,
+        "subject": subject,
+        "message_id": f"msg_{hash(subject + body) % 10000}",
+        "timestamp": datetime.now().isoformat()
+    }
+
+def create_file(filename: str, content: str) -> dict:
+    """Create a file with content"""
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(content)
+        
+        return {
+            "status": "created",
+            "filename": filename,
+            "size": len(content),
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+def make_api_call(url: str, method: str = "GET", data: str = "") -> dict:
+    """Make API call with error handling"""
+    try:
+        if method.upper() == "GET":
+            response = requests.get(url, timeout=10)
+        elif method.upper() == "POST":
+            response = requests.post(url, data=data, timeout=10)
+        elif method.upper() == "PUT":
+            response = requests.put(url, data=data, timeout=10)
+        elif method.upper() == "DELETE":
+            response = requests.delete(url, timeout=10)
+        else:
+            return {"error": f"Unsupported method: {method}"}
+        
+        return {
+            "status": "success",
+            "status_code": response.status_code,
+            "data": response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
+        }
+    except requests.exceptions.Timeout:
+        return {"error": "Request timeout"}
+    except requests.exceptions.ConnectionError:
+        return {"error": "Connection error"}
+    except Exception as e:
+        return {"error": f"Request error: {str(e)}"}
+
+def query_database(query: str, database: str = "main") -> dict:
+    """Query database (simulated)"""
+    # Simulated database responses
+    if "SELECT" in query.upper():
+        return {
+            "status": "success",
+            "query": query,
+            "results": [
+                {"id": 1, "name": "John Doe", "email": "john@example.com"},
+                {"id": 2, "name": "Jane Smith", "email": "jane@example.com"}
+            ],
+            "count": 2
+        }
+    elif "INSERT" in query.upper():
+        return {
+            "status": "success",
+            "query": query,
+            "affected_rows": 1,
+            "message": "Record inserted successfully"
+        }
+    else:
+        return {
+            "status": "success",
+            "query": query,
+            "message": "Query executed successfully"
+        }
+
+def analyze_text(text: str) -> dict:
+    """Analyze text for sentiment and keywords"""
+    # Simple text analysis
+    words = text.split()
+    word_count = len(words)
+    char_count = len(text)
+    
+    # Simple sentiment analysis
+    positive_words = ["good", "great", "excellent", "amazing", "wonderful"]
+    negative_words = ["bad", "terrible", "awful", "horrible", "disappointing"]
+    
+    positive_count = sum(1 for word in words if word.lower() in positive_words)
+    negative_count = sum(1 for word in words if word.lower() in negative_words)
+    
+    if positive_count > negative_count:
+        sentiment = "positive"
+    elif negative_count > positive_count:
+        sentiment = "negative"
+    else:
+        sentiment = "neutral"
+    
+    return {
+        "word_count": word_count,
+        "character_count": char_count,
+        "sentiment": sentiment,
+        "positive_words": positive_count,
+        "negative_words": negative_count
+    }
+
+def main():
+    # Get API key
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    # Create advanced tools
+    email_tool = Tool(
+        name="send_email",
+        description="Send email to any recipient",
+        parameters=EmailParams,
+        handler=send_email
+    )
+    
+    file_tool = Tool(
+        name="create_file",
+        description="Create a file with specified content",
+        parameters=FileParams,
+        handler=create_file
+    )
+    
+    api_tool = Tool(
+        name="make_api_call",
+        description="Make HTTP API calls to any endpoint",
+        parameters=APIParams,
+        handler=make_api_call
+    )
+    
+    database_tool = Tool(
+        name="query_database",
+        description="Execute SQL queries on database",
+        parameters=DatabaseParams,
+        handler=query_database
+    )
+    
+    analysis_tool = Tool(
+        name="analyze_text",
+        description="Analyze text for sentiment and keywords",
+        parameters=None,
+        handler=analyze_text
+    )
+    
+    # Create agent with advanced tools
+    agent = Agent(
+        name="AdvancedToolAgent",
+        model="llama-3.3-70b-versatile",
+        api_key=api_key,
+        base_url="https://api.groq.com/openai/v1",
+        preamble="You are an advanced AI assistant with access to powerful tools. Use the available tools to help users with complex tasks including email, file operations, API calls, database queries, and text analysis.",
+        tools=[email_tool, file_tool, api_tool, database_tool, analysis_tool]
+    )
+    
+    print("Advanced Tool Agent is ready!")
+    print("Available tools: email, file operations, API calls, database, text analysis")
+    print("Ask me to perform complex tasks (type 'quit' to exit)")
+    print("-" * 70)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Get response from agent
+            response = agent.prompt(user_input)
+            print(f"\nAgent: {response}")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Running the Example
+
+```bash
+python agent_tools.py
+```
+
+## Expected Output
+
+```
+Tool Agent is ready!
+Available tools: weather, calculator, news, time
+Ask me anything (type 'quit' to exit)
+------------------------------------------------------------
+
+You: What's the weather in Paris?
+
+Agent: I'll check the weather in Paris for you.
+
+Agent: The current weather in Paris is:
+- Temperature: 22°C
+- Condition: Sunny
+- Humidity: 65%
+
+You: Calculate 15 * 8 and then get the current time.
+
+Agent: I'll calculate 15 * 8 for you and then get the current time.
+
+Agent: The result of 15 * 8 is 120.
+
+Agent: The current time is 2024-01-15 14:30:25 UTC.
+
+You: Get me the latest AI news.
+
+Agent: I'll fetch the latest AI news for you.
+
+Agent: Here are the latest AI news articles:
+1. AI Breakthrough in Healthcare
+2. New AI Model Surpasses Human Performance
+3. AI Ethics in the Workplace
+
+You: quit
+
+Goodbye!
+```
+
+## Key Features Demonstrated
+
+- **Custom Tools**: Define tools with specific parameters
+- **Function Calling**: Agents can execute custom functions
+- **API Integration**: Connect to external services
+- **Data Processing**: Handle complex calculations
+- **Error Handling**: Robust error management
+- **Tool Selection**: Agents choose appropriate tools
+
+## Tool Best Practices
+
+### 1. Clear Descriptions
+
+```python
+# Good: Clear and specific
+tool = Tool(
+    name="get_weather_forecast",
+    description="Get 5-day weather forecast for any city with temperature, humidity, and conditions",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+# Bad: Vague and unclear
+tool = Tool(
+    name="weather",
+    description="Get weather",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+```
+
+### 2. Proper Parameter Validation
+
+```python
+from pydantic import BaseModel, Field, validator
+
+class EmailParams(BaseModel):
+    to: str = Field(..., description="Recipient email address")
+    subject: str = Field(..., description="Email subject")
+    body: str = Field(..., description="Email body")
+    
+    @validator('to')
+    def validate_email(cls, v):
+        import re
+        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', v):
+            raise ValueError('Invalid email address')
+        return v
+    
+    @validator('subject')
+    def validate_subject(cls, v):
+        if len(v) > 100:
+            raise ValueError('Subject too long')
+        return v
+```
+
+### 3. Efficient Error Handling
+
+```python
+def robust_tool(input_data: str) -> dict:
+    """Tool with comprehensive error handling"""
+    try:
+        # Validate input
+        if not input_data or not isinstance(input_data, str):
+            return {"error": "Invalid input data"}
+        
+        # Process data
+        result = process_data(input_data)
+        
+        # Validate output
+        if not result:
+            return {"error": "Processing failed"}
+        
+        return {"success": True, "result": result}
+    
+    except ValueError as e:
+        return {"error": f"Value error: {str(e)}"}
+    except TypeError as e:
+        return {"error": f"Type error: {str(e)}"}
+    except Exception as e:
+        return {"error": f"Unexpected error: {str(e)}"}
+```
+
+## Common Issues
+
+### 1. Tool Not Being Called
+
+**Problem**: Agent doesn't use available tools
+**Solutions**:
+- Improve tool descriptions
+- Use more specific prompts
+- Check tool parameter validation
+- Ensure tools are properly registered
+
+```python
+# Better tool description
+tool = Tool(
+    name="get_weather",
+    description="Get current weather conditions for any city worldwide. Use this when users ask about weather.",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+# More specific prompt
+response = agent.prompt("Use the weather tool to get the current weather in Tokyo")
+```
+
+### 2. Parameter Validation Errors
+
+**Problem**: Tool fails due to invalid parameters
+**Solutions**:
+- Use proper Pydantic models
+- Add input validation
+- Handle edge cases
+- Provide clear error messages
+
+```python
+class RobustParams(BaseModel):
+    input: str = Field(..., description="Input data")
+    
+    @validator('input')
+    def validate_input(cls, v):
+        if not v or len(v.strip()) == 0:
+            raise ValueError('Input cannot be empty')
+        if len(v) > 1000:
+            raise ValueError('Input too long')
+        return v.strip()
+```
+
+### 3. Performance Issues
+
+**Problem**: Tools are too slow
+**Solutions**:
+- Implement caching
+- Use async operations
+- Optimize algorithms
+- Add timeouts
+
+```python
+import asyncio
+import aiohttp
+
+async def async_api_call(url: str) -> dict:
+    """Async API call for better performance"""
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+```
+
+## Integration Examples
+
+### 1. Workflow Automation
+
+```python
+class WorkflowTool:
+    def __init__(self):
+        self.steps = []
+    
+    def add_step(self, step: str):
+        """Add step to workflow"""
+        self.steps.append(step)
+    
+    def execute_workflow(self, workflow_name: str) -> dict:
+        """Execute workflow"""
+        return {
+            "workflow": workflow_name,
+            "steps": self.steps,
+            "status": "completed",
+            "timestamp": datetime.now().isoformat()
+        }
+
+# Create workflow tool
+workflow_tool = Tool(
+    name="execute_workflow",
+    description="Execute automated workflows",
+    parameters=None,
+    handler=WorkflowTool().execute_workflow
+)
+```
+
+### 2. Data Pipeline
+
+```python
+class DataPipelineTool:
+    def process_data(self, data: str, operations: List[str]) -> dict:
+        """Process data through pipeline"""
+        results = []
+        current_data = data
+        
+        for operation in operations:
+            if operation == "clean":
+                current_data = self.clean_data(current_data)
+            elif operation == "transform":
+                current_data = self.transform_data(current_data)
+            elif operation == "validate":
+                current_data = self.validate_data(current_data)
+            
+            results.append({
+                "operation": operation,
+                "result": current_data
+            })
+        
+        return {
+            "pipeline": operations,
+            "results": results,
+            "final_data": current_data
+        }
+    
+    def clean_data(self, data: str) -> str:
+        """Clean data"""
+        return data.strip().lower()
+    
+    def transform_data(self, data: str) -> str:
+        """Transform data"""
+        return data.upper()
+    
+    def validate_data(self, data: str) -> str:
+        """Validate data"""
+        if len(data) < 5:
+            raise ValueError("Data too short")
+        return data
+```
+
+## Next Steps
+
+- **[Agent with RAG](./agent-rag.mdx)** - Add knowledge base
+- **[Blockchain Integration](./agent-blockchain.mdx)** - Web3 features
+- **[Advanced Tools](./advanced-tools.mdx)** - Complex tool implementations
+- **[Tool Testing](./tool-testing.mdx)** - Test tool functionality

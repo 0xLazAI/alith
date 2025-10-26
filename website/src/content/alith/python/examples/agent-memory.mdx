@@ -1,0 +1,423 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Agent with Memory Example
+
+This example demonstrates how to create an AI agent with conversation memory, allowing it to remember previous interactions and maintain context across multiple turns.
+
+## Why Memory Matters
+
+Without memory, each conversation turn is independent:
+```python
+agent.prompt("My name is Alice")
+agent.prompt("What's my name?")  # Response: "I don't know your name"
+```
+
+With memory, the agent maintains context:
+```python
+agent.prompt("My name is Alice")
+agent.prompt("What's my name?")  # Response: "Your name is Alice"
+```
+
+## Complete Example
+
+```python
+from alith import Agent, WindowBufferMemory
+import os
+
+def main():
+    # Get API key
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    # Create memory with 10 message window
+    memory = WindowBufferMemory(window_size=10)
+    
+    # Create agent with memory
+    agent = Agent(
+        name="MemoryAgent",
+        model="llama-3.3-70b-versatile",
+        api_key=api_key,
+        base_url="https://api.groq.com/openai/v1",
+        preamble="You are a helpful AI assistant with memory. You can remember our previous conversations.",
+        memory=memory
+    )
+    
+    print("Memory Agent is ready!")
+    print("I can remember our conversation (type 'quit' to exit)")
+    print("-" * 50)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Get response from agent
+            response = agent.prompt(user_input)
+            print(f"\nAgent: {response}")
+            
+            # Show memory status
+            messages = memory.messages()
+            print(f"\nMemory: {len(messages)} messages stored")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Advanced Memory Example
+
+```python
+from alith import Agent, WindowBufferMemory, MessageBuilder
+import os
+
+class AdvancedMemoryAgent:
+    def __init__(self, api_key: str):
+        # Create memory with larger window
+        self.memory = WindowBufferMemory(window_size=20)
+        
+        # Create agent
+        self.agent = Agent(
+            name="AdvancedMemoryAgent",
+            model="llama-3.3-70b-versatile",
+            api_key=api_key,
+            base_url="https://api.groq.com/openai/v1",
+            preamble="You are an advanced AI assistant with excellent memory. You can remember details from our conversation and use them to provide better responses.",
+            memory=self.memory
+        )
+    
+    def add_system_message(self, message: str):
+        """Add system message to memory"""
+        system_msg = MessageBuilder.new_system_message(message)
+        self.memory.add_message(system_msg)
+    
+    def get_conversation_summary(self) -> str:
+        """Get conversation summary"""
+        messages = self.memory.messages()
+        if not messages:
+            return "No conversation yet"
+        
+        # Simple summary (in production, use AI to generate summary)
+        user_messages = [msg for msg in messages if msg.role == "user"]
+        ai_messages = [msg for msg in messages if msg.role == "assistant"]
+        
+        return f"Conversation: {len(user_messages)} user messages, {len(ai_messages)} AI responses"
+    
+    def clear_memory(self):
+        """Clear conversation memory"""
+        self.memory.clear()
+        print("Memory cleared!")
+    
+    def show_memory_stats(self):
+        """Show memory statistics"""
+        messages = self.memory.messages()
+        stats = {
+            "total_messages": len(messages),
+            "user_messages": len([m for m in messages if m.role == "user"]),
+            "ai_messages": len([m for m in messages if m.role == "assistant"]),
+            "system_messages": len([m for m in messages if m.role == "system"])
+        }
+        
+        print(f"\nMemory Stats:")
+        for key, value in stats.items():
+            print(f"  {key}: {value}")
+    
+    def chat(self, message: str) -> str:
+        """Chat with the agent"""
+        response = self.agent.prompt(message)
+        return response
+
+def main():
+    # Get API key
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    # Create advanced agent
+    agent = AdvancedMemoryAgent(api_key)
+    
+    print("Advanced Memory Agent is ready!")
+    print("Commands: 'stats' (show memory), 'clear' (clear memory), 'quit' (exit)")
+    print("-" * 60)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if user_input.lower() == 'stats':
+                agent.show_memory_stats()
+                continue
+            
+            if user_input.lower() == 'clear':
+                agent.clear_memory()
+                continue
+            
+            if not user_input:
+                continue
+            
+            # Chat with agent
+            response = agent.chat(user_input)
+            print(f"\nAgent: {response}")
+            
+            # Show conversation summary
+            summary = agent.get_conversation_summary()
+            print(f"\n{summary}")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Running the Example
+
+```bash
+python agent_memory.py
+```
+
+## Expected Output
+
+```
+Memory Agent is ready!
+I can remember our conversation (type 'quit' to exit)
+--------------------------------------------------
+
+You: My name is Alice and I'm a software engineer.
+
+Agent: Nice to meet you, Alice! It's great to hear that you're a software engineer. What kind of software do you work on? Are you involved in any particular programming languages or technologies?
+
+Memory: 2 messages stored
+
+You: What's my name and profession?
+
+Agent: Your name is Alice and you're a software engineer! You mentioned that earlier in our conversation.
+
+Memory: 4 messages stored
+
+You: What programming languages should I learn?
+
+Agent: As a software engineer, you might want to consider learning languages that align with your career goals. Some popular options include:
+
+- Python: Great for data science, AI, and web development
+- JavaScript: Essential for web development
+- Java: Widely used in enterprise applications
+- C++: Good for system programming and performance-critical applications
+- Go: Growing in popularity for backend services
+- Rust: Excellent for systems programming with memory safety
+
+Since you're already a software engineer, you might want to focus on languages that complement your existing skills or help you transition into areas you're interested in.
+
+Memory: 6 messages stored
+
+You: quit
+
+Goodbye!
+```
+
+## Key Features Demonstrated
+
+- **Conversation Memory**: Agent remembers previous interactions
+- **Context Awareness**: Responses are informed by conversation history
+- **Memory Management**: Automatic cleanup with sliding window
+- **Memory Statistics**: Track conversation details
+- **Memory Control**: Clear memory when needed
+
+## Memory Configuration Options
+
+### Window Size
+
+```python
+# Small memory (5 messages)
+memory = WindowBufferMemory(window_size=5)
+
+# Medium memory (10 messages) - default
+memory = WindowBufferMemory(window_size=10)
+
+# Large memory (20 messages)
+memory = WindowBufferMemory(window_size=20)
+```
+
+### Memory Types
+
+```python
+# Basic memory
+memory = WindowBufferMemory(window_size=10)
+
+# Custom memory with analytics
+class AnalyticsMemory(WindowBufferMemory):
+    def __init__(self, window_size=10):
+        super().__init__(window_size)
+        self.stats = {"total_messages": 0, "user_messages": 0, "ai_messages": 0}
+    
+    def add_message(self, message):
+        super().add_message(message)
+        self.stats["total_messages"] += 1
+        if message.role == "user":
+            self.stats["user_messages"] += 1
+        elif message.role == "assistant":
+            self.stats["ai_messages"] += 1
+    
+    def get_stats(self):
+        return self.stats.copy()
+```
+
+## Best Practices
+
+### 1. Memory Size
+
+Choose appropriate window size based on your use case:
+
+```python
+# Short conversations (chatbots)
+memory = WindowBufferMemory(window_size=5)
+
+# Medium conversations (customer service)
+memory = WindowBufferMemory(window_size=15)
+
+# Long conversations (personal assistants)
+memory = WindowBufferMemory(window_size=30)
+```
+
+### 2. Memory Cleanup
+
+Implement memory cleanup for long-running applications:
+
+```python
+class AutoCleanupMemory(WindowBufferMemory):
+    def __init__(self, window_size=10, max_age_hours=24):
+        super().__init__(window_size)
+        self.max_age_hours = max_age_hours
+        self.message_timestamps = []
+    
+    def add_message(self, message):
+        import time
+        current_time = time.time()
+        
+        # Clean old messages
+        self._cleanup_old_messages(current_time)
+        
+        # Add new message
+        super().add_message(message)
+        self.message_timestamps.append(current_time)
+    
+    def _cleanup_old_messages(self, current_time):
+        cutoff_time = current_time - (self.max_age_hours * 3600)
+        
+        # Remove old messages
+        while (self.message_timestamps and 
+               self.message_timestamps[0] < cutoff_time):
+            self.message_timestamps.pop(0)
+            if self._messages:
+                self._messages.pop(0)
+```
+
+### 3. Memory Persistence
+
+Save memory to disk for persistence:
+
+```python
+import json
+import os
+
+class PersistentMemory(WindowBufferMemory):
+    def __init__(self, file_path="memory.json", window_size=10):
+        super().__init__(window_size)
+        self.file_path = file_path
+        self.load()
+    
+    def add_message(self, message):
+        super().add_message(message)
+        self.save()
+    
+    def save(self):
+        """Save memory to disk"""
+        data = {
+            "messages": [
+                {"role": msg.role, "content": msg.content}
+                for msg in self._messages
+            ]
+        }
+        with open(self.file_path, 'w') as f:
+            json.dump(data, f)
+    
+    def load(self):
+        """Load memory from disk"""
+        if os.path.exists(self.file_path):
+            try:
+                with open(self.file_path, 'r') as f:
+                    data = json.load(f)
+                    self._messages = [
+                        MessageBuilder.messages_from_value([msg])[0]
+                        for msg in data.get("messages", [])
+                    ]
+            except (json.JSONDecodeError, KeyError):
+                self._messages = []
+```
+
+## Common Issues
+
+### 1. Memory Overflow
+
+**Problem**: Memory grows too large
+**Solution**: Implement size limits
+
+```python
+# Monitor memory usage
+if len(memory.messages()) > 100:
+    memory.clear()  # Reset if too large
+```
+
+### 2. Context Loss
+
+**Problem**: Important context gets lost
+**Solution**: Use larger window size or custom memory
+
+```python
+# Use larger window for important conversations
+memory = WindowBufferMemory(window_size=20)
+```
+
+### 3. Performance Issues
+
+**Problem**: Memory operations are slow
+**Solution**: Use efficient data structures
+
+```python
+# Use deque for efficient operations
+from collections import deque
+
+class EfficientMemory(WindowBufferMemory):
+    def __init__(self, window_size=10):
+        super().__init__(window_size)
+        self._messages = deque(maxlen=window_size)
+```
+
+## Next Steps
+
+- **[Agent with Tools](./agent-tools.mdx)** - Add custom capabilities
+- **[Agent with RAG](./agent-rag.mdx)** - Add knowledge base
+- **[Blockchain Integration](./agent-blockchain.mdx)** - Web3 features
+- **[Advanced Memory](./advanced-memory.mdx)** - Custom memory implementations

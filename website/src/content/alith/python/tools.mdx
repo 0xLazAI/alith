@@ -1,0 +1,946 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Custom Tools
+
+Tools extend your AI agents' capabilities by allowing them to execute custom functions, interact with APIs, and perform complex operations. Alith provides a flexible tool system that integrates seamlessly with your agents.
+
+## Why Use Tools?
+
+### Without Tools
+```python
+from alith import Agent
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+# Agent can only generate text
+response = agent.prompt("What's the weather in Paris?")
+# Response: "I don't have access to real-time weather data"
+```
+
+### With Tools
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+
+class WeatherParams(BaseModel):
+    city: str = Field(..., description="City name to get weather for")
+
+def get_weather(city: str) -> dict:
+    """Get current weather for a city"""
+    # Simulated weather API
+    return {
+        "city": city,
+        "temperature": 22,
+        "condition": "sunny",
+        "humidity": 65
+    }
+
+weather_tool = Tool(
+    name="get_weather",
+    description="Get current weather for any city",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[weather_tool]
+)
+
+# Agent can now use the weather tool
+response = agent.prompt("What's the weather in Paris?")
+# Response: Uses the weather tool to get real data
+```
+
+## Tool Types
+
+<Tabs items={['Simple Functions', 'API Integrations', 'Data Processing', 'Complex Workflows']}>
+
+<Tabs.Tab>
+
+### Simple Functions
+
+Basic tools for calculations and simple operations:
+
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+
+# Math operations
+class MathParams(BaseModel):
+    operation: str = Field(..., description="Operation: add, subtract, multiply, divide")
+    a: float = Field(..., description="First number")
+    b: float = Field(..., description="Second number")
+
+def calculate(operation: str, a: float, b: float) -> dict:
+    """Perform basic math operations"""
+    operations = {
+        "add": a + b,
+        "subtract": a - b,
+        "multiply": a * b,
+        "divide": a / b if b != 0 else "Error: Division by zero"
+    }
+    
+    return {
+        "operation": operation,
+        "result": operations.get(operation, "Invalid operation"),
+        "inputs": [a, b]
+    }
+
+# Text processing
+class TextParams(BaseModel):
+    text: str = Field(..., description="Text to process")
+    operation: str = Field(..., description="Operation: count_words, reverse, uppercase")
+
+def process_text(text: str, operation: str) -> dict:
+    """Process text in various ways"""
+    operations = {
+        "count_words": len(text.split()),
+        "reverse": text[::-1],
+        "uppercase": text.upper()
+    }
+    
+    return {
+        "operation": operation,
+        "result": operations.get(operation, "Invalid operation"),
+        "original": text
+    }
+
+# Create tools
+math_tool = Tool(
+    name="calculate",
+    description="Perform basic math operations",
+    parameters=MathParams,
+    handler=calculate
+)
+
+text_tool = Tool(
+    name="process_text",
+    description="Process text in various ways",
+    parameters=TextParams,
+    handler=process_text
+)
+
+# Use with agent
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[math_tool, text_tool]
+)
+
+response = agent.prompt("Calculate 15 * 8 and then reverse the text 'Hello World'")
+```
+
+**Benefits:**
+- Simple to implement
+- Fast execution
+- No external dependencies
+- Reliable results
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### API Integrations
+
+Tools that interact with external APIs:
+
+```python
+import requests
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+
+# Weather API
+class WeatherParams(BaseModel):
+    city: str = Field(..., description="City name")
+    country: str = Field("US", description="Country code")
+
+def get_weather(city: str, country: str = "US") -> dict:
+    """Get current weather using OpenWeatherMap API"""
+    api_key = "your-openweather-api-key"
+    url = f"http://api.openweathermap.org/data/2.5/weather"
+    params = {
+        "q": f"{city},{country}",
+        "appid": api_key,
+        "units": "metric"
+    }
+    
+    try:
+        response = requests.get(url, params=params)
+        data = response.json()
+        
+        return {
+            "city": data["name"],
+            "temperature": data["main"]["temp"],
+            "condition": data["weather"][0]["description"],
+            "humidity": data["main"]["humidity"]
+        }
+    except Exception as e:
+        return {"error": f"Failed to get weather: {str(e)}"}
+
+# News API
+class NewsParams(BaseModel):
+    query: str = Field(..., description="Search query for news")
+    limit: int = Field(5, description="Number of articles to return")
+
+def get_news(query: str, limit: int = 5) -> dict:
+    """Get news articles using NewsAPI"""
+    api_key = "your-newsapi-key"
+    url = "https://newsapi.org/v2/everything"
+    params = {
+        "q": query,
+        "apiKey": api_key,
+        "pageSize": limit,
+        "sortBy": "publishedAt"
+    }
+    
+    try:
+        response = requests.get(url, params=params)
+        data = response.json()
+        
+        articles = []
+        for article in data.get("articles", []):
+            articles.append({
+                "title": article["title"],
+                "description": article["description"],
+                "url": article["url"],
+                "publishedAt": article["publishedAt"]
+            })
+        
+        return {"articles": articles, "total": len(articles)}
+    except Exception as e:
+        return {"error": f"Failed to get news: {str(e)}"}
+
+# Create tools
+weather_tool = Tool(
+    name="get_weather",
+    description="Get current weather for any city",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+news_tool = Tool(
+    name="get_news",
+    description="Get latest news articles",
+    parameters=NewsParams,
+    handler=get_news
+)
+
+# Use with agent
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[weather_tool, news_tool]
+)
+
+response = agent.prompt("What's the weather in Tokyo and get me the latest AI news")
+```
+
+**Benefits:**
+- Real-time data
+- External service integration
+- Rich information sources
+- Dynamic content
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Data Processing
+
+Tools for data manipulation and analysis:
+
+```python
+import pandas as pd
+import json
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+
+# CSV processing
+class CSVParams(BaseModel):
+    data: str = Field(..., description="CSV data as string")
+    operation: str = Field(..., description="Operation: head, tail, describe, filter")
+
+def process_csv(data: str, operation: str) -> dict:
+    """Process CSV data"""
+    try:
+        # Convert CSV string to DataFrame
+        from io import StringIO
+        df = pd.read_csv(StringIO(data))
+        
+        operations = {
+            "head": df.head().to_dict(),
+            "tail": df.tail().to_dict(),
+            "describe": df.describe().to_dict(),
+            "info": {
+                "shape": df.shape,
+                "columns": df.columns.tolist(),
+                "dtypes": df.dtypes.to_dict()
+            }
+        }
+        
+        return {
+            "operation": operation,
+            "result": operations.get(operation, "Invalid operation"),
+            "shape": df.shape
+        }
+    except Exception as e:
+        return {"error": f"Failed to process CSV: {str(e)}"}
+
+# JSON processing
+class JSONParams(BaseModel):
+    data: str = Field(..., description="JSON data as string")
+    operation: str = Field(..., description="Operation: parse, validate, extract")
+
+def process_json(data: str, operation: str) -> dict:
+    """Process JSON data"""
+    try:
+        if operation == "parse":
+            parsed = json.loads(data)
+            return {"parsed": parsed, "type": type(parsed).__name__}
+        
+        elif operation == "validate":
+            json.loads(data)
+            return {"valid": True, "message": "JSON is valid"}
+        
+        elif operation == "extract":
+            parsed = json.loads(data)
+            if isinstance(parsed, dict):
+                return {"keys": list(parsed.keys()), "values": list(parsed.values())}
+            else:
+                return {"error": "Not a JSON object"}
+        
+        else:
+            return {"error": "Invalid operation"}
+    
+    except json.JSONDecodeError as e:
+        return {"error": f"Invalid JSON: {str(e)}"}
+    except Exception as e:
+        return {"error": f"Failed to process JSON: {str(e)}"}
+
+# Create tools
+csv_tool = Tool(
+    name="process_csv",
+    description="Process CSV data",
+    parameters=CSVParams,
+    handler=process_csv
+)
+
+json_tool = Tool(
+    name="process_json",
+    description="Process JSON data",
+    parameters=JSONParams,
+    handler=process_json
+)
+
+# Use with agent
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[csv_tool, json_tool]
+)
+
+csv_data = "name,age,city\nJohn,25,NYC\nJane,30,LA"
+response = agent.prompt(f"Process this CSV data: {csv_data}")
+```
+
+**Benefits:**
+- Data manipulation
+- Analysis capabilities
+- Format conversion
+- Validation features
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Complex Workflows
+
+Tools that chain multiple operations:
+
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+import requests
+import json
+
+# Multi-step workflow
+class WorkflowParams(BaseModel):
+    task: str = Field(..., description="Task to perform")
+    data: str = Field(..., description="Input data")
+
+def complex_workflow(task: str, data: str) -> dict:
+    """Perform complex multi-step workflows"""
+    results = {"steps": [], "final_result": None}
+    
+    if task == "analyze_and_summarize":
+        # Step 1: Analyze data
+        analysis = analyze_data(data)
+        results["steps"].append({"step": "analysis", "result": analysis})
+        
+        # Step 2: Generate summary
+        summary = generate_summary(analysis)
+        results["steps"].append({"step": "summary", "result": summary})
+        
+        # Step 3: Create report
+        report = create_report(analysis, summary)
+        results["steps"].append({"step": "report", "result": report})
+        
+        results["final_result"] = report
+    
+    elif task == "process_and_notify":
+        # Step 1: Process data
+        processed = process_data(data)
+        results["steps"].append({"step": "processing", "result": processed})
+        
+        # Step 2: Send notification
+        notification = send_notification(processed)
+        results["steps"].append({"step": "notification", "result": notification})
+        
+        results["final_result"] = notification
+    
+    return results
+
+def analyze_data(data: str) -> dict:
+    """Analyze input data"""
+    return {
+        "word_count": len(data.split()),
+        "char_count": len(data),
+        "sentiment": "positive" if "good" in data.lower() else "neutral"
+    }
+
+def generate_summary(analysis: dict) -> str:
+    """Generate summary from analysis"""
+    return f"Data contains {analysis['word_count']} words with {analysis['sentiment']} sentiment"
+
+def create_report(analysis: dict, summary: str) -> dict:
+    """Create final report"""
+    return {
+        "analysis": analysis,
+        "summary": summary,
+        "timestamp": "2024-01-01T00:00:00Z"
+    }
+
+def process_data(data: str) -> dict:
+    """Process data"""
+    return {"processed": data.upper(), "status": "completed"}
+
+def send_notification(processed: dict) -> dict:
+    """Send notification"""
+    return {"sent": True, "message": "Processing completed"}
+
+# Create workflow tool
+workflow_tool = Tool(
+    name="complex_workflow",
+    description="Perform complex multi-step workflows",
+    parameters=WorkflowParams,
+    handler=complex_workflow
+)
+
+# Use with agent
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[workflow_tool]
+)
+
+response = agent.prompt("Analyze and summarize this text: 'This is a good example of text analysis'")
+```
+
+**Benefits:**
+- Multi-step operations
+- Workflow automation
+- Complex business logic
+- Orchestrated processes
+
+</Tabs.Tab>
+
+</Tabs>
+
+## Built-in Tools
+
+### DuckDuckGo Search
+
+Alith includes a powerful search tool for web information:
+
+```python
+from alith.utilities.search import DuckDuckGoTool
+
+# Create search tool
+search_tool = DuckDuckGoTool()
+
+# Use directly
+results = search_tool.text("Python programming", max_results=5)
+news = search_tool.news("AI news", max_results=3)
+images = search_tool.images("cats", max_results=5)
+videos = search_tool.videos("tutorials", max_results=3)
+
+# Structured output
+results = search_tool("Python", source="text", structured=True)
+# Returns: {"structured": True, "results": [...], "answer": None}
+
+# Text output
+results = search_tool("Python", source="text", structured=False)
+# Returns: {"structured": False, "results": None, "answer": "...formatted text..."}
+
+# Use with agent
+agent = Agent(
+    name="SearchBot",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[search_tool.to_tool()]
+)
+
+response = agent.prompt("Search for latest AI news and summarize the top 3 articles")
+```
+
+## Function-Based Tools
+
+You can also use regular Python functions as tools:
+
+```python
+from alith import Agent
+
+def calculate(a: int, b: int) -> int:
+    """Add two numbers together"""
+    return a + b
+
+def get_current_time() -> str:
+    """Get current time"""
+    from datetime import datetime
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+def reverse_string(text: str) -> str:
+    """Reverse a string"""
+    return text[::-1]
+
+# Functions automatically become tools
+agent = Agent(
+    name="FunctionAgent",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[calculate, get_current_time, reverse_string]
+)
+
+response = agent.prompt("Calculate 5 + 3, get the current time, and reverse 'Hello World'")
+```
+
+## Advanced Tool Features
+
+### 1. Tool Chaining
+
+Create tools that use other tools:
+
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel, Field
+
+class ResearchParams(BaseModel):
+    topic: str = Field(..., description="Research topic")
+    depth: str = Field("basic", description="Research depth: basic, detailed, comprehensive")
+
+def research_topic(topic: str, depth: str = "basic") -> dict:
+    """Research a topic using multiple sources"""
+    # Step 1: Search for information
+    search_tool = DuckDuckGoTool()
+    search_results = search_tool.text(topic, max_results=5)
+    
+    # Step 2: Get news
+    news_results = search_tool.news(topic, max_results=3)
+    
+    # Step 3: Compile research
+    research = {
+        "topic": topic,
+        "depth": depth,
+        "search_results": search_results.get("results", []),
+        "news_results": news_results.get("results", []),
+        "summary": f"Research on {topic} completed with {depth} depth"
+    }
+    
+    return research
+
+research_tool = Tool(
+    name="research_topic",
+    description="Research any topic using multiple sources",
+    parameters=ResearchParams,
+    handler=research_topic
+)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[research_tool]
+)
+
+response = agent.prompt("Research artificial intelligence with detailed depth")
+```
+
+### 2. Conditional Tools
+
+Tools that adapt based on input:
+
+```python
+def adaptive_tool(query: str) -> dict:
+    """Adaptive tool that chooses the right operation"""
+    query_lower = query.lower()
+    
+    if "weather" in query_lower:
+        return get_weather_tool(query)
+    elif "news" in query_lower:
+        return get_news_tool(query)
+    elif "calculate" in query_lower:
+        return calculate_tool(query)
+    else:
+        return {"error": "No suitable operation found"}
+
+def get_weather_tool(query: str) -> dict:
+    # Extract city from query
+    words = query.split()
+    city = "Paris"  # Default
+    for word in words:
+        if word.lower() not in ["weather", "in", "the", "for"]:
+            city = word
+            break
+    
+    return {"operation": "weather", "city": city, "result": "Weather data"}
+
+def get_news_tool(query: str) -> dict:
+    return {"operation": "news", "query": query, "result": "News data"}
+
+def calculate_tool(query: str) -> dict:
+    return {"operation": "calculate", "query": query, "result": "Calculation result"}
+```
+
+### 3. Error Handling
+
+Robust tools with proper error handling:
+
+```python
+import requests
+from alith import Tool
+from pydantic import BaseModel, Field
+
+class APIParams(BaseModel):
+    endpoint: str = Field(..., description="API endpoint")
+    method: str = Field("GET", description="HTTP method")
+
+def robust_api_call(endpoint: str, method: str = "GET") -> dict:
+    """Make API calls with error handling"""
+    try:
+        # Validate endpoint
+        if not endpoint.startswith(("http://", "https://")):
+            return {"error": "Invalid endpoint URL"}
+        
+        # Make request
+        if method.upper() == "GET":
+            response = requests.get(endpoint, timeout=10)
+        elif method.upper() == "POST":
+            response = requests.post(endpoint, timeout=10)
+        else:
+            return {"error": f"Unsupported method: {method}"}
+        
+        # Check response
+        if response.status_code == 200:
+            return {
+                "status": "success",
+                "status_code": response.status_code,
+                "data": response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
+            }
+        else:
+            return {
+                "status": "error",
+                "status_code": response.status_code,
+                "error": response.text
+            }
+    
+    except requests.exceptions.Timeout:
+        return {"error": "Request timeout"}
+    except requests.exceptions.ConnectionError:
+        return {"error": "Connection error"}
+    except requests.exceptions.RequestException as e:
+        return {"error": f"Request error: {str(e)}"}
+    except Exception as e:
+        return {"error": f"Unexpected error: {str(e)}"}
+
+api_tool = Tool(
+    name="api_call",
+    description="Make API calls with error handling",
+    parameters=APIParams,
+    handler=robust_api_call
+)
+```
+
+## Tool Best Practices
+
+### 1. Clear Descriptions
+
+Write descriptive tool names and descriptions:
+
+```python
+# Good: Clear and specific
+tool = Tool(
+    name="get_weather_forecast",
+    description="Get 5-day weather forecast for any city with temperature, humidity, and conditions",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+# Bad: Vague and unclear
+tool = Tool(
+    name="weather",
+    description="Get weather",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+```
+
+### 2. Proper Parameter Validation
+
+Use Pydantic models for robust validation:
+
+```python
+from pydantic import BaseModel, Field, validator
+
+class EmailParams(BaseModel):
+    to: str = Field(..., description="Recipient email address")
+    subject: str = Field(..., description="Email subject")
+    body: str = Field(..., description="Email body")
+    
+    @validator('to')
+    def validate_email(cls, v):
+        import re
+        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', v):
+            raise ValueError('Invalid email address')
+        return v
+    
+    @validator('subject')
+    def validate_subject(cls, v):
+        if len(v) > 100:
+            raise ValueError('Subject too long')
+        return v
+```
+
+### 3. Efficient Error Handling
+
+Implement comprehensive error handling:
+
+```python
+def robust_tool(input_data: str) -> dict:
+    """Tool with comprehensive error handling"""
+    try:
+        # Validate input
+        if not input_data or not isinstance(input_data, str):
+            return {"error": "Invalid input data"}
+        
+        # Process data
+        result = process_data(input_data)
+        
+        # Validate output
+        if not result:
+            return {"error": "Processing failed"}
+        
+        return {"success": True, "result": result}
+    
+    except ValueError as e:
+        return {"error": f"Value error: {str(e)}"}
+    except TypeError as e:
+        return {"error": f"Type error: {str(e)}"}
+    except Exception as e:
+        return {"error": f"Unexpected error: {str(e)}"}
+```
+
+### 4. Performance Optimization
+
+Optimize tools for performance:
+
+```python
+from functools import lru_cache
+import time
+
+class OptimizedTool:
+    def __init__(self):
+        self.cache = {}
+        self.cache_timeout = 300  # 5 minutes
+    
+    @lru_cache(maxsize=100)
+    def cached_operation(self, data: str) -> dict:
+        """Cached operation for repeated requests"""
+        # Simulate expensive operation
+        time.sleep(0.1)
+        return {"processed": data.upper(), "timestamp": time.time()}
+    
+    def smart_cache(self, key: str, data: str) -> dict:
+        """Smart caching with timeout"""
+        current_time = time.time()
+        
+        # Check if cached data is still valid
+        if key in self.cache:
+            cached_time, cached_result = self.cache[key]
+            if current_time - cached_time < self.cache_timeout:
+                return cached_result
+        
+        # Process and cache
+        result = self.process_data(data)
+        self.cache[key] = (current_time, result)
+        return result
+    
+    def process_data(self, data: str) -> dict:
+        """Process data with caching"""
+        return {"processed": data, "cached": True}
+```
+
+## Tool Testing
+
+### 1. Unit Testing
+
+Test individual tools:
+
+```python
+import pytest
+from alith import Tool
+
+def test_weather_tool():
+    """Test weather tool functionality"""
+    tool = Tool(
+        name="get_weather",
+        description="Get weather",
+        parameters=WeatherParams,
+        handler=get_weather
+    )
+    
+    # Test valid input
+    result = tool.handler("Paris", "FR")
+    assert "city" in result
+    assert result["city"] == "Paris"
+    
+    # Test invalid input
+    result = tool.handler("", "")
+    assert "error" in result
+
+def test_calculation_tool():
+    """Test calculation tool"""
+    tool = Tool(
+        name="calculate",
+        description="Calculate",
+        parameters=MathParams,
+        handler=calculate
+    )
+    
+    # Test addition
+    result = tool.handler("add", 5, 3)
+    assert result["result"] == 8
+    
+    # Test division by zero
+    result = tool.handler("divide", 5, 0)
+    assert "Error" in result["result"]
+```
+
+### 2. Integration Testing
+
+Test tools with agents:
+
+```python
+def test_agent_with_tools():
+    """Test agent using tools"""
+    agent = Agent(
+        model="llama-3.3-70b-versatile",
+        api_key="your-groq-api-key",
+        base_url="https://api.groq.com/openai/v1",
+        tools=[weather_tool, math_tool]
+    )
+    
+    # Test tool usage
+    response = agent.prompt("What's 5 + 3?")
+    assert "8" in response or "eight" in response.lower()
+    
+    # Test multiple tools
+    response = agent.prompt("What's the weather in Paris and calculate 10 * 5?")
+    assert len(response) > 0
+```
+
+## Common Issues
+
+### 1. Tool Not Being Called
+
+**Problem**: Agent doesn't use available tools
+**Solutions**:
+- Improve tool descriptions
+- Use more specific prompts
+- Check tool parameter validation
+- Ensure tools are properly registered
+
+```python
+# Better tool description
+tool = Tool(
+    name="get_weather",
+    description="Get current weather conditions for any city worldwide. Use this when users ask about weather.",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+# More specific prompt
+response = agent.prompt("Use the weather tool to get the current weather in Tokyo")
+```
+
+### 2. Parameter Validation Errors
+
+**Problem**: Tool fails due to invalid parameters
+**Solutions**:
+- Use proper Pydantic models
+- Add input validation
+- Handle edge cases
+- Provide clear error messages
+
+```python
+class RobustParams(BaseModel):
+    input: str = Field(..., description="Input data")
+    
+    @validator('input')
+    def validate_input(cls, v):
+        if not v or len(v.strip()) == 0:
+            raise ValueError('Input cannot be empty')
+        if len(v) > 1000:
+            raise ValueError('Input too long')
+        return v.strip()
+```
+
+### 3. Performance Issues
+
+**Problem**: Tools are too slow
+**Solutions**:
+- Implement caching
+- Use async operations
+- Optimize algorithms
+- Add timeouts
+
+```python
+import asyncio
+import aiohttp
+
+async def async_api_call(url: str) -> dict:
+    """Async API call for better performance"""
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+```
+
+## Next Steps
+
+Now that you understand custom tools, explore:
+
+- **[Blockchain Integration](./lazai.mdx)** - Web3 capabilities
+- **[Advanced Features](./advanced.mdx)** - TEE, training, and optimization
+- **[Examples](../examples/)** - Real-world implementations
