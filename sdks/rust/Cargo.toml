@@ -11,9 +11,25 @@ crate-type = ["rlib", "cdylib"]
 name = "agent_groq"
 path = "examples/agent_groq.rs"
 
+[[example]]
+name = "agent_github_errorIdentifier"
+path = "examples/agent_github_errorIdentifier.rs"
+
+[[example]]
+name = "agent_articleWriter"
+path = "examples/agent_articleWriter.rs"
+
+[[example]]
+name = "dat_minting"
+path = "examples/dat_minting.rs"
+
+
 [dependencies]
-alith.workspace = true
+alith = { workspace = true, features = ["lazai", "crypto", "ipfs", "wallet"] }
 tokio.workspace = true
 async-trait.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+sha2.workspace = true
+hex.workspace = true
+anyhow.workspace = true

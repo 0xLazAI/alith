@@ -362,9 +362,12 @@ name = "alith-rust-sdk"
 version = "0.12.3"
 dependencies = [
  "alith",
+ "anyhow",
  "async-trait",
+ "hex",
  "serde",
  "serde_json",
+ "sha2",
  "tokio",
 ]
 
