@@ -75,6 +75,7 @@
     "@types/node": "^22.17.0",
     "@types/node-rsa": "^1.1.4",
     "ava": "^6.0.1",
+    "cpx2": "^7.0.1",
     "prettier": "^2.8.4",
     "typedoc": "^0.28.10",
     "typescript": "^5.4.5"
@@ -86,19 +87,19 @@
     "node": ">= 10"
   },
   "scripts": {
-    "build": "napi build --platform --release --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
-    "build:windows": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
-    "build:debug": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
-    "build:debug:windows": "napi build --platform --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx \"src/internal.*\" dist",
+    "build": "napi build --platform --release --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx2 \"src/internal.*\" dist",
+    "build:windows": "napi build --platform --release --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx2 \"src/internal.*\" dist",
+    "build:debug": "napi build --platform --features \"${NAPI_FEATURES:-}\" --target \"${NAPI_TARGET:-}\" --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx2 \"src/internal.*\" dist",
+    "build:debug:windows": "napi build --platform --js src/internal.js --dts src/internal.d.ts && npx tsc --build && npx cpx2 \"src/internal.*\" dist",
     "prepublishOnly": "napi prepublish -t npm",
     "docs": "typedoc",
-    "test": "npx cpx \"*.node\" dist && ava",
+    "test": "npx cpx2 \"*.node\" dist && ava",
     "format": "prettier --write .",
     "lint": "biome lint .",
     "lint:fix": "biome check --apply . --unsafe",
     "universal": "napi universal",
     "version": "napi version",
-    "tsc": "npx tsc --build && npx cpx \"src/internal.*\" dist"
+    "tsc": "npx tsc --build && npx cpx2 \"src/internal.*\" dist"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
