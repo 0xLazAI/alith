@@ -1,5 +1,39 @@
 [
     {
+        "id": "9d51cd26080deab8",
+        "topic_id": "6058",
+        "title": "AI Automation: The Biggest Lie Web3 Teams Tell Themselves",
+        "url": "https://forum.ceg.vote/t/ai-automation-the-biggest-lie-web3-teams-tell-themselves/6058",
+        "views": "",
+        "comments": "6",
+        "created_date": "Jun 30, 2025 4:09 pm",
+        "latest_activity": "Oct 29, 2025 3:23 pm",
+        "content": "Everyone\u2019s talking about AI automating operations, but I\u2019m curious about the reality gap. Web3 operations seem uniquely resistant to \u201ctraditional\u201d AI automation approaches.\nSecurity vs automation tension: Traditional AI tools want API access, cloud integrations, centralized data. Web3 operations require multisigs, air-gapped systems, and trustless verification. These fundamentally conflict.\nThe context problem: AI works great with predictable patterns, but Web3 throws curveballs daily. Sudden governance proposals, market volatility, protocol upgrades. How do you train AI on chaos?\nData fragmentation nightmare: Developers have metrics scattered across GitHub and documentation sites, community teams track engagement across Discord, Twitter, and forums, operations teams monitor on-chain performance through block explorers and dashboards. AI automation requires unified data that doesn\u2019t exist.\nThe decentralization catch-22: Centralized AI contradicts decentralized operations. Decentralized AI isn\u2019t ready for production. What\u2019s the middle ground?\nWhat AI automation actually works in your Web3 operations? Where have you tried and failed? Are we solving real problems or just adding \u201cAI-powered\u201d to existing processes?\nGenuinely curious if anyone\u2019s found AI automation that doesn\u2019t create more operational overhead than it saves!",
+        "comments_details": [
+            {
+                "author": "daryl",
+                "comment": "Everyone\u2019s talking about AI automating operations, but I\u2019m curious about the reality gap. Web3 operations seem uniquely resistant to \u201ctraditional\u201d AI automation approaches.\nSecurity vs automation tension: Traditional AI tools want API access, cloud integrations, centralized data. Web3 operations require multisigs, air-gapped systems, and trustless verification. These fundamentally conflict.\nThe context problem: AI works great with predictable patterns, but Web3 throws curveballs daily. Sudden governance proposals, market volatility, protocol upgrades. How do you train AI on chaos?\nData fragmentation nightmare: Developers have metrics scattered across GitHub and documentation sites, community teams track engagement across Discord, Twitter, and forums, operations teams monitor on-chain performance through block explorers and dashboards. AI automation requires unified data that doesn\u2019t exist.\nThe decentralization catch-22: Centralized AI contradicts decentralized operations. Decentralized AI isn\u2019t ready for production. What\u2019s the middle ground?\nWhat AI automation actually works in your Web3 operations? Where have you tried and failed? Are we solving real problems or just adding \u201cAI-powered\u201d to existing processes?\nGenuinely curious if anyone\u2019s found AI automation that doesn\u2019t create more operational overhead than it saves!"
+            }
+        ]
+    },
+    {
+        "id": "959f217567452e70",
+        "topic_id": "11021",
+        "title": "DogEx and LazAi",
+        "url": "https://forum.ceg.vote/t/dogex-and-lazai/11021",
+        "views": "",
+        "comments": "3",
+        "created_date": "Oct 29, 2025 8:02 am",
+        "latest_activity": null,
+        "content": "Welcome to the Metis Andromeda Governance Forum",
+        "comments_details": [
+            {
+                "author": "Nizzy",
+                "comment": "Welcome to the Metis Andromeda Governance Forum"
+            }
+        ]
+    },
+    {
         "id": "640909c36ac0551a",
         "topic_id": "4079",
         "title": "Welcome to the Hyperion Forum: Our Community Home",
@@ -204,6 +238,23 @@
         ]
     },
     {
+        "id": "bb68e7013ddc870d",
+        "topic_id": "10991",
+        "title": "What risks should you watch out for when trying to increase profits with MEV BOTs?",
+        "url": "https://forum.ceg.vote/t/what-risks-should-you-watch-out-for-when-trying-to-increase-profits-with-mev-bots/10991",
+        "views": "",
+        "comments": "2",
+        "created_date": "Oct 26, 2025 10:58 am",
+        "latest_activity": null,
+        "content": "When using MEV bots to increase profits, businesses and startups should be aware of several key risks. One major concern is network blockage, which can delay transactions and reduce profitability. If not properly managed, high gas prices might potentially reduce gains. Bots that rely on outdated data or poor timing may miss opportunities or execute unprofitable trades. Smart contract bugs and coding errors can expose funds to loss or Illegal use. Market volatility can cause sudden price swings, making strategies less effective. Security threats such as frontrunning or sandwich attacks can also impact profit margins. Regular audits, strong testing, and accurate data feeds help reduce these risks. For companies aiming to grow safely in DeFi trading, partnering with a trusted MEV BOT development company like beleaf technologies experienced in secure and efficient MEV BOT Development ensures stability, better performance, and long-term protection against financial and technical risks in fast-changing blockchain markets.",
+        "comments_details": [
+            {
+                "author": "Robynmadison",
+                "comment": "When using MEV bots to increase profits, businesses and startups should be aware of several key risks. One major concern is network blockage, which can delay transactions and reduce profitability. If not properly managed, high gas prices might potentially reduce gains. Bots that rely on outdated data or poor timing may miss opportunities or execute unprofitable trades. Smart contract bugs and coding errors can expose funds to loss or Illegal use. Market volatility can cause sudden price swings, making strategies less effective. Security threats such as frontrunning or sandwich attacks can also impact profit margins. Regular audits, strong testing, and accurate data feeds help reduce these risks. For companies aiming to grow safely in DeFi trading, partnering with a trusted MEV BOT development company like beleaf technologies experienced in secure and efficient MEV BOT Development ensures stability, better performance, and long-term protection against financial and technical risks in fast-changing blockchain markets."
+            }
+        ]
+    },
+    {
         "id": "74705fce58a3fd6d",
         "topic_id": "10981",
         "title": "Multi-Agent Orchestration in LazAI: The Engine of Decentralized AI",
@@ -285,57 +336,6 @@
             {
                 "author": "Harini_Priya",
                 "comment": "By Harini Priya K | LazAI Dev Ambassador\nIntroduction\nDevelopers have long used SDKs (Software Development Kits) to build apps. SDKs made coding easier with ready-made tools and libraries. But as AI grows smarter, we\u2019re moving from coding for machines to building with them.\nNow, SDKs are becoming something else \u2014 platforms that don\u2019t only assist us in coding but also think and learn alongside us.\nFrom Tools to Thinking Systems\nClassic SDKs obeyed rules. You wrote the rules, and the machine followed. It was predictable \u2014 but restrictive.\nAI SDKs, however, comprehend language, context, and intent. They are able to reason, learn, and even get better with time. Rather than issuing commands, we now cooperate with AI.\nThe New Type of SDK\nNew-generation AI platforms \u2014 such as Alith, LangChain, and OpenAI\u2019s platforms \u2014 are not libraries. They\u2019re intelligence interfaces.\nThey enable developers to:\nStack many AI models in combination.\nConstruct systems that learn and remember.\nMake agents that operate on their own.\nPersonalize responses based on user context.\nWe\u2019re no longer building software. We\u2019re building digital minds.\nDevelopers as AI Designers\nTomorrow\u2019s developers aren\u2019t just coders \u2014 they\u2019re cognitive designers.\nThey\u2019ll shape how AI thinks, learns, and interacts.\nInstead of writing endless logic, they\u2019ll design behavior.\nThe Future Ahead\nIn the near future, developer tools will learn from you.\nThey\u2019ll understand your style, suggest ideas, debug code, and even grow alongside your skills.\nThese platforms won\u2019t just execute commands \u2014 they\u2019ll become your creative partners.\nConclusion\nWe\u2019re entering an era where code can understand, not just execute.\nSDKs are evolving into systems that can think, learn, and co-create.\nDevelopers aren\u2019t just writing programs anymore \u2014They\u2019re helping shape the future of intelligence."
-            }
-        ]
-    },
-    {
-        "id": "e744ea3f8fc23e77",
-        "topic_id": "10665",
-        "title": "8th No-Lose lottery winner ann",
-        "url": "https://forum.ceg.vote/t/8th-no-lose-lottery-winner-ann/10665",
-        "views": "",
-        "comments": "4",
-        "created_date": "Sep 24, 2025 4:23 pm",
-        "latest_activity": "Oct 24, 2025 4:33 pm",
-        "content": "OCT\n20\n8th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Oct 20 4:23 PM \u2192 Wed, Oct 22 4:00 AM\n1\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nNo-Lose Lottery draw occurs biweekly, and badges will be redeemable for a surprise reward soon.\nThe 8th round winners Are In!\nCongrats to our winners:\nContributor (Small Prize): @han & @Alpha_Alith\nVisionary (Grand Prize): @NOWOLO\nThank you to everyone contributing to the Metis Forum!\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "OCT\n20\n8th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Oct 20 4:23 PM \u2192 Wed, Oct 22 4:00 AM\n1\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nNo-Lose Lottery draw occurs biweekly, and badges will be redeemable for a surprise reward soon.\nThe 8th round winners Are In!\nCongrats to our winners:\nContributor (Small Prize): @han & @Alpha_Alith\nVisionary (Grand Prize): @NOWOLO\nThank you to everyone contributing to the Metis Forum!\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!"
-            }
-        ]
-    },
-    {
-        "id": "03df884f7ef57e01",
-        "topic_id": "5649",
-        "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
-        "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
-        "views": "",
-        "comments": "153",
-        "created_date": "Jun 14, 2025 6:42 pm",
-        "latest_activity": "Oct 24, 2025 1:43 pm",
-        "content": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together.",
-        "comments_details": [
-            {
-                "author": "mrwagmicto",
-                "comment": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together."
-            }
-        ]
-    },
-    {
-        "id": "0f7677e0e06448b9",
-        "topic_id": "10955",
-        "title": "No-Lose Lottery Surprise Rewards",
-        "url": "https://forum.ceg.vote/t/no-lose-lottery-surprise-rewards/10955",
-        "views": "",
-        "comments": "1",
-        "created_date": "Oct 22, 2025 2:57 pm",
-        "latest_activity": "Oct 24, 2025 9:00 am",
-        "content": "No-Lose Lottery Surprise Rewards Announcement\nThe No-Lose Lottery is Metis\u2019 way of recognizing and appreciating our active Forum contributors.\nWe\u2019re glad to announce that, as a token of appreciation, Metis is allocating Lazbubu DAT redeem codes to all past and upcoming winners of the No-Lose Lottery.\nLazbubu Rarity Categories\nThere are four levels of Lazbubu DATs in the ecosystem:\nCommon \u2013 Standard rarity, slower growth, basic reward potential.\nAdvanced \u2013 Intermediate rarity, faster growth, more valuable reward potential.\nRare \u2013 High rarity, even faster growth, greater chance of valuable rewards.\nLegendary \u2013 Top rarity, fastest growth, and the highest potential rewards.\nFor the lottery winners:\nGrand Prize winners receive a Rare Lazbubu DAT\nSmall Prize winners receive an Advanced Lazbubu DAT\nFeatures of Your Lazbubu DAT\n1- Daily Message Quota:\nAdvanced: 40 messages/day\nRare: 70 messages/day\n2- Growth Speed: Rare grows faster than Advanced\n3- Maturity Rewards:\nAdvanced: 5,000 points\nRare: 10,000 points\n4- Adventure Rewards: Higher rarity = higher reward and postcard chances\nEach DAT evolves through interaction, adventure, and consistency. The rarer your Lazbubu, the more it can achieve inside the LazAI ecosystem.\nHow to Claim\nDAT redeem codes will be sent via DM to all No-Lose Lottery Visionary and Contributor Badge holders.\nCheck and claim your Lazbubu DAT here:\nLazbubu\nHave a Lazbubu\uff01\nI'm having a great time with my Lazbubu @LazAINetwork. Come join us!\nLearn more about your DAT and its growth:\ndocs.lazpad.fun\nLazbubu Incubator | LazPad\nYour Lazbubu journey starts now.\nTrain it, interact daily, and see how far your DAT can grow before mainnet!",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "No-Lose Lottery Surprise Rewards Announcement\nThe No-Lose Lottery is Metis\u2019 way of recognizing and appreciating our active Forum contributors.\nWe\u2019re glad to announce that, as a token of appreciation, Metis is allocating Lazbubu DAT redeem codes to all past and upcoming winners of the No-Lose Lottery.\nLazbubu Rarity Categories\nThere are four levels of Lazbubu DATs in the ecosystem:\nCommon \u2013 Standard rarity, slower growth, basic reward potential.\nAdvanced \u2013 Intermediate rarity, faster growth, more valuable reward potential.\nRare \u2013 High rarity, even faster growth, greater chance of valuable rewards.\nLegendary \u2013 Top rarity, fastest growth, and the highest potential rewards.\nFor the lottery winners:\nGrand Prize winners receive a Rare Lazbubu DAT\nSmall Prize winners receive an Advanced Lazbubu DAT\nFeatures of Your Lazbubu DAT\n1- Daily Message Quota:\nAdvanced: 40 messages/day\nRare: 70 messages/day\n2- Growth Speed: Rare grows faster than Advanced\n3- Maturity Rewards:\nAdvanced: 5,000 points\nRare: 10,000 points\n4- Adventure Rewards: Higher rarity = higher reward and postcard chances\nEach DAT evolves through interaction, adventure, and consistency. The rarer your Lazbubu, the more it can achieve inside the LazAI ecosystem.\nHow to Claim\nDAT redeem codes will be sent via DM to all No-Lose Lottery Visionary and Contributor Badge holders.\nCheck and claim your Lazbubu DAT here:\nLazbubu\nHave a Lazbubu\uff01\nI'm having a great time with my Lazbubu @LazAINetwork. Come join us!\nLearn more about your DAT and its growth:\ndocs.lazpad.fun\nLazbubu Incubator | LazPad\nYour Lazbubu journey starts now.\nTrain it, interact daily, and see how far your DAT can grow before mainnet!"
             }
         ]
     }
