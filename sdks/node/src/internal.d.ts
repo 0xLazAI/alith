@@ -9,7 +9,7 @@ export interface DelegateTool {
   description: string;
   parameters: string;
   author: string;
-  handler: (...args: any[]) => any;
+  handler: (...args: any[]) => any | Promise<any>;
 }
 /**
  * Runs the text chunker on the incoming text and returns the chunks as a vector of strings.

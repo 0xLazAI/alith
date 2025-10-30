@@ -4,12 +4,13 @@ import { Extractor, parseArgs } from "./extractor";
 import { chunkText } from "./internal";
 import { Memory, Message, MessageBuilder, WindowBufferMemory } from "./memory";
 import { QdrantClient, QdrantClientParams, QdrantStore, Store } from "./store";
-import { Tool } from "./tool";
+import { MaybePromise, Tool } from "./tool";
 
 export {
   Agent,
   AgentOptions,
   Tool,
+  MaybePromise,
   chunkText,
   Embeddings,
   RemoteModelEmbeddings,
