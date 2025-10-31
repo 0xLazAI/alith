@@ -23,6 +23,10 @@ path = "examples/agent_articleWriter.rs"
 name = "dat_minting"
 path = "examples/dat_minting.rs"
 
+[[example]]
+name = "agent_langTranslator"
+path = "examples/agent_langTranslator.rs"
+
 
 [dependencies]
 alith = { workspace = true, features = ["lazai", "crypto", "ipfs", "wallet"] }
