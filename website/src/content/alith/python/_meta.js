@@ -7,7 +7,6 @@ export default {
   store: "",
   tools: "",
   "text-evaluator": "",
-  lazai: "",
   "api-reference": "",
   examples: "",
 };
