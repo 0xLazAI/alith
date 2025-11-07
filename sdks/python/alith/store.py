@@ -116,10 +116,17 @@ class ChromaDBStore(Store):
             ids=ids,
         )
 
-    def save_docs(self, docs: List[str]) -> "ChromaDBStore":
+    def save_docs(self, docs: List[str], collection_name: Optional[str] = None) -> "ChromaDBStore":
         ids = [hashlib.sha256(doc.encode("utf-8")).hexdigest() for doc in docs]
         metadatas = [None] * len(docs)
-        self.collection.upsert(
+        
+        # Use specified collection or default collection
+        if collection_name and collection_name != self.collection_name:
+            collection = self.app.get_collection(name=collection_name)
+        else:
+            collection = self.collection
+            
+        collection.upsert(
             documents=docs,
             metadatas=metadatas,
             ids=ids,
@@ -137,6 +144,72 @@ class ChromaDBStore(Store):
         self.app = None
         self.collection = None
 
+    def search_in(
+        self,
+        query: str,
+        limit: int = 3,
+        score_threshold: float = 0.4,
+        collection_name: Optional[str] = None,
+    ) -> List[str]:
+        """Search in a specific collection."""
+        if collection_name and collection_name != self.collection_name:
+            # Get the specified collection
+            collection = self.app.get_collection(name=collection_name)
+            fetched = collection.query(
+                query_texts=[query],
+                n_results=limit,
+            )
+        else:
+            # Use the default collection
+            fetched = self.collection.query(
+                query_texts=[query],
+                n_results=limit,
+            )
+        
+        results = []
+        for i in range(len(fetched["ids"][0])):  # type: ignore
+            result = {
+                "id": fetched["ids"][0][i],  # type: ignore
+                "metadata": fetched["metadatas"][0][i],  # type: ignore
+                "context": fetched["documents"][0][i],  # type: ignore
+                "score": fetched["distances"][0][i],  # type: ignore
+            }
+            if result["score"] >= score_threshold:
+                results.append(result)
+        results = [result["context"] for result in results]
+        return results
+
+    def has_collection(self, collection_name: str) -> bool:
+        """Check if the collection exists."""
+        try:
+            collections = self.app.list_collections()
+            return any(col.name == collection_name for col in collections)
+        except Exception:
+            return False
+
+    def create_collection(self, collection_name: str) -> "ChromaDBStore":
+        """Create a new collection."""
+        if self.embeddings:
+            class CustomEmbeddingFunction(EmbeddingFunction):
+                def __call__(self, texts):
+                    return self.embeddings.embed_texts(texts)
+            
+            from chromadb.utils import embedding_functions
+            default_ef = embedding_functions.DefaultEmbeddingFunction()
+            
+            self.app.create_collection(
+                name=collection_name,
+                embedding_function=CustomEmbeddingFunction()
+            )
+        else:
+            from chromadb.utils import embedding_functions
+            default_ef = embedding_functions.DefaultEmbeddingFunction()
+            
+            self.app.create_collection(
+                name=collection_name,
+                embedding_function=default_ef
+            )
+        return self
 
 try:
     from pymilvus import MilvusClient, MilvusException, model
