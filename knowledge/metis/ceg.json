@@ -1,13 +1,64 @@
 [
     {
+        "id": "9e4684dca2f6c042",
+        "topic_id": "11112",
+        "title": "Metis & LazAI Launch GMPayer: The Cross-Chain Payment Hub for AI Agents",
+        "url": "https://forum.ceg.vote/t/metis-lazai-launch-gmpayer-the-cross-chain-payment-hub-for-ai-agents/11112",
+        "views": "25",
+        "comments": "0",
+        "created_date": "Nov 5, 2025 7:20 pm",
+        "latest_activity": null,
+        "content": "AI is entering a new era, one where intelligent agents don\u2019t just process data, they transact value.\nTo make that possible, LazAI, in collaboration with Metis, ZKM, and GOAT Network, has launched GMPayer , an x402-powered, cross-chain payment hub that allows AI agents to make instant, verifiable, and trustless payments across multiple blockchains without intermediaries.\nWhat is GMPayer?\nGMPayer (GOAT\u2013Metis\u2013Payer) is the first multi-currency, x402-based payment protocol designed specifically for the AI agent economy.\nIt brings together:\nLazAI \u2013 Through the Data Anchoring Token (DAT) standard, LazAI connects data ownership, rights, and revenue to every AI transaction. Contributors are automatically compensated when their data or models are used.\nMetis \u2013 Provides the execution and settlement backbone, with Andromeda anchoring transactions and Hyperion scaling microtransactions for AI workflows.\nZKM \u2013 Validates every transaction through zero-knowledge proofs, ensuring payments remain transparent, neutral, and verifiable.\nGOAT Network \u2013 Bridges Bitcoin and stablecoin liquidity with zkRollup infrastructure and EIP-3009 compatibility for x402-based payments.\nTogether, these networks form a decentralized payment layer where AI agents can buy, sell, and exchange data and services autonomously.\nWhy x402 Changes Everything\nFor over three decades, the web reserved HTTP 402: \u201cPayment Required\u201d, a dormant status code.\nIn 2025, Coinbase and Cloudflare revived it as x402, creating a new standard for per-request, onchain payments.\nx402 lets one AI agent pay another directly in the same request \u2014 no accounts, no APIs, no invoices.\nBut to make it safe, every payment must be provable, rights-bound, and multi-chain compatible.\nThat\u2019s the role of GMPayer: to turn x402 from a protocol into a working economic layer where agents can transact securely, instantly, and autonomously.\nGMPayer\u2019s Four-Phase Vision\nPhase 1 \u2013 Build the Payment Hub\nLaunch the first x402-based, cross-chain hub where AI agents independently pay for compute, data, and model access.\nPhase 2 \u2013 Make Payments Trustworthy and Controllable\nIntroduce user-level controls for agent micropayments, including safe budgets, spending limits, and transparent transaction histories.\nPhase 3 \u2013 Create the AI Business Network\nTransform AI services into profit-generating assets through DAT attribution, enabling per-call rewards.\nPhase 4 \u2013 Build a Universal AI Value-Exchange Layer\nSeamlessly integrate AI commerce across all Web3 chains, a global marketplace for data, compute, and intelligence.\nWhy It Matters for Metis\nFor Metis, this marks a major leap forward in scaling Hyperion\u2019s high-throughput infrastructure and Andromeda\u2019s decentralized settlement.\nBy enabling AI payments directly on Metis Andromeda, GMPayer cements Metis as the economic and technical backbone of the AI-powered Web3 economy, a system where data, computation, and payments converge into a single, verifiable loop.\nThe AI Agent Economy Starts Here\nWith GMPayer, AI agents stop just \u201cthinking\u201d, they start transacting.\nEvery API call becomes a deal.\nEvery dataset becomes an asset.\nEvery contribution earns value automatically.\nThis is how LazAI, Metis, ZKM, and GOAT Network are building the foundation of an AI economy that runs itself \u2014 autonomous, decentralized, and borderless.\nLearn more: Read the GMPayer User Guide \u2192\nX402 and LazAI: Powering Payments for the Agent Economy\nRead more : How LazAI is Building the Value Layer for AI Commerce",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "AI is entering a new era, one where intelligent agents don\u2019t just process data, they transact value.\nTo make that possible, LazAI, in collaboration with Metis, ZKM, and GOAT Network, has launched GMPayer , an x402-powered, cross-chain payment hub that allows AI agents to make instant, verifiable, and trustless payments across multiple blockchains without intermediaries.\nWhat is GMPayer?\nGMPayer (GOAT\u2013Metis\u2013Payer) is the first multi-currency, x402-based payment protocol designed specifically for the AI agent economy.\nIt brings together:\nLazAI \u2013 Through the Data Anchoring Token (DAT) standard, LazAI connects data ownership, rights, and revenue to every AI transaction. Contributors are automatically compensated when their data or models are used.\nMetis \u2013 Provides the execution and settlement backbone, with Andromeda anchoring transactions and Hyperion scaling microtransactions for AI workflows.\nZKM \u2013 Validates every transaction through zero-knowledge proofs, ensuring payments remain transparent, neutral, and verifiable.\nGOAT Network \u2013 Bridges Bitcoin and stablecoin liquidity with zkRollup infrastructure and EIP-3009 compatibility for x402-based payments.\nTogether, these networks form a decentralized payment layer where AI agents can buy, sell, and exchange data and services autonomously.\nWhy x402 Changes Everything\nFor over three decades, the web reserved HTTP 402: \u201cPayment Required\u201d, a dormant status code.\nIn 2025, Coinbase and Cloudflare revived it as x402, creating a new standard for per-request, onchain payments.\nx402 lets one AI agent pay another directly in the same request \u2014 no accounts, no APIs, no invoices.\nBut to make it safe, every payment must be provable, rights-bound, and multi-chain compatible.\nThat\u2019s the role of GMPayer: to turn x402 from a protocol into a working economic layer where agents can transact securely, instantly, and autonomously.\nGMPayer\u2019s Four-Phase Vision\nPhase 1 \u2013 Build the Payment Hub\nLaunch the first x402-based, cross-chain hub where AI agents independently pay for compute, data, and model access.\nPhase 2 \u2013 Make Payments Trustworthy and Controllable\nIntroduce user-level controls for agent micropayments, including safe budgets, spending limits, and transparent transaction histories.\nPhase 3 \u2013 Create the AI Business Network\nTransform AI services into profit-generating assets through DAT attribution, enabling per-call rewards.\nPhase 4 \u2013 Build a Universal AI Value-Exchange Layer\nSeamlessly integrate AI commerce across all Web3 chains, a global marketplace for data, compute, and intelligence.\nWhy It Matters for Metis\nFor Metis, this marks a major leap forward in scaling Hyperion\u2019s high-throughput infrastructure and Andromeda\u2019s decentralized settlement.\nBy enabling AI payments directly on Metis Andromeda, GMPayer cements Metis as the economic and technical backbone of the AI-powered Web3 economy, a system where data, computation, and payments converge into a single, verifiable loop.\nThe AI Agent Economy Starts Here\nWith GMPayer, AI agents stop just \u201cthinking\u201d, they start transacting.\nEvery API call becomes a deal.\nEvery dataset becomes an asset.\nEvery contribution earns value automatically.\nThis is how LazAI, Metis, ZKM, and GOAT Network are building the foundation of an AI economy that runs itself \u2014 autonomous, decentralized, and borderless.\nLearn more: Read the GMPayer User Guide \u2192\nX402 and LazAI: Powering Payments for the Agent Economy\nRead more : How LazAI is Building the Value Layer for AI Commerce"
+            }
+        ]
+    },
+    {
+        "id": "278f3b02d21d4821",
+        "topic_id": "10664",
+        "title": "7th No-Lose Lottery Draw winner ann",
+        "url": "https://forum.ceg.vote/t/7th-no-lose-lottery-draw-winner-ann/10664",
+        "views": "72",
+        "comments": "2",
+        "created_date": "Sep 24, 2025 4:22 pm",
+        "latest_activity": "Nov 5, 2025 5:54 pm",
+        "content": "OCT\n6\n7th No-Lose Lottery- Winner Ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Oct 6 4:10 PM \u2192 Wed, Oct 8 4:00 AM\n1\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nNo-Lose Lottery draw occurs biweekly, and badges will be redeemable for a surprise reward soon.\nThere will be biweekly winners:\n2 Contributor Badge \u2013 Small Prize\nOne Visionary Badge \u2013 Grand Prize\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "OCT\n6\n7th No-Lose Lottery- Winner Ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Oct 6 4:10 PM \u2192 Wed, Oct 8 4:00 AM\n1\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nNo-Lose Lottery draw occurs biweekly, and badges will be redeemable for a surprise reward soon.\nThere will be biweekly winners:\n2 Contributor Badge \u2013 Small Prize\nOne Visionary Badge \u2013 Grand Prize\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!"
+            }
+        ]
+    },
+    {
+        "id": "a4cf675002daad21",
+        "topic_id": "10666",
+        "title": "9th No-Lose lottery winner ann",
+        "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
+        "views": "63",
+        "comments": "1",
+        "created_date": "Sep 24, 2025 4:25 pm",
+        "latest_activity": "Nov 5, 2025 5:30 pm",
+        "content": "NOV\n3\n9th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 3 5:24 PM \u2192 Wed, Nov 5 6:24 PM\n0 going\nCongratulations to our forum contributors!\nHere are winners:\nContributor Badge \u2013 Advanced Lazbubu DAT: @djpablo47 and @InvadersMustDie\nVisionary Badge \u2013 Rare Lazbubu DAT: @janani_1117\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "NOV\n3\n9th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 3 5:24 PM \u2192 Wed, Nov 5 6:24 PM\n0 going\nCongratulations to our forum contributors!\nHere are winners:\nContributor Badge \u2013 Advanced Lazbubu DAT: @djpablo47 and @InvadersMustDie\nVisionary Badge \u2013 Rare Lazbubu DAT: @janani_1117\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!"
+            }
+        ]
+    },
+    {
         "id": "66e745d7dfad13a4",
         "topic_id": "11109",
         "title": "What\u2019s Been Happening Lately: x402, GMPayer, LazAI & the Future of AI Payments",
         "url": "https://forum.ceg.vote/t/what-s-been-happening-lately-x402-gmpayer-lazai-the-future-of-ai-payments/11109",
-        "views": "",
-        "comments": "0",
+        "views": "42",
+        "comments": "1",
         "created_date": "Nov 4, 2025 7:28 pm",
-        "latest_activity": "Nov 4, 2025 7:28 pm",
+        "latest_activity": "Nov 5, 2025 5:20 pm",
         "content": "Hey everyone,\nOver the past few days a lot has happened across the LazAI / Metis / ZKM / GOAT ecosystem, and I wanted to put everything in one place for anyone who\u2019s trying to catch up. This shift is bigger than a single tool or token it\u2019s the early foundation of a real AI-to-AI economy.\nx402 Goes Live\nHTTP 402 (\u201cPayment Required\u201d) has finally been activated as a crypto micro-payment standard.\nThis lets AI agents pay inside a web request no accounts, no APIs, no humans.\nGMPayer Launch\nLazAI + Metis + ZKM + GOAT shipped GMPayer, the first working x402 payment hub.\nAgents can now send $xMETIS or $xGOATED autonomously across chains.\nThe live Proof-of-Concept:\nPay $1\nMint 5,000 $BANG\nAll done through an on-chain x402 call.\nWhy it matters\nThis is the beginning of:\nAI-to-AI payments\nPer-call billing for data, compute, and models\nCross-chain value flow between agents\nVerifiable payments thanks to ZKM\nA BTC + L2 payment lane through GOAT & Metis\nWhat\u2019s next\nPhase 2: AI spending limits + policy guardrails\nPhase 3: AI Business Network (DAT-powered revenue splits)\nPhase 4: A universal, cross-chain AI value exchange layer\nThings are moving really fast!!",
         "comments_details": [
             {
@@ -21,7 +72,7 @@
         "topic_id": "11105",
         "title": "Metis L2 Network: Price Analysis, Community Sentiment, and Ecosystem Challenges",
         "url": "https://forum.ceg.vote/t/metis-l2-network-price-analysis-community-sentiment-and-ecosystem-challenges/11105",
-        "views": "",
+        "views": "58",
         "comments": "1",
         "created_date": "Nov 4, 2025 11:08 am",
         "latest_activity": "Nov 4, 2025 4:43 pm",
@@ -38,7 +89,7 @@
         "topic_id": "11100",
         "title": "FeedByHash \u2013 Gamified Reward Engine",
         "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "",
+        "views": "41",
         "comments": "4",
         "created_date": "Nov 4, 2025 8:52 am",
         "latest_activity": "Nov 4, 2025 4:39 pm",
@@ -55,7 +106,7 @@
         "topic_id": "11097",
         "title": "Multi-Agent Orchestration in LazAI : Why it Matters",
         "url": "https://forum.ceg.vote/t/multi-agent-orchestration-in-lazai-why-it-matters/11097",
-        "views": "",
+        "views": "40",
         "comments": "3",
         "created_date": "Nov 3, 2025 9:32 am",
         "latest_activity": null,
@@ -72,7 +123,7 @@
         "topic_id": "10919",
         "title": "Metis and the AI Layer Race: Why Infra Is Quiet but Strategic Right Now",
         "url": "https://forum.ceg.vote/t/metis-and-the-ai-layer-race-why-infra-is-quiet-but-strategic-right-now/10919",
-        "views": "",
+        "views": "156",
         "comments": "4",
         "created_date": "Oct 17, 2025 5:22 pm",
         "latest_activity": "Nov 2, 2025 1:58 pm",
@@ -89,7 +140,7 @@
         "topic_id": "11067",
         "title": "What new business models are unfolding from the fusion of AI, payments, and crypto wallet development?",
         "url": "https://forum.ceg.vote/t/what-new-business-models-are-unfolding-from-the-fusion-of-ai-payments-and-crypto-wallet-development/11067",
-        "views": "",
+        "views": "62",
         "comments": "1",
         "created_date": "Oct 31, 2025 2:05 pm",
         "latest_activity": "Nov 1, 2025 4:15 pm",
@@ -106,7 +157,7 @@
         "topic_id": "11033",
         "title": "Will white label crypto wallet services make digital assets more accessible for everyday users in 2026?",
         "url": "https://forum.ceg.vote/t/will-white-label-crypto-wallet-services-make-digital-assets-more-accessible-for-everyday-users-in-2026/11033",
-        "views": "",
+        "views": "59",
         "comments": "3",
         "created_date": "Oct 29, 2025 3:40 pm",
         "latest_activity": "Oct 31, 2025 3:30 pm",
@@ -123,7 +174,7 @@
         "topic_id": "11072",
         "title": "DogEx X LazAI Flashdrop",
         "url": "https://forum.ceg.vote/t/dogex-x-lazai-flashdrop/11072",
-        "views": "",
+        "views": "62",
         "comments": "2",
         "created_date": "Oct 31, 2025 3:30 pm",
         "latest_activity": null,
@@ -140,7 +191,7 @@
         "topic_id": "11064",
         "title": "Leverage can multiply profits or destroy your balance if misused",
         "url": "https://forum.ceg.vote/t/leverage-can-multiply-profits-or-destroy-your-balance-if-misused/11064",
-        "views": "",
+        "views": "63",
         "comments": "2",
         "created_date": "Oct 31, 2025 2:05 pm",
         "latest_activity": "Oct 31, 2025 2:05 pm",
@@ -157,7 +208,7 @@
         "topic_id": "11052",
         "title": "Join Today\u2019s Metis Livestream: The Next Phase of ReGenesis",
         "url": "https://forum.ceg.vote/t/join-today-s-metis-livestream-the-next-phase-of-regenesis/11052",
-        "views": "",
+        "views": "64",
         "comments": "1",
         "created_date": "Oct 30, 2025 1:48 pm",
         "latest_activity": "Oct 31, 2025 7:21 am",
@@ -174,7 +225,7 @@
         "topic_id": "11053",
         "title": "X402 and LazAI: Powering Payments for the Agent Economy",
         "url": "https://forum.ceg.vote/t/x402-and-lazai-powering-payments-for-the-agent-economy/11053",
-        "views": "",
+        "views": "68",
         "comments": "1",
         "created_date": "Oct 30, 2025 3:42 pm",
         "latest_activity": "Oct 31, 2025 7:18 am",
@@ -191,7 +242,7 @@
         "topic_id": "11054",
         "title": "How LazAI is Building the Value Layer for AI Commerce",
         "url": "https://forum.ceg.vote/t/how-lazai-is-building-the-value-layer-for-ai-commerce/11054",
-        "views": "",
+        "views": "69",
         "comments": "1",
         "created_date": "Oct 30, 2025 4:12 pm",
         "latest_activity": "Oct 31, 2025 7:10 am",
@@ -208,7 +259,7 @@
         "topic_id": "11006",
         "title": "\ud835\ude3c\ud835\ude4b\ud835\ude4b\ud835\ude4d\ud835\ude4a\ud835\ude51\ud835\ude40\ud835\ude3f | Governance Proposal: Metis Ecosystem Unification and Economic Model Evolution",
         "url": "https://forum.ceg.vote/t/governance-proposal-metis-ecosystem-unification-and-economic-model-evolution/11006",
-        "views": "",
+        "views": "458",
         "comments": "2",
         "created_date": "Oct 27, 2025 7:21 pm",
         "latest_activity": "Oct 31, 2025 12:45 am",
@@ -225,7 +276,7 @@
         "topic_id": "11021",
         "title": "DogEx and LazAi",
         "url": "https://forum.ceg.vote/t/dogex-and-lazai/11021",
-        "views": "",
+        "views": "70",
         "comments": "3",
         "created_date": "Oct 29, 2025 8:02 am",
         "latest_activity": "Oct 29, 2025 7:11 pm",
@@ -242,7 +293,7 @@
         "topic_id": "6058",
         "title": "AI Automation: The Biggest Lie Web3 Teams Tell Themselves",
         "url": "https://forum.ceg.vote/t/ai-automation-the-biggest-lie-web3-teams-tell-themselves/6058",
-        "views": "",
+        "views": "210",
         "comments": "6",
         "created_date": "Jun 30, 2025 4:09 pm",
         "latest_activity": "Oct 29, 2025 3:23 pm",
@@ -259,7 +310,7 @@
         "topic_id": "4079",
         "title": "Welcome to the Hyperion Forum: Our Community Home",
         "url": "https://forum.ceg.vote/t/welcome-to-the-hyperion-forum-our-community-home/4079",
-        "views": "",
+        "views": "1.0k",
         "comments": "48",
         "created_date": "May 15, 2025 2:04 pm",
         "latest_activity": "Oct 28, 2025 5:28 pm",
@@ -276,7 +327,7 @@
         "topic_id": "11015",
         "title": "Opportunities: It\u2019s About Showing Up, Not Just Winning",
         "url": "https://forum.ceg.vote/t/opportunities-it-s-about-showing-up-not-just-winning/11015",
-        "views": "",
+        "views": "75",
         "comments": "0",
         "created_date": "Oct 28, 2025 5:15 pm",
         "latest_activity": null,
@@ -285,57 +336,6 @@
             {
                 "author": "Harini_Priya",
                 "comment": "By Harini Priya K | LazAI Dev Ambassador\nIntroduction\nOpportunities don\u2019t arrive all the time \u2014 but when they do, they arrive in lots of ways: a hackathon, a workshop, a project invitation, or just some random message saying, \u201cHey, will you come?\u201d\nAnd so we stall. We overanalyze.\n\u201cWhat if I\u2019m not prepared?\u201d\n\u201cWhat if I do badly?\u201d\nBut the truth is \u2014 opportunities aren\u2019t exams.\nThey\u2019re doors \u2014 and what matters is only whether you step through them.\nGrabbing the Moment\nTaking every chance doesn\u2019t guarantee you\u2019ll always win. It guarantees you\u2019ll always learn.\nEach event you attend, each challenge you take, each space you enter \u2014 it leaves something behind: a skill, a connection, or a story.\nIt\u2019s not about being the top performer in the room.\nIt\u2019s about being the person who was there when it counted.\nThe Growth Hidden in Every Chance\nSome risks won\u2019t pay off in giant paychecks \u2014 but they change the way you think, the way you produce, and the way you view yourself.\nEven a little assignment or a shot that doesn\u2019t make it is full of lessons that no book can provide.\nBecause when you say \u201cyes,\u201d you gain strength.\nWhen you experiment, you expand.\nAnd when you continue to show up, life begins to open even wider doors.\nConclusion\nDon\u2019t wait for the ultimate opportunity \u2014 make the most of the ones already in front of you.\nYou don\u2019t have to have it all figured out first.\nIt\u2019s not always about standing out in every second.\nIt\u2019s about gathering moments that make you stand out."
-            }
-        ]
-    },
-    {
-        "id": "82af23030f5c5aaa",
-        "topic_id": "11014",
-        "title": "What is the Real Job of a Dev Ambassador?",
-        "url": "https://forum.ceg.vote/t/what-is-the-real-job-of-a-dev-ambassador/11014",
-        "views": "",
-        "comments": "0",
-        "created_date": "Oct 28, 2025 4:18 pm",
-        "latest_activity": null,
-        "content": "The Real Job of a Dev Ambassador\nLet\u2019s be real: being a Dev Ambassador isn\u2019t just about sharing posts or hyping the latest tech. At its core, it\u2019s about building stuff, pitching in, and helping the whole developer community level up. \u201cDev\u201d stands for Developer, and that comes with real responsibility. You need to build stuff, pitch in, and try new things. The real difference you make as a Dev Ambassador comes from what you build, not just what you share online.\nA true Dev Ambassador rolls up their sleeves and gets their hands dirty. They build new features, fix bugs, try out new ideas, or tinker with things to see what works. When something clicks, they don\u2019t keep it to themselves. They write up what they learned, post tutorials, or share their story so someone else can take that knowledge and run with it.\nHere\u2019s what being a Dev Ambassador actually looks like:\nRoll up your sleeves and contribute to building features, improve open-source, and dive into real-world projects.\nTeach what you know, write tutorials, share technical articles, and create resources based on your own experience.\nStay active on GitHub, commit code, squash bugs, share cool tools, or kick off a new project.\nShare your process, write blogs, or make videos about what you\u2019ve actually built, not just what caught your eye.\nGet involved in run sessions, answer questions, mentor folks, and help the community level up.\nDon\u2019t get me wrong, posting is part of the job. But it\u2019s not the whole job.\nAt the end of the day, a Dev Ambassador should be a developer first and a promoter second. Build something real, then share it so others can learn from you. That\u2019s what earns trust and respect in this space.\n@LazAI Dev-rel: @0xthiru & @nidhinakranii",
-        "comments_details": [
-            {
-                "author": "Abi",
-                "comment": "The Real Job of a Dev Ambassador\nLet\u2019s be real: being a Dev Ambassador isn\u2019t just about sharing posts or hyping the latest tech. At its core, it\u2019s about building stuff, pitching in, and helping the whole developer community level up. \u201cDev\u201d stands for Developer, and that comes with real responsibility. You need to build stuff, pitch in, and try new things. The real difference you make as a Dev Ambassador comes from what you build, not just what you share online.\nA true Dev Ambassador rolls up their sleeves and gets their hands dirty. They build new features, fix bugs, try out new ideas, or tinker with things to see what works. When something clicks, they don\u2019t keep it to themselves. They write up what they learned, post tutorials, or share their story so someone else can take that knowledge and run with it.\nHere\u2019s what being a Dev Ambassador actually looks like:\nRoll up your sleeves and contribute to building features, improve open-source, and dive into real-world projects.\nTeach what you know, write tutorials, share technical articles, and create resources based on your own experience.\nStay active on GitHub, commit code, squash bugs, share cool tools, or kick off a new project.\nShare your process, write blogs, or make videos about what you\u2019ve actually built, not just what caught your eye.\nGet involved in run sessions, answer questions, mentor folks, and help the community level up.\nDon\u2019t get me wrong, posting is part of the job. But it\u2019s not the whole job.\nAt the end of the day, a Dev Ambassador should be a developer first and a promoter second. Build something real, then share it so others can learn from you. That\u2019s what earns trust and respect in this space.\n@LazAI Dev-rel: @0xthiru & @nidhinakranii"
-            }
-        ]
-    },
-    {
-        "id": "80705ee81f58f2c5",
-        "topic_id": "11011",
-        "title": "The $DOGE market just turned into a real \u201cPain Train\u201d panic selling, volatility spikes, and traders losing direction",
-        "url": "https://forum.ceg.vote/t/the-doge-market-just-turned-into-a-real-pain-train-panic-selling-volatility-spikes-and-traders-losing-direction/11011",
-        "views": "",
-        "comments": "0",
-        "created_date": "Oct 28, 2025 12:31 pm",
-        "latest_activity": null,
-        "content": "But this time, instead of following the crowd, I decided to trust data, not emotion \u2014 with the help of @LazAINetwork\u2019s AI Vibe Trader on @Dogexperps Mainnet\nLazAI\u2019s integration with DogEx isn\u2019t just a gimmick. It\u2019s a next-level trading assistant powered by real-time analytics, sentiment prediction, and instant decision feedback\nIn my latest $DOGE position (100x leverage, $50K size), the AI warned me mid-trade:\n\u201cScalp going wrong! Cut losses quickly on the 1-min chart\"\nThat alert hit at the perfect time helping me close before the drop deepened\nThese precise warnings and adaptive insights transform how we trade\nInstead of chasing pumps or fearing dips, I\u2019m starting to rely on AI-guided behavior smarter entries, faster reactions, and emotion-free exits\nMy position history clearly shows how LazAI improves risk control and consistency. Each alert teaches discipline, especially when handling high leverage and volatile assets\nThis collaboration between\n@Dogexperps and @LazAINetwork is shaping what future DeFi trading should look like \u2014 a balance between human intuition and AI precision\nThe Flash Drop Challenge isn\u2019t just a competition; it\u2019s proof that AI-powered trading can turn chaos into clarity",
-        "comments_details": [
-            {
-                "author": "soiphowall",
-                "comment": "But this time, instead of following the crowd, I decided to trust data, not emotion \u2014 with the help of @LazAINetwork\u2019s AI Vibe Trader on @Dogexperps Mainnet\nLazAI\u2019s integration with DogEx isn\u2019t just a gimmick. It\u2019s a next-level trading assistant powered by real-time analytics, sentiment prediction, and instant decision feedback\nIn my latest $DOGE position (100x leverage, $50K size), the AI warned me mid-trade:\n\u201cScalp going wrong! Cut losses quickly on the 1-min chart\"\nThat alert hit at the perfect time helping me close before the drop deepened\nThese precise warnings and adaptive insights transform how we trade\nInstead of chasing pumps or fearing dips, I\u2019m starting to rely on AI-guided behavior smarter entries, faster reactions, and emotion-free exits\nMy position history clearly shows how LazAI improves risk control and consistency. Each alert teaches discipline, especially when handling high leverage and volatile assets\nThis collaboration between\n@Dogexperps and @LazAINetwork is shaping what future DeFi trading should look like \u2014 a balance between human intuition and AI precision\nThe Flash Drop Challenge isn\u2019t just a competition; it\u2019s proof that AI-powered trading can turn chaos into clarity"
-            }
-        ]
-    },
-    {
-        "id": "e0d5c340cfc23674",
-        "topic_id": "10295",
-        "title": "New EIPs in Ethereum: what\u2019s coming and why does it matter?",
-        "url": "https://forum.ceg.vote/t/new-eips-in-ethereum-what-s-coming-and-why-does-it-matter/10295",
-        "views": "",
-        "comments": "2",
-        "created_date": "Aug 27, 2025 9:46 pm",
-        "latest_activity": "Oct 27, 2025 12:17 pm",
-        "content": "Hello there!\nI\u2019d like to share some exciting updates about Ethereum Improvement Proposals (EIPs).\nAs you know, Ethereum evolves through improvement proposals \u2014 EIPs. One of the latest proposals actively moving toward implementation is EIP-3074: Auth and Exec. Its core idea is to make wallet management much easier, including the long-awaited feature of recovering access to your Ethereum wallet, which has been a pain point for many users.\nThere are other interesting proposals too \u2014 for example, EIP-4906 for updating NFTs, or the recently implemented EIP-4844: Proto-Danksharding (Blob blocks), which has already helped reduce fees across L2 networks.\nIf you\u2019d like to dive deeper, check out the Ethereum Magicians Forum \u2014 this is where the Ethereum community discusses upcoming upgrades, and anyone can comment or join the conversation.\nNow, a question for you:\nWhich Ethereum upgrade do you find most valuable?\nThe ability to recover your address (EIP-3074)?\nNew possibilities for NFTs (EIP-4906)?\nOr what\u2019s already live \u2014 Blob blocks (EIP-4844)?",
-        "comments_details": [
-            {
-                "author": "Vladimir",
-                "comment": "Hello there!\nI\u2019d like to share some exciting updates about Ethereum Improvement Proposals (EIPs).\nAs you know, Ethereum evolves through improvement proposals \u2014 EIPs. One of the latest proposals actively moving toward implementation is EIP-3074: Auth and Exec. Its core idea is to make wallet management much easier, including the long-awaited feature of recovering access to your Ethereum wallet, which has been a pain point for many users.\nThere are other interesting proposals too \u2014 for example, EIP-4906 for updating NFTs, or the recently implemented EIP-4844: Proto-Danksharding (Blob blocks), which has already helped reduce fees across L2 networks.\nIf you\u2019d like to dive deeper, check out the Ethereum Magicians Forum \u2014 this is where the Ethereum community discusses upcoming upgrades, and anyone can comment or join the conversation.\nNow, a question for you:\nWhich Ethereum upgrade do you find most valuable?\nThe ability to recover your address (EIP-3074)?\nNew possibilities for NFTs (EIP-4906)?\nOr what\u2019s already live \u2014 Blob blocks (EIP-4844)?"
             }
         ]
     }
