@@ -3,11 +3,18 @@ use alith_core::tool::{StructureTool, ToolError};
 use async_trait::async_trait;
 use reqwest::Client;
 use scraper::{Html, Selector};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use url::Url;
 
 pub const DEFAULT_URL: &str = "https://duckduckgo.com/html/";
 pub const DEFAUTL_MAX_COUNT: usize = 10;
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct SearchInput {
+    pub query: String,
+}
 
 pub struct Searcher {
     url: String,
@@ -86,7 +93,7 @@ impl Search for Searcher {
 
 #[async_trait]
 impl StructureTool for Searcher {
-    type Input = String;
+    type Input = SearchInput;
     type Output = SearchResults;
 
     fn name(&self) -> &str {
@@ -102,7 +109,7 @@ such as finding the latest news, retrieving detailed information on a specific t
     }
 
     async fn run_with_args(&self, input: Self::Input) -> Result<Self::Output, ToolError> {
-        self.search(&input)
+        self.search(&input.query)
             .await
             .map_err(|err| ToolError::NormalError(Box::new(err)))
     }

@@ -6,6 +6,8 @@ use serde::{Deserialize, Serialize};
 
 pub mod duckduckgo;
 
+pub use duckduckgo::SearchInput;
+
 #[derive(Debug, Default)]
 pub enum SearchProvider {
     #[default]
@@ -75,7 +77,7 @@ impl SearchTool {
 
 #[async_trait]
 impl StructureTool for SearchTool {
-    type Input = String;
+    type Input = SearchInput;
     type Output = SearchResults;
 
     #[inline]
@@ -95,14 +97,57 @@ impl StructureTool for SearchTool {
 
     #[inline]
     fn author(&self) -> &str {
-        self.searcher.version()
+        self.searcher.author()
     }
 
     #[inline]
     async fn run_with_args(&self, input: Self::Input) -> Result<Self::Output, ToolError> {
         self.searcher
-            .search(&input)
+            .search(&input.query)
             .await
             .map_err(|err| ToolError::NormalError(Box::new(err)))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_search_tool_schema_is_object() {
+        let tool = SearchTool::default();
+        let definition = StructureTool::definition(&tool);
+        let schema = &definition.parameters;
+
+        // Verify that parameters is an object type, not a string
+        assert_eq!(
+            schema.get("type").and_then(|v| v.as_str()),
+            Some("object"),
+            "SearchTool schema type should be 'object', not 'string'"
+        );
+
+        // Verify that the object has properties
+        let properties = schema.get("properties");
+        assert!(
+            properties.is_some() && properties.unwrap().is_object(),
+            "SearchTool schema should have properties"
+        );
+
+        // Verify that the query property exists
+        let query_prop = schema
+            .get("properties")
+            .and_then(|props| props.get("query"));
+        assert!(
+            query_prop.is_some(),
+            "SearchTool schema properties should have 'query' field"
+        );
+    }
+
+    #[test]
+    fn test_search_input_deserialize() {
+        let json = r#"{"query": "Bitcoin"}"#;
+        let input: Result<SearchInput, _> = serde_json::from_str(json);
+        assert!(input.is_ok(), "SearchInput should deserialize from JSON");
+        assert_eq!(input.unwrap().query, "Bitcoin");
     }
 }

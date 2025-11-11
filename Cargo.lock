@@ -420,6 +420,7 @@ dependencies = [
  "alith-core",
  "async-trait",
  "reqwest 0.12.23",
+ "schemars",
  "scraper",
  "serde",
  "serde_json",
