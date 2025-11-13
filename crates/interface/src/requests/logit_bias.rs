@@ -355,6 +355,7 @@ impl OpenAILogitBias {
                 serde_json::Value::Number(serde_json::Number::from(value.ceil() as i32)),
             );
         }
+        self.built_logit_bias = Some(openai_logit_bias);
     }
 
     fn get(&self) -> Option<HashMap<String, serde_json::Value>> {
