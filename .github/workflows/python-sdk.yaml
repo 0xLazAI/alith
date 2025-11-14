@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-      - '*'
+      - "*"
   pull_request:
     branches:
       - main
@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 env:
-  PYTHON_VERSION: '3.12'
+  PYTHON_VERSION: "3.14"
   PYO3_USE_ABI3_FORWARD_COMPATIBILITY: 1
 
 jobs:
@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [ x86_64, aarch64 ]
+        target: [x86_64, aarch64]
     steps:
       - uses: actions/checkout@v4
       - uses: PyO3/maturin-action@v1.47.2
@@ -112,7 +112,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    needs: [ macos, linux, windows ]
+    needs: [macos, linux, windows]
     steps:
       - uses: actions/download-artifact@v4
         with:
