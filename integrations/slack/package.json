@@ -1,0 +1,43 @@
+{
+  "name": "lazai-slack-bot",
+  "version": "1.0.0",
+  "description": "LazAI Slack Bot for data contributions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "test": "ts-node test/setup-test.ts",
+    "test:setup": "ts-node test/setup-test.ts",
+    "setup:complete": "ts-node scripts/setup-complete.ts",
+    "clean": "rimraf dist",
+    "validate": "npm run test:setup && npm run build"
+  },
+  "keywords": [
+    "lazai",
+    "slack",
+    "bot",
+    "ai",
+    "data"
+  ],
+  "author": "LazAI Dev Ambassador",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@slack/bolt": "^4.6.0",
+    "@slack/web-api": "^7.12.0",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "form-data": "^4.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "nodemon": "^3.1.11",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
