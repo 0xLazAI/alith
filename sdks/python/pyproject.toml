@@ -43,6 +43,15 @@ evaluation = [
     "pyspellchecker",
 ]
 
+# Optional dependencies for multi-modal embeddings (CLIP)
+multimodal = [
+    "torch",
+    "torchvision",
+    "pillow",
+    "clip @ git+https://github.com/openai/CLIP.git",
+    "faiss-cpu",
+]
+
 [tool.maturin]
 features = ["pyo3/extension-module"]
 module-name = "alith._alith"
@@ -50,3 +59,9 @@ python-source = "."
 
 [tool.ruff.lint]
 ignore = ["F403", "F405"]
+
+[tool.pytest.ini_options]
+# Exclude crypto test by default (requires system gpg binary)
+# To run crypto test: pytest test/data/crypto/
+testpaths = ["test"]
+norecursedirs = ["test/data/crypto"]
