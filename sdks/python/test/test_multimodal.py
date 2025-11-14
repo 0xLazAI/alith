@@ -3,20 +3,20 @@
 import os
 import pytest
 
-os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 # Check for required multimodal dependencies
 try:
-    import clip
-    import torch
-    from PIL import Image
-    import faiss
+    import clip  # noqa: F401
+    import torch  # noqa: F401
+    from PIL import Image  # noqa: F401
+    import faiss  # noqa: F401
 except ImportError as e:
-    missing = getattr(e, 'name', 'multimodal dependencies')
+    missing = getattr(e, "name", "multimodal dependencies")
     pytest.skip(
-        f"{missing} not available. Install with: pip install -e \".[multimodal]\" "
-        "(local) or pip install \"alith[multimodal]\" (PyPI)",
-        allow_module_level=True
+        f'{missing} not available. Install with: pip install -e ".[multimodal]" '
+        '(local) or pip install "alith[multimodal]" (PyPI)',
+        allow_module_level=True,
     )
 
 try:
@@ -94,9 +94,7 @@ def test_embed_images(embeddings, test_image):
 
 def test_embed_multimodal(embeddings, test_image):
     """Test multimodal embedding."""
-    result = embeddings.embed_multimodal(
-        texts=["hello"], images=[str(test_image)]
-    )
+    result = embeddings.embed_multimodal(texts=["hello"], images=[str(test_image)])
     assert len(result) == 2
     assert all(len(emb) == 512 for emb in result)
 
@@ -161,7 +159,7 @@ def test_original_agent_still_works():
 
 def test_faiss_store_still_works(embeddings):
     """Test FAISSStore backward compatibility with text embeddings.
-    
+
     Verifies that the base FAISSStore class still works correctly with text-only
     embeddings, ensuring multimodal features don't break existing functionality.
     Uses ClipEmbeddings which supports both text and images.
@@ -176,4 +174,3 @@ def test_cross_modal_search(store, test_image):
     store.save(str(test_image))
     results = store.search("red color image", limit=1)
     assert len(results) > 0
-
