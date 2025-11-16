@@ -47,7 +47,9 @@ export class ChainManager {
   ) {
     this.config = config;
     this.web3 = new Web3(config.endpoint);
-    this.account = this.web3.eth.accounts.privateKeyToAccount(privateKey);
+    // Add 0x prefix if not present (MetaMask exports keys without 0x)
+    const formattedKey = privateKey.startsWith('0x') ? privateKey : `0x${privateKey}`;
+    this.account = this.web3.eth.accounts.privateKeyToAccount(formattedKey);
   }
 
   async getCurrentBlock() {
