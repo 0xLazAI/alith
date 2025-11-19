@@ -51,6 +51,71 @@ print(agent.prompt("Calculate 10 - 3"))
 
 See [here](./examples/README.md) for more examples.
 
+## Multimodal Embeddings (CLIP)
+
+The Python SDK includes CLIP-based multimodal embeddings for both text and images:
+- Text embeddings using CLIP
+- Image embeddings using CLIP
+- Cross-modal search (search images with text queries)
+- MultimodalAgent with image support
+
+Install optional dependencies:
+
+```shell
+python -m pip install "alith[multimodal]"
+```
+
+### Quick Example
+
+```python
+from alith import ClipEmbeddings, ImageFAISSStore, MultimodalAgent
+
+# Create embeddings and store
+embeddings = ClipEmbeddings()
+store = ImageFAISSStore(embeddings=embeddings, dimension=512)
+
+# Save images and text
+store.save("path/to/image.png")
+store.save("document text")
+
+# Search across modalities
+results = store.search("red logo", limit=5)
+
+# Use with MultimodalAgent
+agent = MultimodalAgent(
+    model="meta-llama/llama-4-scout-17b-16e-instruct",
+    api_key="your-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    store=store
+)
+
+response = agent.prompt("Describe this image", images=["path/to/image.png"])
+```
+
+### Example Script
+
+See [examples/agent_with_multimodal_embeddings.py](./examples/agent_with_multimodal_embeddings.py) for a complete example.
+
+**Run the example:**
+```shell
+cd sdks/python
+# activate your venv first (see "Developing" above), then:
+python examples/agent_with_multimodal_embeddings.py
+```
+
+**Notes:**
+- The first run will download the CLIP model (~150MB for ViT-B/32)
+- **System requirements**: Works on systems with 2GB+ free RAM
+- CPU works fine, but a GPU (CUDA/MPS) will speed up inference significantly
+- Embedding dimension is 512 for CLIP ViT-B/32 model
+- Supports common image formats: PNG, JPG, JPEG, GIF, BMP, WEBP
+
+If you didn't install the optional multimodal extras, install them first:
+
+```shell
+pip install "alith[multimodal]"
+```
+
 ## Data Evaluation (Text)
 
 The Python SDK includes multilingual text evaluators built on XLM-RoBERTa for:

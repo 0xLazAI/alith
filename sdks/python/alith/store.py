@@ -1,7 +1,8 @@
 import hashlib
 import shutil
 from abc import ABC, abstractmethod
-from typing import Callable, List, Optional
+from pathlib import Path
+from typing import Callable, List, Optional, Union
 
 from .embeddings import Embeddings
 
@@ -621,3 +622,139 @@ class FAISSStore(Store):
         if os.path.exists(f"{path}.json"):
             with open(f"{path}.json", 'r') as f:
                 self.texts = json.load(f)
+
+
+class ImageFAISSStore(FAISSStore):
+    """FAISS vector store with image support."""
+    
+    def __init__(
+        self,
+        dimension: int = 512,
+        embeddings: Optional[Embeddings] = None,
+        index_type: str = "L2"
+    ):
+        super().__init__(
+            dimension=dimension, embeddings=embeddings, index_type=index_type
+        )
+        self.image_paths: List[str] = []
+        self.index_to_document: dict[int, str] = {}
+    
+    def search(
+        self,
+        query: str,
+        limit: int = 10,
+        score_threshold: float = 0.2
+    ) -> List[str]:
+        """Search for similar documents."""
+        if not self.texts and not self.image_paths:
+            return []
+            
+        if self.embeddings:
+            query_embedding = self.embeddings.embed_texts([query])[0]
+        else:
+            raise ValueError("Embeddings must be provided for search")
+            
+        query_vector = np.array(query_embedding, dtype=np.float32).reshape(1, -1)
+        
+        total_docs = len(self.texts) + len(self.image_paths)
+        distances, indices = self.index.search(query_vector, min(limit * 2, total_docs))
+        
+        results = []
+        results_append = results.append
+        
+        for i, distance in zip(indices[0], distances[0]):
+            if i == -1: 
+                continue
+                
+            if distance == 0.0:
+                score = 1.0
+            else:
+                score = 1.0 / (1.0 + distance)
+            
+            if score >= score_threshold:
+                document = self.index_to_document.get(i)
+                if document:
+                    results_append(document)
+                elif i < len(self.texts):
+                    results_append(self.texts[i])
+                if len(results) >= limit:
+                    break
+                    
+        return results
+    
+    def save(self, value: Union[str, Path]) -> None:
+        """Save image or text to storage.
+        
+        If value is an image path and embeddings support image embeddings,
+        the image will be embedded and stored. Otherwise, value is treated as text.
+        
+        Args:
+            value: Image path or text string to save.
+        """
+        is_image = False
+        image_path = None
+        
+        if isinstance(value, (str, Path)):
+            path = Path(value)
+            image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp']
+            if path.exists() and path.suffix.lower() in image_extensions:
+                is_image = True
+                image_path = str(path)
+        
+        if is_image and self.embeddings and hasattr(self.embeddings, 'embed_images'):
+            try:
+                image_embeddings = self.embeddings.embed_images([image_path])
+                if image_embeddings:
+                    vectors = np.array(image_embeddings, dtype=np.float32)
+                    abs_image_path = str(Path(image_path).absolute())
+                    index_before = self.index.ntotal
+                    self.index.add(vectors)
+                    current_index = index_before
+                    self.image_paths.append(abs_image_path)
+                    self.index_to_document[current_index] = abs_image_path
+                    return
+            except (NotImplementedError, AttributeError, Exception) as e:
+                import warnings
+                msg = f"Failed to embed image {image_path}: {e}. Treating as text."
+                warnings.warn(msg)
+                pass
+        
+        self.save_docs([str(value)])
+    
+    def save_docs(self, docs: List[str]) -> "ImageFAISSStore":
+        """Save multiple documents to the store.
+        
+        Args:
+            docs: List of text documents to save.
+        
+        Returns:
+            Self for method chaining.
+        
+        Raises:
+            ValueError: If embeddings are not provided.
+        """
+        if not docs:
+            return self
+            
+        if self.embeddings:
+            embeddings = self.embeddings.embed_texts(docs)
+        else:
+            raise ValueError("Embeddings must be provided for saving documents")
+            
+        vectors = np.array(embeddings).astype('float32')
+        
+        start_index = self.index.ntotal
+        self.index.add(vectors)
+        
+        for i, doc in enumerate(docs):
+            self.index_to_document[start_index + i] = doc
+        
+        self.texts.extend(docs)
+        
+        return self
+    
+    def reset(self) -> None:
+        """Reset the store by clearing all stored data."""
+        super().reset()
+        self.image_paths = []
+        self.index_to_document = {}
