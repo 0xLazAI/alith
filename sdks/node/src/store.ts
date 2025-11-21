@@ -1,4 +1,5 @@
 import { QdrantClient, QdrantClientParams } from "@qdrant/js-client-rest";
+import { Pinecone } from "@pinecone-database/pinecone";
 import type { Embeddings } from "./embeddings";
 
 function generateUUID(): string {
@@ -138,4 +139,91 @@ class QdrantStore implements Store {
   }
 }
 
-export { type Store, QdrantStore, QdrantClient, QdrantClientParams };
+class PineconeStore implements Store {
+  private client: Pinecone;
+  private indexName: string;
+  private embeddings: Embeddings;
+  private namespace: string;
+
+  constructor(
+    embeddings: Embeddings,
+    apiKey: string,
+    indexName = "alith",
+    namespace = "default"
+  ) {
+    this.embeddings = embeddings;
+    this.client = new Pinecone({ apiKey });
+    this.indexName = indexName;
+    this.namespace = namespace;
+  }
+
+  async search(
+    query: string,
+    limit = 3,
+    scoreThreshold = 0.4
+  ): Promise<string[]> {
+    const index = this.client.index(this.indexName);
+    const queryVectors = await this.embedTexts([query]);
+
+    const queryResponse = await index.namespace(this.namespace).query({
+      vector: queryVectors[0],
+      topK: limit,
+      includeMetadata: true,
+    });
+
+    return (
+      queryResponse.matches
+        ?.filter((match: any) => (match.score || 0) >= scoreThreshold)
+        .map((match: any) => match.metadata?.text as string) || []
+    );
+  }
+
+  async save(value: string): Promise<void> {
+    const index = this.client.index(this.indexName);
+    const vectors = await this.embedTexts([value]);
+    const id = generateUUID();
+
+    await index.namespace(this.namespace).upsert([
+      {
+        id,
+        values: vectors[0],
+        metadata: { text: value },
+      },
+    ]);
+  }
+
+  async reset(): Promise<void> {
+    const index = this.client.index(this.indexName);
+    await index.namespace(this.namespace).deleteAll();
+  }
+
+  async saveDocs(values: string[]): Promise<void> {
+    const index = this.client.index(this.indexName);
+    const vectors = await this.embedTexts(values);
+
+    const records = values.map((value, i) => ({
+      id: generateUUID(),
+      values: vectors[i],
+      metadata: { text: value },
+    }));
+
+    // Pinecone has a limit of 100 vectors per upsert, so batch them
+    const batchSize = 100;
+    for (let i = 0; i < records.length; i += batchSize) {
+      const batch = records.slice(i, i + batchSize);
+      await index.namespace(this.namespace).upsert(batch);
+    }
+  }
+
+  private async embedTexts(text: string[]): Promise<number[][]> {
+    return this.embeddings.embedTexts(text);
+  }
+}
+
+export {
+  type Store,
+  QdrantStore,
+  QdrantClient,
+  QdrantClientParams,
+  PineconeStore,
+};
