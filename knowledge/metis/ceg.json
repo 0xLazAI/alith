@@ -1,10 +1,95 @@
 [
     {
+        "id": "a3b7f65d94031f00",
+        "topic_id": "11145",
+        "title": "CreateAI Joins the LazAI Ecosystem",
+        "url": "https://forum.ceg.vote/t/createai-joins-the-lazai-ecosystem/11145",
+        "views": "6",
+        "comments": "1",
+        "created_date": "Nov 20, 2025 5:36 am",
+        "latest_activity": "Nov 20, 2025 10:15 am",
+        "content": "CreateAI, the autonomous AI agent marketplace powered by GMPayer and LazAINetwork is officially live into the LazAI ecosystem.\nCreateAI is a creative AI marketplace where anyone can design, train, and deploy AI agents, and then mint their outputs on-chain. Whether you\u2019re experimenting with prompts or building full agents, every creation can be anchored as a DAT, giving you verifiable provenance and ownership tied directly to your wallet.\nThis integration is powered by GMPayer, enabling secure x402-based transactions for AI-to-AI and AI-to-service interactions. That means your mints, usages, and interactions flow through a trustless, onchain payment path.\nTheir onboarding guide walks you through:\nchoosing an agent template\ncrafting your prompt\ngenerating outputs\nminting your creation\nviewing your works in the gallery\nIf you want to experiment with building or collecting AI-generated pieces, this is a great place to start.\nTry it out: https://createai.fun\nLet us know what you create",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "CreateAI, the autonomous AI agent marketplace powered by GMPayer and LazAINetwork is officially live into the LazAI ecosystem.\nCreateAI is a creative AI marketplace where anyone can design, train, and deploy AI agents, and then mint their outputs on-chain. Whether you\u2019re experimenting with prompts or building full agents, every creation can be anchored as a DAT, giving you verifiable provenance and ownership tied directly to your wallet.\nThis integration is powered by GMPayer, enabling secure x402-based transactions for AI-to-AI and AI-to-service interactions. That means your mints, usages, and interactions flow through a trustless, onchain payment path.\nTheir onboarding guide walks you through:\nchoosing an agent template\ncrafting your prompt\ngenerating outputs\nminting your creation\nviewing your works in the gallery\nIf you want to experiment with building or collecting AI-generated pieces, this is a great place to start.\nTry it out: https://createai.fun\nLet us know what you create"
+            }
+        ]
+    },
+    {
+        "id": "b61250845d23cf6f",
+        "topic_id": "11146",
+        "title": "Metis and LazAI Are Building the Foundation for Decentralized AI | Genzio Podcast",
+        "url": "https://forum.ceg.vote/t/metis-and-lazai-are-building-the-foundation-for-decentralized-ai-genzio-podcast/11146",
+        "views": "6",
+        "comments": "1",
+        "created_date": "Nov 20, 2025 5:54 am",
+        "latest_activity": "Nov 20, 2025 10:12 am",
+        "content": "I just watched this new conversation between Daniel and Zack from Genzio, and it helped clarify a few things I\u2019ve been wondering about around AI-native infra and onchain agent transactions.\nOne idea that stood out to me is Daniel\u2019s point about why AI and blockchain are converging now\u2014not as a hype pairing, but because agents finally need verifiable, programmable environments to operate in. That lens made the whole \u201cAI economy\u201d narrative feel much more practical.\nAnother part I found interesting was the breakdown of the X402 Global Message Protocol. Instead of thinking of it as just a messaging standard, the way Daniel frames it\u2014as a foundation for autonomous agents to transact, coordinate, and verify actions onchain\u2014made me rethink what \u201conchain AI\u201d could actually look like in day-to-day use.\nAnd his explanation of why LazAI chose to build on Metis touched on something we\u2019ve been discussing in other threads: the importance of having a chain optimized for agent throughput rather than human UX.\nWould love to hear how you are thinking about this.",
+        "comments_details": [
+            {
+                "author": "Julie0xnana",
+                "comment": "I just watched this new conversation between Daniel and Zack from Genzio, and it helped clarify a few things I\u2019ve been wondering about around AI-native infra and onchain agent transactions.\nOne idea that stood out to me is Daniel\u2019s point about why AI and blockchain are converging now\u2014not as a hype pairing, but because agents finally need verifiable, programmable environments to operate in. That lens made the whole \u201cAI economy\u201d narrative feel much more practical.\nAnother part I found interesting was the breakdown of the X402 Global Message Protocol. Instead of thinking of it as just a messaging standard, the way Daniel frames it\u2014as a foundation for autonomous agents to transact, coordinate, and verify actions onchain\u2014made me rethink what \u201conchain AI\u201d could actually look like in day-to-day use.\nAnd his explanation of why LazAI chose to build on Metis touched on something we\u2019ve been discussing in other threads: the importance of having a chain optimized for agent throughput rather than human UX.\nWould love to hear how you are thinking about this."
+            }
+        ]
+    },
+    {
+        "id": "af53f11fb6fc77a8",
+        "topic_id": "11144",
+        "title": "Hyperkit | Weekly/Monthly Update",
+        "url": "https://forum.ceg.vote/t/hyperkit-weekly-monthly-update/11144",
+        "views": "20",
+        "comments": "0",
+        "created_date": "Nov 19, 2025 3:57 am",
+        "latest_activity": null,
+        "content": "Last Revision Updates: November 18, 2025 : 9:43PM (PHT) ~ JustineDevs\nUPDATE OF THE MONTH\nOn Saturday, November 15, 2025 Cavite State University - Main Campus Indang, Calabarzon Blockchain Campus Conference Luzon 2025\nThe Cavite State University - Blockchain Campus Conference is a nationwide campus conference series is designed to tackle real-world challenges in industries such as finance, health, retail, government, logistics, utilities, gaming & entertainment, and more, all through the power of blockchain solutions.\nMAIN EVENT - Cavite State University (Main), Don Severino de las Alas Campus, Indang, Cavite\nBlockchain Campus Conference (BCC) Luzon 2025 is more than just a conference it\u2019s a full-scale blockchain experience designed to engage students, professionals, developers, and industry leaders in meaningful discussions, collaborations, and innovations.\nIn addition to insightful talks and panel discussions covering blockchain applications across finance, health, retail, government, gaming, and more, attendees can expect.\nTwo of Co-Founder of Hyperkit attending Ongoing panel discussion with @Tristan-T-Dev and @ArhonJay as they share their stories & Hyperkit project and inspire attendees with their journeys in tech and blockchain.\n\n\nOCTOBER MONTH PROGRESS\nHyperkit Status In Progress:\nRun internal security audit before any mainnet consideration.\nPick three critical documentation gaps and close them.\nDefine which features are MVP and which can wait.\nUpdate Documentation & Whitepaper (version 1.0 Published) thru https://docs.hyperionkit.xyz/\nTechnology Status:\nFRONTEND DASHBOARD\nStatus: 80% complete. React components built. Tailwind styling done. Error handling needs work. Some UI flows still rough around edges.\nBACKEND API\nStatus: 85% complete. Node.js Express server running. Core endpoints functional. Rate limiting incomplete. Webhook system needs hardening.\nSMART CONTRACT GENERATION ENGINE\nStatus: 90% complete. LLM integration works. Generates production Solidity code. Output quality consistent. Edge cases with complex token mechanics still surfacing.\nAUTOMATED AUDITING SYSTEM\nStatus: 75% complete. Vulnerability detection functional. Static analysis working. Dynamic testing incomplete. False positives need reduction.\nCLI TOOLS\nStatus: 70% complete. Scaffolding works. Deployment orchestration partial. Error messages vague. Documentation sparse.\nHYPERAGENT AI ASSISTANT\nStatus: Monolithic version 40% complete. SOA refactoring planned Q4 2025. Batch contract generation works. Deployment orchestration partially working. Cross-chain bridging incomplete.\nMETIS SDK INTEGRATION\nStatus: 85% complete. Hyperion connectivity stable. Andromeda bridging functional. Edge cases in cross-chain routing still problematic.\nSECURITY AUDITS\nStatus: 0% complete. No third-party audit scheduled. No bug bounty live. Internal code review ongoing but insufficient for production confidence.\nDOCUMENTATION\nStatus: 30% complete. API docs exist but outdated. Tutorials missing. Deployment guides incomplete. Onboarding documentation absent.\nPRODUCTION DEPLOYMENT\nStatus: Hyperion testnet live. Metis testnet live. Mantle testnet partial. Zero mainnet production deployment. Demo dApps exist but not real user traffic.\nTEAM CAPACITY\nStatus: Stretched thin. Justine handles frontend and product decisions. Tristan focused on design. Aaron managing backend and infrastructure. No margin for unexpected issues.\nWHAT WORKS NOW\nYou can generate basic smart contracts using the CLI. You can deploy to Hyperion testnet. You can integrate Metis SDK. React components are usable. CLI scaffolding saves time.\nWHAT DOESN\u2019T WORK YET\nPython SDK missing. Mantle integration incomplete. Documentation too sparse for self-service onboarding. Auditing system produces false positives. Error handling across the stack inconsistent. No real user base. No revenue. No mainnet security audit approval.\nCONFIDENCE ASSESSMENT\nCore technology solid. Architecture sound. Team competent but overextended. Testnet deployments reliable. Production readiness: low. Mainnet launch readiness: 6-8 months away minimum.\nRelevant Topic: Hyperkit - Live apps",
+        "comments_details": [
+            {
+                "author": "JustineDevs",
+                "comment": "Last Revision Updates: November 18, 2025 : 9:43PM (PHT) ~ JustineDevs\nUPDATE OF THE MONTH\nOn Saturday, November 15, 2025 Cavite State University - Main Campus Indang, Calabarzon Blockchain Campus Conference Luzon 2025\nThe Cavite State University - Blockchain Campus Conference is a nationwide campus conference series is designed to tackle real-world challenges in industries such as finance, health, retail, government, logistics, utilities, gaming & entertainment, and more, all through the power of blockchain solutions.\nMAIN EVENT - Cavite State University (Main), Don Severino de las Alas Campus, Indang, Cavite\nBlockchain Campus Conference (BCC) Luzon 2025 is more than just a conference it\u2019s a full-scale blockchain experience designed to engage students, professionals, developers, and industry leaders in meaningful discussions, collaborations, and innovations.\nIn addition to insightful talks and panel discussions covering blockchain applications across finance, health, retail, government, gaming, and more, attendees can expect.\nTwo of Co-Founder of Hyperkit attending Ongoing panel discussion with @Tristan-T-Dev and @ArhonJay as they share their stories & Hyperkit project and inspire attendees with their journeys in tech and blockchain.\n\n\nOCTOBER MONTH PROGRESS\nHyperkit Status In Progress:\nRun internal security audit before any mainnet consideration.\nPick three critical documentation gaps and close them.\nDefine which features are MVP and which can wait.\nUpdate Documentation & Whitepaper (version 1.0 Published) thru https://docs.hyperionkit.xyz/\nTechnology Status:\nFRONTEND DASHBOARD\nStatus: 80% complete. React components built. Tailwind styling done. Error handling needs work. Some UI flows still rough around edges.\nBACKEND API\nStatus: 85% complete. Node.js Express server running. Core endpoints functional. Rate limiting incomplete. Webhook system needs hardening.\nSMART CONTRACT GENERATION ENGINE\nStatus: 90% complete. LLM integration works. Generates production Solidity code. Output quality consistent. Edge cases with complex token mechanics still surfacing.\nAUTOMATED AUDITING SYSTEM\nStatus: 75% complete. Vulnerability detection functional. Static analysis working. Dynamic testing incomplete. False positives need reduction.\nCLI TOOLS\nStatus: 70% complete. Scaffolding works. Deployment orchestration partial. Error messages vague. Documentation sparse.\nHYPERAGENT AI ASSISTANT\nStatus: Monolithic version 40% complete. SOA refactoring planned Q4 2025. Batch contract generation works. Deployment orchestration partially working. Cross-chain bridging incomplete.\nMETIS SDK INTEGRATION\nStatus: 85% complete. Hyperion connectivity stable. Andromeda bridging functional. Edge cases in cross-chain routing still problematic.\nSECURITY AUDITS\nStatus: 0% complete. No third-party audit scheduled. No bug bounty live. Internal code review ongoing but insufficient for production confidence.\nDOCUMENTATION\nStatus: 30% complete. API docs exist but outdated. Tutorials missing. Deployment guides incomplete. Onboarding documentation absent.\nPRODUCTION DEPLOYMENT\nStatus: Hyperion testnet live. Metis testnet live. Mantle testnet partial. Zero mainnet production deployment. Demo dApps exist but not real user traffic.\nTEAM CAPACITY\nStatus: Stretched thin. Justine handles frontend and product decisions. Tristan focused on design. Aaron managing backend and infrastructure. No margin for unexpected issues.\nWHAT WORKS NOW\nYou can generate basic smart contracts using the CLI. You can deploy to Hyperion testnet. You can integrate Metis SDK. React components are usable. CLI scaffolding saves time.\nWHAT DOESN\u2019T WORK YET\nPython SDK missing. Mantle integration incomplete. Documentation too sparse for self-service onboarding. Auditing system produces false positives. Error handling across the stack inconsistent. No real user base. No revenue. No mainnet security audit approval.\nCONFIDENCE ASSESSMENT\nCore technology solid. Architecture sound. Team competent but overextended. Testnet deployments reliable. Production readiness: low. Mainnet launch readiness: 6-8 months away minimum.\nRelevant Topic: Hyperkit - Live apps"
+            }
+        ]
+    },
+    {
+        "id": "f53765750e50038d",
+        "topic_id": "11143",
+        "title": "How Multi-Agent Frameworks Like X402 Change the AI Dev Landscape",
+        "url": "https://forum.ceg.vote/t/how-multi-agent-frameworks-like-x402-change-the-ai-dev-landscape/11143",
+        "views": "23",
+        "comments": "0",
+        "created_date": "Nov 18, 2025 4:42 pm",
+        "latest_activity": null,
+        "content": "How Multi-Agent Frameworks Like X402 Change the AI Dev Landscape\nMulti-agent frameworks are pushing AI development into a new execution model one where intelligence isn\u2019t monolithic but distributed, orchestrated, and system-driven. X402 sits in this emerging layer and catalyzes several major shifts.\n1. From Single Models to Coordinated Intelligence\nTraditional AI stacks revolve around one model doing everything classification, reasoning, planning, execution. Multi-agent frameworks break that pattern. They split capability into specialized units (retrievers, planners, evaluators, actors) and layer orchestration on top.\nThis lets developers build dynamic systems where agents collaborate instead of overloading a single model with every responsibility.\n2. Workflow-Level Engineering Replaces Prompt Hacking\nInstead of manually crafting long prompts or chaining API calls, developers now engineer workflows.\nX402 brings discipline through:\nstructured task routing\nstate propagation\noutcome validation\npredictable branching logic\nThis moves AI engineering closer to software architecture cleaner, measurable, maintainable.\n3. Agents Become Software Components, Not Black Box Calls\nEach agent becomes a modular service with clear inputs, outputs, and responsibilities.\nThis unlocks:\nversioning\ntestability\nreuse across projects\nspecialization at the function level\nYou architect AI the same way you architect microservices composable, iterative, and upgrade-friendly.\n4. Distributed Execution Becomes Native\nMulti-agent frameworks embed distributed compute from day zero.\nWith systems like X402, task execution can run across local machines, remote nodes, or decentralized compute layers.\nThis directly supports:\nparallel workloads\ncross-node execution\ndecentralized pipelines\nverifiable or reproducible output flows\nScaling becomes a built-in feature rather than an infrastructure burden.\n5. Verifiability and Audit Trails Become First-Class\nIn a multi-agent setup, transparency matters.\nX402-style frameworks enforce structured logs, agent-level traces, and deterministic dataflow.\nThis supports:\ndebugging\ncompliance\ntrust in complex workflows\nmulti-step output validation\nAI outcomes shift from \u201cthe model said so\u201d to \u201cthe system executed with traceable logic.\u201d\n6. Faster Prototyping Without Losing Operational Discipline\nTeams can spin up new agents quickly while letting the orchestrator manage retries, timeouts, failures, and branching.\nThis hybrid of speed + structure lets builders move fast without racking up systems debt.\n7. A New Era of AI Engineering Roles\nAs these frameworks mature, new responsibilities emerge:\nAgent architects (designing interactions)\nOrchestration engineers (defining workflows)\nVerification engineers (ensuring correctness)\nAutonomy designers (building agent-level behaviors)\nThis creates a more rigorous, engineering-driven ecosystem around AI.\nThe Bottom Line\nFrameworks like X402 aren\u2019t just tools they are driving a paradigm shift.\nThey push AI away from one big model and toward intelligent, orchestrated systems that behave more like distributed software than isolated calls.\nThis changes how we build, test, scale, and trust AI.",
+        "comments_details": [
+            {
+                "author": "DannySteffe",
+                "comment": "How Multi-Agent Frameworks Like X402 Change the AI Dev Landscape\nMulti-agent frameworks are pushing AI development into a new execution model one where intelligence isn\u2019t monolithic but distributed, orchestrated, and system-driven. X402 sits in this emerging layer and catalyzes several major shifts.\n1. From Single Models to Coordinated Intelligence\nTraditional AI stacks revolve around one model doing everything classification, reasoning, planning, execution. Multi-agent frameworks break that pattern. They split capability into specialized units (retrievers, planners, evaluators, actors) and layer orchestration on top.\nThis lets developers build dynamic systems where agents collaborate instead of overloading a single model with every responsibility.\n2. Workflow-Level Engineering Replaces Prompt Hacking\nInstead of manually crafting long prompts or chaining API calls, developers now engineer workflows.\nX402 brings discipline through:\nstructured task routing\nstate propagation\noutcome validation\npredictable branching logic\nThis moves AI engineering closer to software architecture cleaner, measurable, maintainable.\n3. Agents Become Software Components, Not Black Box Calls\nEach agent becomes a modular service with clear inputs, outputs, and responsibilities.\nThis unlocks:\nversioning\ntestability\nreuse across projects\nspecialization at the function level\nYou architect AI the same way you architect microservices composable, iterative, and upgrade-friendly.\n4. Distributed Execution Becomes Native\nMulti-agent frameworks embed distributed compute from day zero.\nWith systems like X402, task execution can run across local machines, remote nodes, or decentralized compute layers.\nThis directly supports:\nparallel workloads\ncross-node execution\ndecentralized pipelines\nverifiable or reproducible output flows\nScaling becomes a built-in feature rather than an infrastructure burden.\n5. Verifiability and Audit Trails Become First-Class\nIn a multi-agent setup, transparency matters.\nX402-style frameworks enforce structured logs, agent-level traces, and deterministic dataflow.\nThis supports:\ndebugging\ncompliance\ntrust in complex workflows\nmulti-step output validation\nAI outcomes shift from \u201cthe model said so\u201d to \u201cthe system executed with traceable logic.\u201d\n6. Faster Prototyping Without Losing Operational Discipline\nTeams can spin up new agents quickly while letting the orchestrator manage retries, timeouts, failures, and branching.\nThis hybrid of speed + structure lets builders move fast without racking up systems debt.\n7. A New Era of AI Engineering Roles\nAs these frameworks mature, new responsibilities emerge:\nAgent architects (designing interactions)\nOrchestration engineers (defining workflows)\nVerification engineers (ensuring correctness)\nAutonomy designers (building agent-level behaviors)\nThis creates a more rigorous, engineering-driven ecosystem around AI.\nThe Bottom Line\nFrameworks like X402 aren\u2019t just tools they are driving a paradigm shift.\nThey push AI away from one big model and toward intelligent, orchestrated systems that behave more like distributed software than isolated calls.\nThis changes how we build, test, scale, and trust AI."
+            }
+        ]
+    },
+    {
+        "id": "97b914a162e0af8a",
+        "topic_id": "4924",
+        "title": "Hyperkit",
+        "url": "https://forum.ceg.vote/t/hyperkit/4924",
+        "views": "406",
+        "comments": "8",
+        "created_date": "May 29, 2025 11:34 am",
+        "latest_activity": "Nov 16, 2025 12:41 pm",
+        "content": "Hyperhack Forum Project Proposal Update: HyperKit\nLive Link: http://hyperionkit.xyz, http://ai.hyperionkit.xyz\nProject Name\nHyperKit\nTrack 3: Infrastructure and Ecosystem Tools\n- Traditional DeFi Protocols: Core primitives reimagined for Hyperion\n- Web3 Infrastructure and Tooling: Developer-facing tools and services\n- Interoperability with Metis SDK: Projects bridging Hyperion and Andromeda\nProblem Statement\nDevelopers building on decentralized networks often face fragmented tooling ecosystems, high integration complexity, and limited interoperability across chains. These challenges slow down innovation and create barriers for onboarding new builders and users alike. In the Hyperion ecosystem, this fragmentation is especially pressing due to the early-stage nature of the tools and lack of seamless connectivity with other networks like Andromeda.\nSolution Overview\nHyperKit is a comprehensive infrastructure toolkit designed to simplify development and enhance interoperability within the Hyperion ecosystem. It combines core DeFi primitives, developer-centric APIs, and a robust bridging framework using the Metis SDK to enable seamless interactions between Hyperion and Andromeda. Our approach focuses on modularity, developer experience, and community-driven extensibility. By packaging essential tools into one unified kit, we aim to lower the entry barrier for developers and foster faster ecosystem growth.\nProject Description\nHyperKit is an open-source, developer-first infrastructure suite tailored for the Hyperion ecosystem. It provides a modular set of libraries and smart contracts that reimagine core DeFi building blocks (e.g., staking, swapping, vaults) optimized for Hyperion. Additionally, HyperKit includes a Web3 toolkit with prebuilt components such as wallet integrations, SDKs for dApp interactions, and templates for rapid deployment.\nA key component of HyperKit is its native interoperability layer powered by the Metis SDK. This allows developers to easily bridge assets and data between Hyperion and Andromeda, enabling truly cross-chain dApps.\nWe envision developers interacting with HyperKit via a CLI tool, SDKs in TypeScript and Rust, and a visual dashboard for managing deployments. By simplifying infrastructure access and providing composable building blocks, we empower developers to go from idea to deployment faster.\nWhat excites us most is the potential to accelerate the adoption of Hyperion by offering an experience comparable to mature ecosystems like Ethereum or Solana, but with the added benefit of native cross-chain capabilities.\nCommunity Engagement Features\nTo foster community engagement and drive adoption, HyperKit includes a gamified user testing program:\nTestable Features/Tasks:\n- Deploy a sample dApp using the HyperKit CLI.\n- Bridge test tokens from Hyperion to Andromeda using the Metis SDK.\n- Implement a staking pool using HyperKit contracts.\n- Submit feedback or a pull request to the open-source repo.\nPoints System:\n- 50 points \u2013 Deploy a test dApp\n- 30 points \u2013 Successfully bridge tokens\n- 20 points \u2013 Set up a staking pool\n- 10 points \u2013 Submit feedback or PR\nGamification Strategy:\nUsers accumulate points for completing tasks, which will be displayed on a leaderboard. Top contributors will be eligible for community badges, early adopter NFTs, and potential ecosystem grants.\nUser Onboarding Incentive:\nThis approach not only incentivizes users to explore and test HyperKit, but also creates a sense of achievement and progression. By engaging directly with the toolkit, users become more likely to contribute, build, and evangelize the Hyperion ecosystem.\nUpdate: Hyperion Testnet Deployment & Verified Contracts\nWe are excited to announce that the **Hyperion Testnet is now deployed and all critical contracts have been verified**. This milestone enables developers and users to fully interact with the HyperKit infrastructure on a live test environment.\nToken Contracts\n| Token | Symbol | Address | Verification Link |\n|-----------------|---------|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Tether USD | USDT | `0x9b52D326D4866055F6c23297656002992e4293FC` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x9b52D326D4866055F6c23297656002992e4293FC | Blockscout ) |\n| USD Coin | USDC | `0x31424DB0B7a929283C394b4DA412253Ab6D61682` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x31424DB0B7a929283C394b4DA412253Ab6D61682 | Blockscout ) |\n| Dai Stablecoin | DAI | `0xdE896235F5897EC6D13Aa5b43964F9d2d34D82Fb` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xdE896235F5897EC6D13Aa5b43964F9d2d34D82Fb | Blockscout ) |\n| Wrapped Ether | WETH | `0xc8BB7DB0a07d2146437cc20e1f3a133474546dD4` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xc8BB7DB0a07d2146437cc20e1f3a133474546dD4 | Blockscout ) |\nContract Addresses and Types\n| Contract | Type | Address | Verification Link |\n|-----------------|------------------|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|\n| LiquidityPool | AMM/Swap | `0x91C39DAA7617C5188d0427Fc82e4006803772B74` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x91C39DAA7617C5188d0427Fc82e4006803772B74 | Blockscout ) |\n| BuyVault | Direct Purchase | `0x0adFd197aAbbC194e8790041290Be57F18d576a3` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x0adFd197aAbbC194e8790041290Be57F18d576a3 | Blockscout ) |\n| StakingRewards | Staking | `0xB94d264074571A5099C458f74b526d1e4EE0314B` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xB94d264074571A5099C458f74b526d1e4EE0314B | Blockscout ) |\n| Bridge | Cross-Chain | `0xfF064Fd496256e84b68dAE2509eDA84a3c235550` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xfF064Fd496256e84b68dAE2509eDA84a3c235550 | Blockscout ) |\n| Faucet | Token Distribution| `0xE1B8C7168B0c48157A5e4B80649C5a1b83bF4cC4` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xE1B8C7168B0c48157A5e4B80649C5a1b83bF4cC4 | Blockscout ) |\nUseful Resources & Links\n- [Testnet Walkthrough Video](https://x.com/HyperionKit/status/1957796051467001874)\n- [Guides Walkthrough Video](https://x.com/HyperionKit/status/1958525753974538332)\n- [Pitch Deck](https://www.canva.com/design/DAGvFBK3My0/YzvwHA4KNaQ4wwZvXVzpDQ/edit?utm_content=DAGvFBK3My0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)\n[Video Presentation](https://x.com/HyperionKit/status/1958552729376456781)\n- [GitHub Repository](https://github.com/HyperionKit/Hyperkit.git)\nMarketing Update\nA big thank you to the community and contributors: @Norbert, @Sheyda, @han, and @0xthiru for pushing us into the marketing challenge.\nAfter receiving our $300 kickstart fund on July 30th and additional sponsorship, we have launched a marketing campaign with a $100 budget based on our marketing plan, achieving the following:\nImpressions: 3.3K+\nNew followers on X (formerly Twitter): 54\nPosts: 6\nReplies: 4\nVerified followers: 5 / 132\nEngagement rate: 26.2%\nEngagements: 868\nProfile visits: 112\nLikes: 166\nReposts: 130\nBookmarks: 6\nShares: 2\n--\nNext Steps & Vision\nWe continue to improve the core functionality, focusing on product monetization strategies, expanding interoperability features, and enhancing the developer and user experience. Our roadmap includes additional community-driven tools and expanded ecosystem collaborations.\n-\u2013\nIf you want to engage directly with HyperKit, visit the live site: https://hyperionkit.xyz and https://ai.hyperionkit.xyz and join us in building the future of Hyperion DeFi infrastructure.\n-\u2013\n[1](http://hyperionkit.xyz) [2](https://ai.hyperionkit.xyz)\nTeam Members\n@Tristan-T-Dev @ArhonJay @JustineDevs",
+        "comments_details": [
+            {
+                "author": "JustineDevs",
+                "comment": "Hyperhack Forum Project Proposal Update: HyperKit\nLive Link: http://hyperionkit.xyz, http://ai.hyperionkit.xyz\nProject Name\nHyperKit\nTrack 3: Infrastructure and Ecosystem Tools\n- Traditional DeFi Protocols: Core primitives reimagined for Hyperion\n- Web3 Infrastructure and Tooling: Developer-facing tools and services\n- Interoperability with Metis SDK: Projects bridging Hyperion and Andromeda\nProblem Statement\nDevelopers building on decentralized networks often face fragmented tooling ecosystems, high integration complexity, and limited interoperability across chains. These challenges slow down innovation and create barriers for onboarding new builders and users alike. In the Hyperion ecosystem, this fragmentation is especially pressing due to the early-stage nature of the tools and lack of seamless connectivity with other networks like Andromeda.\nSolution Overview\nHyperKit is a comprehensive infrastructure toolkit designed to simplify development and enhance interoperability within the Hyperion ecosystem. It combines core DeFi primitives, developer-centric APIs, and a robust bridging framework using the Metis SDK to enable seamless interactions between Hyperion and Andromeda. Our approach focuses on modularity, developer experience, and community-driven extensibility. By packaging essential tools into one unified kit, we aim to lower the entry barrier for developers and foster faster ecosystem growth.\nProject Description\nHyperKit is an open-source, developer-first infrastructure suite tailored for the Hyperion ecosystem. It provides a modular set of libraries and smart contracts that reimagine core DeFi building blocks (e.g., staking, swapping, vaults) optimized for Hyperion. Additionally, HyperKit includes a Web3 toolkit with prebuilt components such as wallet integrations, SDKs for dApp interactions, and templates for rapid deployment.\nA key component of HyperKit is its native interoperability layer powered by the Metis SDK. This allows developers to easily bridge assets and data between Hyperion and Andromeda, enabling truly cross-chain dApps.\nWe envision developers interacting with HyperKit via a CLI tool, SDKs in TypeScript and Rust, and a visual dashboard for managing deployments. By simplifying infrastructure access and providing composable building blocks, we empower developers to go from idea to deployment faster.\nWhat excites us most is the potential to accelerate the adoption of Hyperion by offering an experience comparable to mature ecosystems like Ethereum or Solana, but with the added benefit of native cross-chain capabilities.\nCommunity Engagement Features\nTo foster community engagement and drive adoption, HyperKit includes a gamified user testing program:\nTestable Features/Tasks:\n- Deploy a sample dApp using the HyperKit CLI.\n- Bridge test tokens from Hyperion to Andromeda using the Metis SDK.\n- Implement a staking pool using HyperKit contracts.\n- Submit feedback or a pull request to the open-source repo.\nPoints System:\n- 50 points \u2013 Deploy a test dApp\n- 30 points \u2013 Successfully bridge tokens\n- 20 points \u2013 Set up a staking pool\n- 10 points \u2013 Submit feedback or PR\nGamification Strategy:\nUsers accumulate points for completing tasks, which will be displayed on a leaderboard. Top contributors will be eligible for community badges, early adopter NFTs, and potential ecosystem grants.\nUser Onboarding Incentive:\nThis approach not only incentivizes users to explore and test HyperKit, but also creates a sense of achievement and progression. By engaging directly with the toolkit, users become more likely to contribute, build, and evangelize the Hyperion ecosystem.\nUpdate: Hyperion Testnet Deployment & Verified Contracts\nWe are excited to announce that the **Hyperion Testnet is now deployed and all critical contracts have been verified**. This milestone enables developers and users to fully interact with the HyperKit infrastructure on a live test environment.\nToken Contracts\n| Token | Symbol | Address | Verification Link |\n|-----------------|---------|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Tether USD | USDT | `0x9b52D326D4866055F6c23297656002992e4293FC` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x9b52D326D4866055F6c23297656002992e4293FC | Blockscout ) |\n| USD Coin | USDC | `0x31424DB0B7a929283C394b4DA412253Ab6D61682` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x31424DB0B7a929283C394b4DA412253Ab6D61682 | Blockscout ) |\n| Dai Stablecoin | DAI | `0xdE896235F5897EC6D13Aa5b43964F9d2d34D82Fb` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xdE896235F5897EC6D13Aa5b43964F9d2d34D82Fb | Blockscout ) |\n| Wrapped Ether | WETH | `0xc8BB7DB0a07d2146437cc20e1f3a133474546dD4` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xc8BB7DB0a07d2146437cc20e1f3a133474546dD4 | Blockscout ) |\nContract Addresses and Types\n| Contract | Type | Address | Verification Link |\n|-----------------|------------------|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|\n| LiquidityPool | AMM/Swap | `0x91C39DAA7617C5188d0427Fc82e4006803772B74` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x91C39DAA7617C5188d0427Fc82e4006803772B74 | Blockscout ) |\n| BuyVault | Direct Purchase | `0x0adFd197aAbbC194e8790041290Be57F18d576a3` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x0adFd197aAbbC194e8790041290Be57F18d576a3 | Blockscout ) |\n| StakingRewards | Staking | `0xB94d264074571A5099C458f74b526d1e4EE0314B` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xB94d264074571A5099C458f74b526d1e4EE0314B | Blockscout ) |\n| Bridge | Cross-Chain | `0xfF064Fd496256e84b68dAE2509eDA84a3c235550` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xfF064Fd496256e84b68dAE2509eDA84a3c235550 | Blockscout ) |\n| Faucet | Token Distribution| `0xE1B8C7168B0c48157A5e4B80649C5a1b83bF4cC4` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xE1B8C7168B0c48157A5e4B80649C5a1b83bF4cC4 | Blockscout ) |\nUseful Resources & Links\n- [Testnet Walkthrough Video](https://x.com/HyperionKit/status/1957796051467001874)\n- [Guides Walkthrough Video](https://x.com/HyperionKit/status/1958525753974538332)\n- [Pitch Deck](https://www.canva.com/design/DAGvFBK3My0/YzvwHA4KNaQ4wwZvXVzpDQ/edit?utm_content=DAGvFBK3My0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)\n[Video Presentation](https://x.com/HyperionKit/status/1958552729376456781)\n- [GitHub Repository](https://github.com/HyperionKit/Hyperkit.git)\nMarketing Update\nA big thank you to the community and contributors: @Norbert, @Sheyda, @han, and @0xthiru for pushing us into the marketing challenge.\nAfter receiving our $300 kickstart fund on July 30th and additional sponsorship, we have launched a marketing campaign with a $100 budget based on our marketing plan, achieving the following:\nImpressions: 3.3K+\nNew followers on X (formerly Twitter): 54\nPosts: 6\nReplies: 4\nVerified followers: 5 / 132\nEngagement rate: 26.2%\nEngagements: 868\nProfile visits: 112\nLikes: 166\nReposts: 130\nBookmarks: 6\nShares: 2\n--\nNext Steps & Vision\nWe continue to improve the core functionality, focusing on product monetization strategies, expanding interoperability features, and enhancing the developer and user experience. Our roadmap includes additional community-driven tools and expanded ecosystem collaborations.\n-\u2013\nIf you want to engage directly with HyperKit, visit the live site: https://hyperionkit.xyz and https://ai.hyperionkit.xyz and join us in building the future of Hyperion DeFi infrastructure.\n-\u2013\n[1](http://hyperionkit.xyz) [2](https://ai.hyperionkit.xyz)\nTeam Members\n@Tristan-T-Dev @ArhonJay @JustineDevs"
+            }
+        ]
+    },
+    {
         "id": "03df884f7ef57e01",
         "topic_id": "5649",
         "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
         "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
-        "views": "1.6k",
+        "views": "1.7k",
         "comments": "155",
         "created_date": "Jun 14, 2025 6:42 pm",
         "latest_activity": "Nov 14, 2025 8:53 pm",
@@ -21,7 +106,7 @@
         "topic_id": "11139",
         "title": "How developers can leverage x402 to build pay-per-use services",
         "url": "https://forum.ceg.vote/t/how-developers-can-leverage-x402-to-build-pay-per-use-services/11139",
-        "views": "6",
+        "views": "69",
         "comments": "0",
         "created_date": "Nov 14, 2025 6:14 pm",
         "latest_activity": null,
@@ -38,7 +123,7 @@
         "topic_id": "11138",
         "title": "The Toughest Parts of Building Decentralized AI",
         "url": "https://forum.ceg.vote/t/the-toughest-parts-of-building-decentralized-ai/11138",
-        "views": "6",
+        "views": "60",
         "comments": "0",
         "created_date": "Nov 14, 2025 5:18 pm",
         "latest_activity": null,
@@ -55,7 +140,7 @@
         "topic_id": "11137",
         "title": "X402: Where AI Interacts, and Metis Settles",
         "url": "https://forum.ceg.vote/t/x402-where-ai-interacts-and-metis-settles/11137",
-        "views": "27",
+        "views": "79",
         "comments": "0",
         "created_date": "Nov 12, 2025 5:25 pm",
         "latest_activity": null,
@@ -72,7 +157,7 @@
         "topic_id": "11109",
         "title": "What\u2019s Been Happening Lately: x402, GMPayer, LazAI & the Future of AI Payments",
         "url": "https://forum.ceg.vote/t/what-s-been-happening-lately-x402-gmpayer-lazai-the-future-of-ai-payments/11109",
-        "views": "107",
+        "views": "152",
         "comments": "2",
         "created_date": "Nov 4, 2025 7:28 pm",
         "latest_activity": "Nov 12, 2025 11:54 am",
@@ -89,7 +174,7 @@
         "topic_id": "11100",
         "title": "FeedByHash \u2013 Gamified Reward Engine",
         "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "101",
+        "views": "145",
         "comments": "5",
         "created_date": "Nov 4, 2025 8:52 am",
         "latest_activity": "Nov 12, 2025 10:00 am",
@@ -106,7 +191,7 @@
         "topic_id": "10666",
         "title": "9th No-Lose lottery winner ann",
         "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
-        "views": "124",
+        "views": "165",
         "comments": "2",
         "created_date": "Sep 24, 2025 4:25 pm",
         "latest_activity": "Nov 12, 2025 3:42 am",
@@ -123,7 +208,7 @@
         "topic_id": "11132",
         "title": "Lazarian: LazAI Advocates Program",
         "url": "https://forum.ceg.vote/t/lazarian-lazai-advocates-program/11132",
-        "views": "63",
+        "views": "113",
         "comments": "1",
         "created_date": "Nov 10, 2025 4:24 pm",
         "latest_activity": "Nov 11, 2025 3:53 pm",
@@ -140,7 +225,7 @@
         "topic_id": "11105",
         "title": "Metis L2 Network: Price Analysis, Community Sentiment, and Ecosystem Challenges",
         "url": "https://forum.ceg.vote/t/metis-l2-network-price-analysis-community-sentiment-and-ecosystem-challenges/11105",
-        "views": "124",
+        "views": "170",
         "comments": "2",
         "created_date": "Nov 4, 2025 11:08 am",
         "latest_activity": "Nov 10, 2025 2:22 pm",
@@ -157,7 +242,7 @@
         "topic_id": "10454",
         "title": "Spotlight Campaign Final Winners",
         "url": "https://forum.ceg.vote/t/spotlight-campaign-final-winners/10454",
-        "views": "406",
+        "views": "462",
         "comments": "40",
         "created_date": "Sep 4, 2025 3:09 pm",
         "latest_activity": "Nov 8, 2025 10:50 am",
@@ -174,7 +259,7 @@
         "topic_id": "10664",
         "title": "7th No-Lose Lottery Draw winner ann",
         "url": "https://forum.ceg.vote/t/7th-no-lose-lottery-draw-winner-ann/10664",
-        "views": "131",
+        "views": "175",
         "comments": "3",
         "created_date": "Sep 24, 2025 4:22 pm",
         "latest_activity": "Nov 8, 2025 10:31 am",
@@ -191,7 +276,7 @@
         "topic_id": "11113",
         "title": "LazAI my AI trading companion",
         "url": "https://forum.ceg.vote/t/lazai-my-ai-trading-companion/11113",
-        "views": "47",
+        "views": "93",
         "comments": "2",
         "created_date": "Nov 6, 2025 10:51 am",
         "latest_activity": null,
@@ -208,7 +293,7 @@
         "topic_id": "11112",
         "title": "Metis & LazAI Launch GMPayer: The Cross-Chain Payment Hub for AI Agents",
         "url": "https://forum.ceg.vote/t/metis-lazai-launch-gmpayer-the-cross-chain-payment-hub-for-ai-agents/11112",
-        "views": "78",
+        "views": "125",
         "comments": "0",
         "created_date": "Nov 5, 2025 7:20 pm",
         "latest_activity": null,
@@ -225,7 +310,7 @@
         "topic_id": "11097",
         "title": "Multi-Agent Orchestration in LazAI : Why it Matters",
         "url": "https://forum.ceg.vote/t/multi-agent-orchestration-in-lazai-why-it-matters/11097",
-        "views": "92",
+        "views": "134",
         "comments": "3",
         "created_date": "Nov 3, 2025 9:32 am",
         "latest_activity": "Nov 4, 2025 4:46 pm",
@@ -242,7 +327,7 @@
         "topic_id": "10919",
         "title": "Metis and the AI Layer Race: Why Infra Is Quiet but Strategic Right Now",
         "url": "https://forum.ceg.vote/t/metis-and-the-ai-layer-race-why-infra-is-quiet-but-strategic-right-now/10919",
-        "views": "237",
+        "views": "284",
         "comments": "4",
         "created_date": "Oct 17, 2025 5:22 pm",
         "latest_activity": "Nov 2, 2025 1:58 pm",
@@ -251,91 +336,6 @@
             {
                 "author": "Norbert",
                 "comment": "Metis is entering a defining phase in the evolution of blockchain infra. The global direction of the industry is shifting from building isolated networks toward creating intelligent systems capable of processing, coordinating, and learning from on-chain activity. This is where Metis is positioning itself.\nThe architecture being built is structured around three interdependent components. Andromeda forms the settlement foundation, ensuring scalability, reliability, and trust at the base layer. Hyperion is being developed as an AI-optimized runtime designed for high-performance computing and intelligent automation. LazAI sits at the application layer, enabling AI agents, DATs, and on-chain intelligence to operate within a single connected framework.\nThis multi-layer design is not theoretical. It reflects a practical response to how blockchain and artificial intelligence are converging. In the next era of Web3, networks will not only execute transactions but also interpret and act on data in real time. That requires infrastructure capable of understanding patterns, context, and intent \u2014 the core principles behind Metis\u2019s direction.\nMetis is not competing for attention through market narratives. It is defining how decentralized infrastructure should evolve to support intelligent applications at scale. The combination of Andromeda, Hyperion, and LazAI establishes a foundation that aligns computation, intelligence, and usability into one continuum.\nThe next growth phase of Web3 will not come from hype cycles or token speculation. It will come from infrastructure that allows AI systems to function as part of the blockchain itself \u2014 integrated, autonomous, and verifiable. Metis is building that reality.\nref: Open Letter to the Metis Community: Metis is no longer \u201cjust an L2\u201d"
-            }
-        ]
-    },
-    {
-        "id": "7dff59a68fc97616",
-        "topic_id": "11067",
-        "title": "What new business models are unfolding from the fusion of AI, payments, and crypto wallet development?",
-        "url": "https://forum.ceg.vote/t/what-new-business-models-are-unfolding-from-the-fusion-of-ai-payments-and-crypto-wallet-development/11067",
-        "views": "111",
-        "comments": "1",
-        "created_date": "Oct 31, 2025 2:05 pm",
-        "latest_activity": "Nov 1, 2025 4:15 pm",
-        "content": "Every two or three decades, the financial stack reforms itself. The last major rewrite was digital banking; the next is the convergence of intelligent automation, payments architecture, and blockchain custody. This intersection has already started to transform how value is stored, moved, and verified across borders.\nAt the center of all this lies a once-overlooked but critical layer - crypto wallet development, now shifting from mere storage infrastructure to programmable financial intelligence.\nOne of the most observable shifts is in transactional orchestration. Payment networks are starting to resemble adaptive environments that evaluate liquidity routes, settlement windows, and counterparty reliability before authorizing value movement. This model is gradually replacing the static routing logic of traditional card and bank systems.\nAnother evolving model merges custody with automated decision-making. A new generation of wallets can act as autonomous triggers - initiating transfers or managing tokenized assets through pre-defined algorithms tied to a publicly-verifiable data feeds, rather than direct user input.\nThe third pathway surfaces at the intersection of data and value exchange. Through machine-readable contracts, data producers and consumers can transact directly - bypassing intermediaries.\nContributors retain visibility, control, and ownership of their data while token-based payments flow automatically once conditions are met and consent is verified.\nThis model operationalizes the long-discussed user-owned data economy, for the first time linking information rights with a monetized economic value.",
-        "comments_details": [
-            {
-                "author": "Johnjames",
-                "comment": "Every two or three decades, the financial stack reforms itself. The last major rewrite was digital banking; the next is the convergence of intelligent automation, payments architecture, and blockchain custody. This intersection has already started to transform how value is stored, moved, and verified across borders.\nAt the center of all this lies a once-overlooked but critical layer - crypto wallet development, now shifting from mere storage infrastructure to programmable financial intelligence.\nOne of the most observable shifts is in transactional orchestration. Payment networks are starting to resemble adaptive environments that evaluate liquidity routes, settlement windows, and counterparty reliability before authorizing value movement. This model is gradually replacing the static routing logic of traditional card and bank systems.\nAnother evolving model merges custody with automated decision-making. A new generation of wallets can act as autonomous triggers - initiating transfers or managing tokenized assets through pre-defined algorithms tied to a publicly-verifiable data feeds, rather than direct user input.\nThe third pathway surfaces at the intersection of data and value exchange. Through machine-readable contracts, data producers and consumers can transact directly - bypassing intermediaries.\nContributors retain visibility, control, and ownership of their data while token-based payments flow automatically once conditions are met and consent is verified.\nThis model operationalizes the long-discussed user-owned data economy, for the first time linking information rights with a monetized economic value."
-            }
-        ]
-    },
-    {
-        "id": "ad4574a153105caa",
-        "topic_id": "11033",
-        "title": "Will white label crypto wallet services make digital assets more accessible for everyday users in 2026?",
-        "url": "https://forum.ceg.vote/t/will-white-label-crypto-wallet-services-make-digital-assets-more-accessible-for-everyday-users-in-2026/11033",
-        "views": "108",
-        "comments": "3",
-        "created_date": "Oct 29, 2025 3:40 pm",
-        "latest_activity": "Oct 31, 2025 3:30 pm",
-        "content": "As things stand today, most crypto wallets still feel like opening a cockpit when all you wanted was to drive to the store. You\u2019re greeted by a plethora of buttons, a seed phrase that looks like a spell, and a horrible feeling that a single botched tap will make your entire fortune disappear.\nNevertheless, crypto ownership is skyrocketing. Almost 28% of American adults own crypto and over 60% of wallet users own and operate multiple wallets. People want to use crypto daily - but the user experience hasn\u2019t matured to meet the demand.\nThis is precisely the gap that white label crypto wallet services fill. These solutions provide you with the foundational elements of a crypto wallet, and your users never see the complex system.\nConsider creating a crypto wallet that employs bank-grade encryption (MPC/HSM), has fiat on-ramps through plug-and-play APIs, and cross-chain capabilities - everything perfected in under 6 weeks rather than the 6 months normally required to build from scratch. This allows your team to focus on what actually matters: simplicity, clarity, and trust.\nWhen users no longer have to worry about losing money or remembering cumbersome phrases, crypto starts to feel usable. That\u2019s why more and more technical founders have started to partner with seasoned providers like Antier, whose white label crypto wallet services allow you to transform complex, command-center - style wallets into user-friendly app interfaces.",
-        "comments_details": [
-            {
-                "author": "Emilywilliam",
-                "comment": "As things stand today, most crypto wallets still feel like opening a cockpit when all you wanted was to drive to the store. You\u2019re greeted by a plethora of buttons, a seed phrase that looks like a spell, and a horrible feeling that a single botched tap will make your entire fortune disappear.\nNevertheless, crypto ownership is skyrocketing. Almost 28% of American adults own crypto and over 60% of wallet users own and operate multiple wallets. People want to use crypto daily - but the user experience hasn\u2019t matured to meet the demand.\nThis is precisely the gap that white label crypto wallet services fill. These solutions provide you with the foundational elements of a crypto wallet, and your users never see the complex system.\nConsider creating a crypto wallet that employs bank-grade encryption (MPC/HSM), has fiat on-ramps through plug-and-play APIs, and cross-chain capabilities - everything perfected in under 6 weeks rather than the 6 months normally required to build from scratch. This allows your team to focus on what actually matters: simplicity, clarity, and trust.\nWhen users no longer have to worry about losing money or remembering cumbersome phrases, crypto starts to feel usable. That\u2019s why more and more technical founders have started to partner with seasoned providers like Antier, whose white label crypto wallet services allow you to transform complex, command-center - style wallets into user-friendly app interfaces."
-            }
-        ]
-    },
-    {
-        "id": "608bbdc9b896dbe8",
-        "topic_id": "11072",
-        "title": "DogEx X LazAI Flashdrop",
-        "url": "https://forum.ceg.vote/t/dogex-x-lazai-flashdrop/11072",
-        "views": "112",
-        "comments": "2",
-        "created_date": "Oct 31, 2025 3:30 pm",
-        "latest_activity": null,
-        "content": "x.com\n@",
-        "comments_details": [
-            {
-                "author": "Tigretom",
-                "comment": "x.com\n@"
-            }
-        ]
-    },
-    {
-        "id": "c2603d44ac825ea4",
-        "topic_id": "11064",
-        "title": "Leverage can multiply profits or destroy your balance if misused",
-        "url": "https://forum.ceg.vote/t/leverage-can-multiply-profits-or-destroy-your-balance-if-misused/11064",
-        "views": "110",
-        "comments": "2",
-        "created_date": "Oct 31, 2025 2:05 pm",
-        "latest_activity": "Oct 31, 2025 2:05 pm",
-        "content": "When it\u2019s your friend:\nAmplified gains with smaller capital\nFlexibility to adjust positions fast\nAccess to larger markets and opportunities\nWhen it\u2019s your enemy:\nLosses multiply just as fast as gains\nMargin calls hit when markets turn\nOverleverage kills risk control\nLow-risk DOGE long tips:\nUse small position sizes\nAlways set stop-losses\nKeep realistic risk/reward\nDiversify to stay safe\nLeverage isn\u2019t evil poor management is\nTrade smart, not hard\n@Dogexperps @LazAINetwork",
-        "comments_details": [
-            {
-                "author": "DuyTradeEveryday",
-                "comment": "When it\u2019s your friend:\nAmplified gains with smaller capital\nFlexibility to adjust positions fast\nAccess to larger markets and opportunities\nWhen it\u2019s your enemy:\nLosses multiply just as fast as gains\nMargin calls hit when markets turn\nOverleverage kills risk control\nLow-risk DOGE long tips:\nUse small position sizes\nAlways set stop-losses\nKeep realistic risk/reward\nDiversify to stay safe\nLeverage isn\u2019t evil poor management is\nTrade smart, not hard\n@Dogexperps @LazAINetwork"
-            }
-        ]
-    },
-    {
-        "id": "183ea4aea1bec74d",
-        "topic_id": "11052",
-        "title": "Join Today\u2019s Metis Livestream: The Next Phase of ReGenesis",
-        "url": "https://forum.ceg.vote/t/join-today-s-metis-livestream-the-next-phase-of-regenesis/11052",
-        "views": "116",
-        "comments": "1",
-        "created_date": "Oct 30, 2025 1:48 pm",
-        "latest_activity": "Oct 31, 2025 7:21 am",
-        "content": "Join Today\u2019s Livestream: The Next Phase of ReGenesis\nx.com\n@\nToday at 3 PM UTC \u2014 dive into what\u2019s next for Metis ReGenesis and the evolution of decentralized governance\nSpeakers:\nElena Sinelnikova \u2014 Decentralization Coordinator, Metis\nKevin Liu \u2014 Co-Founder, Metis & Core Contributor GOAT Network\nDaniel Kwak \u2014 CCO, Metis & Head of Marketing, @LazAINetwork (Host)\nWatch live on YouTube: https://www.youtube.com/watch?v=rkQdFv0AawM",
-        "comments_details": [
-            {
-                "author": "Yaroslav",
-                "comment": "Join Today\u2019s Livestream: The Next Phase of ReGenesis\nx.com\n@\nToday at 3 PM UTC \u2014 dive into what\u2019s next for Metis ReGenesis and the evolution of decentralized governance\nSpeakers:\nElena Sinelnikova \u2014 Decentralization Coordinator, Metis\nKevin Liu \u2014 Co-Founder, Metis & Core Contributor GOAT Network\nDaniel Kwak \u2014 CCO, Metis & Head of Marketing, @LazAINetwork (Host)\nWatch live on YouTube: https://www.youtube.com/watch?v=rkQdFv0AawM"
             }
         ]
     }

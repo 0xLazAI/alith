@@ -225,7 +225,7 @@ ChromaDBStore().save_docs(["doc1", "doc2", "doc3"])
 ## Qdrant Vector Database
 
 ```typescript
-import { Store, QdrantStore, Embeddings, RemoteModelEmbeddings } from "../src";
+import { Store, QdrantStore, Embeddings, RemoteModelEmbeddings } from "alith";
 
 let embeddings: Embeddings = new RemoteModelEmbeddings(
   "your embeddings model name",
@@ -235,6 +235,45 @@ let embeddings: Embeddings = new RemoteModelEmbeddings(
 const store: Store = new QdrantStore(embeddings);
 store.save("Hello, World");
 console.log(store.search("Hello, World"));
+```
+
+## Pinecone Vector Database
+
+```typescript
+import { Store, PineconeStore, Embeddings, RemoteModelEmbeddings } from "alith";
+
+let embeddings: Embeddings = new RemoteModelEmbeddings(
+  "text-embedding-3-small",
+  "your-openai-api-key",
+  "https://api.openai.com/v1",
+);
+
+const store: Store = new PineconeStore(
+  embeddings,
+  process.env.PINECONE_API_KEY!,
+  "alith", // index name
+  "default" // namespace (optional)
+);
+
+// Save documents
+await store.save("Artificial Intelligence is transforming the world");
+await store.saveDocs([
+  "Machine Learning is a subset of AI",
+  "Deep Learning uses neural networks",
+  "Natural Language Processing enables AI to understand text"
+]);
+
+// Search with similarity
+const results = await store.search("What is AI?", 3, 0.7);
+console.log(results);
+```
+
+### Environment Variables
+
+Create a `.env` file with:
+
+```bash
+PINECONE_API_KEY=your-pinecone-api-key
 ```
 
 </Tabs.Tab>
