@@ -1,0 +1,558 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Agent with RAG Example
+
+This example demonstrates how to create an AI agent with Retrieval Augmented Generation (RAG) capabilities, allowing it to access and reason over large knowledge bases.
+
+## What is RAG?
+
+RAG combines the power of large language models with external knowledge retrieval:
+
+1. **Store** documents in a vector database
+2. **Search** for relevant information using semantic similarity
+3. **Augment** the LLM prompt with retrieved context
+4. **Generate** responses based on both the query and retrieved knowledge
+
+## Complete Example
+
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+import os
+
+def main():
+    # Get API key
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    # Setup embeddings and vector store
+    print("Setting up knowledge base...")
+    embeddings = FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+    store = ChromaDBStore(
+        path="./knowledge_db",
+        collection_name="documents",
+        embeddings=embeddings
+    )
+    
+    # Add sample documents
+    documents = [
+        "Artificial Intelligence (AI) is a branch of computer science that aims to create machines capable of intelligent behavior. AI systems can learn, reason, and make decisions.",
+        "Machine Learning is a subset of AI that enables computers to learn and improve from experience without being explicitly programmed. It uses algorithms to identify patterns in data.",
+        "Deep Learning is a subset of machine learning that uses neural networks with multiple layers to model and understand complex patterns in data. It's particularly effective for image recognition and natural language processing.",
+        "Natural Language Processing (NLP) is a field of AI that focuses on the interaction between computers and humans through natural language. It enables machines to understand, interpret, and generate human language.",
+        "Computer Vision is a field of AI that enables machines to interpret and understand visual information from the world. It's used in applications like facial recognition, object detection, and autonomous vehicles."
+    ]
+    
+    # Chunk and store documents
+    print("Adding documents to knowledge base...")
+    for doc in documents:
+        chunks = chunk_text(doc, max_chunk_token_size=100, overlap_percent=0.1)
+        store.save_docs(chunks)
+    
+    print(f"Added {len(documents)} documents to knowledge base")
+    
+    # Create agent with knowledge base
+    agent = Agent(
+        name="RAGAgent",
+        model="llama-3.3-70b-versatile",
+        api_key=api_key,
+        base_url="https://api.groq.com/openai/v1",
+        preamble="You are a knowledgeable AI assistant with access to a comprehensive knowledge base about AI and technology. Use the provided context to answer questions accurately and comprehensively.",
+        store=store
+    )
+    
+    print("RAG Agent is ready!")
+    print("Ask me anything about AI and technology (type 'quit' to exit)")
+    print("-" * 60)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Get response from agent
+            response = agent.prompt(user_input)
+            print(f"\nAgent: {response}")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Advanced RAG Example
+
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+import os
+from pathlib import Path
+
+class AdvancedRAGAgent:
+    def __init__(self, api_key: str):
+        # Setup embeddings and store
+        self.embeddings = FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+        self.store = ChromaDBStore(
+            path="./advanced_knowledge_db",
+            collection_name="documents",
+            embeddings=self.embeddings
+        )
+        
+        # Create agent
+        self.agent = Agent(
+            name="AdvancedRAGAgent",
+            model="llama-3.3-70b-versatile",
+            api_key=api_key,
+            base_url="https://api.groq.com/openai/v1",
+            preamble="You are an advanced AI assistant with access to a comprehensive knowledge base. Use the provided context to answer questions accurately and provide detailed explanations.",
+            store=self.store
+        )
+    
+    def add_documents_from_file(self, file_path: str):
+        """Add documents from a text file"""
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Chunk the content
+            chunks = chunk_text(
+                content,
+                max_chunk_token_size=200,
+                overlap_percent=0.1
+            )
+            
+            # Store chunks
+            self.store.save_docs(chunks)
+            print(f"Added {len(chunks)} chunks from {file_path}")
+            
+        except Exception as e:
+            print(f"Error adding documents from {file_path}: {e}")
+    
+    def add_documents_from_directory(self, directory_path: str):
+        """Add documents from all text files in a directory"""
+        directory = Path(directory_path)
+        if not directory.exists():
+            print(f"Directory {directory_path} does not exist")
+            return
+        
+        text_files = list(directory.glob("*.txt"))
+        if not text_files:
+            print(f"No .txt files found in {directory_path}")
+            return
+        
+        for file_path in text_files:
+            self.add_documents_from_file(str(file_path))
+    
+    def search_knowledge_base(self, query: str, limit: int = 5):
+        """Search the knowledge base directly"""
+        results = self.store.search(query, limit=limit, score_threshold=0.3)
+        return results
+    
+    def get_knowledge_stats(self):
+        """Get knowledge base statistics"""
+        # This is a simplified version - in production, you'd get actual stats
+        return {
+            "total_documents": "Unknown",  # ChromaDB doesn't provide easy count
+            "embedding_model": "BAAI/bge-small-en-v1.5",
+            "store_type": "ChromaDB"
+        }
+    
+    def chat(self, message: str) -> str:
+        """Chat with the agent"""
+        response = self.agent.prompt(message)
+        return response
+
+def main():
+    # Get API key
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    # Create advanced RAG agent
+    agent = AdvancedRAGAgent(api_key)
+    
+    print("Advanced RAG Agent is ready!")
+    print("Commands:")
+    print("  'add <file>' - Add documents from file")
+    print("  'add_dir <directory>' - Add documents from directory")
+    print("  'search <query>' - Search knowledge base")
+    print("  'stats' - Show knowledge base statistics")
+    print("  'quit' - Exit")
+    print("-" * 60)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Handle commands
+            if user_input.startswith('add '):
+                file_path = user_input[4:].strip()
+                agent.add_documents_from_file(file_path)
+                continue
+            
+            if user_input.startswith('add_dir '):
+                dir_path = user_input[8:].strip()
+                agent.add_documents_from_directory(dir_path)
+                continue
+            
+            if user_input.startswith('search '):
+                query = user_input[7:].strip()
+                results = agent.search_knowledge_base(query)
+                print(f"\nSearch results for '{query}':")
+                for i, result in enumerate(results, 1):
+                    print(f"{i}. {result[:100]}...")
+                continue
+            
+            if user_input.lower() == 'stats':
+                stats = agent.get_knowledge_stats()
+                print(f"\nKnowledge Base Statistics:")
+                for key, value in stats.items():
+                    print(f"  {key}: {value}")
+                continue
+            
+            # Chat with agent
+            response = agent.chat(user_input)
+            print(f"\nAgent: {response}")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Running the Example
+
+```bash
+python agent_rag.py
+```
+
+## Expected Output
+
+```
+Setting up knowledge base...
+Adding documents to knowledge base...
+Added 5 documents to knowledge base
+RAG Agent is ready!
+Ask me anything about AI and technology (type 'quit' to exit)
+------------------------------------------------------------
+
+You: What is machine learning?
+
+Agent: Machine Learning is a subset of Artificial Intelligence (AI) that enables computers to learn and improve from experience without being explicitly programmed. It uses algorithms to identify patterns in data, allowing systems to make predictions or decisions based on the patterns they've learned.
+
+Machine learning is particularly powerful because it can automatically discover complex patterns in large datasets that would be difficult or impossible for humans to identify manually. It's widely used in applications like recommendation systems, image recognition, natural language processing, and predictive analytics.
+
+You: How does deep learning relate to machine learning?
+
+Agent: Deep Learning is a subset of machine learning that uses neural networks with multiple layers to model and understand complex patterns in data. It's particularly effective for image recognition and natural language processing.
+
+The key relationship is that deep learning is a specialized form of machine learning that uses artificial neural networks with multiple hidden layers (hence "deep"). While traditional machine learning algorithms might use simpler models, deep learning can handle much more complex data and patterns by using these multi-layered neural networks.
+
+Deep learning has been particularly successful in areas like computer vision, where it can identify objects in images, and natural language processing, where it can understand and generate human language with remarkable accuracy.
+
+You: quit
+
+Goodbye!
+```
+
+## Key Features Demonstrated
+
+- **Knowledge Base**: Store documents in vector database
+- **Semantic Search**: Find relevant information using embeddings
+- **Context Augmentation**: Enhance prompts with retrieved context
+- **Accurate Responses**: Ground responses in factual knowledge
+- **Document Management**: Add and manage knowledge sources
+
+## RAG Configuration Options
+
+### Embedding Models
+
+```python
+# Different embedding models
+embeddings = FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")  # English
+embeddings = FastEmbeddings(model_name="BAAI/bge-m3")  # Multilingual
+embeddings = FastEmbeddings(model_name="BAAI/bge-large-en-v1.5")  # Large model
+```
+
+### Vector Stores
+
+```python
+# ChromaDB (default)
+store = ChromaDBStore(path="./chroma_db", embeddings=embeddings)
+
+# Milvus
+store = MilvusStore(uri="alith.db", dimension=768, embeddings=embeddings)
+
+# FAISS (high performance)
+store = FAISSStore(dimension=768, embeddings=embeddings, index_type="L2")
+```
+
+### Chunking Strategies
+
+```python
+# Basic chunking
+chunks = chunk_text(text, max_chunk_token_size=200, overlap_percent=0.1)
+
+# Smaller chunks for precise retrieval
+chunks = chunk_text(text, max_chunk_token_size=100, overlap_percent=0.2)
+
+# Larger chunks for context
+chunks = chunk_text(text, max_chunk_token_size=400, overlap_percent=0.05)
+```
+
+## Best Practices
+
+### 1. Document Preparation
+
+```python
+def prepare_documents(text: str) -> List[str]:
+    """Prepare documents for optimal retrieval"""
+    # Clean text
+    text = text.strip()
+    
+    # Remove excessive whitespace
+    text = ' '.join(text.split())
+    
+    # Chunk appropriately
+    chunks = chunk_text(text, max_chunk_token_size=200, overlap_percent=0.1)
+    
+    # Filter out very short chunks
+    chunks = [chunk for chunk in chunks if len(chunk.split()) > 10]
+    
+    return chunks
+```
+
+### 2. Search Optimization
+
+```python
+def optimized_search(store, query: str, context: str = ""):
+    """Optimized search with context"""
+    # Expand query with context
+    expanded_query = f"{context} {query}" if context else query
+    
+    # Search with appropriate parameters
+    results = store.search(
+        expanded_query,
+        limit=5,
+        score_threshold=0.3  # Lower threshold for more results
+    )
+    
+    # Filter and rank results
+    filtered_results = [r for r in results if len(r) > 50]  # Filter short results
+    
+    return filtered_results
+```
+
+### 3. Performance Optimization
+
+```python
+# Use FAISS for better performance
+store = FAISSStore(dimension=768, embeddings=embeddings)
+
+# Create optimized index
+store.create_ivf_index(nlist=100)
+
+# Batch operations
+store.save_docs(documents)  # Better than individual saves
+
+# Cache frequent queries
+@lru_cache(maxsize=50)
+def cached_search(query):
+    return store.search(query)
+```
+
+## Common Issues
+
+### 1. Poor Retrieval Quality
+
+**Problem**: Retrieved documents aren't relevant
+**Solutions**:
+- Improve document chunking strategy
+- Use better embedding models
+- Adjust similarity thresholds
+- Add metadata for filtering
+
+```python
+# Improve chunking
+chunks = chunk_text(
+    text,
+    max_chunk_token_size=150,  # Smaller chunks
+    overlap_percent=0.2  # More overlap
+)
+
+# Use better embeddings
+embeddings = FastEmbeddings(model_name="BAAI/bge-large-en-v1.5")
+
+# Adjust search parameters
+results = store.search(query, limit=10, score_threshold=0.2)
+```
+
+### 2. Slow Performance
+
+**Problem**: Search is too slow
+**Solutions**:
+- Use FAISS for better performance
+- Implement caching
+- Optimize index settings
+- Use batch operations
+
+```python
+# Use FAISS for speed
+store = FAISSStore(dimension=768, embeddings=embeddings)
+
+# Create optimized index
+store.create_ivf_index(nlist=100)
+
+# Cache frequent queries
+@lru_cache(maxsize=50)
+def cached_search(query):
+    return store.search(query)
+```
+
+### 3. Memory Issues
+
+**Problem**: Vector store uses too much memory
+**Solutions**:
+- Use disk-based storage
+- Implement compression
+- Limit document count
+- Use efficient data structures
+
+```python
+# Use persistent storage
+store = ChromaDBStore(path="./disk_storage")
+
+# Implement size limits
+class LimitedStore(ChromaDBStore):
+    def __init__(self, max_docs=10000, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.max_docs = max_docs
+    
+    def save_docs(self, docs):
+        super().save_docs(docs)
+        # Implement cleanup if needed
+        if len(self.documents) > self.max_docs:
+            self._cleanup_old_docs()
+```
+
+## Integration Examples
+
+### 1. Document Assistant
+
+```python
+class DocumentAssistant:
+    def __init__(self, model, api_key, base_url):
+        self.embeddings = FastEmbeddings()
+        self.store = ChromaDBStore(path="./docs", embeddings=self.embeddings)
+        self.agent = Agent(
+            model=model,
+            api_key=api_key,
+            base_url=base_url,
+            store=self.store,
+            preamble="You are a document assistant. Use the provided context to answer questions about the documents."
+        )
+    
+    def add_documents(self, file_paths: List[str]):
+        """Add documents to the knowledge base"""
+        for file_path in file_paths:
+            content = Path(file_path).read_text()
+            chunks = chunk_text(content, max_chunk_token_size=200)
+            self.store.save_docs(chunks)
+            print(f"Added {file_path}")
+    
+    def query(self, question: str) -> str:
+        """Query the document knowledge base"""
+        return self.agent.prompt(question)
+
+# Usage
+assistant = DocumentAssistant(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+assistant.add_documents(["doc1.txt", "doc2.txt", "doc3.txt"])
+response = assistant.query("What is the main topic of the documents?")
+```
+
+### 2. Code Assistant
+
+```python
+class CodeAssistant:
+    def __init__(self, model, api_key, base_url):
+        # Use code-specific embeddings
+        self.embeddings = FastEmbeddings(model_name="microsoft/codebert-base")
+        self.store = FAISSStore(dimension=768, embeddings=self.embeddings)
+        self.agent = Agent(
+            model=model,
+            api_key=api_key,
+            base_url=base_url,
+            store=self.store,
+            preamble="You are a code assistant. Use the provided code context to help with programming questions."
+        )
+    
+    def add_codebase(self, code_files: List[str]):
+        """Add code files to the knowledge base"""
+        for file_path in code_files:
+            with open(file_path, 'r') as f:
+                code = f.read()
+            
+            # Chunk code appropriately
+            chunks = self._chunk_code(code)
+            self.store.save_docs(chunks)
+    
+    def _chunk_code(self, code: str) -> List[str]:
+        """Chunk code by functions/classes"""
+        # Simple chunking by lines (implement better logic)
+        lines = code.split('\n')
+        chunks = []
+        current_chunk = ""
+        
+        for line in lines:
+            if len(current_chunk + line) < 500:
+                current_chunk += line + '\n'
+            else:
+                if current_chunk:
+                    chunks.append(current_chunk.strip())
+                current_chunk = line + '\n'
+        
+        if current_chunk:
+            chunks.append(current_chunk.strip())
+        
+        return chunks
+    
+    def ask_about_code(self, question: str) -> str:
+        """Ask questions about the codebase"""
+        return self.agent.prompt(question)
+```
+
+## Next Steps
+
+- **[Agent with Tools](./agent-tools.mdx)** - Add custom capabilities
+- **[Blockchain Integration](./agent-blockchain.mdx)** - Web3 features
+- **[Advanced RAG](./advanced-rag.mdx)** - Multi-collection RAG
+- **[Production RAG](./production-rag.mdx)** - Enterprise RAG systems
