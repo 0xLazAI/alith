@@ -1,10 +1,61 @@
 [
     {
+        "id": "af53f11fb6fc77a8",
+        "topic_id": "11144",
+        "title": "Hyperkit | Weekly/Monthly Update",
+        "url": "https://forum.ceg.vote/t/hyperkit-weekly-monthly-update/11144",
+        "views": "46",
+        "comments": "1",
+        "created_date": "Nov 19, 2025 3:57 am",
+        "latest_activity": "Nov 22, 2025 6:42 am",
+        "content": "Last Revision Updates: November 18, 2025 : 9:43PM (PHT) ~ JustineDevs\nUPDATE OF THE MONTH\nOn Saturday, November 15, 2025 Cavite State University - Main Campus Indang, Calabarzon Blockchain Campus Conference Luzon 2025\nThe Cavite State University - Blockchain Campus Conference is a nationwide campus conference series is designed to tackle real-world challenges in industries such as finance, health, retail, government, logistics, utilities, gaming & entertainment, and more, all through the power of blockchain solutions.\nMAIN EVENT - Cavite State University (Main), Don Severino de las Alas Campus, Indang, Cavite\nBlockchain Campus Conference (BCC) Luzon 2025 is more than just a conference it\u2019s a full-scale blockchain experience designed to engage students, professionals, developers, and industry leaders in meaningful discussions, collaborations, and innovations.\nIn addition to insightful talks and panel discussions covering blockchain applications across finance, health, retail, government, gaming, and more, attendees can expect.\nTwo of Co-Founder of Hyperkit attending Ongoing panel discussion with @Tristan-T-Dev and @ArhonJay as they share their stories & Hyperkit project and inspire attendees with their journeys in tech and blockchain.\n\n\nOCTOBER MONTH PROGRESS\nHyperkit Status In Progress:\nRun internal security audit before any mainnet consideration.\nPick three critical documentation gaps and close them.\nDefine which features are MVP and which can wait.\nUpdate Documentation & Whitepaper (version 1.0 Published) thru https://docs.hyperionkit.xyz/\nTechnology Status:\nFRONTEND DASHBOARD\nStatus: 80% complete. React components built. Tailwind styling done. Error handling needs work. Some UI flows still rough around edges.\nBACKEND API\nStatus: 85% complete. Node.js Express server running. Core endpoints functional. Rate limiting incomplete. Webhook system needs hardening.\nSMART CONTRACT GENERATION ENGINE\nStatus: 90% complete. LLM integration works. Generates production Solidity code. Output quality consistent. Edge cases with complex token mechanics still surfacing.\nAUTOMATED AUDITING SYSTEM\nStatus: 75% complete. Vulnerability detection functional. Static analysis working. Dynamic testing incomplete. False positives need reduction.\nCLI TOOLS\nStatus: 70% complete. Scaffolding works. Deployment orchestration partial. Error messages vague. Documentation sparse.\nHYPERAGENT AI ASSISTANT\nStatus: Monolithic version 40% complete. SOA refactoring planned Q4 2025. Batch contract generation works. Deployment orchestration partially working. Cross-chain bridging incomplete.\nMETIS SDK INTEGRATION\nStatus: 85% complete. Hyperion connectivity stable. Andromeda bridging functional. Edge cases in cross-chain routing still problematic.\nSECURITY AUDITS\nStatus: 0% complete. No third-party audit scheduled. No bug bounty live. Internal code review ongoing but insufficient for production confidence.\nDOCUMENTATION\nStatus: 30% complete. API docs exist but outdated. Tutorials missing. Deployment guides incomplete. Onboarding documentation absent.\nPRODUCTION DEPLOYMENT\nStatus: Hyperion testnet live. Metis testnet live. Mantle testnet partial. Zero mainnet production deployment. Demo dApps exist but not real user traffic.\nTEAM CAPACITY\nStatus: Stretched thin. Justine handles frontend and product decisions. Tristan focused on design. Aaron managing backend and infrastructure. No margin for unexpected issues.\nWHAT WORKS NOW\nYou can generate basic smart contracts using the CLI. You can deploy to Hyperion testnet. You can integrate Metis SDK. React components are usable. CLI scaffolding saves time.\nWHAT DOESN\u2019T WORK YET\nPython SDK missing. Mantle integration incomplete. Documentation too sparse for self-service onboarding. Auditing system produces false positives. Error handling across the stack inconsistent. No real user base. No revenue. No mainnet security audit approval.\nCONFIDENCE ASSESSMENT\nCore technology solid. Architecture sound. Team competent but overextended. Testnet deployments reliable. Production readiness: low. Mainnet launch readiness: 6-8 months away minimum.\nRelevant Topic: Hyperkit - Live apps",
+        "comments_details": [
+            {
+                "author": "JustineDevs",
+                "comment": "Last Revision Updates: November 18, 2025 : 9:43PM (PHT) ~ JustineDevs\nUPDATE OF THE MONTH\nOn Saturday, November 15, 2025 Cavite State University - Main Campus Indang, Calabarzon Blockchain Campus Conference Luzon 2025\nThe Cavite State University - Blockchain Campus Conference is a nationwide campus conference series is designed to tackle real-world challenges in industries such as finance, health, retail, government, logistics, utilities, gaming & entertainment, and more, all through the power of blockchain solutions.\nMAIN EVENT - Cavite State University (Main), Don Severino de las Alas Campus, Indang, Cavite\nBlockchain Campus Conference (BCC) Luzon 2025 is more than just a conference it\u2019s a full-scale blockchain experience designed to engage students, professionals, developers, and industry leaders in meaningful discussions, collaborations, and innovations.\nIn addition to insightful talks and panel discussions covering blockchain applications across finance, health, retail, government, gaming, and more, attendees can expect.\nTwo of Co-Founder of Hyperkit attending Ongoing panel discussion with @Tristan-T-Dev and @ArhonJay as they share their stories & Hyperkit project and inspire attendees with their journeys in tech and blockchain.\n\n\nOCTOBER MONTH PROGRESS\nHyperkit Status In Progress:\nRun internal security audit before any mainnet consideration.\nPick three critical documentation gaps and close them.\nDefine which features are MVP and which can wait.\nUpdate Documentation & Whitepaper (version 1.0 Published) thru https://docs.hyperionkit.xyz/\nTechnology Status:\nFRONTEND DASHBOARD\nStatus: 80% complete. React components built. Tailwind styling done. Error handling needs work. Some UI flows still rough around edges.\nBACKEND API\nStatus: 85% complete. Node.js Express server running. Core endpoints functional. Rate limiting incomplete. Webhook system needs hardening.\nSMART CONTRACT GENERATION ENGINE\nStatus: 90% complete. LLM integration works. Generates production Solidity code. Output quality consistent. Edge cases with complex token mechanics still surfacing.\nAUTOMATED AUDITING SYSTEM\nStatus: 75% complete. Vulnerability detection functional. Static analysis working. Dynamic testing incomplete. False positives need reduction.\nCLI TOOLS\nStatus: 70% complete. Scaffolding works. Deployment orchestration partial. Error messages vague. Documentation sparse.\nHYPERAGENT AI ASSISTANT\nStatus: Monolithic version 40% complete. SOA refactoring planned Q4 2025. Batch contract generation works. Deployment orchestration partially working. Cross-chain bridging incomplete.\nMETIS SDK INTEGRATION\nStatus: 85% complete. Hyperion connectivity stable. Andromeda bridging functional. Edge cases in cross-chain routing still problematic.\nSECURITY AUDITS\nStatus: 0% complete. No third-party audit scheduled. No bug bounty live. Internal code review ongoing but insufficient for production confidence.\nDOCUMENTATION\nStatus: 30% complete. API docs exist but outdated. Tutorials missing. Deployment guides incomplete. Onboarding documentation absent.\nPRODUCTION DEPLOYMENT\nStatus: Hyperion testnet live. Metis testnet live. Mantle testnet partial. Zero mainnet production deployment. Demo dApps exist but not real user traffic.\nTEAM CAPACITY\nStatus: Stretched thin. Justine handles frontend and product decisions. Tristan focused on design. Aaron managing backend and infrastructure. No margin for unexpected issues.\nWHAT WORKS NOW\nYou can generate basic smart contracts using the CLI. You can deploy to Hyperion testnet. You can integrate Metis SDK. React components are usable. CLI scaffolding saves time.\nWHAT DOESN\u2019T WORK YET\nPython SDK missing. Mantle integration incomplete. Documentation too sparse for self-service onboarding. Auditing system produces false positives. Error handling across the stack inconsistent. No real user base. No revenue. No mainnet security audit approval.\nCONFIDENCE ASSESSMENT\nCore technology solid. Architecture sound. Team competent but overextended. Testnet deployments reliable. Production readiness: low. Mainnet launch readiness: 6-8 months away minimum.\nRelevant Topic: Hyperkit - Live apps"
+            }
+        ]
+    },
+    {
+        "id": "bf31b682f7cf3f1a",
+        "topic_id": "11149",
+        "title": "Metis Xzuki Creativity Quest",
+        "url": "https://forum.ceg.vote/t/metis-xzuki-creativity-quest/11149",
+        "views": "15",
+        "comments": "1",
+        "created_date": "Nov 22, 2025 2:56 am",
+        "latest_activity": "Nov 22, 2025 6:36 am",
+        "content": "The CreateAI ecosystem continues to grow on Metis, and we\u2019re excited to support the next wave of community-driven creativity. With the mint window now reopened and the submission period extended, it\u2019s a great moment for Metis community members to jump in and experiment with AI-native creation.\nThe Xzuki Creative Challenge invites anyone \u2014 whether you\u2019re a long-time Metis builder or just discovering AI creation to mint an Xzuki, create something unique, and share it with the wider community. This challenge showcases how fast AI-powered apps can innovate on Metis, and how creativity becomes a shared experience when the tools are accessible to everyone.\nUpdated Challenge Timeline\nNew submission deadline:\nNov 24 at 1:00 PM UTC**\nThe extended window gives more room for users to explore CreateAI, test ideas, and contribute their own work to the community showcase.\nHow to Participate\nMint an Xzuki on CreateAI\nBuild your creative piece\nPost it on X\nTag the project\u2019s account and follow the challenge instructions\nParticipate in community voting once submissions go live\nEven if you\u2019re not submitting, you can still join as a voter and there are community rewards tied to that as well.\nWhy This Matters for Metis\nThis challenge highlights the growing creative side of the Metis ecosystem and shows how builders are using Metis infrastructure to activate real AI-native experiences. It\u2019s a simple, low-barrier way for more users to interact with Metis apps, join the conversation, and help shape what AI creativity looks like onchain.\nIf you\u2019re curious to try CreateAI or want to participate in a light-hearted, community-driven campaign, now\u2019s the moment.\nExplore CreateAI here: https://createai.fun\nLooking forward to seeing what the community creates next.",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "The CreateAI ecosystem continues to grow on Metis, and we\u2019re excited to support the next wave of community-driven creativity. With the mint window now reopened and the submission period extended, it\u2019s a great moment for Metis community members to jump in and experiment with AI-native creation.\nThe Xzuki Creative Challenge invites anyone \u2014 whether you\u2019re a long-time Metis builder or just discovering AI creation to mint an Xzuki, create something unique, and share it with the wider community. This challenge showcases how fast AI-powered apps can innovate on Metis, and how creativity becomes a shared experience when the tools are accessible to everyone.\nUpdated Challenge Timeline\nNew submission deadline:\nNov 24 at 1:00 PM UTC**\nThe extended window gives more room for users to explore CreateAI, test ideas, and contribute their own work to the community showcase.\nHow to Participate\nMint an Xzuki on CreateAI\nBuild your creative piece\nPost it on X\nTag the project\u2019s account and follow the challenge instructions\nParticipate in community voting once submissions go live\nEven if you\u2019re not submitting, you can still join as a voter and there are community rewards tied to that as well.\nWhy This Matters for Metis\nThis challenge highlights the growing creative side of the Metis ecosystem and shows how builders are using Metis infrastructure to activate real AI-native experiences. It\u2019s a simple, low-barrier way for more users to interact with Metis apps, join the conversation, and help shape what AI creativity looks like onchain.\nIf you\u2019re curious to try CreateAI or want to participate in a light-hearted, community-driven campaign, now\u2019s the moment.\nExplore CreateAI here: https://createai.fun\nLooking forward to seeing what the community creates next."
+            }
+        ]
+    },
+    {
+        "id": "03df884f7ef57e01",
+        "topic_id": "5649",
+        "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
+        "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
+        "views": "1.7k",
+        "comments": "156",
+        "created_date": "Jun 14, 2025 6:42 pm",
+        "latest_activity": "Nov 21, 2025 11:13 am",
+        "content": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together.",
+        "comments_details": [
+            {
+                "author": "mrwagmicto",
+                "comment": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together."
+            }
+        ]
+    },
+    {
         "id": "a3b7f65d94031f00",
         "topic_id": "11145",
         "title": "CreateAI Joins the LazAI Ecosystem",
         "url": "https://forum.ceg.vote/t/createai-joins-the-lazai-ecosystem/11145",
-        "views": "6",
+        "views": "28",
         "comments": "1",
         "created_date": "Nov 20, 2025 5:36 am",
         "latest_activity": "Nov 20, 2025 10:15 am",
@@ -21,7 +72,7 @@
         "topic_id": "11146",
         "title": "Metis and LazAI Are Building the Foundation for Decentralized AI | Genzio Podcast",
         "url": "https://forum.ceg.vote/t/metis-and-lazai-are-building-the-foundation-for-decentralized-ai-genzio-podcast/11146",
-        "views": "6",
+        "views": "24",
         "comments": "1",
         "created_date": "Nov 20, 2025 5:54 am",
         "latest_activity": "Nov 20, 2025 10:12 am",
@@ -34,28 +85,11 @@
         ]
     },
     {
-        "id": "af53f11fb6fc77a8",
-        "topic_id": "11144",
-        "title": "Hyperkit | Weekly/Monthly Update",
-        "url": "https://forum.ceg.vote/t/hyperkit-weekly-monthly-update/11144",
-        "views": "20",
-        "comments": "0",
-        "created_date": "Nov 19, 2025 3:57 am",
-        "latest_activity": null,
-        "content": "Last Revision Updates: November 18, 2025 : 9:43PM (PHT) ~ JustineDevs\nUPDATE OF THE MONTH\nOn Saturday, November 15, 2025 Cavite State University - Main Campus Indang, Calabarzon Blockchain Campus Conference Luzon 2025\nThe Cavite State University - Blockchain Campus Conference is a nationwide campus conference series is designed to tackle real-world challenges in industries such as finance, health, retail, government, logistics, utilities, gaming & entertainment, and more, all through the power of blockchain solutions.\nMAIN EVENT - Cavite State University (Main), Don Severino de las Alas Campus, Indang, Cavite\nBlockchain Campus Conference (BCC) Luzon 2025 is more than just a conference it\u2019s a full-scale blockchain experience designed to engage students, professionals, developers, and industry leaders in meaningful discussions, collaborations, and innovations.\nIn addition to insightful talks and panel discussions covering blockchain applications across finance, health, retail, government, gaming, and more, attendees can expect.\nTwo of Co-Founder of Hyperkit attending Ongoing panel discussion with @Tristan-T-Dev and @ArhonJay as they share their stories & Hyperkit project and inspire attendees with their journeys in tech and blockchain.\n\n\nOCTOBER MONTH PROGRESS\nHyperkit Status In Progress:\nRun internal security audit before any mainnet consideration.\nPick three critical documentation gaps and close them.\nDefine which features are MVP and which can wait.\nUpdate Documentation & Whitepaper (version 1.0 Published) thru https://docs.hyperionkit.xyz/\nTechnology Status:\nFRONTEND DASHBOARD\nStatus: 80% complete. React components built. Tailwind styling done. Error handling needs work. Some UI flows still rough around edges.\nBACKEND API\nStatus: 85% complete. Node.js Express server running. Core endpoints functional. Rate limiting incomplete. Webhook system needs hardening.\nSMART CONTRACT GENERATION ENGINE\nStatus: 90% complete. LLM integration works. Generates production Solidity code. Output quality consistent. Edge cases with complex token mechanics still surfacing.\nAUTOMATED AUDITING SYSTEM\nStatus: 75% complete. Vulnerability detection functional. Static analysis working. Dynamic testing incomplete. False positives need reduction.\nCLI TOOLS\nStatus: 70% complete. Scaffolding works. Deployment orchestration partial. Error messages vague. Documentation sparse.\nHYPERAGENT AI ASSISTANT\nStatus: Monolithic version 40% complete. SOA refactoring planned Q4 2025. Batch contract generation works. Deployment orchestration partially working. Cross-chain bridging incomplete.\nMETIS SDK INTEGRATION\nStatus: 85% complete. Hyperion connectivity stable. Andromeda bridging functional. Edge cases in cross-chain routing still problematic.\nSECURITY AUDITS\nStatus: 0% complete. No third-party audit scheduled. No bug bounty live. Internal code review ongoing but insufficient for production confidence.\nDOCUMENTATION\nStatus: 30% complete. API docs exist but outdated. Tutorials missing. Deployment guides incomplete. Onboarding documentation absent.\nPRODUCTION DEPLOYMENT\nStatus: Hyperion testnet live. Metis testnet live. Mantle testnet partial. Zero mainnet production deployment. Demo dApps exist but not real user traffic.\nTEAM CAPACITY\nStatus: Stretched thin. Justine handles frontend and product decisions. Tristan focused on design. Aaron managing backend and infrastructure. No margin for unexpected issues.\nWHAT WORKS NOW\nYou can generate basic smart contracts using the CLI. You can deploy to Hyperion testnet. You can integrate Metis SDK. React components are usable. CLI scaffolding saves time.\nWHAT DOESN\u2019T WORK YET\nPython SDK missing. Mantle integration incomplete. Documentation too sparse for self-service onboarding. Auditing system produces false positives. Error handling across the stack inconsistent. No real user base. No revenue. No mainnet security audit approval.\nCONFIDENCE ASSESSMENT\nCore technology solid. Architecture sound. Team competent but overextended. Testnet deployments reliable. Production readiness: low. Mainnet launch readiness: 6-8 months away minimum.\nRelevant Topic: Hyperkit - Live apps",
-        "comments_details": [
-            {
-                "author": "JustineDevs",
-                "comment": "Last Revision Updates: November 18, 2025 : 9:43PM (PHT) ~ JustineDevs\nUPDATE OF THE MONTH\nOn Saturday, November 15, 2025 Cavite State University - Main Campus Indang, Calabarzon Blockchain Campus Conference Luzon 2025\nThe Cavite State University - Blockchain Campus Conference is a nationwide campus conference series is designed to tackle real-world challenges in industries such as finance, health, retail, government, logistics, utilities, gaming & entertainment, and more, all through the power of blockchain solutions.\nMAIN EVENT - Cavite State University (Main), Don Severino de las Alas Campus, Indang, Cavite\nBlockchain Campus Conference (BCC) Luzon 2025 is more than just a conference it\u2019s a full-scale blockchain experience designed to engage students, professionals, developers, and industry leaders in meaningful discussions, collaborations, and innovations.\nIn addition to insightful talks and panel discussions covering blockchain applications across finance, health, retail, government, gaming, and more, attendees can expect.\nTwo of Co-Founder of Hyperkit attending Ongoing panel discussion with @Tristan-T-Dev and @ArhonJay as they share their stories & Hyperkit project and inspire attendees with their journeys in tech and blockchain.\n\n\nOCTOBER MONTH PROGRESS\nHyperkit Status In Progress:\nRun internal security audit before any mainnet consideration.\nPick three critical documentation gaps and close them.\nDefine which features are MVP and which can wait.\nUpdate Documentation & Whitepaper (version 1.0 Published) thru https://docs.hyperionkit.xyz/\nTechnology Status:\nFRONTEND DASHBOARD\nStatus: 80% complete. React components built. Tailwind styling done. Error handling needs work. Some UI flows still rough around edges.\nBACKEND API\nStatus: 85% complete. Node.js Express server running. Core endpoints functional. Rate limiting incomplete. Webhook system needs hardening.\nSMART CONTRACT GENERATION ENGINE\nStatus: 90% complete. LLM integration works. Generates production Solidity code. Output quality consistent. Edge cases with complex token mechanics still surfacing.\nAUTOMATED AUDITING SYSTEM\nStatus: 75% complete. Vulnerability detection functional. Static analysis working. Dynamic testing incomplete. False positives need reduction.\nCLI TOOLS\nStatus: 70% complete. Scaffolding works. Deployment orchestration partial. Error messages vague. Documentation sparse.\nHYPERAGENT AI ASSISTANT\nStatus: Monolithic version 40% complete. SOA refactoring planned Q4 2025. Batch contract generation works. Deployment orchestration partially working. Cross-chain bridging incomplete.\nMETIS SDK INTEGRATION\nStatus: 85% complete. Hyperion connectivity stable. Andromeda bridging functional. Edge cases in cross-chain routing still problematic.\nSECURITY AUDITS\nStatus: 0% complete. No third-party audit scheduled. No bug bounty live. Internal code review ongoing but insufficient for production confidence.\nDOCUMENTATION\nStatus: 30% complete. API docs exist but outdated. Tutorials missing. Deployment guides incomplete. Onboarding documentation absent.\nPRODUCTION DEPLOYMENT\nStatus: Hyperion testnet live. Metis testnet live. Mantle testnet partial. Zero mainnet production deployment. Demo dApps exist but not real user traffic.\nTEAM CAPACITY\nStatus: Stretched thin. Justine handles frontend and product decisions. Tristan focused on design. Aaron managing backend and infrastructure. No margin for unexpected issues.\nWHAT WORKS NOW\nYou can generate basic smart contracts using the CLI. You can deploy to Hyperion testnet. You can integrate Metis SDK. React components are usable. CLI scaffolding saves time.\nWHAT DOESN\u2019T WORK YET\nPython SDK missing. Mantle integration incomplete. Documentation too sparse for self-service onboarding. Auditing system produces false positives. Error handling across the stack inconsistent. No real user base. No revenue. No mainnet security audit approval.\nCONFIDENCE ASSESSMENT\nCore technology solid. Architecture sound. Team competent but overextended. Testnet deployments reliable. Production readiness: low. Mainnet launch readiness: 6-8 months away minimum.\nRelevant Topic: Hyperkit - Live apps"
-            }
-        ]
-    },
-    {
         "id": "f53765750e50038d",
         "topic_id": "11143",
         "title": "How Multi-Agent Frameworks Like X402 Change the AI Dev Landscape",
         "url": "https://forum.ceg.vote/t/how-multi-agent-frameworks-like-x402-change-the-ai-dev-landscape/11143",
-        "views": "23",
+        "views": "38",
         "comments": "0",
         "created_date": "Nov 18, 2025 4:42 pm",
         "latest_activity": null,
@@ -72,7 +106,7 @@
         "topic_id": "4924",
         "title": "Hyperkit",
         "url": "https://forum.ceg.vote/t/hyperkit/4924",
-        "views": "406",
+        "views": "424",
         "comments": "8",
         "created_date": "May 29, 2025 11:34 am",
         "latest_activity": "Nov 16, 2025 12:41 pm",
@@ -85,28 +119,11 @@
         ]
     },
     {
-        "id": "03df884f7ef57e01",
-        "topic_id": "5649",
-        "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
-        "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
-        "views": "1.7k",
-        "comments": "155",
-        "created_date": "Jun 14, 2025 6:42 pm",
-        "latest_activity": "Nov 14, 2025 8:53 pm",
-        "content": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together.",
-        "comments_details": [
-            {
-                "author": "mrwagmicto",
-                "comment": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together."
-            }
-        ]
-    },
-    {
         "id": "64c522443f761d0a",
         "topic_id": "11139",
         "title": "How developers can leverage x402 to build pay-per-use services",
         "url": "https://forum.ceg.vote/t/how-developers-can-leverage-x402-to-build-pay-per-use-services/11139",
-        "views": "69",
+        "views": "86",
         "comments": "0",
         "created_date": "Nov 14, 2025 6:14 pm",
         "latest_activity": null,
@@ -123,7 +140,7 @@
         "topic_id": "11138",
         "title": "The Toughest Parts of Building Decentralized AI",
         "url": "https://forum.ceg.vote/t/the-toughest-parts-of-building-decentralized-ai/11138",
-        "views": "60",
+        "views": "75",
         "comments": "0",
         "created_date": "Nov 14, 2025 5:18 pm",
         "latest_activity": null,
@@ -140,7 +157,7 @@
         "topic_id": "11137",
         "title": "X402: Where AI Interacts, and Metis Settles",
         "url": "https://forum.ceg.vote/t/x402-where-ai-interacts-and-metis-settles/11137",
-        "views": "79",
+        "views": "95",
         "comments": "0",
         "created_date": "Nov 12, 2025 5:25 pm",
         "latest_activity": null,
@@ -157,7 +174,7 @@
         "topic_id": "11109",
         "title": "What\u2019s Been Happening Lately: x402, GMPayer, LazAI & the Future of AI Payments",
         "url": "https://forum.ceg.vote/t/what-s-been-happening-lately-x402-gmpayer-lazai-the-future-of-ai-payments/11109",
-        "views": "152",
+        "views": "168",
         "comments": "2",
         "created_date": "Nov 4, 2025 7:28 pm",
         "latest_activity": "Nov 12, 2025 11:54 am",
@@ -174,7 +191,7 @@
         "topic_id": "11100",
         "title": "FeedByHash \u2013 Gamified Reward Engine",
         "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "145",
+        "views": "160",
         "comments": "5",
         "created_date": "Nov 4, 2025 8:52 am",
         "latest_activity": "Nov 12, 2025 10:00 am",
@@ -191,7 +208,7 @@
         "topic_id": "10666",
         "title": "9th No-Lose lottery winner ann",
         "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
-        "views": "165",
+        "views": "179",
         "comments": "2",
         "created_date": "Sep 24, 2025 4:25 pm",
         "latest_activity": "Nov 12, 2025 3:42 am",
@@ -208,7 +225,7 @@
         "topic_id": "11132",
         "title": "Lazarian: LazAI Advocates Program",
         "url": "https://forum.ceg.vote/t/lazarian-lazai-advocates-program/11132",
-        "views": "113",
+        "views": "128",
         "comments": "1",
         "created_date": "Nov 10, 2025 4:24 pm",
         "latest_activity": "Nov 11, 2025 3:53 pm",
@@ -225,7 +242,7 @@
         "topic_id": "11105",
         "title": "Metis L2 Network: Price Analysis, Community Sentiment, and Ecosystem Challenges",
         "url": "https://forum.ceg.vote/t/metis-l2-network-price-analysis-community-sentiment-and-ecosystem-challenges/11105",
-        "views": "170",
+        "views": "185",
         "comments": "2",
         "created_date": "Nov 4, 2025 11:08 am",
         "latest_activity": "Nov 10, 2025 2:22 pm",
@@ -242,7 +259,7 @@
         "topic_id": "10454",
         "title": "Spotlight Campaign Final Winners",
         "url": "https://forum.ceg.vote/t/spotlight-campaign-final-winners/10454",
-        "views": "462",
+        "views": "476",
         "comments": "40",
         "created_date": "Sep 4, 2025 3:09 pm",
         "latest_activity": "Nov 8, 2025 10:50 am",
@@ -259,7 +276,7 @@
         "topic_id": "10664",
         "title": "7th No-Lose Lottery Draw winner ann",
         "url": "https://forum.ceg.vote/t/7th-no-lose-lottery-draw-winner-ann/10664",
-        "views": "175",
+        "views": "188",
         "comments": "3",
         "created_date": "Sep 24, 2025 4:22 pm",
         "latest_activity": "Nov 8, 2025 10:31 am",
@@ -276,7 +293,7 @@
         "topic_id": "11113",
         "title": "LazAI my AI trading companion",
         "url": "https://forum.ceg.vote/t/lazai-my-ai-trading-companion/11113",
-        "views": "93",
+        "views": "108",
         "comments": "2",
         "created_date": "Nov 6, 2025 10:51 am",
         "latest_activity": null,
@@ -293,7 +310,7 @@
         "topic_id": "11112",
         "title": "Metis & LazAI Launch GMPayer: The Cross-Chain Payment Hub for AI Agents",
         "url": "https://forum.ceg.vote/t/metis-lazai-launch-gmpayer-the-cross-chain-payment-hub-for-ai-agents/11112",
-        "views": "125",
+        "views": "140",
         "comments": "0",
         "created_date": "Nov 5, 2025 7:20 pm",
         "latest_activity": null,
@@ -310,7 +327,7 @@
         "topic_id": "11097",
         "title": "Multi-Agent Orchestration in LazAI : Why it Matters",
         "url": "https://forum.ceg.vote/t/multi-agent-orchestration-in-lazai-why-it-matters/11097",
-        "views": "134",
+        "views": "149",
         "comments": "3",
         "created_date": "Nov 3, 2025 9:32 am",
         "latest_activity": "Nov 4, 2025 4:46 pm",
@@ -319,23 +336,6 @@
             {
                 "author": "stitch_v626",
                 "comment": "Hii Laz fam :)))\nHere we go with my first post from the LazAI journey! Let\u2019s pull back the curtain on what really makes things tick with the Multi-Agent Orchestrator. #lazAiNetwork\nPicture this: a wild AI concert where all the top agents take the stage together . You\u2019ve got the finance brainiac, the logistics mastermind , the compliance expert , , everyone\u2019s got their thing . but without a conductor??\nTotal chaos. That\u2019s when the Multi-Agent Orchestrator steps in and brings order to the madness.\nThe Orchestrator is like the conductor who keeps these AI superstars in sync . it gets them sharing info , splitting up jobs , learning from each other , and building out workflows that actually scale . There;s no room for lone wolves here ., its all about the band\ninside LAZAI , this maestro works with:\nAlith agents (these are your specialist Als )\nDigital Twins (think real-world AI replicas)\nDAT anchored workflows (secure , decentralised data flows)\n\u2026>>>This is the secret ingredient that turns clever code into something that actually makes a difference.\nso why does this matter? Simple: instead of running one AI ragged , the orchestrator directs a whole team of specialists. That makes everything: (smarter, faster, way more dependable). Each agent knows where it fits , so they play together without stepping on each other\u2019s toes.\nHere\u2019s what really gets me : the whole thing just scales. You need more muscle? Add new agents , no sweat. Something goes sideways? The orchestrator reroutes tasks and keeps things rolling ; nothing falls apart. It\u2019s AI teamwork at its best , like multiplayer chess but with bots pulling off insane moves.\nwhether you\u2019re tracking data, running simulations , or launching AI-powered apps, the Multi-Agent Orchestrator is your all access pass to decentralizeed , intelligent teamwork. This is the future, and it\u2019s already jamming.\nWant in?? FOLLOW @LazAI@LazAINetwork for more lazai stories and tech explained with a twist . jump in and ride the AI wave .\n#AIOrchestration #DigitalTwins #FutureOfAI\n:)) lets stay connected :))"
-            }
-        ]
-    },
-    {
-        "id": "87bbfe9f21573fb5",
-        "topic_id": "10919",
-        "title": "Metis and the AI Layer Race: Why Infra Is Quiet but Strategic Right Now",
-        "url": "https://forum.ceg.vote/t/metis-and-the-ai-layer-race-why-infra-is-quiet-but-strategic-right-now/10919",
-        "views": "284",
-        "comments": "4",
-        "created_date": "Oct 17, 2025 5:22 pm",
-        "latest_activity": "Nov 2, 2025 1:58 pm",
-        "content": "Metis is entering a defining phase in the evolution of blockchain infra. The global direction of the industry is shifting from building isolated networks toward creating intelligent systems capable of processing, coordinating, and learning from on-chain activity. This is where Metis is positioning itself.\nThe architecture being built is structured around three interdependent components. Andromeda forms the settlement foundation, ensuring scalability, reliability, and trust at the base layer. Hyperion is being developed as an AI-optimized runtime designed for high-performance computing and intelligent automation. LazAI sits at the application layer, enabling AI agents, DATs, and on-chain intelligence to operate within a single connected framework.\nThis multi-layer design is not theoretical. It reflects a practical response to how blockchain and artificial intelligence are converging. In the next era of Web3, networks will not only execute transactions but also interpret and act on data in real time. That requires infrastructure capable of understanding patterns, context, and intent \u2014 the core principles behind Metis\u2019s direction.\nMetis is not competing for attention through market narratives. It is defining how decentralized infrastructure should evolve to support intelligent applications at scale. The combination of Andromeda, Hyperion, and LazAI establishes a foundation that aligns computation, intelligence, and usability into one continuum.\nThe next growth phase of Web3 will not come from hype cycles or token speculation. It will come from infrastructure that allows AI systems to function as part of the blockchain itself \u2014 integrated, autonomous, and verifiable. Metis is building that reality.\nref: Open Letter to the Metis Community: Metis is no longer \u201cjust an L2\u201d",
-        "comments_details": [
-            {
-                "author": "Norbert",
-                "comment": "Metis is entering a defining phase in the evolution of blockchain infra. The global direction of the industry is shifting from building isolated networks toward creating intelligent systems capable of processing, coordinating, and learning from on-chain activity. This is where Metis is positioning itself.\nThe architecture being built is structured around three interdependent components. Andromeda forms the settlement foundation, ensuring scalability, reliability, and trust at the base layer. Hyperion is being developed as an AI-optimized runtime designed for high-performance computing and intelligent automation. LazAI sits at the application layer, enabling AI agents, DATs, and on-chain intelligence to operate within a single connected framework.\nThis multi-layer design is not theoretical. It reflects a practical response to how blockchain and artificial intelligence are converging. In the next era of Web3, networks will not only execute transactions but also interpret and act on data in real time. That requires infrastructure capable of understanding patterns, context, and intent \u2014 the core principles behind Metis\u2019s direction.\nMetis is not competing for attention through market narratives. It is defining how decentralized infrastructure should evolve to support intelligent applications at scale. The combination of Andromeda, Hyperion, and LazAI establishes a foundation that aligns computation, intelligence, and usability into one continuum.\nThe next growth phase of Web3 will not come from hype cycles or token speculation. It will come from infrastructure that allows AI systems to function as part of the blockchain itself \u2014 integrated, autonomous, and verifiable. Metis is building that reality.\nref: Open Letter to the Metis Community: Metis is no longer \u201cjust an L2\u201d"
             }
         ]
     }
