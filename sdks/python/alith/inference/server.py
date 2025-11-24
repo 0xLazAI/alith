@@ -13,9 +13,37 @@ def run(
     engine_type: str = "llamacpp",
     *,
     model: str,
-    settlement: bool = False
+    settlement: bool = False,
+    graceful_settlement: bool = False,
+    
+    store_type: str="chromadb",
+    llm_base_url: str,
+    llm_api_key: str,
+    private_key: str
 ):
-    """Run an inference server with the given address and engine type."""
+    """Run an inference server with the given address and engine type.
+    Args:
+        host: The host to run the server on (e.g. localhost).
+        port: The port to run the server on (e.g. 8000).
+        engine_type: The type of engine to use (available: llamacpp, openai).
+        model: The model to use (e.g. deepseek/deepseek-r1-0528).
+        settlement: Whether to enable the settlement middleware (e.g. True).
+        store_type: The type of store to use (available: chromadb, milvus, faiss).
+        llm_base_url: The base URL of the LLM (e.g. https://api.groq.com/openai/v1).
+        llm_api_key: The API key of the LLM (e.g. gsk_LQYB...HFZa4z3Fh).
+        private_key: The private key to use (e.g. 0x1234567890a...67890a...).
+    """
+    
+    # Set environment variables from parameters if provided
+    import os
+    if store_type:
+        os.environ["ALITH_STORE_TYPE"] = store_type
+    if llm_base_url:
+        os.environ["LLM_BASE_URL"] = llm_base_url
+    if llm_api_key:
+        os.environ["LLM_API_KEY"] = llm_api_key
+    if private_key:
+        os.environ["PRIVATE_KEY"] = private_key
 
     if engine_type == "llamacpp":
         from llama_cpp.server.app import create_app
@@ -32,7 +60,7 @@ def run(
 
             app.add_middleware(HeaderValidationMiddleware, type=INFERENCE_TYPE)
             app.add_middleware(DataQueryMiddleware)
-            app.add_middleware(TokenBillingMiddleware)
+            app.add_middleware(TokenBillingMiddleware, graceful=graceful_settlement)
 
         return uvicorn.run(
             app,
@@ -52,7 +80,8 @@ def run(
 
             app.add_middleware(HeaderValidationMiddleware, type=INFERENCE_TYPE)
             app.add_middleware(DataQueryMiddleware)
-            app.add_middleware(TokenBillingMiddleware)
+            app.add_middleware(TokenBillingMiddleware, graceful=graceful_settlement)
+
         return uvicorn.run(
             app,
             host=host,

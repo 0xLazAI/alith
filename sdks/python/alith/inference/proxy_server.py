@@ -24,6 +24,7 @@ app.add_middleware(
 oai = openai.OpenAI(
     api_key=os.getenv("LLM_API_KEY"),
     base_url=os.getenv("LLM_BASE_URL"),
+    timeout=60.0,  # 60 second timeout to prevent hanging
 )
 
 
@@ -31,9 +32,26 @@ oai = openai.OpenAI(
 async def completions(request: Request):
     try:
         request_data = await request.json()
-        return oai.chat.completions.create(**request_data)
+        # Log request details for monitoring
+        model = request_data.get("model", "unknown")
+        messages = request_data.get("messages", [])
+        num_messages = len(messages)
+        
+        # Calculate approximate token count for logging
+        total_chars = sum(len(str(msg.get("content", ""))) for msg in messages)
+        approx_tokens = total_chars // 4  # Rough estimate
+        
+        # Log request details
+        logger.info(f"Processing request - Model: {model}, Messages: {num_messages}, Approx tokens: {approx_tokens}")
+        
+        # Make the request
+        response = oai.chat.completions.create(**request_data)
+        
+        return response
     except Exception as e:
-        logger.error(f"Completion error: {e}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
+
         raise HTTPException(status_code=500, detail=str(e))
 
 
