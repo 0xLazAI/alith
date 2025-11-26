@@ -1,10 +1,61 @@
 [
     {
+        "id": "b61250845d23cf6f",
+        "topic_id": "11146",
+        "title": "Metis and LazAI Are Building the Foundation for Decentralized AI | Genzio Podcast",
+        "url": "https://forum.ceg.vote/t/metis-and-lazai-are-building-the-foundation-for-decentralized-ai-genzio-podcast/11146",
+        "views": "43",
+        "comments": "2",
+        "created_date": "Nov 20, 2025 5:54 am",
+        "latest_activity": "Nov 25, 2025 11:24 am",
+        "content": "I just watched this new conversation between Daniel and Zack from Genzio, and it helped clarify a few things I\u2019ve been wondering about around AI-native infra and onchain agent transactions.\nOne idea that stood out to me is Daniel\u2019s point about why AI and blockchain are converging now\u2014not as a hype pairing, but because agents finally need verifiable, programmable environments to operate in. That lens made the whole \u201cAI economy\u201d narrative feel much more practical.\nAnother part I found interesting was the breakdown of the X402 Global Message Protocol. Instead of thinking of it as just a messaging standard, the way Daniel frames it\u2014as a foundation for autonomous agents to transact, coordinate, and verify actions onchain\u2014made me rethink what \u201conchain AI\u201d could actually look like in day-to-day use.\nAnd his explanation of why LazAI chose to build on Metis touched on something we\u2019ve been discussing in other threads: the importance of having a chain optimized for agent throughput rather than human UX.\nWould love to hear how you are thinking about this.",
+        "comments_details": [
+            {
+                "author": "Julie0xnana",
+                "comment": "I just watched this new conversation between Daniel and Zack from Genzio, and it helped clarify a few things I\u2019ve been wondering about around AI-native infra and onchain agent transactions.\nOne idea that stood out to me is Daniel\u2019s point about why AI and blockchain are converging now\u2014not as a hype pairing, but because agents finally need verifiable, programmable environments to operate in. That lens made the whole \u201cAI economy\u201d narrative feel much more practical.\nAnother part I found interesting was the breakdown of the X402 Global Message Protocol. Instead of thinking of it as just a messaging standard, the way Daniel frames it\u2014as a foundation for autonomous agents to transact, coordinate, and verify actions onchain\u2014made me rethink what \u201conchain AI\u201d could actually look like in day-to-day use.\nAnd his explanation of why LazAI chose to build on Metis touched on something we\u2019ve been discussing in other threads: the importance of having a chain optimized for agent throughput rather than human UX.\nWould love to hear how you are thinking about this."
+            }
+        ]
+    },
+    {
+        "id": "475fc6e0a91bb5cb",
+        "topic_id": "11138",
+        "title": "The Toughest Parts of Building Decentralized AI",
+        "url": "https://forum.ceg.vote/t/the-toughest-parts-of-building-decentralized-ai/11138",
+        "views": "92",
+        "comments": "2",
+        "created_date": "Nov 14, 2025 5:18 pm",
+        "latest_activity": "Nov 25, 2025 7:12 am",
+        "content": "The Toughest Parts of Building Decentralized AI\nDecentralized AI is catching on fast. People love the idea sharing data, computing power, and ideas across the globe, without handing everything over to one big company. Sounds great, right? But, honestly, pulling it off is a real headache. There are plenty of roadblocks along the way. Let\u2019s talk about what actually makes building these systems so tricky.\nGetting Different Systems to Play Nice\nDecentralized AI isn\u2019t built from a single toolkit. It\u2019s a jumble of blockchains, storage networks, and all sorts of computing platforms. The problem? These pieces rarely fit together easily or talk to each other the way you\u2019d hope.\nHere\u2019s what gets in the way:\nEveryone uses different formats and standards\nConnecting blockchains and platforms is a hassle\nNetwork bottlenecks slow everything down\nYou risk getting locked into one system you can\u2019t escape\nSky-High Compute Costs\nTraining AI takes a massive amount of computing power. Once you spread that out over a decentralized network, it gets even pricier and more complicated. Every node has to check the work, which just adds more cost.\nThe main headaches:\nComputing power isn\u2019t cheap\nSome nodes just drop out\u2014gone without warning\nYou\u2019re always trying to balance speed with true decentralization\nCan You Trust the Data?\nFor AI to work well, it needs clean, reliable data. In a decentralized system, data comes from everywhere\u2014and not all of it\u2019s good.\nBiggest worries:\nFake or even dangerous data sneaks in\nPrivacy issues pop up everywhere\nIt\u2019s tough to keep giant data sets accessible all the time\nYou need proof that the data is actually coming from where it claims\nGovernance and Incentives\nThese systems run on community involvement. But getting people to agree and actually participate is a whole different challenge.\nWhat makes it tough:\nFiguring out rewards that feel fair\nStopping folks with more tokens from taking over\nKeeping decisions quick and fair\nGetting people to actually show up and vote or participate\nChecking the AI\u2019s Work\nHow do you know the AI model was trained honestly? Or that its outputs haven\u2019t been tampered with? This is a tough nut to crack.\nTricky parts:\nVerifying results without exposing the whole model\nMaking sure the training process was legit\nKeeping bad actors from faking outputs\nScaling all this verification as models get bigger\nMaking It Easy for Users\nLet\u2019s be real\u2014a lot of decentralized AI projects are just too complicated for most people. If it\u2019s painful to use, people give up.\nPain points:\nWallets and cryptographic keys scare people off\nUploading data feels like a maze\nResults come back slow\nDevelopers don\u2019t get the tools they need\nIf something\u2019s hard to use, people walk away. Simple as that.\nThe Regulation Maze\nAI laws are still a work in progress. Throw decentralization into the mix, and it gets even messier.\nWhat keeps teams up at night:\nWho takes the blame if something goes wrong?\nWhich country\u2019s rules do you have to follow?\nHow do you stay legal when everything is global?\nHow do you avoid using data you shouldn\u2019t touch?\nFinal Thoughts\nThere\u2019s huge promise in decentralized AI more openness, better security, and making AI tools available to everyone, not just big tech. But first, teams have to get past these big challenges. The ones that nail the basics strong tech, clear rules, good rewards, and just making things easy are going to shape where this goes next.",
+        "comments_details": [
+            {
+                "author": "DannySteffe",
+                "comment": "The Toughest Parts of Building Decentralized AI\nDecentralized AI is catching on fast. People love the idea sharing data, computing power, and ideas across the globe, without handing everything over to one big company. Sounds great, right? But, honestly, pulling it off is a real headache. There are plenty of roadblocks along the way. Let\u2019s talk about what actually makes building these systems so tricky.\nGetting Different Systems to Play Nice\nDecentralized AI isn\u2019t built from a single toolkit. It\u2019s a jumble of blockchains, storage networks, and all sorts of computing platforms. The problem? These pieces rarely fit together easily or talk to each other the way you\u2019d hope.\nHere\u2019s what gets in the way:\nEveryone uses different formats and standards\nConnecting blockchains and platforms is a hassle\nNetwork bottlenecks slow everything down\nYou risk getting locked into one system you can\u2019t escape\nSky-High Compute Costs\nTraining AI takes a massive amount of computing power. Once you spread that out over a decentralized network, it gets even pricier and more complicated. Every node has to check the work, which just adds more cost.\nThe main headaches:\nComputing power isn\u2019t cheap\nSome nodes just drop out\u2014gone without warning\nYou\u2019re always trying to balance speed with true decentralization\nCan You Trust the Data?\nFor AI to work well, it needs clean, reliable data. In a decentralized system, data comes from everywhere\u2014and not all of it\u2019s good.\nBiggest worries:\nFake or even dangerous data sneaks in\nPrivacy issues pop up everywhere\nIt\u2019s tough to keep giant data sets accessible all the time\nYou need proof that the data is actually coming from where it claims\nGovernance and Incentives\nThese systems run on community involvement. But getting people to agree and actually participate is a whole different challenge.\nWhat makes it tough:\nFiguring out rewards that feel fair\nStopping folks with more tokens from taking over\nKeeping decisions quick and fair\nGetting people to actually show up and vote or participate\nChecking the AI\u2019s Work\nHow do you know the AI model was trained honestly? Or that its outputs haven\u2019t been tampered with? This is a tough nut to crack.\nTricky parts:\nVerifying results without exposing the whole model\nMaking sure the training process was legit\nKeeping bad actors from faking outputs\nScaling all this verification as models get bigger\nMaking It Easy for Users\nLet\u2019s be real\u2014a lot of decentralized AI projects are just too complicated for most people. If it\u2019s painful to use, people give up.\nPain points:\nWallets and cryptographic keys scare people off\nUploading data feels like a maze\nResults come back slow\nDevelopers don\u2019t get the tools they need\nIf something\u2019s hard to use, people walk away. Simple as that.\nThe Regulation Maze\nAI laws are still a work in progress. Throw decentralization into the mix, and it gets even messier.\nWhat keeps teams up at night:\nWho takes the blame if something goes wrong?\nWhich country\u2019s rules do you have to follow?\nHow do you stay legal when everything is global?\nHow do you avoid using data you shouldn\u2019t touch?\nFinal Thoughts\nThere\u2019s huge promise in decentralized AI more openness, better security, and making AI tools available to everyone, not just big tech. But first, teams have to get past these big challenges. The ones that nail the basics strong tech, clear rules, good rewards, and just making things easy are going to shape where this goes next."
+            }
+        ]
+    },
+    {
+        "id": "a4cf675002daad21",
+        "topic_id": "10666",
+        "title": "9th No-Lose lottery winner ann",
+        "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
+        "views": "198",
+        "comments": "3",
+        "created_date": "Sep 24, 2025 4:25 pm",
+        "latest_activity": "Nov 24, 2025 10:58 pm",
+        "content": "NOV\n3\n9th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 3 5:24 PM \u2192 Wed, Nov 5 6:24 PM\n0 going\nCongratulations to our forum contributors!\nHere are winners:\nContributor Badge \u2013 Advanced Lazbubu DAT: @djpablo47 and @InvadersMustDie\nVisionary Badge \u2013 Rare Lazbubu DAT: @janani_1117\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "NOV\n3\n9th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 3 5:24 PM \u2192 Wed, Nov 5 6:24 PM\n0 going\nCongratulations to our forum contributors!\nHere are winners:\nContributor Badge \u2013 Advanced Lazbubu DAT: @djpablo47 and @InvadersMustDie\nVisionary Badge \u2013 Rare Lazbubu DAT: @janani_1117\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!"
+            }
+        ]
+    },
+    {
         "id": "e0f658fe00d85668",
         "topic_id": "11137",
         "title": "X402: Where AI Interacts, and Metis Settles",
         "url": "https://forum.ceg.vote/t/x402-where-ai-interacts-and-metis-settles/11137",
-        "views": "103",
+        "views": "117",
         "comments": "1",
         "created_date": "Nov 12, 2025 5:25 pm",
         "latest_activity": "Nov 23, 2025 6:20 pm",
@@ -21,7 +72,7 @@
         "topic_id": "11150",
         "title": "My Beginner Journey Exploring X402",
         "url": "https://forum.ceg.vote/t/my-beginner-journey-exploring-x402/11150",
-        "views": "5",
+        "views": "20",
         "comments": "0",
         "created_date": "Nov 23, 2025 7:23 am",
         "latest_activity": null,
@@ -38,7 +89,7 @@
         "topic_id": "11144",
         "title": "Hyperkit | Weekly/Monthly Update",
         "url": "https://forum.ceg.vote/t/hyperkit-weekly-monthly-update/11144",
-        "views": "54",
+        "views": "65",
         "comments": "1",
         "created_date": "Nov 19, 2025 3:57 am",
         "latest_activity": "Nov 22, 2025 6:42 am",
@@ -55,7 +106,7 @@
         "topic_id": "11149",
         "title": "Metis Xzuki Creativity Quest",
         "url": "https://forum.ceg.vote/t/metis-xzuki-creativity-quest/11149",
-        "views": "23",
+        "views": "46",
         "comments": "1",
         "created_date": "Nov 22, 2025 2:56 am",
         "latest_activity": "Nov 22, 2025 6:36 am",
@@ -89,7 +140,7 @@
         "topic_id": "11145",
         "title": "CreateAI Joins the LazAI Ecosystem",
         "url": "https://forum.ceg.vote/t/createai-joins-the-lazai-ecosystem/11145",
-        "views": "36",
+        "views": "46",
         "comments": "1",
         "created_date": "Nov 20, 2025 5:36 am",
         "latest_activity": "Nov 20, 2025 10:15 am",
@@ -102,28 +153,11 @@
         ]
     },
     {
-        "id": "b61250845d23cf6f",
-        "topic_id": "11146",
-        "title": "Metis and LazAI Are Building the Foundation for Decentralized AI | Genzio Podcast",
-        "url": "https://forum.ceg.vote/t/metis-and-lazai-are-building-the-foundation-for-decentralized-ai-genzio-podcast/11146",
-        "views": "33",
-        "comments": "1",
-        "created_date": "Nov 20, 2025 5:54 am",
-        "latest_activity": "Nov 20, 2025 10:12 am",
-        "content": "I just watched this new conversation between Daniel and Zack from Genzio, and it helped clarify a few things I\u2019ve been wondering about around AI-native infra and onchain agent transactions.\nOne idea that stood out to me is Daniel\u2019s point about why AI and blockchain are converging now\u2014not as a hype pairing, but because agents finally need verifiable, programmable environments to operate in. That lens made the whole \u201cAI economy\u201d narrative feel much more practical.\nAnother part I found interesting was the breakdown of the X402 Global Message Protocol. Instead of thinking of it as just a messaging standard, the way Daniel frames it\u2014as a foundation for autonomous agents to transact, coordinate, and verify actions onchain\u2014made me rethink what \u201conchain AI\u201d could actually look like in day-to-day use.\nAnd his explanation of why LazAI chose to build on Metis touched on something we\u2019ve been discussing in other threads: the importance of having a chain optimized for agent throughput rather than human UX.\nWould love to hear how you are thinking about this.",
-        "comments_details": [
-            {
-                "author": "Julie0xnana",
-                "comment": "I just watched this new conversation between Daniel and Zack from Genzio, and it helped clarify a few things I\u2019ve been wondering about around AI-native infra and onchain agent transactions.\nOne idea that stood out to me is Daniel\u2019s point about why AI and blockchain are converging now\u2014not as a hype pairing, but because agents finally need verifiable, programmable environments to operate in. That lens made the whole \u201cAI economy\u201d narrative feel much more practical.\nAnother part I found interesting was the breakdown of the X402 Global Message Protocol. Instead of thinking of it as just a messaging standard, the way Daniel frames it\u2014as a foundation for autonomous agents to transact, coordinate, and verify actions onchain\u2014made me rethink what \u201conchain AI\u201d could actually look like in day-to-day use.\nAnd his explanation of why LazAI chose to build on Metis touched on something we\u2019ve been discussing in other threads: the importance of having a chain optimized for agent throughput rather than human UX.\nWould love to hear how you are thinking about this."
-            }
-        ]
-    },
-    {
         "id": "f53765750e50038d",
         "topic_id": "11143",
         "title": "How Multi-Agent Frameworks Like X402 Change the AI Dev Landscape",
         "url": "https://forum.ceg.vote/t/how-multi-agent-frameworks-like-x402-change-the-ai-dev-landscape/11143",
-        "views": "45",
+        "views": "54",
         "comments": "0",
         "created_date": "Nov 18, 2025 4:42 pm",
         "latest_activity": null,
@@ -140,7 +174,7 @@
         "topic_id": "4924",
         "title": "Hyperkit",
         "url": "https://forum.ceg.vote/t/hyperkit/4924",
-        "views": "432",
+        "views": "444",
         "comments": "8",
         "created_date": "May 29, 2025 11:34 am",
         "latest_activity": "Nov 16, 2025 12:41 pm",
@@ -157,7 +191,7 @@
         "topic_id": "11139",
         "title": "How developers can leverage x402 to build pay-per-use services",
         "url": "https://forum.ceg.vote/t/how-developers-can-leverage-x402-to-build-pay-per-use-services/11139",
-        "views": "93",
+        "views": "101",
         "comments": "0",
         "created_date": "Nov 14, 2025 6:14 pm",
         "latest_activity": null,
@@ -170,28 +204,11 @@
         ]
     },
     {
-        "id": "475fc6e0a91bb5cb",
-        "topic_id": "11138",
-        "title": "The Toughest Parts of Building Decentralized AI",
-        "url": "https://forum.ceg.vote/t/the-toughest-parts-of-building-decentralized-ai/11138",
-        "views": "82",
-        "comments": "0",
-        "created_date": "Nov 14, 2025 5:18 pm",
-        "latest_activity": null,
-        "content": "The Toughest Parts of Building Decentralized AI\nDecentralized AI is catching on fast. People love the idea sharing data, computing power, and ideas across the globe, without handing everything over to one big company. Sounds great, right? But, honestly, pulling it off is a real headache. There are plenty of roadblocks along the way. Let\u2019s talk about what actually makes building these systems so tricky.\nGetting Different Systems to Play Nice\nDecentralized AI isn\u2019t built from a single toolkit. It\u2019s a jumble of blockchains, storage networks, and all sorts of computing platforms. The problem? These pieces rarely fit together easily or talk to each other the way you\u2019d hope.\nHere\u2019s what gets in the way:\nEveryone uses different formats and standards\nConnecting blockchains and platforms is a hassle\nNetwork bottlenecks slow everything down\nYou risk getting locked into one system you can\u2019t escape\nSky-High Compute Costs\nTraining AI takes a massive amount of computing power. Once you spread that out over a decentralized network, it gets even pricier and more complicated. Every node has to check the work, which just adds more cost.\nThe main headaches:\nComputing power isn\u2019t cheap\nSome nodes just drop out\u2014gone without warning\nYou\u2019re always trying to balance speed with true decentralization\nCan You Trust the Data?\nFor AI to work well, it needs clean, reliable data. In a decentralized system, data comes from everywhere\u2014and not all of it\u2019s good.\nBiggest worries:\nFake or even dangerous data sneaks in\nPrivacy issues pop up everywhere\nIt\u2019s tough to keep giant data sets accessible all the time\nYou need proof that the data is actually coming from where it claims\nGovernance and Incentives\nThese systems run on community involvement. But getting people to agree and actually participate is a whole different challenge.\nWhat makes it tough:\nFiguring out rewards that feel fair\nStopping folks with more tokens from taking over\nKeeping decisions quick and fair\nGetting people to actually show up and vote or participate\nChecking the AI\u2019s Work\nHow do you know the AI model was trained honestly? Or that its outputs haven\u2019t been tampered with? This is a tough nut to crack.\nTricky parts:\nVerifying results without exposing the whole model\nMaking sure the training process was legit\nKeeping bad actors from faking outputs\nScaling all this verification as models get bigger\nMaking It Easy for Users\nLet\u2019s be real\u2014a lot of decentralized AI projects are just too complicated for most people. If it\u2019s painful to use, people give up.\nPain points:\nWallets and cryptographic keys scare people off\nUploading data feels like a maze\nResults come back slow\nDevelopers don\u2019t get the tools they need\nIf something\u2019s hard to use, people walk away. Simple as that.\nThe Regulation Maze\nAI laws are still a work in progress. Throw decentralization into the mix, and it gets even messier.\nWhat keeps teams up at night:\nWho takes the blame if something goes wrong?\nWhich country\u2019s rules do you have to follow?\nHow do you stay legal when everything is global?\nHow do you avoid using data you shouldn\u2019t touch?\nFinal Thoughts\nThere\u2019s huge promise in decentralized AI more openness, better security, and making AI tools available to everyone, not just big tech. But first, teams have to get past these big challenges. The ones that nail the basics strong tech, clear rules, good rewards, and just making things easy are going to shape where this goes next.",
-        "comments_details": [
-            {
-                "author": "DannySteffe",
-                "comment": "The Toughest Parts of Building Decentralized AI\nDecentralized AI is catching on fast. People love the idea sharing data, computing power, and ideas across the globe, without handing everything over to one big company. Sounds great, right? But, honestly, pulling it off is a real headache. There are plenty of roadblocks along the way. Let\u2019s talk about what actually makes building these systems so tricky.\nGetting Different Systems to Play Nice\nDecentralized AI isn\u2019t built from a single toolkit. It\u2019s a jumble of blockchains, storage networks, and all sorts of computing platforms. The problem? These pieces rarely fit together easily or talk to each other the way you\u2019d hope.\nHere\u2019s what gets in the way:\nEveryone uses different formats and standards\nConnecting blockchains and platforms is a hassle\nNetwork bottlenecks slow everything down\nYou risk getting locked into one system you can\u2019t escape\nSky-High Compute Costs\nTraining AI takes a massive amount of computing power. Once you spread that out over a decentralized network, it gets even pricier and more complicated. Every node has to check the work, which just adds more cost.\nThe main headaches:\nComputing power isn\u2019t cheap\nSome nodes just drop out\u2014gone without warning\nYou\u2019re always trying to balance speed with true decentralization\nCan You Trust the Data?\nFor AI to work well, it needs clean, reliable data. In a decentralized system, data comes from everywhere\u2014and not all of it\u2019s good.\nBiggest worries:\nFake or even dangerous data sneaks in\nPrivacy issues pop up everywhere\nIt\u2019s tough to keep giant data sets accessible all the time\nYou need proof that the data is actually coming from where it claims\nGovernance and Incentives\nThese systems run on community involvement. But getting people to agree and actually participate is a whole different challenge.\nWhat makes it tough:\nFiguring out rewards that feel fair\nStopping folks with more tokens from taking over\nKeeping decisions quick and fair\nGetting people to actually show up and vote or participate\nChecking the AI\u2019s Work\nHow do you know the AI model was trained honestly? Or that its outputs haven\u2019t been tampered with? This is a tough nut to crack.\nTricky parts:\nVerifying results without exposing the whole model\nMaking sure the training process was legit\nKeeping bad actors from faking outputs\nScaling all this verification as models get bigger\nMaking It Easy for Users\nLet\u2019s be real\u2014a lot of decentralized AI projects are just too complicated for most people. If it\u2019s painful to use, people give up.\nPain points:\nWallets and cryptographic keys scare people off\nUploading data feels like a maze\nResults come back slow\nDevelopers don\u2019t get the tools they need\nIf something\u2019s hard to use, people walk away. Simple as that.\nThe Regulation Maze\nAI laws are still a work in progress. Throw decentralization into the mix, and it gets even messier.\nWhat keeps teams up at night:\nWho takes the blame if something goes wrong?\nWhich country\u2019s rules do you have to follow?\nHow do you stay legal when everything is global?\nHow do you avoid using data you shouldn\u2019t touch?\nFinal Thoughts\nThere\u2019s huge promise in decentralized AI more openness, better security, and making AI tools available to everyone, not just big tech. But first, teams have to get past these big challenges. The ones that nail the basics strong tech, clear rules, good rewards, and just making things easy are going to shape where this goes next."
-            }
-        ]
-    },
-    {
         "id": "66e745d7dfad13a4",
         "topic_id": "11109",
         "title": "What\u2019s Been Happening Lately: x402, GMPayer, LazAI & the Future of AI Payments",
         "url": "https://forum.ceg.vote/t/what-s-been-happening-lately-x402-gmpayer-lazai-the-future-of-ai-payments/11109",
-        "views": "175",
+        "views": "183",
         "comments": "2",
         "created_date": "Nov 4, 2025 7:28 pm",
         "latest_activity": "Nov 12, 2025 11:54 am",
@@ -208,7 +225,7 @@
         "topic_id": "11100",
         "title": "FeedByHash \u2013 Gamified Reward Engine",
         "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "167",
+        "views": "174",
         "comments": "5",
         "created_date": "Nov 4, 2025 8:52 am",
         "latest_activity": "Nov 12, 2025 10:00 am",
@@ -221,28 +238,11 @@
         ]
     },
     {
-        "id": "a4cf675002daad21",
-        "topic_id": "10666",
-        "title": "9th No-Lose lottery winner ann",
-        "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
-        "views": "186",
-        "comments": "2",
-        "created_date": "Sep 24, 2025 4:25 pm",
-        "latest_activity": "Nov 12, 2025 3:42 am",
-        "content": "NOV\n3\n9th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 3 5:24 PM \u2192 Wed, Nov 5 6:24 PM\n0 going\nCongratulations to our forum contributors!\nHere are winners:\nContributor Badge \u2013 Advanced Lazbubu DAT: @djpablo47 and @InvadersMustDie\nVisionary Badge \u2013 Rare Lazbubu DAT: @janani_1117\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "NOV\n3\n9th No-Lose lottery winner ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 3 5:24 PM \u2192 Wed, Nov 5 6:24 PM\n0 going\nCongratulations to our forum contributors!\nHere are winners:\nContributor Badge \u2013 Advanced Lazbubu DAT: @djpablo47 and @InvadersMustDie\nVisionary Badge \u2013 Rare Lazbubu DAT: @janani_1117\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!"
-            }
-        ]
-    },
-    {
         "id": "5cb5b43cac2993e8",
         "topic_id": "11132",
         "title": "Lazarian: LazAI Advocates Program",
         "url": "https://forum.ceg.vote/t/lazarian-lazai-advocates-program/11132",
-        "views": "135",
+        "views": "143",
         "comments": "1",
         "created_date": "Nov 10, 2025 4:24 pm",
         "latest_activity": "Nov 11, 2025 3:53 pm",
@@ -259,7 +259,7 @@
         "topic_id": "11105",
         "title": "Metis L2 Network: Price Analysis, Community Sentiment, and Ecosystem Challenges",
         "url": "https://forum.ceg.vote/t/metis-l2-network-price-analysis-community-sentiment-and-ecosystem-challenges/11105",
-        "views": "193",
+        "views": "201",
         "comments": "2",
         "created_date": "Nov 4, 2025 11:08 am",
         "latest_activity": "Nov 10, 2025 2:22 pm",
@@ -276,7 +276,7 @@
         "topic_id": "10454",
         "title": "Spotlight Campaign Final Winners",
         "url": "https://forum.ceg.vote/t/spotlight-campaign-final-winners/10454",
-        "views": "483",
+        "views": "492",
         "comments": "40",
         "created_date": "Sep 4, 2025 3:09 pm",
         "latest_activity": "Nov 8, 2025 10:50 am",
@@ -293,7 +293,7 @@
         "topic_id": "10664",
         "title": "7th No-Lose Lottery Draw winner ann",
         "url": "https://forum.ceg.vote/t/7th-no-lose-lottery-draw-winner-ann/10664",
-        "views": "195",
+        "views": "202",
         "comments": "3",
         "created_date": "Sep 24, 2025 4:22 pm",
         "latest_activity": "Nov 8, 2025 10:31 am",
@@ -310,7 +310,7 @@
         "topic_id": "11113",
         "title": "LazAI my AI trading companion",
         "url": "https://forum.ceg.vote/t/lazai-my-ai-trading-companion/11113",
-        "views": "115",
+        "views": "124",
         "comments": "2",
         "created_date": "Nov 6, 2025 10:51 am",
         "latest_activity": null,
@@ -327,7 +327,7 @@
         "topic_id": "11112",
         "title": "Metis & LazAI Launch GMPayer: The Cross-Chain Payment Hub for AI Agents",
         "url": "https://forum.ceg.vote/t/metis-lazai-launch-gmpayer-the-cross-chain-payment-hub-for-ai-agents/11112",
-        "views": "147",
+        "views": "156",
         "comments": "0",
         "created_date": "Nov 5, 2025 7:20 pm",
         "latest_activity": null,
