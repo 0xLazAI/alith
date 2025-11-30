@@ -1,10 +1,61 @@
 [
     {
+        "id": "0c57e09c938a6545",
+        "topic_id": "11152",
+        "title": "Metio | AI-Powered Social Trading Bot for Metis",
+        "url": "https://forum.ceg.vote/t/metio-ai-powered-social-trading-bot-for-metis/11152",
+        "views": "5",
+        "comments": "0",
+        "created_date": "Nov 29, 2025 8:00 pm",
+        "latest_activity": null,
+        "content": "Metio/Tweetrade | AI-Powered Social Trading Bot for Metis\n1. Introduction\nMetio is an AI-powered social trading bot that enables users to execute on-chain trades directly from Twitter/X using natural-language commands. Formerly known as TweetradeBot, Metio is being rebuilt natively for the Metis/ LazAI ecosystem with three key pillars:\nDAT (Decentralized Autonomous Trader) Integration \u2014 to provide verifiable, permanent trading history and on-chain performance logs for every user.\nLazbubu AI Avatar \u2014 A friendly, animated bot persona that guides users through trading, wallet setup, and portfolio insights.\nMetis-native Execution Layer \u2014 fast, cheap, and scalable trades using Metis Rollup, with planned integration into the upcoming LazAI architecture.\nMetio aims to become the go to consume -facing trading agent on Metis, combining social UX, AI assistance, and verifiable on-chain data.\n2. Value Proposition\nMetio solves the problem of complex, fragmented on-chain trading by enabling:\nTrade via simple tweets/DMs (\u201cbuy 0.5 ETH of METIS\u201d, \u201csell half my GRAPE\u201d, \u201ccheck my PnL\u201d)\nTrustless trading history backed by DAT\nZero-friction onboarding using embedded smart wallets\nPersonal AI assistant (Lazbubu) guiding users at every step\nExecution routed through Metis-native DEX paths for best pricing and security\nThis turns social platforms into distribution engines for Metis dApps and liquidity flow.\n3. Uniqueness Factor\nMetio differentiates itself from typical trading bots in multiple ways:\n1. DAT Integration (First on Metis)\nEvery trade is registered in a decentralized, tamper-proof activity registry, giving:\ntransparent PnL\nverifiable trading reputation\nfraud-resistant leaderboards\ncross-app trading score composability\n2. AI Persona: Lazbubu\nLazbubu is not a static bot \u2014 it\u2019s an animated AI avatar that:\nexplains transactions\ntracks user portfolio changes\nsends alerts on price swings\nacts as Metis\u2019 friendly \u201cface\u201d for new users\n3. Social-Native Execution Layer\nUnlike traditional GUI wallets, Metio lives directly on Twitter/X, allowing trading from:\ntweets\nreplies\nDMs\nAI chat interface\n4. Plug-and-Play Integrations for Metis dApps\nDEXs, tokens, NFT projects, and memecoins can integrate their commands and swap routes into the bot for free distribution and instant liquidity access.\n4. Benefits for Users\nTrade instantly via tweet without opening any app\nVerifiable trading history and performance metrics via DAT\nAI guidance on best routes, slippage, and risk\nSecure smart wallets with social login\nCopy-trade top traders using DAT reputation\nAlerts and automation, e.g.\n\u201calert me when METIS is up 10%\u201d\n\u201csell if price drops below $20\u201d\nMetio turns every user into an empowered trader, regardless of experience level.\n5. Benefits for Metis Ecosystem\n1. Onboarding New Users at Scale\nSocial bots outperform websites in conversion. Metio becomes a gateway to Metis, lowering friction dramatically.\n2. Increased On-Chain Activity\nmore swaps\nmore volume routed through Metis DEXs\nrecurring automated actions\n3. Native Liquidity Retention\nUsers trade within Metis instead of bridging out.\n4. Strengthening the Agent Economy Narrative\nMetio showcases Metis as the home of:\ndecentralized agents\nsocial execution layers\n5. Growth for Partners\nDEXs, memecoins, NFT communities get:\nimmediate integration\ncommands inside the bot\ntrading flows\nanalytics via DAT\nfaster user acquisition\n6. Security / Audits\nMetio\u2019s architecture prioritizes safety:\nSmart Wallet Infrastructure\nEmbedded smart wallets via audited libraries\nKey management via Privy-style custodial control\nTrade Execution\nRoutes only through audited Metis-native aggregators/DEXs\nParameter validation to prevent malicious transactions\nAllowlist of verified contracts\nData Layer (DAT)\nImmutable trading logs\nPublicly verifiable entries\nEliminates fake PnL or manipulated performance claims\n7. Roadmap\nPhase 1 \u2014 Foundation\nRebrand TweetradeBot \u2192 Metio\nMetis wallet + DEX routing\nCore AI command interpreter\nPhase 2 \u2014 Dashboard\nTrading history and PnL tracking\nUser reputation scoring\nLeaderboard live on Metio dashboard\nCommunity quests & XP on dashboard\nPhase 3 \u2014 DAT Integration & Lazbubu\nLazbubu avatar integration\nDAT registry module\nDEX + project onboarding framework\nPhase 4 \u2014 Public Launch\nMulti-platform rollout\nMarketing + KOL activation\n8. Summary\nMetio is the Metis-native AI social trading bot, designed to bring millions of mainstream users into the ecosystem through a familiar, zero-friction interface \u2014 Twitter/X.\nWith:\nDAT-powered verifiable trading history\nLazbubu AI persona\nsmart wallet onboarding\nMetis-native execution routing\nMetio is positioned to become a flagship consumer app for Metis, boosting liquidity, strengthening the agent economy, and creating sticky user flow for the ecosystem.\n9. Official Links\nWebsite: https://dashboard.tweetrade.bot/\nTwitter: https://x.com/tweetradebot\nDashboard: https://dashboard.tweetrade.bot/\nGitHub: GitHub - lazydevpro/tweetrade-bot\nDemo Video: https://www.youtube.com/watch?v=CrQYK2glvpY",
+        "comments_details": [
+            {
+                "author": "penguinpecker",
+                "comment": "Metio/Tweetrade | AI-Powered Social Trading Bot for Metis\n1. Introduction\nMetio is an AI-powered social trading bot that enables users to execute on-chain trades directly from Twitter/X using natural-language commands. Formerly known as TweetradeBot, Metio is being rebuilt natively for the Metis/ LazAI ecosystem with three key pillars:\nDAT (Decentralized Autonomous Trader) Integration \u2014 to provide verifiable, permanent trading history and on-chain performance logs for every user.\nLazbubu AI Avatar \u2014 A friendly, animated bot persona that guides users through trading, wallet setup, and portfolio insights.\nMetis-native Execution Layer \u2014 fast, cheap, and scalable trades using Metis Rollup, with planned integration into the upcoming LazAI architecture.\nMetio aims to become the go to consume -facing trading agent on Metis, combining social UX, AI assistance, and verifiable on-chain data.\n2. Value Proposition\nMetio solves the problem of complex, fragmented on-chain trading by enabling:\nTrade via simple tweets/DMs (\u201cbuy 0.5 ETH of METIS\u201d, \u201csell half my GRAPE\u201d, \u201ccheck my PnL\u201d)\nTrustless trading history backed by DAT\nZero-friction onboarding using embedded smart wallets\nPersonal AI assistant (Lazbubu) guiding users at every step\nExecution routed through Metis-native DEX paths for best pricing and security\nThis turns social platforms into distribution engines for Metis dApps and liquidity flow.\n3. Uniqueness Factor\nMetio differentiates itself from typical trading bots in multiple ways:\n1. DAT Integration (First on Metis)\nEvery trade is registered in a decentralized, tamper-proof activity registry, giving:\ntransparent PnL\nverifiable trading reputation\nfraud-resistant leaderboards\ncross-app trading score composability\n2. AI Persona: Lazbubu\nLazbubu is not a static bot \u2014 it\u2019s an animated AI avatar that:\nexplains transactions\ntracks user portfolio changes\nsends alerts on price swings\nacts as Metis\u2019 friendly \u201cface\u201d for new users\n3. Social-Native Execution Layer\nUnlike traditional GUI wallets, Metio lives directly on Twitter/X, allowing trading from:\ntweets\nreplies\nDMs\nAI chat interface\n4. Plug-and-Play Integrations for Metis dApps\nDEXs, tokens, NFT projects, and memecoins can integrate their commands and swap routes into the bot for free distribution and instant liquidity access.\n4. Benefits for Users\nTrade instantly via tweet without opening any app\nVerifiable trading history and performance metrics via DAT\nAI guidance on best routes, slippage, and risk\nSecure smart wallets with social login\nCopy-trade top traders using DAT reputation\nAlerts and automation, e.g.\n\u201calert me when METIS is up 10%\u201d\n\u201csell if price drops below $20\u201d\nMetio turns every user into an empowered trader, regardless of experience level.\n5. Benefits for Metis Ecosystem\n1. Onboarding New Users at Scale\nSocial bots outperform websites in conversion. Metio becomes a gateway to Metis, lowering friction dramatically.\n2. Increased On-Chain Activity\nmore swaps\nmore volume routed through Metis DEXs\nrecurring automated actions\n3. Native Liquidity Retention\nUsers trade within Metis instead of bridging out.\n4. Strengthening the Agent Economy Narrative\nMetio showcases Metis as the home of:\ndecentralized agents\nsocial execution layers\n5. Growth for Partners\nDEXs, memecoins, NFT communities get:\nimmediate integration\ncommands inside the bot\ntrading flows\nanalytics via DAT\nfaster user acquisition\n6. Security / Audits\nMetio\u2019s architecture prioritizes safety:\nSmart Wallet Infrastructure\nEmbedded smart wallets via audited libraries\nKey management via Privy-style custodial control\nTrade Execution\nRoutes only through audited Metis-native aggregators/DEXs\nParameter validation to prevent malicious transactions\nAllowlist of verified contracts\nData Layer (DAT)\nImmutable trading logs\nPublicly verifiable entries\nEliminates fake PnL or manipulated performance claims\n7. Roadmap\nPhase 1 \u2014 Foundation\nRebrand TweetradeBot \u2192 Metio\nMetis wallet + DEX routing\nCore AI command interpreter\nPhase 2 \u2014 Dashboard\nTrading history and PnL tracking\nUser reputation scoring\nLeaderboard live on Metio dashboard\nCommunity quests & XP on dashboard\nPhase 3 \u2014 DAT Integration & Lazbubu\nLazbubu avatar integration\nDAT registry module\nDEX + project onboarding framework\nPhase 4 \u2014 Public Launch\nMulti-platform rollout\nMarketing + KOL activation\n8. Summary\nMetio is the Metis-native AI social trading bot, designed to bring millions of mainstream users into the ecosystem through a familiar, zero-friction interface \u2014 Twitter/X.\nWith:\nDAT-powered verifiable trading history\nLazbubu AI persona\nsmart wallet onboarding\nMetis-native execution routing\nMetio is positioned to become a flagship consumer app for Metis, boosting liquidity, strengthening the agent economy, and creating sticky user flow for the ecosystem.\n9. Official Links\nWebsite: https://dashboard.tweetrade.bot/\nTwitter: https://x.com/tweetradebot\nDashboard: https://dashboard.tweetrade.bot/\nGitHub: GitHub - lazydevpro/tweetrade-bot\nDemo Video: https://www.youtube.com/watch?v=CrQYK2glvpY"
+            }
+        ]
+    },
+    {
+        "id": "03df884f7ef57e01",
+        "topic_id": "5649",
+        "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
+        "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
+        "views": "1.8k",
+        "comments": "157",
+        "created_date": "Jun 14, 2025 6:42 pm",
+        "latest_activity": "Nov 29, 2025 11:32 am",
+        "content": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together.",
+        "comments_details": [
+            {
+                "author": "mrwagmicto",
+                "comment": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together."
+            }
+        ]
+    },
+    {
+        "id": "8c1db431cb96b331",
+        "topic_id": "10667",
+        "title": "10th No-Lose Lottery- Winner Ann",
+        "url": "https://forum.ceg.vote/t/10th-no-lose-lottery-winner-ann/10667",
+        "views": "41",
+        "comments": "2",
+        "created_date": "Sep 24, 2025 4:26 pm",
+        "latest_activity": "Nov 29, 2025 10:22 am",
+        "content": "NOV\n17\n10th No-Lose Lottery- Winner Ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 17 5:00 PM \u2192 Wed, Nov 19 6:00 PM\n0 going\n10th No-Lose Lottery Winners Are Here!\nThank you to everyone who has been actively contributing to the Forum, your participation continues to strengthen the Metis community.\nWe\u2019re excited to announce the winners of the 10th No-Lose Lottery:\nContributor badge Winners\n@HeyImEder1\n@Aryanzutshi\nVisionary badge Winner\n@mrwagmicto\nCongratulations to all!\nA Turning Point for the No-Lose Lottery\nWith this 10th draw, we officially confirm that the distribution of Lazbubu Rare and Advanced DAT redeem codes for winners has been completed.\nWe\u2019ll be announcing the next wave of rewards, starting with the winners of this 10th draw, very soon!\nStay active, keep contributing, and every point you earn remains a ticket for the next biweekly draw.\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!",
+        "comments_details": [
+            {
+                "author": "Sheyda",
+                "comment": "NOV\n17\n10th No-Lose Lottery- Winner Ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Nov 17 5:00 PM \u2192 Wed, Nov 19 6:00 PM\n0 going\n10th No-Lose Lottery Winners Are Here!\nThank you to everyone who has been actively contributing to the Forum, your participation continues to strengthen the Metis community.\nWe\u2019re excited to announce the winners of the 10th No-Lose Lottery:\nContributor badge Winners\n@HeyImEder1\n@Aryanzutshi\nVisionary badge Winner\n@mrwagmicto\nCongratulations to all!\nA Turning Point for the No-Lose Lottery\nWith this 10th draw, we officially confirm that the distribution of Lazbubu Rare and Advanced DAT redeem codes for winners has been completed.\nWe\u2019ll be announcing the next wave of rewards, starting with the winners of this 10th draw, very soon!\nStay active, keep contributing, and every point you earn remains a ticket for the next biweekly draw.\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!"
+            }
+        ]
+    },
+    {
         "id": "a6df3b78189d6d9c",
         "topic_id": "11151",
         "title": "LazAI Launches \u201cOpen Launch\u201d on LazPad \u2014 Build Your AI Agent Token on Metis",
         "url": "https://forum.ceg.vote/t/lazai-launches-open-launch-on-lazpad-build-your-ai-agent-token-on-metis/11151",
-        "views": "4",
+        "views": "13",
         "comments": "0",
         "created_date": "Nov 28, 2025 6:55 pm",
         "latest_activity": null,
@@ -21,7 +72,7 @@
         "topic_id": "11146",
         "title": "Metis and LazAI Are Building the Foundation for Decentralized AI | Genzio Podcast",
         "url": "https://forum.ceg.vote/t/metis-and-lazai-are-building-the-foundation-for-decentralized-ai-genzio-podcast/11146",
-        "views": "75",
+        "views": "82",
         "comments": "2",
         "created_date": "Nov 20, 2025 5:54 am",
         "latest_activity": "Nov 25, 2025 11:24 am",
@@ -38,7 +89,7 @@
         "topic_id": "11138",
         "title": "The Toughest Parts of Building Decentralized AI",
         "url": "https://forum.ceg.vote/t/the-toughest-parts-of-building-decentralized-ai/11138",
-        "views": "117",
+        "views": "127",
         "comments": "2",
         "created_date": "Nov 14, 2025 5:18 pm",
         "latest_activity": "Nov 25, 2025 7:12 am",
@@ -55,7 +106,7 @@
         "topic_id": "10666",
         "title": "9th No-Lose lottery winner ann",
         "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
-        "views": "219",
+        "views": "226",
         "comments": "3",
         "created_date": "Sep 24, 2025 4:25 pm",
         "latest_activity": "Nov 24, 2025 10:58 pm",
@@ -72,7 +123,7 @@
         "topic_id": "11137",
         "title": "X402: Where AI Interacts, and Metis Settles",
         "url": "https://forum.ceg.vote/t/x402-where-ai-interacts-and-metis-settles/11137",
-        "views": "139",
+        "views": "146",
         "comments": "1",
         "created_date": "Nov 12, 2025 5:25 pm",
         "latest_activity": "Nov 23, 2025 6:20 pm",
@@ -89,7 +140,7 @@
         "topic_id": "11150",
         "title": "My Beginner Journey Exploring X402",
         "url": "https://forum.ceg.vote/t/my-beginner-journey-exploring-x402/11150",
-        "views": "44",
+        "views": "52",
         "comments": "0",
         "created_date": "Nov 23, 2025 7:23 am",
         "latest_activity": null,
@@ -106,7 +157,7 @@
         "topic_id": "11144",
         "title": "Hyperkit | Weekly/Monthly Update",
         "url": "https://forum.ceg.vote/t/hyperkit-weekly-monthly-update/11144",
-        "views": "86",
+        "views": "93",
         "comments": "1",
         "created_date": "Nov 19, 2025 3:57 am",
         "latest_activity": "Nov 22, 2025 6:42 am",
@@ -123,7 +174,7 @@
         "topic_id": "11149",
         "title": "Metis Xzuki Creativity Quest",
         "url": "https://forum.ceg.vote/t/metis-xzuki-creativity-quest/11149",
-        "views": "69",
+        "views": "76",
         "comments": "1",
         "created_date": "Nov 22, 2025 2:56 am",
         "latest_activity": "Nov 22, 2025 6:36 am",
@@ -136,28 +187,11 @@
         ]
     },
     {
-        "id": "03df884f7ef57e01",
-        "topic_id": "5649",
-        "title": "Dogex: Simplified Decentralized Perpetuals DEX on Hyperion",
-        "url": "https://forum.ceg.vote/t/dogex-simplified-decentralized-perpetuals-dex-on-hyperion/5649",
-        "views": "1.8k",
-        "comments": "156",
-        "created_date": "Jun 14, 2025 6:42 pm",
-        "latest_activity": "Nov 21, 2025 11:13 am",
-        "content": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together.",
-        "comments_details": [
-            {
-                "author": "mrwagmicto",
-                "comment": "Dogex \u2014 The Easiest Way to Start Trading Perpetual Futures with AI.\nLinks: doge-ex.com\nTwitter: https://x.com/DogexPerps\nCEO Twitter with 30 days challenge to make DOGEX: https://x.com/mr_wagmi_cto\nVideo tutorial: https://youtu.be/4Wjm_cblm_Y\nVision:\nPitch FUTURE vision - https://youtu.be/0iTfrZa1XvU\nPlans White Paper - Notion\nPresentation - https://docs.google.com/presentation/d/1FMCItBUjbN_Yr7yD4bMiGLszgZCjsZQ7wPelGRJ4N8w/edit?usp=sharing\nProblem\nMost decentralized perpetual exchanges are overloaded with complex interfaces, confusing mechanics, and steep learning curves that push away new and retail traders. It\u2019s hard not just to use the platform, but also to understand how perp trading works and choose a strategy.\nDogex solves this with an AI-powered, user-friendly platform on Hyperion \u2014 featuring a smart assistant, autotrading and simple tools for beginners.\nDogex\u2019s mission\nDogex is the gateway to DeFi for the next generation of traders.\nDogex NOW:\nSimplicity\nA clean, minimal interface focused on what matters: quick position entry and exit, clear margin information, real-time updates. Fully mobile-compatible and beginner-friendly.\nSpeed and Scalability\nHyperion\u2019s parallel transaction architecture ensures ultra-low latency and near-instant order execution. It delivers a user experience comparable to centralized exchanges while remaining fully decentralized.\nHigh Leverage and 1-Minute Charts\nDogex offers high leverage and access to 1-minute timeframes. This enables users to:\nMake more trades in shorter periods\nQuickly understand market dynamics\nLearn by doing in real trading conditions\nAvoid long waiting periods associated with daily or weekly timeframes\nThe platform encourages active trading and accelerates the learning process.\nOnchain AI Assistant\nAn integrated onchain AI system monitors positions, provides real-time risk analysis, and offers smart suggestions. It\u2019s especially useful for beginners, helping them avoid liquidations and learn position management on the go.\nDogex FUTURE Vision:\nRevolutionizing Trading with AI and Community Power\nPerps Onboarding for Beginners: Our AI Vibe Trader don\u2019t just teach theory \u2014 it guided users through real, hands-on trading strategies step-by-step, ensuring newcomers build true mastery from day one.\nSeamless Auto-Strategies with Full Control: Hit a button and let smart auto-strategies work for you \u2014 but stay in the driver\u2019s seat. This is not magic, it\u2019s the second step in your trading journey, designed to teach and empower, not replace.\nIntelligent AI Trading Assistant: Pick your strategy, analyze market conditions, and get real-time insights and trade support. Our AI assistant is your personal trading partner, adapting to your style and goals.\nDecentralized, Community-Driven Platform: Governance, fees, and liquidity are powered by users \u2014 from rookies to pros. Higher liquidity means more earning potential for everyone and richer experience for traders, fostering a thriving ecosystem.\nA Bold New Approach to Trading: Dogex is more than a platform \u2014 it\u2019s a movement. A vibrant space where beginners arrive for fun and leave as professional traders, armed with modern strategies and AI-powered insights.\nWhere Trading Meets Joy: Here, trading is not just profit \u2014 it\u2019s pleasure. A place to unwind, socialize, and vibe with friends, all while growing your skills without the fear of losses.\nDogex isn\u2019t just another trading app. It\u2019s the future playground for traders who want to learn deeply, trade smartly, and enjoy the journey \u2014 together."
-            }
-        ]
-    },
-    {
         "id": "a3b7f65d94031f00",
         "topic_id": "11145",
         "title": "CreateAI Joins the LazAI Ecosystem",
         "url": "https://forum.ceg.vote/t/createai-joins-the-lazai-ecosystem/11145",
-        "views": "66",
+        "views": "73",
         "comments": "1",
         "created_date": "Nov 20, 2025 5:36 am",
         "latest_activity": "Nov 20, 2025 10:15 am",
@@ -174,7 +208,7 @@
         "topic_id": "11143",
         "title": "How Multi-Agent Frameworks Like X402 Change the AI Dev Landscape",
         "url": "https://forum.ceg.vote/t/how-multi-agent-frameworks-like-x402-change-the-ai-dev-landscape/11143",
-        "views": "77",
+        "views": "84",
         "comments": "0",
         "created_date": "Nov 18, 2025 4:42 pm",
         "latest_activity": null,
@@ -191,7 +225,7 @@
         "topic_id": "4924",
         "title": "Hyperkit",
         "url": "https://forum.ceg.vote/t/hyperkit/4924",
-        "views": "472",
+        "views": "482",
         "comments": "8",
         "created_date": "May 29, 2025 11:34 am",
         "latest_activity": "Nov 16, 2025 12:41 pm",
@@ -208,7 +242,7 @@
         "topic_id": "11139",
         "title": "How developers can leverage x402 to build pay-per-use services",
         "url": "https://forum.ceg.vote/t/how-developers-can-leverage-x402-to-build-pay-per-use-services/11139",
-        "views": "121",
+        "views": "128",
         "comments": "0",
         "created_date": "Nov 14, 2025 6:14 pm",
         "latest_activity": null,
@@ -225,7 +259,7 @@
         "topic_id": "11109",
         "title": "What\u2019s Been Happening Lately: x402, GMPayer, LazAI & the Future of AI Payments",
         "url": "https://forum.ceg.vote/t/what-s-been-happening-lately-x402-gmpayer-lazai-the-future-of-ai-payments/11109",
-        "views": "219",
+        "views": "228",
         "comments": "2",
         "created_date": "Nov 4, 2025 7:28 pm",
         "latest_activity": "Nov 12, 2025 11:54 am",
@@ -242,7 +276,7 @@
         "topic_id": "11100",
         "title": "FeedByHash \u2013 Gamified Reward Engine",
         "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "194",
+        "views": "201",
         "comments": "5",
         "created_date": "Nov 4, 2025 8:52 am",
         "latest_activity": "Nov 12, 2025 10:00 am",
@@ -259,7 +293,7 @@
         "topic_id": "11132",
         "title": "Lazarian: LazAI Advocates Program",
         "url": "https://forum.ceg.vote/t/lazarian-lazai-advocates-program/11132",
-        "views": "163",
+        "views": "170",
         "comments": "1",
         "created_date": "Nov 10, 2025 4:24 pm",
         "latest_activity": "Nov 11, 2025 3:53 pm",
@@ -276,7 +310,7 @@
         "topic_id": "11105",
         "title": "Metis L2 Network: Price Analysis, Community Sentiment, and Ecosystem Challenges",
         "url": "https://forum.ceg.vote/t/metis-l2-network-price-analysis-community-sentiment-and-ecosystem-challenges/11105",
-        "views": "223",
+        "views": "230",
         "comments": "2",
         "created_date": "Nov 4, 2025 11:08 am",
         "latest_activity": "Nov 10, 2025 2:22 pm",
@@ -293,7 +327,7 @@
         "topic_id": "10454",
         "title": "Spotlight Campaign Final Winners",
         "url": "https://forum.ceg.vote/t/spotlight-campaign-final-winners/10454",
-        "views": "524",
+        "views": "538",
         "comments": "40",
         "created_date": "Sep 4, 2025 3:09 pm",
         "latest_activity": "Nov 8, 2025 10:50 am",
@@ -302,40 +336,6 @@
             {
                 "author": "Sheyda",
                 "comment": "Spotlight Campaign Final Winners\nThe Spotlight Campaign has officially concluded, and we want to express our thanks to all developers and community participants who joined us in this journey. Your contributions, creativity, and commitment are what make the Metis ecosystem stronger every day.\nAs promised, this campaign comes with two sets of rewards that have been separately announced here.\nWinners Breakdown of the $7,500 bonus prize pool\nTier 1: HyperHack Spotlight Champion\nStreamNFT\n$3,000 prize\nForum pin for 14 days\nPriority DevRel support for 6 months\nNewsletter spotlight\n+25 bonus points for the final judging phase\nTier 2: Growth Catalysts\nFracture Point, Safe Work Play, BOLTIS, LazaiTrader\n$750 prize each\nForum pin for 7 days\nDevRel support for 3 months\nNewsletter spotlight\n+15 bonus points\nTier 3: Community Stars\nHaithe, Festify, Eduverse\n$500 prize each\nDevRel support for 1 month\nNewsletter spotlight\n+10 bonus points\nHow We Scored Project Performance for the bonus priz pool\nProjects were evaluated between July 15 \u2013 August 21 across three weighted categories:\n75% X (Twitter) account growth and quality (verified via TwitterAudit)\n20% On-chain user activity on your dApp\n5% Users driven to your Forum thread via referral links\nBased on the criteria:\n1 project surpassed 80%+ performance \u2192 Tier 1 Champion\n4 projects scored between 30\u201380% \u2192 Tier 2 Catalysts\n3 projects scored below 30% \u2192 Tier 3 Stars\nMain criteria to unlock the remaining Marketing fund\nTo unlock the remaining $200 campaign marketing funds, projects needed at least 100 new registrations through Forum referral links. Bot-like accounts were filtered and removed to ensure fairness. Here are the winners: CERTHUB, Haithe, Safe Work Play, BOLTIS, StreamNFT, Eduverse, LazaiTrader, Fracture Point, Festify and ProofDao\nPayment & Next Steps\nOur team will DM each project owner for payment arrangements, which will take place on September 18.\nPlease provide your ERC-20 wallet address (no exchange wallets accepted).\nAll rewards will be distributed in METIS tokens on Andromeda."
-            }
-        ]
-    },
-    {
-        "id": "278f3b02d21d4821",
-        "topic_id": "10664",
-        "title": "7th No-Lose Lottery Draw winner ann",
-        "url": "https://forum.ceg.vote/t/7th-no-lose-lottery-draw-winner-ann/10664",
-        "views": "217",
-        "comments": "3",
-        "created_date": "Sep 24, 2025 4:22 pm",
-        "latest_activity": "Nov 8, 2025 10:31 am",
-        "content": "OCT\n6\n7th No-Lose Lottery- Winner Ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Oct 6 4:10 PM \u2192 Wed, Oct 8 4:00 AM\n1\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nNo-Lose Lottery draw occurs biweekly, and badges will be redeemable for a surprise reward soon.\nThere will be biweekly winners:\n2 Contributor Badge \u2013 Small Prize\nOne Visionary Badge \u2013 Grand Prize\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "OCT\n6\n7th No-Lose Lottery- Winner Ann\nExpired\n\u00b7\nCreated by\nSheyda\nMon, Oct 6 4:10 PM \u2192 Wed, Oct 8 4:00 AM\n1\nRemember, every point you earn on the Forum = 1 ticket for the biweekly draw, so your participation always counts.\nNo-Lose Lottery draw occurs biweekly, and badges will be redeemable for a surprise reward soon.\nThere will be biweekly winners:\n2 Contributor Badge \u2013 Small Prize\nOne Visionary Badge \u2013 Grand Prize\nReminder\nEvery 1 point = 1 lottery ticket\nBoost your points! engage and contribute by replying, every reply earns 2 points\nCheck out your score in the live leaderboard\nStay tuned for the next round and official updates on Metis X: @MetisL2!"
-            }
-        ]
-    },
-    {
-        "id": "cfd1ad1e160fe61b",
-        "topic_id": "11113",
-        "title": "LazAI my AI trading companion",
-        "url": "https://forum.ceg.vote/t/lazai-my-ai-trading-companion/11113",
-        "views": "142",
-        "comments": "2",
-        "created_date": "Nov 6, 2025 10:51 am",
-        "latest_activity": null,
-        "content": "Am sure here everyone already uses and loves LazAI and DogEx partnership.\nIf you don\u2019t which is not possible thou, do well to go through this amazing thread and get convinced\nx.com\n@",
-        "comments_details": [
-            {
-                "author": "Kinginthenorth",
-                "comment": "Am sure here everyone already uses and loves LazAI and DogEx partnership.\nIf you don\u2019t which is not possible thou, do well to go through this amazing thread and get convinced\nx.com\n@"
             }
         ]
     }
