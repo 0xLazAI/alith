@@ -10,12 +10,13 @@ import {
   PineconeStore,
   Store,
 } from "./store";
-import { Tool } from "./tool";
+import { MaybePromise, Tool } from "./tool";
 
 export {
   Agent,
   AgentOptions,
   Tool,
+  MaybePromise,
   chunkText,
   Embeddings,
   RemoteModelEmbeddings,
