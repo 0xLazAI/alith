@@ -48,7 +48,7 @@ export async function validateAccountAndSignature(
     account = await clientInstance.getQueryAccount(user, node);
   }
 
-  if (!account || account.node !== user) {
+  if (!account || account.user !== user) {
     throw new Error(`Account ${user} does not exist or is unauthorized`);
   }
 

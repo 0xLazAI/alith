@@ -3,7 +3,13 @@ import { Embeddings, RemoteModelEmbeddings } from "./embeddings";
 import { Extractor, parseArgs } from "./extractor";
 import { chunkText } from "./internal";
 import { Memory, Message, MessageBuilder, WindowBufferMemory } from "./memory";
-import { QdrantClient, QdrantClientParams, QdrantStore, Store } from "./store";
+import {
+  QdrantClient,
+  QdrantClientParams,
+  QdrantStore,
+  PineconeStore,
+  Store,
+} from "./store";
 import { MaybePromise, Tool } from "./tool";
 
 export {
@@ -22,6 +28,7 @@ export {
   QdrantStore,
   QdrantClient,
   QdrantClientParams,
+  PineconeStore,
   Extractor,
   parseArgs,
 };

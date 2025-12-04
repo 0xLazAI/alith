@@ -20,3 +20,5 @@ next-env.d.ts
 scripts/dev_*
 # Node log
 node.log
+node_modules
+.idea/

@@ -132,7 +132,7 @@ impl ApiConfigTrait for GenericApiConfig {
         if let Some(port) = &self.api_config.port {
             format!("https://{}:{}{}", self.api_config.host, port, path)
         } else {
-            format!("https://{}:{}", self.api_config.host, path)
+            format!("https://{}{}", self.api_config.host, path)
         }
     }
 

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@types/node": "^24.8.1",
+    "alith": "^0.12.3"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
