@@ -1,10 +1,27 @@
 [
     {
+        "id": "462bd1c1314b40af",
+        "topic_id": "5917",
+        "title": "Narrative vs Product Marketing in Crypto. What\u2019s Driving Adoption?",
+        "url": "https://forum.ceg.vote/t/narrative-vs-product-marketing-in-crypto-whats-driving-adoption/5917",
+        "views": "96",
+        "comments": "10",
+        "created_date": "Jun 23, 2025 5:45 pm",
+        "latest_activity": "Dec 3, 2025 10:34 am",
+        "content": "So here\u2019s something I\u2019ve been thinking about a lot lately: In crypto, what really moves the needle, narrative or product?\nOn one hand, you\u2019ve got the product-first folks. They say, \u201cBuild something useful and the users will come.\u201d Makes sense, right? Strong tech, clean UX, real utility. Solid stuff. We need more of that.\nBut let\u2019s be honest\u2026 narrative runs this space.\nHalf the coins that pump? They don\u2019t even have a working product yet. What they do have is a compelling story. A vision. A meme. A mission that resonates (or at least goes viral on Twitter for a week).\nThink about:\nBitcoin: digital gold, decentralized revolution, opt out of fiat.\nEthereum: world computer, unstoppable apps, dev playground.\nSolana: high-speed, cheap fees, future of DeFi + NFTs.\nThese aren\u2019t just features. They\u2019re narratives people believe in. They make people want to be early, want to participate, want to belong.\nCompare that to some protocol grinding away in the shadows with a slick UI and great TPS\u2026 but no story? Crickets.\nThis doesn\u2019t mean product doesn\u2019t matter. In the long run, it has to work. But in crypto, narrative is the front door. It\u2019s how people discover, get curious, ape in.\nNarrative drives attention. Product keeps it.\nSo what do you think? Are we over-indexing on hype? Or is narrative just the native language of a still-immature industry? And how do you balance storytelling with real value?\nCurious to hear how others are thinking about this.",
+        "comments_details": [
+            {
+                "author": "Rosita",
+                "comment": "So here\u2019s something I\u2019ve been thinking about a lot lately: In crypto, what really moves the needle, narrative or product?\nOn one hand, you\u2019ve got the product-first folks. They say, \u201cBuild something useful and the users will come.\u201d Makes sense, right? Strong tech, clean UX, real utility. Solid stuff. We need more of that.\nBut let\u2019s be honest\u2026 narrative runs this space.\nHalf the coins that pump? They don\u2019t even have a working product yet. What they do have is a compelling story. A vision. A meme. A mission that resonates (or at least goes viral on Twitter for a week).\nThink about:\nBitcoin: digital gold, decentralized revolution, opt out of fiat.\nEthereum: world computer, unstoppable apps, dev playground.\nSolana: high-speed, cheap fees, future of DeFi + NFTs.\nThese aren\u2019t just features. They\u2019re narratives people believe in. They make people want to be early, want to participate, want to belong.\nCompare that to some protocol grinding away in the shadows with a slick UI and great TPS\u2026 but no story? Crickets.\nThis doesn\u2019t mean product doesn\u2019t matter. In the long run, it has to work. But in crypto, narrative is the front door. It\u2019s how people discover, get curious, ape in.\nNarrative drives attention. Product keeps it.\nSo what do you think? Are we over-indexing on hype? Or is narrative just the native language of a still-immature industry? And how do you balance storytelling with real value?\nCurious to hear how others are thinking about this."
+            }
+        ]
+    },
+    {
         "id": "fe6e0490ad4fbc7e",
         "topic_id": "11163",
         "title": "The One Thing That Keeps Me Up at Night When Building Multi-Agent Systems",
         "url": "https://forum.ceg.vote/t/the-one-thing-that-keeps-me-up-at-night-when-building-multi-agent-systems/11163",
-        "views": "12",
+        "views": "19",
         "comments": "0",
         "created_date": "Dec 1, 2025 5:13 pm",
         "latest_activity": "Dec 1, 2025 5:13 pm",
@@ -21,7 +38,7 @@
         "topic_id": "11162",
         "title": "Diving into ERC-8004: My Take on Trustless AI Agents and Why They\u2019re a Game-Changer",
         "url": "https://forum.ceg.vote/t/diving-into-erc-8004-my-take-on-trustless-ai-agents-and-why-theyre-a-game-changer/11162",
-        "views": "12",
+        "views": "17",
         "comments": "0",
         "created_date": "Dec 1, 2025 4:52 pm",
         "latest_activity": null,
@@ -34,11 +51,28 @@
         ]
     },
     {
+        "id": "3ff6962ed023bed8",
+        "topic_id": "11159",
+        "title": "Alith + x402: The Verified Internet Economy",
+        "url": "https://forum.ceg.vote/t/alith-x402-the-verified-internet-economy/11159",
+        "views": "3",
+        "comments": "2",
+        "created_date": "Dec 1, 2025 10:17 am",
+        "latest_activity": null,
+        "content": "Alith + x402 is building a verified internet economy. Every piece of content\u2014AI responses, code samples, whatever it may be\u2014is thoroughly checked, always up to date, and users pay only tiny, instant micropayments. Say goodbye to hallucinated answers, outdated examples, or uncredited work. Here, truth comes first, and quality work is recognized immediately.\nThis three-part series explains everything: the core protocol, the trust layer that makes AI reliable, and the first real product that\u2019s already bringing this system to life.\nEpisode 1 \u2013 What is x402? (Introduction)\nx402 is designed for making tiny payments\u2014ranging from a tenth of a cent up to ten cents\u2014instantly and directly on the blockchain. No subscriptions, no bundling, and no intermediaries. Just seamless, pay-as-you-go transactions. It works just like sending data: you pay for exactly what you use, right when you use it.\nEpisode 2 \u2013 AI Needs a Trust Layer\nAI today is quick and inexpensive, but let\u2019s face it\u2014it invents facts, takes ideas without credit, and gives answers with no accountability. Alith brings in a trust layer. Every answer is checked automatically, corrected if it\u2019s wrong, and given on-chain proof you can verify yourself. Add x402 to the mix, and only reliable, verified information gets paid for. Now you have an AI system where truth matters\u2014and the incentives make sense.\nEpisode 3 \u2013 Real-World Example: Verified Code Snippet Marketplace\nImagine a marketplace where developers upload code snippets and, immediately, the system runs them through Alith\u2019s process\u2014static analysis, sandbox tests, behavioral checks. Only code that passes verification goes live. Users pay a few cents per read or download with x402, and creators receive instant payment each time. Even years later, if the Auto-Fix system updates their code for new libraries, they still earn. It\u2019s pay-per-use, verification built in, and everyone benefits.\nReferences:\nINTRODUCTION\nOVERVIEW\nREAL-WORLD EXAMPLE",
+        "comments_details": [
+            {
+                "author": "gokkull_15",
+                "comment": "Alith + x402 is building a verified internet economy. Every piece of content\u2014AI responses, code samples, whatever it may be\u2014is thoroughly checked, always up to date, and users pay only tiny, instant micropayments. Say goodbye to hallucinated answers, outdated examples, or uncredited work. Here, truth comes first, and quality work is recognized immediately.\nThis three-part series explains everything: the core protocol, the trust layer that makes AI reliable, and the first real product that\u2019s already bringing this system to life.\nEpisode 1 \u2013 What is x402? (Introduction)\nx402 is designed for making tiny payments\u2014ranging from a tenth of a cent up to ten cents\u2014instantly and directly on the blockchain. No subscriptions, no bundling, and no intermediaries. Just seamless, pay-as-you-go transactions. It works just like sending data: you pay for exactly what you use, right when you use it.\nEpisode 2 \u2013 AI Needs a Trust Layer\nAI today is quick and inexpensive, but let\u2019s face it\u2014it invents facts, takes ideas without credit, and gives answers with no accountability. Alith brings in a trust layer. Every answer is checked automatically, corrected if it\u2019s wrong, and given on-chain proof you can verify yourself. Add x402 to the mix, and only reliable, verified information gets paid for. Now you have an AI system where truth matters\u2014and the incentives make sense.\nEpisode 3 \u2013 Real-World Example: Verified Code Snippet Marketplace\nImagine a marketplace where developers upload code snippets and, immediately, the system runs them through Alith\u2019s process\u2014static analysis, sandbox tests, behavioral checks. Only code that passes verification goes live. Users pay a few cents per read or download with x402, and creators receive instant payment each time. Even years later, if the Auto-Fix system updates their code for new libraries, they still earn. It\u2019s pay-per-use, verification built in, and everyone benefits.\nReferences:\nINTRODUCTION\nOVERVIEW\nREAL-WORLD EXAMPLE"
+            }
+        ]
+    },
+    {
         "id": "dd0fdf6efc75ff6d",
         "topic_id": "11158",
         "title": "The X402 Use Case That Actually Blew My Mind: Paying Per Prompt, No Subscriptions",
         "url": "https://forum.ceg.vote/t/the-x402-use-case-that-actually-blew-my-mind-paying-per-prompt-no-subscriptions/11158",
-        "views": "15",
+        "views": "21",
         "comments": "0",
         "created_date": "Dec 1, 2025 6:00 am",
         "latest_activity": "Dec 1, 2025 6:00 am",
@@ -51,11 +85,28 @@
         ]
     },
     {
+        "id": "d58c2b7c11c9b65b",
+        "topic_id": "11155",
+        "title": "hyperkit waitlist is live",
+        "url": "https://forum.ceg.vote/t/hyperkit-waitlist-is-live/11155",
+        "views": "3",
+        "comments": "2",
+        "created_date": "Nov 30, 2025 9:57 pm",
+        "latest_activity": null,
+        "content": "Hey Builders,\nWe\u2019re excited to announce that Hyperkit Waitlist is now open for early access!\nIf you\u2019re tired of spending weeks building smart contracts when you could be shipping in hours, Hyperkit is for you.\nWhat is Hyperkit?\nHyperkit is an AI-powered blockchain infrastructure toolkit that simplifies smart contract development. With our platform, you can:\nGenerate smart contracts in minutes - No more manual coding from scratch\nAuto-audit for security vulnerabilities - Built-in safety checks\nDeploy across 4 major L2s - Hyperion, Metis, Mantle, Avalanche\nAccess autonomous AI agents - For contract generation, auditing, and deployment\nMulti-chain integration ready - Cross-chain compatibility out of the box\nWhy Join the Hyperkit Waitlist?\nEarly builders get founding member status with exclusive perks:\nGuaranteed Access - Be first to enter Hyperkit Studio before public launch via limited beta waves\nPriority AI Access - Get priority access to new autonomous AI agents, templates, and multi-chain features\nFounding Builder Badge - Exclusive \u201cFounding Builder\u201d profile badge in-app and special Discord role\nExclusive Discounts - Waitlist-only discounts or extended free trial with extra usage credits for the first months\nPrivate Sessions - Invitation to private office hours, workshops, and behind-the-scenes dev updates\nShape the Roadmap - Direct line to the core team via priority feedback calls and surveys to shape the product\nOn-Chain Rewards - Eligibility for future NFTs or loyalty points recognizing you as an early adopter\nReferral Perks - Move up the queue and unlock higher-tier rewards by inviting other builders\nFirst-to-Deploy - First to deploy on Hyperion, Metis, Mantle and Avalanche using our advanced testnet tools\nWhy Build on Hyperkit?\nSpeed: 2 weeks of work \u2192 2 hours with AI-powered generation\nSecurity: Automatic auditing catches vulnerabilities before deployment\nEcosystem: Multi-chain support from day one\nCommunity: Join hundreds of founding builders shaping the future of Web3 AI\nSupport: Direct access to the core team for guidance and feedback\nHow to Join\nVisit: https://waitlist.hyperionkit.xyz\nEnter your email\nComplete simple quests to move up the queue\nGet exclusive founder benefits\nSpots are limited for Beta Wave 1, and they\u2019re filling fast!\nAbout Hyperkit\nHyperkit is building the infrastructure layer for AI-powered Web3. Our mission is to make smart contract development accessible to every builder, not just experts.\nTeam: Full-stack Web3 developers from Hyperion, Mantle, and LazAI communities\nStatus: Early beta, mainnet-ready stack launching in ~6 months\nFocus: AI agents, smart contract automation, cross-chain integration\nConnect with Us\nWebsite: https://hyperionkit.xyz\nWaitlist: https://waitlist.hyperionkit.xyz\nDiscord: Discord\n\ud835\udd4f Twitter: @HyperionKit\nLive Apps: Related Topic\nJoin the Movement\nThis isn\u2019t just another tool. This is about democratizing smart contract development and empowering builders to ship faster.\nBe early. Be a founder. Shape the future of Web3 AI infrastructure.\n\u2192 https://waitlist.hyperionkit.xyz\n#Hyperkit #Web3\nai #Builders #SmartContracts",
+        "comments_details": [
+            {
+                "author": "JustineDevs",
+                "comment": "Hey Builders,\nWe\u2019re excited to announce that Hyperkit Waitlist is now open for early access!\nIf you\u2019re tired of spending weeks building smart contracts when you could be shipping in hours, Hyperkit is for you.\nWhat is Hyperkit?\nHyperkit is an AI-powered blockchain infrastructure toolkit that simplifies smart contract development. With our platform, you can:\nGenerate smart contracts in minutes - No more manual coding from scratch\nAuto-audit for security vulnerabilities - Built-in safety checks\nDeploy across 4 major L2s - Hyperion, Metis, Mantle, Avalanche\nAccess autonomous AI agents - For contract generation, auditing, and deployment\nMulti-chain integration ready - Cross-chain compatibility out of the box\nWhy Join the Hyperkit Waitlist?\nEarly builders get founding member status with exclusive perks:\nGuaranteed Access - Be first to enter Hyperkit Studio before public launch via limited beta waves\nPriority AI Access - Get priority access to new autonomous AI agents, templates, and multi-chain features\nFounding Builder Badge - Exclusive \u201cFounding Builder\u201d profile badge in-app and special Discord role\nExclusive Discounts - Waitlist-only discounts or extended free trial with extra usage credits for the first months\nPrivate Sessions - Invitation to private office hours, workshops, and behind-the-scenes dev updates\nShape the Roadmap - Direct line to the core team via priority feedback calls and surveys to shape the product\nOn-Chain Rewards - Eligibility for future NFTs or loyalty points recognizing you as an early adopter\nReferral Perks - Move up the queue and unlock higher-tier rewards by inviting other builders\nFirst-to-Deploy - First to deploy on Hyperion, Metis, Mantle and Avalanche using our advanced testnet tools\nWhy Build on Hyperkit?\nSpeed: 2 weeks of work \u2192 2 hours with AI-powered generation\nSecurity: Automatic auditing catches vulnerabilities before deployment\nEcosystem: Multi-chain support from day one\nCommunity: Join hundreds of founding builders shaping the future of Web3 AI\nSupport: Direct access to the core team for guidance and feedback\nHow to Join\nVisit: https://waitlist.hyperionkit.xyz\nEnter your email\nComplete simple quests to move up the queue\nGet exclusive founder benefits\nSpots are limited for Beta Wave 1, and they\u2019re filling fast!\nAbout Hyperkit\nHyperkit is building the infrastructure layer for AI-powered Web3. Our mission is to make smart contract development accessible to every builder, not just experts.\nTeam: Full-stack Web3 developers from Hyperion, Mantle, and LazAI communities\nStatus: Early beta, mainnet-ready stack launching in ~6 months\nFocus: AI agents, smart contract automation, cross-chain integration\nConnect with Us\nWebsite: https://hyperionkit.xyz\nWaitlist: https://waitlist.hyperionkit.xyz\nDiscord: Discord\n\ud835\udd4f Twitter: @HyperionKit\nLive Apps: Related Topic\nJoin the Movement\nThis isn\u2019t just another tool. This is about democratizing smart contract development and empowering builders to ship faster.\nBe early. Be a founder. Shape the future of Web3 AI infrastructure.\n\u2192 https://waitlist.hyperionkit.xyz\n#Hyperkit #Web3\nai #Builders #SmartContracts"
+            }
+        ]
+    },
+    {
         "id": "0c57e09c938a6545",
         "topic_id": "11152",
         "title": "Metio | AI-Powered Social Trading Bot for Metis",
         "url": "https://forum.ceg.vote/t/metio-ai-powered-social-trading-bot-for-metis/11152",
-        "views": "36",
+        "views": "45",
         "comments": "0",
         "created_date": "Nov 29, 2025 8:00 pm",
         "latest_activity": null,
@@ -89,7 +140,7 @@
         "topic_id": "10667",
         "title": "10th No-Lose Lottery- Winner Ann",
         "url": "https://forum.ceg.vote/t/10th-no-lose-lottery-winner-ann/10667",
-        "views": "66",
+        "views": "73",
         "comments": "2",
         "created_date": "Sep 24, 2025 4:26 pm",
         "latest_activity": "Nov 29, 2025 10:22 am",
@@ -106,7 +157,7 @@
         "topic_id": "11151",
         "title": "LazAI Launches \u201cOpen Launch\u201d on LazPad \u2014 Build Your AI Agent Token on Metis",
         "url": "https://forum.ceg.vote/t/lazai-launches-open-launch-on-lazpad-build-your-ai-agent-token-on-metis/11151",
-        "views": "36",
+        "views": "43",
         "comments": "0",
         "created_date": "Nov 28, 2025 6:55 pm",
         "latest_activity": null,
@@ -123,7 +174,7 @@
         "topic_id": "11146",
         "title": "Metis and LazAI Are Building the Foundation for Decentralized AI | Genzio Podcast",
         "url": "https://forum.ceg.vote/t/metis-and-lazai-are-building-the-foundation-for-decentralized-ai-genzio-podcast/11146",
-        "views": "119",
+        "views": "125",
         "comments": "2",
         "created_date": "Nov 20, 2025 5:54 am",
         "latest_activity": "Nov 25, 2025 11:24 am",
@@ -140,7 +191,7 @@
         "topic_id": "11138",
         "title": "The Toughest Parts of Building Decentralized AI",
         "url": "https://forum.ceg.vote/t/the-toughest-parts-of-building-decentralized-ai/11138",
-        "views": "151",
+        "views": "157",
         "comments": "2",
         "created_date": "Nov 14, 2025 5:18 pm",
         "latest_activity": "Nov 25, 2025 7:12 am",
@@ -157,7 +208,7 @@
         "topic_id": "10666",
         "title": "9th No-Lose lottery winner ann",
         "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
-        "views": "247",
+        "views": "253",
         "comments": "3",
         "created_date": "Sep 24, 2025 4:25 pm",
         "latest_activity": "Nov 24, 2025 10:58 pm",
@@ -174,7 +225,7 @@
         "topic_id": "11137",
         "title": "X402: Where AI Interacts, and Metis Settles",
         "url": "https://forum.ceg.vote/t/x402-where-ai-interacts-and-metis-settles/11137",
-        "views": "169",
+        "views": "175",
         "comments": "1",
         "created_date": "Nov 12, 2025 5:25 pm",
         "latest_activity": "Nov 23, 2025 6:20 pm",
@@ -191,7 +242,7 @@
         "topic_id": "11150",
         "title": "My Beginner Journey Exploring X402",
         "url": "https://forum.ceg.vote/t/my-beginner-journey-exploring-x402/11150",
-        "views": "76",
+        "views": "82",
         "comments": "0",
         "created_date": "Nov 23, 2025 7:23 am",
         "latest_activity": null,
@@ -208,7 +259,7 @@
         "topic_id": "11144",
         "title": "Hyperkit | Weekly/Monthly Update",
         "url": "https://forum.ceg.vote/t/hyperkit-weekly-monthly-update/11144",
-        "views": "117",
+        "views": "123",
         "comments": "1",
         "created_date": "Nov 19, 2025 3:57 am",
         "latest_activity": "Nov 22, 2025 6:42 am",
@@ -225,7 +276,7 @@
         "topic_id": "11149",
         "title": "Metis Xzuki Creativity Quest",
         "url": "https://forum.ceg.vote/t/metis-xzuki-creativity-quest/11149",
-        "views": "100",
+        "views": "106",
         "comments": "1",
         "created_date": "Nov 22, 2025 2:56 am",
         "latest_activity": "Nov 22, 2025 6:36 am",
@@ -242,7 +293,7 @@
         "topic_id": "11145",
         "title": "CreateAI Joins the LazAI Ecosystem",
         "url": "https://forum.ceg.vote/t/createai-joins-the-lazai-ecosystem/11145",
-        "views": "97",
+        "views": "103",
         "comments": "1",
         "created_date": "Nov 20, 2025 5:36 am",
         "latest_activity": "Nov 20, 2025 10:15 am",
@@ -259,7 +310,7 @@
         "topic_id": "11143",
         "title": "How Multi-Agent Frameworks Like X402 Change the AI Dev Landscape",
         "url": "https://forum.ceg.vote/t/how-multi-agent-frameworks-like-x402-change-the-ai-dev-landscape/11143",
-        "views": "107",
+        "views": "113",
         "comments": "0",
         "created_date": "Nov 18, 2025 4:42 pm",
         "latest_activity": null,
@@ -276,7 +327,7 @@
         "topic_id": "4924",
         "title": "Hyperkit",
         "url": "https://forum.ceg.vote/t/hyperkit/4924",
-        "views": "509",
+        "views": "516",
         "comments": "8",
         "created_date": "May 29, 2025 11:34 am",
         "latest_activity": "Nov 16, 2025 12:41 pm",
@@ -285,57 +336,6 @@
             {
                 "author": "JustineDevs",
                 "comment": "Hyperhack Forum Project Proposal Update: HyperKit\nLive Link: http://hyperionkit.xyz, http://ai.hyperionkit.xyz\nProject Name\nHyperKit\nTrack 3: Infrastructure and Ecosystem Tools\n- Traditional DeFi Protocols: Core primitives reimagined for Hyperion\n- Web3 Infrastructure and Tooling: Developer-facing tools and services\n- Interoperability with Metis SDK: Projects bridging Hyperion and Andromeda\nProblem Statement\nDevelopers building on decentralized networks often face fragmented tooling ecosystems, high integration complexity, and limited interoperability across chains. These challenges slow down innovation and create barriers for onboarding new builders and users alike. In the Hyperion ecosystem, this fragmentation is especially pressing due to the early-stage nature of the tools and lack of seamless connectivity with other networks like Andromeda.\nSolution Overview\nHyperKit is a comprehensive infrastructure toolkit designed to simplify development and enhance interoperability within the Hyperion ecosystem. It combines core DeFi primitives, developer-centric APIs, and a robust bridging framework using the Metis SDK to enable seamless interactions between Hyperion and Andromeda. Our approach focuses on modularity, developer experience, and community-driven extensibility. By packaging essential tools into one unified kit, we aim to lower the entry barrier for developers and foster faster ecosystem growth.\nProject Description\nHyperKit is an open-source, developer-first infrastructure suite tailored for the Hyperion ecosystem. It provides a modular set of libraries and smart contracts that reimagine core DeFi building blocks (e.g., staking, swapping, vaults) optimized for Hyperion. Additionally, HyperKit includes a Web3 toolkit with prebuilt components such as wallet integrations, SDKs for dApp interactions, and templates for rapid deployment.\nA key component of HyperKit is its native interoperability layer powered by the Metis SDK. This allows developers to easily bridge assets and data between Hyperion and Andromeda, enabling truly cross-chain dApps.\nWe envision developers interacting with HyperKit via a CLI tool, SDKs in TypeScript and Rust, and a visual dashboard for managing deployments. By simplifying infrastructure access and providing composable building blocks, we empower developers to go from idea to deployment faster.\nWhat excites us most is the potential to accelerate the adoption of Hyperion by offering an experience comparable to mature ecosystems like Ethereum or Solana, but with the added benefit of native cross-chain capabilities.\nCommunity Engagement Features\nTo foster community engagement and drive adoption, HyperKit includes a gamified user testing program:\nTestable Features/Tasks:\n- Deploy a sample dApp using the HyperKit CLI.\n- Bridge test tokens from Hyperion to Andromeda using the Metis SDK.\n- Implement a staking pool using HyperKit contracts.\n- Submit feedback or a pull request to the open-source repo.\nPoints System:\n- 50 points \u2013 Deploy a test dApp\n- 30 points \u2013 Successfully bridge tokens\n- 20 points \u2013 Set up a staking pool\n- 10 points \u2013 Submit feedback or PR\nGamification Strategy:\nUsers accumulate points for completing tasks, which will be displayed on a leaderboard. Top contributors will be eligible for community badges, early adopter NFTs, and potential ecosystem grants.\nUser Onboarding Incentive:\nThis approach not only incentivizes users to explore and test HyperKit, but also creates a sense of achievement and progression. By engaging directly with the toolkit, users become more likely to contribute, build, and evangelize the Hyperion ecosystem.\nUpdate: Hyperion Testnet Deployment & Verified Contracts\nWe are excited to announce that the **Hyperion Testnet is now deployed and all critical contracts have been verified**. This milestone enables developers and users to fully interact with the HyperKit infrastructure on a live test environment.\nToken Contracts\n| Token | Symbol | Address | Verification Link |\n|-----------------|---------|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Tether USD | USDT | `0x9b52D326D4866055F6c23297656002992e4293FC` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x9b52D326D4866055F6c23297656002992e4293FC | Blockscout ) |\n| USD Coin | USDC | `0x31424DB0B7a929283C394b4DA412253Ab6D61682` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x31424DB0B7a929283C394b4DA412253Ab6D61682 | Blockscout ) |\n| Dai Stablecoin | DAI | `0xdE896235F5897EC6D13Aa5b43964F9d2d34D82Fb` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xdE896235F5897EC6D13Aa5b43964F9d2d34D82Fb | Blockscout ) |\n| Wrapped Ether | WETH | `0xc8BB7DB0a07d2146437cc20e1f3a133474546dD4` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xc8BB7DB0a07d2146437cc20e1f3a133474546dD4 | Blockscout ) |\nContract Addresses and Types\n| Contract | Type | Address | Verification Link |\n|-----------------|------------------|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|\n| LiquidityPool | AMM/Swap | `0x91C39DAA7617C5188d0427Fc82e4006803772B74` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x91C39DAA7617C5188d0427Fc82e4006803772B74 | Blockscout ) |\n| BuyVault | Direct Purchase | `0x0adFd197aAbbC194e8790041290Be57F18d576a3` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0x0adFd197aAbbC194e8790041290Be57F18d576a3 | Blockscout ) |\n| StakingRewards | Staking | `0xB94d264074571A5099C458f74b526d1e4EE0314B` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xB94d264074571A5099C458f74b526d1e4EE0314B | Blockscout ) |\n| Bridge | Cross-Chain | `0xfF064Fd496256e84b68dAE2509eDA84a3c235550` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xfF064Fd496256e84b68dAE2509eDA84a3c235550 | Blockscout ) |\n| Faucet | Token Distribution| `0xE1B8C7168B0c48157A5e4B80649C5a1b83bF4cC4` | Verified on [Hyperion Testnet Explorer]( Metis Hyperion Testnet address details for 0xE1B8C7168B0c48157A5e4B80649C5a1b83bF4cC4 | Blockscout ) |\nUseful Resources & Links\n- [Testnet Walkthrough Video](https://x.com/HyperionKit/status/1957796051467001874)\n- [Guides Walkthrough Video](https://x.com/HyperionKit/status/1958525753974538332)\n- [Pitch Deck](https://www.canva.com/design/DAGvFBK3My0/YzvwHA4KNaQ4wwZvXVzpDQ/edit?utm_content=DAGvFBK3My0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)\n[Video Presentation](https://x.com/HyperionKit/status/1958552729376456781)\n- [GitHub Repository](https://github.com/HyperionKit/Hyperkit.git)\nMarketing Update\nA big thank you to the community and contributors: @Norbert, @Sheyda, @han, and @0xthiru for pushing us into the marketing challenge.\nAfter receiving our $300 kickstart fund on July 30th and additional sponsorship, we have launched a marketing campaign with a $100 budget based on our marketing plan, achieving the following:\nImpressions: 3.3K+\nNew followers on X (formerly Twitter): 54\nPosts: 6\nReplies: 4\nVerified followers: 5 / 132\nEngagement rate: 26.2%\nEngagements: 868\nProfile visits: 112\nLikes: 166\nReposts: 130\nBookmarks: 6\nShares: 2\n--\nNext Steps & Vision\nWe continue to improve the core functionality, focusing on product monetization strategies, expanding interoperability features, and enhancing the developer and user experience. Our roadmap includes additional community-driven tools and expanded ecosystem collaborations.\n-\u2013\nIf you want to engage directly with HyperKit, visit the live site: https://hyperionkit.xyz and https://ai.hyperionkit.xyz and join us in building the future of Hyperion DeFi infrastructure.\n-\u2013\n[1](http://hyperionkit.xyz) [2](https://ai.hyperionkit.xyz)\nTeam Members\n@Tristan-T-Dev @ArhonJay @JustineDevs"
-            }
-        ]
-    },
-    {
-        "id": "64c522443f761d0a",
-        "topic_id": "11139",
-        "title": "How developers can leverage x402 to build pay-per-use services",
-        "url": "https://forum.ceg.vote/t/how-developers-can-leverage-x402-to-build-pay-per-use-services/11139",
-        "views": "151",
-        "comments": "0",
-        "created_date": "Nov 14, 2025 6:14 pm",
-        "latest_activity": null,
-        "content": "If you\u2019ve seen what x402 is doing, you know it changes how payments work on the web. No more subs, no more big friction. The question for us developers becomes: How do we build services around it?\nHere\u2019s what I\u2019ve been thinking:\nUse it for APIs or data feeds: You can protect endpoints with the x402 flow. If a client hits your API without payment, you respond with HTTP 402 and payment instructions. Once paid, you deliver the resource.\nTurn content or compute into micro-transactions: Imagine a service where each request or inference costs $0.001 rather than forcing a $10/month subscription. That becomes viable because x402 is designed for micropayments.\nAgent-friendly: For developers building AI agents or bots, x402 means the agent can transact autonomously. Your bot isn\u2019t waiting on a registered account or API key it just pays and proceeds.\nSimple integration: One line of middleware in your server stack and you\u2019re accepting payments. You\u2019re not rebuilding billing systems from scratch.\nChain-agnostic and open: You aren\u2019t locked into one network or token. That means your service can adapt as the payments landscape evolves.\nQuestion for the Guild:\nWhat type of service could you build today that uses x402\u2019s model pay-per-use, instant settlement, no account required? And what\u2019s the biggest blocker you foresee in building that?",
-        "comments_details": [
-            {
-                "author": "nidhinakranii",
-                "comment": "If you\u2019ve seen what x402 is doing, you know it changes how payments work on the web. No more subs, no more big friction. The question for us developers becomes: How do we build services around it?\nHere\u2019s what I\u2019ve been thinking:\nUse it for APIs or data feeds: You can protect endpoints with the x402 flow. If a client hits your API without payment, you respond with HTTP 402 and payment instructions. Once paid, you deliver the resource.\nTurn content or compute into micro-transactions: Imagine a service where each request or inference costs $0.001 rather than forcing a $10/month subscription. That becomes viable because x402 is designed for micropayments.\nAgent-friendly: For developers building AI agents or bots, x402 means the agent can transact autonomously. Your bot isn\u2019t waiting on a registered account or API key it just pays and proceeds.\nSimple integration: One line of middleware in your server stack and you\u2019re accepting payments. You\u2019re not rebuilding billing systems from scratch.\nChain-agnostic and open: You aren\u2019t locked into one network or token. That means your service can adapt as the payments landscape evolves.\nQuestion for the Guild:\nWhat type of service could you build today that uses x402\u2019s model pay-per-use, instant settlement, no account required? And what\u2019s the biggest blocker you foresee in building that?"
-            }
-        ]
-    },
-    {
-        "id": "66e745d7dfad13a4",
-        "topic_id": "11109",
-        "title": "What\u2019s Been Happening Lately: x402, GMPayer, LazAI & the Future of AI Payments",
-        "url": "https://forum.ceg.vote/t/what-s-been-happening-lately-x402-gmpayer-lazai-the-future-of-ai-payments/11109",
-        "views": "253",
-        "comments": "2",
-        "created_date": "Nov 4, 2025 7:28 pm",
-        "latest_activity": "Nov 12, 2025 11:54 am",
-        "content": "Hey everyone,\nOver the past few days a lot has happened across the LazAI / Metis / ZKM / GOAT ecosystem, and I wanted to put everything in one place for anyone who\u2019s trying to catch up. This shift is bigger than a single tool or token it\u2019s the early foundation of a real AI-to-AI economy.\nx402 Goes Live\nHTTP 402 (\u201cPayment Required\u201d) has finally been activated as a crypto micro-payment standard.\nThis lets AI agents pay inside a web request no accounts, no APIs, no humans.\nGMPayer Launch\nLazAI + Metis + ZKM + GOAT shipped GMPayer, the first working x402 payment hub.\nAgents can now send $xMETIS or $xGOATED autonomously across chains.\nThe live Proof-of-Concept:\nPay $1\nMint 5,000 $BANG\nAll done through an on-chain x402 call.\nWhy it matters\nThis is the beginning of:\nAI-to-AI payments\nPer-call billing for data, compute, and models\nCross-chain value flow between agents\nVerifiable payments thanks to ZKM\nA BTC + L2 payment lane through GOAT & Metis\nWhat\u2019s next\nPhase 2: AI spending limits + policy guardrails\nPhase 3: AI Business Network (DAT-powered revenue splits)\nPhase 4: A universal, cross-chain AI value exchange layer\nThings are moving really fast!!",
-        "comments_details": [
-            {
-                "author": "Gann",
-                "comment": "Hey everyone,\nOver the past few days a lot has happened across the LazAI / Metis / ZKM / GOAT ecosystem, and I wanted to put everything in one place for anyone who\u2019s trying to catch up. This shift is bigger than a single tool or token it\u2019s the early foundation of a real AI-to-AI economy.\nx402 Goes Live\nHTTP 402 (\u201cPayment Required\u201d) has finally been activated as a crypto micro-payment standard.\nThis lets AI agents pay inside a web request no accounts, no APIs, no humans.\nGMPayer Launch\nLazAI + Metis + ZKM + GOAT shipped GMPayer, the first working x402 payment hub.\nAgents can now send $xMETIS or $xGOATED autonomously across chains.\nThe live Proof-of-Concept:\nPay $1\nMint 5,000 $BANG\nAll done through an on-chain x402 call.\nWhy it matters\nThis is the beginning of:\nAI-to-AI payments\nPer-call billing for data, compute, and models\nCross-chain value flow between agents\nVerifiable payments thanks to ZKM\nA BTC + L2 payment lane through GOAT & Metis\nWhat\u2019s next\nPhase 2: AI spending limits + policy guardrails\nPhase 3: AI Business Network (DAT-powered revenue splits)\nPhase 4: A universal, cross-chain AI value exchange layer\nThings are moving really fast!!"
-            }
-        ]
-    },
-    {
-        "id": "dfc79a763f5a31d4",
-        "topic_id": "11100",
-        "title": "FeedByHash \u2013 Gamified Reward Engine",
-        "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "225",
-        "comments": "5",
-        "created_date": "Nov 4, 2025 8:52 am",
-        "latest_activity": "Nov 12, 2025 10:00 am",
-        "content": "FeedByHash \u2013 Gamified Reward Engine\nOverview\nFeedByHash introduces a playful and community-driven approach to on-chain engagement within the Metis L2 ecosystem.\nBy transforming ordinary transactions into a gamified \u201cfeed-to-earn\u201d experience, FeedByHash creates a new category of transactional GameFi where every hash generated becomes a ticket to win rewards from the Metis Builder Mining Rewards (BMR) program.\nOur goal is to make on-chain participation fun, rewarding, and accessible to everyone turning user actions into meaningful growth for the Metis economy.\nIntroduction\nFeedByHash is a Web3 dApp built on Metis L2, designed to gamify blockchain activity and boost network engagement through micro-transactions.\nUsers \u201cfeed\u201d a virtual dog by generating on-chain hashes (transactions). Each transaction costs only $0.01, and each hash becomes one entry into the Metis reward pool.\nWhen the dog\u2019s progress bar is complete, rewards are distributed proportionally and randomly among participants based on their contribution.\nFeedByHash merges gaming psychology, on-chain incentives, and the Builder Mining framework making network growth both measurable and entertaining.\nValue Proposition\nGamified on-chain engagement: Every Metis transaction turns into a reward opportunity.\nLow-cost entry: 1 cent per transaction accessible to any wallet.\nSustainable reward model: Built around real BMR rewards and organic network activity.\nCommunity participation: Transparent reward cycles and open metrics for all users.\nEducational gateway: Introduces new users to Metis dApps, wallets, and transactions through play.\nUniqueness Factor\nFirst GameFi interface for Builder Mining Rewards converting BMR data into a public, transparent, and rewarding user experience.\nPlayable token economy: Each hash = a \u201cfeeding action\u201d, blending DeFi logic with NFT-style gamification.\nReward transparency: All reward distribution and fee logic are fully on-chain.\nThematic branding: Accessible through feedbyhash.dog, blending humor, blockchain, and community.\nBenefits for Users\nEarn rewards directly by performing simple transactions.\nLow barrier to entry 1\u00a2 per transaction.\nFun and engaging experience that turns blockchain participation into a game.\nReward transparency all feeds and rewards are verifiable on-chain.\nOpportunity to climb leaderboards, join special events, and unlock pet-based NFTs in future updates.\nBenefits for Metis Ecosystem\nDrives consistent transaction volume and user retention through gamification.\nExpands Builder Mining participation beyond dApp developers to end-users.\nEncourages organic wallet creation and usage of Metis L2.\nActs as a gateway to other Metis dApps and partner ecosystems.\nReinforces the Metis narrative of community-owned and activity-driven Layer 2 growth.\nReward Structure\nReward Pool Sources:\n1\u00a2 service fee from each transaction.\nBuilder Mining Rewards (BMR) generated by aggregate transaction volume.\nDistribution Model:\n50% of collected BMR rewards are distributed randomly among active users based on transaction count.\n50% is allocated to support future FeedByHash development, infrastructure, and ecosystem expansions.\nEven one hash can win a reward but more transactions increase your chances.\nRoadmap\nQ4 2025\nLaunch of FeedByHash v1 (Mainnet dApp at feedbyhash.dog)\nPublic reward pool integrated with BMR\nDashboard for progress tracking & rewards claiming\nIntegration with Metis Builder Mining analytics dashboard\nQ1 2026\nIntroduce user levels and NFT skins (Dog, Cat, LazBubai)\nLaunch referral and leaderboard systems\nAdd staking rewards and cross-dApp partnerships\nQ2 2026\nOpen developer API for custom \u201cfeed-to-earn\u201d integrations\nExpand GameFi modules and connect with external reward sources\nBegin ecosystem-wide marketing and community reward campaigns\nTechnical KPIs\n100K+ transactions generated via FeedByHash dApp within first 3 months\n5K+ active wallets engaged\n100% uptime for reward distribution cycles\nIntegration with Metis Builder Mining API for live BMR tracking\nLaunch other Metis L2 web3 dapps binding mechanism with staking and referral modules by Q1 2026\nFinancial KPIs\n$10K+ in transaction volume generated through FeedByHash within 3 months\n50% BMR revenue share distributed as rewards\n20+ dApps integrated via cross-promotional campaigns\nTeam Details\nBackend Developer: Smart contract logic, transaction parsing, BMR integration\nFrontend Developer: Web3 UI/UX, animation, MetaMask integration\nDesigner: Visual identity, game assets, dog/cat art, animation style\nProject Lead: Product strategy, community management, partnerships\nA small team of four builders one backend, one frontend, one designer, one manager united by a shared goal: to make Web3 more playful, transparent, and rewarding.\nOfficial Links\nWebsite: feedbyhash.dog\nTwitter/X: twitter.com/feedbyhash\nTelegram: Telegram: View @feedbyhash",
-        "comments_details": [
-            {
-                "author": "Dog",
-                "comment": "FeedByHash \u2013 Gamified Reward Engine\nOverview\nFeedByHash introduces a playful and community-driven approach to on-chain engagement within the Metis L2 ecosystem.\nBy transforming ordinary transactions into a gamified \u201cfeed-to-earn\u201d experience, FeedByHash creates a new category of transactional GameFi where every hash generated becomes a ticket to win rewards from the Metis Builder Mining Rewards (BMR) program.\nOur goal is to make on-chain participation fun, rewarding, and accessible to everyone turning user actions into meaningful growth for the Metis economy.\nIntroduction\nFeedByHash is a Web3 dApp built on Metis L2, designed to gamify blockchain activity and boost network engagement through micro-transactions.\nUsers \u201cfeed\u201d a virtual dog by generating on-chain hashes (transactions). Each transaction costs only $0.01, and each hash becomes one entry into the Metis reward pool.\nWhen the dog\u2019s progress bar is complete, rewards are distributed proportionally and randomly among participants based on their contribution.\nFeedByHash merges gaming psychology, on-chain incentives, and the Builder Mining framework making network growth both measurable and entertaining.\nValue Proposition\nGamified on-chain engagement: Every Metis transaction turns into a reward opportunity.\nLow-cost entry: 1 cent per transaction accessible to any wallet.\nSustainable reward model: Built around real BMR rewards and organic network activity.\nCommunity participation: Transparent reward cycles and open metrics for all users.\nEducational gateway: Introduces new users to Metis dApps, wallets, and transactions through play.\nUniqueness Factor\nFirst GameFi interface for Builder Mining Rewards converting BMR data into a public, transparent, and rewarding user experience.\nPlayable token economy: Each hash = a \u201cfeeding action\u201d, blending DeFi logic with NFT-style gamification.\nReward transparency: All reward distribution and fee logic are fully on-chain.\nThematic branding: Accessible through feedbyhash.dog, blending humor, blockchain, and community.\nBenefits for Users\nEarn rewards directly by performing simple transactions.\nLow barrier to entry 1\u00a2 per transaction.\nFun and engaging experience that turns blockchain participation into a game.\nReward transparency all feeds and rewards are verifiable on-chain.\nOpportunity to climb leaderboards, join special events, and unlock pet-based NFTs in future updates.\nBenefits for Metis Ecosystem\nDrives consistent transaction volume and user retention through gamification.\nExpands Builder Mining participation beyond dApp developers to end-users.\nEncourages organic wallet creation and usage of Metis L2.\nActs as a gateway to other Metis dApps and partner ecosystems.\nReinforces the Metis narrative of community-owned and activity-driven Layer 2 growth.\nReward Structure\nReward Pool Sources:\n1\u00a2 service fee from each transaction.\nBuilder Mining Rewards (BMR) generated by aggregate transaction volume.\nDistribution Model:\n50% of collected BMR rewards are distributed randomly among active users based on transaction count.\n50% is allocated to support future FeedByHash development, infrastructure, and ecosystem expansions.\nEven one hash can win a reward but more transactions increase your chances.\nRoadmap\nQ4 2025\nLaunch of FeedByHash v1 (Mainnet dApp at feedbyhash.dog)\nPublic reward pool integrated with BMR\nDashboard for progress tracking & rewards claiming\nIntegration with Metis Builder Mining analytics dashboard\nQ1 2026\nIntroduce user levels and NFT skins (Dog, Cat, LazBubai)\nLaunch referral and leaderboard systems\nAdd staking rewards and cross-dApp partnerships\nQ2 2026\nOpen developer API for custom \u201cfeed-to-earn\u201d integrations\nExpand GameFi modules and connect with external reward sources\nBegin ecosystem-wide marketing and community reward campaigns\nTechnical KPIs\n100K+ transactions generated via FeedByHash dApp within first 3 months\n5K+ active wallets engaged\n100% uptime for reward distribution cycles\nIntegration with Metis Builder Mining API for live BMR tracking\nLaunch other Metis L2 web3 dapps binding mechanism with staking and referral modules by Q1 2026\nFinancial KPIs\n$10K+ in transaction volume generated through FeedByHash within 3 months\n50% BMR revenue share distributed as rewards\n20+ dApps integrated via cross-promotional campaigns\nTeam Details\nBackend Developer: Smart contract logic, transaction parsing, BMR integration\nFrontend Developer: Web3 UI/UX, animation, MetaMask integration\nDesigner: Visual identity, game assets, dog/cat art, animation style\nProject Lead: Product strategy, community management, partnerships\nA small team of four builders one backend, one frontend, one designer, one manager united by a shared goal: to make Web3 more playful, transparent, and rewarding.\nOfficial Links\nWebsite: feedbyhash.dog\nTwitter/X: twitter.com/feedbyhash\nTelegram: Telegram: View @feedbyhash"
             }
         ]
     }
