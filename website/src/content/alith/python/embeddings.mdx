@@ -1,0 +1,574 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Embeddings
+
+Embeddings convert text into numerical vectors that capture semantic meaning, enabling semantic search, similarity matching, and retrieval-augmented generation (RAG). Alith provides multiple embedding implementations optimized for different use cases.
+
+## What are Embeddings?
+
+Embeddings are dense vector representations of text that capture semantic meaning:
+
+- **Semantic Similarity**: Similar texts have similar vector representations
+- **Dimensional Space**: Text is mapped to a high-dimensional vector space
+- **Mathematical Operations**: Vectors can be compared using distance metrics
+- **Language Understanding**: Captures meaning beyond just word matching
+
+### Why Use Embeddings?
+
+```python
+# Without embeddings - keyword matching only
+query = "automobile"
+document = "car vehicle transportation"
+# No match found - different words
+
+# With embeddings - semantic understanding
+query_embedding = [0.1, 0.8, 0.3, ...]  # "automobile"
+doc_embedding = [0.2, 0.7, 0.4, ...]    # "car vehicle"
+# High similarity - same meaning!
+```
+
+## Embedding Types
+
+<Tabs items={['FastEmbeddings', 'MilvusEmbeddings', 'RemoteModelEmbeddings', 'OllamaEmbeddings']}>
+
+<Tabs.Tab>
+
+### FastEmbeddings
+
+FastEmbeddings provides fast, local embedding generation with excellent performance:
+
+```python
+from alith import FastEmbeddings
+
+# Default model (BAAI/bge-small-en-v1.5)
+embeddings = FastEmbeddings()
+
+# Custom model
+embeddings = FastEmbeddings(
+    model_name="BAAI/bge-large-en-v1.5",
+    cache_dir="./models"
+)
+
+# Generate embeddings
+vectors = embeddings.embed_texts([
+    "First text",
+    "Second text"
+])
+print(f"Embedding dimension: {len(vectors[0])}")
+```
+
+**Benefits:**
+- Fast local inference
+- Multiple model options
+- GPU acceleration support
+- No API costs
+- Privacy-friendly
+
+**Available Models:**
+- `BAAI/bge-small-en-v1.5` (384 dims) - Fast, good quality
+- `BAAI/bge-base-en-v1.5` (768 dims) - Balanced performance
+- `BAAI/bge-large-en-v1.5` (1024 dims) - High quality
+- `BAAI/bge-m3` (1024 dims) - Multilingual support
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### MilvusEmbeddings
+
+Use Milvus's built-in embedding functions for integrated vector operations:
+
+```python
+from alith import MilvusEmbeddings
+
+embeddings = MilvusEmbeddings()
+vectors = embeddings.embed_texts(["text1", "text2"])
+```
+
+**Benefits:**
+- Integrated with Milvus
+- Optimized for vector databases
+- Built-in model support
+- Seamless workflow
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### RemoteModelEmbeddings
+
+Use cloud-based embedding services for high-quality results:
+
+```python
+from alith import RemoteModelEmbeddings
+
+# OpenAI embeddings
+embeddings = RemoteModelEmbeddings(
+    model="text-embedding-3-small",
+    api_key="your-openai-api-key",
+    base_url="https://api.openai.com/v1"
+)
+
+# Custom API
+embeddings = RemoteModelEmbeddings(
+    model="custom-embedding-model",
+    api_key="your-api-key",
+    base_url="https://your-embedding-api.com"
+)
+
+vectors = embeddings.embed_texts(["text"])
+```
+
+**Benefits:**
+- High-quality embeddings
+- Multiple providers
+- Scalable infrastructure
+- Latest models
+
+**Supported Providers:**
+- OpenAI (`text-embedding-3-small`, `text-embedding-3-large`)
+- Cohere (`embed-english-v3.0`)
+- Hugging Face (various models)
+- Custom APIs
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### OllamaEmbeddings
+
+Use local Ollama models for embeddings with complete privacy:
+
+```python
+from alith import OllamaEmbeddings
+
+embeddings = OllamaEmbeddings(
+    model="nomic-embed-text",
+    base_url="http://localhost:11434"
+)
+
+vectors = embeddings.embed_texts(["text"])
+```
+
+**Benefits:**
+- Complete privacy
+- No internet required
+- Custom model support
+- Local control
+
+**Available Models:**
+- `nomic-embed-text` (768 dims) - General purpose
+- `mxbai-embed-large` (1024 dims) - High quality
+- `all-minilm` (384 dims) - Fast inference
+
+</Tabs.Tab>
+
+</Tabs>
+
+## Embedding Configuration
+
+### Model Selection
+
+Choose the right embedding model for your use case:
+
+```python
+# For general English text
+embeddings = FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+
+# For high-quality results
+embeddings = FastEmbeddings(model_name="BAAI/bge-large-en-v1.5")
+
+# For multilingual content
+embeddings = FastEmbeddings(model_name="BAAI/bge-m3")
+
+# For code/documentation
+embeddings = FastEmbeddings(model_name="microsoft/codebert-base")
+```
+
+### Performance Optimization
+
+```python
+# Use GPU acceleration
+embeddings = FastEmbeddings(
+    model_name="BAAI/bge-large-en-v1.5",
+    cache_dir="./models"
+)
+
+# Batch processing for efficiency
+texts = ["text1", "text2", "text3", "text4"]
+vectors = embeddings.embed_texts(texts)  # Process all at once
+```
+
+## Embedding Applications
+
+### 1. Semantic Search
+
+```python
+from alith import FastEmbeddings, ChromaDBStore
+
+# Setup embeddings and store
+embeddings = FastEmbeddings()
+store = ChromaDBStore(path="./search_db", embeddings=embeddings)
+
+# Add documents
+documents = [
+    "Python is a programming language",
+    "Machine learning uses algorithms",
+    "Data science involves statistics"
+]
+store.save_docs(documents)
+
+# Search semantically
+results = store.search("artificial intelligence", limit=3)
+# Will find relevant documents even without exact keyword matches
+```
+
+### 2. Document Similarity
+
+```python
+from alith import FastEmbeddings
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+embeddings = FastEmbeddings()
+
+# Generate embeddings for documents
+docs = [
+    "The weather is sunny today",
+    "It's a beautiful sunny day",
+    "Python programming tutorial"
+]
+
+vectors = embeddings.embed_texts(docs)
+
+# Calculate similarity
+similarity_matrix = cosine_similarity(vectors)
+print(f"Similarity between doc 1 and 2: {similarity_matrix[0][1]:.3f}")
+print(f"Similarity between doc 1 and 3: {similarity_matrix[0][2]:.3f}")
+```
+
+### 3. Clustering
+
+```python
+from sklearn.cluster import KMeans
+from alith import FastEmbeddings
+
+embeddings = FastEmbeddings()
+
+# Generate embeddings
+texts = [
+    "Python programming",
+    "Java development", 
+    "Machine learning",
+    "Data analysis",
+    "Web development",
+    "Mobile apps"
+]
+
+vectors = embeddings.embed_texts(texts)
+
+# Cluster documents
+kmeans = KMeans(n_clusters=2, random_state=42)
+clusters = kmeans.fit_predict(vectors)
+
+for i, (text, cluster) in enumerate(zip(texts, clusters)):
+    print(f"Document {i}: '{text}' -> Cluster {cluster}")
+```
+
+### 4. Classification
+
+```python
+from sklearn.linear_model import LogisticRegression
+from alith import FastEmbeddings
+
+embeddings = FastEmbeddings()
+
+# Training data
+train_texts = [
+    "I love this product",
+    "This is terrible",
+    "Amazing quality",
+    "Worst purchase ever"
+]
+train_labels = [1, 0, 1, 0]  # 1 = positive, 0 = negative
+
+# Generate embeddings
+train_vectors = embeddings.embed_texts(train_texts)
+
+# Train classifier
+classifier = LogisticRegression()
+classifier.fit(train_vectors, train_labels)
+
+# Predict on new text
+new_text = "This is fantastic!"
+new_vector = embeddings.embed_texts([new_text])
+prediction = classifier.predict(new_vector)
+print(f"Sentiment: {'Positive' if prediction[0] == 1 else 'Negative'}")
+```
+
+## Best Practices
+
+### 1. Model Selection
+
+```python
+def choose_embedding_model(use_case: str):
+    """Select appropriate embedding model"""
+    if use_case == "general":
+        return FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+    elif use_case == "code":
+        return FastEmbeddings(model_name="microsoft/codebert-base")
+    elif use_case == "multilingual":
+        return FastEmbeddings(model_name="BAAI/bge-m3")
+    elif use_case == "high_quality":
+        return FastEmbeddings(model_name="BAAI/bge-large-en-v1.5")
+    else:
+        return FastEmbeddings()  # Default
+```
+
+### 2. Batch Processing
+
+```python
+def process_documents_efficiently(documents: List[str], batch_size: int = 100):
+    """Process documents in batches for efficiency"""
+    embeddings = FastEmbeddings()
+    all_vectors = []
+    
+    for i in range(0, len(documents), batch_size):
+        batch = documents[i:i + batch_size]
+        vectors = embeddings.embed_texts(batch)
+        all_vectors.extend(vectors)
+        print(f"Processed batch {i//batch_size + 1}")
+    
+    return all_vectors
+```
+
+### 3. Caching
+
+```python
+from functools import lru_cache
+import hashlib
+
+class CachedEmbeddings:
+    def __init__(self, base_embeddings):
+        self.base_embeddings = base_embeddings
+        self.cache = {}
+    
+    def embed_texts(self, texts: List[str]) -> List[List[float]]:
+        """Embed texts with caching"""
+        results = []
+        uncached_texts = []
+        uncached_indices = []
+        
+        for i, text in enumerate(texts):
+            text_hash = hashlib.md5(text.encode()).hexdigest()
+            if text_hash in self.cache:
+                results.append(self.cache[text_hash])
+            else:
+                results.append(None)
+                uncached_texts.append(text)
+                uncached_indices.append(i)
+        
+        # Generate embeddings for uncached texts
+        if uncached_texts:
+            new_vectors = self.base_embeddings.embed_texts(uncached_texts)
+            for i, vector in enumerate(new_vectors):
+                text_hash = hashlib.md5(uncached_texts[i].encode()).hexdigest()
+                self.cache[text_hash] = vector
+                results[uncached_indices[i]] = vector
+        
+        return results
+```
+
+## Performance Considerations
+
+### 1. Dimension Optimization
+
+```python
+# Choose appropriate dimensions
+def get_optimal_dimensions(text_length: int, use_case: str) -> int:
+    """Get optimal embedding dimensions"""
+    if use_case == "search" and text_length < 100:
+        return 384  # Fast, sufficient for short texts
+    elif use_case == "classification":
+        return 768  # Balanced performance
+    elif use_case == "high_quality":
+        return 1024  # Maximum quality
+    else:
+        return 768  # Default
+```
+
+### 2. Memory Management
+
+```python
+class MemoryEfficientEmbeddings:
+    def __init__(self, max_cache_size: int = 1000):
+        self.embeddings = FastEmbeddings()
+        self.cache = {}
+        self.max_cache_size = max_cache_size
+    
+    def embed_texts(self, texts: List[str]) -> List[List[float]]:
+        """Memory-efficient embedding with cache limits"""
+        # Clear cache if too large
+        if len(self.cache) > self.max_cache_size:
+            # Keep only most recent entries
+            recent_items = list(self.cache.items())[-self.max_cache_size//2:]
+            self.cache = dict(recent_items)
+        
+        # Generate embeddings
+        return self.embeddings.embed_texts(texts)
+```
+
+## Common Issues
+
+### 1. Dimension Mismatch
+
+**Problem**: Embeddings have different dimensions
+**Solution**: Use consistent models
+
+```python
+# Ensure consistent dimensions
+embeddings = FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")  # 384 dims
+store = ChromaDBStore(dimension=384, embeddings=embeddings)
+```
+
+### 2. Memory Issues
+
+**Problem**: Large embedding matrices consume too much memory
+**Solution**: Implement batching and caching
+
+```python
+# Process in batches
+def embed_large_dataset(texts: List[str], batch_size: int = 50):
+    embeddings = FastEmbeddings()
+    all_vectors = []
+    
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i + batch_size]
+        vectors = embeddings.embed_texts(batch)
+        all_vectors.extend(vectors)
+        
+        # Clear memory periodically
+        if i % (batch_size * 10) == 0:
+            import gc
+            gc.collect()
+    
+    return all_vectors
+```
+
+### 3. Quality Issues
+
+**Problem**: Poor embedding quality
+**Solution**: Use better models and preprocessing
+
+```python
+def preprocess_text(text: str) -> str:
+    """Preprocess text for better embeddings"""
+    # Clean text
+    text = text.strip().lower()
+    
+    # Remove excessive whitespace
+    text = ' '.join(text.split())
+    
+    # Remove special characters if needed
+    import re
+    text = re.sub(r'[^\w\s]', '', text)
+    
+    return text
+
+# Use preprocessing
+embeddings = FastEmbeddings()
+processed_texts = [preprocess_text(t) for t in texts]
+vectors = embeddings.embed_texts(processed_texts)
+```
+
+## Integration Examples
+
+### 1. RAG System
+
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+
+class RAGSystem:
+    def __init__(self, model, api_key, base_url):
+        self.embeddings = FastEmbeddings(model_name="BAAI/bge-large-en-v1.5")
+        self.store = ChromaDBStore(path="./rag_db", embeddings=self.embeddings)
+        self.agent = Agent(
+            model=model,
+            api_key=api_key,
+            base_url=base_url,
+            store=self.store
+        )
+    
+    def add_documents(self, documents: List[str]):
+        """Add documents to the knowledge base"""
+        chunks = []
+        for doc in documents:
+            chunks.extend(chunk_text(doc, max_chunk_token_size=200))
+        
+        self.store.save_docs(chunks)
+    
+    def query(self, question: str) -> str:
+        """Query the knowledge base"""
+        return self.agent.prompt(question)
+
+# Usage
+rag = RAGSystem(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+rag.add_documents(["Document 1", "Document 2"])
+response = rag.query("What is the main topic?")
+```
+
+### 2. Similarity Search Engine
+
+```python
+class SimilaritySearchEngine:
+    def __init__(self):
+        self.embeddings = FastEmbeddings()
+        self.documents = []
+        self.vectors = []
+    
+    def add_documents(self, documents: List[str]):
+        """Add documents to the search engine"""
+        self.documents.extend(documents)
+        vectors = self.embeddings.embed_texts(documents)
+        self.vectors.extend(vectors)
+    
+    def search(self, query: str, limit: int = 5) -> List[tuple]:
+        """Search for similar documents"""
+        query_vector = self.embeddings.embed_texts([query])[0]
+        
+        # Calculate similarities
+        similarities = []
+        for i, doc_vector in enumerate(self.vectors):
+            similarity = cosine_similarity([query_vector], [doc_vector])[0][0]
+            similarities.append((self.documents[i], similarity))
+        
+        # Sort by similarity
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        return similarities[:limit]
+
+# Usage
+search_engine = SimilaritySearchEngine()
+search_engine.add_documents([
+    "Python programming tutorial",
+    "Machine learning algorithms",
+    "Data science techniques"
+])
+
+results = search_engine.search("artificial intelligence")
+for doc, similarity in results:
+    print(f"{doc}: {similarity:.3f}")
+```
+
+## Next Steps
+
+Now that you understand embeddings, explore:
+
+- **[Vector Stores & RAG](./store.mdx)** - Building knowledge bases
+- **[Custom Tools](./tools.mdx)** - Extending agent capabilities
+- **[Blockchain Integration](./lazai.mdx)** - Web3 features
+- **[Examples](./examples/)** - Real-world implementations

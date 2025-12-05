@@ -1,0 +1,603 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Agent Configuration
+
+The `Agent` class is the core component of Alith, providing a unified interface for AI interactions with support for multiple LLM providers, memory management, tools, and knowledge bases.
+
+## Basic Agent Setup
+
+<Steps>
+
+### Simple Agent
+
+```python
+from alith import Agent
+
+# Minimal agent configuration
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+response = agent.prompt("Hello, how are you?")
+print(response)
+```
+
+### Complete Agent Configuration
+
+```python
+from alith import Agent, WindowBufferMemory, ChromaDBStore, FastEmbeddings
+
+# Full agent setup with all features
+memory = WindowBufferMemory(window_size=20)
+embeddings = FastEmbeddings()
+store = ChromaDBStore(path="./knowledge", embeddings=embeddings)
+
+agent = Agent(
+    name="AdvancedAgent",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    preamble="You are an expert AI assistant specializing in Web3 and blockchain technology.",
+    memory=memory,
+    store=store,
+    tools=[],  # Add custom tools here
+    extra_headers={"User-Agent": "Alith-Agent/1.0"}
+)
+
+response = agent.prompt("Explain how smart contracts work")
+print(response)
+```
+
+</Steps>
+
+## Agent Parameters
+
+### Core Parameters
+
+| Parameter | Type | Description | Example |
+|-----------|------|-------------|---------|
+| `model` | `str` | LLM model identifier | `"llama-3.3-70b-versatile"` |
+| `api_key` | `str` | API key for authentication | `"gsk_..."` |
+| `base_url` | `str` | API endpoint URL | `"https://api.groq.com/openai/v1"` |
+| `name` | `str` | Agent identifier | `"MyAgent"` |
+| `preamble` | `str` | System prompt/instructions | `"You are a helpful assistant"` |
+
+### Advanced Parameters
+
+| Parameter | Type | Description | Default |
+|-----------|------|-------------|---------|
+| `memory` | `Memory` | Conversation memory | `None` |
+| `store` | `Store` | Vector store for RAG | `None` |
+| `tools` | `List[Tool]` | Available tools | `[]` |
+| `extra_headers` | `Dict[str, str]` | Custom HTTP headers | `{}` |
+| `mcp_config_path` | `str` | MCP configuration | `""` |
+
+## Model Providers
+
+<Tabs items={['Groq (Free)', 'OpenAI', 'Anthropic', 'Local Models']}>
+
+<Tabs.Tab>
+
+### Groq (Free LLM Provider)
+
+Groq provides free access to powerful open-source models:
+
+```python
+from alith import Agent
+
+# Llama 3.1 70B (Most capable)
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+# Llama 3.1 8B (Faster, lighter)
+agent = Agent(
+    model="llama3-8b-8192",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+# Mixtral 8x7B (Good balance)
+agent = Agent(
+    model="mixtral-8x7b-32768",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+```
+
+**Benefits:**
+- Free tier available
+- Fast inference
+- Multiple model options
+- OpenAI-compatible API
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### OpenAI
+
+```python
+from alith import Agent
+
+# GPT-4 (Most capable)
+agent = Agent(
+    model="gpt-4",
+    api_key="your-openai-api-key",
+    base_url="https://api.openai.com/v1"
+)
+
+# GPT-4 Turbo (Faster)
+agent = Agent(
+    model="gpt-4-turbo",
+    api_key="your-openai-api-key",
+    base_url="https://api.openai.com/v1"
+)
+
+# GPT-3.5 Turbo (Cost-effective)
+agent = Agent(
+    model="gpt-3.5-turbo",
+    api_key="your-openai-api-key",
+    base_url="https://api.openai.com/v1"
+)
+```
+
+**Benefits:**
+- Industry-leading quality
+- Excellent reasoning
+- Reliable performance
+- Rich ecosystem
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Anthropic
+
+```python
+from alith import Agent
+
+# Claude 3.5 Sonnet (Latest)
+agent = Agent(
+    model="claude-3-5-sonnet-20241022",
+    api_key="your-anthropic-api-key",
+    base_url="https://api.anthropic.com/v1"
+)
+
+# Claude 3 Haiku (Fast)
+agent = Agent(
+    model="claude-3-haiku-20240307",
+    api_key="your-anthropic-api-key",
+    base_url="https://api.anthropic.com/v1"
+)
+```
+
+**Benefits:**
+- Excellent safety
+- Long context windows
+- Strong reasoning
+- Constitutional AI
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Local Models
+
+```python
+from alith import Agent
+
+# Ollama local model
+agent = Agent(
+    model="llama3.1:8b",
+    api_key="",  # Not needed for local
+    base_url="http://localhost:11434/v1"
+)
+
+# LM Studio
+agent = Agent(
+    model="llama3.1:8b",
+    api_key="",
+    base_url="http://localhost:1234/v1"
+)
+
+# vLLM server
+agent = Agent(
+    model="meta-llama/Llama-3.1-8B-Instruct",
+    api_key="",
+    base_url="http://localhost:8000/v1"
+)
+```
+
+**Benefits:**
+- Complete privacy
+- No API costs
+- Custom fine-tuning
+- Offline operation
+
+</Tabs.Tab>
+
+</Tabs>
+
+## Agent Methods
+
+### Core Methods
+
+#### `prompt(message: str) -> str`
+
+Send a message to the agent and get a response:
+
+```python
+response = agent.prompt("What is the capital of France?")
+print(response)
+```
+
+**Use Cases:**
+- Simple Q&A
+- Text generation
+- Code explanation
+- Creative writing
+
+#### Memory Integration
+
+The Agent automatically handles conversation history when memory is configured:
+
+```python
+from alith import Agent, WindowBufferMemory
+
+# Create memory for conversation history
+memory = WindowBufferMemory(window_size=10)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+
+# Agent automatically maintains conversation context
+agent.prompt("My name is Alice")
+response = agent.prompt("What's my name?")  # Will remember: "Your name is Alice"
+```
+
+**Use Cases:**
+- Multi-turn conversations
+- Context-aware responses
+- Chat applications
+- Memory management
+
+## Agent Types
+
+### 1. Simple Agent
+
+Basic agent without memory or tools:
+
+```python
+from alith import Agent
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+# Each prompt is independent
+response1 = agent.prompt("My name is Alice")
+response2 = agent.prompt("What's my name?")  # Won't remember
+```
+
+**Best for:**
+- Simple Q&A
+- One-off tasks
+- Stateless operations
+- Resource-constrained environments
+
+### 2. Conversational Agent
+
+Agent with memory for ongoing conversations:
+
+```python
+from alith import Agent, WindowBufferMemory
+
+memory = WindowBufferMemory(window_size=10)
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    memory=memory
+)
+
+# Maintains conversation context
+agent.prompt("My name is Alice")
+agent.prompt("What's my name?")  # Remembers: "Your name is Alice"
+```
+
+**Best for:**
+- Chatbots
+- Customer service
+- Personal assistants
+- Multi-turn dialogues
+
+### 3. Knowledge Agent
+
+Agent with access to documents and knowledge bases:
+
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+
+# Setup knowledge base
+embeddings = FastEmbeddings()
+store = ChromaDBStore(path="./docs", embeddings=embeddings)
+
+# Add documents
+docs = chunk_text("Your knowledge base content...", max_chunk_token_size=200)
+store.save_docs(docs)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    store=store
+)
+
+# Can answer questions about your documents
+response = agent.prompt("What does the documentation say about AI?")
+```
+
+**Best for:**
+- Documentation assistants
+- Research tools
+- Educational applications
+- Enterprise knowledge bases
+
+### 4. Tool-Enabled Agent
+
+Agent that can execute custom functions:
+
+```python
+from alith import Agent, Tool
+from pydantic import BaseModel
+
+class WeatherParams(BaseModel):
+    city: str
+
+def get_weather(city: str) -> dict:
+    return {"city": city, "temp": 22, "condition": "sunny"}
+
+weather_tool = Tool(
+    name="get_weather",
+    description="Get weather for a city",
+    parameters=WeatherParams,
+    handler=get_weather
+)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    tools=[weather_tool]
+)
+
+# Agent can use tools
+response = agent.prompt("What's the weather in Paris?")
+```
+
+**Best for:**
+- API integrations
+- Data processing
+- Workflow automation
+- Complex applications
+
+## Best Practices
+
+### 1. Model Selection
+
+Choose the right model for your use case:
+
+```python
+# For simple tasks - faster and cheaper
+agent = Agent(model="llama3-8b-8192", ...)
+
+# For complex reasoning - more capable
+agent = Agent(model="llama-3.3-70b-versatile", ...)
+
+# For code generation - specialized
+agent = Agent(model="deepseek-coder", ...)
+```
+
+### 2. Preamble Design
+
+Write effective system prompts:
+
+```python
+# Good: Specific and clear
+preamble = """
+You are a Python programming expert. 
+- Provide clear, working code examples
+- Explain complex concepts simply
+- Always include error handling
+- Follow PEP 8 style guidelines
+"""
+
+# Bad: Too vague
+preamble = "You are helpful"
+```
+
+### 3. Memory Management
+
+Optimize memory usage:
+
+```python
+# For short conversations
+memory = WindowBufferMemory(window_size=5)
+
+# For longer conversations
+memory = WindowBufferMemory(window_size=20)
+
+# For persistent memory (custom implementation)
+class PersistentMemory(WindowBufferMemory):
+    def save_to_disk(self, path: str):
+        # Implement persistence
+        pass
+```
+
+### 4. Error Handling
+
+Handle API errors gracefully:
+
+```python
+import time
+from alith import Agent
+
+def robust_prompt(agent, message, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            return agent.prompt(message)
+        except Exception as e:
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # Exponential backoff
+                continue
+            raise e
+
+# Usage
+response = robust_prompt(agent, "Hello!")
+```
+
+## Common Issues
+
+### 1. API Rate Limits
+
+**Problem**: Too many requests to API
+**Solution**: Implement rate limiting and retry logic
+
+```python
+import time
+from functools import wraps
+
+def rate_limit(calls_per_minute=60):
+    def decorator(func):
+        last_called = [0.0]
+        min_interval = 60.0 / calls_per_minute
+        
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            elapsed = time.time() - last_called[0]
+            left_to_wait = min_interval - elapsed
+            if left_to_wait > 0:
+                time.sleep(left_to_wait)
+            ret = func(*args, **kwargs)
+            last_called[0] = time.time()
+            return ret
+        return wrapper
+    return decorator
+
+@rate_limit(calls_per_minute=30)
+def safe_prompt(agent, message):
+    return agent.prompt(message)
+```
+
+### 2. Memory Overflow
+
+**Problem**: Memory grows too large
+**Solution**: Implement memory limits and cleanup
+
+```python
+class LimitedMemory(WindowBufferMemory):
+    def __init__(self, window_size=10, max_tokens=4000):
+        super().__init__(window_size)
+        self.max_tokens = max_tokens
+    
+    def add_message(self, message):
+        super().add_message(message)
+        # Clean up if too many tokens
+        if self._count_tokens() > self.max_tokens:
+            self._messages = self._messages[-self.window_size:]
+    
+    def _count_tokens(self):
+        # Simple token counting (use tiktoken for accurate count)
+        return sum(len(msg.content.split()) for msg in self._messages)
+```
+
+### 3. Context Length Limits
+
+**Problem**: Input exceeds model's context window
+**Solution**: Implement context management
+
+```python
+def truncate_context(text, max_tokens=4000):
+    # Simple word-based truncation
+    words = text.split()
+    if len(words) <= max_tokens:
+        return text
+    return " ".join(words[:max_tokens]) + "..."
+
+# Usage
+truncated = truncate_context(long_text)
+response = agent.prompt(truncated)
+```
+
+## Performance Optimization
+
+### 1. Model Caching
+
+Cache model responses for repeated queries:
+
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=100)
+def cached_prompt(agent, message):
+    return agent.prompt(message)
+```
+
+### 2. Batch Processing
+
+Process multiple requests efficiently:
+
+```python
+def batch_prompt(agent, messages):
+    responses = []
+    for message in messages:
+        response = agent.prompt(message)
+        responses.append(response)
+    return responses
+```
+
+### 3. Memory Management
+
+Use memory for better context management:
+
+```python
+from alith import Agent, WindowBufferMemory
+
+def contextual_agent():
+    memory = WindowBufferMemory(window_size=20)
+    
+    agent = Agent(
+        model="llama-3.3-70b-versatile",
+        api_key="your-groq-api-key",
+        base_url="https://api.groq.com/openai/v1",
+        memory=memory
+    )
+    
+    return agent
+
+# Usage
+agent = contextual_agent()
+response = agent.prompt("Hello, I'm Alice")
+response = agent.prompt("What's my name?")  # Remembers context
+```
+
+## Next Steps
+
+Now that you understand agent configuration, explore:
+
+- **[Memory Management](./memory.mdx)** - Advanced memory strategies
+- **[Vector Stores](./store.mdx)** - Building knowledge bases  
+- **[Custom Tools](./tools.mdx)** - Extending agent capabilities
+- **[Blockchain Integration](./lazai.mdx)** - Web3 features
+- **[Examples](./examples/)** - Real-world implementations

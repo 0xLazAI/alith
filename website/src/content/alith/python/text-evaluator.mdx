@@ -1,0 +1,1111 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Text Evaluator
+
+The `TextEvaluator` class provides enterprise-grade text quality assessment using state-of-the-art natural language processing models. This comprehensive evaluation system analyzes text across multiple linguistic dimensions to ensure content meets professional standards.
+
+## Overview
+
+TextEvaluator leverages advanced transformer-based language models to deliver precise, multi-dimensional text quality metrics. Built on the XLM-RoBERTa architecture, it provides robust evaluation capabilities across multiple languages and domains.
+
+### Enterprise Applications
+
+- **Content Quality Assurance**: Automated quality control for AI-generated content
+- **Educational Technology**: Automated assessment of student writing and assignments
+- **Content Moderation**: Detection and classification of low-quality or inappropriate text
+- **Translation Services**: Quality assessment for machine and human translations
+- **Conversational AI**: Response quality validation for chatbot and virtual assistant systems
+
+## Technical Architecture
+
+![TextEvaluator Architecture](/images/TextEvaluator/text-evaluator-architecture.png)
+
+The TextEvaluator system follows a three-tiered architecture designed for enterprise-scale text quality assessment:
+
+### **Advanced Language Models**
+- **XLM-RoBERTa Integration**: Multilingual transformer model for comprehensive text understanding
+- **GPU Acceleration**: CUDA-optimized processing for enterprise-scale deployments
+- **Multi-language Support**: Native support for English, Chinese, Japanese, Korean, and 100+ languages
+
+### **Evaluation Framework**
+- **Perplexity Analysis**: Statistical measurement of text fluency and naturalness
+- **Linguistic Assessment**: Grammar, spelling, and syntactic structure evaluation
+- **Semantic Analysis**: Contextual similarity and meaning preservation metrics
+- **Factual Validation**: Knowledge base integration for accuracy verification
+
+### **Production Features**
+- **Scalable Processing**: Batch evaluation capabilities for high-volume content
+- **Customizable Metrics**: Configurable evaluation weights and thresholds
+- **Performance Optimization**: Memory-efficient processing with caching support
+
+## Installation & Configuration
+
+```python
+from alith.data.evaluator.text import TextEvaluator
+
+# Initialize with GPU acceleration for production environments
+evaluator = TextEvaluator(device="cuda")  # or "cpu" for CPU-only deployments
+
+# Automatic model initialization includes:
+# - XLM-RoBERTa tokenizer for multilingual tokenization
+# - XLM-RoBERTa masked language model for perplexity calculation
+# - XLM-RoBERTa encoder for semantic embedding generation
+```
+
+## Core Evaluation Methods
+
+### 1. Perplexity Analysis
+
+Statistical measurement of text fluency and naturalness using masked language modeling:
+
+```python
+# Professional text fluency assessment
+text = "The quick brown fox jumps over the lazy dog."
+fluency_score = evaluator.evaluate_perplexity(text)
+print(f"Fluency Score: {fluency_score:.3f}")  # Range: 0.0-1.0 (higher indicates better fluency)
+
+# Comparative analysis across text samples
+texts = [
+    "This is a well-written sentence with proper grammar.",
+    "This sentence has bad grammer and spelling erors.",
+    "asdf qwerty random words no meaning"
+]
+
+fluency_scores = [evaluator.evaluate_perplexity(text) for text in texts]
+# Expected scores: ~0.85, ~0.65, ~0.20 respectively
+```
+
+### 2. Linguistic Assessment
+
+Comprehensive grammar and spelling evaluation with language-specific rules:
+
+```python
+# Professional English text assessment
+text = "I am going to the store to buy some groceries."
+grammar_score = evaluator.evaluate_grammar(text)
+print(f"Grammar Score: {grammar_score:.3f}")  # Range: 0.0-1.0
+
+# Multilingual evaluation with language-specific processing
+multilingual_texts = {
+    "chinese": "你好，今天天气很好。",
+    "japanese": "こんにちは、今日はいい天気です。",
+    "korean": "안녕하세요, 오늘 날씨가 좋습니다."
+}
+
+# Language-specific grammar evaluation
+for language, text in multilingual_texts.items():
+    score = evaluator.evaluate_grammar(text)
+    print(f"{language.capitalize()} Grammar Score: {score:.3f}")
+```
+
+### 3. Semantic Similarity Analysis
+
+Contextual similarity measurement using transformer-based embeddings:
+
+```python
+# Semantic similarity assessment
+text1 = "The weather is beautiful today."
+text2 = "Today's weather is lovely."
+text3 = "I like to eat pizza for dinner."
+
+# High semantic similarity
+similarity_high = evaluator.evaluate_similarity(text1, text2)
+print(f"High Similarity: {similarity_high:.3f}")  # Expected: ~0.85
+
+# Low semantic similarity
+similarity_low = evaluator.evaluate_similarity(text1, text3)
+print(f"Low Similarity: {similarity_low:.3f}")  # Expected: ~0.15
+```
+
+### 4. Comprehensive Quality Assessment
+
+Enterprise-grade evaluation combining multiple linguistic metrics:
+
+```python
+# Standard quality assessment
+text = "The capital of France is Paris."
+accuracy_score = evaluator.evaluate_accuracy(text)
+print(f"Overall Quality Score: {accuracy_score:.3f}")
+
+# Reference-based evaluation
+reference_text = "Paris is the capital city of France."
+accuracy_with_reference = evaluator.evaluate_accuracy(text, reference_text=reference_text)
+
+# Knowledge base integration for factual validation
+knowledge_base = {
+    "France": "a country in Europe",
+    "Paris": "the capital of France",
+    "Eiffel Tower": "a famous landmark in Paris"
+}
+accuracy_with_knowledge = evaluator.evaluate_accuracy(text, fact_knowledge=knowledge_base)
+```
+
+## Enterprise Use Cases
+
+<Tabs items={['Content Quality Assurance', 'Educational Technology', 'Translation Services', 'Conversational AI']}>
+
+<Tabs.Tab>
+
+### Content Quality Assurance
+
+Enterprise-grade content quality control for AI-generated materials:
+
+```python
+class ContentQualityAssurance:
+    """Professional content quality assessment system"""
+    
+    def __init__(self, quality_threshold: float = 0.8):
+        self.evaluator = TextEvaluator()
+        self.quality_threshold = quality_threshold
+    
+    def assess_content_quality(self, content: str) -> dict:
+        """Comprehensive content quality assessment with detailed metrics"""
+        # Multi-dimensional evaluation
+        accuracy_score = self.evaluator.evaluate_accuracy(content)
+        fluency_score = self.evaluator.evaluate_perplexity(content)
+        grammar_score = self.evaluator.evaluate_grammar(content)
+        
+        # Quality classification
+        quality_level = self._classify_quality(accuracy_score)
+        
+        # Compliance assessment
+        meets_standards = accuracy_score >= self.quality_threshold
+        
+        return {
+            "overall_score": accuracy_score,
+            "fluency_score": fluency_score,
+            "grammar_score": grammar_score,
+            "quality_level": quality_level,
+            "compliance_status": "PASS" if meets_standards else "FAIL",
+            "recommendations": self._generate_recommendations(accuracy_score, fluency_score, grammar_score),
+            "assessment_timestamp": self._get_timestamp()
+        }
+    
+    def _classify_quality(self, score: float) -> str:
+        """Professional quality classification"""
+        if score >= 0.95:
+            return "EXCELLENT"
+        elif score >= 0.85:
+            return "GOOD"
+        elif score >= 0.75:
+            return "ACCEPTABLE"
+        elif score >= 0.65:
+            return "NEEDS_IMPROVEMENT"
+        else:
+            return "UNACCEPTABLE"
+    
+    def _generate_recommendations(self, accuracy: float, fluency: float, grammar: float) -> list:
+        """Generate professional improvement recommendations"""
+        recommendations = []
+        
+        if fluency < 0.8:
+            recommendations.append("Improve text fluency and naturalness")
+        if grammar < 0.8:
+            recommendations.append("Address grammatical errors and spelling issues")
+        if accuracy < 0.8:
+            recommendations.append("Enhance overall content quality")
+        
+        return recommendations if recommendations else ["Content meets quality standards"]
+    
+    def _get_timestamp(self) -> str:
+        """Get ISO timestamp for audit trail"""
+        from datetime import datetime
+        return datetime.utcnow().isoformat() + "Z"
+
+# Professional usage
+qa_system = ContentQualityAssurance(quality_threshold=0.85)
+content = "This is a well-written article about artificial intelligence."
+assessment = qa_system.assess_content_quality(content)
+print(f"Quality Level: {assessment['quality_level']}")
+print(f"Compliance: {assessment['compliance_status']}")
+```
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Educational Technology
+
+Advanced automated assessment system for educational institutions:
+
+```python
+class EducationalAssessmentSystem:
+    """Professional educational assessment platform"""
+    
+    def __init__(self, grading_standards: dict = None):
+        self.evaluator = TextEvaluator()
+        self.grading_standards = grading_standards or self._default_standards()
+    
+    def assess_student_writing(self, essay: str, assignment_prompt: str = None) -> dict:
+        """Comprehensive student writing assessment with academic standards"""
+        # Core evaluation metrics
+        accuracy_score = self.evaluator.evaluate_accuracy(essay)
+        fluency_score = self.evaluator.evaluate_perplexity(essay)
+        grammar_score = self.evaluator.evaluate_grammar(essay)
+        
+        # Assignment relevance assessment
+        relevance_score = 1.0
+        if assignment_prompt:
+            relevance_score = self.evaluator.evaluate_similarity(essay, assignment_prompt)
+        
+        # Language proficiency detection
+        detected_language = self.evaluator.detect_language(essay)
+        
+        # Academic grade calculation
+        academic_grade = self._calculate_academic_grade(accuracy_score, fluency_score, grammar_score, relevance_score)
+        
+        return {
+            "student_id": self._generate_student_id(),
+            "assessment_timestamp": self._get_timestamp(),
+            "overall_score": accuracy_score,
+            "fluency_score": fluency_score,
+            "grammar_score": grammar_score,
+            "relevance_score": relevance_score,
+            "detected_language": detected_language,
+            "academic_grade": academic_grade,
+            "grade_points": self._grade_to_points(academic_grade),
+            "strengths": self._identify_academic_strengths(fluency_score, grammar_score, relevance_score),
+            "improvement_areas": self._suggest_academic_improvements(fluency_score, grammar_score, relevance_score),
+            "rubric_compliance": self._assess_rubric_compliance(accuracy_score, fluency_score, grammar_score)
+        }
+    
+    def _default_standards(self) -> dict:
+        """Default academic grading standards"""
+        return {
+            "A": {"min_score": 0.9, "description": "Excellent"},
+            "B": {"min_score": 0.8, "description": "Good"},
+            "C": {"min_score": 0.7, "description": "Satisfactory"},
+            "D": {"min_score": 0.6, "description": "Needs Improvement"},
+            "F": {"min_score": 0.0, "description": "Unsatisfactory"}
+        }
+    
+    def _calculate_academic_grade(self, accuracy: float, fluency: float, grammar: float, relevance: float) -> str:
+        """Calculate academic letter grade with weighted criteria"""
+        weighted_score = (
+            accuracy * 0.25 +      # Content accuracy
+            fluency * 0.25 +       # Writing fluency
+            grammar * 0.25 +       # Grammar and mechanics
+            relevance * 0.25       # Assignment relevance
+        )
+        
+        for grade, standards in self.grading_standards.items():
+            if weighted_score >= standards["min_score"]:
+                return grade
+        return "F"
+    
+    def _identify_academic_strengths(self, fluency: float, grammar: float, relevance: float) -> list:
+        """Identify academic writing strengths"""
+        strengths = []
+        if fluency >= 0.85:
+            strengths.append("Strong writing fluency and flow")
+        if grammar >= 0.85:
+            strengths.append("Excellent grammar and mechanics")
+        if relevance >= 0.85:
+            strengths.append("High assignment relevance")
+        if fluency >= 0.8 and grammar >= 0.8:
+            strengths.append("Overall writing proficiency")
+        return strengths
+    
+    def _suggest_academic_improvements(self, fluency: float, grammar: float, relevance: float) -> list:
+        """Suggest specific academic improvements"""
+        improvements = []
+        if fluency < 0.75:
+            improvements.append("Focus on sentence structure and paragraph organization")
+        if grammar < 0.75:
+            improvements.append("Review grammar rules and proofreading techniques")
+        if relevance < 0.75:
+            improvements.append("Ensure content directly addresses assignment requirements")
+        return improvements
+    
+    def _assess_rubric_compliance(self, accuracy: float, fluency: float, grammar: float) -> dict:
+        """Assess compliance with academic rubric standards"""
+        return {
+            "content_quality": "MEETS_STANDARDS" if accuracy >= 0.8 else "BELOW_STANDARDS",
+            "writing_mechanics": "MEETS_STANDARDS" if grammar >= 0.8 else "BELOW_STANDARDS",
+            "fluency": "MEETS_STANDARDS" if fluency >= 0.8 else "BELOW_STANDARDS"
+        }
+    
+    def _generate_student_id(self) -> str:
+        """Generate unique student identifier"""
+        import uuid
+        return f"STU_{str(uuid.uuid4())[:8].upper()}"
+    
+    def _get_timestamp(self) -> str:
+        """Get ISO timestamp for academic records"""
+        from datetime import datetime
+        return datetime.utcnow().isoformat() + "Z"
+    
+    def _grade_to_points(self, grade: str) -> float:
+        """Convert letter grade to grade points"""
+        grade_points = {"A": 4.0, "B": 3.0, "C": 2.0, "D": 1.0, "F": 0.0}
+        return grade_points.get(grade, 0.0)
+
+# Professional educational assessment
+assessment_system = EducationalAssessmentSystem()
+student_essay = "Artificial intelligence is a rapidly growing field that has the potential to revolutionize many industries."
+assignment_prompt = "Write about the impact of artificial intelligence on modern society."
+
+assessment_result = assessment_system.assess_student_writing(student_essay, assignment_prompt)
+print(f"Academic Grade: {assessment_result['academic_grade']}")
+print(f"Grade Points: {assessment_result['grade_points']}")
+print(f"Rubric Compliance: {assessment_result['rubric_compliance']}")
+```
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Translation Quality Assessment
+
+Evaluate the quality of translated content:
+
+```python
+class TranslationEvaluator:
+    def __init__(self):
+        self.evaluator = TextEvaluator()
+    
+    def evaluate_translation(self, original: str, translation: str, target_language: str = None) -> dict:
+        """Evaluate translation quality"""
+        # Detect languages
+        original_lang = self.evaluator.detect_language(original)
+        translation_lang = self.evaluator.detect_language(translation)
+        
+        # Semantic similarity (meaning preservation)
+        meaning_preservation = self.evaluator.evaluate_similarity(original, translation)
+        
+        # Translation fluency
+        fluency_score = self.evaluator.evaluate_perplexity(translation)
+        
+        # Grammar in target language
+        grammar_score = self.evaluator.evaluate_grammar(translation)
+        
+        # Overall quality
+        overall_score = (meaning_preservation * 0.4 + fluency_score * 0.3 + grammar_score * 0.3)
+        
+        return {
+            "original_language": original_lang,
+            "translation_language": translation_lang,
+            "meaning_preservation": meaning_preservation,
+            "fluency": fluency_score,
+            "grammar": grammar_score,
+            "overall_quality": overall_score,
+            "quality_level": self.get_quality_level(overall_score),
+            "issues": self.identify_translation_issues(meaning_preservation, fluency_score, grammar_score)
+        }
+    
+    def get_quality_level(self, score: float) -> str:
+        """Get quality level description"""
+        if score >= 0.9:
+            return "Professional"
+        elif score >= 0.8:
+            return "Good"
+        elif score >= 0.7:
+            return "Acceptable"
+        else:
+            return "Needs Improvement"
+    
+    def identify_translation_issues(self, meaning: float, fluency: float, grammar: float) -> list:
+        """Identify specific translation issues"""
+        issues = []
+        if meaning < 0.7:
+            issues.append("Meaning not preserved accurately")
+        if fluency < 0.7:
+            issues.append("Translation sounds unnatural")
+        if grammar < 0.7:
+            issues.append("Grammar errors in target language")
+        return issues
+
+# Usage
+evaluator = TranslationEvaluator()
+original = "Hello, how are you today?"
+translation = "Hola, ¿cómo estás hoy?"  # Spanish translation
+evaluation = evaluator.evaluate_translation(original, translation)
+print(f"Quality Level: {evaluation['quality_level']}")
+print(f"Issues: {', '.join(evaluation['issues']) if evaluation['issues'] else 'None'}")
+```
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Chatbot Response Quality
+
+Ensure chatbot responses are high-quality and appropriate:
+
+```python
+class ChatbotQualityControl:
+    def __init__(self):
+        self.evaluator = TextEvaluator()
+        self.response_history = []
+    
+    def evaluate_response(self, user_query: str, bot_response: str, context: str = None) -> dict:
+        """Evaluate chatbot response quality"""
+        # Basic quality metrics
+        fluency = self.evaluator.evaluate_perplexity(bot_response)
+        grammar = self.evaluator.evaluate_grammar(bot_response)
+        
+        # Relevance to user query
+        relevance = self.evaluator.evaluate_similarity(user_query, bot_response)
+        
+        # Context awareness (if provided)
+        context_score = 1.0
+        if context:
+            context_score = self.evaluator.evaluate_similarity(context, bot_response)
+        
+        # Overall quality
+        overall_score = (fluency * 0.3 + grammar * 0.3 + relevance * 0.3 + context_score * 0.1)
+        
+        # Quality assessment
+        quality_assessment = self.assess_response_quality(overall_score, fluency, grammar, relevance)
+        
+        return {
+            "overall_score": overall_score,
+            "fluency": fluency,
+            "grammar": grammar,
+            "relevance": relevance,
+            "context_awareness": context_score,
+            "quality_level": quality_assessment["level"],
+            "recommendations": quality_assessment["recommendations"],
+            "safety_flags": self.check_safety_issues(bot_response)
+        }
+    
+    def assess_response_quality(self, overall: float, fluency: float, grammar: float, relevance: float) -> dict:
+        """Assess overall response quality"""
+        if overall >= 0.9:
+            level = "Excellent"
+            recommendations = ["Response meets all quality standards"]
+        elif overall >= 0.8:
+            level = "Good"
+            recommendations = ["Minor improvements possible"]
+        elif overall >= 0.7:
+            level = "Acceptable"
+            recommendations = ["Some improvements needed"]
+        else:
+            level = "Poor"
+            recommendations = ["Significant improvements required"]
+        
+        # Specific recommendations
+        if fluency < 0.7:
+            recommendations.append("Improve response fluency")
+        if grammar < 0.7:
+            recommendations.append("Fix grammar and spelling")
+        if relevance < 0.7:
+            recommendations.append("Increase relevance to user query")
+        
+        return {"level": level, "recommendations": recommendations}
+    
+    def check_safety_issues(self, response: str) -> list:
+        """Check for potential safety issues"""
+        safety_flags = []
+        
+        # Check for inappropriate content indicators
+        inappropriate_patterns = [
+            r"\b(hate|violence|harm)\b",
+            r"\b(dangerous|illegal)\b",
+            r"\b(offensive|inappropriate)\b"
+        ]
+        
+        for pattern in inappropriate_patterns:
+            if re.search(pattern, response.lower()):
+                safety_flags.append("Potential inappropriate content detected")
+        
+        # Check response length (too short might be unhelpful)
+        if len(response.split()) < 3:
+            safety_flags.append("Response too short to be helpful")
+        
+        return safety_flags
+
+# Usage
+quality_control = ChatbotQualityControl()
+user_query = "What is artificial intelligence?"
+bot_response = "Artificial intelligence (AI) is a branch of computer science that focuses on creating intelligent machines that can perform tasks typically requiring human intelligence."
+evaluation = quality_control.evaluate_response(user_query, bot_response)
+print(f"Quality Level: {evaluation['quality_level']}")
+print(f"Recommendations: {evaluation['recommendations']}")
+```
+
+</Tabs.Tab>
+
+</Tabs>
+
+## Enterprise Implementation
+
+### High-Volume Batch Processing
+
+Production-ready batch processing for enterprise-scale content evaluation:
+
+```python
+class EnterpriseBatchProcessor:
+    """Professional batch processing system for high-volume content evaluation"""
+    
+    def __init__(self, batch_size: int = 100, max_workers: int = 4):
+        self.evaluator = TextEvaluator()
+        self.batch_size = batch_size
+        self.max_workers = max_workers
+    
+    def process_content_batch(self, content_items: list) -> dict:
+        """Process large volumes of content with enterprise-grade efficiency"""
+        results = {
+            "total_processed": 0,
+            "successful_evaluations": 0,
+            "failed_evaluations": 0,
+            "processing_time": 0,
+            "evaluation_results": []
+        }
+        
+        start_time = time.time()
+        
+        # Process in batches for memory efficiency
+        for i in range(0, len(content_items), self.batch_size):
+            batch = content_items[i:i + self.batch_size]
+            batch_results = self._process_batch(batch)
+            results["evaluation_results"].extend(batch_results)
+            results["total_processed"] += len(batch)
+        
+        results["processing_time"] = time.time() - start_time
+        results["successful_evaluations"] = len([r for r in results["evaluation_results"] if r["status"] == "SUCCESS"])
+        results["failed_evaluations"] = results["total_processed"] - results["successful_evaluations"]
+        
+        return results
+    
+    def _process_batch(self, batch: list) -> list:
+        """Process individual batch with error handling"""
+        batch_results = []
+        
+        for item in batch:
+            try:
+                result = {
+                    "content_id": item.get("id", "unknown"),
+                    "content_preview": item["text"][:100] + "..." if len(item["text"]) > 100 else item["text"],
+                    "accuracy_score": self.evaluator.evaluate_accuracy(item["text"]),
+                    "fluency_score": self.evaluator.evaluate_perplexity(item["text"]),
+                    "grammar_score": self.evaluator.evaluate_grammar(item["text"]),
+                    "detected_language": self.evaluator.detect_language(item["text"]),
+                    "status": "SUCCESS",
+                    "timestamp": self._get_timestamp()
+                }
+            except Exception as e:
+                result = {
+                    "content_id": item.get("id", "unknown"),
+                    "status": "FAILED",
+                    "error_message": str(e),
+                    "timestamp": self._get_timestamp()
+                }
+            
+            batch_results.append(result)
+        
+        return batch_results
+    
+    def _get_timestamp(self) -> str:
+        """Get ISO timestamp for audit trail"""
+        from datetime import datetime
+        return datetime.utcnow().isoformat() + "Z"
+
+# Enterprise usage
+content_items = [
+    {"id": "content_001", "text": "This is a well-written professional document."},
+    {"id": "content_002", "text": "This sentance has grammer erors."},
+    {"id": "content_003", "text": "Random words without meaning asdf qwerty"}
+]
+
+processor = EnterpriseBatchProcessor(batch_size=50, max_workers=8)
+batch_results = processor.process_content_batch(content_items)
+
+print(f"Total Processed: {batch_results['total_processed']}")
+print(f"Success Rate: {batch_results['successful_evaluations'] / batch_results['total_processed'] * 100:.1f}%")
+print(f"Processing Time: {batch_results['processing_time']:.2f} seconds")
+```
+
+### Customizable Evaluation Framework
+
+Enterprise-grade evaluation with configurable criteria and weights:
+
+```python
+class ConfigurableEvaluationFramework:
+    """Professional evaluation framework with customizable criteria"""
+    
+    def __init__(self, evaluation_config: dict = None):
+        self.evaluator = TextEvaluator()
+        self.config = evaluation_config or self._default_config()
+    
+    def _default_config(self) -> dict:
+        """Default enterprise evaluation configuration"""
+        return {
+            "weights": {
+                "plausibility": 0.4,
+                "grammar": 0.3,
+                "similarity": 0.2,
+                "factual_accuracy": 0.1
+            },
+            "thresholds": {
+                "excellent": 0.9,
+                "good": 0.8,
+                "acceptable": 0.7,
+                "needs_improvement": 0.6
+            },
+            "language_specific": {
+                "english": {"grammar_weight": 0.4, "spelling_weight": 0.3},
+                "chinese": {"grammar_weight": 0.3, "punctuation_weight": 0.4},
+                "japanese": {"grammar_weight": 0.35, "particle_weight": 0.35}
+            }
+        }
+    
+    def evaluate_with_custom_criteria(self, text: str, reference_text: str = None, 
+                                    knowledge_base: dict = None) -> dict:
+        """Comprehensive evaluation with customizable criteria"""
+        # Core metrics
+        plausibility_score = self.evaluator.evaluate_perplexity(text)
+        grammar_score = self.evaluator.evaluate_grammar(text)
+        detected_language = self.evaluator.detect_language(text)
+        
+        # Reference similarity (if provided)
+        similarity_score = 1.0
+        if reference_text:
+            similarity_score = self.evaluator.evaluate_similarity(text, reference_text)
+        
+        # Factual accuracy (if knowledge base provided)
+        factual_score = 1.0
+        if knowledge_base:
+            factual_score = self._evaluate_factual_accuracy(text, knowledge_base)
+        
+        # Apply language-specific weights
+        language_weights = self.config["language_specific"].get(detected_language, {})
+        adjusted_weights = self._adjust_weights_for_language(language_weights)
+        
+        # Calculate weighted score
+        weighted_score = self._calculate_weighted_score(
+            plausibility_score, grammar_score, similarity_score, factual_score, adjusted_weights
+        )
+        
+        # Quality classification
+        quality_level = self._classify_quality(weighted_score)
+        
+        return {
+            "overall_score": weighted_score,
+            "plausibility_score": plausibility_score,
+            "grammar_score": grammar_score,
+            "similarity_score": similarity_score,
+            "factual_score": factual_score,
+            "detected_language": detected_language,
+            "quality_level": quality_level,
+            "evaluation_criteria": self.config["weights"],
+            "language_specific_adjustments": language_weights,
+            "compliance_status": self._assess_compliance(weighted_score)
+        }
+    
+    def _adjust_weights_for_language(self, language_weights: dict) -> dict:
+        """Adjust evaluation weights based on language-specific requirements"""
+        base_weights = self.config["weights"].copy()
+        
+        for criterion, weight in language_weights.items():
+            if criterion in base_weights:
+                base_weights[criterion] = weight
+        
+        # Normalize weights
+        total_weight = sum(base_weights.values())
+        return {k: v / total_weight for k, v in base_weights.items()}
+    
+    def _calculate_weighted_score(self, plausibility: float, grammar: float, 
+                                 similarity: float, factual: float, weights: dict) -> float:
+        """Calculate weighted evaluation score"""
+        return (
+            weights["plausibility"] * plausibility +
+            weights["grammar"] * grammar +
+            weights["similarity"] * similarity +
+            weights["factual_accuracy"] * factual
+        )
+    
+    def _classify_quality(self, score: float) -> str:
+        """Classify quality level based on score"""
+        thresholds = self.config["thresholds"]
+        
+        if score >= thresholds["excellent"]:
+            return "EXCELLENT"
+        elif score >= thresholds["good"]:
+            return "GOOD"
+        elif score >= thresholds["acceptable"]:
+            return "ACCEPTABLE"
+        elif score >= thresholds["needs_improvement"]:
+            return "NEEDS_IMPROVEMENT"
+        else:
+            return "UNACCEPTABLE"
+    
+    def _assess_compliance(self, score: float) -> str:
+        """Assess compliance with enterprise standards"""
+        return "COMPLIANT" if score >= self.config["thresholds"]["acceptable"] else "NON_COMPLIANT"
+
+# Professional usage with custom configuration
+custom_config = {
+    "weights": {
+        "plausibility": 0.3,
+        "grammar": 0.4,
+        "similarity": 0.2,
+        "factual_accuracy": 0.1
+    },
+    "thresholds": {
+        "excellent": 0.95,
+        "good": 0.85,
+        "acceptable": 0.75,
+        "needs_improvement": 0.65
+    }
+}
+
+evaluation_framework = ConfigurableEvaluationFramework(custom_config)
+text = "The capital of France is Paris."
+reference = "Paris is the capital city of France."
+
+evaluation_result = evaluation_framework.evaluate_with_custom_criteria(text, reference)
+print(f"Quality Level: {evaluation_result['quality_level']}")
+print(f"Compliance: {evaluation_result['compliance_status']}")
+```
+
+## Production Optimization
+
+### Enterprise GPU Configuration
+
+```python
+import torch
+
+class ProductionGPUManager:
+    """Professional GPU resource management for enterprise deployments"""
+    
+    def __init__(self):
+        self.device_info = self._get_device_info()
+        self.optimal_device = self._select_optimal_device()
+    
+    def _get_device_info(self) -> dict:
+        """Comprehensive GPU device information"""
+        return {
+            "cuda_available": torch.cuda.is_available(),
+            "gpu_count": torch.cuda.device_count() if torch.cuda.is_available() else 0,
+            "current_device": torch.cuda.current_device() if torch.cuda.is_available() else None,
+            "device_names": [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())] if torch.cuda.is_available() else []
+        }
+    
+    def _select_optimal_device(self) -> str:
+        """Select optimal device for production workloads"""
+        if self.device_info["cuda_available"] and self.device_info["gpu_count"] > 0:
+            return f"cuda:{self.device_info['current_device']}"
+        return "cpu"
+    
+    def get_production_evaluator(self) -> TextEvaluator:
+        """Get production-optimized evaluator instance"""
+        return TextEvaluator(device=self.optimal_device)
+
+# Professional GPU setup
+gpu_manager = ProductionGPUManager()
+print(f"Production Device: {gpu_manager.optimal_device}")
+print(f"GPU Information: {gpu_manager.device_info}")
+
+evaluator = gpu_manager.get_production_evaluator()
+```
+
+### Enterprise Memory Management
+
+```python
+class EnterpriseMemoryManager:
+    """Professional memory management for large-scale processing"""
+    
+    def __init__(self, max_memory_usage: float = 0.8):
+        self.max_memory_usage = max_memory_usage
+        self.evaluator = TextEvaluator()
+    
+    def process_enterprise_dataset(self, dataset: list, chunk_size: int = 1000) -> dict:
+        """Process enterprise-scale datasets with memory optimization"""
+        results = {
+            "total_processed": 0,
+            "memory_usage": [],
+            "processing_times": [],
+            "evaluation_results": []
+        }
+        
+        for i in range(0, len(dataset), chunk_size):
+            chunk = dataset[i:i + chunk_size]
+            chunk_results = self._process_chunk_with_memory_management(chunk)
+            results["evaluation_results"].extend(chunk_results)
+            results["total_processed"] += len(chunk)
+            
+            # Memory monitoring
+            memory_usage = self._monitor_memory_usage()
+            results["memory_usage"].append(memory_usage)
+            
+            # Clear memory if needed
+            if memory_usage > self.max_memory_usage:
+                self._clear_memory()
+        
+        return results
+    
+    def _process_chunk_with_memory_management(self, chunk: list) -> list:
+        """Process chunk with memory management"""
+        chunk_results = []
+        
+        for item in chunk:
+            try:
+                result = {
+                    "item_id": item.get("id"),
+                    "accuracy": self.evaluator.evaluate_accuracy(item["text"]),
+                    "fluency": self.evaluator.evaluate_perplexity(item["text"]),
+                    "grammar": self.evaluator.evaluate_grammar(item["text"]),
+                    "status": "SUCCESS"
+                }
+            except Exception as e:
+                result = {
+                    "item_id": item.get("id"),
+                    "status": "FAILED",
+                    "error": str(e)
+                }
+            
+            chunk_results.append(result)
+        
+        return chunk_results
+    
+    def _monitor_memory_usage(self) -> float:
+        """Monitor current memory usage"""
+        if torch.cuda.is_available():
+            return torch.cuda.memory_allocated() / torch.cuda.max_memory_allocated()
+        return 0.0
+    
+    def _clear_memory(self):
+        """Clear GPU memory for optimal performance"""
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.synchronize()
+```
+
+## Enterprise Best Practices
+
+### 1. Production Model Initialization
+
+```python
+class ProductionEvaluatorFactory:
+    """Professional evaluator factory for production environments"""
+    
+    _instance = None
+    _evaluator = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+    
+    def get_evaluator(self) -> TextEvaluator:
+        """Get singleton evaluator instance for production use"""
+        if self._evaluator is None:
+            self._evaluator = TextEvaluator(device="cuda" if torch.cuda.is_available() else "cpu")
+        return self._evaluator
+
+# Production usage
+factory = ProductionEvaluatorFactory()
+evaluator = factory.get_evaluator()  # Singleton instance
+```
+
+### 2. Enterprise Error Handling
+
+```python
+class EnterpriseErrorHandler:
+    """Professional error handling for production systems"""
+    
+    def __init__(self, log_level: str = "INFO"):
+        self.log_level = log_level
+        self.error_counts = {}
+    
+    def safe_evaluate_with_logging(self, evaluator: TextEvaluator, text: str) -> dict:
+        """Enterprise-grade evaluation with comprehensive error handling"""
+        try:
+            # Input validation
+            if not self._validate_input(text):
+                return self._create_error_response("INVALID_INPUT", "Empty or invalid text provided")
+            
+            # Perform evaluation
+            score = evaluator.evaluate_accuracy(text)
+            
+            # Log successful evaluation
+            self._log_evaluation("SUCCESS", text[:50] + "...", score)
+            
+            return {
+                "status": "SUCCESS",
+                "score": score,
+                "timestamp": self._get_timestamp(),
+                "error": None
+            }
+        
+        except Exception as e:
+            error_type = type(e).__name__
+            self.error_counts[error_type] = self.error_counts.get(error_type, 0) + 1
+            
+            # Log error
+            self._log_evaluation("ERROR", text[:50] + "...", 0.0, str(e))
+            
+            return {
+                "status": "ERROR",
+                "score": 0.0,
+                "timestamp": self._get_timestamp(),
+                "error": str(e),
+                "error_type": error_type
+            }
+    
+    def _validate_input(self, text: str) -> bool:
+        """Validate input text for evaluation"""
+        return text and len(text.strip()) > 0 and isinstance(text, str)
+    
+    def _create_error_response(self, error_code: str, message: str) -> dict:
+        """Create standardized error response"""
+        return {
+            "status": "ERROR",
+            "score": 0.0,
+            "timestamp": self._get_timestamp(),
+            "error": message,
+            "error_code": error_code
+        }
+    
+    def _log_evaluation(self, status: str, text_preview: str, score: float, error: str = None):
+        """Log evaluation results for audit trail"""
+        log_entry = {
+            "timestamp": self._get_timestamp(),
+            "status": status,
+            "text_preview": text_preview,
+            "score": score,
+            "error": error
+        }
+        # In production, this would write to enterprise logging system
+        print(f"EVALUATION_LOG: {log_entry}")
+    
+    def _get_timestamp(self) -> str:
+        """Get ISO timestamp for audit trail"""
+        from datetime import datetime
+        return datetime.utcnow().isoformat() + "Z"
+```
+
+### 3. Enterprise Caching System
+
+```python
+from functools import lru_cache
+import hashlib
+
+class EnterpriseCachingSystem:
+    """Professional caching system for enterprise deployments"""
+    
+    def __init__(self, max_cache_size: int = 10000):
+        self.max_cache_size = max_cache_size
+        self.cache_hits = 0
+        self.cache_misses = 0
+    
+    @lru_cache(maxsize=10000)
+    def cached_evaluate_accuracy(self, text_hash: str, text: str) -> float:
+        """Cache evaluation results with hash-based keys"""
+        evaluator = TextEvaluator()
+        return evaluator.evaluate_accuracy(text)
+    
+    def evaluate_with_caching(self, text: str) -> dict:
+        """Evaluate text with enterprise caching"""
+        # Generate content hash for caching
+        text_hash = hashlib.md5(text.encode()).hexdigest()
+        
+        try:
+            score = self.cached_evaluate_accuracy(text_hash, text)
+            self.cache_hits += 1
+            cache_status = "HIT"
+        except:
+            # Fallback for cache misses
+            evaluator = TextEvaluator()
+            score = evaluator.evaluate_accuracy(text)
+            self.cache_misses += 1
+            cache_status = "MISS"
+        
+        return {
+            "score": score,
+            "cache_status": cache_status,
+            "cache_hit_rate": self.cache_hits / (self.cache_hits + self.cache_misses),
+            "timestamp": self._get_timestamp()
+        }
+    
+    def _get_timestamp(self) -> str:
+        """Get ISO timestamp"""
+        from datetime import datetime
+        return datetime.utcnow().isoformat() + "Z"
+```
+
+## Integration with Alith Agents
+
+Use TextEvaluator with Alith agents for quality control:
+
+```python
+from alith import Agent
+from alith.data.evaluator.text import TextEvaluator
+
+# Create agent with quality control
+class QualityControlledAgent:
+    def __init__(self, model: str, api_key: str, min_quality: float = 0.7):
+        self.agent = Agent(model=model, api_key=api_key)
+        self.evaluator = TextEvaluator()
+        self.min_quality = min_quality
+    
+    def prompt_with_quality_control(self, prompt: str) -> dict:
+        """Generate response with quality control"""
+        # Generate response
+        response = self.agent.prompt(prompt)
+        
+        # Evaluate quality
+        quality_score = self.evaluator.evaluate_accuracy(response)
+        
+        # Return response with quality info
+        return {
+            "response": response,
+            "quality_score": quality_score,
+            "meets_standards": quality_score >= self.min_quality,
+            "quality_level": self.get_quality_level(quality_score)
+        }
+    
+    def get_quality_level(self, score: float) -> str:
+        """Get quality level description"""
+        if score >= 0.9:
+            return "Excellent"
+        elif score >= 0.8:
+            return "Good"
+        elif score >= 0.7:
+            return "Acceptable"
+        else:
+            return "Needs Improvement"
+
+# Usage
+quality_agent = QualityControlledAgent(
+    model="gpt-4",
+    api_key="your-api-key",
+    min_quality=0.8
+)
+
+result = quality_agent.prompt_with_quality_control("Explain quantum computing")
+print(f"Response: {result['response']}")
+print(f"Quality: {result['quality_level']} ({result['quality_score']:.3f})")
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **CUDA Out of Memory**
+   ```python
+   # Use CPU instead
+   evaluator = TextEvaluator(device="cpu")
+   ```
+
+2. **Model Download Issues**
+   ```python
+   # Ensure internet connection for model download
+   # Models are downloaded on first use
+   ```
+
+3. **Language Detection Errors**
+   ```python
+   # Manually specify language for better accuracy
+   language = evaluator.detect_language(text)
+   print(f"Detected language: {language}")
+   ```
+
+## Next Steps
+
+Now that you understand TextEvaluator, explore:
+
+- **[Agent Configuration](./agent.mdx)** - Configure agents with quality control
+- **[Memory Management](./memory.mdx)** - Store evaluation results
+- **[Advanced Features](./advanced.mdx)** - Custom evaluation pipelines

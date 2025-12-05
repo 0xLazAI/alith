@@ -36,7 +36,7 @@ use std::env;
 async fn main() -> Result<(), anyhow::Error> {
     let api_key = env::var("GROQ_API_KEY")?;
     let model = LLM::from_custom_model(
-        "llama3-70b-8192",
+        "llama-3.3-70b-versatile",
         "https://api.groq.com/openai/v1",
         api_key
     )?;
@@ -91,7 +91,7 @@ load_dotenv()
 api_key = os.getenv("GROQ_API_KEY")
 
 agent = Agent(
-    model="llama3-70b-8192",
+    model="llama-3.3-70b-versatile",
     api_key=api_key,
     base_url="https://api.groq.com/openai/v1",
     
@@ -135,7 +135,7 @@ import { Agent } from "alith";
 import 'dotenv/config';
 
 const agent = new Agent({
-  model: "llama3-70b-8192",
+  model: "llama-3.3-70b-versatile",
   apiKey: process.env.GROQ_API_KEY!,
   baseUrl: "https://api.groq.com/openai/v1",
   

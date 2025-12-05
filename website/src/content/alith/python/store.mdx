@@ -1,0 +1,846 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Vector Stores & RAG
+
+Vector stores enable Retrieval Augmented Generation (RAG), allowing your AI agents to access and reason over large knowledge bases. Alith provides support for multiple vector databases with optimized performance and easy integration.
+
+## What is RAG?
+
+RAG combines the power of large language models with external knowledge retrieval:
+
+1. **Store** documents in a vector database
+2. **Search** for relevant information using semantic similarity
+3. **Augment** the LLM prompt with retrieved context
+4. **Generate** responses based on both the query and retrieved knowledge
+
+### Without RAG
+```python
+from alith import Agent
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+# Agent can only use its training data
+response = agent.prompt("What's the latest company policy?")
+# Response: "I don't have access to current company policies"
+```
+
+### With RAG
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+
+# Setup knowledge base
+embeddings = FastEmbeddings()
+store = ChromaDBStore(path="./docs", embeddings=embeddings)
+
+# Add company documents
+docs = chunk_text("Company policy document...", max_chunk_token_size=200)
+store.save_docs(docs)
+
+agent = Agent(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    store=store
+)
+
+# Agent can access company knowledge
+response = agent.prompt("What's the latest company policy?")
+# Response: Uses retrieved company documents to provide accurate information
+```
+
+## Vector Store Types
+
+<Tabs items={['ChromaDB', 'Milvus', 'FAISS', 'Custom Store']}>
+
+<Tabs.Tab>
+
+### ChromaDB
+
+ChromaDB is a popular open-source vector database with excellent Python integration:
+
+```python
+from alith import ChromaDBStore, FastEmbeddings
+
+# Initialize ChromaDB with custom embeddings
+embeddings = FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+store = ChromaDBStore(
+    path="./chroma_db",
+    collection_name="my_docs",
+    embeddings=embeddings
+)
+
+# Save documents
+store.save("This is a document about AI.")
+store.save_docs([
+    "Document 1 content",
+    "Document 2 content", 
+    "Document 3 content"
+])
+
+# Search
+results = store.search("AI", limit=3, score_threshold=0.4)
+print(results)
+```
+
+**Benefits:**
+- Easy to use
+- Good performance
+- Persistent storage
+- Collection management
+- Metadata support
+
+**Use Cases:**
+- Small to medium datasets
+- Development and prototyping
+- Applications requiring metadata
+- Multi-tenant systems
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Milvus
+
+Milvus is a high-performance vector database for large-scale applications:
+
+```python
+from alith import MilvusStore
+
+store = MilvusStore(
+    uri="alith.db",          # Local file or Milvus server
+    dimension=768,           # Embedding dimension
+    collection_name="docs",
+    embeddings=embeddings
+)
+
+# Same API as ChromaDB
+store.save_docs(documents)
+results = store.search("query", limit=5)
+```
+
+**Benefits:**
+- High performance
+- Scalable architecture
+- Advanced indexing
+- Distributed deployment
+- GPU acceleration
+
+**Use Cases:**
+- Large-scale applications
+- Production systems
+- High-throughput requirements
+- Distributed deployments
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### FAISS
+
+FAISS provides high-performance vector search with batch operations:
+
+```python
+from alith import FAISSStore
+
+store = FAISSStore(
+    dimension=768,
+    embeddings=embeddings,
+    index_type="L2"  # or "IP" for inner product
+)
+
+# Save documents
+store.save_docs([
+    "Document 1",
+    "Document 2", 
+    "Document 3"
+])
+
+# Regular search
+results = store.search("query", limit=3, score_threshold=0.4)
+
+# Batch search (much faster for multiple queries)
+queries = ["query1", "query2", "query3"]
+batch_results = store.search_batch(queries, limit=3)
+
+# Search with scores
+results_with_scores = store.search_with_scores("query", limit=3)
+# Returns: [(text, score), ...]
+
+# Approximate search for large datasets
+results = store.search_approximate("query", limit=10, nprobe=10)
+
+# Create IVF index for better performance
+store.create_ivf_index(nlist=100)
+
+# Persistence
+store.save_to_disk("./faiss_index")
+store.load_from_disk("./faiss_index")
+
+# Statistics
+stats = store.get_stats()
+print(f"Total documents: {stats['total_documents']}")
+```
+
+**Benefits:**
+- Extremely fast
+- Batch operations
+- Multiple index types
+- GPU support
+- Memory efficient
+
+**Use Cases:**
+- High-performance applications
+- Batch processing
+- Real-time search
+- Research and experimentation
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+
+### Custom Store
+
+Create your own vector store implementation:
+
+```python
+from alith import Store
+from typing import List
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+class CustomVectorStore(Store):
+    """Custom vector store using scikit-learn"""
+    
+    def __init__(self, embeddings):
+        self.embeddings = embeddings
+        self.documents = []
+        self.vectors = []
+    
+    def save(self, value: str) -> None:
+        """Save a single document"""
+        self.save_docs([value])
+    
+    def save_docs(self, docs: List[str]) -> "CustomVectorStore":
+        """Save multiple documents"""
+        if not docs:
+            return self
+        
+        # Generate embeddings
+        vectors = self.embeddings.embed_texts(docs)
+        
+        # Store documents and vectors
+        self.documents.extend(docs)
+        self.vectors.extend(vectors)
+        
+        return self
+    
+    def search(self, query: str, limit: int = 3, score_threshold: float = 0.4) -> List[str]:
+        """Search for similar documents"""
+        if not self.documents:
+            return []
+        
+        # Generate query embedding
+        query_vector = self.embeddings.embed_texts([query])[0]
+        
+        # Calculate similarities
+        similarities = cosine_similarity([query_vector], self.vectors)[0]
+        
+        # Get top results
+        results = []
+        for i, similarity in enumerate(similarities):
+            if similarity >= score_threshold:
+                results.append((self.documents[i], similarity))
+        
+        # Sort by similarity and return top results
+        results.sort(key=lambda x: x[1], reverse=True)
+        return [doc for doc, score in results[:limit]]
+    
+    def reset(self) -> None:
+        """Reset the store"""
+        self.documents.clear()
+        self.vectors.clear()
+
+# Usage
+store = CustomVectorStore(embeddings)
+store.save_docs(["Document 1", "Document 2"])
+results = store.search("query")
+```
+
+**Benefits:**
+- Full control
+- Custom logic
+- Integration flexibility
+- Specialized features
+
+**Use Cases:**
+- Specialized requirements
+- Integration with existing systems
+- Custom similarity metrics
+- Research and experimentation
+
+</Tabs.Tab>
+
+</Tabs>
+
+## Embeddings
+
+Embeddings convert text into numerical vectors that capture semantic meaning:
+
+### FastEmbeddings
+
+FastEmbeddings provides fast, local embedding generation:
+
+```python
+from alith import FastEmbeddings
+
+# Default model (BAAI/bge-small-en-v1.5)
+embeddings = FastEmbeddings()
+
+# Custom model
+embeddings = FastEmbeddings(
+    model_name="BAAI/bge-large-en-v1.5",
+    cache_dir="./models"
+)
+
+# Generate embeddings
+vectors = embeddings.embed_texts([
+    "First text",
+    "Second text"
+])
+print(f"Embedding dimension: {len(vectors[0])}")
+```
+
+### MilvusEmbeddings
+
+Use Milvus's built-in embedding functions:
+
+```python
+from alith import MilvusEmbeddings
+
+embeddings = MilvusEmbeddings()
+vectors = embeddings.embed_texts(["text1", "text2"])
+```
+
+### Remote Model Embeddings
+
+Use cloud-based embedding services:
+
+```python
+from alith import RemoteModelEmbeddings
+
+# OpenAI embeddings
+embeddings = RemoteModelEmbeddings(
+    model="text-embedding-3-small",
+    api_key="your-openai-api-key",
+    base_url="https://api.openai.com/v1"
+)
+
+# Custom API
+embeddings = RemoteModelEmbeddings(
+    model="custom-embedding-model",
+    api_key="your-api-key",
+    base_url="https://your-embedding-api.com"
+)
+
+vectors = embeddings.embed_texts(["text"])
+```
+
+### Ollama Embeddings
+
+Use local Ollama models for embeddings:
+
+```python
+from alith import OllamaEmbeddings
+
+embeddings = OllamaEmbeddings(
+    model="nomic-embed-text",
+    base_url="http://localhost:11434"
+)
+
+vectors = embeddings.embed_texts(["text"])
+```
+
+## Text Chunking
+
+Chunking breaks large documents into smaller pieces for better retrieval:
+
+```python
+from alith import chunk_text
+
+# Basic chunking
+text = "Your long document content here..."
+chunks = chunk_text(
+    text=text,
+    max_chunk_token_size=200,
+    overlap_percent=0.1
+)
+
+print(f"Created {len(chunks)} chunks")
+for i, chunk in enumerate(chunks):
+    print(f"Chunk {i+1}: {chunk[:100]}...")
+```
+
+### Advanced Chunking Strategies
+
+```python
+def smart_chunking(text: str, max_size: int = 200, overlap: float = 0.1):
+    """Advanced chunking with sentence boundaries"""
+    sentences = text.split('. ')
+    chunks = []
+    current_chunk = ""
+    
+    for sentence in sentences:
+        if len(current_chunk + sentence) <= max_size:
+            current_chunk += sentence + ". "
+        else:
+            if current_chunk:
+                chunks.append(current_chunk.strip())
+            current_chunk = sentence + ". "
+    
+    if current_chunk:
+        chunks.append(current_chunk.strip())
+    
+    return chunks
+
+# Usage
+chunks = smart_chunking(long_document, max_size=200)
+```
+
+## RAG Implementation
+
+### Basic RAG Setup
+
+<Steps>
+
+### 1. Prepare Documents
+
+```python
+from alith import chunk_text
+
+# Load your documents
+with open("knowledge_base.txt", "r") as f:
+    content = f.read()
+
+# Chunk the content
+chunks = chunk_text(
+    text=content,
+    max_chunk_token_size=200,
+    overlap_percent=0.1
+)
+
+print(f"Created {len(chunks)} chunks")
+```
+
+### 2. Create Vector Store
+
+```python
+from alith import ChromaDBStore, FastEmbeddings
+
+# Setup embeddings and store
+embeddings = FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+store = ChromaDBStore(
+    path="./knowledge_db",
+    collection_name="documents",
+    embeddings=embeddings
+)
+
+# Save chunks to store
+store.save_docs(chunks)
+print("Documents stored successfully")
+```
+
+### 3. Create RAG Agent
+
+```python
+from alith import Agent
+
+# Create agent with knowledge base
+agent = Agent(
+    name="KnowledgeAgent",
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1",
+    store=store,
+    preamble="You are a helpful assistant with access to a knowledge base. Use the provided context to answer questions accurately."
+)
+
+# Query with context
+response = agent.prompt("What is the main topic of the knowledge base?")
+print(response)
+```
+
+</Steps>
+
+### Advanced RAG Features
+
+#### 1. Multi-Collection RAG
+
+```python
+# Create multiple collections
+store.create_collection("policies")
+store.create_collection("procedures")
+store.create_collection("faq")
+
+# Save to specific collections
+store.save_docs(policy_docs, collection_name="policies")
+store.save_docs(procedure_docs, collection_name="procedures")
+store.save_docs(faq_docs, collection_name="faq")
+
+# Search in specific collection
+results = store.search_in(
+    "query",
+    limit=5,
+    collection_name="policies"
+)
+```
+
+#### 2. Hybrid Search
+
+```python
+class HybridSearchStore(ChromaDBStore):
+    """Store with hybrid search (semantic + keyword)"""
+    
+    def hybrid_search(self, query: str, limit: int = 5) -> List[str]:
+        # Semantic search
+        semantic_results = self.search(query, limit=limit*2)
+        
+        # Keyword search (simple implementation)
+        keyword_results = self._keyword_search(query, limit=limit*2)
+        
+        # Combine and deduplicate
+        all_results = semantic_results + keyword_results
+        unique_results = list(dict.fromkeys(all_results))  # Remove duplicates
+        
+        return unique_results[:limit]
+    
+    def _keyword_search(self, query: str, limit: int) -> List[str]:
+        # Simple keyword matching
+        query_words = set(query.lower().split())
+        results = []
+        
+        for doc in self.documents:
+            doc_words = set(doc.lower().split())
+            if query_words.intersection(doc_words):
+                results.append(doc)
+        
+        return results[:limit]
+```
+
+#### 3. Context-Aware RAG
+
+```python
+class ContextAwareRAG:
+    """RAG that adapts based on conversation context"""
+    
+    def __init__(self, store, agent):
+        self.store = store
+        self.agent = agent
+        self.conversation_context = []
+    
+    def query_with_context(self, question: str) -> str:
+        # Add conversation context to search
+        context_query = self._build_context_query(question)
+        
+        # Search with context
+        results = self.store.search(context_query, limit=5)
+        
+        # Generate response
+        response = self.agent.prompt(question)
+        
+        # Update context
+        self.conversation_context.append(question)
+        self.conversation_context.append(response)
+        
+        return response
+    
+    def _build_context_query(self, question: str) -> str:
+        # Combine current question with recent context
+        recent_context = " ".join(self.conversation_context[-3:])
+        return f"{recent_context} {question}"
+```
+
+## Performance Optimization
+
+### 1. Batch Operations
+
+```python
+# Efficient batch processing
+def batch_embed_and_store(documents: List[str], store, batch_size: int = 100):
+    """Process documents in batches for efficiency"""
+    for i in range(0, len(documents), batch_size):
+        batch = documents[i:i + batch_size]
+        store.save_docs(batch)
+        print(f"Processed batch {i//batch_size + 1}")
+```
+
+### 2. Index Optimization
+
+```python
+# For FAISS - create optimized index
+store = FAISSStore(dimension=768, embeddings=embeddings)
+
+# Add documents
+store.save_docs(documents)
+
+# Create IVF index for better performance
+store.create_ivf_index(nlist=100)
+
+# Save optimized index
+store.save_to_disk("./optimized_index")
+```
+
+### 3. Caching
+
+```python
+from functools import lru_cache
+
+class CachedStore(ChromaDBStore):
+    """Store with query caching"""
+    
+    @lru_cache(maxsize=100)
+    def cached_search(self, query: str, limit: int, score_threshold: float):
+        return self.search(query, limit, score_threshold)
+    
+    def search(self, query: str, limit: int = 3, score_threshold: float = 0.4):
+        return self.cached_search(query, limit, score_threshold)
+```
+
+## Best Practices
+
+### 1. Document Preparation
+
+```python
+def prepare_documents(text: str) -> List[str]:
+    """Prepare documents for optimal retrieval"""
+    # Clean text
+    text = text.strip()
+    
+    # Remove excessive whitespace
+    text = ' '.join(text.split())
+    
+    # Chunk appropriately
+    chunks = chunk_text(text, max_chunk_token_size=200, overlap_percent=0.1)
+    
+    # Filter out very short chunks
+    chunks = [chunk for chunk in chunks if len(chunk.split()) > 10]
+    
+    return chunks
+```
+
+### 2. Embedding Selection
+
+```python
+# Choose appropriate embedding model
+def get_embeddings_for_domain(domain: str):
+    """Select embeddings based on domain"""
+    if domain == "general":
+        return FastEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+    elif domain == "code":
+        return FastEmbeddings(model_name="microsoft/codebert-base")
+    elif domain == "multilingual":
+        return FastEmbeddings(model_name="BAAI/bge-m3")
+    else:
+        return FastEmbeddings()  # Default
+```
+
+### 3. Search Optimization
+
+```python
+def optimized_search(store, query: str, context: str = ""):
+    """Optimized search with context"""
+    # Expand query with context
+    expanded_query = f"{context} {query}" if context else query
+    
+    # Search with appropriate parameters
+    results = store.search(
+        expanded_query,
+        limit=5,
+        score_threshold=0.3  # Lower threshold for more results
+    )
+    
+    # Filter and rank results
+    filtered_results = [r for r in results if len(r) > 50]  # Filter short results
+    
+    return filtered_results
+```
+
+## Common Issues
+
+### 1. Poor Retrieval Quality
+
+**Problem**: Retrieved documents aren't relevant
+**Solutions**:
+- Improve document chunking strategy
+- Use better embedding models
+- Adjust similarity thresholds
+- Add metadata for filtering
+
+```python
+# Improve chunking
+chunks = chunk_text(
+    text,
+    max_chunk_token_size=150,  # Smaller chunks
+    overlap_percent=0.2  # More overlap
+)
+
+# Use better embeddings
+embeddings = FastEmbeddings(model_name="BAAI/bge-large-en-v1.5")
+
+# Adjust search parameters
+results = store.search(query, limit=10, score_threshold=0.2)
+```
+
+### 2. Slow Performance
+
+**Problem**: Search is too slow
+**Solutions**:
+- Use FAISS for better performance
+- Implement caching
+- Optimize index settings
+- Use batch operations
+
+```python
+# Use FAISS for speed
+store = FAISSStore(dimension=768, embeddings=embeddings)
+
+# Create optimized index
+store.create_ivf_index(nlist=100)
+
+# Cache frequent queries
+@lru_cache(maxsize=50)
+def cached_search(query):
+    return store.search(query)
+```
+
+### 3. Memory Issues
+
+**Problem**: Vector store uses too much memory
+**Solutions**:
+- Use disk-based storage
+- Implement compression
+- Limit document count
+- Use efficient data structures
+
+```python
+# Use persistent storage
+store = ChromaDBStore(path="./disk_storage")
+
+# Implement size limits
+class LimitedStore(ChromaDBStore):
+    def __init__(self, max_docs=10000, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.max_docs = max_docs
+    
+    def save_docs(self, docs):
+        super().save_docs(docs)
+        # Implement cleanup if needed
+        if len(self.documents) > self.max_docs:
+            self._cleanup_old_docs()
+```
+
+## Integration Examples
+
+### 1. Document Assistant
+
+```python
+from alith import Agent, ChromaDBStore, FastEmbeddings, chunk_text
+from pathlib import Path
+
+class DocumentAssistant:
+    def __init__(self, model, api_key, base_url):
+        self.embeddings = FastEmbeddings()
+        self.store = ChromaDBStore(path="./docs", embeddings=self.embeddings)
+        self.agent = Agent(
+            model=model,
+            api_key=api_key,
+            base_url=base_url,
+            store=self.store,
+            preamble="You are a document assistant. Use the provided context to answer questions about the documents."
+        )
+    
+    def add_documents(self, file_paths: List[str]):
+        """Add documents to the knowledge base"""
+        for file_path in file_paths:
+            content = Path(file_path).read_text()
+            chunks = chunk_text(content, max_chunk_token_size=200)
+            self.store.save_docs(chunks)
+            print(f"Added {file_path}")
+    
+    def query(self, question: str) -> str:
+        """Query the document knowledge base"""
+        return self.agent.prompt(question)
+
+# Usage
+assistant = DocumentAssistant(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+assistant.add_documents(["doc1.txt", "doc2.txt", "doc3.txt"])
+response = assistant.query("What is the main topic of the documents?")
+```
+
+### 2. Code Assistant
+
+```python
+class CodeAssistant:
+    def __init__(self, model, api_key, base_url):
+        # Use code-specific embeddings
+        self.embeddings = FastEmbeddings(model_name="microsoft/codebert-base")
+        self.store = FAISSStore(dimension=768, embeddings=self.embeddings)
+        self.agent = Agent(
+            model=model,
+            api_key=api_key,
+            base_url=base_url,
+            store=self.store,
+            preamble="You are a code assistant. Use the provided code context to help with programming questions."
+        )
+    
+    def add_codebase(self, code_files: List[str]):
+        """Add code files to the knowledge base"""
+        for file_path in code_files:
+            with open(file_path, 'r') as f:
+                code = f.read()
+            
+            # Chunk code appropriately
+            chunks = self._chunk_code(code)
+            self.store.save_docs(chunks)
+    
+    def _chunk_code(self, code: str) -> List[str]:
+        """Chunk code by functions/classes"""
+        # Simple chunking by lines (implement better logic)
+        lines = code.split('\n')
+        chunks = []
+        current_chunk = ""
+        
+        for line in lines:
+            if len(current_chunk + line) < 500:
+                current_chunk += line + '\n'
+            else:
+                if current_chunk:
+                    chunks.append(current_chunk.strip())
+                current_chunk = line + '\n'
+        
+        if current_chunk:
+            chunks.append(current_chunk.strip())
+        
+        return chunks
+    
+    def ask_about_code(self, question: str) -> str:
+        """Ask questions about the codebase"""
+        return self.agent.prompt(question)
+```
+
+## Next Steps
+
+Now that you understand vector stores and RAG, explore:
+
+- **[Custom Tools](./tools.mdx)** - Extending agent capabilities
+- **[Blockchain Integration](./lazai.mdx)** - Web3 features
+- **[Advanced Features](./advanced.mdx)** - TEE, training, and optimization
+- **[Examples](./examples/)** - Real-world implementations

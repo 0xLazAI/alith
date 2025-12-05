@@ -1,0 +1,160 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Basic Agent Example
+
+This example demonstrates how to create a simple AI agent using the Alith Python SDK with Groq's free LLM service.
+
+## Prerequisites
+
+- Python 3.8+
+- Alith Python SDK installed
+- Groq API key (free)
+
+## Setup
+
+<Steps>
+
+### 1. Install Dependencies
+
+```bash
+pip install alith
+```
+
+### 2. Get Groq API Key
+
+1. Visit [Groq](https://groq.com)
+2. Sign up for a free account
+3. Go to API Keys section
+4. Generate a new API key
+5. Copy your API key
+
+### 3. Set Environment Variable
+
+```bash
+# Unix/MacOS
+export GROQ_API_KEY="your-groq-api-key"
+
+# Windows
+set GROQ_API_KEY=your-groq-api-key
+```
+
+### 4. Create Basic Agent
+
+```python
+from alith import Agent
+import os
+
+# Get API key from environment
+api_key = os.getenv("GROQ_API_KEY")
+
+# Create agent
+agent = Agent(
+    name="BasicAgent",
+    model="llama-3.3-70b-versatile",
+    api_key=api_key,
+    base_url="https://api.groq.com/openai/v1",
+    preamble="You are a helpful AI assistant."
+)
+
+# Test the agent
+response = agent.prompt("Hello! How are you?")
+print(response)
+```
+
+</Steps>
+
+## Complete Example
+
+```python
+from alith import Agent
+import os
+
+def main():
+    # Get API key
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    # Create agent
+    agent = Agent(
+        name="BasicAgent",
+        model="llama-3.3-70b-versatile",
+        api_key=api_key,
+        base_url="https://api.groq.com/openai/v1",
+        preamble="You are a helpful AI assistant that provides clear and accurate answers."
+    )
+    
+    print("Basic Agent is ready!")
+    print("Ask me anything (type 'quit' to exit)")
+    print("-" * 50)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Get response from agent
+            response = agent.prompt(user_input)
+            print(f"\nAgent: {response}")
+            
+        except KeyboardInterrupt:
+            print("\nGoodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Running the Example
+
+```bash
+python basic_agent.py
+```
+
+## Expected Output
+
+```
+Basic Agent is ready!
+Ask me anything (type 'quit' to exit)
+--------------------------------------------------
+
+You: What is artificial intelligence?
+
+Agent: Artificial intelligence (AI) is a branch of computer science that aims to create machines and systems capable of performing tasks that typically require human intelligence. These tasks include learning, reasoning, problem-solving, perception, and language understanding.
+
+AI can be categorized into different types:
+- Narrow AI: Designed for specific tasks (like voice assistants, image recognition)
+- General AI: Hypothetical AI with human-level intelligence across all domains
+- Superintelligence: AI that surpasses human intelligence
+
+Key areas of AI include machine learning, deep learning, natural language processing, computer vision, and robotics.
+
+You: quit
+
+Goodbye!
+```
+
+## Key Features Demonstrated
+
+- **Simple Agent Creation**: Basic agent setup with Groq's free LLM
+- **Environment Variables**: Secure API key management
+- **Interactive Loop**: Continuous conversation capability
+- **Error Handling**: Graceful error management
+- **User Experience**: Clean input/output formatting
+
+## Next Steps
+
+- **[Agent with Memory](./agent-memory.mdx)** - Add conversation memory
+- **[Agent with Tools](./agent-tools.mdx)** - Add custom capabilities
+- **[Agent with RAG](./agent-rag.mdx)** - Add knowledge base
+- **[Blockchain Integration](./agent-blockchain.mdx)** - Web3 features

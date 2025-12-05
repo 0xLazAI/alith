@@ -1,0 +1,773 @@
+import { Steps, Tabs } from "nextra/components";
+
+# Agent with Blockchain Integration
+
+This example demonstrates how to create an AI agent with blockchain integration using the LazAI network, enabling decentralized AI services, data management, and secure computations.
+
+## What is Blockchain Integration?
+
+Blockchain integration provides:
+
+- **Decentralized Data Registry**: Store and manage data on-chain
+- **Verified Computing**: Secure AI computations in TEE environments
+- **Settlement System**: Automated billing and payments
+- **Privacy Protection**: Encrypted data processing
+- **Node Network**: Distributed AI service providers
+
+## Complete Example
+
+```python
+from alith import Agent
+from alith.lazai import Client
+import os
+import requests
+import json
+
+def main():
+    # Get API key and private key
+    api_key = os.getenv("GROQ_API_KEY")
+    private_key = os.getenv("PRIVATE_KEY")
+    
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    if not private_key:
+        print("Error: PRIVATE_KEY environment variable not set")
+        return
+    
+    # Initialize blockchain client
+    print("Initializing blockchain client...")
+    client = Client()
+    
+    # Check wallet balance
+    balance = client.get_balance()
+    print(f"Wallet balance: {balance} wei ({balance / 1e18:.4f} ETH)")
+    
+    # Register user if needed
+    try:
+        user_info = client.get_user(client.wallet.address)
+        print(f"User registered: {user_info[1]} available balance")
+    except:
+        print("Registering new user...")
+        client.add_user(amount=1000000000000000000)  # 1 ETH
+        print("User registered successfully")
+    
+    # Create agent
+    agent = Agent(
+        name="BlockchainAgent",
+        model="llama-3.3-70b-versatile",
+        api_key=api_key,
+        base_url="https://api.groq.com/openai/v1",
+        preamble="You are a blockchain-enabled AI assistant. You can help users with blockchain operations, data management, and decentralized AI services."
+    )
+    
+    print("Blockchain Agent is ready!")
+    print("Commands:")
+    print("  'balance' - Check wallet balance")
+    print("  'add_file <url>' - Add file to registry")
+    print("  'get_file <id>' - Get file information")
+    print("  'nodes' - List available nodes")
+    print("  'deposit <amount>' - Deposit funds")
+    print("  'quit' - Exit")
+    print("-" * 60)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Handle blockchain commands
+            if user_input.lower() == 'balance':
+                balance = client.get_balance()
+                print(f"Balance: {balance} wei ({balance / 1e18:.4f} ETH)")
+                continue
+            
+            if user_input.startswith('add_file '):
+                url = user_input[9:].strip()
+                try:
+                    file_id = client.add_file(url)
+                    print(f"File added with ID: {file_id}")
+                except Exception as e:
+                    print(f"Error adding file: {e}")
+                continue
+            
+            if user_input.startswith('get_file '):
+                try:
+                    file_id = int(user_input[9:].strip())
+                    file_info = client.get_file(file_id)
+                    print(f"File info: {file_info}")
+                except Exception as e:
+                    print(f"Error getting file: {e}")
+                continue
+            
+            if user_input.lower() == 'nodes':
+                try:
+                    nodes = client.active_node_list()
+                    print(f"Active nodes: {len(nodes)}")
+                    for i, node in enumerate(nodes[:5]):  # Show first 5
+                        print(f"  {i+1}. {node}")
+                except Exception as e:
+                    print(f"Error getting nodes: {e}")
+                continue
+            
+            if user_input.startswith('deposit '):
+                try:
+                    amount = int(user_input[8:].strip())
+                    client.deposit(amount)
+                    print(f"Deposited {amount} wei")
+                except Exception as e:
+                    print(f"Error depositing: {e}")
+                continue
+            
+            # Chat with agent
+            response = agent.prompt(user_input)
+            print(f"\nAgent: {response}")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Advanced Blockchain Example
+
+```python
+from alith import Agent
+from alith.lazai import Client, ProofData
+import os
+import requests
+import json
+from datetime import datetime
+
+class AdvancedBlockchainAgent:
+    def __init__(self, api_key: str, private_key: str):
+        # Initialize blockchain client
+        self.client = Client()
+        self.api_key = api_key
+        
+        # Create agent
+        self.agent = Agent(
+            name="AdvancedBlockchainAgent",
+            model="llama-3.3-70b-versatile",
+            api_key=api_key,
+            base_url="https://api.groq.com/openai/v1",
+            preamble="You are an advanced blockchain-enabled AI assistant. You can help users with complex blockchain operations, data management, and decentralized AI services."
+        )
+    
+    def get_wallet_info(self) -> dict:
+        """Get comprehensive wallet information"""
+        balance = self.client.get_balance()
+        user_info = self.client.get_user(self.client.wallet.address)
+        
+        return {
+            "address": self.client.wallet.address,
+            "balance": balance,
+            "balance_eth": balance / 1e18,
+            "available_balance": user_info[1],
+            "total_balance": user_info[2]
+        }
+    
+    def add_file_with_proof(self, url: str, content_hash: str) -> dict:
+        """Add file with content hash and proof"""
+        try:
+            # Add file with hash
+            tx_hash = self.client.add_file_with_hash(url, content_hash)
+            
+            # Create proof data
+            proof = ProofData(
+                id=1,
+                score=95,
+                file_url=url,
+                proof_url=f"{url}.proof"
+            )
+            
+            # Add proof
+            self.client.add_proof(1, proof)
+            
+            return {
+                "status": "success",
+                "file_url": url,
+                "content_hash": content_hash,
+                "transaction_hash": tx_hash,
+                "proof_added": True
+            }
+        except Exception as e:
+            return {"status": "error", "error": str(e)}
+    
+    def setup_node_services(self, node_address: str, node_url: str, public_key: str) -> dict:
+        """Setup node services"""
+        try:
+            # Register inference node
+            self.client.add_inference_node(node_address, node_url, public_key)
+            
+            # Register query node
+            self.client.add_query_node(node_address, f"{node_url}/query", public_key)
+            
+            # Register training node
+            self.client.add_training_node(node_address, f"{node_url}/training", public_key)
+            
+            return {
+                "status": "success",
+                "node_address": node_address,
+                "services": ["inference", "query", "training"]
+            }
+        except Exception as e:
+            return {"status": "error", "error": str(e)}
+    
+    def deposit_for_services(self, node_address: str, amounts: dict) -> dict:
+        """Deposit funds for different services"""
+        try:
+            results = {}
+            
+            if "query" in amounts:
+                self.client.deposit_query(node_address, amounts["query"])
+                results["query"] = f"Deposited {amounts['query']} wei"
+            
+            if "inference" in amounts:
+                self.client.deposit_inference(node_address, amounts["inference"])
+                results["inference"] = f"Deposited {amounts['inference']} wei"
+            
+            if "training" in amounts:
+                self.client.deposit_training(node_address, amounts["training"])
+                results["training"] = f"Deposited {amounts['training']} wei"
+            
+            return {"status": "success", "results": results}
+        except Exception as e:
+            return {"status": "error", "error": str(e)}
+    
+    def query_decentralized_data(self, node_address: str, file_id: int, query: str) -> dict:
+        """Query decentralized data using RAG"""
+        try:
+            # Generate request headers
+            headers = self.client.get_request_headers(
+                node=node_address,
+                file_id=file_id
+            )
+            
+            # Make request to query service
+            response = requests.post(
+                f"https://{node_address}/query/rag",
+                json={
+                    "query": query,
+                    "file_id": file_id
+                },
+                headers=headers,
+                timeout=30
+            )
+            
+            if response.status_code == 200:
+                return {
+                    "status": "success",
+                    "query": query,
+                    "results": response.json()
+                }
+            else:
+                return {
+                    "status": "error",
+                    "error": f"HTTP {response.status_code}: {response.text}"
+                }
+        except Exception as e:
+            return {"status": "error", "error": str(e)}
+    
+    def get_network_stats(self) -> dict:
+        """Get network statistics"""
+        try:
+            total_nodes = client.nodes_count()
+            active_nodes = client.active_nodes_count()
+            total_users = len(client.get_all_users())
+            
+            return {
+                "total_nodes": total_nodes,
+                "active_nodes": active_nodes,
+                "total_users": total_users,
+                "network_health": active_nodes / total_nodes if total_nodes > 0 else 0
+            }
+        except Exception as e:
+            return {"error": str(e)}
+    
+    def chat(self, message: str) -> str:
+        """Chat with the agent"""
+        return self.agent.prompt(message)
+
+def main():
+    # Get API key and private key
+    api_key = os.getenv("GROQ_API_KEY")
+    private_key = os.getenv("PRIVATE_KEY")
+    
+    if not api_key:
+        print("Error: GROQ_API_KEY environment variable not set")
+        return
+    
+    if not private_key:
+        print("Error: PRIVATE_KEY environment variable not set")
+        return
+    
+    # Create advanced blockchain agent
+    agent = AdvancedBlockchainAgent(api_key, private_key)
+    
+    print("Advanced Blockchain Agent is ready!")
+    print("Commands:")
+    print("  'wallet' - Show wallet information")
+    print("  'add_file <url> <hash>' - Add file with proof")
+    print("  'setup_node <address> <url> <pubkey>' - Setup node services")
+    print("  'deposit <node> <amounts>' - Deposit funds for services")
+    print("  'query <node> <file_id> <query>' - Query decentralized data")
+    print("  'stats' - Show network statistics")
+    print("  'quit' - Exit")
+    print("-" * 70)
+    
+    # Interactive loop
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+            
+            if user_input.lower() in ['quit', 'exit', 'bye']:
+                print("Goodbye!")
+                break
+            
+            if not user_input:
+                continue
+            
+            # Handle blockchain commands
+            if user_input.lower() == 'wallet':
+                info = agent.get_wallet_info()
+                print(f"Wallet Information:")
+                print(f"  Address: {info['address']}")
+                print(f"  Balance: {info['balance_eth']:.4f} ETH")
+                print(f"  Available: {info['available_balance']} wei")
+                continue
+            
+            if user_input.startswith('add_file '):
+                parts = user_input[9:].strip().split()
+                if len(parts) >= 2:
+                    url, hash_value = parts[0], parts[1]
+                    result = agent.add_file_with_proof(url, hash_value)
+                    print(f"File operation: {result}")
+                else:
+                    print("Usage: add_file <url> <hash>")
+                continue
+            
+            if user_input.startswith('setup_node '):
+                parts = user_input[11:].strip().split()
+                if len(parts) >= 3:
+                    address, url, pubkey = parts[0], parts[1], parts[2]
+                    result = agent.setup_node_services(address, url, pubkey)
+                    print(f"Node setup: {result}")
+                else:
+                    print("Usage: setup_node <address> <url> <pubkey>")
+                continue
+            
+            if user_input.startswith('deposit '):
+                parts = user_input[8:].strip().split()
+                if len(parts) >= 2:
+                    node = parts[0]
+                    amounts = {}
+                    for part in parts[1:]:
+                        if ':' in part:
+                            service, amount = part.split(':')
+                            amounts[service] = int(amount)
+                    result = agent.deposit_for_services(node, amounts)
+                    print(f"Deposit: {result}")
+                else:
+                    print("Usage: deposit <node> <service:amount> ...")
+                continue
+            
+            if user_input.startswith('query '):
+                parts = user_input[6:].strip().split()
+                if len(parts) >= 3:
+                    node, file_id, query = parts[0], int(parts[1]), ' '.join(parts[2:])
+                    result = agent.query_decentralized_data(node, file_id, query)
+                    print(f"Query result: {result}")
+                else:
+                    print("Usage: query <node> <file_id> <query>")
+                continue
+            
+            if user_input.lower() == 'stats':
+                stats = agent.get_network_stats()
+                print(f"Network Statistics:")
+                for key, value in stats.items():
+                    print(f"  {key}: {value}")
+                continue
+            
+            # Chat with agent
+            response = agent.chat(user_input)
+            print(f"\nAgent: {response}")
+            
+        except KeyboardInterrupt:
+            print("\n👋 Goodbye!")
+            break
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Running the Example
+
+```bash
+# Set environment variables
+export GROQ_API_KEY="your-groq-api-key"
+export PRIVATE_KEY="0x..."
+
+# Run the example
+python agent_blockchain.py
+```
+
+## Expected Output
+
+```
+Initializing blockchain client...
+Wallet balance: 1000000000000000000 wei (1.0000 ETH)
+User registered: 1000000000000000000 available balance
+Blockchain Agent is ready!
+Commands:
+  'balance' - Check wallet balance
+  'add_file <url>' - Add file to registry
+  'get_file <id>' - Get file information
+  'nodes' - List available nodes
+  'deposit <amount>' - Deposit funds
+  'quit' - Exit
+------------------------------------------------------------
+
+You: balance
+
+Balance: 1000000000000000000 wei (1.0000 ETH)
+
+You: add_file https://example.com/data.json
+
+File added with ID: 1
+
+You: get_file 1
+
+File info: (1, '0x...', 'https://example.com/data.json', '0x...', 0, 0)
+
+You: nodes
+
+Active nodes: 3
+  1. 0xnode1...
+  2. 0xnode2...
+  3. 0xnode3...
+
+You: What is blockchain?
+
+Agent: Blockchain is a distributed ledger technology that maintains a continuously growing list of records, called blocks, which are linked and secured using cryptography. Each block contains a cryptographic hash of the previous block, a timestamp, and transaction data.
+
+Key features of blockchain include:
+- Decentralization: No single point of control
+- Immutability: Data cannot be altered once recorded
+- Transparency: All transactions are visible to network participants
+- Security: Cryptographic protection against tampering
+
+Blockchain is commonly used for cryptocurrencies like Bitcoin, but it has many other applications including supply chain management, smart contracts, and decentralized applications (DApps).
+
+You: quit
+
+Goodbye!
+```
+
+## Key Features Demonstrated
+
+- **Blockchain Integration**: Connect to LazAI network
+- **Wallet Management**: Check balance and manage funds
+- **Data Registry**: Store and retrieve files on-chain
+- **Node Management**: Interact with decentralized nodes
+- **Settlement System**: Handle payments and billing
+- **Decentralized Services**: Use distributed AI services
+
+## Blockchain Configuration
+
+### Environment Setup
+
+```bash
+# Required environment variables
+export GROQ_API_KEY="your-groq-api-key"
+export PRIVATE_KEY="0x..."
+
+# Optional: Use local development network
+export LAZAI_LOCAL_CHAIN="true"
+
+# Optional: Custom RPC endpoint
+export LAZAI_RPC_URL="https://custom-rpc.example.com"
+```
+
+### Network Configuration
+
+```python
+from alith.lazai import Client, ChainConfig, ContractConfig
+
+# Use testnet (default)
+client = Client()
+
+# Use local development network
+import os
+os.environ["LAZAI_LOCAL_CHAIN"] = "true"
+client = Client()
+
+# Custom configuration
+custom_config = ChainConfig(
+    network="Custom Network",
+    endpoint="https://custom-rpc.example.com",
+    chain_id=12345
+)
+client = Client(chain_config=custom_config)
+```
+
+## Best Practices
+
+### 1. Security
+
+```python
+# Always use environment variables for private keys
+import os
+private_key = os.getenv("PRIVATE_KEY")
+if not private_key:
+    raise ValueError("PRIVATE_KEY environment variable not set")
+
+# Validate addresses
+def validate_address(address: str) -> bool:
+    return address.startswith("0x") and len(address) == 42
+
+# Use secure random nonces
+import secrets
+nonce = secrets.randbelow(2**256)
+```
+
+### 2. Error Handling
+
+```python
+def robust_blockchain_operation(operation_func, *args, **kwargs):
+    """Execute blockchain operations with error handling"""
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            return operation_func(*args, **kwargs)
+        except Exception as e:
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # Exponential backoff
+                continue
+            raise e
+
+# Usage
+try:
+    file_id = robust_blockchain_operation(
+        client.add_file,
+        "https://example.com/data.json"
+    )
+    print(f"Success: {file_id}")
+except Exception as e:
+    print(f"Error: {e}")
+```
+
+### 3. Gas Optimization
+
+```python
+def optimize_gas_usage(client):
+    """Optimize gas usage for blockchain operations"""
+    # Check gas price
+    gas_price = client.get_gas_price()
+    print(f"Current gas price: {gas_price} wei")
+    
+    # Estimate gas for transaction
+    estimated_gas = client.estimated_gas(
+        to=contract_address,
+        value=0,
+        data=transaction_data
+    )
+    
+    # Use appropriate gas limit
+    gas_limit = int(estimated_gas * 1.2)  # 20% buffer
+    return gas_limit
+```
+
+## Common Issues
+
+### 1. Transaction Failures
+
+**Problem**: Blockchain transactions fail
+**Solutions**:
+- Check gas price and limits
+- Ensure sufficient balance
+- Verify contract addresses
+- Check nonce issues
+
+```python
+# Check balance before transaction
+balance = client.get_balance()
+if balance < 1000000000000000000:  # 1 ETH
+    print("Insufficient balance")
+
+# Check gas price
+gas_price = client.get_gas_price()
+if gas_price > 20000000000:  # 20 gwei
+    print("Gas price too high, waiting...")
+    time.sleep(60)
+```
+
+### 2. Network Connectivity
+
+**Problem**: Cannot connect to blockchain
+**Solutions**:
+- Check RPC endpoint
+- Verify network configuration
+- Use fallback endpoints
+- Implement retry logic
+
+```python
+# Use multiple RPC endpoints
+endpoints = [
+    "https://mainnet.infura.io/v3/your-key",
+    "https://eth-mainnet.alchemyapi.io/v2/your-key",
+    "https://rpc.ankr.com/eth"
+]
+
+for endpoint in endpoints:
+    try:
+        client = Client(chain_config=ChainConfig(endpoint=endpoint))
+        break
+    except Exception as e:
+        print(f"Failed to connect to {endpoint}: {e}")
+        continue
+```
+
+### 3. Private Key Issues
+
+**Problem**: Private key not working
+**Solutions**:
+- Verify key format
+- Check key permissions
+- Use proper key derivation
+- Secure key storage
+
+```python
+# Validate private key format
+def validate_private_key(key: str) -> bool:
+    if not key.startswith("0x"):
+        key = "0x" + key
+    
+    if len(key) != 66:
+        return False
+    
+    try:
+        int(key, 16)
+        return True
+    except ValueError:
+        return False
+
+# Secure key storage
+import keyring
+def store_private_key(key: str):
+    keyring.set_password("alith", "private_key", key)
+
+def get_private_key():
+    return keyring.get_password("alith", "private_key")
+```
+
+## Integration Examples
+
+### 1. Decentralized AI Assistant
+
+```python
+class DecentralizedAssistant:
+    def __init__(self, model, api_key, base_url):
+        self.client = Client()
+        self.agent = Agent(
+            model=model,
+            api_key=api_key,
+            base_url=base_url
+        )
+        self.nodes = self.client.active_node_list()
+    
+    def query_data(self, query: str, file_id: int) -> str:
+        """Query data using decentralized services"""
+        # Get best node
+        node = self.get_best_node()
+        
+        # Generate headers
+        headers = self.client.get_request_headers(node=node, file_id=file_id)
+        
+        # Make request
+        response = requests.post(
+            f"https://{node}/query/rag",
+            json={"query": query, "file_id": file_id},
+            headers=headers
+        )
+        
+        return response.json()
+    
+    def get_best_node(self) -> str:
+        """Get the best available node"""
+        if not self.nodes:
+            raise Exception("No active nodes available")
+        return self.nodes[0]  # Simple selection
+    
+    def add_knowledge(self, url: str) -> int:
+        """Add knowledge to the network"""
+        file_id = self.client.add_file(url)
+        print(f"Added knowledge with ID: {file_id}")
+        return file_id
+
+# Usage
+assistant = DecentralizedAssistant(
+    model="llama-3.3-70b-versatile",
+    api_key="your-groq-api-key",
+    base_url="https://api.groq.com/openai/v1"
+)
+
+# Add knowledge
+file_id = assistant.add_knowledge("https://example.com/knowledge.json")
+
+# Query knowledge
+response = assistant.query_data("What is the main topic?", file_id)
+```
+
+### 2. Privacy-Preserving AI Service
+
+```python
+class PrivacyPreservingService:
+    def __init__(self, client):
+        self.client = client
+        self.encryption_key = "your-encryption-key"
+    
+    def process_sensitive_data(self, data: str, user: str) -> str:
+        """Process sensitive data with privacy protection"""
+        # Encrypt data
+        encrypted_data = encrypt(data.encode(), self.encryption_key)
+        
+        # Use TEE for processing
+        result = self.process_in_tee(encrypted_data)
+        
+        # Update user account
+        self.update_user_usage(user, len(data))
+        
+        return result
+    
+    def process_in_tee(self, encrypted_data: bytes) -> str:
+        """Process data in trusted execution environment"""
+        # Implement TEE processing
+        return "Processed result"
+    
+    def update_user_usage(self, user: str, data_size: int):
+        """Update user usage statistics"""
+        # Implement usage tracking
+        pass
+```
+
+## Next Steps
+
+- **[Advanced Features](./advanced.mdx)** - TEE, training, and optimization
+- **[Production Deployment](./deployment.mdx)** - Enterprise deployment
+- **[Security Guide](./security.mdx)** - Security best practices
+- **[Performance Optimization](./performance.mdx)** - Scaling and optimization
