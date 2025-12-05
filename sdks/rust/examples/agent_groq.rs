@@ -4,7 +4,7 @@ use alith::{Agent, Chat, LLM};
 async fn main() {
     let model = LLM::openai_compatible_model(
         "Your-api-key",
-        "api.groq.com/openai/v1",
+        "https://api.groq.com/openai/v1",
         "llama-3.1-8b-instant",
     )
     .expect("Failed to create model");
