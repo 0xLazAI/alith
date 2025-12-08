@@ -121,7 +121,7 @@
     "node-rsa": "^1.1.1",
     "openpgp": "^6.1.1",
     "web3": "^4.16.0",
-    "zod": "3.24.4",
-    "zod-to-json-schema": "^3.24.1"
+    "zod": "^3.25.0",
+    "zod-to-json-schema": "^3.25.0"
   }
 }
