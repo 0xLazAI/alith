@@ -7,4 +7,4 @@ pub use super::res_components::{GenerationSettings, TimingUsage, TokenUsage};
 pub use error::CompletionError;
 pub use request::CompletionRequest;
 pub use response::{CompletionFinishReason, CompletionResponse};
-pub use tool::{ToolChoice, ToolDefinition};
+pub use tool::{ToolCall, ToolChoice, ToolDefinition, Function};
