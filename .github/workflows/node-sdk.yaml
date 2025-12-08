@@ -54,13 +54,7 @@ jobs:
         run: npm install -g alith --retry=3 --retry-delay=2000
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --retry=3 --retry-delay=2000
-          else
-            npm install --retry=3 --retry-delay=2000
-          fi
-        shell: bash
+        run: npm install --retry=3 --retry-delay=2000
 
       - name: Build
         run: npm run build
@@ -118,13 +112,7 @@ jobs:
           npm config set fetch-retry-mintimeout 20000
           npm config set fetch-retry-maxtimeout 120000
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --retry=3 --retry-delay=2000
-          else
-            npm install --retry=3 --retry-delay=2000
-          fi
-        shell: bash
+        run: npm install --retry=3 --retry-delay=2000
       - name: Build
         shell: bash
         working-directory: .
@@ -162,12 +150,7 @@ jobs:
           npm config set fetch-retry-mintimeout 20000
           npm config set fetch-retry-maxtimeout 120000
       - name: Install dependencies
-        run: |
-          if (Test-Path package-lock.json) {
-            npm ci --retry=3 --retry-delay=2000
-          } else {
-            npm install --retry=3 --retry-delay=2000
-          }
+        run: npm install --retry=3 --retry-delay=2000
       - name: Build
         shell: bash
         run: ${{ matrix.settings.build }}
@@ -218,13 +201,7 @@ jobs:
           npm config set fetch-retry-mintimeout 20000
           npm config set fetch-retry-maxtimeout 120000
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --retry=3 --retry-delay=2000
-          else
-            npm install --retry=3 --retry-delay=2000
-          fi
-        shell: bash
+        run: npm install --retry=3 --retry-delay=2000
       - name: Build
         run: ${{ matrix.settings.build }}
         shell: bash
@@ -260,13 +237,7 @@ jobs:
           npm config set fetch-retry-maxtimeout 120000
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --retry=3 --retry-delay=2000
-          else
-            npm install --retry=3 --retry-delay=2000
-          fi
-        shell: bash
+        run: npm install --retry=3 --retry-delay=2000
 
       - name: Download all artifacts
         uses: actions/download-artifact@v4
