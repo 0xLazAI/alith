@@ -359,6 +359,7 @@ class Client(ChainManager):
         )
 
     def get_inference_node(self, address: str):
+        print("Getting inference node for address:", address)
         return self.inference_contract.functions.getNode(address).call()
 
     def inference_node_list(
