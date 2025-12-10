@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x402 Payment Test - LazAI Server</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+        }
+        .endpoint {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .endpoint h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .url {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        .url a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .url a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        .response {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .status-code {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .status-200 { background: #28a745; color: white; }
+        .status-402 { background: #ffc107; color: #333; }
+        .status-error { background: #dc3545; color: white; }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 x402 Payment Integration - Test Page</h1>
+        <p>Test the AEON BNB x402 payment endpoints for LazAI Server</p>
+        
+        <div class="note">
+            <strong>⚠️ Note:</strong> Make sure the LazAI server is running on <code>http://localhost:8000</code>
+            <br>Run: <code>cd sdks/node && npx ts-node src/inference/server.ts</code>
+        </div>
+
+        <h2>📍 Test Endpoints</h2>
+
+        <!-- Health Check -->
+        <div class="endpoint">
+            <h3>1. Server Health Check</h3>
+            <p>Check if the server is running and view configuration</p>
+            <div class="url">
+                <a href="http://localhost:8000/health" target="_blank">http://localhost:8000/health</a>
+            </div>
+            <button onclick="testEndpoint('/health', 'response-health')">Test in Page</button>
+            <div id="response-health" class="response" style="display:none;"></div>
+        </div>
+
+        <!-- Payment Required -->
+        <div class="endpoint">
+            <h3>2. Payment Required (402 Response)</h3>
+            <p>See what a payment required error looks like</p>
+            <div class="url">
+                <a href="http://localhost:8000/x402/payment-required" target="_blank">http://localhost:8000/x402/payment-required</a>
+            </div>
+            <button onclick="testEndpoint('/x402/payment-required', 'response-payment-required')">Test in Page</button>
+            <div id="response-payment-required" class="response" style="display:none;"></div>
+        </div>
+
+        <!-- x402 Info -->
+        <div class="endpoint">
+            <h3>3. x402 Payment Information</h3>
+            <p>View complete payment integration details</p>
+            <div class="url">
+                <a href="http://localhost:8000/x402/info" target="_blank">http://localhost:8000/x402/info</a>
+            </div>
+            <button onclick="testEndpoint('/x402/info', 'response-info')">Test in Page</button>
+            <div id="response-info" class="response" style="display:none;"></div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="endpoint">
+            <h3>4. Integration Code Examples</h3>
+            <p>Get TypeScript, curl, and PowerShell examples</p>
+            <div class="url">
+                <a href="http://localhost:8000/x402/example" target="_blank">http://localhost:8000/x402/example</a>
+            </div>
+            <button onclick="testEndpoint('/x402/example', 'response-example')">Test in Page</button>
+            <div id="response-example" class="response" style="display:none;"></div>
+        </div>
+
+        <!-- Models List -->
+        <div class="endpoint">
+            <h3>5. Available Models</h3>
+            <p>List all available AI models</p>
+            <div class="url">
+                <a href="http://localhost:8000/v1/models" target="_blank">http://localhost:8000/v1/models</a>
+            </div>
+            <button onclick="testEndpoint('/v1/models', 'response-models')">Test in Page</button>
+            <div id="response-models" class="response" style="display:none;"></div>
+        </div>
+
+        <!-- Chat Completions (will get 402 if payment middleware is active) -->
+        <div class="endpoint">
+            <h3>6. Chat Completions (Without Payment)</h3>
+            <p>Try to make a request without payment - should get 405 (GET not allowed) or success if settlement disabled</p>
+            <div class="url">
+                <a href="http://localhost:8000/v1/chat/completions" target="_blank">http://localhost:8000/v1/chat/completions</a>
+            </div>
+            <button onclick="testEndpoint('/v1/chat/completions', 'response-chat')">Test in Page</button>
+            <div id="response-chat" class="response" style="display:none;"></div>
+        </div>
+
+        <h2>🧪 POST Request Tests</h2>
+
+        <!-- Test Payment Verification -->
+        <div class="endpoint">
+            <h3>7. Test Payment Verification</h3>
+            <p>Test the payment proof verification endpoint</p>
+            <button onclick="testPaymentVerification()">Test Payment Verification</button>
+            <div id="response-verify" class="response" style="display:none;"></div>
+        </div>
+
+        <!-- Test Chat with Mock Payment -->
+        <div class="endpoint">
+            <h3>8. Chat Request (Mock Payment)</h3>
+            <p>Send a chat request with a mock payment proof</p>
+            <button onclick="testChatWithPayment()">Test Chat with Payment</button>
+            <div id="response-chat-payment" class="response" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const baseURL = 'http://localhost:8000';
+
+        async function testEndpoint(path, responseId) {
+            const responseDiv = document.getElementById(responseId);
+            if (!responseDiv) {
+                console.error('Response div not found:', responseId);
+                return;
+            }
+            
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = 'Loading...';
+
+            try {
+                const response = await fetch(baseURL + path);
+                const status = response.status;
+                const data = await response.json();
+                
+                let statusClass = 'status-200';
+                if (status === 402) statusClass = 'status-402';
+                else if (status >= 400) statusClass = 'status-error';
+                
+                responseDiv.innerHTML = `<div class="status-code ${statusClass}">Status: ${status}</div>\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                responseDiv.innerHTML = `<div class="status-code status-error">Error</div>\n${error.message}`;
+            }
+        }
+
+        async function testPaymentVerification() {
+            const responseDiv = document.getElementById('response-verify');
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = 'Sending request...';
+
+            try {
+                const response = await fetch(baseURL + '/x402/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-402-Payment-Proof': 'mock_payment_proof_for_testing_12345'
+                    },
+                    body: JSON.stringify({
+                        proof: 'mock_payment_proof_for_testing_12345'
+                    })
+                });
+                
+                const status = response.status;
+                const data = await response.json();
+                
+                let statusClass = status === 200 ? 'status-200' : status === 402 ? 'status-402' : 'status-error';
+                responseDiv.innerHTML = `<div class="status-code ${statusClass}">Status: ${status}</div>\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                responseDiv.innerHTML = `<div class="status-code status-error">Error</div>\n${error.message}`;
+            }
+        }
+
+        async function testChatWithPayment() {
+            const responseDiv = document.getElementById('response-chat-payment');
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = 'Sending chat request with mock payment...';
+
+            try {
+                const response = await fetch(baseURL + '/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-402-Payment-Proof': 'eyJzaWduYXR1cmUiOiIweDEyMzQiLCJhbW91bnQiOiIwLjAxIiwiY3VycmVuY3kiOiJVU0RUIn0='
+                    },
+                    body: JSON.stringify({
+                        model: 'llama-3.1-8b-instant',
+                        messages: [
+                            { role: 'user', content: 'What is the capital of France? Answer in one word.' }
+                        ],
+                        max_tokens: 10
+                    })
+                });
+                
+                const status = response.status;
+                const data = await response.json();
+                
+                let statusClass = status === 200 ? 'status-200' : status === 402 ? 'status-402' : 'status-error';
+                responseDiv.innerHTML = `<div class="status-code ${statusClass}">Status: ${status}</div>\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                responseDiv.innerHTML = `<div class="status-code status-error">Error</div>\n${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
