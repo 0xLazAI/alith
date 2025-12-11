@@ -34,14 +34,14 @@ jobs:
           toolchain: ${{ env.RUST_VERSION }}
           override: true
           components: clippy, rustfmt
-      - name: Install cargo-nextest (Linux)
+      - name: Install cargo-nextest
         uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           max_attempts: 3
           retry_wait_seconds: 30
           command: |
-            curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
+            curl -fsSL https://github.com/taiki-e/install-action/raw/main/install-action.sh | bash -s -- nextest
       - uses: Swatinem/rust-cache@v2
         with:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
@@ -151,7 +151,7 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 30
           command: |
-            curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
+            curl -fsSL https://github.com/taiki-e/install-action/raw/main/install-action.sh | bash -s -- nextest
 
       - name: Install cargo-nextest (macOS)
         if: runner.os == 'macOS'
@@ -161,7 +161,7 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 30
           command: |
-            curl -LsSf https://get.nexte.st/latest/mac | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
+            curl -fsSL https://github.com/taiki-e/install-action/raw/main/install-action.sh | bash -s -- nextest
 
       - name: Install cargo-nextest (Windows)
         if: runner.os == 'Windows'
@@ -170,10 +170,11 @@ jobs:
           timeout_minutes: 10
           max_attempts: 3
           retry_wait_seconds: 30
+          shell: pwsh
           command: |
-            $tmp = New-TemporaryFile | Rename-Item -NewName { $_ -replace 'tmp$', 'zip' } -PassThru
-            Invoke-WebRequest -OutFile $tmp https://get.nexte.st/latest/windows
-            Expand-Archive -Path $tmp -DestinationPath "${env:CARGO_HOME}\bin"
+            $ErrorActionPreference = 'Stop'
+            irm https://github.com/taiki-e/install-action/raw/main/install-action.ps1 | iex
+            ./install-action.ps1 nextest
       - uses: Swatinem/rust-cache@v2
         with:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
