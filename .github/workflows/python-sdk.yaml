@@ -58,6 +58,10 @@ jobs:
         target: [ x86_64, aarch64 ]
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
       - uses: PyO3/maturin-action@v1.47.2
         with:
           target: ${{ matrix.target }}
@@ -78,6 +82,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
       - uses: PyO3/maturin-action@v1.47.2
         with:
           working-directory: "sdks/python"
@@ -93,6 +101,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
       - uses: PyO3/maturin-action@v1.47.2
         with:
           working-directory: "sdks/python"
