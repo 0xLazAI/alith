@@ -35,13 +35,9 @@ jobs:
           override: true
           components: clippy, rustfmt
       - name: Install cargo-nextest
-        uses: nick-fields/retry@v3
+        uses: taiki-e/install-action@v2
         with:
-          timeout_minutes: 10
-          max_attempts: 3
-          retry_wait_seconds: 30
-          command: |
-            curl -fsSL https://github.com/taiki-e/install-action/raw/main/install-action.sh | bash -s -- nextest
+          tool: nextest
       - uses: Swatinem/rust-cache@v2
         with:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
@@ -143,38 +139,10 @@ jobs:
           toolchain: ${{ env.RUST_VERSION }}
           override: true
           components: clippy, rustfmt
-      - name: Install cargo-nextest (Linux)
-        if: runner.os == 'Linux'
-        uses: nick-fields/retry@v3
+      - name: Install cargo-nextest
+        uses: taiki-e/install-action@v2
         with:
-          timeout_minutes: 10
-          max_attempts: 3
-          retry_wait_seconds: 30
-          command: |
-            curl -fsSL https://github.com/taiki-e/install-action/raw/main/install-action.sh | bash -s -- nextest
-
-      - name: Install cargo-nextest (macOS)
-        if: runner.os == 'macOS'
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          retry_wait_seconds: 30
-          command: |
-            curl -fsSL https://github.com/taiki-e/install-action/raw/main/install-action.sh | bash -s -- nextest
-
-      - name: Install cargo-nextest (Windows)
-        if: runner.os == 'Windows'
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          retry_wait_seconds: 30
-          shell: pwsh
-          command: |
-            $ErrorActionPreference = 'Stop'
-            irm https://github.com/taiki-e/install-action/raw/main/install-action.ps1 | iex
-            ./install-action.ps1 nextest
+          tool: nextest
       - uses: Swatinem/rust-cache@v2
         with:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
