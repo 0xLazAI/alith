@@ -15,7 +15,6 @@ from alith.multi_agent import (
     AgentRole,
     MultiAgent,
     SharedMemory,
-    WorkflowCondition,
     WorkflowStep,
 )
 
@@ -133,7 +132,7 @@ print("\nWorkflow Execution Summary:")
 print("=" * 80)
 print(f"Success: {result['success']}")
 print(f"Steps executed: {len(result['execution_history'])}")
-print(f"\nFinal Output:")
+print("\nFinal Output:")
 print(result['final_output'])
 
 print("\n" + "=" * 80)
