@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock, AsyncMock
+from unittest.mock import MagicMock
 import sys
 import os
 import json
@@ -33,9 +33,8 @@ mock_request_module.USER_HEADER = "user-address"
 mock_request_module.SIGNATURE_HEADER = "x-signature"
 sys.modules["alith.lazai.request"] = mock_request_module
 
-from alith.inference.settlement import TokenBillingMiddleware, calculate_billing
-from alith.inference.config import Config
-from starlette.types import Scope, Receive, Send
+from alith.inference.settlement import TokenBillingMiddleware  # noqa: E402
+from alith.inference.config import Config  # noqa: E402
 
 class MockRequest:
     def __init__(self, path, headers):
