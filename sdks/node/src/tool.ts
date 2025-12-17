@@ -3,6 +3,12 @@ import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
 /**
+ * Utility type to handle both synchronous and asynchronous return values.
+ * This allows tool handlers to return either a direct value or a Promise.
+ */
+type MaybePromise<T> = T | Promise<T>;
+
+/**
  * The Parameters type, which can be one of the following three types:
  * 1. string: Directly represents a JSONSchema string
  * 2. z.ZodTypeAny: A type-safe schema defined using Zod
@@ -48,9 +54,10 @@ type Tool = {
   /**
    * The handler function of the tool. This function is called when the tool is executed.
    * It accepts any number of arguments and returns any type of result.
+   * The handler can be either synchronous or asynchronous (returning a Promise).
    * The arguments passed to this function should match the parameters defined in the `parameters` field.
    */
-  handler: (...args: unknown[]) => unknown;
+  handler: (...args: unknown[]) => MaybePromise<unknown>;
 };
 
 /**
@@ -84,4 +91,4 @@ function convertParametersToJson(parameters: Parameters): string {
 }
 
 // Export the function and types for use in other modules
-export { convertParametersToJson, type Parameters, type Tool };
+export { convertParametersToJson, type MaybePromise, type Parameters, type Tool };
