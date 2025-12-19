@@ -139,13 +139,13 @@ for msg in memory.messages:
     recipient_str = msg.recipient if msg.recipient else "all"
     print(f"  {msg.sender} -> {recipient_str}: {msg.content[:100]}...")
 
-print(f"\nAgent results:")
+print("\nAgent results:")
 for agent_id in [planner.agent_id, executor.agent_id, reviewer.agent_id]:
     result = memory.get_result(agent_id)
     if result:
         print(f"  {agent_id}: {result.status.value} ({result.execution_time:.2f}s)")
 
-print(f"\nShared context:")
+print("\nShared context:")
 for key, value in memory.context.items():
     print(f"  {key}: {value}")
 

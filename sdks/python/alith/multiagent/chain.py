@@ -2,7 +2,7 @@
 Sequential agent chain for multi-step workflows.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional
 
 from .agent import MultiAgent

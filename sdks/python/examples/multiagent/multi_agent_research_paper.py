@@ -113,7 +113,7 @@ research_chain = AgentChain(
 topic = "The role of decentralized AI agents in Web3 ecosystems"
 research_results = research_chain.execute(topic)
 
-print(f"Research completed. Outline created.")
+print("Research completed. Outline created.")
 outline = research_chain.get_final_result()
 if outline:
     print(f"\nOutline preview:\n{outline.output[:300]}...")
@@ -173,8 +173,8 @@ print(all_sections)
 print("\n" + "=" * 80)
 print("Workflow Summary")
 print("=" * 80)
-print(f"Total agents used: 7")
-print(f"Total steps: 3 phases")
+print("Total agents used: 7")
+print("Total steps: 3 phases")
 print(f"Total execution time: {sum(r.execution_time for r in research_results) + sum(r.execution_time for r in writing_results.values()) + review_result.execution_time:.2f}s")
 print(f"Memory messages: {len(memory.messages)}")
 print(f"Memory results: {len(memory.results)}")

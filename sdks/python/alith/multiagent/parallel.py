@@ -4,12 +4,12 @@ Parallel agent execution for concurrent workflows.
 
 import concurrent.futures
 import threading
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional
 
 from .agent import MultiAgent
 from .memory import SharedMemory
-from .types import AgentResult, AgentStatus
+from .types import AgentResult
 
 
 @dataclass
