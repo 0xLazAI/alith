@@ -47,7 +47,7 @@ mistralrs = { git = "https://github.com/EricLBuehler/mistral.rs.git", rev = "aaa
 # sglang
 
 # Python
-pythonize = { version = "0.23", optional = true }
+pythonize = { version = "0.27", optional = true }
 either.workspace = true
 async-stream.workspace = true
 encoding_rs.workspace = true
