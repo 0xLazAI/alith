@@ -65,7 +65,7 @@ impl CudaConfig {
         self.total_vram_bytes = self
             .cuda_devices
             .iter()
-            .map(|d| (d.available_vram_bytes))
+            .map(|d| d.available_vram_bytes)
             .sum();
         Ok(())
     }
