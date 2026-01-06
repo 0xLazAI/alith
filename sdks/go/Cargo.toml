@@ -1,0 +1,18 @@
+[package]
+name = "alith-go-sdk"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+name = "alith_go_sdk"
+crate-type = ["staticlib"]
+
+[dependencies]
+alith.workspace = true
+tokio.workspace = true
+async-trait.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+lazy_static = "1.4.0"
+libc = "0.2"
+
