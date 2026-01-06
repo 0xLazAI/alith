@@ -1,5 +1,6 @@
 import json
 import logging
+import uuid
 from typing import Awaitable, Callable
 
 from fastapi import Request, Response, status
@@ -18,7 +19,7 @@ logging.basicConfig(
 
 
 class TokenBillingMiddleware(BaseHTTPMiddleware):
-    """Token consumption billing middleware for /v1/chat/completions endpoint."""
+    """Token consumption billing middleware for /v1/chat/completions and /v1/embeddings endpoints."""
 
     def __init__(self, app, client: Client = Client(), config: Config = Config()):
         super().__init__(app)
@@ -30,9 +31,11 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
     ) -> Response:
         # Process the request and get the response
         response = await call_next(request)
-        # Only process successful responses to /v1/chat/completions
-        # TODO: Settlement for other request including embeddings, completions, etc.
-        if request.url.path == "/v1/chat/completions" and response.status_code == 200:
+        # Only process successful responses to /v1/chat/completions and /v1/embeddings
+        if (
+            request.url.path in ["/v1/chat/completions", "/v1/embeddings"]
+            and response.status_code == 200
+        ):
             try:
                 # Read the response body
                 response_body = b""
@@ -40,14 +43,20 @@ class TokenBillingMiddleware(BaseHTTPMiddleware):
                     response_body += chunk
                 # Parse response to extract token usage
                 response_data = json.loads(response_body.decode("utf-8"))
-                id = response_data.get("id", 0)
+                
+                # Get ID or generate one if missing (common in embeddings)
+                id = response_data.get("id")
+                if not id:
+                    id = str(uuid.uuid4())
+                
                 usage = response_data.get("usage", {})
                 total_tokens = usage.get("total_tokens", 0)
+                
                 user, cost = calculate_billing(
-                    request, id, total_tokens, self.config.price_per_token, self.client
+                    request, str(id), total_tokens, self.config.price_per_token, self.client
                 )
                 logger.info(
-                    f"User {user} consumed {total_tokens} tokens on /v1/chat/completions, billing: {cost}"
+                    f"User {user} consumed {total_tokens} tokens on {request.url.path}, billing: {cost}"
                 )
 
                 new_response = Response(
@@ -95,7 +104,7 @@ def calculate_billing(
     total_tokens: int,
     price_per_token: int,
     client: Client = Client(),
-) -> tuple[int, int]:
+) -> tuple[str, int]:
     user = request.headers[USER_HEADER]
     nonce = request.headers[NONCE_HEADER]
     signature = request.headers[SIGNATURE_HEADER]
