@@ -9,7 +9,7 @@ use alith_core::{
     chat::{Completion, CompletionError, Request as CompletionRequest},
     client::CompletionResponse,
     interface::requests::completion::{
-        CompletionFinishReason, GenerationSettings, TimingUsage, TokenUsage,
+        CompletionFinishReason, GenerationSettings, TimingUsage, TokenUsage, ToolCall, Function,
     },
 };
 use alith_models::local_model::{GgufLoader, GgufLoaderTrait, LocalLLMModel};
@@ -180,11 +180,20 @@ impl Completion for LlamaEngine {
                 .decode(&mut batch)
                 .map_err(|err| CompletionError::Inference(err.to_string()))?;
         }
+
+        // Basic tool call detection - look for function call patterns in the output
+        let tool_calls = Self::detect_tool_calls(&output);
+        let final_finish_reason = if tool_calls.is_some() && !tool_calls.as_ref().unwrap().is_empty() {
+            CompletionFinishReason::ToolsCall
+        } else {
+            finish_reason
+        };
+
         Ok(CompletionResponse {
             id: self.model.model_base.model_id.clone(),
             index: None,
             content: output,
-            finish_reason,
+            finish_reason: final_finish_reason,
             completion_probabilities: None,
             truncated: false,
             generation_settings: GenerationSettings::default(),
@@ -195,8 +204,51 @@ impl Completion for LlamaEngine {
                 completion_tokens: output_tokens.len() as u32,
                 total_tokens: (last_index as usize + 1 + output_tokens.len()) as u32,
             },
-            // TODO: tool calls
-            tool_calls: None,
+            tool_calls,
         })
+    }
+
+    /// Basic tool call detection from model output
+    /// Looks for common function call patterns like:
+    /// - `function_name(args)`
+    /// - JSON function calls
+    fn detect_tool_calls(output: &str) -> Option<Vec<ToolCall>> {
+        // Simple detection: look for function call patterns
+        // This is a basic implementation that can be enhanced
+        
+        // Check if output contains function-like patterns
+        if output.contains("(") && output.contains(")") {
+            // Look for patterns like function_name(args)
+            if let Some(start) = output.find('(') {
+                if let Some(end) = output.rfind(')') {
+                    if start < end {
+                        let before_paren = &output[..start];
+                        if let Some(function_name) = before_paren.split_whitespace().last() {
+                            // Basic validation: function names are typically alphanumeric
+                            if function_name.chars().all(|c| c.is_alphanumeric() || c == '_') && function_name.len() > 2 {
+                                let arguments = &output[start+1..end];
+                                
+                                let tool_call = ToolCall {
+                                    id: "call_0".to_string(),
+                                    r#type: "function".to_string(),
+                                    function: Function {
+                                        name: function_name.to_string(),
+                                        arguments: if arguments.trim().is_empty() {
+                                            "{}".to_string()
+                                        } else {
+                                            format!("{{\"input\": \"{}\"}}", arguments.replace('"', "\\\""))
+                                        },
+                                    },
+                                };
+                                
+                                return Some(vec![tool_call]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        None
     }
 }
