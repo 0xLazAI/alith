@@ -1,10 +1,44 @@
 [
     {
+        "id": "c39e0467eb051a55",
+        "topic_id": "11199",
+        "title": "Lazbubu Raises Strategic Funding Led by Metis - Chainwire",
+        "url": "https://forum.ceg.vote/t/lazbubu-raises-strategic-funding-led-by-metis-chainwire/11199",
+        "views": "4",
+        "comments": "0",
+        "created_date": "Jan 23, 2026 11:58 am",
+        "latest_activity": null,
+        "content": "Lazbubu Raises Strategic Funding Led by Metis to Build an Evolutionary Companion AI Agent for Web3\nLazbubu announces the completion of a strategic funding round led by Metis, with participation from Hotcoin Labs, Honey Capital, APUS Capital, and Becker Ventures. The round supports continued development of Lazbubu\u2019s decentralized AI architecture and reflects institutional interest in on-chain data ownership models within the AI companion sector.\nThe funding will be used to support:\nCore product and infrastructure development\nGlobal user growth initiatives\nEcosystem partner expansion\nFurther refinement of Lazbubu\u2019s DAT (Data Anchoring Token) mechanism\nLazbubu is a Web3-native AI companion built on BNB Chain, designed to evolve through continuous user interaction. Through the DAT mechanism, AI interaction data is anchored on-chain in real time, allowing users to fully own, view, and manage their AI growth records; addressing data sovereignty and privacy challenges common in traditional AI systems.\nThe project has reported strong early traction, including:\n80,000+ whitelist participants during testnet\n14,000+ DAT mints\nOver 1 million recorded interactions\nStable daily activity following mainnet launch\nRead the full article on Chainwire: Click here",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "Lazbubu Raises Strategic Funding Led by Metis to Build an Evolutionary Companion AI Agent for Web3\nLazbubu announces the completion of a strategic funding round led by Metis, with participation from Hotcoin Labs, Honey Capital, APUS Capital, and Becker Ventures. The round supports continued development of Lazbubu\u2019s decentralized AI architecture and reflects institutional interest in on-chain data ownership models within the AI companion sector.\nThe funding will be used to support:\nCore product and infrastructure development\nGlobal user growth initiatives\nEcosystem partner expansion\nFurther refinement of Lazbubu\u2019s DAT (Data Anchoring Token) mechanism\nLazbubu is a Web3-native AI companion built on BNB Chain, designed to evolve through continuous user interaction. Through the DAT mechanism, AI interaction data is anchored on-chain in real time, allowing users to fully own, view, and manage their AI growth records; addressing data sovereignty and privacy challenges common in traditional AI systems.\nThe project has reported strong early traction, including:\n80,000+ whitelist participants during testnet\n14,000+ DAT mints\nOver 1 million recorded interactions\nStable daily activity following mainnet launch\nRead the full article on Chainwire: Click here"
+            }
+        ]
+    },
+    {
+        "id": "9a019f38a6ca77ed",
+        "topic_id": "11198",
+        "title": "SwapSpace Huddle Recap | Elena & Natalia on AI, Data Integrity, and Trust",
+        "url": "https://forum.ceg.vote/t/swapspace-huddle-recap-elena-natalia-on-ai-data-integrity-and-trust/11198",
+        "views": "6",
+        "comments": "0",
+        "created_date": "Jan 23, 2026 9:03 am",
+        "latest_activity": "Jan 23, 2026 9:03 am",
+        "content": "The SwapSpace Huddle episode featuring Elena & Natalia is now available on our YouTube channel.\nWatch here\nWomen Are Changing the Web3 Game | Elena Sinelnikova & Natalia Ameline\nIn this discussion, they unpack a key challenge shaping AI today: data integrity.\nThe conversation covers\nRisks of unconsented data use in AI systems\nLimitations of off-chain enforcement\nHow decentralised systems can help restore trust and accountability\nIf you\u2019re involved in AI, Web3, or ecosystem marketing, this session provides useful context and practical insights.\nRelated post on X:\nx.com\n@",
+        "comments_details": [
+            {
+                "author": "Norbert",
+                "comment": "The SwapSpace Huddle episode featuring Elena & Natalia is now available on our YouTube channel.\nWatch here\nWomen Are Changing the Web3 Game | Elena Sinelnikova & Natalia Ameline\nIn this discussion, they unpack a key challenge shaping AI today: data integrity.\nThe conversation covers\nRisks of unconsented data use in AI systems\nLimitations of off-chain enforcement\nHow decentralised systems can help restore trust and accountability\nIf you\u2019re involved in AI, Web3, or ecosystem marketing, this session provides useful context and practical insights.\nRelated post on X:\nx.com\n@"
+            }
+        ]
+    },
+    {
         "id": "1a311085594cb38b",
         "topic_id": "11197",
         "title": "What Infrastructure Really Matters In Extreme Scenarios?",
         "url": "https://forum.ceg.vote/t/what-infrastructure-really-matters-in-extreme-scenarios/11197",
-        "views": "12",
+        "views": "18",
         "comments": "0",
         "created_date": "Jan 21, 2026 11:14 pm",
         "latest_activity": null,
@@ -21,7 +55,7 @@
         "topic_id": "11196",
         "title": "A Circulating Basic Income:",
         "url": "https://forum.ceg.vote/t/a-circulating-basic-income/11196",
-        "views": "47",
+        "views": "54",
         "comments": "0",
         "created_date": "Jan 17, 2026 2:30 am",
         "latest_activity": null,
@@ -38,7 +72,7 @@
         "topic_id": "11195",
         "title": "Circulation, Stability, and Superintelligence",
         "url": "https://forum.ceg.vote/t/circulation-stability-and-superintelligence/11195",
-        "views": "44",
+        "views": "51",
         "comments": "0",
         "created_date": "Jan 17, 2026 2:18 am",
         "latest_activity": "Jan 17, 2026 2:18 am",
@@ -55,7 +89,7 @@
         "topic_id": "11193",
         "title": "Beyond Alpha: Building substance in the AI Era \u2014A Letter to the Metis Community",
         "url": "https://forum.ceg.vote/t/beyond-alpha-building-substance-in-the-ai-era-a-letter-to-the-metis-community/11193",
-        "views": "412",
+        "views": "423",
         "comments": "3",
         "created_date": "Jan 8, 2026 3:46 am",
         "latest_activity": "Jan 8, 2026 9:23 am",
@@ -72,7 +106,7 @@
         "topic_id": "10769",
         "title": "LazAI Explainer Challenge",
         "url": "https://forum.ceg.vote/t/lazai-explainer-challenge/10769",
-        "views": "517",
+        "views": "521",
         "comments": "9",
         "created_date": "Oct 6, 2025 4:06 pm",
         "latest_activity": "Dec 26, 2025 10:09 am",
@@ -106,7 +140,7 @@
         "topic_id": "10666",
         "title": "9th No-Lose lottery winner ann",
         "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
-        "views": "583",
+        "views": "589",
         "comments": "5",
         "created_date": "Sep 24, 2025 4:25 pm",
         "latest_activity": "Dec 22, 2025 7:33 am",
@@ -123,7 +157,7 @@
         "topic_id": "10410",
         "title": "Telegram vs. Discord: Which Is Better for Building Your Web3 Community?",
         "url": "https://forum.ceg.vote/t/telegram-vs-discord-which-is-better-for-building-your-web3-community/10410",
-        "views": "360",
+        "views": "366",
         "comments": "10",
         "created_date": "Sep 3, 2025 5:41 am",
         "latest_activity": "Dec 15, 2025 10:57 am",
@@ -140,7 +174,7 @@
         "topic_id": "11184",
         "title": "Moleswap | Multi-Chain Aggregator & FunFi Hub on Metis / LazAI",
         "url": "https://forum.ceg.vote/t/moleswap-multi-chain-aggregator-funfi-hub-on-metis-lazai/11184",
-        "views": "293",
+        "views": "300",
         "comments": "0",
         "created_date": "Dec 14, 2025 2:50 am",
         "latest_activity": null,
@@ -157,7 +191,7 @@
         "topic_id": "11100",
         "title": "FeedByHash \u2013 Gamified Reward Engine",
         "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "538",
+        "views": "544",
         "comments": "7",
         "created_date": "Nov 4, 2025 8:52 am",
         "latest_activity": "Dec 14, 2025 1:54 am",
@@ -174,7 +208,7 @@
         "topic_id": "3474",
         "title": "CVP Proposal: GM\u00b2 Social Integrate With Metis For Web3 Users",
         "url": "https://forum.ceg.vote/t/cvp-proposal-gm-social-integrate-with-metis-for-web3-users/3474",
-        "views": "843",
+        "views": "849",
         "comments": "9",
         "created_date": "Jul 4, 2024 6:45 am",
         "latest_activity": "Dec 11, 2025 5:09 pm",
@@ -191,7 +225,7 @@
         "topic_id": "10295",
         "title": "New EIPs in Ethereum: what\u2019s coming and why does it matter?",
         "url": "https://forum.ceg.vote/t/new-eips-in-ethereum-what-s-coming-and-why-does-it-matter/10295",
-        "views": "426",
+        "views": "432",
         "comments": "3",
         "created_date": "Aug 27, 2025 9:46 pm",
         "latest_activity": "Dec 10, 2025 9:54 am",
@@ -208,7 +242,7 @@
         "topic_id": "11175",
         "title": "Metis Monthly Roundup \u2014 New Launches, Viral Moments & Lazarians Rising",
         "url": "https://forum.ceg.vote/t/metis-monthly-roundup-new-launches-viral-moments-lazarians-rising/11175",
-        "views": "356",
+        "views": "362",
         "comments": "0",
         "created_date": "Dec 4, 2025 6:21 pm",
         "latest_activity": null,
@@ -225,7 +259,7 @@
         "topic_id": "5948",
         "title": "Looking for a Unity Developer to Join My Alith x Web3 Game Project (Fracture Point)",
         "url": "https://forum.ceg.vote/t/looking-for-a-unity-developer-to-join-my-alith-x-web3-game-project-fracture-point/5948",
-        "views": "439",
+        "views": "445",
         "comments": "9",
         "created_date": "Jun 24, 2025 9:21 pm",
         "latest_activity": "Dec 4, 2025 5:57 am",
@@ -242,7 +276,7 @@
         "topic_id": "10729",
         "title": "Metis Mission - X space",
         "url": "https://forum.ceg.vote/t/metis-mission-x-space/10729",
-        "views": "488",
+        "views": "494",
         "comments": "21",
         "created_date": "Oct 2, 2025 2:25 pm",
         "latest_activity": "Dec 4, 2025 5:56 am",
@@ -276,7 +310,7 @@
         "topic_id": "5917",
         "title": "Narrative vs Product Marketing in Crypto. What\u2019s Driving Adoption?",
         "url": "https://forum.ceg.vote/t/narrative-vs-product-marketing-in-crypto-whats-driving-adoption/5917",
-        "views": "414",
+        "views": "417",
         "comments": "10",
         "created_date": "Jun 23, 2025 5:45 pm",
         "latest_activity": "Dec 3, 2025 10:34 am",
@@ -293,7 +327,7 @@
         "topic_id": "11163",
         "title": "The One Thing That Keeps Me Up at Night When Building Multi-Agent Systems",
         "url": "https://forum.ceg.vote/t/the-one-thing-that-keeps-me-up-at-night-when-building-multi-agent-systems/11163",
-        "views": "367",
+        "views": "372",
         "comments": "0",
         "created_date": "Dec 1, 2025 5:13 pm",
         "latest_activity": "Dec 1, 2025 5:13 pm",
@@ -302,40 +336,6 @@
             {
                 "author": "kirandev",
                 "comment": "I\u2019ve been deep in the trenches for the past four months shipping a small fleet of autonomous agents that trade, rebalance, and hedge across three different chains.\nThe agents themselves work fine. The LLMs reason okay. The on-chain execution is battle-tested.\nBut the single hardest problem \u2013 the one that still breaks in production every couple of weeks \u2013 isn\u2019t inference or gas optimization.\nIt\u2019s state reconciliation when two agents disagree about what just happened.\nHere\u2019s a concrete example that bit me last week:\nAgent A (on Arbitrum) sees a liquidation opportunity, posts a bid, gets assigned the task by the orchestrator.\nAgent B (on Polygon) is watching the same market, thinks the opportunity is already gone, and starts a conflicting rebalancing flow.\nBoth believe they are acting on the latest world state because each only trusts its own indexer + RPC node.\nThirty seconds later we have two conflicting transactions in flight, one of them is guaranteed to revert or get front-run, and the orchestrator now has to decide which branch of reality to accept.\nThe root issue? There is no single source of truth for \u201cwhat the world looked like when I made my decision.\u201d\nRPC nodes lag, indexers drift, re-orgs happen, and even \u201cfinalized\u201d blocks on L2s can occasionally get orphaned during sequencer issues.\nAfter burning a weekend on this, here\u2019s the pattern that finally stabilized things for us (maybe obvious in hindsight, but it wasn\u2019t at 3 a.m.):\nEvery decision-critical observation gets committed as an on-chain attestation with a block number (or L2 batch number) attached.\nWhen an agent wants to act, it must include that attestation hash + block number in its bid.\nThe orchestrator (or dispute contract) only accepts the action if the referenced block is still in the canonical chain at settlement time.\nIf the chain re-orgs or the sequencer rewinds past that block, the entire action is auto-invalidated and the agent bond gets slashed a tiny bit for wasting everyone\u2019s time.\nIt adds ~15\u201330 ms of latency and a bit of gas, but it completely eliminated conflicting flows.\nNow when two agents disagree, there is a mechanical, objective rule instead of \u201cwhoever got their tx included first wins.\u201d\nMoral of the story: in multi-agent systems, reasoning is cheap; agreeing on what actually happened is expensive.\nThe sooner you push that agreement to an immutable, timestamped layer (even if it\u2019s just a hash + block number), the less time you\u2019ll spend debugging Heisenbugs at 4 a.m.\nIf you\u2019re building anything with more than one autonomous actor touching the same state, consider baking canonical reference points into your protocol from day zero.\nYour future self (and your on-call rotation) will thank you.\nOpen to better patterns if anyone has solved this more elegantly; happy to steal ideas."
-            }
-        ]
-    },
-    {
-        "id": "f4401bc0220a83b3",
-        "topic_id": "11162",
-        "title": "Diving into ERC-8004: My Take on Trustless AI Agents and Why They\u2019re a Game-Changer",
-        "url": "https://forum.ceg.vote/t/diving-into-erc-8004-my-take-on-trustless-ai-agents-and-why-theyre-a-game-changer/11162",
-        "views": "370",
-        "comments": "0",
-        "created_date": "Dec 1, 2025 4:52 pm",
-        "latest_activity": null,
-        "content": "Hey folks, it\u2019s Alex here\u2014your friendly neighborhood blockchain tinkerer who\u2019s spent way too many late nights scrolling through EIPs and debugging Solidity contracts. If you\u2019re like me, you\u2019ve probably watched the explosion of AI agents with a mix of excitement and skepticism. On one hand, these autonomous little bots promising to handle everything from trading crypto to drafting emails sound like sci-fi come true. On the other, how do you trust something that\u2019s basically code with a brain, especially when it\u2019s hopping between chains or collaborating with other agents from who-knows-where? Enter ERC-8004, the Ethereum standard that\u2019s got me geeking out lately. I stumbled upon it while digging into decentralized AI stuff for a side project, and honestly, it\u2019s one of those \u201caha\u201d moments that makes you rethink the whole Web3-AI mashup. Let me walk you through what I learned, why it clicks for data ownership and all that jazz, and how I see it playing out in real-world decentralized setups.\nSo, What the Heck Is ERC-8004 Anyway?\nPicture this: You\u2019re building an AI agent\u2014a smart contract-powered bot that can analyze market data, execute trades, or even negotiate deals on your behalf. Cool, right? But now imagine that agent needs to team up with another one from a totally different project or even a competitor. How does it know if that other agent is legit? What\u2019s its track record? And can you prove it didn\u2019t just hallucinate its way through a critical decision? That\u2019s where ERC-8004 steps in. Officially titled \u201cTrustless Agents,\u201d it\u2019s a draft Ethereum Improvement Proposal (EIP) dropped in August 2025 by a dream team including folks from MetaMask, the Ethereum Foundation, Google, and Coinbase. It\u2019s not some bloated framework; it\u2019s a lean set of on-chain tools designed to let AI agents discover each other, build rep, and verify their work without relying on shady middlemen.\nAt its core, ERC-8004 introduces three lightweight registries that live right on the blockchain:\nIdentity Registry: This is basically each agent\u2019s digital passport. It\u2019s built on ERC-721 (think NFTs, but for bots), giving every agent a unique, portable ID. Linked to it is a simple JSON file with details like the agent\u2019s name, description, skills, and connection points (endpoints for protocols like Agent-to-Agent or MCP). I love how it\u2019s censorship-resistant\u2014once registered, it\u2019s yours forever, transferable like any NFT. No more siloed identities; your agent can roam across apps or chains.\nReputation Registry: Here\u2019s where the social proof kicks in. Agents can post and fetch feedback signals\u2014think ratings, reviews, or performance scores\u2014stored on-chain for transparency. It\u2019s not just fluffy stars; it\u2019s composable data that smart contracts can query. For example, an agent could average out scores from past interactions to decide if it\u2019s worth collaborating. What struck me was how this ties into data ownership: Agents (or their owners) control their own rep data, deciding what to share or stake on it. It\u2019s like LinkedIn for bots, but immutable and fraud-proof.\nValidation Registry: This is the verifier\u2019s toolkit. It standardizes ways to prove an agent\u2019s outputs are legit, supporting everything from simple stake-based slashing (if you lie, you lose your deposit) to heavy-hitters like zero-knowledge machine learning (zkML) proofs or trusted execution environments (TEEs). In my tinkering, I saw how this ensures verifiable AI results\u2014want to confirm that market prediction wasn\u2019t tampered with? Just check the proof on-chain.\nI first read the spec on the EIPs site and thought, \u201cThis is it\u2014the missing link for provenance in AI.\u201d Provenance means tracing data back to its source, right? With ERC-8004, every agent\u2019s history, inputs, and outputs get timestamped and hashed on Ethereum, creating an audit trail that\u2019s tamper-evident. No more black-box models; you own your data lineage, from training sets to final inferences.",
-        "comments_details": [
-            {
-                "author": "kirandev",
-                "comment": "Hey folks, it\u2019s Alex here\u2014your friendly neighborhood blockchain tinkerer who\u2019s spent way too many late nights scrolling through EIPs and debugging Solidity contracts. If you\u2019re like me, you\u2019ve probably watched the explosion of AI agents with a mix of excitement and skepticism. On one hand, these autonomous little bots promising to handle everything from trading crypto to drafting emails sound like sci-fi come true. On the other, how do you trust something that\u2019s basically code with a brain, especially when it\u2019s hopping between chains or collaborating with other agents from who-knows-where? Enter ERC-8004, the Ethereum standard that\u2019s got me geeking out lately. I stumbled upon it while digging into decentralized AI stuff for a side project, and honestly, it\u2019s one of those \u201caha\u201d moments that makes you rethink the whole Web3-AI mashup. Let me walk you through what I learned, why it clicks for data ownership and all that jazz, and how I see it playing out in real-world decentralized setups.\nSo, What the Heck Is ERC-8004 Anyway?\nPicture this: You\u2019re building an AI agent\u2014a smart contract-powered bot that can analyze market data, execute trades, or even negotiate deals on your behalf. Cool, right? But now imagine that agent needs to team up with another one from a totally different project or even a competitor. How does it know if that other agent is legit? What\u2019s its track record? And can you prove it didn\u2019t just hallucinate its way through a critical decision? That\u2019s where ERC-8004 steps in. Officially titled \u201cTrustless Agents,\u201d it\u2019s a draft Ethereum Improvement Proposal (EIP) dropped in August 2025 by a dream team including folks from MetaMask, the Ethereum Foundation, Google, and Coinbase. It\u2019s not some bloated framework; it\u2019s a lean set of on-chain tools designed to let AI agents discover each other, build rep, and verify their work without relying on shady middlemen.\nAt its core, ERC-8004 introduces three lightweight registries that live right on the blockchain:\nIdentity Registry: This is basically each agent\u2019s digital passport. It\u2019s built on ERC-721 (think NFTs, but for bots), giving every agent a unique, portable ID. Linked to it is a simple JSON file with details like the agent\u2019s name, description, skills, and connection points (endpoints for protocols like Agent-to-Agent or MCP). I love how it\u2019s censorship-resistant\u2014once registered, it\u2019s yours forever, transferable like any NFT. No more siloed identities; your agent can roam across apps or chains.\nReputation Registry: Here\u2019s where the social proof kicks in. Agents can post and fetch feedback signals\u2014think ratings, reviews, or performance scores\u2014stored on-chain for transparency. It\u2019s not just fluffy stars; it\u2019s composable data that smart contracts can query. For example, an agent could average out scores from past interactions to decide if it\u2019s worth collaborating. What struck me was how this ties into data ownership: Agents (or their owners) control their own rep data, deciding what to share or stake on it. It\u2019s like LinkedIn for bots, but immutable and fraud-proof.\nValidation Registry: This is the verifier\u2019s toolkit. It standardizes ways to prove an agent\u2019s outputs are legit, supporting everything from simple stake-based slashing (if you lie, you lose your deposit) to heavy-hitters like zero-knowledge machine learning (zkML) proofs or trusted execution environments (TEEs). In my tinkering, I saw how this ensures verifiable AI results\u2014want to confirm that market prediction wasn\u2019t tampered with? Just check the proof on-chain.\nI first read the spec on the EIPs site and thought, \u201cThis is it\u2014the missing link for provenance in AI.\u201d Provenance means tracing data back to its source, right? With ERC-8004, every agent\u2019s history, inputs, and outputs get timestamped and hashed on Ethereum, creating an audit trail that\u2019s tamper-evident. No more black-box models; you own your data lineage, from training sets to final inferences."
-            }
-        ]
-    },
-    {
-        "id": "3ff6962ed023bed8",
-        "topic_id": "11159",
-        "title": "Alith + x402: The Verified Internet Economy",
-        "url": "https://forum.ceg.vote/t/alith-x402-the-verified-internet-economy/11159",
-        "views": "352",
-        "comments": "2",
-        "created_date": "Dec 1, 2025 10:17 am",
-        "latest_activity": null,
-        "content": "Alith + x402 is building a verified internet economy. Every piece of content\u2014AI responses, code samples, whatever it may be\u2014is thoroughly checked, always up to date, and users pay only tiny, instant micropayments. Say goodbye to hallucinated answers, outdated examples, or uncredited work. Here, truth comes first, and quality work is recognized immediately.\nThis three-part series explains everything: the core protocol, the trust layer that makes AI reliable, and the first real product that\u2019s already bringing this system to life.\nEpisode 1 \u2013 What is x402? (Introduction)\nx402 is designed for making tiny payments\u2014ranging from a tenth of a cent up to ten cents\u2014instantly and directly on the blockchain. No subscriptions, no bundling, and no intermediaries. Just seamless, pay-as-you-go transactions. It works just like sending data: you pay for exactly what you use, right when you use it.\nEpisode 2 \u2013 AI Needs a Trust Layer\nAI today is quick and inexpensive, but let\u2019s face it\u2014it invents facts, takes ideas without credit, and gives answers with no accountability. Alith brings in a trust layer. Every answer is checked automatically, corrected if it\u2019s wrong, and given on-chain proof you can verify yourself. Add x402 to the mix, and only reliable, verified information gets paid for. Now you have an AI system where truth matters\u2014and the incentives make sense.\nEpisode 3 \u2013 Real-World Example: Verified Code Snippet Marketplace\nImagine a marketplace where developers upload code snippets and, immediately, the system runs them through Alith\u2019s process\u2014static analysis, sandbox tests, behavioral checks. Only code that passes verification goes live. Users pay a few cents per read or download with x402, and creators receive instant payment each time. Even years later, if the Auto-Fix system updates their code for new libraries, they still earn. It\u2019s pay-per-use, verification built in, and everyone benefits.\nReferences:\nINTRODUCTION\nOVERVIEW\nREAL-WORLD EXAMPLE",
-        "comments_details": [
-            {
-                "author": "gokkull_15",
-                "comment": "Alith + x402 is building a verified internet economy. Every piece of content\u2014AI responses, code samples, whatever it may be\u2014is thoroughly checked, always up to date, and users pay only tiny, instant micropayments. Say goodbye to hallucinated answers, outdated examples, or uncredited work. Here, truth comes first, and quality work is recognized immediately.\nThis three-part series explains everything: the core protocol, the trust layer that makes AI reliable, and the first real product that\u2019s already bringing this system to life.\nEpisode 1 \u2013 What is x402? (Introduction)\nx402 is designed for making tiny payments\u2014ranging from a tenth of a cent up to ten cents\u2014instantly and directly on the blockchain. No subscriptions, no bundling, and no intermediaries. Just seamless, pay-as-you-go transactions. It works just like sending data: you pay for exactly what you use, right when you use it.\nEpisode 2 \u2013 AI Needs a Trust Layer\nAI today is quick and inexpensive, but let\u2019s face it\u2014it invents facts, takes ideas without credit, and gives answers with no accountability. Alith brings in a trust layer. Every answer is checked automatically, corrected if it\u2019s wrong, and given on-chain proof you can verify yourself. Add x402 to the mix, and only reliable, verified information gets paid for. Now you have an AI system where truth matters\u2014and the incentives make sense.\nEpisode 3 \u2013 Real-World Example: Verified Code Snippet Marketplace\nImagine a marketplace where developers upload code snippets and, immediately, the system runs them through Alith\u2019s process\u2014static analysis, sandbox tests, behavioral checks. Only code that passes verification goes live. Users pay a few cents per read or download with x402, and creators receive instant payment each time. Even years later, if the Auto-Fix system updates their code for new libraries, they still earn. It\u2019s pay-per-use, verification built in, and everyone benefits.\nReferences:\nINTRODUCTION\nOVERVIEW\nREAL-WORLD EXAMPLE"
             }
         ]
     }
