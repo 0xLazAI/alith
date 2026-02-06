@@ -1,10 +1,61 @@
 [
     {
+        "id": "e07017f986f6df0f",
+        "topic_id": "11219",
+        "title": "GOAT Network X Space | x402 Special",
+        "url": "https://forum.ceg.vote/t/goat-network-x-space-x402-special/11219",
+        "views": "5",
+        "comments": "0",
+        "created_date": "Feb 5, 2026 2:00 pm",
+        "latest_activity": null,
+        "content": "FEB\n5\nGOAT Network X Space | x402 Special\nExpired\n\u00b7\nCreated by\nDavid\nYesterday 12:00 PM \u2192 1:00 PM (Abidjan)\nhttps://x.com/GOATRollup/status/2019379411594965474?s=20\n0 going\nWe\u2019re bringing HTTP 402 \u201cPayment Required\u201d to life.\nx402 = tap-to-pay for the internet\nNo accounts \u00b7 No subscriptions \u00b7 Pay per request\nBuilt for AI, APIs, content, games, and micro-payments.\nWe\u2019ll discuss in Chinese\n\u2022 What x402 actually fixes\n\u2022 Why per-request pricing beats subscriptions\n\u2022 How x402 works as a protocol, not a checkout plugin\n\n\n\n\n\nLazAI joins this X Space hosted by GOATRollup to discuss why per-request payments are key for AI, APIs & machine-to-machine services + how x402 enables usage-based pricing at scale!",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "FEB\n5\nGOAT Network X Space | x402 Special\nExpired\n\u00b7\nCreated by\nDavid\nYesterday 12:00 PM \u2192 1:00 PM (Abidjan)\nhttps://x.com/GOATRollup/status/2019379411594965474?s=20\n0 going\nWe\u2019re bringing HTTP 402 \u201cPayment Required\u201d to life.\nx402 = tap-to-pay for the internet\nNo accounts \u00b7 No subscriptions \u00b7 Pay per request\nBuilt for AI, APIs, content, games, and micro-payments.\nWe\u2019ll discuss in Chinese\n\u2022 What x402 actually fixes\n\u2022 Why per-request pricing beats subscriptions\n\u2022 How x402 works as a protocol, not a checkout plugin\n\n\n\n\n\nLazAI joins this X Space hosted by GOATRollup to discuss why per-request payments are key for AI, APIs & machine-to-machine services + how x402 enables usage-based pricing at scale!"
+            }
+        ]
+    },
+    {
+        "id": "686a0ea8007cf5c7",
+        "topic_id": "11218",
+        "title": "Why Decentralized AI Needs Two Standards: EIP-8004 and EIP-8028 Explained",
+        "url": "https://forum.ceg.vote/t/why-decentralized-ai-needs-two-standards-eip-8004-and-eip-8028-explained/11218",
+        "views": "4",
+        "comments": "0",
+        "created_date": "Feb 5, 2026 1:48 pm",
+        "latest_activity": null,
+        "content": "Decentralized AI cannot scale on trust alone or on token economics alone. It needs both.\nIn this article, we break down why EIP-8004 and EIP-8028 are designed to work together as two foundational layers of the decentralized AI stack.\nEIP-8004 establishes who an AI agent is and why it can be trusted\u2014through on-chain identity, reputation, and validation.\nEIP-8028 (Data-Anchored Token / DAT) defines what AI assets are, how they are used, and how value flows back to contributors via on-chain usage metering and revenue sharing.\nTogether, these standards connect agent trust with asset economics, enabling verifiable AI services where behavior, data usage, and value exchange are fully auditable on-chain. This is the missing infrastructure for a self-sustaining decentralized AI economy on Ethereum.\nRead the full article: https://lazai.network/blog/the-two-layers-of-decentralized-ai-agent-operations-8004-and-asset-economics-8028",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "Decentralized AI cannot scale on trust alone or on token economics alone. It needs both.\nIn this article, we break down why EIP-8004 and EIP-8028 are designed to work together as two foundational layers of the decentralized AI stack.\nEIP-8004 establishes who an AI agent is and why it can be trusted\u2014through on-chain identity, reputation, and validation.\nEIP-8028 (Data-Anchored Token / DAT) defines what AI assets are, how they are used, and how value flows back to contributors via on-chain usage metering and revenue sharing.\nTogether, these standards connect agent trust with asset economics, enabling verifiable AI services where behavior, data usage, and value exchange are fully auditable on-chain. This is the missing infrastructure for a self-sustaining decentralized AI economy on Ethereum.\nRead the full article: https://lazai.network/blog/the-two-layers-of-decentralized-ai-agent-operations-8004-and-asset-economics-8028"
+            }
+        ]
+    },
+    {
+        "id": "dce00e09e4f747a5",
+        "topic_id": "11217",
+        "title": "Applied AI Summit - Consensus Hong Kong",
+        "url": "https://forum.ceg.vote/t/applied-ai-summit-consensus-hong-kong/11217",
+        "views": "4",
+        "comments": "0",
+        "created_date": "Feb 5, 2026 12:18 pm",
+        "latest_activity": null,
+        "content": "FEB\n8\nApplied AI Summit\nPublic\n\u00b7\nCreated by\nDavid\nSun, Feb 8 7:00 AM \u2192 10:00 AM (Abidjan)\nHong Kong\n0 going\nWe\u2019re excited to announce the Applied AI Summit in Hong Kong, happening alongside Consensus Hong Kong.\nCo-hosted with Lagrange and in partnership with AWS, this invite-only gathering brings together leading builders and operators shaping the future of applied AI.\nLimited capacity \u2014 secure your spot early\nFeb 8, 2026\n3-6 PM GMT+8\nhttps://luma.com/3loqk0iz\n\n\n\nSecure Spot here: https://luma.com/3loqk0iz",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "FEB\n8\nApplied AI Summit\nPublic\n\u00b7\nCreated by\nDavid\nSun, Feb 8 7:00 AM \u2192 10:00 AM (Abidjan)\nHong Kong\n0 going\nWe\u2019re excited to announce the Applied AI Summit in Hong Kong, happening alongside Consensus Hong Kong.\nCo-hosted with Lagrange and in partnership with AWS, this invite-only gathering brings together leading builders and operators shaping the future of applied AI.\nLimited capacity \u2014 secure your spot early\nFeb 8, 2026\n3-6 PM GMT+8\nhttps://luma.com/3loqk0iz\n\n\n\nSecure Spot here: https://luma.com/3loqk0iz"
+            }
+        ]
+    },
+    {
         "id": "307d6997962fd397",
         "topic_id": "11202",
         "title": "How AI Agents Evolve in Web3",
         "url": "https://forum.ceg.vote/t/how-ai-agents-evolve-in-web3/11202",
-        "views": "53",
+        "views": "65",
         "comments": "0",
         "created_date": "Jan 29, 2026 10:35 am",
         "latest_activity": null,
@@ -21,7 +72,7 @@
         "topic_id": "11201",
         "title": "Metis Leads Strategic Investment in Lazbubu",
         "url": "https://forum.ceg.vote/t/metis-leads-strategic-investment-in-lazbubu/11201",
-        "views": "64",
+        "views": "72",
         "comments": "0",
         "created_date": "Jan 27, 2026 6:56 pm",
         "latest_activity": null,
@@ -38,7 +89,7 @@
         "topic_id": "11200",
         "title": "Decentralized AI Summit - ETHDenver 2026",
         "url": "https://forum.ceg.vote/t/decentralized-ai-summit-ethdenver-2026/11200",
-        "views": "87",
+        "views": "95",
         "comments": "0",
         "created_date": "Jan 25, 2026 7:16 pm",
         "latest_activity": null,
@@ -55,7 +106,7 @@
         "topic_id": "11199",
         "title": "Lazbubu Raises Strategic Funding Led by Metis - Chainwire",
         "url": "https://forum.ceg.vote/t/lazbubu-raises-strategic-funding-led-by-metis-chainwire/11199",
-        "views": "92",
+        "views": "100",
         "comments": "0",
         "created_date": "Jan 23, 2026 11:58 am",
         "latest_activity": null,
@@ -72,7 +123,7 @@
         "topic_id": "11198",
         "title": "SwapSpace Huddle Recap | Elena & Natalia on AI, Data Integrity, and Trust",
         "url": "https://forum.ceg.vote/t/swapspace-huddle-recap-elena-natalia-on-ai-data-integrity-and-trust/11198",
-        "views": "95",
+        "views": "103",
         "comments": "0",
         "created_date": "Jan 23, 2026 9:03 am",
         "latest_activity": "Jan 23, 2026 9:03 am",
@@ -89,7 +140,7 @@
         "topic_id": "11197",
         "title": "What Infrastructure Really Matters In Extreme Scenarios?",
         "url": "https://forum.ceg.vote/t/what-infrastructure-really-matters-in-extreme-scenarios/11197",
-        "views": "106",
+        "views": "114",
         "comments": "0",
         "created_date": "Jan 21, 2026 11:14 pm",
         "latest_activity": null,
@@ -106,7 +157,7 @@
         "topic_id": "11196",
         "title": "A Circulating Basic Income:",
         "url": "https://forum.ceg.vote/t/a-circulating-basic-income/11196",
-        "views": "139",
+        "views": "147",
         "comments": "0",
         "created_date": "Jan 17, 2026 2:30 am",
         "latest_activity": null,
@@ -123,7 +174,7 @@
         "topic_id": "11195",
         "title": "Circulation, Stability, and Superintelligence",
         "url": "https://forum.ceg.vote/t/circulation-stability-and-superintelligence/11195",
-        "views": "135",
+        "views": "143",
         "comments": "0",
         "created_date": "Jan 17, 2026 2:18 am",
         "latest_activity": "Jan 17, 2026 2:18 am",
@@ -140,7 +191,7 @@
         "topic_id": "11193",
         "title": "Beyond Alpha: Building substance in the AI Era \u2014A Letter to the Metis Community",
         "url": "https://forum.ceg.vote/t/beyond-alpha-building-substance-in-the-ai-era-a-letter-to-the-metis-community/11193",
-        "views": "551",
+        "views": "565",
         "comments": "3",
         "created_date": "Jan 8, 2026 3:46 am",
         "latest_activity": "Jan 8, 2026 9:23 am",
@@ -157,7 +208,7 @@
         "topic_id": "10769",
         "title": "LazAI Explainer Challenge",
         "url": "https://forum.ceg.vote/t/lazai-explainer-challenge/10769",
-        "views": "598",
+        "views": "606",
         "comments": "9",
         "created_date": "Oct 6, 2025 4:06 pm",
         "latest_activity": "Dec 26, 2025 10:09 am",
@@ -191,7 +242,7 @@
         "topic_id": "10666",
         "title": "9th No-Lose lottery winner ann",
         "url": "https://forum.ceg.vote/t/9th-no-lose-lottery-winner-ann/10666",
-        "views": "673",
+        "views": "681",
         "comments": "5",
         "created_date": "Sep 24, 2025 4:25 pm",
         "latest_activity": "Dec 22, 2025 7:33 am",
@@ -208,7 +259,7 @@
         "topic_id": "10410",
         "title": "Telegram vs. Discord: Which Is Better for Building Your Web3 Community?",
         "url": "https://forum.ceg.vote/t/telegram-vs-discord-which-is-better-for-building-your-web3-community/10410",
-        "views": "445",
+        "views": "453",
         "comments": "10",
         "created_date": "Sep 3, 2025 5:41 am",
         "latest_activity": "Dec 15, 2025 10:57 am",
@@ -225,7 +276,7 @@
         "topic_id": "11184",
         "title": "Moleswap | Multi-Chain Aggregator & FunFi Hub on Metis / LazAI",
         "url": "https://forum.ceg.vote/t/moleswap-multi-chain-aggregator-funfi-hub-on-metis-lazai/11184",
-        "views": "386",
+        "views": "394",
         "comments": "0",
         "created_date": "Dec 14, 2025 2:50 am",
         "latest_activity": null,
@@ -242,7 +293,7 @@
         "topic_id": "11100",
         "title": "FeedByHash \u2013 Gamified Reward Engine",
         "url": "https://forum.ceg.vote/t/feedbyhash-gamified-reward-engine/11100",
-        "views": "630",
+        "views": "638",
         "comments": "7",
         "created_date": "Nov 4, 2025 8:52 am",
         "latest_activity": "Dec 14, 2025 1:54 am",
@@ -259,7 +310,7 @@
         "topic_id": "3474",
         "title": "CVP Proposal: GM\u00b2 Social Integrate With Metis For Web3 Users",
         "url": "https://forum.ceg.vote/t/cvp-proposal-gm-social-integrate-with-metis-for-web3-users/3474",
-        "views": "943",
+        "views": "952",
         "comments": "9",
         "created_date": "Jul 4, 2024 6:45 am",
         "latest_activity": "Dec 11, 2025 5:09 pm",
@@ -276,7 +327,7 @@
         "topic_id": "10295",
         "title": "New EIPs in Ethereum: what\u2019s coming and why does it matter?",
         "url": "https://forum.ceg.vote/t/new-eips-in-ethereum-what-s-coming-and-why-does-it-matter/10295",
-        "views": "518",
+        "views": "526",
         "comments": "3",
         "created_date": "Aug 27, 2025 9:46 pm",
         "latest_activity": "Dec 10, 2025 9:54 am",
@@ -285,57 +336,6 @@
             {
                 "author": "Vladimir",
                 "comment": "Hello there!\nI\u2019d like to share some exciting updates about Ethereum Improvement Proposals (EIPs).\nAs you know, Ethereum evolves through improvement proposals \u2014 EIPs. One of the latest proposals actively moving toward implementation is EIP-3074: Auth and Exec. Its core idea is to make wallet management much easier, including the long-awaited feature of recovering access to your Ethereum wallet, which has been a pain point for many users.\nThere are other interesting proposals too \u2014 for example, EIP-4906 for updating NFTs, or the recently implemented EIP-4844: Proto-Danksharding (Blob blocks), which has already helped reduce fees across L2 networks.\nIf you\u2019d like to dive deeper, check out the Ethereum Magicians Forum \u2014 this is where the Ethereum community discusses upcoming upgrades, and anyone can comment or join the conversation.\nNow, a question for you:\nWhich Ethereum upgrade do you find most valuable?\nThe ability to recover your address (EIP-3074)?\nNew possibilities for NFTs (EIP-4906)?\nOr what\u2019s already live \u2014 Blob blocks (EIP-4844)?"
-            }
-        ]
-    },
-    {
-        "id": "5667fa4b556fdc82",
-        "topic_id": "11175",
-        "title": "Metis Monthly Roundup \u2014 New Launches, Viral Moments & Lazarians Rising",
-        "url": "https://forum.ceg.vote/t/metis-monthly-roundup-new-launches-viral-moments-lazarians-rising/11175",
-        "views": "447",
-        "comments": "0",
-        "created_date": "Dec 4, 2025 6:21 pm",
-        "latest_activity": null,
-        "content": "Here\u2019s a quick look at everything that happened across the Metis ecosystem this month:\nLazAI Launches Open Launch\nLazAI dropped Open Launch on LazPad, letting anyone create and co-build AI Agent Tokens directly on Metis Andromeda.\nZero listing fees, METIS pairing, bonding curve price discovery, and community-driven co-building.\n** Metis DevRel Goes Viral at Devconnect**\nMetis DevRel Thiru became a Devconnect icon after his arrival video hit 29M views.\nPeople lined up for selfies, podcasts, and panels \u2014 and Devcon 8 was announced for Mumbai, adding to the excitement.\nThiru shared more in interviews including The Rollup.\nLazarian Army Assembles\nThe LazAI Ambassador Program launched, rewarding Web3 & AI creators with:\n\u2022 Monthly METIS rewards\n\u2022 Performance bonuses\n\u2022 VIP perks\n\u2022 Honor NFTs\nAll focused on championing decentralized AI and data ownership.\nCreateAI Goes Live\nCreateAI launched on November 19 \u2014 an AI-native marketplace where every agent output becomes a DAT on Metis for verifiable ownership.\nIntegrated with LazAI, GMPayer, and x402 for fully onchain creation and trading.\nThe Metis Ecosystem Unifies\nGovernance approved the Ecosystem Unification & Economic Model Evolution proposal, marking a new structural era for ReGenesis.\nMetis, LazAI, GOAT, and ZKM now operate under one aligned economic model.\nLazAI Talks E6\nLazTalks #6 explored who should govern agent-to-agent payments, featuring speakers from Metis, LazAI, AEON.XYZ, SentientAGI, and Polyflow.\nMonthly Highlights\nMetis Turkey held a strong community meetup covering the full Metis stack\nLazbubu reached 2,700\u201312,000 daily active users\nCreateAI hit 20,000 mints in under 3 hours\nElena spoke on ReGenesis with Roundtable Network\nLazAI hosted its first Roundtable Eco Space\nMetis won Layer 2 Solution of the Year at BlockLife Forum 2025\nElena joined Genzio CEO Zack Nelson to discuss the AI Internet economy\nSummary\nNovember activated the entire ecosystem\u2014Open Launch, ReGenesis alignment, AI-native tools, viral DevRel moments, and thousands of daily Lazbubu users.\nMetis + LazAI continue shaping the future of AI and Web3.\nJoin our Telegram community and help shape what comes next.",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "Here\u2019s a quick look at everything that happened across the Metis ecosystem this month:\nLazAI Launches Open Launch\nLazAI dropped Open Launch on LazPad, letting anyone create and co-build AI Agent Tokens directly on Metis Andromeda.\nZero listing fees, METIS pairing, bonding curve price discovery, and community-driven co-building.\n** Metis DevRel Goes Viral at Devconnect**\nMetis DevRel Thiru became a Devconnect icon after his arrival video hit 29M views.\nPeople lined up for selfies, podcasts, and panels \u2014 and Devcon 8 was announced for Mumbai, adding to the excitement.\nThiru shared more in interviews including The Rollup.\nLazarian Army Assembles\nThe LazAI Ambassador Program launched, rewarding Web3 & AI creators with:\n\u2022 Monthly METIS rewards\n\u2022 Performance bonuses\n\u2022 VIP perks\n\u2022 Honor NFTs\nAll focused on championing decentralized AI and data ownership.\nCreateAI Goes Live\nCreateAI launched on November 19 \u2014 an AI-native marketplace where every agent output becomes a DAT on Metis for verifiable ownership.\nIntegrated with LazAI, GMPayer, and x402 for fully onchain creation and trading.\nThe Metis Ecosystem Unifies\nGovernance approved the Ecosystem Unification & Economic Model Evolution proposal, marking a new structural era for ReGenesis.\nMetis, LazAI, GOAT, and ZKM now operate under one aligned economic model.\nLazAI Talks E6\nLazTalks #6 explored who should govern agent-to-agent payments, featuring speakers from Metis, LazAI, AEON.XYZ, SentientAGI, and Polyflow.\nMonthly Highlights\nMetis Turkey held a strong community meetup covering the full Metis stack\nLazbubu reached 2,700\u201312,000 daily active users\nCreateAI hit 20,000 mints in under 3 hours\nElena spoke on ReGenesis with Roundtable Network\nLazAI hosted its first Roundtable Eco Space\nMetis won Layer 2 Solution of the Year at BlockLife Forum 2025\nElena joined Genzio CEO Zack Nelson to discuss the AI Internet economy\nSummary\nNovember activated the entire ecosystem\u2014Open Launch, ReGenesis alignment, AI-native tools, viral DevRel moments, and thousands of daily Lazbubu users.\nMetis + LazAI continue shaping the future of AI and Web3.\nJoin our Telegram community and help shape what comes next."
-            }
-        ]
-    },
-    {
-        "id": "a104259411bdcc90",
-        "topic_id": "5948",
-        "title": "Looking for a Unity Developer to Join My Alith x Web3 Game Project (Fracture Point)",
-        "url": "https://forum.ceg.vote/t/looking-for-a-unity-developer-to-join-my-alith-x-web3-game-project-fracture-point/5948",
-        "views": "527",
-        "comments": "9",
-        "created_date": "Jun 24, 2025 9:21 pm",
-        "latest_activity": "Dec 4, 2025 5:57 am",
-        "content": "Hey builders,\nI\u2019m currently developing Fracture Point, a competitive extraction shooter built for Web3 where Proof of Play is enforced on-chain using AIith as sole decision maker.\nThe project is part of the Alith Integration Track for HyperHack. We\u2019ve made strong progress on the backend and smart contracts (claim system, XP token, and rank NFT), and we\u2019re now building a local simulation to show how Alith AI integrates into fair gaming reward logic.\nWhat I need now is a Unity developer who can help bring the front-end gameplay layer to life even a basic prototype with a simple environment and UI to showcase the play \u2192 evaluate \u2192 reward flow.\nIdeal Teammate Profile:\n\u2022 Experience with Unity (especially on mobile or FPS-style mechanics)\n\u2022 Comfortable building quick prototypes for hackathons\n\u2022 Bonus: Interest in Web3, AI agents, or competitive game design\nWhy join?\n\u2022 You\u2019ll be helping build one of the few AI-native games in the hackathon\n\u2022 The backend and reward logic are already in motion you\u2019ll focus on gameplay or UI\n\u2022 It\u2019s a great fit for someone who wants to ship fast, learn from a real use case, and potentially continue beyond the hack\nIf you\u2019re up for building something unique, reply here or DM me!\nLet\u2019s make something players can actually trust.\n\u2013 Adeyemi (Supaman)",
-        "comments_details": [
-            {
-                "author": "i_am_supaman_lj",
-                "comment": "Hey builders,\nI\u2019m currently developing Fracture Point, a competitive extraction shooter built for Web3 where Proof of Play is enforced on-chain using AIith as sole decision maker.\nThe project is part of the Alith Integration Track for HyperHack. We\u2019ve made strong progress on the backend and smart contracts (claim system, XP token, and rank NFT), and we\u2019re now building a local simulation to show how Alith AI integrates into fair gaming reward logic.\nWhat I need now is a Unity developer who can help bring the front-end gameplay layer to life even a basic prototype with a simple environment and UI to showcase the play \u2192 evaluate \u2192 reward flow.\nIdeal Teammate Profile:\n\u2022 Experience with Unity (especially on mobile or FPS-style mechanics)\n\u2022 Comfortable building quick prototypes for hackathons\n\u2022 Bonus: Interest in Web3, AI agents, or competitive game design\nWhy join?\n\u2022 You\u2019ll be helping build one of the few AI-native games in the hackathon\n\u2022 The backend and reward logic are already in motion you\u2019ll focus on gameplay or UI\n\u2022 It\u2019s a great fit for someone who wants to ship fast, learn from a real use case, and potentially continue beyond the hack\nIf you\u2019re up for building something unique, reply here or DM me!\nLet\u2019s make something players can actually trust.\n\u2013 Adeyemi (Supaman)"
-            }
-        ]
-    },
-    {
-        "id": "2af38106fd91f953",
-        "topic_id": "10729",
-        "title": "Metis Mission - X space",
-        "url": "https://forum.ceg.vote/t/metis-mission-x-space/10729",
-        "views": "532",
-        "comments": "21",
-        "created_date": "Oct 2, 2025 2:25 pm",
-        "latest_activity": "Dec 4, 2025 5:56 am",
-        "content": "OCT\n7\nMetis Vision Update- X Space\nExpired\n\u00b7\nCreated by\nSheyda\nTue, Oct 7, 2025 4:00 PM \u2192 5:00 PM (Abidjan)\n5\nWe\u2019re going live with Elena for a special X AMA\nJoin us on October 7 at 4PM UTC on the Metis X account as our founder Elena shares more about the vision behind Metis\u2019s latest direction update.\nTopics include:\nWhy Metis is \u201cnot just another L2\u201d\nHyperion as the AI-optimized infrastructure layer\nLazAI as the application/data & playability layer\nThe role of the community in shaping what comes next\nBring your questions\u2014$100 will be awarded to the top 5 community questions asked during the Space.\nMark your calendars and join the conversation.\nRead More: Open Letter to the Metis Community: Metis is no longer \u201cjust an L2\u201d",
-        "comments_details": [
-            {
-                "author": "Sheyda",
-                "comment": "OCT\n7\nMetis Vision Update- X Space\nExpired\n\u00b7\nCreated by\nSheyda\nTue, Oct 7, 2025 4:00 PM \u2192 5:00 PM (Abidjan)\n5\nWe\u2019re going live with Elena for a special X AMA\nJoin us on October 7 at 4PM UTC on the Metis X account as our founder Elena shares more about the vision behind Metis\u2019s latest direction update.\nTopics include:\nWhy Metis is \u201cnot just another L2\u201d\nHyperion as the AI-optimized infrastructure layer\nLazAI as the application/data & playability layer\nThe role of the community in shaping what comes next\nBring your questions\u2014$100 will be awarded to the top 5 community questions asked during the Space.\nMark your calendars and join the conversation.\nRead More: Open Letter to the Metis Community: Metis is no longer \u201cjust an L2\u201d"
             }
         ]
     }
