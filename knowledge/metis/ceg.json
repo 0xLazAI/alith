@@ -1,5 +1,22 @@
 [
     {
+        "id": "0cb2a17e9c684fdf",
+        "topic_id": "11252",
+        "title": "Metis Expected Sequencer Mining Rewards Rate (MRR) Update",
+        "url": "https://forum.ceg.vote/t/metis-expected-sequencer-mining-rewards-rate-mrr-update/11252",
+        "views": "",
+        "comments": "0",
+        "created_date": "Apr 17, 2026 8:54 am",
+        "latest_activity": null,
+        "content": "Following a measured adjustment in Metis L2 block production speed, the expected Mining Rewards Rate (MRR) for Decentralized Sequencer Mining is being updated from approximately 15% to approximately 10%.\nThe underlying reward economics remain unchanged: the BLOCK_REWARD on the LockingPool contract is still 0.01247842237 METIS per block.\nWhy the update\nThe MRR formula is straightforward:\nPool MRR = (BLOCK_REWARD \u00d7 blocks_per_year) / total_locked\nOver the past year, the average L2 block time has increased from around 12 seconds to roughly 17\u201318 seconds. Since the reward per block is fixed on-chain, fewer blocks produced over the same period naturally result in lower total rewards distributed across the pool.\nTo reflect current network conditions more accurately, the expected MRR has therefore been recalibrated to approximately 10%.\nWhat we\u2019re working on\nBlock-time performance remains an active area of focus. We will continue monitoring sequencer operations and will keep the community updated if any further adjustments to the expected MRR become necessary.\nAll figures can be reproduced directly on-chain via LockingPool and MetisSequencerSet.",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "Following a measured adjustment in Metis L2 block production speed, the expected Mining Rewards Rate (MRR) for Decentralized Sequencer Mining is being updated from approximately 15% to approximately 10%.\nThe underlying reward economics remain unchanged: the BLOCK_REWARD on the LockingPool contract is still 0.01247842237 METIS per block.\nWhy the update\nThe MRR formula is straightforward:\nPool MRR = (BLOCK_REWARD \u00d7 blocks_per_year) / total_locked\nOver the past year, the average L2 block time has increased from around 12 seconds to roughly 17\u201318 seconds. Since the reward per block is fixed on-chain, fewer blocks produced over the same period naturally result in lower total rewards distributed across the pool.\nTo reflect current network conditions more accurately, the expected MRR has therefore been recalibrated to approximately 10%.\nWhat we\u2019re working on\nBlock-time performance remains an active area of focus. We will continue monitoring sequencer operations and will keep the community updated if any further adjustments to the expected MRR become necessary.\nAll figures can be reproduced directly on-chain via LockingPool and MetisSequencerSet."
+            }
+        ]
+    },
+    {
         "id": "658d0fa883399a01",
         "topic_id": "11248",
         "title": "March in Metis: Ecosystem Growth & Builder Performance",
@@ -319,23 +336,6 @@
             {
                 "author": "David",
                 "comment": "Join us for a live discussion: Skills as the New Primitive.\nFrom execution \u2192 coordination \u2192 value capture, this Space dives into how agents actually evolve in Web3.\nGlad to have LazAI joining, pushing this forward.\nTune in\nhttps://twitter.com/i/spaces/1eaKbjgwmekKX"
-            }
-        ]
-    },
-    {
-        "id": "47e39013112e82b4",
-        "topic_id": "11201",
-        "title": "Metis Leads Strategic Investment in Lazbubu",
-        "url": "https://forum.ceg.vote/t/metis-leads-strategic-investment-in-lazbubu/11201",
-        "views": "",
-        "comments": "0",
-        "created_date": "Jan 27, 2026 6:56 pm",
-        "latest_activity": null,
-        "content": "Metis has led a strategic funding round in Lazbubu, an AI companion project built around on-chain memory and user-owned data. The round also included Hotcoin Labs, Honey Capital, APUS Capital, and Becker Ventures.\nLazbubu is developing an evolutionary AI companion that grows through continuous interaction. Instead of storing AI memory in centralized databases, Lazbubu anchors interaction data on-chain using its DAT (Data Anchoring Token) mechanism. Every conversation and decision becomes a verifiable on-chain record controlled by the user.\nThis model treats AI memory as owned data, not platform-owned data.\nWhy Metis Invested\nMetis\u2019 investment is based on infrastructure alignment.\nAs AI becomes more autonomous, trust depends on who owns the data and how AI history is recorded. Lazbubu\u2019s on-chain memory design directly addresses this by making AI interactions transparent, persistent, and user-controlled.\nLazbubu has also demonstrated early product validation, with strong interaction volume and active usage during its initial rollout. This showed real demand for AI companions built on decentralized data principles, not speculative usage.\nFor Metis, Lazbubu represents the direction of long-term AI infrastructure in Web3:\nAI agents with verifiable history, aligned incentives, and user sovereignty by design.\nThis investment reflects Metis\u2019 broader thesis that decentralization matters most when AI becomes part of everyday digital infrastructure.\nRead more: Lazbubu Raises Strategic Funding Led by Metis to Build an Evolutionary Companion AI Agent for Web3 - Chainwire",
-        "comments_details": [
-            {
-                "author": "Norbert",
-                "comment": "Metis has led a strategic funding round in Lazbubu, an AI companion project built around on-chain memory and user-owned data. The round also included Hotcoin Labs, Honey Capital, APUS Capital, and Becker Ventures.\nLazbubu is developing an evolutionary AI companion that grows through continuous interaction. Instead of storing AI memory in centralized databases, Lazbubu anchors interaction data on-chain using its DAT (Data Anchoring Token) mechanism. Every conversation and decision becomes a verifiable on-chain record controlled by the user.\nThis model treats AI memory as owned data, not platform-owned data.\nWhy Metis Invested\nMetis\u2019 investment is based on infrastructure alignment.\nAs AI becomes more autonomous, trust depends on who owns the data and how AI history is recorded. Lazbubu\u2019s on-chain memory design directly addresses this by making AI interactions transparent, persistent, and user-controlled.\nLazbubu has also demonstrated early product validation, with strong interaction volume and active usage during its initial rollout. This showed real demand for AI companions built on decentralized data principles, not speculative usage.\nFor Metis, Lazbubu represents the direction of long-term AI infrastructure in Web3:\nAI agents with verifiable history, aligned incentives, and user sovereignty by design.\nThis investment reflects Metis\u2019 broader thesis that decentralization matters most when AI becomes part of everyday digital infrastructure.\nRead more: Lazbubu Raises Strategic Funding Led by Metis to Build an Evolutionary Companion AI Agent for Web3 - Chainwire"
             }
         ]
     }
