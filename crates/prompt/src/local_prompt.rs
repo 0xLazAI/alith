@@ -288,7 +288,7 @@ pub fn apply_chat_template(
         }
         (ValueKind::Map, "items") => {
             let _: () = from_args(args)?;
-            state.apply_filter("items", &[value.clone()])
+            state.apply_filter("items", std::slice::from_ref(value))
         }
         _ => Err(Error::new(
             ErrorKind::UnknownMethod,
