@@ -1,5 +1,22 @@
 [
     {
+        "id": "3e0f0f65303f8d05",
+        "topic_id": "11272",
+        "title": "OpenClaw Summer Builder Bootcamp Demo Day",
+        "url": "https://forum.ceg.vote/t/openclaw-summer-builder-bootcamp-demo-day/11272",
+        "views": "",
+        "comments": "0",
+        "created_date": "Jul 15, 2026 12:07 pm",
+        "latest_activity": "Jul 15, 2026 12:07 pm",
+        "content": "OpenClaw Summer Builder Bootcamp - Stage 1 Demo Day is going live in less than an hour!\nWatch builders showcase their final AI Agents after 2 intense weeks:\n\u2022 The real problem they\u2019re solving\n\u2022 Their AI agent workflow\n\u2022 The end-to-end user experience\nJuly 15\n9:00 AM EST\nLive on: Metis \u2022 YouTube \u2022 X\nOpenClaw Summer Builder Bootcamp \u2013 Stage 1 Demo Day\nDon\u2019t miss it!",
+        "comments_details": [
+            {
+                "author": "David",
+                "comment": "OpenClaw Summer Builder Bootcamp - Stage 1 Demo Day is going live in less than an hour!\nWatch builders showcase their final AI Agents after 2 intense weeks:\n\u2022 The real problem they\u2019re solving\n\u2022 Their AI agent workflow\n\u2022 The end-to-end user experience\nJuly 15\n9:00 AM EST\nLive on: Metis \u2022 YouTube \u2022 X\nOpenClaw Summer Builder Bootcamp \u2013 Stage 1 Demo Day\nDon\u2019t miss it!"
+            }
+        ]
+    },
+    {
         "id": "08ea22bde14c6491",
         "topic_id": "11271",
         "title": "June in Metis: Builder Mining Rewards Update",
@@ -319,23 +336,6 @@
             {
                 "author": "David",
                 "comment": "**\nThe Agent Economy Is Not a Trend \u2014 It\u2019s Happening Now**\nThis is no longer a theory. AI agents are already changing how work, coordination, and value creation happen online.\nWhat\u2019s new\n\u2022 AI has moved from tools to autonomous agents\n\u2022 Agents execute tasks, retain memory, and improve over time\n\u2022 Humans shift from operators to coaches and decision-makers\n\u2022 Scale is driven by process and intelligence, not team size\nEVE in action\nBuilt on Metis, GOAT Network\u2019s AI employee EVE is live and working with humans today.\nShe supports decisions, learns from interaction, and builds collective memory. This is a real AI-native workflow, not a demo.\nWhy blockchain matters\nAs agents scale, trust breaks without identity. Blockchain provides:\n\u2022 Verifiable agent identity and reputation\n\u2022 Machine-scale micropayments\n\u2022 Privacy-preserving permissions\nDebot\nMetis, GOAT Network, and LazAI have launched Debot, an open-source decentralized AI agent framework designed for a trustworthy agent internet.\nWhat this enables\n\u2022 One-person companies with AI teams\n\u2022 Agent-to-agent services\n\u2022 Knowledge and process are the real advantages\nThe Agent Economy is live.\nThe internet is being rewritten.\nNow is the time to build.\nRead the full article: here"
-            }
-        ]
-    },
-    {
-        "id": "ae6b6a7ff1c062c5",
-        "topic_id": "11223",
-        "title": "LazAI: Revolutionizing DePIN for Real-World Asset Management",
-        "url": "https://forum.ceg.vote/t/lazai-revolutionizing-depin-for-real-world-asset-management/11223",
-        "views": "",
-        "comments": "0",
-        "created_date": "Feb 8, 2026 5:21 am",
-        "latest_activity": null,
-        "content": "AI \u00d7 Web3 isn\u2019t real unless it touches the real world.\nLazAI transforms real-world data into verifiable, ownable, revenue-generating AI assets that can actually be deployed in production.\nEnd-to-end provenance, enforced trust, and intelligence built to operate.\nRead more: https://lazai.network/blog/lazai-revolutionizing-depin-for-real-world-asset-management",
-        "comments_details": [
-            {
-                "author": "David",
-                "comment": "AI \u00d7 Web3 isn\u2019t real unless it touches the real world.\nLazAI transforms real-world data into verifiable, ownable, revenue-generating AI assets that can actually be deployed in production.\nEnd-to-end provenance, enforced trust, and intelligence built to operate.\nRead more: https://lazai.network/blog/lazai-revolutionizing-depin-for-real-world-asset-management"
             }
         ]
     }
