@@ -84,6 +84,17 @@ impl LLM {
         })
     }
 
+    pub fn google_model_from_model_id(model_id: &str) -> Result<Self> {
+        let api_key = std::env::var("GOOGLE_API_KEY").map_err(|_| {
+            anyhow::anyhow!("GOOGLE_API_KEY environment variable not set for Google model")
+        })?;
+        Self::openai_compatible_model(
+            &api_key,
+            "https://generativelanguage.googleapis.com/v1beta/openai",
+            model_id,
+        )
+    }
+
     #[inline]
     pub fn openai_compatible_model(api_key: &str, base_url: &str, model: &str) -> Result<Self> {
         Self::openai_compatible_model_with_config(api_key, base_url, model, Default::default())
