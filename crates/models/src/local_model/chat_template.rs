@@ -100,7 +100,7 @@ impl LLMChatTemplate {
         ]);
 
         let message_1 = alith_prompt::apply_chat_template(
-            &[user_message_1.clone()],
+            std::slice::from_ref(&user_message_1),
             &self.chat_template,
             self.bos_token.as_deref(),
             &self.eos_token,
