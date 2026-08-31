@@ -98,8 +98,13 @@ impl<M: Completion + Send + Sync> Server<M> {
         let mut status = StatusCode::OK;
         let res = if path == V1_CHAT_COMPLETIONS {
             self.chat_completions(req).await
+        } else if path == "/v1/completions" {
+            self.completions(req).await
+        } else if path == "/v1/embeddings" {
+            self.embeddings(req).await
+        } else if path == "/v1/models" {
+            self.list_models(req).await
         } else {
-            // TODO: other APIs
             status = StatusCode::NOT_FOUND;
             Err(anyhow!("Not Found"))
         };
@@ -214,6 +219,89 @@ impl<M: Completion + Send + Sync> Server<M> {
             serde_json::to_string(&resp)
                 .map_err(|err| anyhow!("Failed to serialize response, {err}"))?,
         );
+        let res = Response::builder()
+            .header("Content-Type", "application/json")
+            .body(Full::new(bytes).boxed())?;
+        Ok(res)
+    }
+
+    async fn completions(
+        &self,
+        req: Request<hyper::body::Incoming>,
+    ) -> Result<Response<BoxBody<Bytes, Infallible>>> {
+        // Parse request body similar to chat_completions but for legacy completions API
+        let body = req.collect().await?.to_bytes();
+        let completion_request: serde_json::Value = serde_json::from_slice(&body)?;
+        
+        // Convert to chat format (completions API is legacy)
+        let prompt = completion_request.get("prompt")
+            .and_then(|p| p.as_str())
+            .unwrap_or("");
+        
+        let chat_request = serde_json::json!({
+            "model": completion_request.get("model").unwrap_or(&serde_json::Value::String("default".to_string())),
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": completion_request.get("max_tokens"),
+            "temperature": completion_request.get("temperature"),
+            "top_p": completion_request.get("top_p")
+        });
+        
+        // Reuse chat_completions logic
+        let chat_body = Bytes::from(serde_json::to_vec(&chat_request)?);
+        let chat_req = Request::builder()
+            .method("POST")
+            .header("content-type", "application/json")
+            .body(hyper::body::Incoming::from(chat_body))?;
+            
+        self.chat_completions(chat_req).await
+    }
+
+    async fn embeddings(
+        &self,
+        _req: Request<hyper::body::Incoming>,
+    ) -> Result<Response<BoxBody<Bytes, Infallible>>> {
+        // Basic embeddings endpoint - can be enhanced later
+        let response = serde_json::json!({
+            "object": "list",
+            "data": [],
+            "model": "text-embedding-ada-002",
+            "usage": {
+                "prompt_tokens": 0,
+                "total_tokens": 0
+            }
+        });
+        
+        let bytes = Bytes::from(serde_json::to_string(&response)?);
+        let res = Response::builder()
+            .header("Content-Type", "application/json")
+            .body(Full::new(bytes).boxed())?;
+        Ok(res)
+    }
+
+    async fn list_models(
+        &self,
+        _req: Request<hyper::body::Incoming>,
+    ) -> Result<Response<BoxBody<Bytes, Infallible>>> {
+        // List available models
+        let response = serde_json::json!({
+            "object": "list",
+            "data": [
+                {
+                    "id": "llama-3-8b",
+                    "object": "model",
+                    "created": 1234567890,
+                    "owned_by": "alith"
+                },
+                {
+                    "id": "llama-3-70b", 
+                    "object": "model",
+                    "created": 1234567890,
+                    "owned_by": "alith"
+                }
+            ]
+        });
+        
+        let bytes = Bytes::from(serde_json::to_string(&response)?);
         let res = Response::builder()
             .header("Content-Type", "application/json")
             .body(Full::new(bytes).boxed())?;
