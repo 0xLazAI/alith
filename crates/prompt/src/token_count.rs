@@ -102,14 +102,14 @@ pub(crate) fn total_prompt_tokens_openai_format(
 
         for (key, value) in message.iter() {
             num_tokens += tokenizer.count_tokens(value) as u64;
-            if let Some(tokens_per_name) = tokens_per_name {
-                if key == "name" {
-                    if tokens_per_name < 0 {
-                        // Handles cases for certain models where name doesn't count towards token count
-                        num_tokens -= tokens_per_name.unsigned_abs() as u64;
-                    } else {
-                        num_tokens += tokens_per_name as u64;
-                    }
+            if let Some(tokens_per_name) = tokens_per_name
+                && key == "name"
+            {
+                if tokens_per_name < 0 {
+                    // Handles cases for certain models where name doesn't count towards token count
+                    num_tokens -= tokens_per_name.unsigned_abs() as u64;
+                } else {
+                    num_tokens += tokens_per_name as u64;
                 }
             }
         }

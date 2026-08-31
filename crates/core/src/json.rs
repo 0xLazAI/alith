@@ -35,10 +35,10 @@ pub fn parse_partial_json(s: &str) -> Result<Value, JsonParseError> {
                 '{' => stack.push('}'),
                 '[' => stack.push(']'),
                 '}' | ']' => {
-                    if let Some(last) = stack.last() {
-                        if *last == c {
-                            stack.pop();
-                        }
+                    if let Some(last) = stack.last()
+                        && *last == c
+                    {
+                        stack.pop();
                     }
                 }
                 _ => {}
