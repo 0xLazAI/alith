@@ -19,6 +19,9 @@ impl Default for PerplexityBackendBuilder {
         let mut config = GenericApiConfig::default();
         config.api_config.host = "api.perplexity.ai".to_string();
         config.api_config.api_key_env_var = "PERPLEXITY_API_KEY".to_string();
+        config
+            .extra_headers
+            .insert("x-pplx-integration", "alith".parse().unwrap());
         config.logging_config.logger_name = "perplexity".to_string();
         Self {
             config,
